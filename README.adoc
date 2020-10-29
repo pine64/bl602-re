@@ -19,7 +19,7 @@
 
 == Resources
 
-* [Pine64 SDK fork's documentation](https://github.com/pine64/bl602-docs), if you figure something out that's documentation-worthy, please update that documentation.
+* https://github.com/pine64/bl602-docs[Pine64 SDK fork's documentation], if you figure something out that's documentation-worthy, please update that documentation.
 
 * https://files.pine64.org/doc/datasheet/padi-ii/BL602_BL604_DS_Datasheet.pdf[BL602/BL604 Datasheet]
 
