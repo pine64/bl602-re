@@ -1,5 +1,5 @@
 
-mac.o:     file format elf32-littleriscv
+libbl602_wifi/mac.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.mac_paid_gid_sta_compute:

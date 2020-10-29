@@ -1,5 +1,5 @@
 
-sha256.o:     file format elf32-littleriscv
+libbl602_wifi/sha256.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.sha256_compress:
@@ -29,6 +29,8 @@ Disassembly of section .text.sha256_compress:
 00000022 <.LVL4>:
   22:	ce06                	sw	ra,28(sp)
   24:	00000097          	auipc	ra,0x0
+			24: R_RISCV_CALL	memcpy
+			24: R_RISCV_RELAX	*ABS*
   28:	000080e7          	jalr	ra # 24 <.LVL4+0x2>
 
 0000002c <.LVL5>:
@@ -71,6 +73,7 @@ Disassembly of section .text.sha256_compress:
 
 00000062 <.LBE2>:
   62:	fcca18e3          	bne	s4,a2,32 <.L2>
+			62: R_RISCV_BRANCH	.L2
   66:	04040713          	addi	a4,s0,64
 
 0000006a <.L3>:
@@ -106,9 +109,14 @@ Disassembly of section .text.sha256_compress:
 
 000000ba <.LVL18>:
   ba:	fae918e3          	bne	s2,a4,6a <.L3>
+			ba: R_RISCV_BRANCH	.L3
   be:	00000537          	lui	a0,0x0
+			be: R_RISCV_HI20	.LANCHOR0
+			be: R_RISCV_RELAX	*ABS*
   c2:	4581                	li	a1,0
   c4:	00050513          	mv	a0,a0
+			c4: R_RISCV_LO12_I	.LANCHOR0
+			c4: R_RISCV_RELAX	*ABS*
   c8:	10000813          	li	a6,256
 
 000000cc <.L4>:
@@ -184,6 +192,7 @@ Disassembly of section .text.sha256_compress:
 0000018a <.LVL26>:
  18a:	0591                	addi	a1,a1,4
  18c:	f50590e3          	bne	a1,a6,cc <.L4>
+			18c: R_RISCV_BRANCH	.L4
  190:	02898993          	addi	s3,s3,40
 
 00000194 <.L5>:
@@ -194,6 +203,7 @@ Disassembly of section .text.sha256_compress:
  19e:	97ba                	add	a5,a5,a4
  1a0:	fef4ae23          	sw	a5,-4(s1)
  1a4:	fe9998e3          	bne	s3,s1,194 <.L5>
+			1a4: R_RISCV_BRANCH	.L5
  1a8:	40f2                	lw	ra,28(sp)
  1aa:	4462                	lw	s0,24(sp)
 
@@ -276,6 +286,8 @@ Disassembly of section .text.sha256_vector:
 
 0000002e <.LVL35>:
   2e:	00000097          	auipc	ra,0x0
+			2e: R_RISCV_CALL	sha256_init
+			2e: R_RISCV_RELAX	*ABS*
   32:	000080e7          	jalr	ra # 2e <.LVL35>
 
 00000036 <.LVL36>:
@@ -291,10 +303,12 @@ Disassembly of section .text.sha256_vector:
 
 00000046 <.LBE7>:
   46:	0f5c1d63          	bne	s8,s5,140 <.L20>
+			46: R_RISCV_BRANCH	.L20
 
 0000004a <.LBB10>:
   4a:	03f00713          	li	a4,63
   4e:	0cf76a63          	bltu	a4,a5,122 <.L12>
+			4e: R_RISCV_BRANCH	.L12
   52:	4018                	lw	a4,0(s0)
   54:	4050                	lw	a2,4(s0)
   56:	00379693          	slli	a3,a5,0x3
@@ -310,15 +324,19 @@ Disassembly of section .text.sha256_vector:
   72:	02d78623          	sb	a3,44(a5)
   76:	03800793          	li	a5,56
   7a:	02e7f163          	bgeu	a5,a4,9c <.L23>
+			7a: R_RISCV_BRANCH	.L23
   7e:	03f00713          	li	a4,63
 
 00000082 <.L22>:
   82:	541c                	lw	a5,40(s0)
   84:	14f77f63          	bgeu	a4,a5,1e2 <.L24>
+			84: R_RISCV_BRANCH	.L24
   88:	8652                	mv	a2,s4
   8a:	02c40593          	addi	a1,s0,44
   8e:	8522                	mv	a0,s0
   90:	00000097          	auipc	ra,0x0
+			90: R_RISCV_CALL	sha256_compress
+			90: R_RISCV_RELAX	*ABS*
   94:	000080e7          	jalr	ra # 90 <.L22+0xe>
 
 00000098 <.LVL39>:
@@ -330,6 +348,7 @@ Disassembly of section .text.sha256_vector:
 000000a0 <.L25>:
   a0:	541c                	lw	a5,40(s0)
   a2:	14f77763          	bgeu	a4,a5,1f0 <.L26>
+			a2: R_RISCV_BRANCH	.L26
 
 000000a6 <.LVL40>:
   a6:	401c                	lw	a5,0(s0)
@@ -360,6 +379,8 @@ Disassembly of section .text.sha256_vector:
 
 000000ea <.LVL44>:
   ea:	00000097          	auipc	ra,0x0
+			ea: R_RISCV_CALL	sha256_compress
+			ea: R_RISCV_RELAX	*ABS*
   ee:	000080e7          	jalr	ra # ea <.LVL44>
 
 000000f2 <.LVL45>:
@@ -386,6 +407,7 @@ Disassembly of section .text.sha256_vector:
 
 0000011e <.LVL51>:
  11e:	fc879ee3          	bne	a5,s0,fa <.L27>
+			11e: R_RISCV_BRANCH	.L27
 
 00000122 <.L12>:
  122:	40b6                	lw	ra,76(sp)
@@ -423,22 +445,29 @@ Disassembly of section .text.sha256_vector:
 
 00000150 <.LBB13>:
  150:	02fb7d63          	bgeu	s6,a5,18a <.L14>
+			150: R_RISCV_BRANCH	.L14
 
 00000154 <.L16>:
  154:	0c11                	addi	s8,s8,4
  156:	b5fd                	j	44 <.L13>
+			156: R_RISCV_RVC_JUMP	.L13
 
 00000158 <.L19>:
  158:	ed05                	bnez	a0,190 <.L15>
+			158: R_RISCV_RVC_BRANCH	.L15
  15a:	029d7b63          	bgeu	s10,s1,190 <.L15>
+			15a: R_RISCV_BRANCH	.L15
  15e:	8652                	mv	a2,s4
  160:	85ce                	mv	a1,s3
  162:	8522                	mv	a0,s0
  164:	00000097          	auipc	ra,0x0
+			164: R_RISCV_CALL	sha256_compress
+			164: R_RISCV_RELAX	*ABS*
  168:	000080e7          	jalr	ra # 164 <.L19+0xc>
 
 0000016c <.LVL62>:
  16c:	fe0544e3          	bltz	a0,154 <.L16>
+			16c: R_RISCV_BRANCH	.L16
  170:	401c                	lw	a5,0(s0)
  172:	4050                	lw	a2,4(s0)
  174:	04098993          	addi	s3,s3,64
@@ -456,11 +485,14 @@ Disassembly of section .text.sha256_vector:
 0000018a <.L14>:
  18a:	5408                	lw	a0,40(s0)
  18c:	f4f1                	bnez	s1,158 <.L19>
+			18c: R_RISCV_RVC_BRANCH	.L19
  18e:	b7d9                	j	154 <.L16>
+			18e: R_RISCV_RVC_JUMP	.L16
 
 00000190 <.L15>:
  190:	40ab0db3          	sub	s11,s6,a0
  194:	01b4f363          	bgeu	s1,s11,19a <.L18>
+			194: R_RISCV_BRANCH	.L18
  198:	8da6                	mv	s11,s1
 
 0000019a <.L18>:
@@ -468,6 +500,8 @@ Disassembly of section .text.sha256_vector:
  19c:	866e                	mv	a2,s11
  19e:	955e                	add	a0,a0,s7
  1a0:	00000097          	auipc	ra,0x0
+			1a0: R_RISCV_CALL	memcpy
+			1a0: R_RISCV_RELAX	*ABS*
  1a4:	000080e7          	jalr	ra # 1a0 <.L18+0x6>
 
 000001a8 <.LVL67>:
@@ -483,14 +517,18 @@ Disassembly of section .text.sha256_vector:
 
 000001b4 <.LVL70>:
  1b4:	fd679be3          	bne	a5,s6,18a <.L14>
+			1b4: R_RISCV_BRANCH	.L14
  1b8:	8652                	mv	a2,s4
  1ba:	85de                	mv	a1,s7
  1bc:	8522                	mv	a0,s0
  1be:	00000097          	auipc	ra,0x0
+			1be: R_RISCV_CALL	sha256_compress
+			1be: R_RISCV_RELAX	*ABS*
  1c2:	000080e7          	jalr	ra # 1be <.LVL70+0xa>
 
 000001c6 <.LVL71>:
  1c6:	f80547e3          	bltz	a0,154 <.L16>
+			1c6: R_RISCV_BRANCH	.L16
  1ca:	401c                	lw	a5,0(s0)
  1cc:	4050                	lw	a2,4(s0)
  1ce:	02042423          	sw	zero,40(s0)
@@ -500,6 +538,7 @@ Disassembly of section .text.sha256_vector:
  1dc:	c014                	sw	a3,0(s0)
  1de:	c05c                	sw	a5,4(s0)
  1e0:	b76d                	j	18a <.L14>
+			1e0: R_RISCV_RVC_JUMP	.L14
 
 000001e2 <.L24>:
  1e2:	00178693          	addi	a3,a5,1
@@ -507,6 +546,7 @@ Disassembly of section .text.sha256_vector:
  1e8:	97a2                	add	a5,a5,s0
  1ea:	02078623          	sb	zero,44(a5)
  1ee:	bd51                	j	82 <.L22>
+			1ee: R_RISCV_RVC_JUMP	.L22
 
 000001f0 <.L26>:
  1f0:	00178693          	addi	a3,a5,1
@@ -514,6 +554,7 @@ Disassembly of section .text.sha256_vector:
  1f6:	97a2                	add	a5,a5,s0
  1f8:	02078623          	sb	zero,44(a5)
  1fc:	b555                	j	a0 <.L25>
+			1fc: R_RISCV_RVC_JUMP	.L25
 
 Disassembly of section .text.hmac_sha256_vector:
 
@@ -542,6 +583,7 @@ Disassembly of section .text.hmac_sha256_vector:
 
 00000036 <.LVL76>:
   36:	00b7ff63          	bgeu	a5,a1,54 <.L34>
+			36: R_RISCV_BRANCH	.L34
   3a:	1178                	addi	a4,sp,172
 
 0000003c <.LVL77>:
@@ -558,6 +600,8 @@ Disassembly of section .text.hmac_sha256_vector:
 
 00000044 <.LVL81>:
   44:	00000097          	auipc	ra,0x0
+			44: R_RISCV_CALL	sha256_vector
+			44: R_RISCV_RELAX	*ABS*
   48:	000080e7          	jalr	ra # 44 <.LVL81>
 
 0000004c <.LVL82>:
@@ -572,6 +616,8 @@ Disassembly of section .text.hmac_sha256_vector:
 
 0000005c <.LVL83>:
   5c:	00000097          	auipc	ra,0x0
+			5c: R_RISCV_CALL	memset
+			5c: R_RISCV_RELAX	*ABS*
   60:	000080e7          	jalr	ra # 5c <.LVL83>
 
 00000064 <.LVL84>:
@@ -581,6 +627,8 @@ Disassembly of section .text.hmac_sha256_vector:
 
 0000006a <.LVL85>:
   6a:	00000097          	auipc	ra,0x0
+			6a: R_RISCV_CALL	memcpy
+			6a: R_RISCV_RELAX	*ABS*
   6e:	000080e7          	jalr	ra # 6a <.LVL85>
 
 00000072 <.LVL86>:
@@ -596,6 +644,7 @@ Disassembly of section .text.hmac_sha256_vector:
   82:	8fb5                	xor	a5,a5,a3
   84:	fef72e23          	sw	a5,-4(a4)
   88:	fe871ae3          	bne	a4,s0,7c <.L35>
+			88: R_RISCV_BRANCH	.L35
   8c:	00fc                	addi	a5,sp,76
 
 0000008e <.LVL90>:
@@ -619,6 +668,7 @@ Disassembly of section .text.hmac_sha256_vector:
   a4:	0611                	addi	a2,a2,4
   a6:	0691                	addi	a3,a3,4
   a8:	08f71d63          	bne	a4,a5,142 <.L37>
+			a8: R_RISCV_BRANCH	.L37
   ac:	1178                	addi	a4,sp,172
 
 000000ae <.LVL95>:
@@ -627,6 +677,8 @@ Disassembly of section .text.hmac_sha256_vector:
   b2:	85d6                	mv	a1,s5
   b4:	00190513          	addi	a0,s2,1
   b8:	00000097          	auipc	ra,0x0
+			b8: R_RISCV_CALL	sha256_vector
+			b8: R_RISCV_RELAX	*ABS*
   bc:	000080e7          	jalr	ra # b8 <.LVL95+0xa>
 
 000000c0 <.LVL96>:
@@ -636,6 +688,8 @@ Disassembly of section .text.hmac_sha256_vector:
 
 000000c8 <.LVL97>:
   c8:	00000097          	auipc	ra,0x0
+			c8: R_RISCV_CALL	memset
+			c8: R_RISCV_RELAX	*ABS*
   cc:	000080e7          	jalr	ra # c8 <.LVL97>
 
 000000d0 <.LVL98>:
@@ -645,6 +699,8 @@ Disassembly of section .text.hmac_sha256_vector:
 
 000000d6 <.LVL99>:
   d6:	00000097          	auipc	ra,0x0
+			d6: R_RISCV_CALL	memcpy
+			d6: R_RISCV_RELAX	*ABS*
   da:	000080e7          	jalr	ra # d6 <.LVL99>
 
 000000de <.LVL100>:
@@ -660,6 +716,7 @@ Disassembly of section .text.hmac_sha256_vector:
   ee:	8fb5                	xor	a5,a5,a3
   f0:	fef72e23          	sw	a5,-4(a4)
   f4:	fe871ae3          	bne	a4,s0,e8 <.L38>
+			f4: R_RISCV_BRANCH	.L38
   f8:	00fc                	addi	a5,sp,76
 
 000000fa <.LVL104>:
@@ -679,6 +736,8 @@ Disassembly of section .text.hmac_sha256_vector:
  110:	d026                	sw	s1,32(sp)
  112:	dc3e                	sw	a5,56(sp)
  114:	00000097          	auipc	ra,0x0
+			114: R_RISCV_CALL	sha256_vector
+			114: R_RISCV_RELAX	*ABS*
  118:	000080e7          	jalr	ra # 114 <.LVL106+0x10>
 
 0000011c <.LVL107>:
@@ -714,3 +773,4 @@ Disassembly of section .text.hmac_sha256_vector:
  150:	0711                	addi	a4,a4,4
  152:	c28c                	sw	a1,0(a3)
  154:	bf81                	j	a4 <.L36>
+			154: R_RISCV_RVC_JUMP	.L36

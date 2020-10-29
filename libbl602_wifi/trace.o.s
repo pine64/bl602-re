@@ -1,3 +1,3 @@
 
-trace.o:     file format elf32-littleriscv
+libbl602_wifi/trace.o:     file format elf32-littleriscv
 

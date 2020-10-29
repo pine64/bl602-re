@@ -1,5 +1,5 @@
 
-lld_pdu.o:     file format elf32-littleriscv
+libblecontroller/lld_pdu.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.lld_pdu_llcp_con_param_req_unpk:
@@ -10,7 +10,11 @@ Disassembly of section .text.lld_pdu_llcp_con_param_req_unpk:
 
 00000004 <.LBB289>:
    4:	000009b7          	lui	s3,0x0
+			4: R_RISCV_HI20	ble_memcpy_ptr
+			4: R_RISCV_RELAX	*ABS*
    8:	0009a783          	lw	a5,0(s3) # 0 <lld_pdu_llcp_con_param_req_unpk>
+			8: R_RISCV_LO12_I	ble_memcpy_ptr
+			8: R_RISCV_RELAX	*ABS*
 
 0000000c <.LBE289>:
    c:	d04a                	sw	s2,32(sp)
@@ -51,6 +55,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_req_unpk:
 
 00000036 <.LBB306>:
   36:	0009a783          	lw	a5,0(s3)
+			36: R_RISCV_LO12_I	ble_memcpy_ptr
+			36: R_RISCV_RELAX	*ABS*
   3a:	81c1                	srli	a1,a1,0x10
   3c:	95ca                	add	a1,a1,s2
   3e:	4609                	li	a2,2
@@ -73,6 +79,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_req_unpk:
 
 00000054 <.LBB314>:
   54:	0009a783          	lw	a5,0(s3)
+			54: R_RISCV_LO12_I	ble_memcpy_ptr
+			54: R_RISCV_RELAX	*ABS*
   58:	81c1                	srli	a1,a1,0x10
   5a:	95ca                	add	a1,a1,s2
   5c:	4609                	li	a2,2
@@ -95,6 +103,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_req_unpk:
 
 00000072 <.LBB322>:
   72:	0009a783          	lw	a5,0(s3)
+			72: R_RISCV_LO12_I	ble_memcpy_ptr
+			72: R_RISCV_RELAX	*ABS*
   76:	81c1                	srli	a1,a1,0x10
   78:	95ca                	add	a1,a1,s2
   7a:	4609                	li	a2,2
@@ -117,6 +127,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_req_unpk:
 
 00000090 <.LBB330>:
   90:	0009a783          	lw	a5,0(s3)
+			90: R_RISCV_LO12_I	ble_memcpy_ptr
+			90: R_RISCV_RELAX	*ABS*
   94:	81c1                	srli	a1,a1,0x10
   96:	95ca                	add	a1,a1,s2
   98:	4605                	li	a2,1
@@ -139,6 +151,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_req_unpk:
 
 000000ae <.LBB338>:
   ae:	0009a783          	lw	a5,0(s3)
+			ae: R_RISCV_LO12_I	ble_memcpy_ptr
+			ae: R_RISCV_RELAX	*ABS*
   b2:	81c1                	srli	a1,a1,0x10
   b4:	95ca                	add	a1,a1,s2
   b6:	4609                	li	a2,2
@@ -161,6 +175,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_req_unpk:
 
 000000cc <.LBB346>:
   cc:	0009a783          	lw	a5,0(s3)
+			cc: R_RISCV_LO12_I	ble_memcpy_ptr
+			cc: R_RISCV_RELAX	*ABS*
   d0:	81c1                	srli	a1,a1,0x10
   d2:	95ca                	add	a1,a1,s2
   d4:	4609                	li	a2,2
@@ -183,6 +199,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_req_unpk:
 
 000000ea <.LBB354>:
   ea:	0009a783          	lw	a5,0(s3)
+			ea: R_RISCV_LO12_I	ble_memcpy_ptr
+			ea: R_RISCV_RELAX	*ABS*
   ee:	81c1                	srli	a1,a1,0x10
   f0:	95ca                	add	a1,a1,s2
   f2:	4609                	li	a2,2
@@ -205,6 +223,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_req_unpk:
 
 00000108 <.LBB362>:
  108:	0009a783          	lw	a5,0(s3)
+			108: R_RISCV_LO12_I	ble_memcpy_ptr
+			108: R_RISCV_RELAX	*ABS*
  10c:	81c1                	srli	a1,a1,0x10
  10e:	95ca                	add	a1,a1,s2
  110:	4609                	li	a2,2
@@ -227,6 +247,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_req_unpk:
 
 00000126 <.LBB370>:
  126:	0009a783          	lw	a5,0(s3)
+			126: R_RISCV_LO12_I	ble_memcpy_ptr
+			126: R_RISCV_RELAX	*ABS*
  12a:	81c1                	srli	a1,a1,0x10
  12c:	95ca                	add	a1,a1,s2
  12e:	4609                	li	a2,2
@@ -249,6 +271,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_req_unpk:
 
 00000144 <.LBB378>:
  144:	0009a783          	lw	a5,0(s3)
+			144: R_RISCV_LO12_I	ble_memcpy_ptr
+			144: R_RISCV_RELAX	*ABS*
  148:	81c1                	srli	a1,a1,0x10
  14a:	95ca                	add	a1,a1,s2
  14c:	4609                	li	a2,2
@@ -271,6 +295,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_req_unpk:
 
 00000162 <.LBB386>:
  162:	0009a783          	lw	a5,0(s3)
+			162: R_RISCV_LO12_I	ble_memcpy_ptr
+			162: R_RISCV_RELAX	*ABS*
  166:	81c1                	srli	a1,a1,0x10
  168:	95ca                	add	a1,a1,s2
  16a:	00e10513          	addi	a0,sp,14
@@ -304,7 +330,11 @@ Disassembly of section .text.lld_pdu_llcp_con_param_rsp_unpk:
 
 00000004 <.LBB389>:
    4:	000009b7          	lui	s3,0x0
+			4: R_RISCV_HI20	ble_memcpy_ptr
+			4: R_RISCV_RELAX	*ABS*
    8:	0009a783          	lw	a5,0(s3) # 0 <lld_pdu_llcp_con_param_rsp_unpk>
+			8: R_RISCV_LO12_I	ble_memcpy_ptr
+			8: R_RISCV_RELAX	*ABS*
 
 0000000c <.LBE389>:
    c:	d04a                	sw	s2,32(sp)
@@ -345,6 +375,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_rsp_unpk:
 
 00000036 <.LBB406>:
   36:	0009a783          	lw	a5,0(s3)
+			36: R_RISCV_LO12_I	ble_memcpy_ptr
+			36: R_RISCV_RELAX	*ABS*
   3a:	81c1                	srli	a1,a1,0x10
   3c:	95ca                	add	a1,a1,s2
   3e:	4609                	li	a2,2
@@ -367,6 +399,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_rsp_unpk:
 
 00000054 <.LBB414>:
   54:	0009a783          	lw	a5,0(s3)
+			54: R_RISCV_LO12_I	ble_memcpy_ptr
+			54: R_RISCV_RELAX	*ABS*
   58:	81c1                	srli	a1,a1,0x10
   5a:	95ca                	add	a1,a1,s2
   5c:	4609                	li	a2,2
@@ -389,6 +423,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_rsp_unpk:
 
 00000072 <.LBB422>:
   72:	0009a783          	lw	a5,0(s3)
+			72: R_RISCV_LO12_I	ble_memcpy_ptr
+			72: R_RISCV_RELAX	*ABS*
   76:	81c1                	srli	a1,a1,0x10
   78:	95ca                	add	a1,a1,s2
   7a:	4609                	li	a2,2
@@ -411,6 +447,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_rsp_unpk:
 
 00000090 <.LBB430>:
   90:	0009a783          	lw	a5,0(s3)
+			90: R_RISCV_LO12_I	ble_memcpy_ptr
+			90: R_RISCV_RELAX	*ABS*
   94:	81c1                	srli	a1,a1,0x10
   96:	95ca                	add	a1,a1,s2
   98:	4605                	li	a2,1
@@ -433,6 +471,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_rsp_unpk:
 
 000000ae <.LBB438>:
   ae:	0009a783          	lw	a5,0(s3)
+			ae: R_RISCV_LO12_I	ble_memcpy_ptr
+			ae: R_RISCV_RELAX	*ABS*
   b2:	81c1                	srli	a1,a1,0x10
   b4:	95ca                	add	a1,a1,s2
   b6:	4609                	li	a2,2
@@ -455,6 +495,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_rsp_unpk:
 
 000000cc <.LBB446>:
   cc:	0009a783          	lw	a5,0(s3)
+			cc: R_RISCV_LO12_I	ble_memcpy_ptr
+			cc: R_RISCV_RELAX	*ABS*
   d0:	81c1                	srli	a1,a1,0x10
   d2:	95ca                	add	a1,a1,s2
   d4:	4609                	li	a2,2
@@ -477,6 +519,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_rsp_unpk:
 
 000000ea <.LBB454>:
   ea:	0009a783          	lw	a5,0(s3)
+			ea: R_RISCV_LO12_I	ble_memcpy_ptr
+			ea: R_RISCV_RELAX	*ABS*
   ee:	81c1                	srli	a1,a1,0x10
   f0:	95ca                	add	a1,a1,s2
   f2:	4609                	li	a2,2
@@ -499,6 +543,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_rsp_unpk:
 
 00000108 <.LBB462>:
  108:	0009a783          	lw	a5,0(s3)
+			108: R_RISCV_LO12_I	ble_memcpy_ptr
+			108: R_RISCV_RELAX	*ABS*
  10c:	81c1                	srli	a1,a1,0x10
  10e:	95ca                	add	a1,a1,s2
  110:	4609                	li	a2,2
@@ -521,6 +567,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_rsp_unpk:
 
 00000126 <.LBB470>:
  126:	0009a783          	lw	a5,0(s3)
+			126: R_RISCV_LO12_I	ble_memcpy_ptr
+			126: R_RISCV_RELAX	*ABS*
  12a:	81c1                	srli	a1,a1,0x10
  12c:	95ca                	add	a1,a1,s2
  12e:	4609                	li	a2,2
@@ -543,6 +591,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_rsp_unpk:
 
 00000144 <.LBB478>:
  144:	0009a783          	lw	a5,0(s3)
+			144: R_RISCV_LO12_I	ble_memcpy_ptr
+			144: R_RISCV_RELAX	*ABS*
  148:	81c1                	srli	a1,a1,0x10
  14a:	95ca                	add	a1,a1,s2
  14c:	4609                	li	a2,2
@@ -565,6 +615,8 @@ Disassembly of section .text.lld_pdu_llcp_con_param_rsp_unpk:
 
 00000162 <.LBB486>:
  162:	0009a783          	lw	a5,0(s3)
+			162: R_RISCV_LO12_I	ble_memcpy_ptr
+			162: R_RISCV_RELAX	*ABS*
  166:	81c1                	srli	a1,a1,0x10
  168:	95ca                	add	a1,a1,s2
  16a:	00e10513          	addi	a0,sp,14
@@ -598,7 +650,11 @@ Disassembly of section .text.lld_pdu_llcp_length_req_unpk:
 
 00000004 <.LBB489>:
    4:	000009b7          	lui	s3,0x0
+			4: R_RISCV_HI20	ble_memcpy_ptr
+			4: R_RISCV_RELAX	*ABS*
    8:	0009a783          	lw	a5,0(s3) # 0 <lld_pdu_llcp_length_req_unpk>
+			8: R_RISCV_LO12_I	ble_memcpy_ptr
+			8: R_RISCV_RELAX	*ABS*
 
 0000000c <.LBE489>:
    c:	d04a                	sw	s2,32(sp)
@@ -639,6 +695,8 @@ Disassembly of section .text.lld_pdu_llcp_length_req_unpk:
 
 00000036 <.LBB506>:
   36:	0009a783          	lw	a5,0(s3)
+			36: R_RISCV_LO12_I	ble_memcpy_ptr
+			36: R_RISCV_RELAX	*ABS*
   3a:	81c1                	srli	a1,a1,0x10
   3c:	95ca                	add	a1,a1,s2
   3e:	4609                	li	a2,2
@@ -661,6 +719,8 @@ Disassembly of section .text.lld_pdu_llcp_length_req_unpk:
 
 00000054 <.LBB514>:
   54:	0009a783          	lw	a5,0(s3)
+			54: R_RISCV_LO12_I	ble_memcpy_ptr
+			54: R_RISCV_RELAX	*ABS*
   58:	81c1                	srli	a1,a1,0x10
   5a:	95ca                	add	a1,a1,s2
   5c:	4609                	li	a2,2
@@ -683,6 +743,8 @@ Disassembly of section .text.lld_pdu_llcp_length_req_unpk:
 
 00000072 <.LBB522>:
   72:	0009a783          	lw	a5,0(s3)
+			72: R_RISCV_LO12_I	ble_memcpy_ptr
+			72: R_RISCV_RELAX	*ABS*
   76:	81c1                	srli	a1,a1,0x10
   78:	95ca                	add	a1,a1,s2
   7a:	00e10513          	addi	a0,sp,14
@@ -716,7 +778,11 @@ Disassembly of section .text.lld_pdu_llcp_length_rsp_unpk:
 
 00000004 <.LBB525>:
    4:	000009b7          	lui	s3,0x0
+			4: R_RISCV_HI20	ble_memcpy_ptr
+			4: R_RISCV_RELAX	*ABS*
    8:	0009a783          	lw	a5,0(s3) # 0 <lld_pdu_llcp_length_rsp_unpk>
+			8: R_RISCV_LO12_I	ble_memcpy_ptr
+			8: R_RISCV_RELAX	*ABS*
 
 0000000c <.LBE525>:
    c:	d04a                	sw	s2,32(sp)
@@ -757,6 +823,8 @@ Disassembly of section .text.lld_pdu_llcp_length_rsp_unpk:
 
 00000036 <.LBB542>:
   36:	0009a783          	lw	a5,0(s3)
+			36: R_RISCV_LO12_I	ble_memcpy_ptr
+			36: R_RISCV_RELAX	*ABS*
   3a:	81c1                	srli	a1,a1,0x10
   3c:	95ca                	add	a1,a1,s2
   3e:	4609                	li	a2,2
@@ -779,6 +847,8 @@ Disassembly of section .text.lld_pdu_llcp_length_rsp_unpk:
 
 00000054 <.LBB550>:
   54:	0009a783          	lw	a5,0(s3)
+			54: R_RISCV_LO12_I	ble_memcpy_ptr
+			54: R_RISCV_RELAX	*ABS*
   58:	81c1                	srli	a1,a1,0x10
   5a:	95ca                	add	a1,a1,s2
   5c:	4609                	li	a2,2
@@ -801,6 +871,8 @@ Disassembly of section .text.lld_pdu_llcp_length_rsp_unpk:
 
 00000072 <.LBB558>:
   72:	0009a783          	lw	a5,0(s3)
+			72: R_RISCV_LO12_I	ble_memcpy_ptr
+			72: R_RISCV_RELAX	*ABS*
   76:	81c1                	srli	a1,a1,0x10
   78:	95ca                	add	a1,a1,s2
   7a:	00e10513          	addi	a0,sp,14
@@ -861,16 +933,20 @@ Disassembly of section .text.lld_pdu_pack:
   2c:	04c00c93          	li	s9,76
   30:	04200b13          	li	s6,66
   34:	00000d37          	lui	s10,0x0
+			34: R_RISCV_HI20	ble_memcpy_ptr
+			34: R_RISCV_RELAX	*ABS*
 
 00000038 <.L10>:
   38:	00064503          	lbu	a0,0(a2)
   3c:	c565                	beqz	a0,124 <.L12>
+			3c: R_RISCV_RVC_BRANCH	.L12
 
 0000003e <.LBB587>:
   3e:	fd050513          	addi	a0,a0,-48
   42:	0ff57793          	andi	a5,a0,255
   46:	4481                	li	s1,0
   48:	0afa6463          	bltu	s4,a5,f0 <.L13>
+			48: R_RISCV_BRANCH	.L13
 
 0000004c <.LBB575>:
   4c:	01051493          	slli	s1,a0,0x10
@@ -885,6 +961,7 @@ Disassembly of section .text.lld_pdu_pack:
   5c:	fd070793          	addi	a5,a4,-48
   60:	0ff7f793          	andi	a5,a5,255
   64:	08fa6663          	bltu	s4,a5,f0 <.L13>
+			64: R_RISCV_BRANCH	.L13
 
 00000068 <.LVL155>:
   68:	037484b3          	mul	s1,s1,s7
@@ -900,6 +977,7 @@ Disassembly of section .text.lld_pdu_pack:
 
 00000078 <.LVL158>:
   78:	bff1                	j	54 <.L14>
+			78: R_RISCV_RVC_JUMP	.L14
 
 0000007a <.L17>:
   7a:	00094783          	lbu	a5,0(s2) # 28008000 <.LASF460+0x2800461f>
@@ -912,7 +990,10 @@ Disassembly of section .text.lld_pdu_pack:
   86:	00f40023          	sb	a5,0(s0)
   8a:	4785                	li	a5,1
   8c:	0097fb63          	bgeu	a5,s1,a2 <.L11>
+			8c: R_RISCV_BRANCH	.L11
   90:	000d2783          	lw	a5,0(s10) # 0 <lld_pdu_pack>
+			90: R_RISCV_LO12_I	ble_memcpy_ptr
+			90: R_RISCV_RELAX	*ABS*
   94:	fff48613          	addi	a2,s1,-1
   98:	9782                	jalr	a5
 
@@ -927,6 +1008,7 @@ Disassembly of section .text.lld_pdu_pack:
   a4:	842a                	mv	s0,a0
   a6:	892e                	mv	s2,a1
   a8:	bf41                	j	38 <.L10>
+			a8: R_RISCV_RVC_JUMP	.L10
 
 000000aa <.L15>:
   aa:	00190593          	addi	a1,s2,1
@@ -948,6 +1030,7 @@ Disassembly of section .text.lld_pdu_pack:
 
 000000c4 <.LBE577>:
   c4:	bff9                	j	a2 <.L11>
+			c4: R_RISCV_RVC_JUMP	.L11
 
 000000c6 <.L16>:
   c6:	00390593          	addi	a1,s2,3
@@ -977,6 +1060,7 @@ Disassembly of section .text.lld_pdu_pack:
 
 000000ee <.LBE582>:
   ee:	bf55                	j	a2 <.L11>
+			ee: R_RISCV_RVC_JUMP	.L11
 
 000000f0 <.L13>:
   f0:	00064783          	lbu	a5,0(a2)
@@ -984,8 +1068,11 @@ Disassembly of section .text.lld_pdu_pack:
 
 000000f8 <.LVL180>:
   f8:	fb8789e3          	beq	a5,s8,aa <.L15>
+			f8: R_RISCV_BRANCH	.L15
   fc:	fd9785e3          	beq	a5,s9,c6 <.L16>
+			fc: R_RISCV_BRANCH	.L16
  100:	f7678de3          	beq	a5,s6,7a <.L17>
+			100: R_RISCV_BRANCH	.L17
  104:	4505                	li	a0,1
 
 00000106 <.L18>:
@@ -1017,6 +1104,7 @@ Disassembly of section .text.lld_pdu_pack:
 00000128 <.LVL186>:
  128:	008a8023          	sb	s0,0(s5)
  12c:	bfe9                	j	106 <.L18>
+			12c: R_RISCV_RVC_JUMP	.L18
 
 Disassembly of section .text.lld_pdu_tx_flush_list:
 
@@ -1044,6 +1132,8 @@ Disassembly of section .text.lld_pdu_tx_flush_list:
 0000001e <.LBE591>:
   1e:	854a                	mv	a0,s2
   20:	00000097          	auipc	ra,0x0
+			20: R_RISCV_CALL	ble_co_list_pop_front
+			20: R_RISCV_RELAX	*ABS*
   24:	000080e7          	jalr	ra # 20 <.LBE591+0x2>
 
 00000028 <.LVL191>:
@@ -1051,11 +1141,13 @@ Disassembly of section .text.lld_pdu_tx_flush_list:
 
 0000002c <.LBE589>:
   2c:	c131                	beqz	a0,70 <.L23>
+			2c: R_RISCV_RVC_BRANCH	.L23
   2e:	00455783          	lhu	a5,4(a0)
   32:	ffa78713          	addi	a4,a5,-6
   36:	0742                	slli	a4,a4,0x10
   38:	8341                	srli	a4,a4,0x10
   3a:	02e9e163          	bltu	s3,a4,5c <.L24>
+			3a: R_RISCV_BRANCH	.L24
 
 0000003e <.LBB592>:
   3e:	300024f3          	csrr	s1,mstatus
@@ -1065,10 +1157,13 @@ Disassembly of section .text.lld_pdu_tx_flush_list:
 
 00000046 <.LBE594>:
   46:	00000097          	auipc	ra,0x0
+			46: R_RISCV_CALL	em_buf_tx_free
+			46: R_RISCV_RELAX	*ABS*
   4a:	000080e7          	jalr	ra # 46 <.LBE594>
 
 0000004e <.LVL194>:
   4e:	c501                	beqz	a0,56 <.L25>
+			4e: R_RISCV_RVC_BRANCH	.L25
   50:	0405                	addi	s0,s0,1
 
 00000052 <.LVL195>:
@@ -1077,17 +1172,22 @@ Disassembly of section .text.lld_pdu_tx_flush_list:
 00000056 <.L25>:
   56:	30049073          	csrw	mstatus,s1
   5a:	bf75                	j	16 <.L22>
+			5a: R_RISCV_RVC_JUMP	.L22
 
 0000005c <.L24>:
   5c:	17f9                	addi	a5,a5,-2
   5e:	07c2                	slli	a5,a5,0x10
   60:	83c1                	srli	a5,a5,0x10
   62:	fafa7ae3          	bgeu	s4,a5,16 <.L22>
+			62: R_RISCV_BRANCH	.L22
   66:	00000097          	auipc	ra,0x0
+			66: R_RISCV_CALL	ble_ke_free
+			66: R_RISCV_RELAX	*ABS*
   6a:	000080e7          	jalr	ra # 66 <.L24+0xa>
 
 0000006e <.LVL198>:
   6e:	b765                	j	16 <.L22>
+			6e: R_RISCV_RVC_JUMP	.L22
 
 00000070 <.L23>:
   70:	8522                	mv	a0,s0
@@ -1113,10 +1213,15 @@ Disassembly of section .text.lld_pdu_cntl_aligned_unpk:
 00000000 <lld_pdu_cntl_aligned_unpk>:
    0:	87b2                	mv	a5,a2
    2:	cd81                	beqz	a1,1a <.L31>
+			2: R_RISCV_RVC_BRANCH	.L31
 
 00000004 <.LBB600>:
    4:	00000737          	lui	a4,0x0
+			4: R_RISCV_HI20	ble_memcpy_ptr
+			4: R_RISCV_RELAX	*ABS*
    8:	00072303          	lw	t1,0(a4) # 0 <lld_pdu_cntl_aligned_unpk>
+			8: R_RISCV_LO12_I	ble_memcpy_ptr
+			8: R_RISCV_RELAX	*ABS*
    c:	862e                	mv	a2,a1
 
 0000000e <.LVL206>:
@@ -1154,6 +1259,8 @@ Disassembly of section .text.lld_pdu_check:
   1c:	d86a                	sw	s10,48(sp)
   1e:	d66e                	sw	s11,44(sp)
   20:	00000097          	auipc	ra,0x0
+			20: R_RISCV_CALL	ble_co_list_init
+			20: R_RISCV_RELAX	*ABS*
   24:	000080e7          	jalr	ra # 20 <.LVL211+0x18>
 
 00000028 <.LVL212>:
@@ -1197,6 +1304,7 @@ Disassembly of section .text.lld_pdu_check:
 
 00000058 <.L34>:
   58:	08099163          	bnez	s3,da <.L43>
+			58: R_RISCV_BRANCH	.L43
 
 0000005c <.L35>:
   5c:	ffe90a13          	addi	s4,s2,-2
@@ -1204,7 +1312,9 @@ Disassembly of section .text.lld_pdu_check:
   64:	8341                	srli	a4,a4,0x10
   66:	4785                	li	a5,1
   68:	02e7f463          	bgeu	a5,a4,90 <.L44>
+			68: R_RISCV_BRANCH	.L44
   6c:	c015                	beqz	s0,90 <.L44>
+			6c: R_RISCV_RVC_BRANCH	.L44
 
 0000006e <.LBB637>:
   6e:	30002773          	csrr	a4,mstatus
@@ -1222,6 +1332,8 @@ Disassembly of section .text.lld_pdu_check:
   84:	85a2                	mv	a1,s0
   86:	854a                	mv	a0,s2
   88:	00000097          	auipc	ra,0x0
+			88: R_RISCV_CALL	llc_pdu_acl_tx_ack_defer
+			88: R_RISCV_RELAX	*ABS*
   8c:	000080e7          	jalr	ra # 88 <.LBE637+0x4>
 
 00000090 <.L44>:
@@ -1232,10 +1344,16 @@ Disassembly of section .text.lld_pdu_check:
 
 00000098 <.LBE642>:
   98:	000009b7          	lui	s3,0x0
+			98: R_RISCV_HI20	lld_evt_env+0x18
+			98: R_RISCV_RELAX	*ABS*+0x18
 
 0000009c <.LVL224>:
   9c:	01898513          	addi	a0,s3,24 # 18 <.LVL211+0x10>
+			9c: R_RISCV_LO12_I	lld_evt_env+0x18
+			9c: R_RISCV_RELAX	*ABS*+0x18
   a0:	00000097          	auipc	ra,0x0
+			a0: R_RISCV_CALL	ble_co_list_pop_front
+			a0: R_RISCV_RELAX	*ABS*
   a4:	000080e7          	jalr	ra # a0 <.LVL224+0x4>
 
 000000a8 <.LVL225>:
@@ -1256,6 +1374,7 @@ Disassembly of section .text.lld_pdu_check:
 
 000000b8 <.L45>:
   b8:	ecf9                	bnez	s1,196 <.L51>
+			b8: R_RISCV_RVC_BRANCH	.L51
   ba:	40f6                	lw	ra,92(sp)
   bc:	4466                	lw	s0,88(sp)
 
@@ -1296,6 +1415,7 @@ Disassembly of section .text.lld_pdu_check:
 000000e8 <.LBE645>:
   e8:	83bd                	srli	a5,a5,0xf
   ea:	dbad                	beqz	a5,5c <.L35>
+			ea: R_RISCV_RVC_BRANCH	.L35
 
 000000ec <.LBB616>:
   ec:	30002df3          	csrr	s11,mstatus
@@ -1309,6 +1429,8 @@ Disassembly of section .text.lld_pdu_check:
 
 000000fa <.LVL240>:
   fa:	00000097          	auipc	ra,0x0
+			fa: R_RISCV_CALL	ble_co_list_pop_front
+			fa: R_RISCV_RELAX	*ABS*
   fe:	000080e7          	jalr	ra # fa <.LVL240>
 
 00000102 <.LVL241>:
@@ -1317,15 +1439,21 @@ Disassembly of section .text.lld_pdu_check:
 
 00000106 <.LBB618>:
  106:	cb99                	beqz	a5,11c <.L37>
+			106: R_RISCV_RVC_BRANCH	.L37
  108:	855e                	mv	a0,s7
 
 0000010a <.LVL243>:
  10a:	00000097          	auipc	ra,0x0
+			10a: R_RISCV_CALL	ble_co_list_pop_front
+			10a: R_RISCV_RELAX	*ABS*
  10e:	000080e7          	jalr	ra # 10a <.LVL243>
 
 00000112 <.LVL244>:
  112:	c509                	beqz	a0,11c <.L37>
+			112: R_RISCV_RVC_BRANCH	.L37
  114:	00000097          	auipc	ra,0x0
+			114: R_RISCV_CALL	ble_ke_free
+			114: R_RISCV_RELAX	*ABS*
  118:	000080e7          	jalr	ra # 114 <.LVL244+0x2>
 
 0000011c <.L37>:
@@ -1346,6 +1474,7 @@ Disassembly of section .text.lld_pdu_check:
 00000136 <.LBE627>:
  136:	004b5783          	lhu	a5,4(s6)
  13a:	04fce163          	bltu	s9,a5,17c <.L39>
+			13a: R_RISCV_BRANCH	.L39
 
 0000013e <.LBB628>:
  13e:	0484c783          	lbu	a5,72(s1)
@@ -1361,6 +1490,7 @@ Disassembly of section .text.lld_pdu_check:
 00000150 <.LBB632>:
  150:	4c9c                	lw	a5,24(s1)
  152:	e791                	bnez	a5,15e <.L40>
+			152: R_RISCV_RVC_BRANCH	.L40
  154:	0564c783          	lbu	a5,86(s1)
  158:	9bed                	andi	a5,a5,-5
  15a:	04f48b23          	sb	a5,86(s1)
@@ -1368,6 +1498,8 @@ Disassembly of section .text.lld_pdu_check:
 0000015e <.L40>:
  15e:	855a                	mv	a0,s6
  160:	00000097          	auipc	ra,0x0
+			160: R_RISCV_CALL	ble_ke_free
+			160: R_RISCV_RELAX	*ABS*
  164:	000080e7          	jalr	ra # 160 <.L40+0x2>
 
 00000168 <.LVL253>:
@@ -1377,19 +1509,26 @@ Disassembly of section .text.lld_pdu_check:
  16c:	00cb4583          	lbu	a1,12(s6)
  170:	854a                	mv	a0,s2
  172:	00000097          	auipc	ra,0x0
+			172: R_RISCV_CALL	llc_pdu_llcp_tx_ack_defer
+			172: R_RISCV_RELAX	*ABS*
  176:	000080e7          	jalr	ra # 172 <.LBE629+0x6>
 
 0000017a <.LBE628>:
  17a:	bdf9                	j	58 <.L34>
+			17a: R_RISCV_RVC_JUMP	.L34
 
 0000017c <.L39>:
  17c:	00fd7963          	bgeu	s10,a5,18e <.L42>
+			17c: R_RISCV_BRANCH	.L42
  180:	855a                	mv	a0,s6
  182:	00000097          	auipc	ra,0x0
+			182: R_RISCV_CALL	em_buf_tx_free
+			182: R_RISCV_RELAX	*ABS*
  186:	000080e7          	jalr	ra # 182 <.L39+0x6>
 
 0000018a <.LVL256>:
  18a:	ec0507e3          	beqz	a0,58 <.L34>
+			18a: R_RISCV_BRANCH	.L34
 
 0000018e <.L42>:
  18e:	0405                	addi	s0,s0,1
@@ -1399,23 +1538,30 @@ Disassembly of section .text.lld_pdu_check:
 
 00000194 <.LVL258>:
  194:	b5d1                	j	58 <.L34>
+			194: R_RISCV_RVC_JUMP	.L34
 
 00000196 <.L51>:
  196:	0064d783          	lhu	a5,6(s1)
  19a:	07279863          	bne	a5,s2,20a <.L46>
+			19a: R_RISCV_BRANCH	.L46
  19e:	0084d503          	lhu	a0,8(s1)
  1a2:	054b7b63          	bgeu	s6,s4,1f8 <.L47>
+			1a2: R_RISCV_BRANCH	.L47
  1a6:	00a4c703          	lbu	a4,10(s1)
  1aa:	00b4c683          	lbu	a3,11(s1)
  1ae:	00c4c603          	lbu	a2,12(s1)
  1b2:	85aa                	mv	a1,a0
  1b4:	854a                	mv	a0,s2
  1b6:	00000097          	auipc	ra,0x0
+			1b6: R_RISCV_CALL	llc_pdu_defer
+			1b6: R_RISCV_RELAX	*ABS*
  1ba:	000080e7          	jalr	ra # 1b6 <.L51+0x20>
 
 000001be <.L48>:
  1be:	8526                	mv	a0,s1
  1c0:	00000097          	auipc	ra,0x0
+			1c0: R_RISCV_CALL	ble_ke_free
+			1c0: R_RISCV_RELAX	*ABS*
  1c4:	000080e7          	jalr	ra # 1c0 <.L48+0x2>
 
 000001c8 <.L49>:
@@ -1426,43 +1572,60 @@ Disassembly of section .text.lld_pdu_check:
 
 000001d0 <.LBE649>:
  1d0:	01898513          	addi	a0,s3,24
+			1d0: R_RISCV_LO12_I	lld_evt_env+0x18
+			1d0: R_RISCV_RELAX	*ABS*+0x18
  1d4:	00000097          	auipc	ra,0x0
+			1d4: R_RISCV_CALL	ble_co_list_pop_front
+			1d4: R_RISCV_RELAX	*ABS*
  1d8:	000080e7          	jalr	ra # 1d4 <.LBE649+0x4>
 
 000001dc <.LVL264>:
  1dc:	84aa                	mv	s1,a0
  1de:	e911                	bnez	a0,1f2 <.L50>
+			1de: R_RISCV_RVC_BRANCH	.L50
 
 000001e0 <.LBB650>:
  1e0:	47e2                	lw	a5,24(sp)
  1e2:	cb81                	beqz	a5,1f2 <.L50>
+			1e2: R_RISCV_RVC_BRANCH	.L50
  1e4:	082c                	addi	a1,sp,24
  1e6:	01898513          	addi	a0,s3,24
+			1e6: R_RISCV_LO12_I	lld_evt_env+0x18
+			1e6: R_RISCV_RELAX	*ABS*+0x18
  1ea:	00000097          	auipc	ra,0x0
+			1ea: R_RISCV_CALL	ble_co_list_merge
+			1ea: R_RISCV_RELAX	*ABS*
  1ee:	000080e7          	jalr	ra # 1ea <.LBB650+0xa>
 
 000001f2 <.L50>:
  1f2:	300b9073          	csrw	mstatus,s7
  1f6:	b5c9                	j	b8 <.L45>
+			1f6: R_RISCV_RVC_JUMP	.L45
 
 000001f8 <.L47>:
  1f8:	0044c583          	lbu	a1,4(s1)
  1fc:	8622                	mv	a2,s0
  1fe:	00000097          	auipc	ra,0x0
+			1fe: R_RISCV_CALL	llm_pdu_defer
+			1fe: R_RISCV_RELAX	*ABS*
  202:	000080e7          	jalr	ra # 1fe <.L47+0x6>
 
 00000206 <.LVL269>:
  206:	8aaa                	mv	s5,a0
  208:	bf5d                	j	1be <.L48>
+			208: R_RISCV_RVC_JUMP	.L48
 
 0000020a <.L46>:
  20a:	85a6                	mv	a1,s1
  20c:	0828                	addi	a0,sp,24
  20e:	00000097          	auipc	ra,0x0
+			20e: R_RISCV_CALL	ble_co_list_push_back
+			20e: R_RISCV_RELAX	*ABS*
  212:	000080e7          	jalr	ra # 20e <.L46+0x4>
 
 00000216 <.LVL271>:
  216:	bf4d                	j	1c8 <.L49>
+			216: R_RISCV_RVC_JUMP	.L49
 
 Disassembly of section .text.lld_pdu_tx_loop:
 
@@ -1530,6 +1693,7 @@ Disassembly of section .text.lld_pdu_data_tx_push:
 
 00000018 <.LBE668>:
   18:	c691                	beqz	a3,24 <.L70>
+			18: R_RISCV_RVC_BRANCH	.L70
   1a:	00b5c703          	lbu	a4,11(a1)
   1e:	0711                	addi	a4,a4,4
   20:	00e585a3          	sb	a4,11(a1)
@@ -1558,6 +1722,7 @@ Disassembly of section .text.lld_pdu_data_tx_push:
 
 0000004c <.LBE671>:
   4c:	ce19                	beqz	a2,6a <.L71>
+			4c: R_RISCV_RVC_BRANCH	.L71
   4e:	0065d683          	lhu	a3,6(a1)
   52:	6621                	lui	a2,0x8
 
@@ -1579,6 +1744,7 @@ Disassembly of section .text.lld_pdu_data_tx_push:
 0000006a <.L71>:
   6a:	511c                	lw	a5,32(a0)
   6c:	e791                	bnez	a5,78 <.L72>
+			6c: R_RISCV_RVC_BRANCH	.L72
 
 0000006e <.L74>:
   6e:	d10c                	sw	a1,32(a0)
@@ -1627,9 +1793,11 @@ Disassembly of section .text.lld_pdu_data_tx_push:
 000000ae <.LBB690>:
   ae:	511c                	lw	a5,32(a0)
   b0:	dfdd                	beqz	a5,6e <.L74>
+			b0: R_RISCV_RVC_BRANCH	.L74
   b2:	515c                	lw	a5,36(a0)
   b4:	c38c                	sw	a1,0(a5)
   b6:	bf6d                	j	70 <.L73>
+			b6: R_RISCV_RVC_JUMP	.L73
 
 Disassembly of section .text.lld_pdu_data_send:
 
@@ -1643,15 +1811,22 @@ Disassembly of section .text.lld_pdu_data_send:
 0000000a <.LVL293>:
    a:	c606                	sw	ra,12(sp)
    c:	00000097          	auipc	ra,0x0
+			c: R_RISCV_CALL	ble_ke_malloc
+			c: R_RISCV_RELAX	*ABS*
   10:	000080e7          	jalr	ra # c <.LVL293+0x2>
 
 00000014 <.LVL294>:
   14:	cd31                	beqz	a0,70 <.L86>
+			14: R_RISCV_RVC_BRANCH	.L86
 
 00000016 <.LBB691>:
   16:	00045703          	lhu	a4,0(s0)
   1a:	000007b7          	lui	a5,0x0
+			1a: R_RISCV_HI20	llc_env
+			1a: R_RISCV_RELAX	*ABS*
   1e:	00078793          	mv	a5,a5
+			1e: R_RISCV_LO12_I	llc_env
+			1e: R_RISCV_RELAX	*ABS*
   22:	070a                	slli	a4,a4,0x2
   24:	97ba                	add	a5,a5,a4
   26:	439c                	lw	a5,0(a5)
@@ -1683,6 +1858,8 @@ Disassembly of section .text.lld_pdu_data_send:
 
 0000005a <.LBE694>:
   5a:	00000097          	auipc	ra,0x0
+			5a: R_RISCV_CALL	ble_co_list_push_back
+			5a: R_RISCV_RELAX	*ABS*
   5e:	000080e7          	jalr	ra # 5a <.LBE694>
 
 00000062 <.LVL301>:
@@ -1702,6 +1879,7 @@ Disassembly of section .text.lld_pdu_data_send:
 
 00000072 <.LVL304>:
   72:	bfdd                	j	68 <.L85>
+			72: R_RISCV_RVC_JUMP	.L85
 
 Disassembly of section .text.lld_pdu_tx_push:
 
@@ -1738,6 +1916,7 @@ Disassembly of section .text.lld_pdu_tx_push:
 0000002c <.LBB704>:
   2c:	5a1c                	lw	a5,48(a2)
   2e:	c79d                	beqz	a5,5c <.L89>
+			2e: R_RISCV_RVC_BRANCH	.L89
 
 00000030 <.LBB706>:
   30:	5a5c                	lw	a5,52(a2)
@@ -1770,6 +1949,8 @@ Disassembly of section .text.lld_pdu_tx_push:
 
 0000005c <.L89>:
   5c:	00000097          	auipc	ra,0x0
+			5c: R_RISCV_CALL	ble_co_list_push_back
+			5c: R_RISCV_RELAX	*ABS*
   60:	000080e7          	jalr	ra # 5c <.L89>
 
 00000064 <.LVL313>:
@@ -1815,6 +1996,7 @@ Disassembly of section .text.lld_pdu_tx_prog:
 
 00000028 <.LBE771>:
   28:	cc21                	beqz	s0,80 <.L95>
+			28: R_RISCV_RVC_BRANCH	.L95
 
 0000002a <.LBB772>:
   2a:	4729                	li	a4,10
@@ -1827,19 +2009,27 @@ Disassembly of section .text.lld_pdu_tx_prog:
 0000003e <.LBE772>:
   3e:	833d                	srli	a4,a4,0xf
   40:	c321                	beqz	a4,80 <.L95>
+			40: R_RISCV_RVC_BRANCH	.L95
 
 00000042 <.LBB774>:
   42:	000009b7          	lui	s3,0x0
+			42: R_RISCV_HI20	llc_env
+			42: R_RISCV_RELAX	*ABS*
   46:	00098713          	mv	a4,s3
+			46: R_RISCV_LO12_I	llc_env
+			46: R_RISCV_RELAX	*ABS*
   4a:	002a9a13          	slli	s4,s5,0x2
   4e:	9752                	add	a4,a4,s4
   50:	4318                	lw	a4,0(a4)
   52:	00098993          	mv	s3,s3
+			52: R_RISCV_LO12_I	llc_env
+			52: R_RISCV_RELAX	*ABS*
   56:	0a574703          	lbu	a4,165(a4)
 
 0000005a <.LVL321>:
   5a:	00477693          	andi	a3,a4,4
   5e:	1e068163          	beqz	a3,240 <.L96>
+			5e: R_RISCV_BRANCH	.L96
 
 00000062 <.LBB775>:
   62:	02077b13          	andi	s6,a4,32
@@ -1847,7 +2037,10 @@ Disassembly of section .text.lld_pdu_tx_prog:
 00000066 <.L98>:
   66:	00c44503          	lbu	a0,12(s0)
   6a:	1c0b0563          	beqz	s6,234 <.L97>
+			6a: R_RISCV_BRANCH	.L97
   6e:	00000097          	auipc	ra,0x0
+			6e: R_RISCV_CALL	llc_llcp_get_autorize
+			6e: R_RISCV_RELAX	*ABS*
   72:	000080e7          	jalr	ra # 6e <.L98+0x8>
 
 00000076 <.LVL323>:
@@ -1855,18 +2048,25 @@ Disassembly of section .text.lld_pdu_tx_prog:
 
 00000078 <.L167>:
   78:	1c051463          	bnez	a0,240 <.L96>
+			78: R_RISCV_BRANCH	.L96
   7c:	4000                	lw	s0,0(s0)
 
 0000007e <.LVL324>:
   7e:	f465                	bnez	s0,66 <.L98>
+			7e: R_RISCV_RVC_BRANCH	.L98
 
 00000080 <.L95>:
   80:	04cbd603          	lhu	a2,76(s7)
   84:	4405                	li	s0,1
   86:	02c46063          	bltu	s0,a2,a6 <.L104>
+			86: R_RISCV_BRANCH	.L104
   8a:	000006b7          	lui	a3,0x0
+			8a: R_RISCV_HI20	llc_env
+			8a: R_RISCV_RELAX	*ABS*
   8e:	002a9713          	slli	a4,s5,0x2
   92:	00068693          	mv	a3,a3
+			92: R_RISCV_LO12_I	llc_env
+			92: R_RISCV_RELAX	*ABS*
   96:	9736                	add	a4,a4,a3
   98:	4318                	lw	a4,0(a4)
   9a:	0a574403          	lbu	s0,165(a4)
@@ -1877,20 +2077,29 @@ Disassembly of section .text.lld_pdu_tx_prog:
 000000a6 <.L104>:
   a6:	008ba703          	lw	a4,8(s7)
   aa:	2e070b63          	beqz	a4,3a0 <.L106>
+			aa: R_RISCV_BRANCH	.L106
   ae:	2e040963          	beqz	s0,3a0 <.L106>
+			ae: R_RISCV_BRANCH	.L106
   b2:	008b8793          	addi	a5,s7,8
   b6:	c43e                	sw	a5,8(sp)
 
 000000b8 <.LBB818>:
   b8:	4705                	li	a4,1
   ba:	38c76563          	bltu	a4,a2,444 <.L108>
+			ba: R_RISCV_BRANCH	.L108
 
 000000be <.LBB819>:
   be:	000004b7          	lui	s1,0x0
+			be: R_RISCV_HI20	em_buf_env
+			be: R_RISCV_RELAX	*ABS*
 
 000000c2 <.LVL328>:
   c2:	00048513          	mv	a0,s1
+			c2: R_RISCV_LO12_I	em_buf_env
+			c2: R_RISCV_RELAX	*ABS*
   c6:	00000097          	auipc	ra,0x0
+			c6: R_RISCV_CALL	ble_co_list_size
+			c6: R_RISCV_RELAX	*ABS*
   ca:	000080e7          	jalr	ra # c6 <.LVL328+0x4>
 
 000000ce <.LBB820>:
@@ -1902,11 +2111,16 @@ Disassembly of section .text.lld_pdu_tx_prog:
 
 000000d6 <.LBB824>:
   d6:	360b0e63          	beqz	s6,452 <.L110>
+			d6: R_RISCV_BRANCH	.L110
 
 000000da <.LBE824>:
   da:	04cbd603          	lhu	a2,76(s7)
   de:	000006b7          	lui	a3,0x0
+			de: R_RISCV_HI20	llc_env
+			de: R_RISCV_RELAX	*ABS*
   e2:	00068693          	mv	a3,a3
+			e2: R_RISCV_LO12_I	llc_env
+			e2: R_RISCV_RELAX	*ABS*
   e6:	060a                	slli	a2,a2,0x2
   e8:	96b2                	add	a3,a3,a2
   ea:	4294                	lw	a3,0(a3)
@@ -1916,6 +2130,7 @@ Disassembly of section .text.lld_pdu_tx_prog:
   f0:	000b2683          	lw	a3,0(s6)
   f4:	00dba423          	sw	a3,8(s7)
   f8:	e299                	bnez	a3,fe <.L111>
+			f8: R_RISCV_RVC_BRANCH	.L111
   fa:	000ba623          	sw	zero,12(s7)
 
 000000fe <.L111>:
@@ -1950,6 +2165,7 @@ Disassembly of section .text.lld_pdu_tx_prog:
 
 00000136 <.LVL334>:
  136:	00c6fe63          	bgeu	a3,a2,152 <.L112>
+			136: R_RISCV_BRANCH	.L112
  13a:	47c2                	lw	a5,16(sp)
  13c:	8d85                	sub	a1,a1,s1
  13e:	8e9d                	sub	a3,a3,a5
@@ -1959,10 +2175,12 @@ Disassembly of section .text.lld_pdu_tx_prog:
 00000146 <.LVL335>:
  146:	0ff6f613          	andi	a2,a3,255
  14a:	20c5ca63          	blt	a1,a2,35e <.L113>
+			14a: R_RISCV_BRANCH	.L113
  14e:	0ff6fc93          	andi	s9,a3,255
 
 00000152 <.L112>:
  152:	018cd463          	bge	s9,s8,15a <.L114>
+			152: R_RISCV_BRANCH	.L114
  156:	0fecfc93          	andi	s9,s9,254
 
 0000015a <.L114>:
@@ -1976,6 +2194,7 @@ Disassembly of section .text.lld_pdu_tx_prog:
  16c:	83c1                	srli	a5,a5,0x10
  16e:	ca3e                	sw	a5,20(sp)
  170:	20fa6f63          	bltu	s4,a5,38e <.L115>
+			170: R_RISCV_BRANCH	.L115
  174:	010c9793          	slli	a5,s9,0x10
  178:	83c1                	srli	a5,a5,0x10
  17a:	86a2                	mv	a3,s0
@@ -1989,7 +2208,11 @@ Disassembly of section .text.lld_pdu_tx_prog:
 
 00000186 <.LBB834>:
  186:	00078513          	mv	a0,a5
+			186: R_RISCV_LO12_I	em_buf_env
+			186: R_RISCV_RELAX	*ABS*
  18a:	00000097          	auipc	ra,0x0
+			18a: R_RISCV_CALL	ble_co_list_pop_front
+			18a: R_RISCV_RELAX	*ABS*
  18e:	000080e7          	jalr	ra # 18a <.LBB834+0x4>
 
 00000192 <.LBE834>:
@@ -2000,12 +2223,14 @@ Disassembly of section .text.lld_pdu_tx_prog:
 
 00000196 <.LBE835>:
  196:	1c068963          	beqz	a3,368 <.L116>
+			196: R_RISCV_BRANCH	.L116
 
 0000019a <.LVL343>:
  19a:	00ab4683          	lbu	a3,10(s6)
  19e:	4785                	li	a5,1
  1a0:	8a8d                	andi	a3,a3,3
  1a2:	00f68363          	beq	a3,a5,1a8 <.L117>
+			1a2: R_RISCV_BRANCH	.L117
  1a6:	4689                	li	a3,2
 
 000001a8 <.L117>:
@@ -2021,6 +2246,7 @@ Disassembly of section .text.lld_pdu_tx_prog:
 000001b8 <.L118>:
  1b8:	86e6                	mv	a3,s9
  1ba:	018cc463          	blt	s9,s8,1c2 <.L119>
+			1ba: R_RISCV_BRANCH	.L119
  1be:	0ffc7693          	andi	a3,s8,255
 
 000001c2 <.L119>:
@@ -2037,11 +2263,14 @@ Disassembly of section .text.lld_pdu_tx_prog:
 000001dc <.LVL348>:
  1dc:	4692                	lw	a3,4(sp)
  1de:	1b804063          	bgtz	s8,37e <.L120>
+			1de: R_RISCV_BRANCH	.L120
  1e2:	4605                	li	a2,1
  1e4:	855e                	mv	a0,s7
 
 000001e6 <.LVL349>:
  1e6:	00000097          	auipc	ra,0x0
+			1e6: R_RISCV_CALL	lld_pdu_data_tx_push
+			1e6: R_RISCV_RELAX	*ABS*
  1ea:	000080e7          	jalr	ra # 1e6 <.LVL349>
 
 000001ee <.LBE836>:
@@ -2065,6 +2294,7 @@ Disassembly of section .text.lld_pdu_tx_prog:
 
 00000204 <.LBB845>:
  204:	22069b63          	bnez	a3,43a <.L165>
+			204: R_RISCV_BRANCH	.L165
  208:	016ba823          	sw	s6,16(s7)
 
 0000020c <.L125>:
@@ -2074,31 +2304,40 @@ Disassembly of section .text.lld_pdu_tx_prog:
 00000214 <.LBE845>:
  214:	47a9                	li	a5,10
  216:	1937e563          	bltu	a5,s3,3a0 <.L106>
+			216: R_RISCV_BRANCH	.L106
 
 0000021a <.LBB846>:
  21a:	008bab03          	lw	s6,8(s7)
 
 0000021e <.LVL357>:
  21e:	220b0a63          	beqz	s6,452 <.L110>
+			21e: R_RISCV_BRANCH	.L110
  222:	000b2683          	lw	a3,0(s6)
  226:	00dba423          	sw	a3,8(s7)
  22a:	ee0697e3          	bnez	a3,118 <.L128>
+			22a: R_RISCV_BRANCH	.L128
  22e:	000ba623          	sw	zero,12(s7)
  232:	b5dd                	j	118 <.L128>
+			232: R_RISCV_RVC_JUMP	.L128
 
 00000234 <.L97>:
  234:	00000097          	auipc	ra,0x0
+			234: R_RISCV_CALL	llc_llcp_get_autorize
+			234: R_RISCV_RELAX	*ABS*
  238:	000080e7          	jalr	ra # 234 <.L97>
 
 0000023c <.LVL359>:
  23c:	8905                	andi	a0,a0,1
  23e:	bd2d                	j	78 <.L167>
+			23e: R_RISCV_RVC_JUMP	.L167
 
 00000240 <.L96>:
  240:	4601                	li	a2,0
  242:	85a2                	mv	a1,s0
  244:	018b8513          	addi	a0,s7,24
  248:	00000097          	auipc	ra,0x0
+			248: R_RISCV_CALL	ble_co_list_extract
+			248: R_RISCV_RELAX	*ABS*
  24c:	000080e7          	jalr	ra # 248 <.L96+0x8>
 
 00000250 <.LVL361>:
@@ -2109,19 +2348,27 @@ Disassembly of section .text.lld_pdu_tx_prog:
  256:	000b4703          	lbu	a4,0(s6)
  25a:	02d706b3          	mul	a3,a4,a3
  25e:	00000737          	lui	a4,0x0
+			25e: R_RISCV_HI20	.LANCHOR0
+			25e: R_RISCV_RELAX	*ABS*
  262:	00070713          	mv	a4,a4
+			262: R_RISCV_LO12_I	.LANCHOR0
+			262: R_RISCV_RELAX	*ABS*
  266:	9736                	add	a4,a4,a3
  268:	4350                	lw	a2,4(a4)
  26a:	e0060be3          	beqz	a2,80 <.L95>
+			26a: R_RISCV_BRANCH	.L95
  26e:	02f10593          	addi	a1,sp,47
 
 00000272 <.LVL363>:
  272:	855a                	mv	a0,s6
  274:	00000097          	auipc	ra,0x0
+			274: R_RISCV_CALL	lld_pdu_pack
+			274: R_RISCV_RELAX	*ABS*
  278:	000080e7          	jalr	ra # 274 <.LVL363+0x2>
 
 0000027c <.LBE777>:
  27c:	e00512e3          	bnez	a0,80 <.L95>
+			27c: R_RISCV_BRANCH	.L95
 
 00000280 <.LBB779>:
  280:	00445703          	lhu	a4,4(s0)
@@ -2146,7 +2393,11 @@ Disassembly of section .text.lld_pdu_tx_prog:
 
 0000029c <.LBB790>:
  29c:	00000737          	lui	a4,0x0
+			29c: R_RISCV_HI20	ble_memcpy_ptr
+			29c: R_RISCV_RELAX	*ABS*
  2a0:	00072703          	lw	a4,0(a4) # 0 <lld_pdu_tx_prog>
+			2a0: R_RISCV_LO12_I	ble_memcpy_ptr
+			2a0: R_RISCV_RELAX	*ABS*
  2a4:	02f14603          	lbu	a2,47(sp)
  2a8:	9536                	add	a0,a0,a3
 
@@ -2156,6 +2407,8 @@ Disassembly of section .text.lld_pdu_tx_prog:
 000002ac <.LBE790>:
  2ac:	4408                	lw	a0,8(s0)
  2ae:	00000097          	auipc	ra,0x0
+			2ae: R_RISCV_CALL	ble_ke_free
+			2ae: R_RISCV_RELAX	*ABS*
  2b2:	000080e7          	jalr	ra # 2ae <.LBE790+0x2>
 
 000002b6 <.LVL369>:
@@ -2163,6 +2416,7 @@ Disassembly of section .text.lld_pdu_tx_prog:
  2ba:	0a574703          	lbu	a4,165(a4)
  2be:	8b05                	andi	a4,a4,1
  2c0:	c711                	beqz	a4,2cc <.L102>
+			2c0: R_RISCV_RVC_BRANCH	.L102
  2c2:	02f14703          	lbu	a4,47(sp)
  2c6:	0711                	addi	a4,a4,4
  2c8:	02e107a3          	sb	a4,47(sp)
@@ -2205,6 +2459,7 @@ Disassembly of section .text.lld_pdu_tx_prog:
 00000312 <.LBB803>:
  312:	020ba683          	lw	a3,32(s7)
  316:	ca85                	beqz	a3,346 <.L103>
+			316: R_RISCV_RVC_BRANCH	.L103
 
 00000318 <.LBB805>:
  318:	024ba683          	lw	a3,36(s7)
@@ -2241,6 +2496,8 @@ Disassembly of section .text.lld_pdu_tx_prog:
  346:	85a2                	mv	a1,s0
  348:	8526                	mv	a0,s1
  34a:	00000097          	auipc	ra,0x0
+			34a: R_RISCV_CALL	ble_co_list_push_back
+			34a: R_RISCV_RELAX	*ABS*
  34e:	000080e7          	jalr	ra # 34a <.L103+0x4>
 
 00000352 <.LVL378>:
@@ -2248,6 +2505,7 @@ Disassembly of section .text.lld_pdu_tx_prog:
  356:	0705                	addi	a4,a4,1
  358:	04eb8423          	sb	a4,72(s7)
  35c:	b315                	j	80 <.L95>
+			35c: R_RISCV_RVC_JUMP	.L95
 
 0000035e <.L113>:
  35e:	409c8833          	sub	a6,s9,s1
@@ -2255,6 +2513,7 @@ Disassembly of section .text.lld_pdu_tx_prog:
 
 00000366 <.LVL380>:
  366:	b3f5                	j	152 <.L112>
+			366: R_RISCV_RVC_JUMP	.L112
 
 00000368 <.L116>:
  368:	4785                	li	a5,1
@@ -2266,6 +2525,7 @@ Disassembly of section .text.lld_pdu_tx_prog:
  374:	01031d13          	slli	s10,t1,0x10
  378:	010d5d13          	srli	s10,s10,0x10
  37c:	bd35                	j	1b8 <.L118>
+			37c: R_RISCV_RVC_JUMP	.L118
 
 0000037e <.L120>:
  37e:	4601                	li	a2,0
@@ -2273,15 +2533,19 @@ Disassembly of section .text.lld_pdu_tx_prog:
 
 00000382 <.LVL384>:
  382:	00000097          	auipc	ra,0x0
+			382: R_RISCV_CALL	lld_pdu_data_tx_push
+			382: R_RISCV_RELAX	*ABS*
  386:	000080e7          	jalr	ra # 382 <.LVL384>
 
 0000038a <.LVL385>:
  38a:	4681                	li	a3,0
  38c:	bbdd                	j	182 <.L123>
+			38c: R_RISCV_RVC_JUMP	.L123
 
 0000038e <.L115>:
  38e:	008ba683          	lw	a3,8(s7)
  392:	e299                	bnez	a3,398 <.L124>
+			392: R_RISCV_RVC_BRANCH	.L124
  394:	016ba623          	sw	s6,12(s7)
 
 00000398 <.L124>:
@@ -2300,6 +2564,7 @@ Disassembly of section .text.lld_pdu_tx_prog:
 
 000003b6 <.LBE858>:
  3b6:	cbc5                	beqz	a5,466 <.L129>
+			3b6: R_RISCV_RVC_BRANCH	.L129
 
 000003b8 <.LBB860>:
  3b8:	4529                	li	a0,10
@@ -2316,6 +2581,7 @@ Disassembly of section .text.lld_pdu_tx_prog:
 000003cc <.LBE863>:
  3cc:	81bd                	srli	a1,a1,0xf
  3ce:	e9c1                	bnez	a1,45e <.L130>
+			3ce: R_RISCV_RVC_BRANCH	.L130
  3d0:	47a9                	li	a5,10
 
 000003d2 <.LVL392>:
@@ -2326,7 +2592,11 @@ Disassembly of section .text.lld_pdu_tx_prog:
 
 000003de <.L131>:
  3de:	000007b7          	lui	a5,0x0
+			3de: R_RISCV_HI20	rwip_coex_cfg+0x1
+			3de: R_RISCV_RELAX	*ABS*+0x1
  3e2:	0017c683          	lbu	a3,1(a5) # 1 <lld_pdu_tx_prog+0x1>
+			3e2: R_RISCV_LO12_I	rwip_coex_cfg+0x1
+			3e2: R_RISCV_RELAX	*ABS*+0x1
 
 000003e6 <.LBB864>:
  3e6:	00065583          	lhu	a1,0(a2)
@@ -2381,30 +2651,42 @@ Disassembly of section .text.lld_pdu_tx_prog:
  43a:	014ba683          	lw	a3,20(s7)
  43e:	0166a023          	sw	s6,0(a3) # f000 <.LASF460+0xb61f>
  442:	b3e9                	j	20c <.L125>
+			442: R_RISCV_RVC_JUMP	.L125
 
 00000444 <.L108>:
  444:	008b8593          	addi	a1,s7,8
  448:	8526                	mv	a0,s1
  44a:	00000097          	auipc	ra,0x0
+			44a: R_RISCV_CALL	ble_co_list_merge
+			44a: R_RISCV_RELAX	*ABS*
  44e:	000080e7          	jalr	ra # 44a <.L108+0x6>
 
 00000452 <.L110>:
  452:	4522                	lw	a0,8(sp)
  454:	00000097          	auipc	ra,0x0
+			454: R_RISCV_CALL	ble_co_list_init
+			454: R_RISCV_RELAX	*ABS*
  458:	000080e7          	jalr	ra # 454 <.L110+0x2>
 
 0000045c <.LVL404>:
  45c:	b791                	j	3a0 <.L106>
+			45c: R_RISCV_RVC_JUMP	.L106
 
 0000045e <.L130>:
  45e:	439c                	lw	a5,0(a5)
  460:	ffb9                	bnez	a5,3be <.L132>
+			460: R_RISCV_RVC_BRANCH	.L132
  462:	4701                	li	a4,0
  464:	bfad                	j	3de <.L131>
+			464: R_RISCV_RVC_JUMP	.L131
 
 00000466 <.L129>:
  466:	000007b7          	lui	a5,0x0
+			466: R_RISCV_HI20	rwip_coex_cfg
+			466: R_RISCV_RELAX	*ABS*
  46a:	0007c703          	lbu	a4,0(a5) # 0 <lld_pdu_tx_prog>
+			46a: R_RISCV_LO12_I	rwip_coex_cfg
+			46a: R_RISCV_RELAX	*ABS*
 
 0000046e <.LBB875>:
  46e:	00065683          	lhu	a3,0(a2)
@@ -2433,6 +2715,7 @@ Disassembly of section .text.lld_pdu_tx_prog:
 00000496 <.LBE882>:
  496:	4701                	li	a4,0
  498:	bf9d                	j	40e <.L133>
+			498: R_RISCV_RVC_JUMP	.L133
 
 Disassembly of section .text.lld_pdu_tx_flush:
 
@@ -2457,11 +2740,14 @@ Disassembly of section .text.lld_pdu_tx_flush:
 0000001a <.L169>:
   1a:	4c9c                	lw	a5,24(s1)
   1c:	eba9                	bnez	a5,6e <.L170>
+			1c: R_RISCV_RVC_BRANCH	.L170
   1e:	30091073          	csrw	mstatus,s2
 
 00000022 <.LBE890>:
   22:	02048513          	addi	a0,s1,32 # 20 <.L169+0x6>
   26:	00000097          	auipc	ra,0x0
+			26: R_RISCV_CALL	lld_pdu_tx_flush_list
+			26: R_RISCV_RELAX	*ABS*
   2a:	000080e7          	jalr	ra # 26 <.LBE890+0x4>
 
 0000002e <.LVL416>:
@@ -2470,6 +2756,8 @@ Disassembly of section .text.lld_pdu_tx_flush:
 00000030 <.LVL417>:
   30:	00848513          	addi	a0,s1,8
   34:	00000097          	auipc	ra,0x0
+			34: R_RISCV_CALL	lld_pdu_tx_flush_list
+			34: R_RISCV_RELAX	*ABS*
   38:	000080e7          	jalr	ra # 34 <.LVL417+0x4>
 
 0000003c <.LVL418>:
@@ -2478,6 +2766,8 @@ Disassembly of section .text.lld_pdu_tx_flush:
 0000003e <.LVL419>:
   3e:	01048513          	addi	a0,s1,16
   42:	00000097          	auipc	ra,0x0
+			42: R_RISCV_CALL	lld_pdu_tx_flush_list
+			42: R_RISCV_RELAX	*ABS*
   46:	000080e7          	jalr	ra # 42 <.LVL419+0x4>
 
 0000004a <.LVL420>:
@@ -2489,6 +2779,7 @@ Disassembly of section .text.lld_pdu_tx_flush:
 
 00000054 <.LVL422>:
   54:	cd95                	beqz	a1,90 <.L168>
+			54: R_RISCV_RVC_BRANCH	.L168
   56:	4462                	lw	s0,24(sp)
   58:	04c4d503          	lhu	a0,76(s1)
   5c:	40f2                	lw	ra,28(sp)
@@ -2503,11 +2794,15 @@ Disassembly of section .text.lld_pdu_tx_flush:
 00000064 <.LVL425>:
   64:	6105                	addi	sp,sp,32
   66:	00000317          	auipc	t1,0x0
+			66: R_RISCV_CALL	llc_common_nb_of_pkt_comp_evt_send
+			66: R_RISCV_RELAX	*ABS*
   6a:	00030067          	jr	t1 # 66 <.LVL425+0x2>
 
 0000006e <.L170>:
   6e:	854e                	mv	a0,s3
   70:	00000097          	auipc	ra,0x0
+			70: R_RISCV_CALL	ble_co_list_pop_front
+			70: R_RISCV_RELAX	*ABS*
   74:	000080e7          	jalr	ra # 70 <.L170+0x2>
 
 00000078 <.LVL427>:
@@ -2516,15 +2811,20 @@ Disassembly of section .text.lld_pdu_tx_flush:
 0000007a <.LVL428>:
   7a:	4508                	lw	a0,8(a0)
   7c:	00000097          	auipc	ra,0x0
+			7c: R_RISCV_CALL	ble_ke_free
+			7c: R_RISCV_RELAX	*ABS*
   80:	000080e7          	jalr	ra # 7c <.LVL428+0x2>
 
 00000084 <.LVL429>:
   84:	8522                	mv	a0,s0
   86:	00000097          	auipc	ra,0x0
+			86: R_RISCV_CALL	ble_ke_free
+			86: R_RISCV_RELAX	*ABS*
   8a:	000080e7          	jalr	ra # 86 <.LVL429+0x2>
 
 0000008e <.LVL430>:
   8e:	b771                	j	1a <.L169>
+			8e: R_RISCV_RVC_JUMP	.L169
 
 00000090 <.L168>:
   90:	40f2                	lw	ra,28(sp)
@@ -2549,7 +2849,11 @@ Disassembly of section .text.lld_pdu_adv_pack:
 
 00000006 <.LVL436>:
    6:	000007b7          	lui	a5,0x0
+			6: R_RISCV_HI20	.LANCHOR1
+			6: R_RISCV_RELAX	*ABS*
    a:	00078793          	mv	a5,a5
+			a: R_RISCV_LO12_I	.LANCHOR1
+			a: R_RISCV_RELAX	*ABS*
    e:	872e                	mv	a4,a1
   10:	85b2                	mv	a1,a2
 
@@ -2559,8 +2863,11 @@ Disassembly of section .text.lld_pdu_adv_pack:
 
 00000016 <.LVL438>:
   16:	c611                	beqz	a2,22 <.L174>
+			16: R_RISCV_RVC_BRANCH	.L174
   18:	853a                	mv	a0,a4
   1a:	00000317          	auipc	t1,0x0
+			1a: R_RISCV_CALL	lld_pdu_pack
+			1a: R_RISCV_RELAX	*ABS*
   1e:	00030067          	jr	t1 # 1a <.LVL438+0x4>
 
 00000022 <.L174>:
@@ -2575,6 +2882,8 @@ Disassembly of section .text.lld_pdu_rx_handler:
 
 00000004 <.LBB921>:
    4:	00000b37          	lui	s6,0x0
+			4: R_RISCV_HI20	em_buf_env
+			4: R_RISCV_RELAX	*ABS*
 
 00000008 <.LBE921>:
    8:	de4e                	sw	s3,60(sp)
@@ -2586,6 +2895,8 @@ Disassembly of section .text.lld_pdu_rx_handler:
 
 00000014 <.LBB922>:
   14:	000b0793          	mv	a5,s6
+			14: R_RISCV_LO12_I	em_buf_env
+			14: R_RISCV_RELAX	*ABS*
 
 00000018 <.LBE922>:
   18:	c686                	sw	ra,76(sp)
@@ -2600,26 +2911,38 @@ Disassembly of section .text.lld_pdu_rx_handler:
 
 00000028 <.LBB924>:
   28:	00000bb7          	lui	s7,0x0
+			28: R_RISCV_HI20	llc_env
+			28: R_RISCV_RELAX	*ABS*
 
 0000002c <.LBB926>:
   2c:	00000c37          	lui	s8,0x0
+			2c: R_RISCV_HI20	.LANCHOR0
+			2c: R_RISCV_RELAX	*ABS*
 
 00000030 <.LBE924>:
   30:	89aa                	mv	s3,a0
   32:	8a2e                	mv	s4,a1
   34:	000b0b13          	mv	s6,s6
+			34: R_RISCV_LO12_I	em_buf_env
+			34: R_RISCV_RELAX	*ABS*
 
 00000038 <.LBB967>:
   38:	28008ab7          	lui	s5,0x28008
 
 0000003c <.LBB973>:
   3c:	000b8b93          	mv	s7,s7
+			3c: R_RISCV_LO12_I	llc_env
+			3c: R_RISCV_RELAX	*ABS*
 
 00000040 <.LBB930>:
   40:	00000db7          	lui	s11,0x0
+			40: R_RISCV_HI20	ble_memcpy_ptr
+			40: R_RISCV_RELAX	*ABS*
 
 00000044 <.LBE930>:
   44:	000c0c13          	mv	s8,s8
+			44: R_RISCV_LO12_I	.LANCHOR0
+			44: R_RISCV_RELAX	*ABS*
 
 00000048 <.L176>:
   48:	1a7d                	addi	s4,s4,-1
@@ -2630,6 +2953,7 @@ Disassembly of section .text.lld_pdu_rx_handler:
 0000004e <.LVL444>:
   4e:	0ff00793          	li	a5,255
   52:	02fa1363          	bne	s4,a5,78 <.L189>
+			52: R_RISCV_BRANCH	.L189
 
 00000056 <.LBB993>:
   56:	40b6                	lw	ra,76(sp)
@@ -2663,11 +2987,14 @@ Disassembly of section .text.lld_pdu_rx_handler:
   78:	0569c783          	lbu	a5,86(s3)
   7c:	8bc1                	andi	a5,a5,16
   7e:	22079663          	bnez	a5,2aa <.L177>
+			7e: R_RISCV_BRANCH	.L177
 
 00000082 <.LBB997>:
   82:	4581                	li	a1,0
   84:	4541                	li	a0,16
   86:	00000097          	auipc	ra,0x0
+			86: R_RISCV_CALL	ble_ke_malloc
+			86: R_RISCV_RELAX	*ABS*
   8a:	000080e7          	jalr	ra # 86 <.LBB997+0x4>
 
 0000008e <.LBB974>:
@@ -2738,8 +3065,10 @@ Disassembly of section .text.lld_pdu_rx_handler:
   f2:	0569c783          	lbu	a5,86(s3)
   f6:	0017f613          	andi	a2,a5,1
   fa:	c619                	beqz	a2,108 <.L178>
+			fa: R_RISCV_RVC_BRANCH	.L178
   fc:	04077713          	andi	a4,a4,64
  100:	e701                	bnez	a4,108 <.L178>
+			100: R_RISCV_RVC_BRANCH	.L178
  102:	9bf9                	andi	a5,a5,-2
  104:	04f98b23          	sb	a5,86(s3)
 
@@ -2750,14 +3079,17 @@ Disassembly of section .text.lld_pdu_rx_handler:
  110:	07c2                	slli	a5,a5,0x10
  112:	83c1                	srli	a5,a5,0x10
  114:	16f77e63          	bgeu	a4,a5,290 <.L179>
+			114: R_RISCV_BRANCH	.L179
  118:	0086d793          	srli	a5,a3,0x8
  11c:	00f40523          	sb	a5,10(s0)
  120:	0569c783          	lbu	a5,86(s3)
  124:	0027f713          	andi	a4,a5,2
  128:	c31d                	beqz	a4,14e <.L180>
+			128: R_RISCV_RVC_BRANCH	.L180
  12a:	00845703          	lhu	a4,8(s0)
  12e:	8b05                	andi	a4,a4,1
  130:	ef19                	bnez	a4,14e <.L180>
+			130: R_RISCV_RVC_BRANCH	.L180
  132:	9bf5                	andi	a5,a5,-3
  134:	04f98b23          	sb	a5,86(s3)
  138:	00645783          	lhu	a5,6(s0)
@@ -2772,8 +3104,10 @@ Disassembly of section .text.lld_pdu_rx_handler:
  14e:	00845783          	lhu	a5,8(s0)
  152:	13f7f793          	andi	a5,a5,319
  156:	ebd5                	bnez	a5,20a <.L181>
+			156: R_RISCV_RVC_BRANCH	.L181
  158:	00a44783          	lbu	a5,10(s0)
  15c:	c7dd                	beqz	a5,20a <.L181>
+			15c: R_RISCV_RVC_BRANCH	.L181
 
 0000015e <.LBB990>:
  15e:	00645483          	lhu	s1,6(s0)
@@ -2788,15 +3122,19 @@ Disassembly of section .text.lld_pdu_rx_handler:
  16e:	0a56c683          	lbu	a3,165(a3)
  172:	8a89                	andi	a3,a3,2
  174:	c681                	beqz	a3,17c <.L182>
+			174: R_RISCV_RVC_BRANCH	.L182
  176:	17f1                	addi	a5,a5,-4
  178:	00f40523          	sb	a5,10(s0)
 
 0000017c <.L182>:
  17c:	c759                	beqz	a4,20a <.L181>
+			17c: R_RISCV_RVC_BRANCH	.L181
  17e:	4789                	li	a5,2
  180:	0ce7f663          	bgeu	a5,a4,24c <.L184>
+			180: R_RISCV_BRANCH	.L184
  184:	478d                	li	a5,3
  186:	08f71263          	bne	a4,a5,20a <.L181>
+			186: R_RISCV_BRANCH	.L181
 
 0000018a <.LBB962>:
  18a:	04a2                	slli	s1,s1,0x8
@@ -2818,6 +3156,8 @@ Disassembly of section .text.lld_pdu_rx_handler:
 
 000001a4 <.LBB964>:
  1a4:	00000097          	auipc	ra,0x0
+			1a4: R_RISCV_CALL	ble_ke_msg_alloc
+			1a4: R_RISCV_RELAX	*ABS*
  1a8:	000080e7          	jalr	ra # 1a4 <.LBB964>
 
 000001ac <.LBB953>:
@@ -2846,6 +3186,8 @@ Disassembly of section .text.lld_pdu_rx_handler:
 
 000001ca <.LBB945>:
  1ca:	000da783          	lw	a5,0(s11) # 0 <lld_pdu_rx_handler>
+			1ca: R_RISCV_LO12_I	ble_memcpy_ptr
+			1ca: R_RISCV_RELAX	*ABS*
 
 000001ce <.LBB946>:
  1ce:	0742                	slli	a4,a4,0x10
@@ -2862,6 +3204,7 @@ Disassembly of section .text.lld_pdu_rx_handler:
  1e0:	4722                	lw	a4,8(sp)
  1e2:	4832                	lw	a6,12(sp)
  1e4:	02f6fd63          	bgeu	a3,a5,21e <.L185>
+			1e4: R_RISCV_BRANCH	.L185
  1e8:	47e5                	li	a5,25
 
 000001ea <.L206>:
@@ -2873,22 +3216,29 @@ Disassembly of section .text.lld_pdu_rx_handler:
  1f4:	866a                	mv	a2,s10
  1f6:	8526                	mv	a0,s1
  1f8:	00000097          	auipc	ra,0x0
+			1f8: R_RISCV_CALL	llc_llcp_recv_handler
+			1f8: R_RISCV_RELAX	*ABS*
  1fc:	000080e7          	jalr	ra # 1f8 <.L186+0xa>
 
 00000200 <.LVL468>:
  200:	8566                	mv	a0,s9
  202:	00000097          	auipc	ra,0x0
+			202: R_RISCV_CALL	ble_ke_msg_send
+			202: R_RISCV_RELAX	*ABS*
  206:	000080e7          	jalr	ra # 202 <.LVL468+0x2>
 
 0000020a <.L181>:
  20a:	00444503          	lbu	a0,4(s0)
  20e:	00000097          	auipc	ra,0x0
+			20e: R_RISCV_CALL	em_buf_rx_free
+			20e: R_RISCV_RELAX	*ABS*
  212:	000080e7          	jalr	ra # 20e <.L181+0x4>
 
 00000216 <.LVL470>:
  216:	4785                	li	a5,1
  218:	00f402a3          	sb	a5,5(s0)
  21c:	a895                	j	290 <.L179>
+			21c: R_RISCV_RVC_JUMP	.L179
 
 0000021e <.L185>:
  21e:	46b1                	li	a3,12
@@ -2896,8 +3246,10 @@ Disassembly of section .text.lld_pdu_rx_handler:
  224:	97e2                	add	a5,a5,s8
  226:	0007c583          	lbu	a1,0(a5)
  22a:	01058463          	beq	a1,a6,232 <.L187>
+			22a: R_RISCV_BRANCH	.L187
  22e:	47f9                	li	a5,30
  230:	bf6d                	j	1ea <.L206>
+			230: R_RISCV_RVC_JUMP	.L206
 
 00000232 <.L187>:
  232:	00170513          	addi	a0,a4,1
@@ -2912,6 +3264,7 @@ Disassembly of section .text.lld_pdu_rx_handler:
 
 0000024a <.LVL472>:
  24a:	b755                	j	1ee <.L186>
+			24a: R_RISCV_RVC_JUMP	.L186
 
 0000024c <.L184>:
  24c:	00849613          	slli	a2,s1,0x8
@@ -2925,6 +3278,8 @@ Disassembly of section .text.lld_pdu_rx_handler:
 
 00000262 <.LVL474>:
  262:	00000097          	auipc	ra,0x0
+			262: R_RISCV_CALL	ble_ke_msg_alloc
+			262: R_RISCV_RELAX	*ABS*
  266:	000080e7          	jalr	ra # 262 <.LVL474>
 
 0000026a <.LVL475>:
@@ -2937,13 +3292,21 @@ Disassembly of section .text.lld_pdu_rx_handler:
  280:	00444703          	lbu	a4,4(s0)
  284:	00e50323          	sb	a4,6(a0)
  288:	00000097          	auipc	ra,0x0
+			288: R_RISCV_CALL	ble_ke_msg_send
+			288: R_RISCV_RELAX	*ABS*
  28c:	000080e7          	jalr	ra # 288 <.LVL475+0x1e>
 
 00000290 <.L179>:
  290:	000007b7          	lui	a5,0x0
+			290: R_RISCV_HI20	lld_evt_env+0x18
+			290: R_RISCV_RELAX	*ABS*+0x18
  294:	85a2                	mv	a1,s0
  296:	01878513          	addi	a0,a5,24 # 18 <.LBE922>
+			296: R_RISCV_LO12_I	lld_evt_env+0x18
+			296: R_RISCV_RELAX	*ABS*+0x18
  29a:	00000097          	auipc	ra,0x0
+			29a: R_RISCV_CALL	ble_co_list_push_back
+			29a: R_RISCV_RELAX	*ABS*
  29e:	000080e7          	jalr	ra # 29a <.L179+0xa>
 
 000002a2 <.L188>:
@@ -2954,11 +3317,15 @@ Disassembly of section .text.lld_pdu_rx_handler:
 
 000002a8 <.LVL479>:
  2a8:	b345                	j	48 <.L176>
+			2a8: R_RISCV_RVC_JUMP	.L176
 
 000002aa <.L177>:
  2aa:	854a                	mv	a0,s2
  2ac:	00000097          	auipc	ra,0x0
+			2ac: R_RISCV_CALL	em_buf_rx_free
+			2ac: R_RISCV_RELAX	*ABS*
  2b0:	000080e7          	jalr	ra # 2ac <.L177+0x2>
 
 000002b4 <.LVL481>:
  2b4:	b7fd                	j	2a2 <.L188>
+			2b4: R_RISCV_RVC_JUMP	.L188

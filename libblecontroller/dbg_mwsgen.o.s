@@ -1,3 +1,3 @@
 
-dbg_mwsgen.o:     file format elf32-littleriscv
+libblecontroller/dbg_mwsgen.o:     file format elf32-littleriscv
 

@@ -1,5 +1,5 @@
 
-phy_hal.o:     file format elf32-littleriscv
+libbl602_wifi/phy_hal.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.hal_fem_gpio_on:
@@ -13,6 +13,8 @@ Disassembly of section .text.hal_fem_gpio_on:
    e:	ce06                	sw	ra,28(sp)
   10:	c43e                	sw	a5,8(sp)
   12:	00000097          	auipc	ra,0x0
+			12: R_RISCV_CALL	GLB_GPIO_Init
+			12: R_RISCV_RELAX	*ABS*
   16:	000080e7          	jalr	ra # 12 <hal_fem_gpio_on+0x12>
 
 0000001a <.LVL0>:
@@ -20,6 +22,8 @@ Disassembly of section .text.hal_fem_gpio_on:
   1e:	0028                	addi	a0,sp,8
   20:	c422                	sw	s0,8(sp)
   22:	00000097          	auipc	ra,0x0
+			22: R_RISCV_CALL	GLB_GPIO_Init
+			22: R_RISCV_RELAX	*ABS*
   26:	000080e7          	jalr	ra # 22 <.LVL0+0x8>
 
 0000002a <.LVL1>:
@@ -94,6 +98,7 @@ Disassembly of section .text.hal_get_capcode_asymm:
 
 00000000 <hal_get_capcode_asymm>:
    0:	c911                	beqz	a0,14 <.L8>
+			0: R_RISCV_RVC_BRANCH	.L8
    2:	400107b7          	lui	a5,0x40010
    6:	8847a783          	lw	a5,-1916(a5) # 4000f884 <.LASF18+0x4000f100>
    a:	83d9                	srli	a5,a5,0x16
@@ -102,6 +107,7 @@ Disassembly of section .text.hal_get_capcode_asymm:
 
 00000014 <.L8>:
   14:	c991                	beqz	a1,28 <.L7>
+			14: R_RISCV_RVC_BRANCH	.L7
   16:	400107b7          	lui	a5,0x40010
   1a:	8847a783          	lw	a5,-1916(a5) # 4000f884 <.LASF18+0x4000f100>
   1e:	83c1                	srli	a5,a5,0x10
@@ -115,7 +121,11 @@ Disassembly of section .text.hal_get_temperature:
 
 00000000 <hal_get_temperature>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	.LANCHOR0
+			0: R_RISCV_RELAX	*ABS*
    4:	0007d783          	lhu	a5,0(a5) # 0 <hal_get_temperature>
+			4: R_RISCV_LO12_I	.LANCHOR0
+			4: R_RISCV_RELAX	*ABS*
    8:	00f51023          	sh	a5,0(a0)
    c:	4505                	li	a0,1
 
@@ -126,5 +136,9 @@ Disassembly of section .text.hal_set_temperature:
 
 00000000 <hal_set_temperature>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	.LANCHOR0
+			0: R_RISCV_RELAX	*ABS*
    4:	00a79023          	sh	a0,0(a5) # 0 <hal_set_temperature>
+			4: R_RISCV_LO12_S	.LANCHOR0
+			4: R_RISCV_RELAX	*ABS*
    8:	8082                	ret

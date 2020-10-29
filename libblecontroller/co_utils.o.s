@@ -1,18 +1,26 @@
 
-co_utils.o:     file format elf32-littleriscv
+libblecontroller/co_utils.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.co_bdaddr_set:
 
 00000000 <co_bdaddr_set>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	ble_memcpy_ptr
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a303          	lw	t1,0(a5) # 0 <co_bdaddr_set>
+			4: R_RISCV_LO12_I	ble_memcpy_ptr
+			4: R_RISCV_RELAX	*ABS*
    8:	85aa                	mv	a1,a0
    a:	00000537          	lui	a0,0x0
+			a: R_RISCV_HI20	.LANCHOR0
+			a: R_RISCV_RELAX	*ABS*
 
 0000000e <.LVL1>:
    e:	4619                	li	a2,6
   10:	00050513          	mv	a0,a0
+			10: R_RISCV_LO12_I	.LANCHOR0
+			10: R_RISCV_RELAX	*ABS*
   14:	8302                	jr	t1
 
 Disassembly of section .text.co_bdaddr_compare:
@@ -29,12 +37,14 @@ Disassembly of section .text.co_bdaddr_compare:
    c:	0006c683          	lbu	a3,0(a3)
   10:	00074703          	lbu	a4,0(a4)
   14:	00e69763          	bne	a3,a4,22 <.L5>
+			14: R_RISCV_BRANCH	.L5
 
 00000018 <.LVL5>:
   18:	0785                	addi	a5,a5,1
 
 0000001a <.LVL6>:
   1a:	fec795e3          	bne	a5,a2,4 <.L4>
+			1a: R_RISCV_BRANCH	.L4
 
 0000001e <.LBE3>:
   1e:	4505                	li	a0,1

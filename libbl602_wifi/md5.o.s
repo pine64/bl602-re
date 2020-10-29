@@ -1,5 +1,5 @@
 
-md5.o:     file format elf32-littleriscv
+libbl602_wifi/md5.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.wpa_MD5Transform:
@@ -1328,6 +1328,8 @@ Disassembly of section .text.wpa_MD5Transform:
  8ae:	4581                	li	a1,0
  8b0:	6145                	addi	sp,sp,48
  8b2:	00000317          	auipc	t1,0x0
+			8b2: R_RISCV_CALL	memset
+			8b2: R_RISCV_RELAX	*ABS*
  8b6:	00030067          	jr	t1 # 8b2 <.LVL319+0x36>
 
 Disassembly of section .text.wpa_MD5Init:
@@ -1373,6 +1375,7 @@ Disassembly of section .text.wpa_MD5Update:
 
 00000026 <.LVL324>:
   26:	00e7f563          	bgeu	a5,a4,30 <.L5>
+			26: R_RISCV_BRANCH	.L5
   2a:	485c                	lw	a5,20(s0)
   2c:	0785                	addi	a5,a5,1
   2e:	c85c                	sw	a5,20(s0)
@@ -1387,6 +1390,7 @@ Disassembly of section .text.wpa_MD5Update:
 
 00000040 <.LVL325>:
   40:	06996d63          	bltu	s2,s1,ba <.L9>
+			40: R_RISCV_BRANCH	.L9
   44:	05850513          	addi	a0,a0,88
 
 00000048 <.LVL326>:
@@ -1400,12 +1404,16 @@ Disassembly of section .text.wpa_MD5Update:
 
 0000004e <.LVL329>:
   4e:	00000097          	auipc	ra,0x0
+			4e: R_RISCV_CALL	memcpy
+			4e: R_RISCV_RELAX	*ABS*
   52:	000080e7          	jalr	ra # 4e <.LVL329>
 
 00000056 <.LVL330>:
   56:	05840593          	addi	a1,s0,88
   5a:	8522                	mv	a0,s0
   5c:	00000097          	auipc	ra,0x0
+			5c: R_RISCV_CALL	wpa_MD5Transform
+			5c: R_RISCV_RELAX	*ABS*
   60:	000080e7          	jalr	ra # 5c <.LVL330+0x6>
 
 00000064 <.LVL331>:
@@ -1415,6 +1423,7 @@ Disassembly of section .text.wpa_MD5Update:
   68:	03f48793          	addi	a5,s1,63
   6c:	009985b3          	add	a1,s3,s1
   70:	0327e563          	bltu	a5,s2,9a <.L8>
+			70: R_RISCV_BRANCH	.L8
   74:	4501                	li	a0,0
 
 00000076 <.L6>:
@@ -1442,29 +1451,37 @@ Disassembly of section .text.wpa_MD5Update:
   8e:	4a22                	lw	s4,8(sp)
   90:	6105                	addi	sp,sp,32
   92:	00000317          	auipc	t1,0x0
+			92: R_RISCV_CALL	memcpy
+			92: R_RISCV_RELAX	*ABS*
   96:	00030067          	jr	t1 # 92 <.LVL339+0x4>
 
 0000009a <.L8>:
   9a:	04000613          	li	a2,64
   9e:	8552                	mv	a0,s4
   a0:	00000097          	auipc	ra,0x0
+			a0: R_RISCV_CALL	memcpy
+			a0: R_RISCV_RELAX	*ABS*
   a4:	000080e7          	jalr	ra # a0 <.L8+0x6>
 
 000000a8 <.LVL341>:
   a8:	85d2                	mv	a1,s4
   aa:	8522                	mv	a0,s0
   ac:	00000097          	auipc	ra,0x0
+			ac: R_RISCV_CALL	wpa_MD5Transform
+			ac: R_RISCV_RELAX	*ABS*
   b0:	000080e7          	jalr	ra # ac <.LVL341+0x4>
 
 000000b4 <.LVL342>:
   b4:	04048493          	addi	s1,s1,64
   b8:	bf45                	j	68 <.L7>
+			b8: R_RISCV_RVC_JUMP	.L7
 
 000000ba <.L9>:
   ba:	4481                	li	s1,0
 
 000000bc <.LVL345>:
   bc:	bf6d                	j	76 <.L6>
+			bc: R_RISCV_RVC_JUMP	.L6
 
 Disassembly of section .text.wpa_MD5Final:
 
@@ -1483,6 +1500,8 @@ Disassembly of section .text.wpa_MD5Final:
 00000010 <.LVL348>:
   10:	ce06                	sw	ra,28(sp)
   12:	00000097          	auipc	ra,0x0
+			12: R_RISCV_CALL	memcpy
+			12: R_RISCV_RELAX	*ABS*
   16:	000080e7          	jalr	ra # 12 <.LVL348+0x2>
 
 0000001a <.LVL349>:
@@ -1493,16 +1512,23 @@ Disassembly of section .text.wpa_MD5Final:
 
 00000026 <.LVL350>:
   26:	04c7ea63          	bltu	a5,a2,7a <.L12>
+			26: R_RISCV_BRANCH	.L12
   2a:	03800793          	li	a5,56
 
 0000002e <.L15>:
   2e:	000005b7          	lui	a1,0x0
+			2e: R_RISCV_HI20	.LANCHOR0
+			2e: R_RISCV_RELAX	*ABS*
   32:	40c78633          	sub	a2,a5,a2
 
 00000036 <.LVL351>:
   36:	8522                	mv	a0,s0
   38:	00058593          	mv	a1,a1
+			38: R_RISCV_LO12_I	.LANCHOR0
+			38: R_RISCV_RELAX	*ABS*
   3c:	00000097          	auipc	ra,0x0
+			3c: R_RISCV_CALL	wpa_MD5Update
+			3c: R_RISCV_RELAX	*ABS*
   40:	000080e7          	jalr	ra # 3c <.LVL351+0x6>
 
 00000044 <.LVL352>:
@@ -1510,6 +1536,8 @@ Disassembly of section .text.wpa_MD5Final:
   46:	8522                	mv	a0,s0
   48:	4621                	li	a2,8
   4a:	00000097          	auipc	ra,0x0
+			4a: R_RISCV_CALL	wpa_MD5Update
+			4a: R_RISCV_RELAX	*ABS*
   4e:	000080e7          	jalr	ra # 4a <.LVL352+0x6>
 
 00000052 <.LVL353>:
@@ -1517,6 +1545,8 @@ Disassembly of section .text.wpa_MD5Final:
   54:	4641                	li	a2,16
   56:	8526                	mv	a0,s1
   58:	00000097          	auipc	ra,0x0
+			58: R_RISCV_CALL	memcpy
+			58: R_RISCV_RELAX	*ABS*
   5c:	000080e7          	jalr	ra # 58 <.LVL353+0x6>
 
 00000060 <.LVL354>:
@@ -1524,6 +1554,8 @@ Disassembly of section .text.wpa_MD5Final:
   62:	09800613          	li	a2,152
   66:	4581                	li	a1,0
   68:	00000097          	auipc	ra,0x0
+			68: R_RISCV_CALL	memset
+			68: R_RISCV_RELAX	*ABS*
   6c:	000080e7          	jalr	ra # 68 <.LVL354+0x8>
 
 00000070 <.LVL355>:
@@ -1540,3 +1572,4 @@ Disassembly of section .text.wpa_MD5Final:
 0000007a <.L12>:
   7a:	07800793          	li	a5,120
   7e:	bf45                	j	2e <.L15>
+			7e: R_RISCV_RVC_JUMP	.L15

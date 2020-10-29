@@ -1,5 +1,5 @@
 
-bl_sha1_wrapper.o:     file format elf32-littleriscv
+libbl602_wifi/bl_sha1_wrapper.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.Bl_hmac_sha1:
@@ -30,10 +30,13 @@ Disassembly of section .text.Bl_hmac_sha1:
   3c:	84ba                	mv	s1,a4
   3e:	8b42                	mv	s6,a6
   40:	02e7d563          	bge	a5,a4,6a <.L2>
+			40: R_RISCV_BRANCH	.L2
   44:	08c8                	addi	a0,sp,84
 
 00000046 <.LVL3>:
   46:	00000097          	auipc	ra,0x0
+			46: R_RISCV_CALL	Bl_SHA1Init
+			46: R_RISCV_RELAX	*ABS*
   4a:	000080e7          	jalr	ra # 46 <.LVL3>
 
 0000004e <.LVL4>:
@@ -43,6 +46,8 @@ Disassembly of section .text.Bl_hmac_sha1:
 
 00000054 <.LVL5>:
   54:	00000097          	auipc	ra,0x0
+			54: R_RISCV_CALL	Bl_SHA1Update
+			54: R_RISCV_RELAX	*ABS*
   58:	000080e7          	jalr	ra # 54 <.LVL5>
 
 0000005c <.LVL6>:
@@ -51,6 +56,8 @@ Disassembly of section .text.Bl_hmac_sha1:
 
 00000060 <.LVL7>:
   60:	00000097          	auipc	ra,0x0
+			60: R_RISCV_CALL	Bl_SHA1Final
+			60: R_RISCV_RELAX	*ABS*
   64:	000080e7          	jalr	ra # 60 <.LVL7>
 
 00000068 <.LVL8>:
@@ -61,6 +68,8 @@ Disassembly of section .text.Bl_hmac_sha1:
   6e:	4581                	li	a1,0
   70:	850a                	mv	a0,sp
   72:	00000097          	auipc	ra,0x0
+			72: R_RISCV_CALL	memset
+			72: R_RISCV_RELAX	*ABS*
   76:	000080e7          	jalr	ra # 72 <.L2+0x8>
 
 0000007a <.LVL10>:
@@ -68,6 +77,8 @@ Disassembly of section .text.Bl_hmac_sha1:
   7c:	85ca                	mv	a1,s2
   7e:	850a                	mv	a0,sp
   80:	00000097          	auipc	ra,0x0
+			80: R_RISCV_CALL	memcpy
+			80: R_RISCV_RELAX	*ABS*
   84:	000080e7          	jalr	ra # 80 <.LVL10+0x6>
 
 00000088 <.LVL11>:
@@ -88,10 +99,13 @@ Disassembly of section .text.Bl_hmac_sha1:
   a6:	8eb9                	xor	a3,a3,a4
   a8:	fed7ae23          	sw	a3,-4(a5)
   ac:	ff4796e3          	bne	a5,s4,98 <.L3>
+			ac: R_RISCV_BRANCH	.L3
   b0:	08c8                	addi	a0,sp,84
 
 000000b2 <.LVL14>:
   b2:	00000097          	auipc	ra,0x0
+			b2: R_RISCV_CALL	Bl_SHA1Init
+			b2: R_RISCV_RELAX	*ABS*
   b6:	000080e7          	jalr	ra # b2 <.LVL14>
 
 000000ba <.LVL15>:
@@ -101,6 +115,8 @@ Disassembly of section .text.Bl_hmac_sha1:
 
 000000c2 <.LVL16>:
   c2:	00000097          	auipc	ra,0x0
+			c2: R_RISCV_CALL	Bl_SHA1Update
+			c2: R_RISCV_RELAX	*ABS*
   c6:	000080e7          	jalr	ra # c2 <.LVL16>
 
 000000ca <.LVL17>:
@@ -108,11 +124,14 @@ Disassembly of section .text.Bl_hmac_sha1:
 
 000000cc <.L4>:
   cc:	0d79c063          	blt	s3,s7,18c <.L5>
+			cc: R_RISCV_BRANCH	.L5
   d0:	85d2                	mv	a1,s4
   d2:	08c8                	addi	a0,sp,84
 
 000000d4 <.LVL19>:
   d4:	00000097          	auipc	ra,0x0
+			d4: R_RISCV_CALL	Bl_SHA1Final
+			d4: R_RISCV_RELAX	*ABS*
   d8:	000080e7          	jalr	ra # d4 <.LVL19>
 
 000000dc <.LVL20>:
@@ -120,6 +139,8 @@ Disassembly of section .text.Bl_hmac_sha1:
   e0:	4581                	li	a1,0
   e2:	850a                	mv	a0,sp
   e4:	00000097          	auipc	ra,0x0
+			e4: R_RISCV_CALL	memset
+			e4: R_RISCV_RELAX	*ABS*
   e8:	000080e7          	jalr	ra # e4 <.LVL20+0x8>
 
 000000ec <.LVL21>:
@@ -127,6 +148,8 @@ Disassembly of section .text.Bl_hmac_sha1:
   ee:	85ca                	mv	a1,s2
   f0:	850a                	mv	a0,sp
   f2:	00000097          	auipc	ra,0x0
+			f2: R_RISCV_CALL	memcpy
+			f2: R_RISCV_RELAX	*ABS*
   f6:	000080e7          	jalr	ra # f2 <.LVL21+0x6>
 
 000000fa <.LVL22>:
@@ -142,10 +165,13 @@ Disassembly of section .text.Bl_hmac_sha1:
  110:	8f3d                	xor	a4,a4,a5
  112:	fee42e23          	sw	a4,-4(s0)
  116:	ff4416e3          	bne	s0,s4,102 <.L6>
+			116: R_RISCV_BRANCH	.L6
  11a:	08c8                	addi	a0,sp,84
 
 0000011c <.LVL24>:
  11c:	00000097          	auipc	ra,0x0
+			11c: R_RISCV_CALL	Bl_SHA1Init
+			11c: R_RISCV_RELAX	*ABS*
  120:	000080e7          	jalr	ra # 11c <.LVL24>
 
 00000124 <.LVL25>:
@@ -155,6 +181,8 @@ Disassembly of section .text.Bl_hmac_sha1:
 
 0000012c <.LVL26>:
  12c:	00000097          	auipc	ra,0x0
+			12c: R_RISCV_CALL	Bl_SHA1Update
+			12c: R_RISCV_RELAX	*ABS*
  130:	000080e7          	jalr	ra # 12c <.LVL26>
 
 00000134 <.LVL27>:
@@ -164,6 +192,8 @@ Disassembly of section .text.Bl_hmac_sha1:
 
 0000013a <.LVL28>:
  13a:	00000097          	auipc	ra,0x0
+			13a: R_RISCV_CALL	Bl_SHA1Update
+			13a: R_RISCV_RELAX	*ABS*
  13e:	000080e7          	jalr	ra # 13a <.LVL28>
 
 00000142 <.LVL29>:
@@ -172,6 +202,8 @@ Disassembly of section .text.Bl_hmac_sha1:
 
 00000146 <.LVL30>:
  146:	00000097          	auipc	ra,0x0
+			146: R_RISCV_CALL	Bl_SHA1Final
+			146: R_RISCV_RELAX	*ABS*
  14a:	000080e7          	jalr	ra # 146 <.LVL30>
 
 0000014e <.LVL31>:
@@ -179,6 +211,8 @@ Disassembly of section .text.Bl_hmac_sha1:
  150:	85a2                	mv	a1,s0
  152:	8556                	mv	a0,s5
  154:	00000097          	auipc	ra,0x0
+			154: R_RISCV_CALL	memcpy
+			154: R_RISCV_RELAX	*ABS*
  158:	000080e7          	jalr	ra # 154 <.LVL31+0x6>
 
 0000015c <.LVL32>:
@@ -227,10 +261,13 @@ Disassembly of section .text.Bl_hmac_sha1:
 
 0000019e <.LVL44>:
  19e:	00000097          	auipc	ra,0x0
+			19e: R_RISCV_CALL	Bl_SHA1Update
+			19e: R_RISCV_RELAX	*ABS*
  1a2:	000080e7          	jalr	ra # 19e <.LVL44>
 
 000001a6 <.LVL45>:
  1a6:	b71d                	j	cc <.L4>
+			1a6: R_RISCV_RVC_JUMP	.L4
 
 Disassembly of section .text.Bl_PRF:
 
@@ -269,14 +306,19 @@ Disassembly of section .text.Bl_PRF:
 
 00000036 <.LVL50>:
   36:	00000097          	auipc	ra,0x0
+			36: R_RISCV_CALL	memset
+			36: R_RISCV_RELAX	*ABS*
   3a:	000080e7          	jalr	ra # 36 <.LVL50>
 
 0000003e <.LVL51>:
   3e:	060c0c63          	beqz	s8,b6 <.L11>
+			3e: R_RISCV_BRANCH	.L11
   42:	8622                	mv	a2,s0
   44:	85e2                	mv	a1,s8
   46:	8556                	mv	a0,s5
   48:	00000097          	auipc	ra,0x0
+			48: R_RISCV_CALL	memcpy
+			48: R_RISCV_RELAX	*ABS*
   4c:	000080e7          	jalr	ra # 48 <.LVL51+0xa>
 
 00000050 <.LVL52>:
@@ -293,6 +335,8 @@ Disassembly of section .text.Bl_PRF:
 00000060 <.LVL54>:
   60:	f8078423          	sb	zero,-120(a5)
   64:	00000097          	auipc	ra,0x0
+			64: R_RISCV_CALL	memcpy
+			64: R_RISCV_RELAX	*ABS*
   68:	000080e7          	jalr	ra # 64 <.LVL54+0x4>
 
 0000006c <.LVL55>:
@@ -329,6 +373,7 @@ Disassembly of section .text.Bl_PRF:
 
 00000098 <.LVL61>:
   98:	036ac863          	blt	s5,s6,c8 <.L15>
+			98: R_RISCV_BRANCH	.L15
   9c:	50ba                	lw	ra,172(sp)
   9e:	542a                	lw	s0,168(sp)
   a0:	549a                	lw	s1,164(sp)
@@ -360,15 +405,19 @@ Disassembly of section .text.Bl_PRF:
   b8:	85de                	mv	a1,s7
   ba:	8556                	mv	a0,s5
   bc:	00000097          	auipc	ra,0x0
+			bc: R_RISCV_CALL	memcpy
+			bc: R_RISCV_RELAX	*ABS*
   c0:	000080e7          	jalr	ra # bc <.L11+0x6>
 
 000000c4 <.LVL69>:
   c4:	c05a                	sw	s6,0(sp)
   c6:	b765                	j	6e <.L12>
+			c6: R_RISCV_RVC_JUMP	.L12
 
 000000c8 <.L15>:
   c8:	843e                	mv	s0,a5
   ca:	00fcd363          	bge	s9,a5,d0 <.L14>
+			ca: R_RISCV_BRANCH	.L14
 
 000000ce <.LVL71>:
   ce:	4451                	li	s0,20
@@ -386,6 +435,8 @@ Disassembly of section .text.Bl_PRF:
   e0:	858a                	mv	a1,sp
   e2:	0048                	addi	a0,sp,4
   e4:	00000097          	auipc	ra,0x0
+			e4: R_RISCV_CALL	Bl_hmac_sha1
+			e4: R_RISCV_RELAX	*ABS*
   e8:	000080e7          	jalr	ra # e4 <.LVL73+0xc>
 
 000000ec <.LVL74>:
@@ -403,3 +454,4 @@ Disassembly of section .text.Bl_PRF:
   fc:	0705                	addi	a4,a4,1
   fe:	f8e78423          	sb	a4,-120(a5)
  102:	b771                	j	8e <.L13>
+			102: R_RISCV_RVC_JUMP	.L13

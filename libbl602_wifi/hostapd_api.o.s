@@ -1,5 +1,5 @@
 
-hostapd_api.o:     file format elf32-littleriscv
+libbl602_wifi/hostapd_api.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.bl606fw_send_mlme:

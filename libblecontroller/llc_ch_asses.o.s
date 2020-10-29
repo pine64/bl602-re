@@ -1,31 +1,41 @@
 
-llc_ch_asses.o:     file format elf32-littleriscv
+libblecontroller/llc_ch_asses.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.llc_ch_assess_local:
 
 00000000 <llc_ch_assess_local>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	llc_env
+			0: R_RISCV_RELAX	*ABS*
    4:	050a                	slli	a0,a0,0x2
 
 00000006 <.LVL1>:
    6:	00078793          	mv	a5,a5
+			6: R_RISCV_LO12_I	llc_env
+			6: R_RISCV_RELAX	*ABS*
    a:	97aa                	add	a5,a5,a0
    c:	4388                	lw	a0,0(a5)
    e:	00000737          	lui	a4,0x0
+			e: R_RISCV_HI20	llm_le_env
+			e: R_RISCV_RELAX	*ABS*
   12:	0015f813          	andi	a6,a1,1
   16:	96aa                	add	a3,a3,a0
 
 00000018 <.LVL3>:
   18:	01468783          	lb	a5,20(a3)
   1c:	00070713          	mv	a4,a4
+			1c: R_RISCV_LO12_I	llm_le_env
+			1c: R_RISCV_RELAX	*ABS*
   20:	02080763          	beqz	a6,4e <.L2>
+			20: R_RISCV_BRANCH	.L2
 
 00000024 <.LBB17>:
   24:	03070583          	lb	a1,48(a4) # 30 <.L8+0x2>
 
 00000028 <.LVL4>:
   28:	00c5d663          	bge	a1,a2,34 <.L3>
+			28: R_RISCV_BRANCH	.L3
 
 0000002c <.L10>:
   2c:	17f5                	addi	a5,a5,-3
@@ -33,6 +43,7 @@ Disassembly of section .text.llc_ch_assess_local:
 0000002e <.L8>:
   2e:	00f68a23          	sb	a5,20(a3)
   32:	a029                	j	3c <.L4>
+			32: R_RISCV_RVC_JUMP	.L4
 
 00000034 <.L3>:
   34:	03954603          	lbu	a2,57(a0)
@@ -40,6 +51,7 @@ Disassembly of section .text.llc_ch_assess_local:
 00000038 <.LVL7>:
   38:	17fd                	addi	a5,a5,-1
   3a:	da75                	beqz	a2,2e <.L8>
+			3a: R_RISCV_RVC_BRANCH	.L8
 
 0000003c <.L4>:
   3c:	01468603          	lb	a2,20(a3)
@@ -49,10 +61,12 @@ Disassembly of section .text.llc_ch_assess_local:
 
 00000044 <.LBE19>:
   44:	00f65b63          	bge	a2,a5,5a <.L6>
+			44: R_RISCV_BRANCH	.L6
 
 00000048 <.L9>:
   48:	00f68a23          	sb	a5,20(a3)
   4c:	a819                	j	62 <.L1>
+			4c: R_RISCV_RVC_JUMP	.L1
 
 0000004e <.L2>:
   4e:	89a1                	andi	a1,a1,8
@@ -60,14 +74,17 @@ Disassembly of section .text.llc_ch_assess_local:
 00000050 <.LVL9>:
   50:	0ff7f793          	andi	a5,a5,255
   54:	fde1                	bnez	a1,2c <.L10>
+			54: R_RISCV_RVC_BRANCH	.L10
   56:	078d                	addi	a5,a5,3
   58:	bfd9                	j	2e <.L8>
+			58: R_RISCV_RVC_JUMP	.L8
 
 0000005a <.L6>:
   5a:	02f70783          	lb	a5,47(a4)
 
 0000005e <.LBE21>:
   5e:	fec7c5e3          	blt	a5,a2,48 <.L9>
+			5e: R_RISCV_BRANCH	.L9
 
 00000062 <.L1>:
   62:	8082                	ret
@@ -76,11 +93,15 @@ Disassembly of section .text.llc_ch_assess_get_local_ch_map:
 
 00000000 <llc_ch_assess_get_local_ch_map>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	llc_env
+			0: R_RISCV_RELAX	*ABS*
    4:	1141                	addi	sp,sp,-16
    6:	050a                	slli	a0,a0,0x2
 
 00000008 <.LVL12>:
    8:	00078793          	mv	a5,a5
+			8: R_RISCV_LO12_I	llc_env
+			8: R_RISCV_RELAX	*ABS*
    c:	c422                	sw	s0,8(sp)
    e:	c04a                	sw	s2,0(sp)
   10:	97aa                	add	a5,a5,a0
@@ -90,7 +111,11 @@ Disassembly of section .text.llc_ch_assess_get_local_ch_map:
 
 00000018 <.LVL13>:
   18:	000007b7          	lui	a5,0x0
+			18: R_RISCV_HI20	ble_memset_ptr
+			18: R_RISCV_RELAX	*ABS*
   1c:	0007a783          	lw	a5,0(a5) # 0 <llc_ch_assess_get_local_ch_map>
+			1c: R_RISCV_LO12_I	ble_memset_ptr
+			1c: R_RISCV_RELAX	*ABS*
   20:	842e                	mv	s0,a1
   22:	8932                	mv	s2,a2
   24:	4581                	li	a1,0
@@ -104,6 +129,8 @@ Disassembly of section .text.llc_ch_assess_get_local_ch_map:
 
 0000002c <.LBB23>:
   2c:	00000637          	lui	a2,0x0
+			2c: R_RISCV_HI20	llm_le_env
+			2c: R_RISCV_RELAX	*ABS*
 
 00000030 <.LBE23>:
   30:	02400693          	li	a3,36
@@ -114,6 +141,8 @@ Disassembly of section .text.llc_ch_assess_get_local_ch_map:
 
 00000038 <.LBB28>:
   38:	00060613          	mv	a2,a2
+			38: R_RISCV_LO12_I	llm_le_env
+			38: R_RISCV_RELAX	*ABS*
 
 0000003c <.LBE28>:
   3c:	587d                	li	a6,-1
@@ -129,12 +158,14 @@ Disassembly of section .text.llc_ch_assess_get_local_ch_map:
   56:	0ff7f793          	andi	a5,a5,255
   5a:	8dfd                	and	a1,a1,a5
   5c:	c195                	beqz	a1,80 <.L12>
+			5c: R_RISCV_RVC_BRANCH	.L12
 
 0000005e <.LBB29>:
   5e:	00d485b3          	add	a1,s1,a3
   62:	01458303          	lb	t1,20(a1)
   66:	02e60583          	lb	a1,46(a2) # 2e <.LBB23+0x2>
   6a:	0065db63          	bge	a1,t1,80 <.L12>
+			6a: R_RISCV_BRANCH	.L12
   6e:	9722                	add	a4,a4,s0
   70:	00074583          	lbu	a1,0(a4)
   74:	0505                	addi	a0,a0,1
@@ -149,6 +180,7 @@ Disassembly of section .text.llc_ch_assess_get_local_ch_map:
 
 00000082 <.LVL20>:
   82:	fb069ee3          	bne	a3,a6,3e <.L13>
+			82: R_RISCV_BRANCH	.L13
 
 00000086 <.LBE30>:
   86:	40b2                	lw	ra,12(sp)
@@ -168,10 +200,14 @@ Disassembly of section .text.llc_ch_assess_get_current_ch_map:
 
 00000000 <llc_ch_assess_get_current_ch_map>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	llc_env
+			0: R_RISCV_RELAX	*ABS*
    4:	050a                	slli	a0,a0,0x2
 
 00000006 <.LVL25>:
    6:	00078793          	mv	a5,a5
+			6: R_RISCV_LO12_I	llc_env
+			6: R_RISCV_RELAX	*ABS*
    a:	97aa                	add	a5,a5,a0
    c:	4388                	lw	a0,0(a5)
    e:	05e50513          	addi	a0,a0,94
@@ -181,10 +217,14 @@ Disassembly of section .text.llc_ch_assess_reass_ch:
 
 00000000 <llc_ch_assess_reass_ch>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	llc_env
+			0: R_RISCV_RELAX	*ABS*
    4:	050a                	slli	a0,a0,0x2
 
 00000006 <.LVL27>:
    6:	00078793          	mv	a5,a5
+			6: R_RISCV_LO12_I	llc_env
+			6: R_RISCV_RELAX	*ABS*
    a:	97aa                	add	a5,a5,a0
    c:	0007af03          	lw	t5,0(a5) # 0 <llc_ch_assess_reass_ch>
   10:	4709                	li	a4,2
@@ -193,15 +233,20 @@ Disassembly of section .text.llc_ch_assess_reass_ch:
 
 00000018 <.LVL29>:
   18:	00d77763          	bgeu	a4,a3,26 <.L21>
+			18: R_RISCV_BRANCH	.L21
   1c:	00569513          	slli	a0,a3,0x5
   20:	07f50513          	addi	a0,a0,127
   24:	811d                	srli	a0,a0,0x7
 
 00000026 <.L21>:
   26:	00000737          	lui	a4,0x0
+			26: R_RISCV_HI20	llm_le_env+0x31
+			26: R_RISCV_RELAX	*ABS*+0x31
 
 0000002a <.LBE31>:
   2a:	03174703          	lbu	a4,49(a4) # 31 <.LBE31+0x7>
+			2a: R_RISCV_LO12_I	llm_le_env+0x31
+			2a: R_RISCV_RELAX	*ABS*+0x31
   2e:	02500813          	li	a6,37
   32:	02400e13          	li	t3,36
   36:	02ef0d23          	sb	a4,58(t5)
@@ -215,6 +260,7 @@ Disassembly of section .text.llc_ch_assess_reass_ch:
 
 00000044 <.LVL33>:
   44:	04ee7f63          	bgeu	t3,a4,a2 <.L27>
+			44: R_RISCV_BRANCH	.L27
   48:	1799                	addi	a5,a5,-26
   4a:	0ff7f793          	andi	a5,a5,255
 
@@ -227,10 +273,12 @@ Disassembly of section .text.llc_ch_assess_reass_ch:
   62:	0ff77713          	andi	a4,a4,255
   66:	00677333          	and	t1,a4,t1
   6a:	02031363          	bnez	t1,90 <.L23>
+			6a: R_RISCV_BRANCH	.L23
   6e:	96b2                	add	a3,a3,a2
   70:	0006c683          	lbu	a3,0(a3)
   74:	8ef9                	and	a3,a3,a4
   76:	ce89                	beqz	a3,90 <.L23>
+			76: R_RISCV_RVC_BRANCH	.L23
   78:	00ff06b3          	add	a3,t5,a5
   7c:	00068a23          	sb	zero,20(a3)
   80:	0008c683          	lbu	a3,0(a7)
@@ -248,7 +296,9 @@ Disassembly of section .text.llc_ch_assess_reass_ch:
 00000092 <.LVL37>:
   92:	0ff87813          	andi	a6,a6,255
   96:	00080363          	beqz	a6,9c <.L24>
+			96: R_RISCV_BRANCH	.L24
   9a:	f14d                	bnez	a0,3c <.L25>
+			9a: R_RISCV_RVC_BRANCH	.L25
 
 0000009c <.L24>:
   9c:	02ff0da3          	sb	a5,59(t5)
@@ -257,3 +307,4 @@ Disassembly of section .text.llc_ch_assess_reass_ch:
 000000a2 <.L27>:
   a2:	87ba                	mv	a5,a4
   a4:	b76d                	j	4e <.L22>
+			a4: R_RISCV_RVC_JUMP	.L22

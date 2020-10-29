@@ -1,5 +1,5 @@
 
-sysctrl.o:     file format elf32-littleriscv
+libbl602_wifi/sysctrl.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.sysctrl_init:

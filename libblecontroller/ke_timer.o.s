@@ -1,12 +1,16 @@
 
-ke_timer.o:     file format elf32-littleriscv
+libblecontroller/ke_timer.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.ble_cmp_abs_time:
 
 00000000 <ble_cmp_abs_time>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	_rom_patch_hook
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <ble_cmp_abs_time>
+			4: R_RISCV_LO12_I	_rom_patch_hook
+			4: R_RISCV_RELAX	*ABS*
    8:	1101                	addi	sp,sp,-32
    a:	cc22                	sw	s0,24(sp)
    c:	ca26                	sw	s1,20(sp)
@@ -24,6 +28,7 @@ Disassembly of section .text.ble_cmp_abs_time:
 
 0000001e <.LVL3>:
   1e:	c901                	beqz	a0,2e <.L2>
+			1e: R_RISCV_RVC_BRANCH	.L2
   20:	00f14503          	lbu	a0,15(sp)
 
 00000024 <.L3>:
@@ -46,12 +51,17 @@ Disassembly of section .text.ble_cmp_abs_time:
 
 00000038 <.LVL7>:
   38:	b7f5                	j	24 <.L3>
+			38: R_RISCV_RVC_JUMP	.L3
 
 Disassembly of section .text.ble_cmp_timer_id:
 
 00000000 <ble_cmp_timer_id>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	_rom_patch_hook
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <ble_cmp_timer_id>
+			4: R_RISCV_LO12_I	_rom_patch_hook
+			4: R_RISCV_RELAX	*ABS*
    8:	1101                	addi	sp,sp,-32
    a:	cc22                	sw	s0,24(sp)
    c:	ca26                	sw	s1,20(sp)
@@ -69,6 +79,7 @@ Disassembly of section .text.ble_cmp_timer_id:
 
 0000001e <.LVL11>:
   1e:	c901                	beqz	a0,2e <.L6>
+			1e: R_RISCV_RVC_BRANCH	.L6
   20:	00f14503          	lbu	a0,15(sp)
 
 00000024 <.L7>:
@@ -85,6 +96,7 @@ Disassembly of section .text.ble_cmp_timer_id:
   32:	01045793          	srli	a5,s0,0x10
   36:	4501                	li	a0,0
   38:	fef716e3          	bne	a4,a5,24 <.L7>
+			38: R_RISCV_BRANCH	.L7
 
 0000003c <.LVL15>:
   3c:	0064d503          	lhu	a0,6(s1)
@@ -95,6 +107,7 @@ Disassembly of section .text.ble_cmp_timer_id:
   44:	8d01                	sub	a0,a0,s0
   46:	00153513          	seqz	a0,a0
   4a:	bfe9                	j	24 <.L7>
+			4a: R_RISCV_RVC_JUMP	.L7
 
 Disassembly of section .text._patch_ke_time:
 
@@ -111,6 +124,7 @@ Disassembly of section .text._patch_ke_time:
 
 00000010 <.LBE81>:
   10:	fe06cfe3          	bltz	a3,e <.L12>
+			10: R_RISCV_BRANCH	.L12
 
 00000014 <.LBB82>:
   14:	4f54                	lw	a3,28(a4)
@@ -135,7 +149,11 @@ Disassembly of section .text.ble_ke_time:
 
 00000000 <ble_ke_time>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	_rom_patch_hook
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <ble_ke_time>
+			4: R_RISCV_LO12_I	_rom_patch_hook
+			4: R_RISCV_RELAX	*ABS*
    8:	1101                	addi	sp,sp,-32
    a:	ce06                	sw	ra,28(sp)
    c:	0068                	addi	a0,sp,12
@@ -143,6 +161,7 @@ Disassembly of section .text.ble_ke_time:
 
 00000010 <.LVL22>:
   10:	c509                	beqz	a0,1a <.L15>
+			10: R_RISCV_RVC_BRANCH	.L15
   12:	4532                	lw	a0,12(sp)
 
 00000014 <.L14>:
@@ -160,6 +179,7 @@ Disassembly of section .text.ble_ke_time:
 
 00000026 <.LBE100>:
   26:	fe06cfe3          	bltz	a3,24 <.L17>
+			26: R_RISCV_BRANCH	.L17
 
 0000002a <.LBB102>:
   2a:	4fd8                	lw	a4,28(a5)
@@ -175,6 +195,7 @@ Disassembly of section .text.ble_ke_time:
   34:	0516                	slli	a0,a0,0x5
   36:	8125                	srli	a0,a0,0x9
   38:	bff1                	j	14 <.L14>
+			38: R_RISCV_RVC_JUMP	.L14
 
 Disassembly of section .text._patch_ble_ke_time_cmp:
 
@@ -195,7 +216,11 @@ Disassembly of section .text.ble_ke_time_cmp:
 
 00000000 <ble_ke_time_cmp>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	_rom_patch_hook
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <ble_ke_time_cmp>
+			4: R_RISCV_LO12_I	_rom_patch_hook
+			4: R_RISCV_RELAX	*ABS*
    8:	1101                	addi	sp,sp,-32
    a:	cc22                	sw	s0,24(sp)
    c:	ca26                	sw	s1,20(sp)
@@ -213,6 +238,7 @@ Disassembly of section .text.ble_ke_time_cmp:
 
 0000001e <.LVL33>:
   1e:	c901                	beqz	a0,2e <.L22>
+			1e: R_RISCV_RVC_BRANCH	.L22
   20:	00f14503          	lbu	a0,15(sp)
 
 00000024 <.L23>:
@@ -232,6 +258,7 @@ Disassembly of section .text.ble_ke_time_cmp:
   34:	00154513          	xori	a0,a0,1
   38:	8905                	andi	a0,a0,1
   3a:	b7ed                	j	24 <.L23>
+			3a: R_RISCV_RVC_JUMP	.L23
 
 Disassembly of section .text._patch_ble_ke_time_past:
 
@@ -244,11 +271,15 @@ Disassembly of section .text._patch_ble_ke_time_past:
 
 0000000a <.LVL38>:
    a:	00000097          	auipc	ra,0x0
+			a: R_RISCV_CALL	ble_ke_time
+			a: R_RISCV_RELAX	*ABS*
    e:	000080e7          	jalr	ra # a <.LVL38>
 
 00000012 <.LVL39>:
   12:	45b2                	lw	a1,12(sp)
   14:	00000097          	auipc	ra,0x0
+			14: R_RISCV_CALL	ble_ke_time_cmp
+			14: R_RISCV_RELAX	*ABS*
   18:	000080e7          	jalr	ra # 14 <.LVL39+0x2>
 
 0000001c <.LVL40>:
@@ -267,7 +298,11 @@ Disassembly of section .text.ble_ke_time_past:
 
 00000000 <ble_ke_time_past>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	_rom_patch_hook
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <ble_ke_time_past>
+			4: R_RISCV_LO12_I	_rom_patch_hook
+			4: R_RISCV_RELAX	*ABS*
    8:	1101                	addi	sp,sp,-32
    a:	cc22                	sw	s0,24(sp)
    c:	ce06                	sw	ra,28(sp)
@@ -280,6 +315,7 @@ Disassembly of section .text.ble_ke_time_past:
 
 00000018 <.LVL45>:
   18:	c519                	beqz	a0,26 <.L28>
+			18: R_RISCV_RVC_BRANCH	.L28
   1a:	00f14503          	lbu	a0,15(sp)
 
 0000001e <.L29>:
@@ -292,20 +328,26 @@ Disassembly of section .text.ble_ke_time_past:
 
 00000026 <.L28>:
   26:	00000097          	auipc	ra,0x0
+			26: R_RISCV_CALL	ble_ke_time
+			26: R_RISCV_RELAX	*ABS*
   2a:	000080e7          	jalr	ra # 26 <.L28>
 
 0000002e <.LVL48>:
   2e:	85a2                	mv	a1,s0
   30:	00000097          	auipc	ra,0x0
+			30: R_RISCV_CALL	ble_ke_time_cmp
+			30: R_RISCV_RELAX	*ABS*
   34:	000080e7          	jalr	ra # 30 <.LVL48+0x2>
 
 00000038 <.LVL49>:
   38:	b7dd                	j	1e <.L29>
+			38: R_RISCV_RVC_JUMP	.L29
 
 Disassembly of section .text._patch_ble_ke_timer_hw_set:
 
 00000000 <_patch_ble_ke_timer_hw_set>:
    0:	c19d                	beqz	a1,26 <.L32>
+			0: R_RISCV_RVC_BRANCH	.L32
    2:	4598                	lw	a4,8(a1)
 
 00000004 <.LBB110>:
@@ -319,6 +361,7 @@ Disassembly of section .text._patch_ble_ke_timer_hw_set:
 00000010 <.LBE112>:
   10:	8b05                	andi	a4,a4,1
   12:	eb01                	bnez	a4,22 <.L33>
+			12: R_RISCV_RVC_BRANCH	.L33
 
 00000014 <.LBB114>:
   14:	04000713          	li	a4,64
@@ -341,12 +384,17 @@ Disassembly of section .text._patch_ble_ke_timer_hw_set:
   2c:	fbf7f793          	andi	a5,a5,-65
   30:	c75c                	sw	a5,12(a4)
   32:	bfc5                	j	22 <.L33>
+			32: R_RISCV_RVC_JUMP	.L33
 
 Disassembly of section .text.ble_ke_timer_hw_set:
 
 00000000 <ble_ke_timer_hw_set>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	_rom_patch_hook
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <ble_ke_timer_hw_set>
+			4: R_RISCV_LO12_I	_rom_patch_hook
+			4: R_RISCV_RELAX	*ABS*
    8:	1141                	addi	sp,sp,-16
    a:	c422                	sw	s0,8(sp)
    c:	c606                	sw	ra,12(sp)
@@ -359,7 +407,9 @@ Disassembly of section .text.ble_ke_timer_hw_set:
 
 00000016 <.LVL61>:
   16:	e115                	bnez	a0,3a <.L34>
+			16: R_RISCV_RVC_BRANCH	.L34
   18:	c40d                	beqz	s0,42 <.L37>
+			18: R_RISCV_RVC_BRANCH	.L37
   1a:	4418                	lw	a4,8(s0)
 
 0000001c <.LBB140>:
@@ -373,6 +423,7 @@ Disassembly of section .text.ble_ke_timer_hw_set:
 00000028 <.LBE142>:
   28:	8b05                	andi	a4,a4,1
   2a:	eb01                	bnez	a4,3a <.L34>
+			2a: R_RISCV_RVC_BRANCH	.L34
 
 0000002c <.LBB144>:
   2c:	04000713          	li	a4,64
@@ -397,12 +448,17 @@ Disassembly of section .text.ble_ke_timer_hw_set:
   48:	fbf7f793          	andi	a5,a5,-65
   4c:	c75c                	sw	a5,12(a4)
   4e:	b7f5                	j	3a <.L34>
+			4e: R_RISCV_RVC_JUMP	.L34
 
 Disassembly of section .text.ble_ke_timer_schedule:
 
 00000000 <ble_ke_timer_schedule>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	_rom_patch_hook
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <ble_ke_timer_schedule>
+			4: R_RISCV_LO12_I	_rom_patch_hook
+			4: R_RISCV_RELAX	*ABS*
    8:	1141                	addi	sp,sp,-16
    a:	c606                	sw	ra,12(sp)
    c:	c422                	sw	s0,8(sp)
@@ -413,17 +469,26 @@ Disassembly of section .text.ble_ke_timer_schedule:
 
 00000016 <.LVL70>:
   16:	e149                	bnez	a0,98 <.L40>
+			16: R_RISCV_RVC_BRANCH	.L40
 
 00000018 <.LBB155>:
   18:	000004b7          	lui	s1,0x0
+			18: R_RISCV_HI20	ble_ke_env
+			18: R_RISCV_RELAX	*ABS*
   1c:	00048493          	mv	s1,s1
+			1c: R_RISCV_LO12_I	ble_ke_env
+			1c: R_RISCV_RELAX	*ABS*
 
 00000020 <.LBB157>:
   20:	00000937          	lui	s2,0x0
+			20: R_RISCV_HI20	ble_ke_env+0x10
+			20: R_RISCV_RELAX	*ABS*+0x10
 
 00000024 <.L44>:
   24:	450d                	li	a0,3
   26:	00000097          	auipc	ra,0x0
+			26: R_RISCV_CALL	ble_ke_event_clear
+			26: R_RISCV_RELAX	*ABS*
   2a:	000080e7          	jalr	ra # 26 <.L44+0x2>
 
 0000002e <.LVL71>:
@@ -431,6 +496,7 @@ Disassembly of section .text.ble_ke_timer_schedule:
 
 00000030 <.LVL72>:
   30:	e819                	bnez	s0,46 <.L42>
+			30: R_RISCV_RVC_BRANCH	.L42
 
 00000032 <.LBE155>:
   32:	4422                	lw	s0,8(sp)
@@ -450,20 +516,29 @@ Disassembly of section .text.ble_ke_timer_schedule:
 
 0000003e <.LBB164>:
   3e:	00000317          	auipc	t1,0x0
+			3e: R_RISCV_CALL	ble_ke_timer_hw_set
+			3e: R_RISCV_RELAX	*ABS*
   42:	00030067          	jr	t1 # 3e <.LBB164>
 
 00000046 <.L42>:
   46:	4408                	lw	a0,8(s0)
   48:	157d                	addi	a0,a0,-1
   4a:	00000097          	auipc	ra,0x0
+			4a: R_RISCV_CALL	ble_ke_time_past
+			4a: R_RISCV_RELAX	*ABS*
   4e:	000080e7          	jalr	ra # 4a <.L42+0x4>
 
 00000052 <.LVL76>:
   52:	c905                	beqz	a0,82 <.L43>
+			52: R_RISCV_RVC_BRANCH	.L43
 
 00000054 <.L45>:
   54:	01090513          	addi	a0,s2,16 # 10 <ble_ke_timer_schedule+0x10>
+			54: R_RISCV_LO12_I	ble_ke_env+0x10
+			54: R_RISCV_RELAX	*ABS*+0x10
   58:	00000097          	auipc	ra,0x0
+			58: R_RISCV_CALL	ble_co_list_pop_front
+			58: R_RISCV_RELAX	*ABS*
   5c:	000080e7          	jalr	ra # 58 <.L45+0x4>
 
 00000060 <.LVL78>:
@@ -474,28 +549,38 @@ Disassembly of section .text.ble_ke_timer_schedule:
   66:	00455503          	lhu	a0,4(a0)
   6a:	0ff00613          	li	a2,255
   6e:	00000097          	auipc	ra,0x0
+			6e: R_RISCV_CALL	ble_ke_msg_send_basic
+			6e: R_RISCV_RELAX	*ABS*
   72:	000080e7          	jalr	ra # 6e <.LBE160+0xc>
 
 00000076 <.LVL80>:
   76:	8522                	mv	a0,s0
   78:	00000097          	auipc	ra,0x0
+			78: R_RISCV_CALL	ble_ke_free
+			78: R_RISCV_RELAX	*ABS*
   7c:	000080e7          	jalr	ra # 78 <.LVL80+0x2>
 
 00000080 <.LVL81>:
   80:	b755                	j	24 <.L44>
+			80: R_RISCV_RVC_JUMP	.L44
 
 00000082 <.L43>:
   82:	8522                	mv	a0,s0
   84:	00000097          	auipc	ra,0x0
+			84: R_RISCV_CALL	ble_ke_timer_hw_set
+			84: R_RISCV_RELAX	*ABS*
   88:	000080e7          	jalr	ra # 84 <.L43+0x2>
 
 0000008c <.LVL82>:
   8c:	4408                	lw	a0,8(s0)
   8e:	00000097          	auipc	ra,0x0
+			8e: R_RISCV_CALL	ble_ke_time_past
+			8e: R_RISCV_RELAX	*ABS*
   92:	000080e7          	jalr	ra # 8e <.LVL82+0x2>
 
 00000096 <.LVL83>:
   96:	fd5d                	bnez	a0,54 <.L45>
+			96: R_RISCV_RVC_BRANCH	.L45
 
 00000098 <.L40>:
   98:	40b2                	lw	ra,12(sp)
@@ -528,6 +613,7 @@ Disassembly of section .text._patch_ble_cmp_timer_id:
    4:	01065713          	srli	a4,a2,0x10
    8:	4781                	li	a5,0
    a:	00e69963          	bne	a3,a4,1c <.L49>
+			a: R_RISCV_BRANCH	.L49
    e:	0065d783          	lhu	a5,6(a1)
   12:	0642                	slli	a2,a2,0x10
 
@@ -549,17 +635,25 @@ Disassembly of section .text._patch_ble_ke_timer_schedule:
    0:	1141                	addi	sp,sp,-16
    2:	c226                	sw	s1,4(sp)
    4:	000004b7          	lui	s1,0x0
+			4: R_RISCV_HI20	ble_ke_env
+			4: R_RISCV_RELAX	*ABS*
    8:	c04a                	sw	s2,0(sp)
    a:	c606                	sw	ra,12(sp)
    c:	c422                	sw	s0,8(sp)
    e:	00048493          	mv	s1,s1
+			e: R_RISCV_LO12_I	ble_ke_env
+			e: R_RISCV_RELAX	*ABS*
 
 00000012 <.LBB165>:
   12:	00000937          	lui	s2,0x0
+			12: R_RISCV_HI20	ble_ke_env+0x10
+			12: R_RISCV_RELAX	*ABS*+0x10
 
 00000016 <.L55>:
   16:	450d                	li	a0,3
   18:	00000097          	auipc	ra,0x0
+			18: R_RISCV_CALL	ble_ke_event_clear
+			18: R_RISCV_RELAX	*ABS*
   1c:	000080e7          	jalr	ra # 18 <.L55+0x2>
 
 00000020 <.LVL93>:
@@ -567,8 +661,11 @@ Disassembly of section .text._patch_ble_ke_timer_schedule:
 
 00000022 <.LVL94>:
   22:	ec09                	bnez	s0,3c <.L52>
+			22: R_RISCV_RVC_BRANCH	.L52
   24:	4501                	li	a0,0
   26:	00000097          	auipc	ra,0x0
+			26: R_RISCV_CALL	ble_ke_timer_hw_set
+			26: R_RISCV_RELAX	*ABS*
   2a:	000080e7          	jalr	ra # 26 <.LVL94+0x4>
 
 0000002e <.L53>:
@@ -586,14 +683,21 @@ Disassembly of section .text._patch_ble_ke_timer_schedule:
   3c:	4408                	lw	a0,8(s0)
   3e:	157d                	addi	a0,a0,-1
   40:	00000097          	auipc	ra,0x0
+			40: R_RISCV_CALL	ble_ke_time_past
+			40: R_RISCV_RELAX	*ABS*
   44:	000080e7          	jalr	ra # 40 <.L52+0x4>
 
 00000048 <.LVL98>:
   48:	c905                	beqz	a0,78 <.L54>
+			48: R_RISCV_RVC_BRANCH	.L54
 
 0000004a <.L56>:
   4a:	01090513          	addi	a0,s2,16 # 10 <_patch_ble_ke_timer_schedule+0x10>
+			4a: R_RISCV_LO12_I	ble_ke_env+0x10
+			4a: R_RISCV_RELAX	*ABS*+0x10
   4e:	00000097          	auipc	ra,0x0
+			4e: R_RISCV_CALL	ble_co_list_pop_front
+			4e: R_RISCV_RELAX	*ABS*
   52:	000080e7          	jalr	ra # 4e <.L56+0x4>
 
 00000056 <.LVL100>:
@@ -604,41 +708,58 @@ Disassembly of section .text._patch_ble_ke_timer_schedule:
   5c:	00455503          	lhu	a0,4(a0)
   60:	0ff00613          	li	a2,255
   64:	00000097          	auipc	ra,0x0
+			64: R_RISCV_CALL	ble_ke_msg_send_basic
+			64: R_RISCV_RELAX	*ABS*
   68:	000080e7          	jalr	ra # 64 <.LBE168+0xc>
 
 0000006c <.LVL102>:
   6c:	8522                	mv	a0,s0
   6e:	00000097          	auipc	ra,0x0
+			6e: R_RISCV_CALL	ble_ke_free
+			6e: R_RISCV_RELAX	*ABS*
   72:	000080e7          	jalr	ra # 6e <.LVL102+0x2>
 
 00000076 <.LVL103>:
   76:	b745                	j	16 <.L55>
+			76: R_RISCV_RVC_JUMP	.L55
 
 00000078 <.L54>:
   78:	8522                	mv	a0,s0
   7a:	00000097          	auipc	ra,0x0
+			7a: R_RISCV_CALL	ble_ke_timer_hw_set
+			7a: R_RISCV_RELAX	*ABS*
   7e:	000080e7          	jalr	ra # 7a <.L54+0x2>
 
 00000082 <.LVL104>:
   82:	4408                	lw	a0,8(s0)
   84:	00000097          	auipc	ra,0x0
+			84: R_RISCV_CALL	ble_ke_time_past
+			84: R_RISCV_RELAX	*ABS*
   88:	000080e7          	jalr	ra # 84 <.LVL104+0x2>
 
 0000008c <.LVL105>:
   8c:	fd5d                	bnez	a0,4a <.L56>
+			8c: R_RISCV_RVC_BRANCH	.L56
   8e:	b745                	j	2e <.L53>
+			8e: R_RISCV_RVC_JUMP	.L53
 
 Disassembly of section .text._patch_ble_ke_timer_init:
 
 00000000 <_patch_ble_ke_timer_init>:
    0:	000005b7          	lui	a1,0x0
+			0: R_RISCV_HI20	ble_ke_timer_schedule
+			0: R_RISCV_RELAX	*ABS*
    4:	1141                	addi	sp,sp,-16
    6:	00058593          	mv	a1,a1
+			6: R_RISCV_LO12_I	ble_ke_timer_schedule
+			6: R_RISCV_RELAX	*ABS*
    a:	450d                	li	a0,3
 
 0000000c <.LVL107>:
    c:	c606                	sw	ra,12(sp)
    e:	00000097          	auipc	ra,0x0
+			e: R_RISCV_CALL	ble_ke_event_callback_set
+			e: R_RISCV_RELAX	*ABS*
   12:	000080e7          	jalr	ra # e <.LVL107+0x2>
 
 00000016 <.LVL108>:
@@ -651,7 +772,11 @@ Disassembly of section .text.ble_ke_timer_init:
 
 00000000 <ble_ke_timer_init>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	_rom_patch_hook
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <ble_ke_timer_init>
+			4: R_RISCV_LO12_I	_rom_patch_hook
+			4: R_RISCV_RELAX	*ABS*
    8:	1141                	addi	sp,sp,-16
    a:	c606                	sw	ra,12(sp)
    c:	4501                	li	a0,0
@@ -659,12 +784,19 @@ Disassembly of section .text.ble_ke_timer_init:
 
 00000010 <.LVL109>:
   10:	ed01                	bnez	a0,28 <.L60>
+			10: R_RISCV_RVC_BRANCH	.L60
   12:	40b2                	lw	ra,12(sp)
   14:	000005b7          	lui	a1,0x0
+			14: R_RISCV_HI20	ble_ke_timer_schedule
+			14: R_RISCV_RELAX	*ABS*
   18:	00058593          	mv	a1,a1
+			18: R_RISCV_LO12_I	ble_ke_timer_schedule
+			18: R_RISCV_RELAX	*ABS*
   1c:	450d                	li	a0,3
   1e:	0141                	addi	sp,sp,16
   20:	00000317          	auipc	t1,0x0
+			20: R_RISCV_CALL	ble_ke_event_callback_set
+			20: R_RISCV_RELAX	*ABS*
   24:	00030067          	jr	t1 # 20 <.LVL109+0x10>
 
 00000028 <.L60>:
@@ -678,10 +810,14 @@ Disassembly of section .text._patch_ble_ke_timer_set:
    0:	1101                	addi	sp,sp,-32
    2:	c05a                	sw	s6,0(sp)
    4:	00000b37          	lui	s6,0x0
+			4: R_RISCV_HI20	ble_ke_env
+			4: R_RISCV_RELAX	*ABS*
    8:	cc22                	sw	s0,24(sp)
    a:	c452                	sw	s4,8(sp)
    c:	c256                	sw	s5,4(sp)
    e:	000b0793          	mv	a5,s6
+			e: R_RISCV_LO12_I	ble_ke_env
+			e: R_RISCV_RELAX	*ABS*
   12:	ce06                	sw	ra,28(sp)
   14:	ca26                	sw	s1,20(sp)
   16:	c84a                	sw	s2,16(sp)
@@ -693,17 +829,23 @@ Disassembly of section .text._patch_ble_ke_timer_set:
 
 00000024 <.LVL112>:
   24:	000b0b13          	mv	s6,s6
+			24: R_RISCV_LO12_I	ble_ke_env
+			24: R_RISCV_RELAX	*ABS*
   28:	fff70413          	addi	s0,a4,-1 # 3fffff <.LASF292+0x3fe9c2>
   2c:	00e6f563          	bgeu	a3,a4,36 <.L64>
+			2c: R_RISCV_BRANCH	.L64
   30:	8436                	mv	s0,a3
   32:	e291                	bnez	a3,36 <.L64>
+			32: R_RISCV_RVC_BRANCH	.L64
   34:	4405                	li	s0,1
 
 00000036 <.L64>:
   36:	4901                	li	s2,0
   38:	cb99                	beqz	a5,4e <.L65>
+			38: R_RISCV_RVC_BRANCH	.L65
   3a:	0047d703          	lhu	a4,4(a5)
   3e:	01571863          	bne	a4,s5,4e <.L65>
+			3e: R_RISCV_BRANCH	.L65
   42:	0067d903          	lhu	s2,6(a5)
   46:	41490933          	sub	s2,s2,s4
   4a:	00193913          	seqz	s2,s2
@@ -713,15 +855,25 @@ Disassembly of section .text._patch_ble_ke_timer_set:
 
 00000052 <.LVL115>:
   52:	000005b7          	lui	a1,0x0
+			52: R_RISCV_HI20	ble_cmp_timer_id
+			52: R_RISCV_RELAX	*ABS*
 
 00000056 <.LVL116>:
   56:	000009b7          	lui	s3,0x0
+			56: R_RISCV_HI20	ble_ke_env+0x10
+			56: R_RISCV_RELAX	*ABS*+0x10
   5a:	01466633          	or	a2,a2,s4
   5e:	00058593          	mv	a1,a1
+			5e: R_RISCV_LO12_I	ble_cmp_timer_id
+			5e: R_RISCV_RELAX	*ABS*
   62:	01098513          	addi	a0,s3,16 # 10 <_patch_ble_ke_timer_set+0x10>
+			62: R_RISCV_LO12_I	ble_ke_env+0x10
+			62: R_RISCV_RELAX	*ABS*+0x10
 
 00000066 <.LVL117>:
   66:	00000097          	auipc	ra,0x0
+			66: R_RISCV_CALL	ble_ke_queue_extract
+			66: R_RISCV_RELAX	*ABS*
   6a:	000080e7          	jalr	ra # 66 <.LVL117>
 
 0000006e <.LVL118>:
@@ -729,9 +881,12 @@ Disassembly of section .text._patch_ble_ke_timer_set:
 
 00000070 <.LVL119>:
   70:	ed01                	bnez	a0,88 <.L66>
+			70: R_RISCV_RVC_BRANCH	.L66
   72:	4581                	li	a1,0
   74:	4531                	li	a0,12
   76:	00000097          	auipc	ra,0x0
+			76: R_RISCV_CALL	ble_ke_malloc
+			76: R_RISCV_RELAX	*ABS*
   7a:	000080e7          	jalr	ra # 76 <.LVL119+0x6>
 
 0000007e <.LVL120>:
@@ -741,6 +896,8 @@ Disassembly of section .text._patch_ble_ke_timer_set:
 
 00000088 <.L66>:
   88:	00000097          	auipc	ra,0x0
+			88: R_RISCV_CALL	ble_ke_time
+			88: R_RISCV_RELAX	*ABS*
   8c:	000080e7          	jalr	ra # 88 <.L66>
 
 00000090 <.LVL122>:
@@ -750,32 +907,49 @@ Disassembly of section .text._patch_ble_ke_timer_set:
   92:	00941793          	slli	a5,s0,0x9
   96:	83a5                	srli	a5,a5,0x9
   98:	00000637          	lui	a2,0x0
+			98: R_RISCV_HI20	ble_cmp_abs_time
+			98: R_RISCV_RELAX	*ABS*
   9c:	c49c                	sw	a5,8(s1)
   9e:	00060613          	mv	a2,a2
+			9e: R_RISCV_LO12_I	ble_cmp_abs_time
+			9e: R_RISCV_RELAX	*ABS*
   a2:	85a6                	mv	a1,s1
   a4:	01098513          	addi	a0,s3,16
+			a4: R_RISCV_LO12_I	ble_ke_env+0x10
+			a4: R_RISCV_RELAX	*ABS*+0x10
   a8:	00000097          	auipc	ra,0x0
+			a8: R_RISCV_CALL	ble_ke_queue_insert
+			a8: R_RISCV_RELAX	*ABS*
   ac:	000080e7          	jalr	ra # a8 <.LVL123+0x16>
 
 000000b0 <.LVL124>:
   b0:	00091663          	bnez	s2,bc <.L67>
+			b0: R_RISCV_BRANCH	.L67
   b4:	010b2783          	lw	a5,16(s6) # 10 <_patch_ble_ke_timer_set+0x10>
   b8:	00979863          	bne	a5,s1,c8 <.L68>
+			b8: R_RISCV_BRANCH	.L68
 
 000000bc <.L67>:
   bc:	010b2503          	lw	a0,16(s6)
   c0:	00000097          	auipc	ra,0x0
+			c0: R_RISCV_CALL	ble_ke_timer_hw_set
+			c0: R_RISCV_RELAX	*ABS*
   c4:	000080e7          	jalr	ra # c0 <.L67+0x4>
 
 000000c8 <.L68>:
   c8:	8522                	mv	a0,s0
   ca:	00000097          	auipc	ra,0x0
+			ca: R_RISCV_CALL	ble_ke_time_past
+			ca: R_RISCV_RELAX	*ABS*
   ce:	000080e7          	jalr	ra # ca <.L68+0x2>
 
 000000d2 <.LVL126>:
   d2:	c511                	beqz	a0,de <.L69>
+			d2: R_RISCV_RVC_BRANCH	.L69
   d4:	450d                	li	a0,3
   d6:	00000097          	auipc	ra,0x0
+			d6: R_RISCV_CALL	ble_ke_event_set
+			d6: R_RISCV_RELAX	*ABS*
   da:	000080e7          	jalr	ra # d6 <.LVL126+0x4>
 
 000000de <.L69>:
@@ -801,7 +975,11 @@ Disassembly of section .text.ble_ke_timer_set:
 
 00000000 <ble_ke_timer_set>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	_rom_patch_hook
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <ble_ke_timer_set>
+			4: R_RISCV_LO12_I	_rom_patch_hook
+			4: R_RISCV_RELAX	*ABS*
    8:	1101                	addi	sp,sp,-32
    a:	cc22                	sw	s0,24(sp)
    c:	c256                	sw	s5,4(sp)
@@ -828,24 +1006,35 @@ Disassembly of section .text.ble_ke_timer_set:
 
 0000002a <.LVL135>:
   2a:	ed71                	bnez	a0,106 <.L77>
+			2a: R_RISCV_RVC_BRANCH	.L77
 
 0000002c <.LVL136>:
   2c:	00000a37          	lui	s4,0x0
+			2c: R_RISCV_HI20	ble_ke_env
+			2c: R_RISCV_RELAX	*ABS*
   30:	000a0793          	mv	a5,s4
+			30: R_RISCV_LO12_I	ble_ke_env
+			30: R_RISCV_RELAX	*ABS*
   34:	00400737          	lui	a4,0x400
   38:	4b9c                	lw	a5,16(a5)
 
 0000003a <.LVL137>:
   3a:	000a0a13          	mv	s4,s4
+			3a: R_RISCV_LO12_I	ble_ke_env
+			3a: R_RISCV_RELAX	*ABS*
   3e:	0ce47163          	bgeu	s0,a4,100 <.L86>
+			3e: R_RISCV_BRANCH	.L86
   42:	e011                	bnez	s0,46 <.L80>
+			42: R_RISCV_RVC_BRANCH	.L80
   44:	4405                	li	s0,1
 
 00000046 <.L80>:
   46:	4901                	li	s2,0
   48:	cb99                	beqz	a5,5e <.L81>
+			48: R_RISCV_RVC_BRANCH	.L81
   4a:	0047d703          	lhu	a4,4(a5)
   4e:	01671863          	bne	a4,s6,5e <.L81>
+			4e: R_RISCV_BRANCH	.L81
   52:	0067d903          	lhu	s2,6(a5)
   56:	41590933          	sub	s2,s2,s5
   5a:	00193913          	seqz	s2,s2
@@ -853,11 +1042,21 @@ Disassembly of section .text.ble_ke_timer_set:
 0000005e <.L81>:
   5e:	010b1613          	slli	a2,s6,0x10
   62:	000005b7          	lui	a1,0x0
+			62: R_RISCV_HI20	ble_cmp_timer_id
+			62: R_RISCV_RELAX	*ABS*
   66:	000009b7          	lui	s3,0x0
+			66: R_RISCV_HI20	ble_ke_env+0x10
+			66: R_RISCV_RELAX	*ABS*+0x10
   6a:	01566633          	or	a2,a2,s5
   6e:	00058593          	mv	a1,a1
+			6e: R_RISCV_LO12_I	ble_cmp_timer_id
+			6e: R_RISCV_RELAX	*ABS*
   72:	01098513          	addi	a0,s3,16 # 10 <ble_ke_timer_set+0x10>
+			72: R_RISCV_LO12_I	ble_ke_env+0x10
+			72: R_RISCV_RELAX	*ABS*+0x10
   76:	00000097          	auipc	ra,0x0
+			76: R_RISCV_CALL	ble_ke_queue_extract
+			76: R_RISCV_RELAX	*ABS*
   7a:	000080e7          	jalr	ra # 76 <.L81+0x18>
 
 0000007e <.LVL140>:
@@ -865,9 +1064,12 @@ Disassembly of section .text.ble_ke_timer_set:
 
 00000080 <.LVL141>:
   80:	ed01                	bnez	a0,98 <.L82>
+			80: R_RISCV_RVC_BRANCH	.L82
   82:	4581                	li	a1,0
   84:	4531                	li	a0,12
   86:	00000097          	auipc	ra,0x0
+			86: R_RISCV_CALL	ble_ke_malloc
+			86: R_RISCV_RELAX	*ABS*
   8a:	000080e7          	jalr	ra # 86 <.LVL141+0x6>
 
 0000008e <.LVL142>:
@@ -877,6 +1079,8 @@ Disassembly of section .text.ble_ke_timer_set:
 
 00000098 <.L82>:
   98:	00000097          	auipc	ra,0x0
+			98: R_RISCV_CALL	ble_ke_time
+			98: R_RISCV_RELAX	*ABS*
   9c:	000080e7          	jalr	ra # 98 <.L82>
 
 000000a0 <.LVL144>:
@@ -886,30 +1090,45 @@ Disassembly of section .text.ble_ke_timer_set:
   a2:	00941793          	slli	a5,s0,0x9
   a6:	83a5                	srli	a5,a5,0x9
   a8:	00000637          	lui	a2,0x0
+			a8: R_RISCV_HI20	ble_cmp_abs_time
+			a8: R_RISCV_RELAX	*ABS*
   ac:	c49c                	sw	a5,8(s1)
   ae:	00060613          	mv	a2,a2
+			ae: R_RISCV_LO12_I	ble_cmp_abs_time
+			ae: R_RISCV_RELAX	*ABS*
   b2:	85a6                	mv	a1,s1
   b4:	01098513          	addi	a0,s3,16
+			b4: R_RISCV_LO12_I	ble_ke_env+0x10
+			b4: R_RISCV_RELAX	*ABS*+0x10
   b8:	00000097          	auipc	ra,0x0
+			b8: R_RISCV_CALL	ble_ke_queue_insert
+			b8: R_RISCV_RELAX	*ABS*
   bc:	000080e7          	jalr	ra # b8 <.LVL145+0x16>
 
 000000c0 <.LVL146>:
   c0:	00091663          	bnez	s2,cc <.L83>
+			c0: R_RISCV_BRANCH	.L83
   c4:	010a2783          	lw	a5,16(s4) # 10 <ble_ke_timer_set+0x10>
   c8:	00979863          	bne	a5,s1,d8 <.L84>
+			c8: R_RISCV_BRANCH	.L84
 
 000000cc <.L83>:
   cc:	010a2503          	lw	a0,16(s4)
   d0:	00000097          	auipc	ra,0x0
+			d0: R_RISCV_CALL	ble_ke_timer_hw_set
+			d0: R_RISCV_RELAX	*ABS*
   d4:	000080e7          	jalr	ra # d0 <.L83+0x4>
 
 000000d8 <.L84>:
   d8:	8522                	mv	a0,s0
   da:	00000097          	auipc	ra,0x0
+			da: R_RISCV_CALL	ble_ke_time_past
+			da: R_RISCV_RELAX	*ABS*
   de:	000080e7          	jalr	ra # da <.L84+0x2>
 
 000000e2 <.LVL148>:
   e2:	c115                	beqz	a0,106 <.L77>
+			e2: R_RISCV_RVC_BRANCH	.L77
   e4:	4462                	lw	s0,24(sp)
 
 000000e6 <.LVL149>:
@@ -927,6 +1146,8 @@ Disassembly of section .text.ble_ke_timer_set:
   f4:	450d                	li	a0,3
   f6:	6105                	addi	sp,sp,32
   f8:	00000317          	auipc	t1,0x0
+			f8: R_RISCV_CALL	ble_ke_event_set
+			f8: R_RISCV_RELAX	*ABS*
   fc:	00030067          	jr	t1 # f8 <.LVL151+0xc>
 
 00000100 <.L86>:
@@ -934,6 +1155,7 @@ Disassembly of section .text.ble_ke_timer_set:
 
 00000104 <.LVL153>:
  104:	b789                	j	46 <.L80>
+			104: R_RISCV_RVC_JUMP	.L80
 
 00000106 <.L77>:
  106:	40f2                	lw	ra,28(sp)
@@ -953,24 +1175,37 @@ Disassembly of section .text._patch_ble_ke_timer_clear:
    0:	1141                	addi	sp,sp,-16
    2:	c226                	sw	s1,4(sp)
    4:	000004b7          	lui	s1,0x0
+			4: R_RISCV_HI20	ble_ke_env
+			4: R_RISCV_RELAX	*ABS*
    8:	c606                	sw	ra,12(sp)
    a:	c422                	sw	s0,8(sp)
    c:	00048493          	mv	s1,s1
+			c: R_RISCV_LO12_I	ble_ke_env
+			c: R_RISCV_RELAX	*ABS*
   10:	4880                	lw	s0,16(s1)
 
 00000012 <.LVL156>:
   12:	c43d                	beqz	s0,80 <.L95>
+			12: R_RISCV_RVC_BRANCH	.L95
   14:	00445783          	lhu	a5,4(s0)
   18:	00000537          	lui	a0,0x0
+			18: R_RISCV_HI20	ble_ke_env+0x10
+			18: R_RISCV_RELAX	*ABS*+0x10
 
 0000001c <.LVL157>:
   1c:	04b79463          	bne	a5,a1,64 <.L96>
+			1c: R_RISCV_BRANCH	.L96
   20:	00645783          	lhu	a5,6(s0)
   24:	04c79063          	bne	a5,a2,64 <.L96>
+			24: R_RISCV_BRANCH	.L96
 
 00000028 <.LBB169>:
   28:	01050513          	addi	a0,a0,16 # 10 <_patch_ble_ke_timer_clear+0x10>
+			28: R_RISCV_LO12_I	ble_ke_env+0x10
+			28: R_RISCV_RELAX	*ABS*+0x10
   2c:	00000097          	auipc	ra,0x0
+			2c: R_RISCV_CALL	ble_co_list_pop_front
+			2c: R_RISCV_RELAX	*ABS*
   30:	000080e7          	jalr	ra # 2c <.LBB169+0x4>
 
 00000034 <.LBE170>:
@@ -979,27 +1214,38 @@ Disassembly of section .text._patch_ble_ke_timer_clear:
 00000036 <.LVL160>:
   36:	8526                	mv	a0,s1
   38:	00000097          	auipc	ra,0x0
+			38: R_RISCV_CALL	ble_ke_timer_hw_set
+			38: R_RISCV_RELAX	*ABS*
   3c:	000080e7          	jalr	ra # 38 <.LVL160+0x2>
 
 00000040 <.LVL161>:
   40:	cc81                	beqz	s1,58 <.L97>
+			40: R_RISCV_RVC_BRANCH	.L97
   42:	4488                	lw	a0,8(s1)
   44:	00000097          	auipc	ra,0x0
+			44: R_RISCV_CALL	ble_ke_time_past
+			44: R_RISCV_RELAX	*ABS*
   48:	000080e7          	jalr	ra # 44 <.LVL161+0x4>
 
 0000004c <.LVL162>:
   4c:	c511                	beqz	a0,58 <.L97>
+			4c: R_RISCV_RVC_BRANCH	.L97
   4e:	450d                	li	a0,3
   50:	00000097          	auipc	ra,0x0
+			50: R_RISCV_CALL	ble_ke_event_set
+			50: R_RISCV_RELAX	*ABS*
   54:	000080e7          	jalr	ra # 50 <.LVL162+0x4>
 
 00000058 <.L97>:
   58:	8522                	mv	a0,s0
   5a:	00000097          	auipc	ra,0x0
+			5a: R_RISCV_CALL	ble_ke_free
+			5a: R_RISCV_RELAX	*ABS*
   5e:	000080e7          	jalr	ra # 5a <.L97+0x2>
 
 00000062 <.LVL164>:
   62:	a839                	j	80 <.L95>
+			62: R_RISCV_RVC_JUMP	.L95
 
 00000064 <.L96>:
   64:	05c2                	slli	a1,a1,0x10
@@ -1009,14 +1255,23 @@ Disassembly of section .text._patch_ble_ke_timer_clear:
 
 00000068 <.LVL167>:
   68:	000005b7          	lui	a1,0x0
+			68: R_RISCV_HI20	ble_cmp_timer_id
+			68: R_RISCV_RELAX	*ABS*
   6c:	00058593          	mv	a1,a1
+			6c: R_RISCV_LO12_I	ble_cmp_timer_id
+			6c: R_RISCV_RELAX	*ABS*
   70:	01050513          	addi	a0,a0,16
+			70: R_RISCV_LO12_I	ble_ke_env+0x10
+			70: R_RISCV_RELAX	*ABS*+0x10
   74:	00000097          	auipc	ra,0x0
+			74: R_RISCV_CALL	ble_ke_queue_extract
+			74: R_RISCV_RELAX	*ABS*
   78:	000080e7          	jalr	ra # 74 <.LVL167+0xc>
 
 0000007c <.LVL168>:
   7c:	842a                	mv	s0,a0
   7e:	fd69                	bnez	a0,58 <.L97>
+			7e: R_RISCV_RVC_BRANCH	.L97
 
 00000080 <.L95>:
   80:	40b2                	lw	ra,12(sp)
@@ -1032,7 +1287,11 @@ Disassembly of section .text.ble_ke_timer_clear:
 
 00000000 <ble_ke_timer_clear>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	_rom_patch_hook
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <ble_ke_timer_clear>
+			4: R_RISCV_LO12_I	_rom_patch_hook
+			4: R_RISCV_RELAX	*ABS*
    8:	1101                	addi	sp,sp,-32
    a:	ca26                	sw	s1,20(sp)
    c:	c64e                	sw	s3,12(sp)
@@ -1052,21 +1311,35 @@ Disassembly of section .text.ble_ke_timer_clear:
 
 00000020 <.LVL174>:
   20:	e551                	bnez	a0,ac <.L109>
+			20: R_RISCV_RVC_BRANCH	.L109
   22:	00000937          	lui	s2,0x0
+			22: R_RISCV_HI20	ble_ke_env
+			22: R_RISCV_RELAX	*ABS*
   26:	00090913          	mv	s2,s2
+			26: R_RISCV_LO12_I	ble_ke_env
+			26: R_RISCV_RELAX	*ABS*
   2a:	01092403          	lw	s0,16(s2) # 10 <ble_ke_timer_clear+0x10>
 
 0000002e <.LVL175>:
   2e:	cc3d                	beqz	s0,ac <.L109>
+			2e: R_RISCV_RVC_BRANCH	.L109
   30:	00445783          	lhu	a5,4(s0)
   34:	00000537          	lui	a0,0x0
+			34: R_RISCV_HI20	ble_ke_env+0x10
+			34: R_RISCV_RELAX	*ABS*+0x10
   38:	04979a63          	bne	a5,s1,8c <.L113>
+			38: R_RISCV_BRANCH	.L113
   3c:	00645783          	lhu	a5,6(s0)
   40:	05379663          	bne	a5,s3,8c <.L113>
+			40: R_RISCV_BRANCH	.L113
 
 00000044 <.LBB172>:
   44:	01050513          	addi	a0,a0,16 # 10 <ble_ke_timer_clear+0x10>
+			44: R_RISCV_LO12_I	ble_ke_env+0x10
+			44: R_RISCV_RELAX	*ABS*+0x10
   48:	00000097          	auipc	ra,0x0
+			48: R_RISCV_CALL	ble_co_list_pop_front
+			48: R_RISCV_RELAX	*ABS*
   4c:	000080e7          	jalr	ra # 48 <.LBB172+0x4>
 
 00000050 <.LBE173>:
@@ -1075,18 +1348,26 @@ Disassembly of section .text.ble_ke_timer_clear:
 00000054 <.LVL178>:
   54:	8526                	mv	a0,s1
   56:	00000097          	auipc	ra,0x0
+			56: R_RISCV_CALL	ble_ke_timer_hw_set
+			56: R_RISCV_RELAX	*ABS*
   5a:	000080e7          	jalr	ra # 56 <.LVL178+0x2>
 
 0000005e <.LVL179>:
   5e:	cc81                	beqz	s1,76 <.L114>
+			5e: R_RISCV_RVC_BRANCH	.L114
   60:	4488                	lw	a0,8(s1)
   62:	00000097          	auipc	ra,0x0
+			62: R_RISCV_CALL	ble_ke_time_past
+			62: R_RISCV_RELAX	*ABS*
   66:	000080e7          	jalr	ra # 62 <.LVL179+0x4>
 
 0000006a <.LVL180>:
   6a:	c511                	beqz	a0,76 <.L114>
+			6a: R_RISCV_RVC_BRANCH	.L114
   6c:	450d                	li	a0,3
   6e:	00000097          	auipc	ra,0x0
+			6e: R_RISCV_CALL	ble_ke_event_set
+			6e: R_RISCV_RELAX	*ABS*
   72:	000080e7          	jalr	ra # 6e <.LVL180+0x4>
 
 00000076 <.L114>:
@@ -1100,20 +1381,31 @@ Disassembly of section .text.ble_ke_timer_clear:
   80:	49b2                	lw	s3,12(sp)
   82:	6105                	addi	sp,sp,32
   84:	00000317          	auipc	t1,0x0
+			84: R_RISCV_CALL	ble_ke_free
+			84: R_RISCV_RELAX	*ABS*
   88:	00030067          	jr	t1 # 84 <.LVL182+0xa>
 
 0000008c <.L113>:
   8c:	01049613          	slli	a2,s1,0x10
   90:	000005b7          	lui	a1,0x0
+			90: R_RISCV_HI20	ble_cmp_timer_id
+			90: R_RISCV_RELAX	*ABS*
   94:	01366633          	or	a2,a2,s3
   98:	00058593          	mv	a1,a1
+			98: R_RISCV_LO12_I	ble_cmp_timer_id
+			98: R_RISCV_RELAX	*ABS*
   9c:	01050513          	addi	a0,a0,16
+			9c: R_RISCV_LO12_I	ble_ke_env+0x10
+			9c: R_RISCV_RELAX	*ABS*+0x10
   a0:	00000097          	auipc	ra,0x0
+			a0: R_RISCV_CALL	ble_ke_queue_extract
+			a0: R_RISCV_RELAX	*ABS*
   a4:	000080e7          	jalr	ra # a0 <.L113+0x14>
 
 000000a8 <.LVL184>:
   a8:	842a                	mv	s0,a0
   aa:	f571                	bnez	a0,76 <.L114>
+			aa: R_RISCV_RVC_BRANCH	.L114
 
 000000ac <.L109>:
   ac:	40f2                	lw	ra,28(sp)
@@ -1128,22 +1420,31 @@ Disassembly of section .text._patch_ble_ke_timer_active:
 
 00000000 <_patch_ble_ke_timer_active>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	ble_ke_env+0x10
+			0: R_RISCV_RELAX	*ABS*+0x10
    4:	0107a783          	lw	a5,16(a5) # 10 <.L132>
+			4: R_RISCV_LO12_I	ble_ke_env+0x10
+			4: R_RISCV_RELAX	*ABS*+0x10
 
 00000008 <.L129>:
    8:	e781                	bnez	a5,10 <.L132>
+			8: R_RISCV_RVC_BRANCH	.L132
    a:	00050023          	sb	zero,0(a0)
    e:	a831                	j	2a <.L136>
+			e: R_RISCV_RVC_JUMP	.L136
 
 00000010 <.L132>:
   10:	0047d703          	lhu	a4,4(a5)
   14:	00b71663          	bne	a4,a1,20 <.L130>
+			14: R_RISCV_BRANCH	.L130
   18:	0067d703          	lhu	a4,6(a5)
   1c:	00c70463          	beq	a4,a2,24 <.L131>
+			1c: R_RISCV_BRANCH	.L131
 
 00000020 <.L130>:
   20:	439c                	lw	a5,0(a5)
   22:	b7dd                	j	8 <.L129>
+			22: R_RISCV_RVC_JUMP	.L129
 
 00000024 <.L131>:
   24:	4785                	li	a5,1
@@ -1161,7 +1462,11 @@ Disassembly of section .text.ble_ke_timer_active:
 
 00000000 <ble_ke_timer_active>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	_rom_patch_hook
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <ble_ke_timer_active>
+			4: R_RISCV_LO12_I	_rom_patch_hook
+			4: R_RISCV_RELAX	*ABS*
    8:	1101                	addi	sp,sp,-32
    a:	cc22                	sw	s0,24(sp)
    c:	ca26                	sw	s1,20(sp)
@@ -1179,6 +1484,7 @@ Disassembly of section .text.ble_ke_timer_active:
 
 0000001e <.LVL195>:
   1e:	c901                	beqz	a0,2e <.L138>
+			1e: R_RISCV_RVC_BRANCH	.L138
 
 00000020 <.L145>:
   20:	40f2                	lw	ra,28(sp)
@@ -1190,22 +1496,31 @@ Disassembly of section .text.ble_ke_timer_active:
 
 0000002e <.L138>:
   2e:	000007b7          	lui	a5,0x0
+			2e: R_RISCV_HI20	ble_ke_env+0x10
+			2e: R_RISCV_RELAX	*ABS*+0x10
   32:	0107a783          	lw	a5,16(a5) # 10 <ble_ke_timer_active+0x10>
+			32: R_RISCV_LO12_I	ble_ke_env+0x10
+			32: R_RISCV_RELAX	*ABS*+0x10
 
 00000036 <.L140>:
   36:	e781                	bnez	a5,3e <.L143>
+			36: R_RISCV_RVC_BRANCH	.L143
   38:	000107a3          	sb	zero,15(sp)
   3c:	b7d5                	j	20 <.L145>
+			3c: R_RISCV_RVC_JUMP	.L145
 
 0000003e <.L143>:
   3e:	0047d703          	lhu	a4,4(a5)
   42:	00871663          	bne	a4,s0,4e <.L141>
+			42: R_RISCV_BRANCH	.L141
   46:	0067d703          	lhu	a4,6(a5)
   4a:	00970463          	beq	a4,s1,52 <.L142>
+			4a: R_RISCV_BRANCH	.L142
 
 0000004e <.L141>:
   4e:	439c                	lw	a5,0(a5)
   50:	b7dd                	j	36 <.L140>
+			50: R_RISCV_RVC_JUMP	.L140
 
 00000052 <.L142>:
   52:	4785                	li	a5,1
@@ -1213,15 +1528,21 @@ Disassembly of section .text.ble_ke_timer_active:
 00000054 <.LVL198>:
   54:	00f107a3          	sb	a5,15(sp)
   58:	b7e1                	j	20 <.L145>
+			58: R_RISCV_RVC_JUMP	.L145
 
 Disassembly of section .text.ble_ke_timer_adjust_all:
 
 00000000 <ble_ke_timer_adjust_all>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	ble_ke_env+0x10
+			0: R_RISCV_RELAX	*ABS*+0x10
    4:	0107a783          	lw	a5,16(a5) # 10 <.L151+0x4>
+			4: R_RISCV_LO12_I	ble_ke_env+0x10
+			4: R_RISCV_RELAX	*ABS*+0x10
 
 00000008 <.L150>:
    8:	e391                	bnez	a5,c <.L151>
+			8: R_RISCV_RVC_BRANCH	.L151
    a:	8082                	ret
 
 0000000c <.L151>:
@@ -1230,6 +1551,7 @@ Disassembly of section .text.ble_ke_timer_adjust_all:
   10:	c798                	sw	a4,8(a5)
   12:	439c                	lw	a5,0(a5)
   14:	bfd5                	j	8 <.L150>
+			14: R_RISCV_RVC_JUMP	.L150
 
 Disassembly of section .text._patch_ble_ke_timer_target_get:
 
@@ -1237,10 +1559,15 @@ Disassembly of section .text._patch_ble_ke_timer_target_get:
    0:	57fd                	li	a5,-1
    2:	c11c                	sw	a5,0(a0)
    4:	000007b7          	lui	a5,0x0
+			4: R_RISCV_HI20	ble_ke_env+0x10
+			4: R_RISCV_RELAX	*ABS*+0x10
    8:	0107a783          	lw	a5,16(a5) # 10 <.LVL204>
+			8: R_RISCV_LO12_I	ble_ke_env+0x10
+			8: R_RISCV_RELAX	*ABS*+0x10
 
 0000000c <.LVL203>:
    c:	c781                	beqz	a5,14 <.L153>
+			c: R_RISCV_RVC_BRANCH	.L153
    e:	479c                	lw	a5,8(a5)
 
 00000010 <.LVL204>:
@@ -1257,7 +1584,11 @@ Disassembly of section .text.ble_ke_timer_target_get:
 
 00000000 <ble_ke_timer_target_get>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	_rom_patch_hook
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <ble_ke_timer_target_get>
+			4: R_RISCV_LO12_I	_rom_patch_hook
+			4: R_RISCV_RELAX	*ABS*
    8:	1101                	addi	sp,sp,-32
    a:	ce06                	sw	ra,28(sp)
    c:	0068                	addi	a0,sp,12
@@ -1265,6 +1596,7 @@ Disassembly of section .text.ble_ke_timer_target_get:
 
 00000010 <.LVL207>:
   10:	c509                	beqz	a0,1a <.L158>
+			10: R_RISCV_RVC_BRANCH	.L158
 
 00000012 <.L160>:
   12:	40f2                	lw	ra,28(sp)
@@ -1276,13 +1608,19 @@ Disassembly of section .text.ble_ke_timer_target_get:
   1a:	57fd                	li	a5,-1
   1c:	c63e                	sw	a5,12(sp)
   1e:	000007b7          	lui	a5,0x0
+			1e: R_RISCV_HI20	ble_ke_env+0x10
+			1e: R_RISCV_RELAX	*ABS*+0x10
   22:	0107a783          	lw	a5,16(a5) # 10 <.LVL207>
+			22: R_RISCV_LO12_I	ble_ke_env+0x10
+			22: R_RISCV_RELAX	*ABS*+0x10
 
 00000026 <.LVL208>:
   26:	d7f5                	beqz	a5,12 <.L160>
+			26: R_RISCV_RVC_BRANCH	.L160
   28:	479c                	lw	a5,8(a5)
 
 0000002a <.LVL209>:
   2a:	0792                	slli	a5,a5,0x4
   2c:	c63e                	sw	a5,12(sp)
   2e:	b7d5                	j	12 <.L160>
+			2e: R_RISCV_RVC_JUMP	.L160

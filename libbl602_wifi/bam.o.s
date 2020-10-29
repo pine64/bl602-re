@@ -1,16 +1,22 @@
 
-bam.o:     file format elf32-littleriscv
+libbl602_wifi/bam.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.bam_init:
 
 00000000 <bam_init>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	bam_env+0xc
+			0: R_RISCV_RELAX	*ABS*+0xc
    4:	577d                	li	a4,-1
    6:	4581                	li	a1,0
    8:	4521                	li	a0,8
    a:	00e78623          	sb	a4,12(a5) # c <bam_init+0xc>
+			a: R_RISCV_LO12_S	bam_env+0xc
+			a: R_RISCV_RELAX	*ABS*+0xc
    e:	00000317          	auipc	t1,0x0
+			e: R_RISCV_CALL	ke_state_set
+			e: R_RISCV_RELAX	*ABS*
   12:	00030067          	jr	t1 # e <bam_init+0xe>
 
 Disassembly of section .text.bam_send_air_action_frame:
@@ -28,7 +34,11 @@ Disassembly of section .text.bam_send_air_action_frame:
 
 0000000e <.LBB58>:
    e:	00000c37          	lui	s8,0x0
+			e: R_RISCV_HI20	sta_info_tab
+			e: R_RISCV_RELAX	*ABS*
   12:	000c0c13          	mv	s8,s8
+			12: R_RISCV_LO12_I	sta_info_tab
+			12: R_RISCV_RELAX	*ABS*
 
 00000016 <.LBE58>:
   16:	cca2                	sw	s0,88(sp)
@@ -68,6 +78,8 @@ Disassembly of section .text.bam_send_air_action_frame:
 
 00000046 <.LBB62>:
   46:	00000097          	auipc	ra,0x0
+			46: R_RISCV_CALL	phy_get_channel
+			46: R_RISCV_RELAX	*ABS*
   4a:	000080e7          	jalr	ra # 46 <.LBB62>
 
 0000004e <.LVL7>:
@@ -79,16 +91,23 @@ Disassembly of section .text.bam_send_air_action_frame:
 
 0000005a <.LVL9>:
   5a:	00000097          	auipc	ra,0x0
+			5a: R_RISCV_CALL	txl_frame_get
+			5a: R_RISCV_RELAX	*ABS*
   5e:	000080e7          	jalr	ra # 5a <.LVL9>
 
 00000062 <.LVL10>:
   62:	16050363          	beqz	a0,1c8 <.L2>
+			62: R_RISCV_BRANCH	.L2
   66:	5d800b93          	li	s7,1496
   6a:	037a0bb3          	mul	s7,s4,s7
 
 0000006e <.LBB63>:
   6e:	000007b7          	lui	a5,0x0
+			6e: R_RISCV_HI20	vif_info_tab
+			6e: R_RISCV_RELAX	*ABS*
   72:	00078d93          	mv	s11,a5
+			72: R_RISCV_LO12_I	vif_info_tab
+			72: R_RISCV_RELAX	*ABS*
   76:	85aa                	mv	a1,a0
   78:	8d2a                	mv	s10,a0
 
@@ -103,6 +122,8 @@ Disassembly of section .text.bam_send_air_action_frame:
 00000084 <.LVL12>:
   84:	c43a                	sw	a4,8(sp)
   86:	00000097          	auipc	ra,0x0
+			86: R_RISCV_CALL	tpc_update_frame_tx_power
+			86: R_RISCV_RELAX	*ABS*
   8a:	000080e7          	jalr	ra # 86 <.LVL12+0x2>
 
 0000008e <.LBB67>:
@@ -152,6 +173,7 @@ Disassembly of section .text.bam_send_air_action_frame:
   e4:	05674603          	lbu	a2,86(a4)
   e8:	4709                	li	a4,2
   ea:	08e61063          	bne	a2,a4,16a <.L4>
+			ea: R_RISCV_BRANCH	.L4
 
 000000ee <.LBB85>:
   ee:	0007d703          	lhu	a4,0(a5)
@@ -169,7 +191,11 @@ Disassembly of section .text.bam_send_air_action_frame:
 
 00000106 <.LBB78>:
  106:	000007b7          	lui	a5,0x0
+			106: R_RISCV_HI20	txl_cntrl_env
+			106: R_RISCV_RELAX	*ABS*
  10a:	00078793          	mv	a5,a5
+			10a: R_RISCV_LO12_I	txl_cntrl_env
+			10a: R_RISCV_RELAX	*ABS*
  10e:	0547d803          	lhu	a6,84(a5) # 54 <.LBE62+0x2>
  112:	0805                	addi	a6,a6,1
  114:	0842                	slli	a6,a6,0x10
@@ -189,24 +215,38 @@ Disassembly of section .text.bam_send_air_action_frame:
 0000013a <.LVL26>:
  13a:	4785                	li	a5,1
  13c:	0afc8563          	beq	s9,a5,1e6 <.L6>
+			13c: R_RISCV_BRANCH	.L6
  140:	040c8063          	beqz	s9,180 <.L7>
+			140: R_RISCV_BRANCH	.L7
  144:	4789                	li	a5,2
  146:	0afc8b63          	beq	s9,a5,1fc <.L8>
+			146: R_RISCV_BRANCH	.L8
  14a:	000005b7          	lui	a1,0x0
+			14a: R_RISCV_HI20	.LC0
+			14a: R_RISCV_RELAX	*ABS*
 
 0000014e <.LVL27>:
  14e:	00000537          	lui	a0,0x0
+			14e: R_RISCV_HI20	.LC1
+			14e: R_RISCV_RELAX	*ABS*
 
 00000152 <.LVL28>:
  152:	00050513          	mv	a0,a0
+			152: R_RISCV_LO12_I	.LC1
+			152: R_RISCV_RELAX	*ABS*
  156:	25d00613          	li	a2,605
  15a:	00058593          	mv	a1,a1
+			15a: R_RISCV_LO12_I	.LC0
+			15a: R_RISCV_RELAX	*ABS*
  15e:	00000097          	auipc	ra,0x0
+			15e: R_RISCV_CALL	assert_warn
+			15e: R_RISCV_RELAX	*ABS*
  162:	000080e7          	jalr	ra # 15e <.LVL28+0xc>
 
 00000166 <.LVL29>:
  166:	4561                	li	a0,24
  168:	a841                	j	1f8 <.L21>
+			168: R_RISCV_RVC_JUMP	.L21
 
 0000016a <.L4>:
  16a:	000c5783          	lhu	a5,0(s8)
@@ -219,12 +259,17 @@ Disassembly of section .text.bam_send_air_action_frame:
 0000017a <.LBB90>:
  17a:	004c5783          	lhu	a5,4(s8)
  17e:	b751                	j	102 <.L20>
+			17e: R_RISCV_RVC_JUMP	.L20
 
 00000180 <.L7>:
  180:	000007b7          	lui	a5,0x0
+			180: R_RISCV_HI20	mac_tid2ac
+			180: R_RISCV_RELAX	*ABS*
  184:	8409                	srai	s0,s0,0x2
  186:	883d                	andi	s0,s0,15
  188:	00078793          	mv	a5,a5
+			188: R_RISCV_LO12_I	mac_tid2ac
+			188: R_RISCV_RELAX	*ABS*
  18c:	97a2                	add	a5,a5,s0
  18e:	85a6                	mv	a1,s1
 
@@ -236,6 +281,8 @@ Disassembly of section .text.bam_send_air_action_frame:
 
 00000196 <.LVL36>:
  196:	00000097          	auipc	ra,0x0
+			196: R_RISCV_CALL	me_build_add_ba_req
+			196: R_RISCV_RELAX	*ABS*
  19a:	000080e7          	jalr	ra # 196 <.LVL36>
 
 0000019e <.LVL37>:
@@ -254,6 +301,7 @@ Disassembly of section .text.bam_send_air_action_frame:
  1ac:	cf1c                	sw	a5,24(a4)
  1ae:	cf48                	sw	a0,28(a4)
  1b0:	00090663          	beqz	s2,1bc <.L11>
+			1b0: R_RISCV_BRANCH	.L11
  1b4:	2d2d2623          	sw	s2,716(s10)
  1b8:	2c9d2823          	sw	s1,720(s10)
 
@@ -263,6 +311,8 @@ Disassembly of section .text.bam_send_air_action_frame:
 
 000001c0 <.LVL41>:
  1c0:	00000097          	auipc	ra,0x0
+			1c0: R_RISCV_CALL	txl_frame_push
+			1c0: R_RISCV_RELAX	*ABS*
  1c4:	000080e7          	jalr	ra # 1c0 <.LVL41>
 
 000001c8 <.L2>:
@@ -298,6 +348,8 @@ Disassembly of section .text.bam_send_air_action_frame:
 
 000001ee <.LVL48>:
  1ee:	00000097          	auipc	ra,0x0
+			1ee: R_RISCV_CALL	me_build_add_ba_rsp
+			1ee: R_RISCV_RELAX	*ABS*
  1f2:	000080e7          	jalr	ra # 1ee <.LVL48>
 
 000001f6 <.L22>:
@@ -306,6 +358,7 @@ Disassembly of section .text.bam_send_air_action_frame:
 000001f8 <.L21>:
  1f8:	440d                	li	s0,3
  1fa:	b75d                	j	1a0 <.L10>
+			1fa: R_RISCV_RVC_JUMP	.L10
 
 000001fc <.L8>:
  1fc:	865a                	mv	a2,s6
@@ -316,7 +369,10 @@ Disassembly of section .text.bam_send_air_action_frame:
 
 00000202 <.LVL53>:
  202:	00000097          	auipc	ra,0x0
+			202: R_RISCV_CALL	me_build_del_ba
+			202: R_RISCV_RELAX	*ABS*
  206:	000080e7          	jalr	ra # 202 <.LVL53>
 
 0000020a <.LVL54>:
  20a:	b7f5                	j	1f6 <.L22>
+			20a: R_RISCV_RVC_JUMP	.L22

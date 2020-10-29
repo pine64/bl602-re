@@ -1,5 +1,5 @@
 
-me_mic.o:     file format elf32-littleriscv
+libbl602_wifi/me_mic.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.michael_block:
@@ -101,6 +101,7 @@ Disassembly of section .text.me_mic_init:
   6a:	0962                	slli	s2,s2,0x18
   6c:	00c96933          	or	s2,s2,a2
   70:	00d71363          	bne	a4,a3,76 <.L3>
+			70: R_RISCV_BRANCH	.L3
   74:	4981                	li	s3,0
 
 00000076 <.L3>:
@@ -117,18 +118,24 @@ Disassembly of section .text.me_mic_init:
   84:	c0d8                	sw	a4,4(s1)
   86:	00048623          	sb	zero,12(s1)
   8a:	00000097          	auipc	ra,0x0
+			8a: R_RISCV_CALL	michael_block
+			8a: R_RISCV_RELAX	*ABS*
   8e:	000080e7          	jalr	ra # 8a <.LVL18+0xa>
 
 00000092 <.LVL19>:
   92:	85a2                	mv	a1,s0
   94:	8526                	mv	a0,s1
   96:	00000097          	auipc	ra,0x0
+			96: R_RISCV_CALL	michael_block
+			96: R_RISCV_RELAX	*ABS*
   9a:	000080e7          	jalr	ra # 96 <.LVL19+0x4>
 
 0000009e <.LVL20>:
   9e:	85ca                	mv	a1,s2
   a0:	8526                	mv	a0,s1
   a2:	00000097          	auipc	ra,0x0
+			a2: R_RISCV_CALL	michael_block
+			a2: R_RISCV_RELAX	*ABS*
   a6:	000080e7          	jalr	ra # a2 <.LVL20+0x4>
 
 000000aa <.LBE4>:
@@ -151,6 +158,8 @@ Disassembly of section .text.me_mic_init:
 
 000000ba <.LBB9>:
   ba:	00000317          	auipc	t1,0x0
+			ba: R_RISCV_CALL	michael_block
+			ba: R_RISCV_RELAX	*ABS*
   be:	00030067          	jr	t1 # ba <.LBB9>
 
 Disassembly of section .text.me_mic_calc:
@@ -203,6 +212,7 @@ Disassembly of section .text.me_mic_calc:
 0000003c <.LVL33>:
   3c:	40860c33          	sub	s8,a2,s0
   40:	00867c63          	bgeu	a2,s0,58 <.L9>
+			40: R_RISCV_BRANCH	.L9
   44:	4791                	li	a5,4
   46:	8f91                	sub	a5,a5,a2
   48:	078e                	slli	a5,a5,0x3
@@ -223,6 +233,7 @@ Disassembly of section .text.me_mic_calc:
   62:	478d                	li	a5,3
   64:	8cc9                	or	s1,s1,a0
   66:	0287f463          	bgeu	a5,s0,8e <.L10>
+			66: R_RISCV_BRANCH	.L10
 
 0000006a <.LVL38>:
   6a:	4711                	li	a4,4
@@ -231,6 +242,7 @@ Disassembly of section .text.me_mic_calc:
   70:	02000793          	li	a5,32
   74:	4901                	li	s2,0
   76:	00f70463          	beq	a4,a5,7e <.L11>
+			76: R_RISCV_BRANCH	.L11
   7a:	00e5d933          	srl	s2,a1,a4
 
 0000007e <.L11>:
@@ -242,6 +254,8 @@ Disassembly of section .text.me_mic_calc:
 
 00000084 <.LVL41>:
   84:	00000097          	auipc	ra,0x0
+			84: R_RISCV_CALL	michael_block
+			84: R_RISCV_RELAX	*ABS*
   88:	000080e7          	jalr	ra # 84 <.LVL41>
 
 0000008c <.LVL42>:
@@ -267,12 +281,14 @@ Disassembly of section .text.me_mic_calc:
 
 000000a6 <.L12>:
   a6:	097b1263          	bne	s6,s7,12a <.L14>
+			a6: R_RISCV_BRANCH	.L14
   aa:	0b0a                	slli	s6,s6,0x2
 
 000000ac <.LBE18>:
   ac:	ffcc7793          	andi	a5,s8,-4
   b0:	9a5a                	add	s4,s4,s6
   b2:	0587fa63          	bgeu	a5,s8,106 <.L15>
+			b2: R_RISCV_BRANCH	.L15
 
 000000b6 <.LBB19>:
   b6:	003c7793          	andi	a5,s8,3
@@ -287,6 +303,7 @@ Disassembly of section .text.me_mic_calc:
   c4:	000a2683          	lw	a3,0(s4)
   c8:	4601                	li	a2,0
   ca:	00b70563          	beq	a4,a1,d4 <.L16>
+			ca: R_RISCV_BRANCH	.L16
   ce:	567d                	li	a2,-1
   d0:	00e65633          	srl	a2,a2,a4
 
@@ -305,11 +322,13 @@ Disassembly of section .text.me_mic_calc:
 
 000000e4 <.LVL52>:
   e4:	0287f163          	bgeu	a5,s0,106 <.L15>
+			e4: R_RISCV_BRANCH	.L15
 
 000000e8 <.LVL53>:
   e8:	02000793          	li	a5,32
   ec:	4a01                	li	s4,0
   ee:	00f90463          	beq	s2,a5,f6 <.L17>
+			ee: R_RISCV_BRANCH	.L17
   f2:	01275a33          	srl	s4,a4,s2
 
 000000f6 <.L17>:
@@ -319,6 +338,8 @@ Disassembly of section .text.me_mic_calc:
 
 000000fc <.LVL55>:
   fc:	00000097          	auipc	ra,0x0
+			fc: R_RISCV_CALL	michael_block
+			fc: R_RISCV_RELAX	*ABS*
  100:	000080e7          	jalr	ra # fc <.LVL55>
 
 00000104 <.LVL56>:
@@ -363,17 +384,21 @@ Disassembly of section .text.me_mic_calc:
 
 00000138 <.LVL64>:
  138:	01990463          	beq	s2,s9,140 <.L13>
+			138: R_RISCV_BRANCH	.L13
  13c:	0127d4b3          	srl	s1,a5,s2
 
 00000140 <.L13>:
  140:	854e                	mv	a0,s3
  142:	00000097          	auipc	ra,0x0
+			142: R_RISCV_CALL	michael_block
+			142: R_RISCV_RELAX	*ABS*
  146:	000080e7          	jalr	ra # 142 <.L13+0x2>
 
 0000014a <.LVL66>:
  14a:	0b85                	addi	s7,s7,1
  14c:	876a                	mv	a4,s10
  14e:	bfa1                	j	a6 <.L12>
+			14e: R_RISCV_RVC_JUMP	.L12
 
 Disassembly of section .text.me_mic_end:
 
@@ -395,14 +420,25 @@ Disassembly of section .text.me_mic_end:
 
 00000012 <.LVL69>:
   12:	02e7f063          	bgeu	a5,a4,32 <.L24>
+			12: R_RISCV_BRANCH	.L24
   16:	000005b7          	lui	a1,0x0
+			16: R_RISCV_HI20	.LC0
+			16: R_RISCV_RELAX	*ABS*
   1a:	00000537          	lui	a0,0x0
+			1a: R_RISCV_HI20	.LC1
+			1a: R_RISCV_RELAX	*ABS*
 
 0000001e <.LVL70>:
   1e:	13e00613          	li	a2,318
   22:	00058593          	mv	a1,a1
+			22: R_RISCV_LO12_I	.LC0
+			22: R_RISCV_RELAX	*ABS*
   26:	00050513          	mv	a0,a0
+			26: R_RISCV_LO12_I	.LC1
+			26: R_RISCV_RELAX	*ABS*
   2a:	00000097          	auipc	ra,0x0
+			2a: R_RISCV_CALL	assert_err
+			2a: R_RISCV_RELAX	*ABS*
   2e:	000080e7          	jalr	ra # 2a <.LVL70+0xc>
 
 00000032 <.L24>:
@@ -413,6 +449,8 @@ Disassembly of section .text.me_mic_end:
   40:	00f595b3          	sll	a1,a1,a5
   44:	8dc5                	or	a1,a1,s1
   46:	00000097          	auipc	ra,0x0
+			46: R_RISCV_CALL	michael_block
+			46: R_RISCV_RELAX	*ABS*
   4a:	000080e7          	jalr	ra # 46 <.L24+0x14>
 
 0000004e <.LVL72>:
@@ -433,4 +471,6 @@ Disassembly of section .text.me_mic_end:
 
 0000005a <.LBB40>:
   5a:	00000317          	auipc	t1,0x0
+			5a: R_RISCV_CALL	michael_block
+			5a: R_RISCV_RELAX	*ABS*
   5e:	00030067          	jr	t1 # 5a <.LBB40>

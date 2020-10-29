@@ -1,5 +1,5 @@
 
-txl_hwdesc.o:     file format elf32-littleriscv
+libbl602_wifi/txl_hwdesc.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.txl_hwdesc_init:

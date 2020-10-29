@@ -1,12 +1,16 @@
 
-txl_buffer.o:     file format elf32-littleriscv
+libbl602_wifi/txl_buffer.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.txl_buffer_reinit:
 
 00000000 <txl_buffer_reinit>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	txl_buffer_env
+			0: R_RISCV_RELAX	*ABS*
    4:	00078793          	mv	a5,a5
+			4: R_RISCV_LO12_I	txl_buffer_env
+			4: R_RISCV_RELAX	*ABS*
    8:	0a07aa23          	sw	zero,180(a5) # b4 <.LASF562>
    c:	0a07ac23          	sw	zero,184(a5)
   10:	8082                	ret
@@ -17,10 +21,14 @@ Disassembly of section .text.txl_buffer_init:
    0:	7179                	addi	sp,sp,-48
    2:	d422                	sw	s0,40(sp)
    4:	00000437          	lui	s0,0x0
+			4: R_RISCV_HI20	txl_buffer_control_desc
+			4: R_RISCV_RELAX	*ABS*
    8:	d04a                	sw	s2,32(sp)
    a:	ce4e                	sw	s3,28(sp)
    c:	cc52                	sw	s4,24(sp)
    e:	00040413          	mv	s0,s0
+			e: R_RISCV_LO12_I	txl_buffer_control_desc
+			e: R_RISCV_RELAX	*ABS*
 
 00000012 <.LBB16>:
   12:	badcba37          	lui	s4,0xbadcb
@@ -35,6 +43,8 @@ Disassembly of section .text.txl_buffer_init:
   22:	d606                	sw	ra,44(sp)
   24:	25840a93          	addi	s5,s0,600 # 258 <.LASF280+0x1>
   28:	00000097          	auipc	ra,0x0
+			28: R_RISCV_CALL	txl_buffer_reinit
+			28: R_RISCV_RELAX	*ABS*
   2c:	000080e7          	jalr	ra # 28 <.LBE16+0xe>
 
 00000030 <.LBB27>:
@@ -52,12 +62,16 @@ Disassembly of section .text.txl_buffer_init:
 00000046 <.L3>:
   46:	01442023          	sw	s4,0(s0)
   4a:	00000097          	auipc	ra,0x0
+			4a: R_RISCV_CALL	phy_get_ntx
+			4a: R_RISCV_RELAX	*ABS*
   4e:	000080e7          	jalr	ra # 4a <.L3+0x4>
 
 00000052 <.LVL2>:
   52:	053a                	slli	a0,a0,0xe
   54:	c048                	sw	a0,4(s0)
   56:	00000097          	auipc	ra,0x0
+			56: R_RISCV_CALL	phy_get_ntx
+			56: R_RISCV_RELAX	*ABS*
   5a:	000080e7          	jalr	ra # 56 <.LVL2+0x4>
 
 0000005e <.LVL3>:
@@ -105,8 +119,13 @@ Disassembly of section .text.txl_buffer_init:
 
 000000bc <.LBE27>:
   bc:	f95415e3          	bne	s0,s5,46 <.L3>
+			bc: R_RISCV_BRANCH	.L3
   c0:	00000437          	lui	s0,0x0
+			c0: R_RISCV_HI20	txl_buffer_control_desc_bcmc
+			c0: R_RISCV_RELAX	*ABS*
   c4:	00040413          	mv	s0,s0
+			c4: R_RISCV_LO12_I	txl_buffer_control_desc_bcmc
+			c4: R_RISCV_RELAX	*ABS*
 
 000000c8 <.LBB28>:
   c8:	badcb937          	lui	s2,0xbadcb
@@ -125,12 +144,16 @@ Disassembly of section .text.txl_buffer_init:
 000000e4 <.L4>:
   e4:	01242023          	sw	s2,0(s0)
   e8:	00000097          	auipc	ra,0x0
+			e8: R_RISCV_CALL	phy_get_ntx
+			e8: R_RISCV_RELAX	*ABS*
   ec:	000080e7          	jalr	ra # e8 <.L4+0x4>
 
 000000f0 <.LVL9>:
   f0:	053a                	slli	a0,a0,0xe
   f2:	c048                	sw	a0,4(s0)
   f4:	00000097          	auipc	ra,0x0
+			f4: R_RISCV_CALL	phy_get_ntx
+			f4: R_RISCV_RELAX	*ABS*
   f8:	000080e7          	jalr	ra # f4 <.LVL9+0x4>
 
 000000fc <.LVL10>:
@@ -160,6 +183,7 @@ Disassembly of section .text.txl_buffer_init:
 
 00000140 <.LBE28>:
  140:	fb3412e3          	bne	s0,s3,e4 <.L4>
+			140: R_RISCV_BRANCH	.L4
  144:	50b2                	lw	ra,44(sp)
  146:	5422                	lw	s0,40(sp)
  148:	5492                	lw	s1,36(sp)
@@ -176,7 +200,11 @@ Disassembly of section .text.txl_buffer_reset:
 
 00000000 <txl_buffer_reset>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	txl_buffer_env
+			0: R_RISCV_RELAX	*ABS*
    4:	00078793          	mv	a5,a5
+			4: R_RISCV_LO12_I	txl_buffer_env
+			4: R_RISCV_RELAX	*ABS*
    8:	0a07aa23          	sw	zero,180(a5) # b4 <.LASF562>
    c:	0a07ac23          	sw	zero,184(a5)
   10:	8082                	ret
@@ -209,11 +237,14 @@ Disassembly of section .text.txl_buffer_alloc:
 00000036 <.LBB51>:
   36:	8ba1                	andi	a5,a5,8
   38:	eb81                	bnez	a5,48 <.L10>
+			38: R_RISCV_RVC_BRANCH	.L10
   3a:	21850593          	addi	a1,a0,536
 
 0000003e <.LVL14>:
   3e:	95ba                	add	a1,a1,a4
   40:	00000097          	auipc	ra,0x0
+			40: R_RISCV_CALL	txu_cntrl_frame_build
+			40: R_RISCV_RELAX	*ABS*
   44:	000080e7          	jalr	ra # 40 <.LVL14+0x2>
 
 00000048 <.L10>:
@@ -234,13 +265,21 @@ Disassembly of section .text.txl_buffer_alloc:
 0000005c <.LVL18>:
   5c:	1ac6ae23          	sw	a2,444(a3)
   60:	fee798e3          	bne	a5,a4,50 <.L11>
+			60: R_RISCV_BRANCH	.L11
 
 00000064 <.LBB45>:
   64:	000007b7          	lui	a5,0x0
+			64: R_RISCV_HI20	txl_buffer_env
+			64: R_RISCV_RELAX	*ABS*
   68:	00078713          	mv	a4,a5
+			68: R_RISCV_LO12_I	txl_buffer_env
+			68: R_RISCV_RELAX	*ABS*
   6c:	0b472703          	lw	a4,180(a4)
   70:	00078793          	mv	a5,a5
+			70: R_RISCV_LO12_I	txl_buffer_env
+			70: R_RISCV_RELAX	*ABS*
   74:	ef09                	bnez	a4,8e <.L12>
+			74: R_RISCV_RVC_BRANCH	.L12
   76:	0a97aa23          	sw	s1,180(a5) # b4 <.LASF562>
 
 0000007a <.L13>:
@@ -263,6 +302,7 @@ Disassembly of section .text.txl_buffer_alloc:
   8e:	0b87a703          	lw	a4,184(a5)
   92:	cb04                	sw	s1,16(a4)
   94:	b7dd                	j	7a <.L13>
+			94: R_RISCV_RVC_JUMP	.L13
 
 Disassembly of section .text.txl_buffer_update_thd:
 
@@ -285,20 +325,33 @@ Disassembly of section .text.txl_buffer_update_thd:
 0000001a <.L17>:
   1a:	4114                	lw	a3,0(a0)
   1c:	e28d                	bnez	a3,3e <.L18>
+			1c: R_RISCV_RVC_BRANCH	.L18
   1e:	e1b9                	bnez	a1,64 <.L19>
+			1e: R_RISCV_RVC_BRANCH	.L19
   20:	000005b7          	lui	a1,0x0
+			20: R_RISCV_HI20	.LANCHOR0
+			20: R_RISCV_RELAX	*ABS*
 
 00000024 <.LVL29>:
   24:	00000537          	lui	a0,0x0
+			24: R_RISCV_HI20	.LC0
+			24: R_RISCV_RELAX	*ABS*
   28:	1141                	addi	sp,sp,-16
   2a:	00058593          	mv	a1,a1
+			2a: R_RISCV_LO12_I	.LANCHOR0
+			2a: R_RISCV_RELAX	*ABS*
   2e:	00050513          	mv	a0,a0
+			2e: R_RISCV_LO12_I	.LC0
+			2e: R_RISCV_RELAX	*ABS*
   32:	c606                	sw	ra,12(sp)
   34:	00000097          	auipc	ra,0x0
+			34: R_RISCV_CALL	printf
+			34: R_RISCV_RELAX	*ABS*
   38:	000080e7          	jalr	ra # 34 <.LVL29+0x10>
 
 0000003c <.L20>:
   3c:	a001                	j	3c <.L20>
+			3c: R_RISCV_RVC_JUMP	.L20
 
 0000003e <.L18>:
   3e:	01072023          	sw	a6,0(a4)
@@ -319,6 +372,7 @@ Disassembly of section .text.txl_buffer_update_thd:
 00000060 <.LVL34>:
   60:	0511                	addi	a0,a0,4
   62:	bf65                	j	1a <.L17>
+			62: R_RISCV_RVC_JUMP	.L17
 
 00000064 <.L19>:
   64:	43d8                	lw	a4,4(a5)

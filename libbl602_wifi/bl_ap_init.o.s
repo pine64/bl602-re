@@ -1,5 +1,5 @@
 
-bl_ap_init.o:     file format elf32-littleriscv
+libbl602_wifi/bl_ap_init.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.ap_setpsk:
@@ -12,16 +12,21 @@ Disassembly of section .text.ap_setpsk:
    8:	c62e                	sw	a1,12(sp)
    a:	84b2                	mv	s1,a2
    c:	00000097          	auipc	ra,0x0
+			c: R_RISCV_CALL	cm_GetApInfo
+			c: R_RISCV_RELAX	*ABS*
   10:	000080e7          	jalr	ra # c <ap_setpsk+0xc>
 
 00000014 <.LVL1>:
   14:	c539                	beqz	a0,62 <.L1>
+			14: R_RISCV_RVC_BRANCH	.L1
   16:	45b2                	lw	a1,12(sp)
   18:	842a                	mv	s0,a0
   1a:	852e                	mv	a0,a1
 
 0000001c <.LVL2>:
   1c:	00000097          	auipc	ra,0x0
+			1c: R_RISCV_CALL	strlen
+			1c: R_RISCV_RELAX	*ABS*
   20:	000080e7          	jalr	ra # 1c <.LVL2>
 
 00000024 <.LVL3>:
@@ -30,11 +35,15 @@ Disassembly of section .text.ap_setpsk:
   2a:	02000613          	li	a2,32
   2e:	08440513          	addi	a0,s0,132
   32:	00000097          	auipc	ra,0x0
+			32: R_RISCV_CALL	memcpy
+			32: R_RISCV_RELAX	*ABS*
   36:	000080e7          	jalr	ra # 32 <.LVL3+0xe>
 
 0000003a <.LVL4>:
   3a:	8526                	mv	a0,s1
   3c:	00000097          	auipc	ra,0x0
+			3c: R_RISCV_CALL	strlen
+			3c: R_RISCV_RELAX	*ABS*
   40:	000080e7          	jalr	ra # 3c <.LVL4+0x2>
 
 00000044 <.LVL5>:
@@ -53,6 +62,8 @@ Disassembly of section .text.ap_setpsk:
 
 0000005a <.LVL8>:
   5a:	00000317          	auipc	t1,0x0
+			5a: R_RISCV_CALL	memcpy
+			5a: R_RISCV_RELAX	*ABS*
   5e:	00030067          	jr	t1 # 5a <.LVL8>
 
 00000062 <.L1>:
@@ -75,6 +86,8 @@ Disassembly of section .text.ap_resetConfiguration:
    6:	c606                	sw	ra,12(sp)
    8:	84aa                	mv	s1,a0
    a:	00000097          	auipc	ra,0x0
+			a: R_RISCV_CALL	cm_GetApInfo
+			a: R_RISCV_RELAX	*ABS*
    e:	000080e7          	jalr	ra # a <ap_resetConfiguration+0xa>
 
 00000012 <.LVL13>:
@@ -83,26 +96,40 @@ Disassembly of section .text.ap_resetConfiguration:
 00000014 <.LVL14>:
   14:	8526                	mv	a0,s1
   16:	00000097          	auipc	ra,0x0
+			16: R_RISCV_CALL	cm_GetApData
+			16: R_RISCV_RELAX	*ABS*
   1a:	000080e7          	jalr	ra # 16 <.LVL14+0x2>
 
 0000001e <.LVL15>:
   1e:	c051                	beqz	s0,a2 <.L4>
+			1e: R_RISCV_RVC_BRANCH	.L4
   20:	c149                	beqz	a0,a2 <.L4>
+			20: R_RISCV_RVC_BRANCH	.L4
   22:	000004b7          	lui	s1,0x0
+			22: R_RISCV_HI20	.LC0
+			22: R_RISCV_RELAX	*ABS*
 
 00000026 <.LVL16>:
   26:	00048513          	mv	a0,s1
+			26: R_RISCV_LO12_I	.LC0
+			26: R_RISCV_RELAX	*ABS*
 
 0000002a <.LVL17>:
   2a:	00000097          	auipc	ra,0x0
+			2a: R_RISCV_CALL	strlen
+			2a: R_RISCV_RELAX	*ABS*
   2e:	000080e7          	jalr	ra # 2a <.LVL17>
 
 00000032 <.LVL18>:
   32:	00048593          	mv	a1,s1
+			32: R_RISCV_LO12_I	.LC0
+			32: R_RISCV_RELAX	*ABS*
   36:	0aa40223          	sb	a0,164(s0)
   3a:	02000613          	li	a2,32
   3e:	08440513          	addi	a0,s0,132
   42:	00000097          	auipc	ra,0x0
+			42: R_RISCV_CALL	memcpy
+			42: R_RISCV_RELAX	*ABS*
   46:	000080e7          	jalr	ra # 42 <.LVL18+0x10>
 
 0000004a <.LVL19>:
@@ -112,6 +139,8 @@ Disassembly of section .text.ap_resetConfiguration:
   54:	4581                	li	a1,0
   56:	00840513          	addi	a0,s0,8
   5a:	00000097          	auipc	ra,0x0
+			5a: R_RISCV_CALL	memset
+			5a: R_RISCV_RELAX	*ABS*
   5e:	000080e7          	jalr	ra # 5a <.LVL19+0x10>
 
 00000062 <.LVL20>:
@@ -147,4 +176,6 @@ Disassembly of section .text.InitializeAp:
 
 00000000 <InitializeAp>:
    0:	00000317          	auipc	t1,0x0
+			0: R_RISCV_CALL	ap_resetConfiguration
+			0: R_RISCV_RELAX	*ABS*
    4:	00030067          	jr	t1 # 0 <InitializeAp>

@@ -1,14 +1,20 @@
 
-lld_sleep.o:     file format elf32-littleriscv
+libblecontroller/lld_sleep.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.lld_sleep_init:
 
 00000000 <lld_sleep_init>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	ble_memset_ptr
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <lld_sleep_init>
+			4: R_RISCV_LO12_I	ble_memset_ptr
+			4: R_RISCV_RELAX	*ABS*
    8:	1101                	addi	sp,sp,-32
    a:	00000537          	lui	a0,0x0
+			a: R_RISCV_HI20	.LANCHOR0
+			a: R_RISCV_RELAX	*ABS*
    e:	ce06                	sw	ra,28(sp)
   10:	cc22                	sw	s0,24(sp)
   12:	ca26                	sw	s1,20(sp)
@@ -17,25 +23,35 @@ Disassembly of section .text.lld_sleep_init:
   18:	4651                	li	a2,20
   1a:	4581                	li	a1,0
   1c:	00050993          	mv	s3,a0
+			1c: R_RISCV_LO12_I	.LANCHOR0
+			1c: R_RISCV_RELAX	*ABS*
   20:	00050513          	mv	a0,a0
+			20: R_RISCV_LO12_I	.LANCHOR0
+			20: R_RISCV_RELAX	*ABS*
   24:	9782                	jalr	a5
 
 00000026 <.LVL0>:
   26:	6485                	lui	s1,0x1
   28:	38848513          	addi	a0,s1,904 # 1388 <.LASF8+0x9>
   2c:	00000097          	auipc	ra,0x0
+			2c: R_RISCV_CALL	rwip_us_2_lpcycles
+			2c: R_RISCV_RELAX	*ABS*
   30:	000080e7          	jalr	ra # 2c <.LVL0+0x6>
 
 00000034 <.LVL1>:
   34:	892a                	mv	s2,a0
   36:	38848513          	addi	a0,s1,904
   3a:	00000097          	auipc	ra,0x0
+			3a: R_RISCV_CALL	rwip_us_2_lpcycles
+			3a: R_RISCV_RELAX	*ABS*
   3e:	000080e7          	jalr	ra # 3a <.LVL1+0x6>
 
 00000042 <.LVL2>:
   42:	842a                	mv	s0,a0
   44:	27100513          	li	a0,625
   48:	00000097          	auipc	ra,0x0
+			48: R_RISCV_CALL	rwip_us_2_lpcycles
+			48: R_RISCV_RELAX	*ABS*
   4c:	000080e7          	jalr	ra # 48 <.LVL2+0x6>
 
 00000050 <.LBB104>:
@@ -60,6 +76,8 @@ Disassembly of section .text.lld_sleep_init:
 0000006e <.LBE104>:
   6e:	38848513          	addi	a0,s1,904
   72:	00000097          	auipc	ra,0x0
+			72: R_RISCV_CALL	rwip_wakeup_delay_set
+			72: R_RISCV_RELAX	*ABS*
   76:	000080e7          	jalr	ra # 72 <.LBE104+0x4>
 
 0000007a <.LBB106>:
@@ -93,7 +111,11 @@ Disassembly of section .text.lld_sleep_enter:
 
 00000006 <.LBE116>:
    6:	00000737          	lui	a4,0x0
+			6: R_RISCV_HI20	.LANCHOR0
+			6: R_RISCV_RELAX	*ABS*
    a:	00d72023          	sw	a3,0(a4) # 0 <lld_sleep_enter>
+			a: R_RISCV_LO12_S	.LANCHOR0
+			a: R_RISCV_RELAX	*ABS*
 
 0000000e <.LBB118>:
    e:	dbc8                	sw	a0,52(a5)
@@ -113,6 +135,7 @@ Disassembly of section .text.lld_sleep_enter:
 0000001e <.LBE124>:
   1e:	8b05                	andi	a4,a4,1
   20:	cb01                	beqz	a4,30 <.L4>
+			20: R_RISCV_RVC_BRANCH	.L4
 
 00000022 <.LBB126>:
   22:	08000713          	li	a4,128
@@ -125,6 +148,7 @@ Disassembly of section .text.lld_sleep_enter:
 
 00000030 <.L4>:
   30:	e981                	bnez	a1,40 <.L3>
+			30: R_RISCV_RVC_BRANCH	.L3
 
 00000032 <.LBB130>:
   32:	28000737          	lui	a4,0x28000
@@ -147,11 +171,16 @@ Disassembly of section .text.lld_sleep_wakeup:
 
 0000000c <.LBB170>:
    c:	000007b7          	lui	a5,0x0
+			c: R_RISCV_HI20	.LANCHOR0
+			c: R_RISCV_RELAX	*ABS*
   10:	00078793          	mv	a5,a5
+			10: R_RISCV_LO12_I	.LANCHOR0
+			10: R_RISCV_RELAX	*ABS*
 
 00000014 <.LBE170>:
   14:	0097c683          	lbu	a3,9(a5) # 9 <lld_sleep_wakeup+0x9>
   18:	c28d                	beqz	a3,3a <.L10>
+			18: R_RISCV_RVC_BRANCH	.L10
 
 0000001a <.LBB172>:
   1a:	47d4                	lw	a3,12(a5)
@@ -194,6 +223,7 @@ Disassembly of section .text.lld_sleep_wakeup:
 00000040 <.LBB194>:
   40:	0087c703          	lbu	a4,8(a5) # 28000008 <.LASF346+0x27ffe6f7>
   44:	cb25                	beqz	a4,b4 <.L12>
+			44: R_RISCV_RVC_BRANCH	.L12
 
 00000046 <.LBB196>:
   46:	43d8                	lw	a4,4(a5)
@@ -206,14 +236,22 @@ Disassembly of section .text.lld_sleep_wakeup:
 
 0000004e <.L13>:
   4e:	00000097          	auipc	ra,0x0
+			4e: R_RISCV_CALL	rwip_sleep_lpcycles_2_us
+			4e: R_RISCV_RELAX	*ABS*
   52:	000080e7          	jalr	ra # 4e <.L13>
 
 00000056 <.LVL35>:
   56:	000006b7          	lui	a3,0x0
+			56: R_RISCV_HI20	lld_evt_env
+			56: R_RISCV_RELAX	*ABS*
   5a:	00068793          	mv	a5,a3
+			5a: R_RISCV_LO12_I	lld_evt_env
+			5a: R_RISCV_RELAX	*ABS*
   5e:	02a7c783          	lbu	a5,42(a5)
   62:	27100713          	li	a4,625
   66:	00068693          	mv	a3,a3
+			66: R_RISCV_LO12_I	lld_evt_env
+			66: R_RISCV_RELAX	*ABS*
   6a:	953e                	add	a0,a0,a5
 
 0000006c <.LVL36>:
@@ -232,6 +270,7 @@ Disassembly of section .text.lld_sleep_wakeup:
 00000084 <.LVL39>:
   84:	4781                	li	a5,0
   86:	e509                	bnez	a0,90 <.L14>
+			86: R_RISCV_RVC_BRANCH	.L14
 
 00000088 <.LVL40>:
   88:	0705                	addi	a4,a4,1
@@ -271,12 +310,17 @@ Disassembly of section .text.lld_sleep_wakeup:
 000000b4 <.L12>:
   b4:	c3c8                	sw	a0,4(a5)
   b6:	bf61                	j	4e <.L13>
+			b6: R_RISCV_RVC_JUMP	.L13
 
 Disassembly of section .text.lld_sleep_wakeup_end:
 
 00000000 <lld_sleep_wakeup_end>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	.LANCHOR0
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a703          	lw	a4,0(a5) # 0 <lld_sleep_wakeup_end>
+			4: R_RISCV_LO12_I	.LANCHOR0
+			4: R_RISCV_RELAX	*ABS*
 
 00000008 <.LBB216>:
    8:	280007b7          	lui	a5,0x28000
@@ -289,42 +333,66 @@ Disassembly of section .text.lld_sleep_set_sw_wakeup:
 
 00000000 <lld_sleep_set_sw_wakeup>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	.LANCHOR0+0x8
+			0: R_RISCV_RELAX	*ABS*+0x8
    4:	00a78423          	sb	a0,8(a5) # 8 <lld_sleep_set_sw_wakeup+0x8>
+			4: R_RISCV_LO12_S	.LANCHOR0+0x8
+			4: R_RISCV_RELAX	*ABS*+0x8
    8:	8082                	ret
 
 Disassembly of section .text.lld_sleep_is_sw_wakeup:
 
 00000000 <lld_sleep_is_sw_wakeup>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	.LANCHOR0+0x8
+			0: R_RISCV_RELAX	*ABS*+0x8
    4:	0087c503          	lbu	a0,8(a5) # 8 <lld_sleep_is_sw_wakeup+0x8>
+			4: R_RISCV_LO12_I	.LANCHOR0+0x8
+			4: R_RISCV_RELAX	*ABS*+0x8
    8:	8082                	ret
 
 Disassembly of section .text.lld_sleep_set_last_sleep_dur:
 
 00000000 <lld_sleep_set_last_sleep_dur>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	.LANCHOR0+0x4
+			0: R_RISCV_RELAX	*ABS*+0x4
    4:	00a7a223          	sw	a0,4(a5) # 4 <lld_sleep_set_last_sleep_dur+0x4>
+			4: R_RISCV_LO12_S	.LANCHOR0+0x4
+			4: R_RISCV_RELAX	*ABS*+0x4
    8:	8082                	ret
 
 Disassembly of section .text.lld_sleep_get_last_sleep_dur:
 
 00000000 <lld_sleep_get_last_sleep_dur>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	.LANCHOR0+0x4
+			0: R_RISCV_RELAX	*ABS*+0x4
    4:	0047a503          	lw	a0,4(a5) # 4 <lld_sleep_get_last_sleep_dur+0x4>
+			4: R_RISCV_LO12_I	.LANCHOR0+0x4
+			4: R_RISCV_RELAX	*ABS*+0x4
    8:	8082                	ret
 
 Disassembly of section .text.lld_sleep_set_pds_reset:
 
 00000000 <lld_sleep_set_pds_reset>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	.LANCHOR0+0x9
+			0: R_RISCV_RELAX	*ABS*+0x9
    4:	00a784a3          	sb	a0,9(a5) # 9 <lld_sleep_set_pds_reset+0x9>
+			4: R_RISCV_LO12_S	.LANCHOR0+0x9
+			4: R_RISCV_RELAX	*ABS*+0x9
    8:	8082                	ret
 
 Disassembly of section .text.lld_sleep_get_pds_reset:
 
 00000000 <lld_sleep_get_pds_reset>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	.LANCHOR0+0x9
+			0: R_RISCV_RELAX	*ABS*+0x9
    4:	0097c503          	lbu	a0,9(a5) # 9 <lld_sleep_get_pds_reset+0x9>
+			4: R_RISCV_LO12_I	.LANCHOR0+0x9
+			4: R_RISCV_RELAX	*ABS*+0x9
    8:	8082                	ret
 
 Disassembly of section .text.lld_sleep_set_current_time:
@@ -342,13 +410,18 @@ Disassembly of section .text.lld_sleep_set_current_time:
 
 00000010 <.LBE223>:
   10:	fe06cfe3          	bltz	a3,e <.L27>
+			10: R_RISCV_BRANCH	.L27
 
 00000014 <.LBB224>:
   14:	4f54                	lw	a3,28(a4)
 
 00000016 <.LBE224>:
   16:	000007b7          	lui	a5,0x0
+			16: R_RISCV_HI20	.LANCHOR0
+			16: R_RISCV_RELAX	*ABS*
   1a:	00078793          	mv	a5,a5
+			1a: R_RISCV_LO12_I	.LANCHOR0
+			1a: R_RISCV_RELAX	*ABS*
   1e:	c7d4                	sw	a3,12(a5)
 
 00000020 <.LBB226>:

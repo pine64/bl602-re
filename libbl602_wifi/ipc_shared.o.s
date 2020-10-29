@@ -1,3 +1,3 @@
 
-ipc_shared.o:     file format elf32-littleriscv
+libbl602_wifi/ipc_shared.o:     file format elf32-littleriscv
 

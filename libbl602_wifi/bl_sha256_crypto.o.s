@@ -1,5 +1,5 @@
 
-bl_sha256_crypto.o:     file format elf32-littleriscv
+libbl602_wifi/bl_sha256_crypto.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.bl_sha256_crypto_kdf:
@@ -46,11 +46,14 @@ Disassembly of section .text.bl_sha256_crypto_kdf:
 0000004c <.L2>:
   4c:	01e15783          	lhu	a5,30(sp)
   50:	02f47a63          	bgeu	s0,a5,84 <.L3>
+			50: R_RISCV_BRANCH	.L3
   54:	00e15603          	lhu	a2,14(sp)
   58:	85ca                	mv	a1,s2
   5a:	8542                	mv	a0,a6
   5c:	820d                	srli	a2,a2,0x3
   5e:	00000097          	auipc	ra,0x0
+			5e: R_RISCV_CALL	memcpy
+			5e: R_RISCV_RELAX	*ABS*
   62:	000080e7          	jalr	ra # 5e <.L2+0x12>
 
 00000066 <.LVL5>:
@@ -101,6 +104,8 @@ Disassembly of section .text.bl_sha256_crypto_kdf:
   9e:	d66e                	sw	s11,44(sp)
   a0:	de56                	sw	s5,60(sp)
   a2:	00000097          	auipc	ra,0x0
+			a2: R_RISCV_CALL	hmac_sha256_vector
+			a2: R_RISCV_RELAX	*ABS*
   a6:	000080e7          	jalr	ra # a2 <.L3+0x1e>
 
 000000aa <.LVL14>:
@@ -110,3 +115,4 @@ Disassembly of section .text.bl_sha256_crypto_kdf:
   b4:	0785                	addi	a5,a5,1
   b6:	00f11f23          	sh	a5,30(sp)
   ba:	bf49                	j	4c <.L2>
+			ba: R_RISCV_RVC_JUMP	.L2

@@ -1,38 +1,56 @@
 
-llc.o:     file format elf32-littleriscv
+libblecontroller/llc.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.llc_init:
 
 00000000 <llc_init>:
    0:	000005b7          	lui	a1,0x0
+			0: R_RISCV_HI20	.LANCHOR0
+			0: R_RISCV_RELAX	*ABS*
    4:	1141                	addi	sp,sp,-16
    6:	00058593          	mv	a1,a1
+			6: R_RISCV_LO12_I	.LANCHOR0
+			6: R_RISCV_RELAX	*ABS*
    a:	4505                	li	a0,1
    c:	c606                	sw	ra,12(sp)
    e:	00000097          	auipc	ra,0x0
+			e: R_RISCV_CALL	ble_ke_task_create
+			e: R_RISCV_RELAX	*ABS*
   12:	000080e7          	jalr	ra # e <llc_init+0xe>
 
 00000016 <.LVL0>:
   16:	07f00593          	li	a1,127
   1a:	4505                	li	a0,1
   1c:	00000097          	auipc	ra,0x0
+			1c: R_RISCV_CALL	ble_ke_state_set
+			1c: R_RISCV_RELAX	*ABS*
   20:	000080e7          	jalr	ra # 1c <.LVL0+0x6>
 
 00000024 <.LVL1>:
   24:	07f00593          	li	a1,127
   28:	10100513          	li	a0,257
   2c:	00000097          	auipc	ra,0x0
+			2c: R_RISCV_CALL	ble_ke_state_set
+			2c: R_RISCV_RELAX	*ABS*
   30:	000080e7          	jalr	ra # 2c <.LVL1+0x8>
 
 00000034 <.LVL2>:
   34:	000007b7          	lui	a5,0x0
+			34: R_RISCV_HI20	ble_memset_ptr
+			34: R_RISCV_RELAX	*ABS*
   38:	40b2                	lw	ra,12(sp)
   3a:	0007a303          	lw	t1,0(a5) # 0 <llc_init>
+			3a: R_RISCV_LO12_I	ble_memset_ptr
+			3a: R_RISCV_RELAX	*ABS*
   3e:	00000537          	lui	a0,0x0
+			3e: R_RISCV_HI20	llc_env
+			3e: R_RISCV_RELAX	*ABS*
   42:	4621                	li	a2,8
   44:	4581                	li	a1,0
   46:	00050513          	mv	a0,a0
+			46: R_RISCV_LO12_I	llc_env
+			46: R_RISCV_RELAX	*ABS*
   4a:	0141                	addi	sp,sp,16
   4c:	8302                	jr	t1
 
@@ -56,16 +74,25 @@ Disassembly of section .text.llc_stop:
   1c:	c84a                	sw	s2,16(sp)
   1e:	c256                	sw	s5,4(sp)
   20:	00000437          	lui	s0,0x0
+			20: R_RISCV_HI20	llc_env
+			20: R_RISCV_RELAX	*ABS*
   24:	00000097          	auipc	ra,0x0
+			24: R_RISCV_CALL	ble_ke_state_set
+			24: R_RISCV_RELAX	*ABS*
   28:	000080e7          	jalr	ra # 24 <.LVL5+0x1c>
 
 0000002c <.LVL6>:
   2c:	00040793          	mv	a5,s0
+			2c: R_RISCV_LO12_I	llc_env
+			2c: R_RISCV_RELAX	*ABS*
   30:	00299a13          	slli	s4,s3,0x2
   34:	97d2                	add	a5,a5,s4
   36:	4398                	lw	a4,0(a5)
   38:	cb29                	beqz	a4,8a <.L3>
+			38: R_RISCV_RVC_BRANCH	.L3
   3a:	00040413          	mv	s0,s0
+			3a: R_RISCV_LO12_I	llc_env
+			3a: R_RISCV_RELAX	*ABS*
   3e:	4901                	li	s2,0
 
 00000040 <.LBB120>:
@@ -78,10 +105,13 @@ Disassembly of section .text.llc_stop:
   4a:	97ba                	add	a5,a5,a4
   4c:	4388                	lw	a0,0(a5)
   4e:	c511                	beqz	a0,5a <.L5>
+			4e: R_RISCV_RVC_BRANCH	.L5
 
 00000050 <.LBB121>:
   50:	1551                	addi	a0,a0,-12
   52:	00000097          	auipc	ra,0x0
+			52: R_RISCV_CALL	ble_ke_msg_free
+			52: R_RISCV_RELAX	*ABS*
   56:	000080e7          	jalr	ra # 52 <.LBB121+0x2>
 
 0000005a <.L5>:
@@ -89,11 +119,14 @@ Disassembly of section .text.llc_stop:
 
 0000005c <.LVL10>:
   5c:	ff5914e3          	bne	s2,s5,44 <.L6>
+			5c: R_RISCV_BRANCH	.L6
 
 00000060 <.LBE120>:
   60:	9452                	add	s0,s0,s4
   62:	4008                	lw	a0,0(s0)
   64:	00000097          	auipc	ra,0x0
+			64: R_RISCV_CALL	ble_ke_free
+			64: R_RISCV_RELAX	*ABS*
   68:	000080e7          	jalr	ra # 64 <.LBE120+0x4>
 
 0000006c <.LVL11>:
@@ -108,6 +141,8 @@ Disassembly of section .text.llc_stop:
   7e:	49b2                	lw	s3,12(sp)
   80:	6105                	addi	sp,sp,32
   82:	00000317          	auipc	t1,0x0
+			82: R_RISCV_CALL	llm_util_bl_rem
+			82: R_RISCV_RELAX	*ABS*
   86:	00030067          	jr	t1 # 82 <.LVL11+0x16>
 
 0000008a <.L3>:
@@ -128,27 +163,37 @@ Disassembly of section .text.llc_reset:
    2:	4505                	li	a0,1
    4:	c606                	sw	ra,12(sp)
    6:	00000097          	auipc	ra,0x0
+			6: R_RISCV_CALL	ble_ke_state_get
+			6: R_RISCV_RELAX	*ABS*
    a:	000080e7          	jalr	ra # 6 <llc_reset+0x6>
 
 0000000e <.LVL14>:
    e:	07f00793          	li	a5,127
   12:	00f50763          	beq	a0,a5,20 <.L13>
+			12: R_RISCV_BRANCH	.L13
   16:	4501                	li	a0,0
   18:	00000097          	auipc	ra,0x0
+			18: R_RISCV_CALL	llc_stop
+			18: R_RISCV_RELAX	*ABS*
   1c:	000080e7          	jalr	ra # 18 <.LVL14+0xa>
 
 00000020 <.L13>:
   20:	10100513          	li	a0,257
   24:	00000097          	auipc	ra,0x0
+			24: R_RISCV_CALL	ble_ke_state_get
+			24: R_RISCV_RELAX	*ABS*
   28:	000080e7          	jalr	ra # 24 <.L13+0x4>
 
 0000002c <.LVL16>:
   2c:	07f00793          	li	a5,127
   30:	00f50963          	beq	a0,a5,42 <.L12>
+			30: R_RISCV_BRANCH	.L12
   34:	40b2                	lw	ra,12(sp)
   36:	4505                	li	a0,1
   38:	0141                	addi	sp,sp,16
   3a:	00000317          	auipc	t1,0x0
+			3a: R_RISCV_CALL	llc_stop
+			3a: R_RISCV_RELAX	*ABS*
   3e:	00030067          	jr	t1 # 3a <.LVL16+0xe>
 
 00000042 <.L12>:
@@ -181,6 +226,8 @@ Disassembly of section .text.llc_discon_event_complete_send:
   16:	80350513          	addi	a0,a0,-2045 # 803 <.LASF240+0x1>
   1a:	c606                	sw	ra,12(sp)
   1c:	00000097          	auipc	ra,0x0
+			1c: R_RISCV_CALL	ble_ke_msg_alloc
+			1c: R_RISCV_RELAX	*ABS*
   20:	000080e7          	jalr	ra # 1c <.LVL22+0x6>
 
 00000024 <.LVL23>:
@@ -193,6 +240,8 @@ Disassembly of section .text.llc_discon_event_complete_send:
   36:	4902                	lw	s2,0(sp)
   38:	0141                	addi	sp,sp,16
   3a:	00000317          	auipc	t1,0x0
+			3a: R_RISCV_CALL	hci_send_2_host
+			3a: R_RISCV_RELAX	*ABS*
   3e:	00030067          	jr	t1 # 3a <.LVL23+0x16>
 
 Disassembly of section .text.llc_le_con_cmp_evt_send:
@@ -213,18 +262,24 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
   14:	89ae                	mv	s3,a1
   16:	84b2                	mv	s1,a2
   18:	00000097          	auipc	ra,0x0
+			18: R_RISCV_CALL	llm_util_check_evt_mask
+			18: R_RISCV_RELAX	*ABS*
   1c:	000080e7          	jalr	ra # 18 <.LVL27+0x10>
 
 00000020 <.LVL28>:
   20:	c57d                	beqz	a0,10e <.L19>
+			20: R_RISCV_RVC_BRANCH	.L19
 
 00000022 <.L22>:
   22:	4525                	li	a0,9
   24:	00000097          	auipc	ra,0x0
+			24: R_RISCV_CALL	llm_util_check_evt_mask
+			24: R_RISCV_RELAX	*ABS*
   28:	000080e7          	jalr	ra # 24 <.L22+0x2>
 
 0000002c <.LVL29>:
   2c:	16051663          	bnez	a0,198 <.L20>
+			2c: R_RISCV_BRANCH	.L20
 
 00000030 <.LBB123>:
   30:	6505                	lui	a0,0x1
@@ -233,6 +288,8 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
   36:	85ce                	mv	a1,s3
   38:	80450513          	addi	a0,a0,-2044 # 804 <.LASF240+0x2>
   3c:	00000097          	auipc	ra,0x0
+			3c: R_RISCV_CALL	ble_ke_msg_alloc
+			3c: R_RISCV_RELAX	*ABS*
   40:	000080e7          	jalr	ra # 3c <.LBB123+0xc>
 
 00000044 <.LVL30>:
@@ -244,10 +301,13 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
 
 00000054 <.LBB143>:
   54:	10091663          	bnez	s2,160 <.L24>
+			54: R_RISCV_BRANCH	.L24
 
 00000058 <.LBB124>:
   58:	854e                	mv	a0,s3
   5a:	00000097          	auipc	ra,0x0
+			5a: R_RISCV_CALL	lld_get_mode
+			5a: R_RISCV_RELAX	*ABS*
   5e:	000080e7          	jalr	ra # 5a <.LBB124+0x2>
 
 00000062 <.LVL33>:
@@ -257,7 +317,10 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
   6c:	0064d783          	lhu	a5,6(s1)
   70:	00640913          	addi	s2,s0,6
   74:	000009b7          	lui	s3,0x0
+			74: R_RISCV_HI20	ble_memcpy_ptr
+			74: R_RISCV_RELAX	*ABS*
   78:	c3f1                	beqz	a5,13c <.L25>
+			78: R_RISCV_RVC_BRANCH	.L25
 
 0000007a <.LBB125>:
   7a:	03400713          	li	a4,52
@@ -282,8 +345,10 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
 0000009e <.LBE129>:
   9e:	8b05                	andi	a4,a4,1
   a0:	cf51                	beqz	a4,13c <.L25>
+			a0: R_RISCV_RVC_BRANCH	.L25
   a2:	0114c703          	lbu	a4,17(s1)
   a6:	c711                	beqz	a4,b2 <.L26>
+			a6: R_RISCV_RVC_BRANCH	.L26
 
 000000a8 <.LBB130>:
   a8:	0007d783          	lhu	a5,0(a5)
@@ -294,6 +359,7 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
 000000ae <.LBE130>:
   ae:	8b85                	andi	a5,a5,1
   b0:	cfb5                	beqz	a5,12c <.L27>
+			b0: R_RISCV_RVC_BRANCH	.L27
 
 000000b2 <.L26>:
   b2:	4785                	li	a5,1
@@ -304,6 +370,8 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
 
 000000bc <.LBB136>:
   bc:	0009a703          	lw	a4,0(s3) # 0 <llc_le_con_cmp_evt_send>
+			bc: R_RISCV_LO12_I	ble_memcpy_ptr
+			bc: R_RISCV_RELAX	*ABS*
   c0:	280085b7          	lui	a1,0x28008
 
 000000c4 <.LBE136>:
@@ -332,6 +400,7 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
   e6:	00f41823          	sh	a5,16(s0)
   ea:	00444783          	lbu	a5,4(s0)
   ee:	e7a5                	bnez	a5,156 <.L29>
+			ee: R_RISCV_RVC_BRANCH	.L29
   f0:	00040923          	sb	zero,18(s0)
 
 000000f4 <.L41>:
@@ -349,15 +418,20 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
 
 00000106 <.LBB170>:
  106:	00000317          	auipc	t1,0x0
+			106: R_RISCV_CALL	hci_send_2_host
+			106: R_RISCV_RELAX	*ABS*
  10a:	00030067          	jr	t1 # 106 <.LBB170>
 
 0000010e <.L19>:
  10e:	4525                	li	a0,9
  110:	00000097          	auipc	ra,0x0
+			110: R_RISCV_CALL	llm_util_check_evt_mask
+			110: R_RISCV_RELAX	*ABS*
  114:	000080e7          	jalr	ra # 110 <.L19+0x2>
 
 00000118 <.LVL47>:
  118:	f509                	bnez	a0,22 <.L22>
+			118: R_RISCV_RVC_BRANCH	.L22
  11a:	40f2                	lw	ra,28(sp)
  11c:	4462                	lw	s0,24(sp)
  11e:	44d2                	lw	s1,20(sp)
@@ -372,7 +446,11 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
 
 0000012c <.L27>:
  12c:	000007b7          	lui	a5,0x0
+			12c: R_RISCV_HI20	ble_memset_ptr
+			12c: R_RISCV_RELAX	*ABS*
  130:	0007a783          	lw	a5,0(a5) # 0 <llc_le_con_cmp_evt_send>
+			130: R_RISCV_LO12_I	ble_memset_ptr
+			130: R_RISCV_RELAX	*ABS*
  134:	4619                	li	a2,6
  136:	4581                	li	a1,0
  138:	854a                	mv	a0,s2
@@ -385,27 +463,36 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
  146:	8b85                	andi	a5,a5,1
  148:	00f402a3          	sb	a5,5(s0)
  14c:	0009a783          	lw	a5,0(s3)
+			14c: R_RISCV_LO12_I	ble_memcpy_ptr
+			14c: R_RISCV_RELAX	*ABS*
  150:	854a                	mv	a0,s2
  152:	9782                	jalr	a5
 
 00000154 <.LVL51>:
  154:	bfbd                	j	d2 <.L28>
+			154: R_RISCV_RVC_JUMP	.L28
 
 00000156 <.L29>:
  156:	0104c783          	lbu	a5,16(s1)
  15a:	00f40923          	sb	a5,18(s0)
  15e:	bf59                	j	f4 <.L41>
+			15e: R_RISCV_RVC_JUMP	.L41
 
 00000160 <.L24>:
  160:	03c00713          	li	a4,60
  164:	f8e918e3          	bne	s2,a4,f4 <.L41>
+			164: R_RISCV_BRANCH	.L41
  168:	00f50223          	sb	a5,4(a0)
  16c:	00e4c783          	lbu	a5,14(s1)
  170:	00051123          	sh	zero,2(a0)
  174:	00051623          	sh	zero,12(a0)
  178:	00f502a3          	sb	a5,5(a0)
  17c:	000007b7          	lui	a5,0x0
+			17c: R_RISCV_HI20	ble_memcpy_ptr
+			17c: R_RISCV_RELAX	*ABS*
  180:	0007a783          	lw	a5,0(a5) # 0 <llc_le_con_cmp_evt_send>
+			180: R_RISCV_LO12_I	ble_memcpy_ptr
+			180: R_RISCV_RELAX	*ABS*
  184:	00051723          	sh	zero,14(a0)
  188:	00051823          	sh	zero,16(a0)
  18c:	4619                	li	a2,6
@@ -415,6 +502,7 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
 00000194 <.L59>:
  194:	9782                	jalr	a5
  196:	bfb9                	j	f4 <.L41>
+			196: R_RISCV_RVC_JUMP	.L41
 
 00000198 <.L20>:
  198:	6505                	lui	a0,0x1
@@ -423,6 +511,8 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
  1a0:	85ce                	mv	a1,s3
  1a2:	80450513          	addi	a0,a0,-2044 # 804 <.LASF240+0x2>
  1a6:	00000097          	auipc	ra,0x0
+			1a6: R_RISCV_CALL	ble_ke_msg_alloc
+			1a6: R_RISCV_RELAX	*ABS*
  1aa:	000080e7          	jalr	ra # 1a6 <.L20+0xe>
 
 000001ae <.LVL56>:
@@ -434,8 +524,11 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
 
 000001be <.LBB173>:
  1be:	12091c63          	bnez	s2,2f6 <.L31>
+			1be: R_RISCV_BRANCH	.L31
  1c2:	854e                	mv	a0,s3
  1c4:	00000097          	auipc	ra,0x0
+			1c4: R_RISCV_CALL	lld_get_mode
+			1c4: R_RISCV_RELAX	*ABS*
  1c8:	000080e7          	jalr	ra # 1c4 <.LBB173+0x6>
 
 000001cc <.LVL58>:
@@ -446,7 +539,10 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
  1da:	01240a93          	addi	s5,s0,18
  1de:	00c40993          	addi	s3,s0,12
  1e2:	00000a37          	lui	s4,0x0
+			1e2: R_RISCV_HI20	ble_memcpy_ptr
+			1e2: R_RISCV_RELAX	*ABS*
  1e6:	c5ed                	beqz	a1,2d0 <.L32>
+			1e6: R_RISCV_RVC_BRANCH	.L32
 
 000001e8 <.LBB148>:
  1e8:	03400793          	li	a5,52
@@ -467,8 +563,10 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
 0000020c <.LBE152>:
  20c:	8b85                	andi	a5,a5,1
  20e:	cfb1                	beqz	a5,26a <.L33>
+			20e: R_RISCV_RVC_BRANCH	.L33
  210:	0114c783          	lbu	a5,17(s1)
  214:	c791                	beqz	a5,220 <.L34>
+			214: R_RISCV_RVC_BRANCH	.L34
 
 00000216 <.LBB153>:
  216:	00095783          	lhu	a5,0(s2)
@@ -479,6 +577,7 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
 0000021c <.LBE153>:
  21c:	8b85                	andi	a5,a5,1
  21e:	c7b1                	beqz	a5,26a <.L33>
+			21e: R_RISCV_RVC_BRANCH	.L33
 
 00000220 <.L34>:
  220:	05c9                	addi	a1,a1,18
@@ -488,6 +587,8 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
 
 00000224 <.LVL65>:
  224:	000a2783          	lw	a5,0(s4) # 0 <llc_le_con_cmp_evt_send>
+			224: R_RISCV_LO12_I	ble_memcpy_ptr
+			224: R_RISCV_RELAX	*ABS*
  228:	81c1                	srli	a1,a1,0x10
  22a:	28008737          	lui	a4,0x28008
  22e:	4619                	li	a2,6
@@ -504,9 +605,11 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
 0000023c <.LBE159>:
  23c:	8b85                	andi	a5,a5,1
  23e:	cf89                	beqz	a5,258 <.L37>
+			23e: R_RISCV_RVC_BRANCH	.L37
  240:	00444703          	lbu	a4,4(s0)
  244:	4785                	li	a5,1
  246:	02f71963          	bne	a4,a5,278 <.L38>
+			246: R_RISCV_BRANCH	.L38
 
 0000024a <.LBB161>:
  24a:	280087b7          	lui	a5,0x28008
@@ -518,10 +621,15 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
 00000254 <.LBE161>:
  254:	8b85                	andi	a5,a5,1
  256:	e38d                	bnez	a5,278 <.L38>
+			256: R_RISCV_RVC_BRANCH	.L38
 
 00000258 <.L37>:
  258:	000007b7          	lui	a5,0x0
+			258: R_RISCV_HI20	ble_memset_ptr
+			258: R_RISCV_RELAX	*ABS*
  25c:	0007a783          	lw	a5,0(a5) # 0 <llc_le_con_cmp_evt_send>
+			25c: R_RISCV_LO12_I	ble_memset_ptr
+			25c: R_RISCV_RELAX	*ABS*
  260:	4619                	li	a2,6
  262:	4581                	li	a1,0
  264:	854e                	mv	a0,s3
@@ -529,21 +637,29 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
 00000266 <.L58>:
  266:	9782                	jalr	a5
  268:	a035                	j	294 <.L39>
+			268: R_RISCV_RVC_JUMP	.L39
 
 0000026a <.L33>:
  26a:	000007b7          	lui	a5,0x0
+			26a: R_RISCV_HI20	ble_memset_ptr
+			26a: R_RISCV_RELAX	*ABS*
  26e:	0007a783          	lw	a5,0(a5) # 0 <llc_le_con_cmp_evt_send>
+			26e: R_RISCV_LO12_I	ble_memset_ptr
+			26e: R_RISCV_RELAX	*ABS*
  272:	4619                	li	a2,6
  274:	4581                	li	a1,0
 
 00000276 <.LVL73>:
  276:	bf75                	j	232 <.L57>
+			276: R_RISCV_RVC_JUMP	.L57
 
 00000278 <.L38>:
  278:	0064d783          	lhu	a5,6(s1)
 
 0000027c <.LBB167>:
  27c:	000a2703          	lw	a4,0(s4)
+			27c: R_RISCV_LO12_I	ble_memcpy_ptr
+			27c: R_RISCV_RELAX	*ABS*
  280:	280085b7          	lui	a1,0x28008
 
 00000284 <.LBE167>:
@@ -563,6 +679,8 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
  29a:	00848593          	addi	a1,s1,8
  29e:	00f402a3          	sb	a5,5(s0)
  2a2:	000a2783          	lw	a5,0(s4)
+			2a2: R_RISCV_LO12_I	ble_memcpy_ptr
+			2a2: R_RISCV_RELAX	*ABS*
  2a6:	00640513          	addi	a0,s0,6
  2aa:	9782                	jalr	a5
 
@@ -581,12 +699,18 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
  2c0:	00f41e23          	sh	a5,28(s0)
  2c4:	00444783          	lbu	a5,4(s0)
  2c8:	e395                	bnez	a5,2ec <.L40>
+			2c8: R_RISCV_RVC_BRANCH	.L40
  2ca:	00040f23          	sb	zero,30(s0)
  2ce:	b51d                	j	f4 <.L41>
+			2ce: R_RISCV_RVC_JUMP	.L41
 
 000002d0 <.L32>:
  2d0:	00000937          	lui	s2,0x0
+			2d0: R_RISCV_HI20	ble_memset_ptr
+			2d0: R_RISCV_RELAX	*ABS*
  2d4:	00092783          	lw	a5,0(s2) # 0 <llc_le_con_cmp_evt_send>
+			2d4: R_RISCV_LO12_I	ble_memset_ptr
+			2d4: R_RISCV_RELAX	*ABS*
  2d8:	4619                	li	a2,6
  2da:	4581                	li	a1,0
  2dc:	854e                	mv	a0,s3
@@ -594,19 +718,24 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
 
 000002e0 <.LVL80>:
  2e0:	00092783          	lw	a5,0(s2)
+			2e0: R_RISCV_LO12_I	ble_memset_ptr
+			2e0: R_RISCV_RELAX	*ABS*
  2e4:	4619                	li	a2,6
  2e6:	4581                	li	a1,0
  2e8:	8556                	mv	a0,s5
  2ea:	bfb5                	j	266 <.L58>
+			2ea: R_RISCV_RVC_JUMP	.L58
 
 000002ec <.L40>:
  2ec:	0104c783          	lbu	a5,16(s1)
  2f0:	00f40f23          	sb	a5,30(s0)
  2f4:	b501                	j	f4 <.L41>
+			2f4: R_RISCV_RVC_JUMP	.L41
 
 000002f6 <.L31>:
  2f6:	03c00793          	li	a5,60
  2fa:	def91de3          	bne	s2,a5,f4 <.L41>
+			2fa: R_RISCV_BRANCH	.L41
  2fe:	4785                	li	a5,1
  300:	00f50223          	sb	a5,4(a0)
  304:	00e4c783          	lbu	a5,14(s1)
@@ -614,7 +743,11 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
  30c:	00848593          	addi	a1,s1,8
  310:	00f502a3          	sb	a5,5(a0)
  314:	000007b7          	lui	a5,0x0
+			314: R_RISCV_HI20	ble_memcpy_ptr
+			314: R_RISCV_RELAX	*ABS*
  318:	0007a783          	lw	a5,0(a5) # 0 <llc_le_con_cmp_evt_send>
+			318: R_RISCV_LO12_I	ble_memcpy_ptr
+			318: R_RISCV_RELAX	*ABS*
  31c:	00051c23          	sh	zero,24(a0)
  320:	00051d23          	sh	zero,26(a0)
  324:	00051e23          	sh	zero,28(a0)
@@ -624,9 +757,13 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
 
 0000032e <.LVL81>:
  32e:	000004b7          	lui	s1,0x0
+			32e: R_RISCV_HI20	ble_memset_ptr
+			32e: R_RISCV_RELAX	*ABS*
 
 00000332 <.LVL82>:
  332:	0004a783          	lw	a5,0(s1) # 0 <llc_le_con_cmp_evt_send>
+			332: R_RISCV_LO12_I	ble_memset_ptr
+			332: R_RISCV_RELAX	*ABS*
  336:	4619                	li	a2,6
  338:	4581                	li	a1,0
  33a:	01240513          	addi	a0,s0,18
@@ -634,10 +771,13 @@ Disassembly of section .text.llc_le_con_cmp_evt_send:
 
 00000340 <.LVL83>:
  340:	0004a783          	lw	a5,0(s1)
+			340: R_RISCV_LO12_I	ble_memset_ptr
+			340: R_RISCV_RELAX	*ABS*
  344:	4619                	li	a2,6
  346:	4581                	li	a1,0
  348:	00c40513          	addi	a0,s0,12
  34c:	b5a1                	j	194 <.L59>
+			34c: R_RISCV_RVC_JUMP	.L59
 
 Disassembly of section .text.llc_le_ch_sel_algo_evt_send:
 
@@ -652,10 +792,13 @@ Disassembly of section .text.llc_le_ch_sel_algo_evt_send:
    a:	c606                	sw	ra,12(sp)
    c:	842e                	mv	s0,a1
    e:	00000097          	auipc	ra,0x0
+			e: R_RISCV_CALL	llm_util_check_evt_mask
+			e: R_RISCV_RELAX	*ABS*
   12:	000080e7          	jalr	ra # e <.LVL85+0x6>
 
 00000016 <.LVL86>:
   16:	c915                	beqz	a0,4a <.L60>
+			16: R_RISCV_RVC_BRANCH	.L60
 
 00000018 <.LBB180>:
   18:	6505                	lui	a0,0x1
@@ -664,6 +807,8 @@ Disassembly of section .text.llc_le_ch_sel_algo_evt_send:
   1e:	4601                	li	a2,0
   20:	80450513          	addi	a0,a0,-2044 # 804 <.LASF240+0x2>
   24:	00000097          	auipc	ra,0x0
+			24: R_RISCV_CALL	ble_ke_msg_alloc
+			24: R_RISCV_RELAX	*ABS*
   28:	000080e7          	jalr	ra # 24 <.LBB180+0xc>
 
 0000002c <.LVL88>:
@@ -686,6 +831,8 @@ Disassembly of section .text.llc_le_ch_sel_algo_evt_send:
 
 00000042 <.LBB185>:
   42:	00000317          	auipc	t1,0x0
+			42: R_RISCV_CALL	hci_send_2_host
+			42: R_RISCV_RELAX	*ABS*
   46:	00030067          	jr	t1 # 42 <.LBB185>
 
 0000004a <.L60>:
@@ -713,7 +860,11 @@ Disassembly of section .text.llc_start:
   18:	c06a                	sw	s10,0(sp)
   1a:	0745da03          	lhu	s4,116(a1) # 28008074 <.LASF808+0x28003e39>
   1e:	000004b7          	lui	s1,0x0
+			1e: R_RISCV_HI20	llc_env
+			1e: R_RISCV_RELAX	*ABS*
   22:	00048413          	mv	s0,s1
+			22: R_RISCV_LO12_I	llc_env
+			22: R_RISCV_RELAX	*ABS*
   26:	002a1c13          	slli	s8,s4,0x2
   2a:	9462                	add	s0,s0,s8
   2c:	008a1913          	slli	s2,s4,0x8
@@ -729,7 +880,10 @@ Disassembly of section .text.llc_start:
 
 00000044 <.LVL95>:
   44:	00048493          	mv	s1,s1
+			44: R_RISCV_LO12_I	llc_env
+			44: R_RISCV_RELAX	*ABS*
   48:	eb89                	bnez	a5,5a <.L64>
+			48: R_RISCV_RVC_BRANCH	.L64
   4a:	4581                	li	a1,0
 
 0000004c <.LVL96>:
@@ -737,6 +891,8 @@ Disassembly of section .text.llc_start:
 
 00000050 <.LVL97>:
   50:	00000097          	auipc	ra,0x0
+			50: R_RISCV_CALL	ble_ke_malloc
+			50: R_RISCV_RELAX	*ABS*
   54:	000080e7          	jalr	ra # 50 <.LVL97>
 
 00000058 <.LVL98>:
@@ -748,7 +904,11 @@ Disassembly of section .text.llc_start:
 
 00000060 <.LVL99>:
   60:	00000d37          	lui	s10,0x0
+			60: R_RISCV_HI20	ble_memset_ptr
+			60: R_RISCV_RELAX	*ABS*
   64:	000d2783          	lw	a5,0(s10) # 0 <llc_start>
+			64: R_RISCV_LO12_I	ble_memset_ptr
+			64: R_RISCV_RELAX	*ABS*
   68:	4c85                	li	s9,1
   6a:	4619                	li	a2,6
   6c:	4581                	li	a1,0
@@ -759,20 +919,31 @@ Disassembly of section .text.llc_start:
 00000078 <.LVL100>:
   78:	05e40513          	addi	a0,s0,94
   7c:	00000097          	auipc	ra,0x0
+			7c: R_RISCV_CALL	llm_util_get_channel_map
+			7c: R_RISCV_RELAX	*ABS*
   80:	000080e7          	jalr	ra # 7c <.LVL100+0x4>
 
 00000084 <.LVL101>:
   84:	06340513          	addi	a0,s0,99
   88:	00000097          	auipc	ra,0x0
+			88: R_RISCV_CALL	llm_util_get_channel_map
+			88: R_RISCV_RELAX	*ABS*
   8c:	000080e7          	jalr	ra # 88 <.LVL101+0x4>
 
 00000090 <.LVL102>:
   90:	07bb4703          	lbu	a4,123(s6)
   94:	000009b7          	lui	s3,0x0
+			94: R_RISCV_HI20	llm_le_env
+			94: R_RISCV_RELAX	*ABS*
   98:	478d                	li	a5,3
   9a:	00098993          	mv	s3,s3
+			9a: R_RISCV_LO12_I	llm_le_env
+			9a: R_RISCV_RELAX	*ABS*
   9e:	02f71d63          	bne	a4,a5,d8 <.L65>
+			9e: R_RISCV_BRANCH	.L65
   a2:	000d2783          	lw	a5,0(s10)
+			a2: R_RISCV_LO12_I	ble_memset_ptr
+			a2: R_RISCV_RELAX	*ABS*
   a6:	02800613          	li	a2,40
   aa:	4581                	li	a1,0
   ac:	01440513          	addi	a0,s0,20
@@ -787,11 +958,14 @@ Disassembly of section .text.llc_start:
 000000c0 <.LBB188>:
   c0:	10500513          	li	a0,261
   c4:	00000097          	auipc	ra,0x0
+			c4: R_RISCV_CALL	ble_ke_timer_set
+			c4: R_RISCV_RELAX	*ABS*
   c8:	000080e7          	jalr	ra # c4 <.LBB188+0x4>
 
 000000cc <.LVL104>:
   cc:	05eb5783          	lhu	a5,94(s6)
   d0:	12fcf263          	bgeu	s9,a5,1f4 <.L66>
+			d0: R_RISCV_BRANCH	.L66
   d4:	03940ca3          	sb	s9,57(s0)
 
 000000d8 <.L65>:
@@ -801,6 +975,8 @@ Disassembly of section .text.llc_start:
   e2:	10100513          	li	a0,257
   e6:	04c41a23          	sh	a2,84(s0)
   ea:	00000097          	auipc	ra,0x0
+			ea: R_RISCV_CALL	ble_ke_timer_set
+			ea: R_RISCV_RELAX	*ABS*
   ee:	000080e7          	jalr	ra # ea <.L65+0x12>
 
 000000f2 <.LVL105>:
@@ -810,6 +986,8 @@ Disassembly of section .text.llc_start:
   fc:	04041e23          	sh	zero,92(s0)
  100:	0a040123          	sb	zero,162(s0)
  104:	00000097          	auipc	ra,0x0
+			104: R_RISCV_CALL	llm_util_get_supp_features
+			104: R_RISCV_RELAX	*ABS*
  108:	000080e7          	jalr	ra # 104 <.LVL105+0x12>
 
 0000010c <.LBB190>:
@@ -830,6 +1008,8 @@ Disassembly of section .text.llc_start:
 
 00000120 <.LBE191>:
  120:	00000097          	auipc	ra,0x0
+			120: R_RISCV_CALL	ble_ke_state_set
+			120: R_RISCV_RELAX	*ABS*
  124:	000080e7          	jalr	ra # 120 <.LBE191>
 
 00000128 <.LVL111>:
@@ -842,6 +1022,8 @@ Disassembly of section .text.llc_start:
  138:	0a0781a3          	sb	zero,163(a5)
  13c:	0a078223          	sb	zero,164(a5)
  140:	00000097          	auipc	ra,0x0
+			140: R_RISCV_CALL	llc_util_set_auth_payl_to_margin
+			140: R_RISCV_RELAX	*ABS*
  144:	000080e7          	jalr	ra # 140 <.LVL111+0x18>
 
 00000148 <.LVL112>:
@@ -892,6 +1074,8 @@ Disassembly of section .text.llc_start:
 000001a8 <.LBE198>:
  1a8:	0a0782a3          	sb	zero,165(a5)
  1ac:	00000097          	auipc	ra,0x0
+			1ac: R_RISCV_CALL	llc_le_con_cmp_evt_send
+			1ac: R_RISCV_RELAX	*ABS*
  1b0:	000080e7          	jalr	ra # 1ac <.LBE198+0x4>
 
 000001b4 <.LBB200>:
@@ -937,11 +1121,14 @@ Disassembly of section .text.llc_start:
  1e8:	8905                	andi	a0,a0,1
  1ea:	6145                	addi	sp,sp,48
  1ec:	00000317          	auipc	t1,0x0
+			1ec: R_RISCV_CALL	llc_le_ch_sel_algo_evt_send
+			1ec: R_RISCV_RELAX	*ABS*
  1f0:	00030067          	jr	t1 # 1ec <.LVL129+0x4>
 
 000001f4 <.L66>:
  1f4:	02040ca3          	sb	zero,57(s0)
  1f8:	b5c5                	j	d8 <.L65>
+			1f8: R_RISCV_RVC_JUMP	.L65
 
 Disassembly of section .text.llc_con_update_complete_send:
 
@@ -963,6 +1150,8 @@ Disassembly of section .text.llc_con_update_complete_send:
   16:	c606                	sw	ra,12(sp)
   18:	842e                	mv	s0,a1
   1a:	00000097          	auipc	ra,0x0
+			1a: R_RISCV_CALL	ble_ke_msg_alloc
+			1a: R_RISCV_RELAX	*ABS*
   1e:	000080e7          	jalr	ra # 1a <.LVL133+0x6>
 
 00000022 <.LVL134>:
@@ -970,10 +1159,15 @@ Disassembly of section .text.llc_con_update_complete_send:
   24:	00f50023          	sb	a5,0(a0)
   28:	00851123          	sh	s0,2(a0)
   2c:	000007b7          	lui	a5,0x0
+			2c: R_RISCV_HI20	llc_env
+			2c: R_RISCV_RELAX	*ABS*
   30:	012500a3          	sb	s2,1(a0)
   34:	00078793          	mv	a5,a5
+			34: R_RISCV_LO12_I	llc_env
+			34: R_RISCV_RELAX	*ABS*
   38:	040a                	slli	s0,s0,0x2
   3a:	c895                	beqz	s1,6e <.L69>
+			3a: R_RISCV_RVC_BRANCH	.L69
   3c:	0504d703          	lhu	a4,80(s1) # 50 <.LVL134+0x2e>
   40:	97a2                	add	a5,a5,s0
   42:	8305                	srli	a4,a4,0x1
@@ -996,6 +1190,8 @@ Disassembly of section .text.llc_con_update_complete_send:
   62:	4902                	lw	s2,0(sp)
   64:	0141                	addi	sp,sp,16
   66:	00000317          	auipc	t1,0x0
+			66: R_RISCV_CALL	hci_send_2_host
+			66: R_RISCV_RELAX	*ABS*
   6a:	00030067          	jr	t1 # 66 <.LVL139+0x4>
 
 0000006e <.L69>:
@@ -1005,6 +1201,7 @@ Disassembly of section .text.llc_con_update_complete_send:
 
 00000074 <.LBE205>:
   74:	cf81                	beqz	a5,8c <.L71>
+			74: R_RISCV_RVC_BRANCH	.L71
   76:	00e7d703          	lhu	a4,14(a5)
   7a:	00e51223          	sh	a4,4(a0)
   7e:	0067d703          	lhu	a4,6(a5)
@@ -1013,12 +1210,14 @@ Disassembly of section .text.llc_con_update_complete_send:
 
 0000008a <.LVL142>:
   8a:	b7f9                	j	58 <.L73>
+			8a: R_RISCV_RVC_JUMP	.L73
 
 0000008c <.L71>:
   8c:	00051223          	sh	zero,4(a0)
   90:	00051323          	sh	zero,6(a0)
   94:	00051423          	sh	zero,8(a0)
   98:	b7d1                	j	5c <.L70>
+			98: R_RISCV_RVC_JUMP	.L70
 
 Disassembly of section .text.llc_ltk_req_send:
 
@@ -1040,6 +1239,8 @@ Disassembly of section .text.llc_ltk_req_send:
   16:	c606                	sw	ra,12(sp)
   18:	c422                	sw	s0,8(sp)
   1a:	00000097          	auipc	ra,0x0
+			1a: R_RISCV_CALL	ble_ke_msg_alloc
+			1a: R_RISCV_RELAX	*ABS*
   1e:	000080e7          	jalr	ra # 1a <.LVL146+0xc>
 
 00000022 <.LVL147>:
@@ -1061,7 +1262,11 @@ Disassembly of section .text.llc_ltk_req_send:
 0000003a <.LBE211>:
   3a:	00f51623          	sh	a5,12(a0)
   3e:	000007b7          	lui	a5,0x0
+			3e: R_RISCV_HI20	ble_memcpy_ptr
+			3e: R_RISCV_RELAX	*ABS*
   42:	0007a783          	lw	a5,0(a5) # 0 <llc_ltk_req_send>
+			42: R_RISCV_LO12_I	ble_memcpy_ptr
+			42: R_RISCV_RELAX	*ABS*
   46:	00148593          	addi	a1,s1,1
   4a:	4621                	li	a2,8
   4c:	0511                	addi	a0,a0,4
@@ -1079,6 +1284,8 @@ Disassembly of section .text.llc_ltk_req_send:
   58:	4902                	lw	s2,0(sp)
   5a:	0141                	addi	sp,sp,16
   5c:	00000317          	auipc	t1,0x0
+			5c: R_RISCV_CALL	hci_send_2_host
+			5c: R_RISCV_RELAX	*ABS*
   60:	00030067          	jr	t1 # 5c <.LVL151+0x4>
 
 Disassembly of section .text.llc_feats_rd_event_send:
@@ -1097,10 +1304,13 @@ Disassembly of section .text.llc_feats_rd_event_send:
   10:	84ae                	mv	s1,a1
   12:	8932                	mv	s2,a2
   14:	00000097          	auipc	ra,0x0
+			14: R_RISCV_CALL	llm_util_check_evt_mask
+			14: R_RISCV_RELAX	*ABS*
   18:	000080e7          	jalr	ra # 14 <.LVL154+0xc>
 
 0000001c <.LVL155>:
   1c:	c531                	beqz	a0,68 <.L76>
+			1c: R_RISCV_RVC_BRANCH	.L76
 
 0000001e <.LBB212>:
   1e:	6505                	lui	a0,0x1
@@ -1109,6 +1319,8 @@ Disassembly of section .text.llc_feats_rd_event_send:
   24:	4601                	li	a2,0
   26:	80450513          	addi	a0,a0,-2044 # 804 <.LASF240+0x2>
   2a:	00000097          	auipc	ra,0x0
+			2a: R_RISCV_CALL	ble_ke_msg_alloc
+			2a: R_RISCV_RELAX	*ABS*
   2e:	000080e7          	jalr	ra # 2a <.LBB212+0xc>
 
 00000032 <.LVL156>:
@@ -1117,7 +1329,11 @@ Disassembly of section .text.llc_feats_rd_event_send:
   38:	013500a3          	sb	s3,1(a0)
   3c:	00951123          	sh	s1,2(a0)
   40:	000007b7          	lui	a5,0x0
+			40: R_RISCV_HI20	ble_memcpy_ptr
+			40: R_RISCV_RELAX	*ABS*
   44:	0007a783          	lw	a5,0(a5) # 0 <llc_feats_rd_event_send>
+			44: R_RISCV_LO12_I	ble_memcpy_ptr
+			44: R_RISCV_RELAX	*ABS*
   48:	842a                	mv	s0,a0
 
 0000004a <.LVL157>:
@@ -1143,6 +1359,8 @@ Disassembly of section .text.llc_feats_rd_event_send:
 
 00000060 <.LBB213>:
   60:	00000317          	auipc	t1,0x0
+			60: R_RISCV_CALL	hci_send_2_host
+			60: R_RISCV_RELAX	*ABS*
   64:	00030067          	jr	t1 # 60 <.LBB213>
 
 00000068 <.L76>:
@@ -1172,12 +1390,18 @@ Disassembly of section .text.llc_version_rd_event_send:
   12:	c606                	sw	ra,12(sp)
   14:	842e                	mv	s0,a1
   16:	00000097          	auipc	ra,0x0
+			16: R_RISCV_CALL	ble_ke_msg_alloc
+			16: R_RISCV_RELAX	*ABS*
   1a:	000080e7          	jalr	ra # 16 <.LVL164+0xe>
 
 0000001e <.LVL165>:
   1e:	000005b7          	lui	a1,0x0
+			1e: R_RISCV_HI20	llc_env
+			1e: R_RISCV_RELAX	*ABS*
   22:	00851123          	sh	s0,2(a0)
   26:	00058593          	mv	a1,a1
+			26: R_RISCV_LO12_I	llc_env
+			26: R_RISCV_RELAX	*ABS*
   2a:	040a                	slli	s0,s0,0x2
   2c:	00950023          	sb	s1,0(a0)
   30:	95a2                	add	a1,a1,s0
@@ -1194,6 +1418,8 @@ Disassembly of section .text.llc_version_rd_event_send:
   52:	4492                	lw	s1,4(sp)
   54:	0141                	addi	sp,sp,16
   56:	00000317          	auipc	t1,0x0
+			56: R_RISCV_CALL	hci_send_2_host
+			56: R_RISCV_RELAX	*ABS*
   5a:	00030067          	jr	t1 # 56 <.LVL165+0x38>
 
 Disassembly of section .text.llc_common_cmd_complete_send:
@@ -1217,6 +1443,8 @@ Disassembly of section .text.llc_common_cmd_complete_send:
 00000016 <.LVL172>:
   16:	c606                	sw	ra,12(sp)
   18:	00000097          	auipc	ra,0x0
+			18: R_RISCV_CALL	ble_ke_msg_alloc
+			18: R_RISCV_RELAX	*ABS*
   1c:	000080e7          	jalr	ra # 18 <.LVL172+0x2>
 
 00000020 <.LVL173>:
@@ -1227,6 +1455,8 @@ Disassembly of section .text.llc_common_cmd_complete_send:
   2c:	4492                	lw	s1,4(sp)
   2e:	0141                	addi	sp,sp,16
   30:	00000317          	auipc	t1,0x0
+			30: R_RISCV_CALL	hci_send_2_host
+			30: R_RISCV_RELAX	*ABS*
   34:	00030067          	jr	t1 # 30 <.LVL173+0x10>
 
 Disassembly of section .text.llc_common_cmd_status_send:
@@ -1248,6 +1478,8 @@ Disassembly of section .text.llc_common_cmd_status_send:
    e:	80250513          	addi	a0,a0,-2046 # 802 <.LASF240>
   12:	c606                	sw	ra,12(sp)
   14:	00000097          	auipc	ra,0x0
+			14: R_RISCV_CALL	ble_ke_msg_alloc
+			14: R_RISCV_RELAX	*ABS*
   18:	000080e7          	jalr	ra # 14 <.LVL179+0x8>
 
 0000001c <.LVL180>:
@@ -1256,6 +1488,8 @@ Disassembly of section .text.llc_common_cmd_status_send:
   22:	40b2                	lw	ra,12(sp)
   24:	0141                	addi	sp,sp,16
   26:	00000317          	auipc	t1,0x0
+			26: R_RISCV_CALL	hci_send_2_host
+			26: R_RISCV_RELAX	*ABS*
   2a:	00030067          	jr	t1 # 26 <.LVL180+0xa>
 
 Disassembly of section .text.llc_common_flush_occurred_send:
@@ -1273,6 +1507,8 @@ Disassembly of section .text.llc_common_flush_occurred_send:
    e:	80350513          	addi	a0,a0,-2045 # 803 <.LASF240+0x1>
   12:	c606                	sw	ra,12(sp)
   14:	00000097          	auipc	ra,0x0
+			14: R_RISCV_CALL	ble_ke_msg_alloc
+			14: R_RISCV_RELAX	*ABS*
   18:	000080e7          	jalr	ra # 14 <.LVL183+0xa>
 
 0000001c <.LVL184>:
@@ -1281,6 +1517,8 @@ Disassembly of section .text.llc_common_flush_occurred_send:
   22:	40b2                	lw	ra,12(sp)
   24:	0141                	addi	sp,sp,16
   26:	00000317          	auipc	t1,0x0
+			26: R_RISCV_CALL	hci_send_2_host
+			26: R_RISCV_RELAX	*ABS*
   2a:	00030067          	jr	t1 # 26 <.LVL184+0xa>
 
 Disassembly of section .text.llc_common_enc_key_ref_comp_evt_send:
@@ -1302,6 +1540,8 @@ Disassembly of section .text.llc_common_enc_key_ref_comp_evt_send:
   14:	80350513          	addi	a0,a0,-2045 # 803 <.LASF240+0x1>
   18:	c606                	sw	ra,12(sp)
   1a:	00000097          	auipc	ra,0x0
+			1a: R_RISCV_CALL	ble_ke_msg_alloc
+			1a: R_RISCV_RELAX	*ABS*
   1e:	000080e7          	jalr	ra # 1a <.LVL188+0xc>
 
 00000022 <.LVL189>:
@@ -1312,6 +1552,8 @@ Disassembly of section .text.llc_common_enc_key_ref_comp_evt_send:
   2e:	4492                	lw	s1,4(sp)
   30:	0141                	addi	sp,sp,16
   32:	00000317          	auipc	t1,0x0
+			32: R_RISCV_CALL	hci_send_2_host
+			32: R_RISCV_RELAX	*ABS*
   36:	00030067          	jr	t1 # 32 <.LVL189+0x10>
 
 Disassembly of section .text.llc_common_enc_change_evt_send:
@@ -1334,9 +1576,14 @@ Disassembly of section .text.llc_common_enc_change_evt_send:
 
 00000020 <.LVL192>:
   20:	c9b5                	beqz	a1,94 <.L90>
+			20: R_RISCV_RVC_BRANCH	.L90
   22:	000007b7          	lui	a5,0x0
+			22: R_RISCV_HI20	llc_env
+			22: R_RISCV_RELAX	*ABS*
   26:	00251493          	slli	s1,a0,0x2
   2a:	00078793          	mv	a5,a5
+			2a: R_RISCV_LO12_I	llc_env
+			2a: R_RISCV_RELAX	*ABS*
   2e:	94be                	add	s1,s1,a5
   30:	409c                	lw	a5,0(s1)
   32:	85a2                	mv	a1,s0
@@ -1351,6 +1598,8 @@ Disassembly of section .text.llc_common_enc_change_evt_send:
   3c:	05a7d783          	lhu	a5,90(a5)
   40:	8e1d                	sub	a2,a2,a5
   42:	00000097          	auipc	ra,0x0
+			42: R_RISCV_CALL	ble_ke_timer_set
+			42: R_RISCV_RELAX	*ABS*
   46:	000080e7          	jalr	ra # 42 <.LVL195+0x6>
 
 0000004a <.LVL196>:
@@ -1359,6 +1608,8 @@ Disassembly of section .text.llc_common_enc_change_evt_send:
   4e:	10400513          	li	a0,260
   52:	0587d603          	lhu	a2,88(a5)
   56:	00000097          	auipc	ra,0x0
+			56: R_RISCV_CALL	ble_ke_timer_set
+			56: R_RISCV_RELAX	*ABS*
   5a:	000080e7          	jalr	ra # 56 <.LVL196+0xc>
 
 0000005e <.L91>:
@@ -1368,6 +1619,8 @@ Disassembly of section .text.llc_common_enc_change_evt_send:
   64:	4621                	li	a2,8
   66:	80350513          	addi	a0,a0,-2045 # 803 <.LASF240+0x1>
   6a:	00000097          	auipc	ra,0x0
+			6a: R_RISCV_CALL	ble_ke_msg_alloc
+			6a: R_RISCV_RELAX	*ABS*
   6e:	000080e7          	jalr	ra # 6a <.L91+0xc>
 
 00000072 <.LVL198>:
@@ -1386,6 +1639,8 @@ Disassembly of section .text.llc_common_enc_change_evt_send:
   88:	4a22                	lw	s4,8(sp)
   8a:	6105                	addi	sp,sp,32
   8c:	00000317          	auipc	t1,0x0
+			8c: R_RISCV_CALL	hci_send_2_host
+			8c: R_RISCV_RELAX	*ABS*
   90:	00030067          	jr	t1 # 8c <.LVL200+0x6>
 
 00000094 <.L90>:
@@ -1396,16 +1651,21 @@ Disassembly of section .text.llc_common_enc_change_evt_send:
 
 0000009a <.LVL203>:
   9a:	00000097          	auipc	ra,0x0
+			9a: R_RISCV_CALL	ble_ke_timer_clear
+			9a: R_RISCV_RELAX	*ABS*
   9e:	000080e7          	jalr	ra # 9a <.LVL203>
 
 000000a2 <.LVL204>:
   a2:	85a2                	mv	a1,s0
   a4:	10400513          	li	a0,260
   a8:	00000097          	auipc	ra,0x0
+			a8: R_RISCV_CALL	ble_ke_timer_clear
+			a8: R_RISCV_RELAX	*ABS*
   ac:	000080e7          	jalr	ra # a8 <.LVL204+0x6>
 
 000000b0 <.LVL205>:
   b0:	b77d                	j	5e <.L91>
+			b0: R_RISCV_RVC_JUMP	.L91
 
 Disassembly of section .text.llc_common_nb_of_pkt_comp_evt_send:
 
@@ -1426,6 +1686,8 @@ Disassembly of section .text.llc_common_nb_of_pkt_comp_evt_send:
   12:	80350513          	addi	a0,a0,-2045 # 803 <.LASF240+0x1>
   16:	c606                	sw	ra,12(sp)
   18:	00000097          	auipc	ra,0x0
+			18: R_RISCV_CALL	ble_ke_msg_alloc
+			18: R_RISCV_RELAX	*ABS*
   1c:	000080e7          	jalr	ra # 18 <.LVL208+0xa>
 
 00000020 <.LVL209>:
@@ -1438,6 +1700,8 @@ Disassembly of section .text.llc_common_nb_of_pkt_comp_evt_send:
   32:	4492                	lw	s1,4(sp)
   34:	0141                	addi	sp,sp,16
   36:	00000317          	auipc	t1,0x0
+			36: R_RISCV_CALL	hci_send_2_host
+			36: R_RISCV_RELAX	*ABS*
   3a:	00030067          	jr	t1 # 36 <.LVL209+0x16>
 
 Disassembly of section .text.llc_con_update_ind:
@@ -1445,8 +1709,12 @@ Disassembly of section .text.llc_con_update_ind:
 00000000 <llc_con_update_ind>:
    0:	1101                	addi	sp,sp,-32
    2:	000007b7          	lui	a5,0x0
+			2: R_RISCV_HI20	llc_env
+			2: R_RISCV_RELAX	*ABS*
    6:	c84a                	sw	s2,16(sp)
    8:	00078713          	mv	a4,a5
+			8: R_RISCV_LO12_I	llc_env
+			8: R_RISCV_RELAX	*ABS*
    c:	00251913          	slli	s2,a0,0x2
   10:	cc22                	sw	s0,24(sp)
   12:	ca26                	sw	s1,20(sp)
@@ -1456,9 +1724,12 @@ Disassembly of section .text.llc_con_update_ind:
   1a:	4314                	lw	a3,0(a4)
   1c:	84ae                	mv	s1,a1
   1e:	00078413          	mv	s0,a5
+			1e: R_RISCV_LO12_I	llc_env
+			1e: R_RISCV_RELAX	*ABS*
   22:	05c6d703          	lhu	a4,92(a3)
   26:	0c077613          	andi	a2,a4,192
   2a:	c605                	beqz	a2,52 <.L97>
+			2a: R_RISCV_RVC_BRANCH	.L97
   2c:	f3f77713          	andi	a4,a4,-193
   30:	89aa                	mv	s3,a0
   32:	04e69e23          	sh	a4,92(a3)
@@ -1466,14 +1737,19 @@ Disassembly of section .text.llc_con_update_ind:
 
 00000038 <.LVL213>:
   38:	00000097          	auipc	ra,0x0
+			38: R_RISCV_CALL	llm_util_check_evt_mask
+			38: R_RISCV_RELAX	*ABS*
   3c:	000080e7          	jalr	ra # 38 <.LVL213>
 
 00000040 <.LVL214>:
   40:	c909                	beqz	a0,52 <.L97>
+			40: R_RISCV_RVC_BRANCH	.L97
   42:	02848613          	addi	a2,s1,40
   46:	85ce                	mv	a1,s3
   48:	4501                	li	a0,0
   4a:	00000097          	auipc	ra,0x0
+			4a: R_RISCV_CALL	llc_con_update_complete_send
+			4a: R_RISCV_RELAX	*ABS*
   4e:	000080e7          	jalr	ra # 4a <.LVL214+0xa>
 
 00000052 <.L97>:
@@ -1482,6 +1758,7 @@ Disassembly of section .text.llc_con_update_ind:
   5a:	4705                	li	a4,1
   5c:	439c                	lw	a5,0(a5)
   5e:	00d77b63          	bgeu	a4,a3,74 <.L99>
+			5e: R_RISCV_BRANCH	.L99
   62:	02e78ca3          	sb	a4,57(a5) # 39 <.LVL213+0x1>
 
 00000066 <.L95>:
@@ -1498,14 +1775,19 @@ Disassembly of section .text.llc_con_update_ind:
 00000074 <.L99>:
   74:	02078ca3          	sb	zero,57(a5)
   78:	b7fd                	j	66 <.L95>
+			78: R_RISCV_RVC_JUMP	.L95
 
 Disassembly of section .text.llc_lsto_con_update:
 
 00000000 <llc_lsto_con_update>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	llc_env
+			0: R_RISCV_RELAX	*ABS*
    4:	1141                	addi	sp,sp,-16
    6:	00251713          	slli	a4,a0,0x2
    a:	00078793          	mv	a5,a5
+			a: R_RISCV_LO12_I	llc_env
+			a: R_RISCV_RELAX	*ABS*
    e:	c606                	sw	ra,12(sp)
   10:	c422                	sw	s0,8(sp)
   12:	97ba                	add	a5,a5,a4
@@ -1517,6 +1799,7 @@ Disassembly of section .text.llc_lsto_con_update:
 0000001a <.LBB217>:
   1a:	05445603          	lhu	a2,84(s0)
   1e:	00f67363          	bgeu	a2,a5,24 <.L106>
+			1e: R_RISCV_BRANCH	.L106
   22:	863e                	mv	a2,a5
 
 00000024 <.L106>:
@@ -1534,6 +1817,8 @@ Disassembly of section .text.llc_lsto_con_update:
 
 0000003e <.LVL221>:
   3e:	00000097          	auipc	ra,0x0
+			3e: R_RISCV_CALL	ble_ke_timer_set
+			3e: R_RISCV_RELAX	*ABS*
   42:	000080e7          	jalr	ra # 3e <.LVL221>
 
 00000046 <.LVL222>:
@@ -1551,9 +1836,13 @@ Disassembly of section .text.llc_map_update_ind:
 
 00000000 <llc_map_update_ind>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	llc_env
+			0: R_RISCV_RELAX	*ABS*
    4:	1141                	addi	sp,sp,-16
    6:	00251713          	slli	a4,a0,0x2
    a:	00078793          	mv	a5,a5
+			a: R_RISCV_LO12_I	llc_env
+			a: R_RISCV_RELAX	*ABS*
    e:	c606                	sw	ra,12(sp)
   10:	c422                	sw	s0,8(sp)
   12:	c04a                	sw	s2,0(sp)
@@ -1569,6 +1858,8 @@ Disassembly of section .text.llc_map_update_ind:
 
 00000024 <.LVL226>:
   24:	00000097          	auipc	ra,0x0
+			24: R_RISCV_CALL	llm_util_check_map_validity
+			24: R_RISCV_RELAX	*ABS*
   28:	000080e7          	jalr	ra # 24 <.LVL226>
 
 0000002c <.LBB218>:
@@ -1627,6 +1918,8 @@ Disassembly of section .text.llc_map_update_ind:
   7c:	4615                	li	a2,5
   7e:	05e48513          	addi	a0,s1,94
   82:	00000097          	auipc	ra,0x0
+			82: R_RISCV_CALL	memcpy
+			82: R_RISCV_RELAX	*ABS*
   86:	000080e7          	jalr	ra # 82 <.LBE235+0x6>
 
 0000008a <.LVL235>:
@@ -1662,34 +1955,48 @@ Disassembly of section .text.llc_con_update_finished:
   1a:	c64e                	sw	s3,12(sp)
   1c:	c452                	sw	s4,8(sp)
   1e:	00000097          	auipc	ra,0x0
+			1e: R_RISCV_CALL	ble_ke_state_get
+			1e: R_RISCV_RELAX	*ABS*
   22:	000080e7          	jalr	ra # 1e <.LVL240+0x8>
 
 00000026 <.LBB236>:
   26:	00f57713          	andi	a4,a0,15
   2a:	47bd                	li	a5,15
   2c:	04f70263          	beq	a4,a5,70 <.L110>
+			2c: R_RISCV_BRANCH	.L110
   30:	89aa                	mv	s3,a0
   32:	854a                	mv	a0,s2
 
 00000034 <.LVL242>:
   34:	00000097          	auipc	ra,0x0
+			34: R_RISCV_CALL	lld_get_mode
+			34: R_RISCV_RELAX	*ABS*
   38:	000080e7          	jalr	ra # 34 <.LVL242>
 
 0000003c <.LVL243>:
   3c:	00000437          	lui	s0,0x0
+			3c: R_RISCV_HI20	llc_env
+			3c: R_RISCV_RELAX	*ABS*
   40:	478d                	li	a5,3
   42:	00040413          	mv	s0,s0
+			42: R_RISCV_LO12_I	llc_env
+			42: R_RISCV_RELAX	*ABS*
   46:	00291a13          	slli	s4,s2,0x2
   4a:	02f51b63          	bne	a0,a5,80 <.L112>
+			4a: R_RISCV_BRANCH	.L112
   4e:	4581                	li	a1,0
   50:	854a                	mv	a0,s2
   52:	00000097          	auipc	ra,0x0
+			52: R_RISCV_CALL	llc_util_clear_operation_ptr
+			52: R_RISCV_RELAX	*ABS*
   56:	000080e7          	jalr	ra # 52 <.LVL243+0x16>
 
 0000005a <.LBB238>:
   5a:	0fe9f593          	andi	a1,s3,254
   5e:	8526                	mv	a0,s1
   60:	00000097          	auipc	ra,0x0
+			60: R_RISCV_CALL	ble_ke_state_set
+			60: R_RISCV_RELAX	*ABS*
   64:	000080e7          	jalr	ra # 60 <.LBB238+0x6>
 
 00000068 <.LBE238>:
@@ -1717,11 +2024,14 @@ Disassembly of section .text.llc_con_update_finished:
   84:	05c6d783          	lhu	a5,92(a3)
   88:	4007f713          	andi	a4,a5,1024
   8c:	c315                	beqz	a4,b0 <.L113>
+			8c: R_RISCV_RVC_BRANCH	.L113
 
 0000008e <.LBB240>:
   8e:	0fd9f593          	andi	a1,s3,253
   92:	8526                	mv	a0,s1
   94:	00000097          	auipc	ra,0x0
+			94: R_RISCV_CALL	ble_ke_state_set
+			94: R_RISCV_RELAX	*ABS*
   98:	000080e7          	jalr	ra # 94 <.LBB240+0x6>
 
 0000009c <.LBE240>:
@@ -1731,6 +2041,7 @@ Disassembly of section .text.llc_con_update_finished:
   a6:	bff77713          	andi	a4,a4,-1025
   aa:	04e79e23          	sh	a4,92(a5)
   ae:	b7c9                	j	70 <.L110>
+			ae: R_RISCV_RVC_JUMP	.L110
 
 000000b0 <.L113>:
   b0:	6705                	lui	a4,0x1
@@ -1738,6 +2049,7 @@ Disassembly of section .text.llc_con_update_finished:
   b6:	8fd9                	or	a5,a5,a4
   b8:	04f69e23          	sh	a5,92(a3)
   bc:	bf55                	j	70 <.L110>
+			bc: R_RISCV_RVC_JUMP	.L110
 
 Disassembly of section .text.llc_map_update_finished:
 
@@ -1759,30 +2071,42 @@ Disassembly of section .text.llc_map_update_finished:
   18:	cc22                	sw	s0,24(sp)
   1a:	c64e                	sw	s3,12(sp)
   1c:	00000097          	auipc	ra,0x0
+			1c: R_RISCV_CALL	ble_ke_state_get
+			1c: R_RISCV_RELAX	*ABS*
   20:	000080e7          	jalr	ra # 1c <.LVL255+0x6>
 
 00000024 <.LBB242>:
   24:	00f57713          	andi	a4,a0,15
   28:	47bd                	li	a5,15
   2a:	02f70b63          	beq	a4,a5,60 <.L115>
+			2a: R_RISCV_BRANCH	.L115
   2e:	89aa                	mv	s3,a0
   30:	854a                	mv	a0,s2
 
 00000032 <.LVL257>:
   32:	00000097          	auipc	ra,0x0
+			32: R_RISCV_CALL	lld_get_mode
+			32: R_RISCV_RELAX	*ABS*
   36:	000080e7          	jalr	ra # 32 <.LVL257>
 
 0000003a <.LVL258>:
   3a:	00000437          	lui	s0,0x0
+			3a: R_RISCV_HI20	llc_env
+			3a: R_RISCV_RELAX	*ABS*
   3e:	478d                	li	a5,3
   40:	00040413          	mv	s0,s0
+			40: R_RISCV_LO12_I	llc_env
+			40: R_RISCV_RELAX	*ABS*
   44:	090a                	slli	s2,s2,0x2
   46:	02f51463          	bne	a0,a5,6e <.L117>
+			46: R_RISCV_BRANCH	.L117
 
 0000004a <.LBB244>:
   4a:	0fe9f593          	andi	a1,s3,254
   4e:	8526                	mv	a0,s1
   50:	00000097          	auipc	ra,0x0
+			50: R_RISCV_CALL	ble_ke_state_set
+			50: R_RISCV_RELAX	*ABS*
   54:	000080e7          	jalr	ra # 50 <.LBB244+0x6>
 
 00000058 <.LBE244>:
@@ -1807,11 +2131,14 @@ Disassembly of section .text.llc_map_update_finished:
   72:	05c6d783          	lhu	a5,92(a3)
   76:	4007f713          	andi	a4,a5,1024
   7a:	c315                	beqz	a4,9e <.L118>
+			7a: R_RISCV_RVC_BRANCH	.L118
 
 0000007c <.LBB246>:
   7c:	0fd9f593          	andi	a1,s3,253
   80:	8526                	mv	a0,s1
   82:	00000097          	auipc	ra,0x0
+			82: R_RISCV_CALL	ble_ke_state_set
+			82: R_RISCV_RELAX	*ABS*
   86:	000080e7          	jalr	ra # 82 <.LBB246+0x6>
 
 0000008a <.LBE246>:
@@ -1821,6 +2148,7 @@ Disassembly of section .text.llc_map_update_finished:
   94:	bff77713          	andi	a4,a4,-1025
   98:	04e79e23          	sh	a4,92(a5)
   9c:	b7d1                	j	60 <.L115>
+			9c: R_RISCV_RVC_JUMP	.L115
 
 0000009e <.L118>:
   9e:	6705                	lui	a4,0x1
@@ -1828,3 +2156,4 @@ Disassembly of section .text.llc_map_update_finished:
   a4:	8fd9                	or	a5,a5,a4
   a6:	04f69e23          	sh	a5,92(a3)
   aa:	bf5d                	j	60 <.L115>
+			aa: R_RISCV_RVC_JUMP	.L115

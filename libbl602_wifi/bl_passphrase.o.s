@@ -1,5 +1,5 @@
 
-bl_passphrase.o:     file format elf32-littleriscv
+libbl602_wifi/bl_passphrase.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.Bl_F:
@@ -27,6 +27,8 @@ Disassembly of section .text.Bl_F:
   22:	c636                	sw	a3,12(sp)
   24:	8b3e                	mv	s6,a5
   26:	00000097          	auipc	ra,0x0
+			26: R_RISCV_CALL	strlen
+			26: R_RISCV_RELAX	*ABS*
   2a:	000080e7          	jalr	ra # 26 <.LVL1+0x1e>
 
 0000002e <.LVL2>:
@@ -43,6 +45,8 @@ Disassembly of section .text.Bl_F:
   3c:	cc3e                	sw	a5,24(sp)
   3e:	ce26                	sw	s1,28(sp)
   40:	00000097          	auipc	ra,0x0
+			40: R_RISCV_CALL	memcpy
+			40: R_RISCV_RELAX	*ABS*
   44:	000080e7          	jalr	ra # 40 <.LVL4+0x4>
 
 00000048 <.LVL5>:
@@ -63,6 +67,8 @@ Disassembly of section .text.Bl_F:
   74:	082c                	addi	a1,sp,24
   76:	0868                	addi	a0,sp,28
   78:	00000097          	auipc	ra,0x0
+			78: R_RISCV_CALL	Bl_hmac_sha1
+			78: R_RISCV_RELAX	*ABS*
   7c:	000080e7          	jalr	ra # 78 <.LVL5+0x30>
 
 00000080 <.LVL6>:
@@ -70,6 +76,8 @@ Disassembly of section .text.Bl_F:
   82:	85ca                	mv	a1,s2
   84:	8556                	mv	a0,s5
   86:	00000097          	auipc	ra,0x0
+			86: R_RISCV_CALL	memcpy
+			86: R_RISCV_RELAX	*ABS*
   8a:	000080e7          	jalr	ra # 86 <.LVL6+0x6>
 
 0000008e <.LVL7>:
@@ -83,6 +91,7 @@ Disassembly of section .text.Bl_F:
 
 00000094 <.L2>:
   94:	01644d63          	blt	s0,s6,ae <.L4>
+			94: R_RISCV_BRANCH	.L4
   98:	40b6                	lw	ra,76(sp)
   9a:	4426                	lw	s0,72(sp)
 
@@ -121,6 +130,8 @@ Disassembly of section .text.Bl_F:
   ba:	0868                	addi	a0,sp,28
   bc:	cc5e                	sw	s7,24(sp)
   be:	00000097          	auipc	ra,0x0
+			be: R_RISCV_CALL	Bl_hmac_sha1
+			be: R_RISCV_RELAX	*ABS*
   c2:	000080e7          	jalr	ra # be <.L4+0x10>
 
 000000c6 <.LVL20>:
@@ -128,6 +139,8 @@ Disassembly of section .text.Bl_F:
   c8:	85a6                	mv	a1,s1
   ca:	854a                	mv	a0,s2
   cc:	00000097          	auipc	ra,0x0
+			cc: R_RISCV_CALL	memcpy
+			cc: R_RISCV_RELAX	*ABS*
   d0:	000080e7          	jalr	ra # cc <.LVL20+0x6>
 
 000000d4 <.LVL21>:
@@ -142,8 +155,10 @@ Disassembly of section .text.Bl_F:
   e8:	8f31                	xor	a4,a4,a2
   ea:	00e68023          	sb	a4,0(a3)
   ee:	ff7794e3          	bne	a5,s7,d6 <.L3>
+			ee: R_RISCV_BRANCH	.L3
   f2:	0405                	addi	s0,s0,1
   f4:	b745                	j	94 <.L2>
+			f4: R_RISCV_RVC_JUMP	.L2
 
 Disassembly of section .text.Bl_PasswordHash:
 
@@ -159,14 +174,18 @@ Disassembly of section .text.Bl_PasswordHash:
   10:	84b2                	mv	s1,a2
   12:	8436                	mv	s0,a3
   14:	00000097          	auipc	ra,0x0
+			14: R_RISCV_CALL	strlen
+			14: R_RISCV_RELAX	*ABS*
   18:	000080e7          	jalr	ra # 14 <Bl_PasswordHash+0x14>
 
 0000001c <.LVL26>:
   1c:	03f00793          	li	a5,63
   20:	04a7ef63          	bltu	a5,a0,7e <.L9>
+			20: R_RISCV_BRANCH	.L9
   24:	02000793          	li	a5,32
   28:	557d                	li	a0,-1
   2a:	0497c363          	blt	a5,s1,70 <.L7>
+			2a: R_RISCV_BRANCH	.L7
   2e:	88a2                	mv	a7,s0
   30:	4809                	li	a6,2
   32:	6785                	lui	a5,0x1
@@ -176,6 +195,8 @@ Disassembly of section .text.Bl_PasswordHash:
   3a:	002c                	addi	a1,sp,8
   3c:	0868                	addi	a0,sp,28
   3e:	00000097          	auipc	ra,0x0
+			3e: R_RISCV_CALL	Bl_F
+			3e: R_RISCV_RELAX	*ABS*
   42:	000080e7          	jalr	ra # 3e <.LVL26+0x22>
 
 00000046 <.LVL27>:
@@ -183,6 +204,8 @@ Disassembly of section .text.Bl_PasswordHash:
   48:	85a2                	mv	a1,s0
   4a:	01440513          	addi	a0,s0,20
   4e:	00000097          	auipc	ra,0x0
+			4e: R_RISCV_CALL	memcpy
+			4e: R_RISCV_RELAX	*ABS*
   52:	000080e7          	jalr	ra # 4e <.LVL27+0x8>
 
 00000056 <.LVL28>:
@@ -195,6 +218,8 @@ Disassembly of section .text.Bl_PasswordHash:
   62:	864a                	mv	a2,s2
   64:	002c                	addi	a1,sp,8
   66:	00000097          	auipc	ra,0x0
+			66: R_RISCV_CALL	Bl_F
+			66: R_RISCV_RELAX	*ABS*
   6a:	000080e7          	jalr	ra # 66 <.LVL28+0x10>
 
 0000006e <.LVL29>:
@@ -220,9 +245,12 @@ Disassembly of section .text.Bl_PasswordHash:
 0000007e <.L9>:
   7e:	557d                	li	a0,-1
   80:	bfc5                	j	70 <.L7>
+			80: R_RISCV_RVC_JUMP	.L7
 
 Disassembly of section .text.bl60x_fw_password_hash:
 
 00000000 <bl60x_fw_password_hash>:
    0:	00000317          	auipc	t1,0x0
+			0: R_RISCV_CALL	Bl_PasswordHash
+			0: R_RISCV_RELAX	*ABS*
    4:	00030067          	jr	t1 # 0 <bl60x_fw_password_hash>
