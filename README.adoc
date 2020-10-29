@@ -11,7 +11,7 @@
 
 * https://github.com/riscv/riscv-gnu-toolchain[RISC-V GNU Compiler Toolchain]
 
-* https://cutter.re/[Cutter, a graphical frontend for]
+* https://cutter.re/[Cutter], a graphical frontend for
   https://www.radare.org/r/[radare2]
 
 * Add your favorite disassembly tools here. If the tool is not free, mark it
@@ -19,7 +19,7 @@
 
 == Resources
 
-* https://files.pine64.org/doc/datasheet/padi-ii/BL602_BL604_DS_Datasheet.pdf[BL602_BL604 Datasheet]
+* https://files.pine64.org/doc/datasheet/padi-ii/BL602_BL604_DS_Datasheet.pdf[BL602/BL604 Datasheet]
 
 * https://github.com/pine64/bl_iot_sdk[SDK]
 
@@ -32,4 +32,4 @@
 * Split objects out of archives `ar x libx.a`.
 
 * Disassembled objects to their assembly
-  `git/github/pine64/bl_iot_sdk/toolchain/riscv/Linux/bin/riscv64-unknown-elf-objdump -S xx.o"`
+  `git/github/pine64/bl_iot_sdk/toolchain/riscv/Linux/bin/riscv64-unknown-elf-objdump -d -r xx.o"`

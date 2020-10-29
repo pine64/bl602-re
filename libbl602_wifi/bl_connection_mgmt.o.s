@@ -1,14 +1,16 @@
 
-bl_connection_mgmt.o:     file format elf32-littleriscv
+libbl602_wifi/bl_connection_mgmt.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.cm_GetApInfo:
 
 00000000 <cm_GetApInfo>:
    0:	c909                	beqz	a0,12 <.L2>
+			0: R_RISCV_RVC_BRANCH	.L2
    2:	00054703          	lbu	a4,0(a0)
    6:	4789                	li	a5,2
    8:	00f71463          	bne	a4,a5,10 <.L3>
+			8: R_RISCV_BRANCH	.L3
    c:	4568                	lw	a0,76(a0)
 
 0000000e <.LVL1>:
@@ -24,9 +26,11 @@ Disassembly of section .text.cm_GetApData:
 
 00000000 <cm_GetApData>:
    0:	c911                	beqz	a0,14 <.L8>
+			0: R_RISCV_RVC_BRANCH	.L8
    2:	00054703          	lbu	a4,0(a0)
    6:	4789                	li	a5,2
    8:	00f71563          	bne	a4,a5,12 <.L9>
+			8: R_RISCV_BRANCH	.L9
    c:	04c50513          	addi	a0,a0,76
 
 00000010 <.LVL5>:
@@ -48,16 +52,21 @@ Disassembly of section .text.cm_AllocAPResources:
    8:	c226                	sw	s1,4(sp)
    a:	892a                	mv	s2,a0
    c:	00000097          	auipc	ra,0x0
+			c: R_RISCV_CALL	cm_GetApData
+			c: R_RISCV_RELAX	*ABS*
   10:	000080e7          	jalr	ra # c <cm_AllocAPResources+0xc>
 
 00000014 <.LVL9>:
   14:	415c                	lw	a5,4(a0)
   16:	eb8d                	bnez	a5,48 <.L15>
+			16: R_RISCV_RVC_BRANCH	.L15
   18:	84aa                	mv	s1,a0
   1a:	4531                	li	a0,12
 
 0000001c <.LVL10>:
   1c:	00000097          	auipc	ra,0x0
+			1c: R_RISCV_CALL	pvPortMalloc
+			1c: R_RISCV_RELAX	*ABS*
   20:	000080e7          	jalr	ra # 1c <.LVL10>
 
 00000024 <.LVL11>:
@@ -66,8 +75,11 @@ Disassembly of section .text.cm_AllocAPResources:
 00000026 <.LVL12>:
   26:	4505                	li	a0,1
   28:	c00d                	beqz	s0,4a <.L14>
+			28: R_RISCV_RVC_BRANCH	.L14
   2a:	12000513          	li	a0,288
   2e:	00000097          	auipc	ra,0x0
+			2e: R_RISCV_CALL	pvPortMalloc
+			2e: R_RISCV_RELAX	*ABS*
   32:	000080e7          	jalr	ra # 2e <.LVL12+0x8>
 
 00000036 <.LVL13>:
@@ -77,6 +89,8 @@ Disassembly of section .text.cm_AllocAPResources:
   3c:	854a                	mv	a0,s2
   3e:	c09c                	sw	a5,0(s1)
   40:	00000097          	auipc	ra,0x0
+			40: R_RISCV_CALL	InitializeAp
+			40: R_RISCV_RELAX	*ABS*
   44:	000080e7          	jalr	ra # 40 <.LVL13+0xa>
 
 00000048 <.L15>:
@@ -98,7 +112,10 @@ Disassembly of section .text.cm_AllocResources:
    0:	00054703          	lbu	a4,0(a0)
    4:	4789                	li	a5,2
    6:	00f71663          	bne	a4,a5,12 <.L19>
+			6: R_RISCV_BRANCH	.L19
    a:	00000317          	auipc	t1,0x0
+			a: R_RISCV_CALL	cm_AllocAPResources
+			a: R_RISCV_RELAX	*ABS*
    e:	00030067          	jr	t1 # a <cm_AllocResources+0xa>
 
 00000012 <.L19>:
@@ -123,6 +140,8 @@ Disassembly of section .text.cm_InitConnection:
   12:	84b6                	mv	s1,a3
   14:	893a                	mv	s2,a4
   16:	00000097          	auipc	ra,0x0
+			16: R_RISCV_CALL	pvPortMalloc
+			16: R_RISCV_RELAX	*ABS*
   1a:	000080e7          	jalr	ra # 16 <.LVL20+0xc>
 
 0000001e <.LVL21>:
@@ -130,22 +149,30 @@ Disassembly of section .text.cm_InitConnection:
 
 00000020 <.LVL22>:
   20:	c905                	beqz	a0,50 <.L20>
+			20: R_RISCV_RVC_BRANCH	.L20
   22:	0ec00613          	li	a2,236
   26:	4581                	li	a1,0
   28:	00000097          	auipc	ra,0x0
+			28: R_RISCV_CALL	memset
+			28: R_RISCV_RELAX	*ABS*
   2c:	000080e7          	jalr	ra # 28 <.LVL22+0x8>
 
 00000030 <.LVL23>:
   30:	8522                	mv	a0,s0
   32:	01340023          	sb	s3,0(s0)
   36:	00000097          	auipc	ra,0x0
+			36: R_RISCV_CALL	cm_AllocResources
+			36: R_RISCV_RELAX	*ABS*
   3a:	000080e7          	jalr	ra # 36 <.LVL23+0x6>
 
 0000003e <.LVL24>:
   3e:	4785                	li	a5,1
   40:	02f51063          	bne	a0,a5,60 <.L22>
+			40: R_RISCV_BRANCH	.L22
   44:	8522                	mv	a0,s0
   46:	00000097          	auipc	ra,0x0
+			46: R_RISCV_CALL	vPortFree
+			46: R_RISCV_RELAX	*ABS*
   4a:	000080e7          	jalr	ra # 46 <.LVL24+0x8>
 
 0000004e <.LVL25>:
@@ -165,10 +192,13 @@ Disassembly of section .text.cm_InitConnection:
 
 00000060 <.L22>:
   60:	00090a63          	beqz	s2,74 <.L23>
+			60: R_RISCV_BRANCH	.L23
   64:	4619                	li	a2,6
   66:	85ca                	mv	a1,s2
   68:	04040513          	addi	a0,s0,64
   6c:	00000097          	auipc	ra,0x0
+			6c: R_RISCV_CALL	memcpy
+			6c: R_RISCV_RELAX	*ABS*
   70:	000080e7          	jalr	ra # 6c <.L22+0xc>
 
 00000074 <.L23>:
@@ -179,6 +209,8 @@ Disassembly of section .text.cm_InitConnection:
   7a:	4581                	li	a1,0
   7c:	854a                	mv	a0,s2
   7e:	00000097          	auipc	ra,0x0
+			7e: R_RISCV_CALL	memset
+			7e: R_RISCV_RELAX	*ABS*
   82:	000080e7          	jalr	ra # 7e <.LVL30+0x6>
 
 00000086 <.LVL31>:
@@ -186,15 +218,20 @@ Disassembly of section .text.cm_InitConnection:
   8a:	4581                	li	a1,0
   8c:	00c40513          	addi	a0,s0,12
   90:	00000097          	auipc	ra,0x0
+			90: R_RISCV_CALL	memset
+			90: R_RISCV_RELAX	*ABS*
   94:	000080e7          	jalr	ra # 90 <.LVL31+0xa>
 
 00000098 <.LVL32>:
   98:	02040623          	sb	zero,44(s0)
   9c:	d8d5                	beqz	s1,50 <.L20>
+			9c: R_RISCV_RVC_BRANCH	.L20
   9e:	85a6                	mv	a1,s1
   a0:	4619                	li	a2,6
   a2:	854a                	mv	a0,s2
   a4:	00000097          	auipc	ra,0x0
+			a4: R_RISCV_CALL	memcpy
+			a4: R_RISCV_RELAX	*ABS*
   a8:	000080e7          	jalr	ra # a4 <.LVL32+0xc>
 
 000000ac <.LVL33>:
@@ -202,10 +239,13 @@ Disassembly of section .text.cm_InitConnection:
   ae:	85a6                	mv	a1,s1
   b0:	04640513          	addi	a0,s0,70
   b4:	00000097          	auipc	ra,0x0
+			b4: R_RISCV_CALL	memcpy
+			b4: R_RISCV_RELAX	*ABS*
   b8:	000080e7          	jalr	ra # b4 <.LVL33+0x8>
 
 000000bc <.LVL34>:
   bc:	bf51                	j	50 <.L20>
+			bc: R_RISCV_RVC_JUMP	.L20
 
 Disassembly of section .text.cm_DeleteConnection:
 
@@ -218,9 +258,12 @@ Disassembly of section .text.cm_DeleteConnection:
    c:	4789                	li	a5,2
    e:	84aa                	mv	s1,a0
   10:	02f71763          	bne	a4,a5,3e <.L35>
+			10: R_RISCV_BRANCH	.L35
 
 00000014 <.LBB10>:
   14:	00000097          	auipc	ra,0x0
+			14: R_RISCV_CALL	cm_GetApData
+			14: R_RISCV_RELAX	*ABS*
   18:	000080e7          	jalr	ra # 14 <.LBB10>
 
 0000001c <.LVL37>:
@@ -229,13 +272,18 @@ Disassembly of section .text.cm_DeleteConnection:
 
 00000020 <.LVL38>:
   20:	cf99                	beqz	a5,3e <.L35>
+			20: R_RISCV_RVC_BRANCH	.L35
   22:	4788                	lw	a0,8(a5)
   24:	00000097          	auipc	ra,0x0
+			24: R_RISCV_CALL	vPortFree
+			24: R_RISCV_RELAX	*ABS*
   28:	000080e7          	jalr	ra # 24 <.LVL38+0x4>
 
 0000002c <.LVL39>:
   2c:	4048                	lw	a0,4(s0)
   2e:	00000097          	auipc	ra,0x0
+			2e: R_RISCV_CALL	vPortFree
+			2e: R_RISCV_RELAX	*ABS*
   32:	000080e7          	jalr	ra # 2e <.LVL39+0x2>
 
 00000036 <.LVL40>:
@@ -251,6 +299,8 @@ Disassembly of section .text.cm_DeleteConnection:
 00000046 <.LVL42>:
   46:	0141                	addi	sp,sp,16
   48:	00000317          	auipc	t1,0x0
+			48: R_RISCV_CALL	vPortFree
+			48: R_RISCV_RELAX	*ABS*
   4c:	00030067          	jr	t1 # 48 <.LVL42+0x2>
 
 Disassembly of section .text.cm_SetPeerAddr:
@@ -263,6 +313,7 @@ Disassembly of section .text.cm_SetPeerAddr:
    8:	842a                	mv	s0,a0
    a:	84b2                	mv	s1,a2
    c:	c981                	beqz	a1,1c <.L41>
+			c: R_RISCV_RVC_BRANCH	.L41
    e:	4619                	li	a2,6
 
 00000010 <.LVL45>:
@@ -270,10 +321,13 @@ Disassembly of section .text.cm_SetPeerAddr:
 
 00000014 <.LVL46>:
   14:	00000097          	auipc	ra,0x0
+			14: R_RISCV_CALL	memcpy
+			14: R_RISCV_RELAX	*ABS*
   18:	000080e7          	jalr	ra # 14 <.LVL46>
 
 0000001c <.L41>:
   1c:	cc89                	beqz	s1,36 <.L40>
+			1c: R_RISCV_RVC_BRANCH	.L40
   1e:	04040513          	addi	a0,s0,64
   22:	4422                	lw	s0,8(sp)
 
@@ -286,6 +340,8 @@ Disassembly of section .text.cm_SetPeerAddr:
   2a:	4619                	li	a2,6
   2c:	0141                	addi	sp,sp,16
   2e:	00000317          	auipc	t1,0x0
+			2e: R_RISCV_CALL	memcpy
+			2e: R_RISCV_RELAX	*ABS*
   32:	00030067          	jr	t1 # 2e <.LVL49+0x4>
 
 00000036 <.L40>:
@@ -303,6 +359,7 @@ Disassembly of section .text.cm_SetComData:
 
 00000000 <cm_SetComData>:
    0:	c1b1                	beqz	a1,44 <.L52>
+			0: R_RISCV_RVC_BRANCH	.L52
    2:	1101                	addi	sp,sp,-32
    4:	cc22                	sw	s0,24(sp)
    6:	842a                	mv	s0,a0
@@ -312,6 +369,8 @@ Disassembly of section .text.cm_SetComData:
    a:	ce06                	sw	ra,28(sp)
    c:	c62e                	sw	a1,12(sp)
    e:	00000097          	auipc	ra,0x0
+			e: R_RISCV_CALL	strlen
+			e: R_RISCV_RELAX	*ABS*
   12:	000080e7          	jalr	ra # e <.LVL54+0x4>
 
 00000016 <.LVL55>:
@@ -320,12 +379,15 @@ Disassembly of section .text.cm_SetComData:
   1c:	02000613          	li	a2,32
   20:	00c40513          	addi	a0,s0,12
   24:	00000097          	auipc	ra,0x0
+			24: R_RISCV_CALL	memcpy
+			24: R_RISCV_RELAX	*ABS*
   28:	000080e7          	jalr	ra # 24 <.LVL55+0xe>
 
 0000002c <.LVL56>:
   2c:	02c44503          	lbu	a0,44(s0)
   30:	47fd                	li	a5,31
   32:	00a7e563          	bltu	a5,a0,3c <.L47>
+			32: R_RISCV_BRANCH	.L47
   36:	942a                	add	s0,s0,a0
 
 00000038 <.LVL57>:

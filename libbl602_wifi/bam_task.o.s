@@ -1,5 +1,5 @@
 
-bam_task.o:     file format elf32-littleriscv
+libbl602_wifi/bam_task.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.rxu_mgt_ind_handler:
@@ -7,6 +7,7 @@ Disassembly of section .text.rxu_mgt_ind_handler:
 00000000 <rxu_mgt_ind_handler>:
    0:	01d5c703          	lbu	a4,29(a1)
    4:	ef71                	bnez	a4,e0 <.L9>
+			4: R_RISCV_RVC_BRANCH	.L9
 
 00000006 <.LBB11>:
    6:	1101                	addi	sp,sp,-32
@@ -26,6 +27,8 @@ Disassembly of section .text.rxu_mgt_ind_handler:
 
 0000001e <.LVL2>:
   1e:	00000a37          	lui	s4,0x0
+			1e: R_RISCV_HI20	.LC1
+			1e: R_RISCV_RELAX	*ABS*
   22:	0422                	slli	s0,s0,0x8
   24:	8c55                	or	s0,s0,a3
 
@@ -38,38 +41,61 @@ Disassembly of section .text.rxu_mgt_ind_handler:
 
 00000032 <.LBB17>:
   32:	000a0593          	mv	a1,s4
+			32: R_RISCV_LO12_I	.LC1
+			32: R_RISCV_RELAX	*ABS*
 
 00000036 <.LVL5>:
   36:	c789                	beqz	a5,40 <.L3>
+			36: R_RISCV_RVC_BRANCH	.L3
   38:	000005b7          	lui	a1,0x0
+			38: R_RISCV_HI20	.LC0
+			38: R_RISCV_RELAX	*ABS*
   3c:	00058593          	mv	a1,a1
+			3c: R_RISCV_LO12_I	.LC0
+			3c: R_RISCV_RELAX	*ABS*
 
 00000040 <.L3>:
   40:	00000ab7          	lui	s5,0x0
+			40: R_RISCV_HI20	.LC2
+			40: R_RISCV_RELAX	*ABS*
   44:	00247793          	andi	a5,s0,2
   48:	000a8613          	mv	a2,s5
+			48: R_RISCV_LO12_I	.LC2
+			48: R_RISCV_RELAX	*ABS*
 
 0000004c <.LVL6>:
   4c:	e789                	bnez	a5,56 <.L4>
+			4c: R_RISCV_RVC_BRANCH	.L4
   4e:	00000637          	lui	a2,0x0
+			4e: R_RISCV_HI20	.LC3
+			4e: R_RISCV_RELAX	*ABS*
   52:	00060613          	mv	a2,a2
+			52: R_RISCV_LO12_I	.LC3
+			52: R_RISCV_RELAX	*ABS*
 
 00000056 <.L4>:
   56:	00645993          	srli	s3,s0,0x6
   5a:	40245693          	srai	a3,s0,0x2
   5e:	00000537          	lui	a0,0x0
+			5e: R_RISCV_HI20	.LC4
+			5e: R_RISCV_RELAX	*ABS*
 
 00000062 <.LVL7>:
   62:	8abd                	andi	a3,a3,15
   64:	874e                	mv	a4,s3
   66:	00050513          	mv	a0,a0
+			66: R_RISCV_LO12_I	.LC4
+			66: R_RISCV_RELAX	*ABS*
   6a:	00000097          	auipc	ra,0x0
+			6a: R_RISCV_CALL	printf
+			6a: R_RISCV_RELAX	*ABS*
   6e:	000080e7          	jalr	ra # 6a <.LVL7+0x8>
 
 00000072 <.LVL8>:
   72:	47a1                	li	a5,8
   74:	86ce                	mv	a3,s3
   76:	0137f363          	bgeu	a5,s3,7c <.L5>
+			76: R_RISCV_BRANCH	.L5
   7a:	46a1                	li	a3,8
 
 0000007c <.L5>:
@@ -89,12 +115,22 @@ Disassembly of section .text.rxu_mgt_ind_handler:
 00000096 <.LVL10>:
   96:	8689                	srai	a3,a3,0x2
   98:	00000537          	lui	a0,0x0
+			98: R_RISCV_HI20	.LC5
+			98: R_RISCV_RELAX	*ABS*
   9c:	00645713          	srli	a4,s0,0x6
   a0:	000a8613          	mv	a2,s5
+			a0: R_RISCV_LO12_I	.LC2
+			a0: R_RISCV_RELAX	*ABS*
   a4:	000a0593          	mv	a1,s4
+			a4: R_RISCV_LO12_I	.LC1
+			a4: R_RISCV_RELAX	*ABS*
   a8:	8abd                	andi	a3,a3,15
   aa:	00050513          	mv	a0,a0
+			aa: R_RISCV_LO12_I	.LC5
+			aa: R_RISCV_RELAX	*ABS*
   ae:	00000097          	auipc	ra,0x0
+			ae: R_RISCV_CALL	printf
+			ae: R_RISCV_RELAX	*ABS*
   b2:	000080e7          	jalr	ra # ae <.LVL10+0x18>
 
 000000b6 <.LVL11>:
@@ -106,6 +142,8 @@ Disassembly of section .text.rxu_mgt_ind_handler:
   c0:	4605                	li	a2,1
   c2:	4581                	li	a1,0
   c4:	00000097          	auipc	ra,0x0
+			c4: R_RISCV_CALL	bam_send_air_action_frame
+			c4: R_RISCV_RELAX	*ABS*
   c8:	000080e7          	jalr	ra # c4 <.LVL11+0xe>
 
 000000cc <.LBE18>:

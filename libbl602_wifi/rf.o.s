@@ -1,5 +1,5 @@
 
-rf.o:     file format elf32-littleriscv
+libbl602_wifi/rf.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.rf_set_channel:
@@ -9,6 +9,8 @@ Disassembly of section .text.rf_set_channel:
 
 00000002 <.LVL1>:
    2:	00000317          	auipc	t1,0x0
+			2: R_RISCV_CALL	rfc_config_channel
+			2: R_RISCV_RELAX	*ABS*
    6:	00030067          	jr	t1 # 2 <.LVL1>
 
 Disassembly of section .text.rf_init:

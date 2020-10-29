@@ -1,5 +1,5 @@
 
-ke_queue.o:     file format elf32-littleriscv
+libbl602_wifi/ke_queue.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.ke_queue_extract:
@@ -20,6 +20,7 @@ Disassembly of section .text.ke_queue_extract:
 
 00000014 <.L2>:
   14:	cc11                	beqz	s0,30 <.L1>
+			14: R_RISCV_RVC_BRANCH	.L1
   16:	85b2                	mv	a1,a2
   18:	8522                	mv	a0,s0
   1a:	c632                	sw	a2,12(sp)
@@ -29,12 +30,15 @@ Disassembly of section .text.ke_queue_extract:
   1e:	401c                	lw	a5,0(s0)
   20:	4632                	lw	a2,12(sp)
   22:	c50d                	beqz	a0,4c <.L3>
+			22: R_RISCV_RVC_BRANCH	.L3
   24:	cc91                	beqz	s1,40 <.L4>
+			24: R_RISCV_RVC_BRANCH	.L4
   26:	c09c                	sw	a5,0(s1)
 
 00000028 <.L5>:
   28:	401c                	lw	a5,0(s0)
   2a:	cf91                	beqz	a5,46 <.L6>
+			2a: R_RISCV_RVC_BRANCH	.L6
   2c:	00042023          	sw	zero,0(s0)
 
 00000030 <.L1>:
@@ -58,10 +62,12 @@ Disassembly of section .text.ke_queue_extract:
 00000040 <.L4>:
   40:	00f92023          	sw	a5,0(s2)
   44:	b7d5                	j	28 <.L5>
+			44: R_RISCV_RVC_JUMP	.L5
 
 00000046 <.L6>:
   46:	00992223          	sw	s1,4(s2)
   4a:	b7dd                	j	30 <.L1>
+			4a: R_RISCV_RVC_JUMP	.L1
 
 0000004c <.L3>:
   4c:	84a2                	mv	s1,s0
@@ -69,3 +75,4 @@ Disassembly of section .text.ke_queue_extract:
 
 00000050 <.LVL10>:
   50:	b7d1                	j	14 <.L2>
+			50: R_RISCV_RVC_JUMP	.L2

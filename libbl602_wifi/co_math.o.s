@@ -1,16 +1,21 @@
 
-co_math.o:     file format elf32-littleriscv
+libbl602_wifi/co_math.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.co_crc32:
 
 00000000 <co_crc32>:
    0:	000006b7          	lui	a3,0x0
+			0: R_RISCV_HI20	.LANCHOR0
+			0: R_RISCV_RELAX	*ABS*
    4:	4701                	li	a4,0
    6:	00068693          	mv	a3,a3
+			6: R_RISCV_LO12_I	.LANCHOR0
+			6: R_RISCV_RELAX	*ABS*
 
 0000000a <.L2>:
    a:	00b71463          	bne	a4,a1,12 <.L3>
+			a: R_RISCV_BRANCH	.L3
    e:	8532                	mv	a0,a2
 
 00000010 <.LVL2>:
@@ -38,3 +43,4 @@ Disassembly of section .text.co_crc32:
 
 0000002e <.LVL7>:
   2e:	bff1                	j	a <.L2>
+			2e: R_RISCV_RVC_JUMP	.L2

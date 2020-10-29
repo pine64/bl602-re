@@ -1,5 +1,5 @@
 
-rijndael.o:     file format elf32-littleriscv
+libbl602_wifi/rijndael.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.rijndaelKeySetupEnc:
@@ -51,11 +51,20 @@ Disassembly of section .text.rijndaelKeySetupEnc:
   76:	c55c                	sw	a5,12(a0)
   78:	08000793          	li	a5,128
   7c:	06f61d63          	bne	a2,a5,f6 <.L4>
+			7c: R_RISCV_BRANCH	.L4
   80:	000006b7          	lui	a3,0x0
+			80: R_RISCV_HI20	.LANCHOR0
+			80: R_RISCV_RELAX	*ABS*
   84:	00000737          	lui	a4,0x0
+			84: R_RISCV_HI20	.LANCHOR1
+			84: R_RISCV_RELAX	*ABS*
   88:	00068693          	mv	a3,a3
+			88: R_RISCV_LO12_I	.LANCHOR0
+			88: R_RISCV_RELAX	*ABS*
   8c:	09050813          	addi	a6,a0,144
   90:	00070713          	mv	a4,a4
+			90: R_RISCV_LO12_I	.LANCHOR1
+			90: R_RISCV_RELAX	*ABS*
 
 00000094 <.L3>:
   94:	428c                	lw	a1,0(a3)
@@ -96,10 +105,12 @@ Disassembly of section .text.rijndaelKeySetupEnc:
   ea:	8fb1                	xor	a5,a5,a2
   ec:	cd5c                	sw	a5,28(a0)
   ee:	01050663          	beq	a0,a6,fa <.L5>
+			ee: R_RISCV_BRANCH	.L5
   f2:	0541                	addi	a0,a0,16
 
 000000f4 <.LVL3>:
   f4:	b745                	j	94 <.L3>
+			f4: R_RISCV_RVC_JUMP	.L3
 
 000000f6 <.L4>:
   f6:	4501                	li	a0,0
@@ -132,11 +143,14 @@ Disassembly of section .text.rijndael_set_key:
   18:	8a32                	mv	s4,a2
   1a:	8936                	mv	s2,a3
   1c:	00000097          	auipc	ra,0x0
+			1c: R_RISCV_CALL	rijndaelKeySetupEnc
+			1c: R_RISCV_RELAX	*ABS*
   20:	000080e7          	jalr	ra # 1c <.LVL9+0xe>
 
 00000024 <.LVL10>:
   24:	c048                	sw	a0,4(s0)
   26:	00090c63          	beqz	s2,3e <.L7>
+			26: R_RISCV_BRANCH	.L7
   2a:	00042023          	sw	zero,0(s0)
 
 0000002e <.L6>:
@@ -161,12 +175,15 @@ Disassembly of section .text.rijndael_set_key:
 
 00000042 <.LBB4>:
   42:	e901                	bnez	a0,52 <.L9>
+			42: R_RISCV_RVC_BRANCH	.L9
   44:	8652                	mv	a2,s4
   46:	85ce                	mv	a1,s3
   48:	8526                	mv	a0,s1
 
 0000004a <.LVL17>:
   4a:	00000097          	auipc	ra,0x0
+			4a: R_RISCV_CALL	rijndaelKeySetupEnc
+			4a: R_RISCV_RELAX	*ABS*
   4e:	000080e7          	jalr	ra # 4a <.LVL17>
 
 00000052 <.L9>:
@@ -181,22 +198,44 @@ Disassembly of section .text.rijndael_set_key:
   5e:	412606b3          	sub	a3,a2,s2
   62:	17c1                	addi	a5,a5,-16
   64:	18d94c63          	blt	s2,a3,1fc <.L11>
+			64: R_RISCV_BRANCH	.L11
   68:	00000637          	lui	a2,0x0
+			68: R_RISCV_HI20	.LANCHOR2
+			68: R_RISCV_RELAX	*ABS*
 
 0000006c <.LVL21>:
   6c:	000007b7          	lui	a5,0x0
+			6c: R_RISCV_HI20	.LANCHOR1
+			6c: R_RISCV_RELAX	*ABS*
   70:	000005b7          	lui	a1,0x0
+			70: R_RISCV_HI20	.LANCHOR3
+			70: R_RISCV_RELAX	*ABS*
   74:	00000837          	lui	a6,0x0
+			74: R_RISCV_HI20	.LANCHOR4
+			74: R_RISCV_RELAX	*ABS*
   78:	000008b7          	lui	a7,0x0
+			78: R_RISCV_HI20	.LANCHOR5
+			78: R_RISCV_RELAX	*ABS*
   7c:	4305                	li	t1,1
   7e:	00060613          	mv	a2,a2
+			7e: R_RISCV_LO12_I	.LANCHOR2
+			7e: R_RISCV_RELAX	*ABS*
   82:	00078793          	mv	a5,a5
+			82: R_RISCV_LO12_I	.LANCHOR1
+			82: R_RISCV_RELAX	*ABS*
   86:	00058593          	mv	a1,a1
+			86: R_RISCV_LO12_I	.LANCHOR3
+			86: R_RISCV_RELAX	*ABS*
   8a:	00080813          	mv	a6,a6
+			8a: R_RISCV_LO12_I	.LANCHOR4
+			8a: R_RISCV_RELAX	*ABS*
   8e:	00088893          	mv	a7,a7
+			8e: R_RISCV_LO12_I	.LANCHOR5
+			8e: R_RISCV_RELAX	*ABS*
 
 00000092 <.L12>:
   92:	f8a35ee3          	bge	t1,a0,2e <.L6>
+			92: R_RISCV_BRANCH	.L6
   96:	04c1                	addi	s1,s1,16
   98:	4098                	lw	a4,0(s1)
   9a:	0305                	addi	t1,t1,1
@@ -328,6 +367,7 @@ Disassembly of section .text.rijndael_set_key:
  1f6:	8f35                	xor	a4,a4,a3
  1f8:	c4d8                	sw	a4,12(s1)
  1fa:	bd61                	j	92 <.L12>
+			1fa: R_RISCV_RVC_JUMP	.L12
 
 000001fc <.L11>:
  1fc:	4f8c                	lw	a1,24(a5)
@@ -353,6 +393,7 @@ Disassembly of section .text.rijndael_set_key:
 00000228 <.LVL32>:
  228:	d3d4                	sw	a3,36(a5)
  22a:	bd15                	j	5e <.L10>
+			22a: R_RISCV_RVC_JUMP	.L10
 
 Disassembly of section .text.rijndael_decrypt:
 
@@ -399,26 +440,42 @@ Disassembly of section .text.rijndael_decrypt:
 00000050 <.LVL35>:
   50:	0055c783          	lbu	a5,5(a1)
   54:	00000937          	lui	s2,0x0
+			54: R_RISCV_HI20	.LANCHOR2
+			54: R_RISCV_RELAX	*ABS*
   58:	000004b7          	lui	s1,0x0
+			58: R_RISCV_HI20	.LANCHOR3
+			58: R_RISCV_RELAX	*ABS*
   5c:	07c2                	slli	a5,a5,0x10
   5e:	00fe4e33          	xor	t3,t3,a5
   62:	0075c783          	lbu	a5,7(a1)
   66:	000003b7          	lui	t2,0x0
+			66: R_RISCV_HI20	.LANCHOR4
+			66: R_RISCV_RELAX	*ABS*
   6a:	000002b7          	lui	t0,0x0
+			6a: R_RISCV_HI20	.LANCHOR5
+			6a: R_RISCV_RELAX	*ABS*
   6e:	00fe4e33          	xor	t3,t3,a5
   72:	0065c783          	lbu	a5,6(a1)
   76:	8462                	mv	s0,s8
   78:	00090913          	mv	s2,s2
+			78: R_RISCV_LO12_I	.LANCHOR2
+			78: R_RISCV_RELAX	*ABS*
   7c:	07a2                	slli	a5,a5,0x8
   7e:	00fe4e33          	xor	t3,t3,a5
   82:	455c                	lw	a5,12(a0)
   84:	00048493          	mv	s1,s1
+			84: R_RISCV_LO12_I	.LANCHOR3
+			84: R_RISCV_RELAX	*ABS*
   88:	00038393          	mv	t2,t2
+			88: R_RISCV_LO12_I	.LANCHOR4
+			88: R_RISCV_RELAX	*ABS*
   8c:	00fe4e33          	xor	t3,t3,a5
 
 00000090 <.LVL36>:
   90:	0095c783          	lbu	a5,9(a1)
   94:	00028293          	mv	t0,t0
+			94: R_RISCV_LO12_I	.LANCHOR5
+			94: R_RISCV_RELAX	*ABS*
   98:	07c2                	slli	a5,a5,0x10
   9a:	00f8c8b3          	xor	a7,a7,a5
   9e:	00b5c783          	lbu	a5,11(a1)
@@ -589,6 +646,7 @@ Disassembly of section .text.rijndael_decrypt:
 
 0000022c <.LVL54>:
  22c:	0c0b8163          	beqz	s7,2ee <.L16>
+			22c: R_RISCV_BRANCH	.L16
  230:	070a                	slli	a4,a4,0x2
  232:	0c8a                	slli	s9,s9,0x2
  234:	9cca                	add	s9,s9,s2
@@ -665,10 +723,15 @@ Disassembly of section .text.rijndael_decrypt:
 
 000002ec <.LVL58>:
  2ec:	b3fd                	j	da <.L17>
+			2ec: R_RISCV_RVC_JUMP	.L17
 
 000002ee <.L16>:
  2ee:	000002b7          	lui	t0,0x0
+			2ee: R_RISCV_HI20	.LANCHOR6
+			2ee: R_RISCV_RELAX	*ABS*
  2f2:	00028293          	mv	t0,t0
+			2f2: R_RISCV_LO12_I	.LANCHOR6
+			2f2: R_RISCV_RELAX	*ABS*
  2f6:	0816                	slli	a6,a6,0x5
  2f8:	9c96                	add	s9,s9,t0
  2fa:	9f96                	add	t6,t6,t0
@@ -844,26 +907,42 @@ Disassembly of section .text.rijndael_encrypt:
 00000050 <.LVL72>:
   50:	0055c783          	lbu	a5,5(a1)
   54:	00000937          	lui	s2,0x0
+			54: R_RISCV_HI20	.LANCHOR7
+			54: R_RISCV_RELAX	*ABS*
   58:	000004b7          	lui	s1,0x0
+			58: R_RISCV_HI20	.LANCHOR8
+			58: R_RISCV_RELAX	*ABS*
   5c:	07c2                	slli	a5,a5,0x10
   5e:	00fe4e33          	xor	t3,t3,a5
   62:	0075c783          	lbu	a5,7(a1)
   66:	000003b7          	lui	t2,0x0
+			66: R_RISCV_HI20	.LANCHOR9
+			66: R_RISCV_RELAX	*ABS*
   6a:	000002b7          	lui	t0,0x0
+			6a: R_RISCV_HI20	.LANCHOR10
+			6a: R_RISCV_RELAX	*ABS*
   6e:	00fe4e33          	xor	t3,t3,a5
   72:	0065c783          	lbu	a5,6(a1)
   76:	8462                	mv	s0,s8
   78:	00090913          	mv	s2,s2
+			78: R_RISCV_LO12_I	.LANCHOR7
+			78: R_RISCV_RELAX	*ABS*
   7c:	07a2                	slli	a5,a5,0x8
   7e:	00fe4e33          	xor	t3,t3,a5
   82:	455c                	lw	a5,12(a0)
   84:	00048493          	mv	s1,s1
+			84: R_RISCV_LO12_I	.LANCHOR8
+			84: R_RISCV_RELAX	*ABS*
   88:	00038393          	mv	t2,t2
+			88: R_RISCV_LO12_I	.LANCHOR9
+			88: R_RISCV_RELAX	*ABS*
   8c:	00fe4e33          	xor	t3,t3,a5
 
 00000090 <.LVL73>:
   90:	0095c783          	lbu	a5,9(a1)
   94:	00028293          	mv	t0,t0
+			94: R_RISCV_LO12_I	.LANCHOR10
+			94: R_RISCV_RELAX	*ABS*
   98:	07c2                	slli	a5,a5,0x10
   9a:	00f8c8b3          	xor	a7,a7,a5
   9e:	00b5c783          	lbu	a5,11(a1)
@@ -1034,6 +1113,7 @@ Disassembly of section .text.rijndael_encrypt:
 
 0000022c <.LVL91>:
  22c:	0c0b8163          	beqz	s7,2ee <.L20>
+			22c: R_RISCV_BRANCH	.L20
  230:	070a                	slli	a4,a4,0x2
  232:	0c8a                	slli	s9,s9,0x2
  234:	9cca                	add	s9,s9,s2
@@ -1110,10 +1190,15 @@ Disassembly of section .text.rijndael_encrypt:
 
 000002ec <.LVL95>:
  2ec:	b3fd                	j	da <.L21>
+			2ec: R_RISCV_RVC_JUMP	.L21
 
 000002ee <.L20>:
  2ee:	000002b7          	lui	t0,0x0
+			2ee: R_RISCV_HI20	.LANCHOR1
+			2ee: R_RISCV_RELAX	*ABS*
  2f2:	00028293          	mv	t0,t0
+			2f2: R_RISCV_LO12_I	.LANCHOR1
+			2f2: R_RISCV_RELAX	*ABS*
  2f6:	0816                	slli	a6,a6,0x5
  2f8:	9c96                	add	s9,s9,t0
  2fa:	9f96                	add	t6,t6,t0

@@ -1,5 +1,5 @@
 
-ke_msg.o:     file format elf32-littleriscv
+libblecontroller/ke_msg.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text._patch_ble_ke_msg_alloc:
@@ -23,6 +23,8 @@ Disassembly of section .text._patch_ble_ke_msg_alloc:
   14:	c436                	sw	a3,8(sp)
   16:	c23a                	sw	a4,4(sp)
   18:	00000097          	auipc	ra,0x0
+			18: R_RISCV_CALL	ble_ke_malloc
+			18: R_RISCV_RELAX	*ABS*
   1c:	000080e7          	jalr	ra # 18 <.LVL3+0x8>
 
 00000020 <.LVL4>:
@@ -42,7 +44,11 @@ Disassembly of section .text._patch_ble_ke_msg_alloc:
 0000003c <.LBE37>:
   3c:	c008                	sw	a0,0(s0)
   3e:	000007b7          	lui	a5,0x0
+			3e: R_RISCV_HI20	ble_memset_ptr
+			3e: R_RISCV_RELAX	*ABS*
   42:	0007a783          	lw	a5,0(a5) # 0 <_patch_ble_ke_msg_alloc>
+			42: R_RISCV_LO12_I	ble_memset_ptr
+			42: R_RISCV_RELAX	*ABS*
   46:	863a                	mv	a2,a4
   48:	4581                	li	a1,0
   4a:	9782                	jalr	a5
@@ -61,7 +67,11 @@ Disassembly of section .text.ble_ke_msg_alloc:
 
 00000000 <ble_ke_msg_alloc>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	_rom_patch_hook
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <ble_ke_msg_alloc>
+			4: R_RISCV_LO12_I	_rom_patch_hook
+			4: R_RISCV_RELAX	*ABS*
    8:	7179                	addi	sp,sp,-48
    a:	d422                	sw	s0,40(sp)
    c:	d226                	sw	s1,36(sp)
@@ -90,6 +100,7 @@ Disassembly of section .text.ble_ke_msg_alloc:
 
 0000002a <.LVL14>:
   2a:	c909                	beqz	a0,3c <.L4>
+			2a: R_RISCV_RVC_BRANCH	.L4
 
 0000002c <.L7>:
   2c:	50b2                	lw	ra,44(sp)
@@ -105,13 +116,19 @@ Disassembly of section .text.ble_ke_msg_alloc:
   3c:	4581                	li	a1,0
   3e:	00c40513          	addi	a0,s0,12
   42:	00000097          	auipc	ra,0x0
+			42: R_RISCV_CALL	ble_ke_malloc
+			42: R_RISCV_RELAX	*ABS*
   46:	000080e7          	jalr	ra # 42 <.L4+0x6>
 
 0000004a <.LVL15>:
   4a:	57fd                	li	a5,-1
   4c:	c11c                	sw	a5,0(a0)
   4e:	000007b7          	lui	a5,0x0
+			4e: R_RISCV_HI20	ble_memset_ptr
+			4e: R_RISCV_RELAX	*ABS*
   52:	0007a783          	lw	a5,0(a5) # 0 <ble_ke_msg_alloc>
+			52: R_RISCV_LO12_I	ble_memset_ptr
+			52: R_RISCV_RELAX	*ABS*
   56:	01351223          	sh	s3,4(a0)
   5a:	01251323          	sh	s2,6(a0)
   5e:	00951423          	sh	s1,8(a0)
@@ -128,6 +145,7 @@ Disassembly of section .text.ble_ke_msg_alloc:
 
 00000070 <.LVL18>:
   70:	bf75                	j	2c <.L7>
+			70: R_RISCV_RVC_JUMP	.L7
 
 Disassembly of section .text._patch_ble_ke_msg_send:
 
@@ -144,13 +162,19 @@ Disassembly of section .text._patch_ble_ke_msg_send:
 
 0000000e <.LBB47>:
    e:	00000537          	lui	a0,0x0
+			e: R_RISCV_HI20	ble_ke_env
+			e: R_RISCV_RELAX	*ABS*
 
 00000012 <.LVL22>:
   12:	15d1                	addi	a1,a1,-12
 
 00000014 <.LVL23>:
   14:	00050513          	mv	a0,a0
+			14: R_RISCV_LO12_I	ble_ke_env
+			14: R_RISCV_RELAX	*ABS*
   18:	00000097          	auipc	ra,0x0
+			18: R_RISCV_CALL	ble_co_list_push_back
+			18: R_RISCV_RELAX	*ABS*
   1c:	000080e7          	jalr	ra # 18 <.LVL23+0x4>
 
 00000020 <.LBE47>:
@@ -159,6 +183,8 @@ Disassembly of section .text._patch_ble_ke_msg_send:
 00000024 <.LBE49>:
   24:	4509                	li	a0,2
   26:	00000097          	auipc	ra,0x0
+			26: R_RISCV_CALL	ble_ke_event_set
+			26: R_RISCV_RELAX	*ABS*
   2a:	000080e7          	jalr	ra # 26 <.LBE49+0x2>
 
 0000002e <.LVL25>:
@@ -174,7 +200,11 @@ Disassembly of section .text.ble_ke_msg_send:
 
 00000000 <ble_ke_msg_send>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	_rom_patch_hook
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <ble_ke_msg_send>
+			4: R_RISCV_LO12_I	_rom_patch_hook
+			4: R_RISCV_RELAX	*ABS*
    8:	1141                	addi	sp,sp,-16
    a:	c422                	sw	s0,8(sp)
    c:	c606                	sw	ra,12(sp)
@@ -188,6 +218,7 @@ Disassembly of section .text.ble_ke_msg_send:
 
 00000018 <.LVL29>:
   18:	e915                	bnez	a0,4c <.L10>
+			18: R_RISCV_RVC_BRANCH	.L10
 
 0000001a <.LBB59>:
   1a:	300024f3          	csrr	s1,mstatus
@@ -197,11 +228,17 @@ Disassembly of section .text.ble_ke_msg_send:
 
 00000022 <.LBB66>:
   22:	00000537          	lui	a0,0x0
+			22: R_RISCV_HI20	ble_ke_env
+			22: R_RISCV_RELAX	*ABS*
   26:	ff440593          	addi	a1,s0,-12
 
 0000002a <.LVL33>:
   2a:	00050513          	mv	a0,a0
+			2a: R_RISCV_LO12_I	ble_ke_env
+			2a: R_RISCV_RELAX	*ABS*
   2e:	00000097          	auipc	ra,0x0
+			2e: R_RISCV_CALL	ble_co_list_push_back
+			2e: R_RISCV_RELAX	*ABS*
   32:	000080e7          	jalr	ra # 2e <.LVL33+0x4>
 
 00000036 <.LBE66>:
@@ -222,6 +259,8 @@ Disassembly of section .text.ble_ke_msg_send:
 
 00000044 <.LBB71>:
   44:	00000317          	auipc	t1,0x0
+			44: R_RISCV_CALL	ble_ke_event_set
+			44: R_RISCV_RELAX	*ABS*
   48:	00030067          	jr	t1 # 44 <.LBB71>
 
 0000004c <.L10>:
@@ -250,10 +289,16 @@ Disassembly of section .text._patch_ble_ke_msg_get_sent_num:
 
 00000012 <.LBE74>:
   12:	00000537          	lui	a0,0x0
+			12: R_RISCV_HI20	ble_ke_env
+			12: R_RISCV_RELAX	*ABS*
 
 00000016 <.LVL43>:
   16:	00050513          	mv	a0,a0
+			16: R_RISCV_LO12_I	ble_ke_env
+			16: R_RISCV_RELAX	*ABS*
   1a:	00000097          	auipc	ra,0x0
+			1a: R_RISCV_CALL	ble_co_list_size
+			1a: R_RISCV_RELAX	*ABS*
   1e:	000080e7          	jalr	ra # 1a <.LVL43+0x4>
 
 00000022 <.LVL44>:
@@ -276,7 +321,11 @@ Disassembly of section .text.ble_ke_msg_get_sent_num:
 
 00000000 <ble_ke_msg_get_sent_num>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	_rom_patch_hook
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <ble_ke_msg_get_sent_num>
+			4: R_RISCV_LO12_I	_rom_patch_hook
+			4: R_RISCV_RELAX	*ABS*
    8:	1101                	addi	sp,sp,-32
    a:	ce06                	sw	ra,28(sp)
    c:	cc22                	sw	s0,24(sp)
@@ -285,6 +334,7 @@ Disassembly of section .text.ble_ke_msg_get_sent_num:
 
 00000014 <.LVL47>:
   14:	c519                	beqz	a0,22 <.L16>
+			14: R_RISCV_RVC_BRANCH	.L16
   16:	00e15503          	lhu	a0,14(sp)
 
 0000001a <.L17>:
@@ -301,13 +351,20 @@ Disassembly of section .text.ble_ke_msg_get_sent_num:
 
 0000002a <.LBE77>:
   2a:	00000537          	lui	a0,0x0
+			2a: R_RISCV_HI20	ble_ke_env
+			2a: R_RISCV_RELAX	*ABS*
   2e:	00050513          	mv	a0,a0
+			2e: R_RISCV_LO12_I	ble_ke_env
+			2e: R_RISCV_RELAX	*ABS*
   32:	00000097          	auipc	ra,0x0
+			32: R_RISCV_CALL	ble_co_list_size
+			32: R_RISCV_RELAX	*ABS*
   36:	000080e7          	jalr	ra # 32 <.LBE77+0x8>
 
 0000003a <.LVL50>:
   3a:	30041073          	csrw	mstatus,s0
   3e:	bff1                	j	1a <.L17>
+			3e: R_RISCV_RVC_JUMP	.L17
 
 Disassembly of section .text._patch_ble_ke_msg_send_basic:
 
@@ -327,10 +384,14 @@ Disassembly of section .text._patch_ble_ke_msg_send_basic:
 0000000a <.LVL55>:
    a:	c606                	sw	ra,12(sp)
    c:	00000097          	auipc	ra,0x0
+			c: R_RISCV_CALL	ble_ke_msg_alloc
+			c: R_RISCV_RELAX	*ABS*
   10:	000080e7          	jalr	ra # c <.LVL55+0x2>
 
 00000014 <.LVL56>:
   14:	00000097          	auipc	ra,0x0
+			14: R_RISCV_CALL	ble_ke_msg_send
+			14: R_RISCV_RELAX	*ABS*
   18:	000080e7          	jalr	ra # 14 <.LVL56>
 
 0000001c <.LVL57>:
@@ -343,7 +404,11 @@ Disassembly of section .text.ble_ke_msg_send_basic:
 
 00000000 <ble_ke_msg_send_basic>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	_rom_patch_hook
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <ble_ke_msg_send_basic>
+			4: R_RISCV_LO12_I	_rom_patch_hook
+			4: R_RISCV_RELAX	*ABS*
    8:	1141                	addi	sp,sp,-16
    a:	c422                	sw	s0,8(sp)
    c:	c226                	sw	s1,4(sp)
@@ -366,11 +431,14 @@ Disassembly of section .text.ble_ke_msg_send_basic:
 
 00000022 <.LVL62>:
   22:	e115                	bnez	a0,46 <.L21>
+			22: R_RISCV_RVC_BRANCH	.L21
   24:	864a                	mv	a2,s2
   26:	85a6                	mv	a1,s1
   28:	8522                	mv	a0,s0
   2a:	4681                	li	a3,0
   2c:	00000097          	auipc	ra,0x0
+			2c: R_RISCV_CALL	ble_ke_msg_alloc
+			2c: R_RISCV_RELAX	*ABS*
   30:	000080e7          	jalr	ra # 2c <.LVL62+0xa>
 
 00000034 <.LVL63>:
@@ -380,6 +448,8 @@ Disassembly of section .text.ble_ke_msg_send_basic:
   3a:	4902                	lw	s2,0(sp)
   3c:	0141                	addi	sp,sp,16
   3e:	00000317          	auipc	t1,0x0
+			3e: R_RISCV_CALL	ble_ke_msg_send
+			3e: R_RISCV_RELAX	*ABS*
   42:	00030067          	jr	t1 # 3e <.LVL63+0xa>
 
 00000046 <.L21>:
@@ -396,6 +466,8 @@ Disassembly of section .text.ble_ke_msg_forward:
    0:	feb51d23          	sh	a1,-6(a0) # fffffffa <.LLST25+0xfffff8af>
    4:	fec51e23          	sh	a2,-4(a0)
    8:	00000317          	auipc	t1,0x0
+			8: R_RISCV_CALL	ble_ke_msg_send
+			8: R_RISCV_RELAX	*ABS*
    c:	00030067          	jr	t1 # 8 <ble_ke_msg_forward+0x8>
 
 Disassembly of section .text.ble_ke_msg_forward_new_id:
@@ -405,6 +477,8 @@ Disassembly of section .text.ble_ke_msg_forward_new_id:
    4:	fec51d23          	sh	a2,-6(a0)
    8:	fed51e23          	sh	a3,-4(a0)
    c:	00000317          	auipc	t1,0x0
+			c: R_RISCV_CALL	ble_ke_msg_send
+			c: R_RISCV_RELAX	*ABS*
   10:	00030067          	jr	t1 # c <ble_ke_msg_forward_new_id+0xc>
 
 Disassembly of section .text._patch_ble_ke_msg_free:
@@ -416,6 +490,8 @@ Disassembly of section .text._patch_ble_ke_msg_free:
 00000004 <.LVL70>:
    4:	c606                	sw	ra,12(sp)
    6:	00000097          	auipc	ra,0x0
+			6: R_RISCV_CALL	ble_ke_free
+			6: R_RISCV_RELAX	*ABS*
    a:	000080e7          	jalr	ra # 6 <.LVL70+0x2>
 
 0000000e <.LVL71>:
@@ -428,7 +504,11 @@ Disassembly of section .text.ble_ke_msg_free:
 
 00000000 <ble_ke_msg_free>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	_rom_patch_hook
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <ble_ke_msg_free>
+			4: R_RISCV_LO12_I	_rom_patch_hook
+			4: R_RISCV_RELAX	*ABS*
    8:	1141                	addi	sp,sp,-16
    a:	c422                	sw	s0,8(sp)
    c:	c606                	sw	ra,12(sp)
@@ -441,6 +521,7 @@ Disassembly of section .text.ble_ke_msg_free:
 
 00000016 <.LVL74>:
   16:	e909                	bnez	a0,28 <.L28>
+			16: R_RISCV_RVC_BRANCH	.L28
   18:	8522                	mv	a0,s0
   1a:	4422                	lw	s0,8(sp)
 
@@ -448,6 +529,8 @@ Disassembly of section .text.ble_ke_msg_free:
   1c:	40b2                	lw	ra,12(sp)
   1e:	0141                	addi	sp,sp,16
   20:	00000317          	auipc	t1,0x0
+			20: R_RISCV_CALL	ble_ke_free
+			20: R_RISCV_RELAX	*ABS*
   24:	00030067          	jr	t1 # 20 <.LVL75+0x4>
 
 00000028 <.L28>:

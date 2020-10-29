@@ -1,16 +1,24 @@
 
-at_status.o:     file format elf32-littleriscv
+libatcmd/at_status.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.at_status:
 
 00000000 <at_status>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	.LANCHOR0
+			0: R_RISCV_RELAX	*ABS*
    4:	ac010113          	addi	sp,sp,-1344
    8:	00078793          	mv	a5,a5
+			8: R_RISCV_LO12_I	.LANCHOR0
+			8: R_RISCV_RELAX	*ABS*
    c:	c43e                	sw	a5,8(sp)
    e:	000007b7          	lui	a5,0x0
+			e: R_RISCV_HI20	at_callback
+			e: R_RISCV_RELAX	*ABS*
   12:	0007a783          	lw	a5,0(a5) # 0 <at_status>
+			12: R_RISCV_LO12_I	at_callback
+			12: R_RISCV_RELAX	*ABS*
   16:	53312623          	sw	s3,1324(sp)
   1a:	52112e23          	sw	ra,1340(sp)
   1e:	52812c23          	sw	s0,1336(sp)
@@ -20,6 +28,7 @@ Disassembly of section .text.at_status:
   2e:	53512223          	sw	s5,1316(sp)
   32:	89aa                	mv	s3,a0
   34:	c789                	beqz	a5,3e <.L2>
+			34: R_RISCV_RVC_BRANCH	.L2
   36:	4601                	li	a2,0
   38:	004c                	addi	a1,sp,4
   3a:	4515                	li	a0,5
@@ -29,12 +38,23 @@ Disassembly of section .text.at_status:
 
 0000003e <.L2>:
   3e:	00000437          	lui	s0,0x0
+			3e: R_RISCV_HI20	.LANCHOR1
+			3e: R_RISCV_RELAX	*ABS*
   42:	00040913          	mv	s2,s0
+			42: R_RISCV_LO12_I	.LANCHOR1
+			42: R_RISCV_RELAX	*ABS*
   46:	00040413          	mv	s0,s0
+			46: R_RISCV_LO12_I	.LANCHOR1
+			46: R_RISCV_RELAX	*ABS*
   4a:	06099b63          	bnez	s3,c0 <.L3>
+			4a: R_RISCV_BRANCH	.L3
   4e:	08c40913          	addi	s2,s0,140 # 8c <.LVL6>
   52:	000004b7          	lui	s1,0x0
+			52: R_RISCV_HI20	.LC0
+			52: R_RISCV_RELAX	*ABS*
   56:	000009b7          	lui	s3,0x0
+			56: R_RISCV_HI20	.LC1
+			56: R_RISCV_RELAX	*ABS*
 
 0000005a <.L4>:
   5a:	4454                	lw	a3,12(s0)
@@ -43,27 +63,42 @@ Disassembly of section .text.at_status:
   62:	1208                	addi	a0,sp,288
   64:	0451                	addi	s0,s0,20
   66:	00000097          	auipc	ra,0x0
+			66: R_RISCV_CALL	at_get_value
+			66: R_RISCV_RELAX	*ABS*
   6a:	000080e7          	jalr	ra # 66 <.L4+0xc>
 
 0000006e <.LVL4>:
   6e:	00048513          	mv	a0,s1
+			6e: R_RISCV_LO12_I	.LC0
+			6e: R_RISCV_RELAX	*ABS*
   72:	00000097          	auipc	ra,0x0
+			72: R_RISCV_CALL	at_dump_noend
+			72: R_RISCV_RELAX	*ABS*
   76:	000080e7          	jalr	ra # 72 <.LVL4+0x4>
 
 0000007a <.LVL5>:
   7a:	fec42583          	lw	a1,-20(s0)
   7e:	1210                	addi	a2,sp,288
   80:	00098513          	mv	a0,s3
+			80: R_RISCV_LO12_I	.LC1
+			80: R_RISCV_RELAX	*ABS*
   84:	00000097          	auipc	ra,0x0
+			84: R_RISCV_CALL	at_dump_noend
+			84: R_RISCV_RELAX	*ABS*
   88:	000080e7          	jalr	ra # 84 <.LVL5+0xa>
 
 0000008c <.LVL6>:
   8c:	00048513          	mv	a0,s1
+			8c: R_RISCV_LO12_I	.LC0
+			8c: R_RISCV_RELAX	*ABS*
   90:	00000097          	auipc	ra,0x0
+			90: R_RISCV_CALL	at_dump_noend
+			90: R_RISCV_RELAX	*ABS*
   94:	000080e7          	jalr	ra # 90 <.LVL6+0x4>
 
 00000098 <.LVL7>:
   98:	fd2411e3          	bne	s0,s2,5a <.L4>
+			98: R_RISCV_BRANCH	.L4
 
 0000009c <.L14>:
   9c:	4501                	li	a0,0
@@ -88,59 +123,87 @@ Disassembly of section .text.at_status:
   c8:	854e                	mv	a0,s3
   ca:	85d2                	mv	a1,s4
   cc:	00000097          	auipc	ra,0x0
+			cc: R_RISCV_CALL	strcmp
+			cc: R_RISCV_RELAX	*ABS*
   d0:	000080e7          	jalr	ra # cc <.L7+0x8>
 
 000000d4 <.LVL10>:
   d4:	e539                	bnez	a0,122 <.L6>
+			d4: R_RISCV_RVC_BRANCH	.L6
   d6:	47d1                	li	a5,20
   d8:	02f484b3          	mul	s1,s1,a5
 
 000000dc <.LVL11>:
   dc:	1208                	addi	a0,sp,288
   de:	00000437          	lui	s0,0x0
+			de: R_RISCV_HI20	.LC0
+			de: R_RISCV_RELAX	*ABS*
   e2:	94ca                	add	s1,s1,s2
   e4:	44d4                	lw	a3,12(s1)
   e6:	4490                	lw	a2,8(s1)
   e8:	0044c583          	lbu	a1,4(s1) # 4 <at_status+0x4>
   ec:	00000097          	auipc	ra,0x0
+			ec: R_RISCV_CALL	at_get_value
+			ec: R_RISCV_RELAX	*ABS*
   f0:	000080e7          	jalr	ra # ec <.LVL11+0x10>
 
 000000f4 <.LVL12>:
   f4:	00040513          	mv	a0,s0
+			f4: R_RISCV_LO12_I	.LC0
+			f4: R_RISCV_RELAX	*ABS*
   f8:	00000097          	auipc	ra,0x0
+			f8: R_RISCV_CALL	at_dump_noend
+			f8: R_RISCV_RELAX	*ABS*
   fc:	000080e7          	jalr	ra # f8 <.LVL12+0x4>
 
 00000100 <.LVL13>:
  100:	00000537          	lui	a0,0x0
+			100: R_RISCV_HI20	.LC1
+			100: R_RISCV_RELAX	*ABS*
  104:	1210                	addi	a2,sp,288
  106:	85d2                	mv	a1,s4
  108:	00050513          	mv	a0,a0
+			108: R_RISCV_LO12_I	.LC1
+			108: R_RISCV_RELAX	*ABS*
  10c:	00000097          	auipc	ra,0x0
+			10c: R_RISCV_CALL	at_dump_noend
+			10c: R_RISCV_RELAX	*ABS*
  110:	000080e7          	jalr	ra # 10c <.LVL13+0xc>
 
 00000114 <.LVL14>:
  114:	00040513          	mv	a0,s0
+			114: R_RISCV_LO12_I	.LC0
+			114: R_RISCV_RELAX	*ABS*
  118:	00000097          	auipc	ra,0x0
+			118: R_RISCV_CALL	at_dump_noend
+			118: R_RISCV_RELAX	*ABS*
  11c:	000080e7          	jalr	ra # 118 <.LVL14+0x4>
 
 00000120 <.LVL15>:
  120:	bfb5                	j	9c <.L14>
+			120: R_RISCV_RVC_JUMP	.L14
 
 00000122 <.L6>:
  122:	0485                	addi	s1,s1,1
  124:	0451                	addi	s0,s0,20
  126:	f9549fe3          	bne	s1,s5,c4 <.L7>
+			126: R_RISCV_BRANCH	.L7
  12a:	451d                	li	a0,7
  12c:	bf8d                	j	9e <.L5>
+			12c: R_RISCV_RVC_JUMP	.L5
 
 Disassembly of section .text.at_setsts:
 
 00000000 <at_setsts>:
    0:	47a1                	li	a5,8
    2:	c92d                	beqz	a0,74 <.L23>
+			2: R_RISCV_RVC_BRANCH	.L23
    4:	c9a5                	beqz	a1,74 <.L23>
+			4: R_RISCV_RVC_BRANCH	.L23
    6:	7179                	addi	sp,sp,-48
    8:	000007b7          	lui	a5,0x0
+			8: R_RISCV_HI20	.LANCHOR1
+			8: R_RISCV_RELAX	*ABS*
    c:	d422                	sw	s0,40(sp)
    e:	d226                	sw	s1,36(sp)
   10:	d04a                	sw	s2,32(sp)
@@ -150,8 +213,12 @@ Disassembly of section .text.at_setsts:
   18:	86ae                	mv	a3,a1
   1a:	892a                	mv	s2,a0
   1c:	00078993          	mv	s3,a5
+			1c: R_RISCV_LO12_I	.LANCHOR1
+			1c: R_RISCV_RELAX	*ABS*
   20:	4481                	li	s1,0
   22:	00078413          	mv	s0,a5
+			22: R_RISCV_LO12_I	.LANCHOR1
+			22: R_RISCV_RELAX	*ABS*
   26:	4a1d                	li	s4,7
 
 00000028 <.L18>:
@@ -161,11 +228,14 @@ Disassembly of section .text.at_setsts:
 
 00000030 <.LVL20>:
   30:	00000097          	auipc	ra,0x0
+			30: R_RISCV_CALL	strcmp
+			30: R_RISCV_RELAX	*ABS*
   34:	000080e7          	jalr	ra # 30 <.LVL20>
 
 00000038 <.LVL21>:
   38:	46b2                	lw	a3,12(sp)
   3a:	e51d                	bnez	a0,68 <.L17>
+			3a: R_RISCV_RVC_BRANCH	.L17
   3c:	47d1                	li	a5,20
   3e:	02f487b3          	mul	a5,s1,a5
   42:	97a2                	add	a5,a5,s0
@@ -173,6 +243,8 @@ Disassembly of section .text.at_setsts:
   46:	478c                	lw	a1,8(a5)
   48:	0047c503          	lbu	a0,4(a5) # 4 <at_setsts+0x4>
   4c:	00000097          	auipc	ra,0x0
+			4c: R_RISCV_CALL	at_set_value
+			4c: R_RISCV_RELAX	*ABS*
   50:	000080e7          	jalr	ra # 4c <.LVL21+0x14>
 
 00000054 <.LVL22>:
@@ -197,8 +269,10 @@ Disassembly of section .text.at_setsts:
   68:	0485                	addi	s1,s1,1
   6a:	09d1                	addi	s3,s3,20
   6c:	fb449ee3          	bne	s1,s4,28 <.L18>
+			6c: R_RISCV_BRANCH	.L18
   70:	479d                	li	a5,7
   72:	b7d5                	j	56 <.L16>
+			72: R_RISCV_RVC_JUMP	.L16
 
 00000074 <.L23>:
   74:	853e                	mv	a0,a5
@@ -213,22 +287,34 @@ Disassembly of section .text.at_peer:
 
 00000002 <.LVL30>:
    2:	10058a63          	beqz	a1,116 <.L36>
+			2: R_RISCV_BRANCH	.L36
    6:	be010113          	addi	sp,sp,-1056
    a:	40812c23          	sw	s0,1048(sp)
    e:	41212823          	sw	s2,1040(sp)
   12:	00000437          	lui	s0,0x0
+			12: R_RISCV_HI20	.LANCHOR2
+			12: R_RISCV_RELAX	*ABS*
   16:	41312623          	sw	s3,1036(sp)
   1a:	40112e23          	sw	ra,1052(sp)
   1e:	40912a23          	sw	s1,1044(sp)
   22:	41412423          	sw	s4,1032(sp)
   26:	41512223          	sw	s5,1028(sp)
   2a:	00040913          	mv	s2,s0
+			2a: R_RISCV_LO12_I	.LANCHOR2
+			2a: R_RISCV_RELAX	*ABS*
   2e:	89b2                	mv	s3,a2
   30:	00040413          	mv	s0,s0
+			30: R_RISCV_LO12_I	.LANCHOR2
+			30: R_RISCV_RELAX	*ABS*
   34:	ea35                	bnez	a2,a8 <.L28>
+			34: R_RISCV_RVC_BRANCH	.L28
   36:	1b840913          	addi	s2,s0,440 # 1b8 <.LASF148+0x3>
   3a:	000004b7          	lui	s1,0x0
+			3a: R_RISCV_HI20	.LC0
+			3a: R_RISCV_RELAX	*ABS*
   3e:	000009b7          	lui	s3,0x0
+			3e: R_RISCV_HI20	.LC1
+			3e: R_RISCV_RELAX	*ABS*
 
 00000042 <.L29>:
   42:	4454                	lw	a3,12(s0)
@@ -237,27 +323,42 @@ Disassembly of section .text.at_peer:
   4a:	850a                	mv	a0,sp
   4c:	0451                	addi	s0,s0,20
   4e:	00000097          	auipc	ra,0x0
+			4e: R_RISCV_CALL	at_get_value
+			4e: R_RISCV_RELAX	*ABS*
   52:	000080e7          	jalr	ra # 4e <.L29+0xc>
 
 00000056 <.LVL32>:
   56:	00048513          	mv	a0,s1
+			56: R_RISCV_LO12_I	.LC0
+			56: R_RISCV_RELAX	*ABS*
   5a:	00000097          	auipc	ra,0x0
+			5a: R_RISCV_CALL	at_dump_noend
+			5a: R_RISCV_RELAX	*ABS*
   5e:	000080e7          	jalr	ra # 5a <.LVL32+0x4>
 
 00000062 <.LVL33>:
   62:	fec42583          	lw	a1,-20(s0)
   66:	860a                	mv	a2,sp
   68:	00098513          	mv	a0,s3
+			68: R_RISCV_LO12_I	.LC1
+			68: R_RISCV_RELAX	*ABS*
   6c:	00000097          	auipc	ra,0x0
+			6c: R_RISCV_CALL	at_dump_noend
+			6c: R_RISCV_RELAX	*ABS*
   70:	000080e7          	jalr	ra # 6c <.LVL33+0xa>
 
 00000074 <.LVL34>:
   74:	00048513          	mv	a0,s1
+			74: R_RISCV_LO12_I	.LC0
+			74: R_RISCV_RELAX	*ABS*
   78:	00000097          	auipc	ra,0x0
+			78: R_RISCV_CALL	at_dump_noend
+			78: R_RISCV_RELAX	*ABS*
   7c:	000080e7          	jalr	ra # 78 <.LVL34+0x4>
 
 00000080 <.LVL35>:
   80:	fd2411e3          	bne	s0,s2,42 <.L29>
+			80: R_RISCV_BRANCH	.L29
 
 00000084 <.L39>:
   84:	4501                	li	a0,0
@@ -282,50 +383,74 @@ Disassembly of section .text.at_peer:
   b0:	854e                	mv	a0,s3
   b2:	85d2                	mv	a1,s4
   b4:	00000097          	auipc	ra,0x0
+			b4: R_RISCV_CALL	strcmp
+			b4: R_RISCV_RELAX	*ABS*
   b8:	000080e7          	jalr	ra # b4 <.L31+0x8>
 
 000000bc <.LVL38>:
   bc:	e539                	bnez	a0,10a <.L30>
+			bc: R_RISCV_RVC_BRANCH	.L30
   be:	47d1                	li	a5,20
   c0:	02f484b3          	mul	s1,s1,a5
 
 000000c4 <.LVL39>:
   c4:	850a                	mv	a0,sp
   c6:	00000437          	lui	s0,0x0
+			c6: R_RISCV_HI20	.LC0
+			c6: R_RISCV_RELAX	*ABS*
   ca:	94ca                	add	s1,s1,s2
   cc:	44d4                	lw	a3,12(s1)
   ce:	4490                	lw	a2,8(s1)
   d0:	0044c583          	lbu	a1,4(s1) # 4 <.LVL30+0x2>
   d4:	00000097          	auipc	ra,0x0
+			d4: R_RISCV_CALL	at_get_value
+			d4: R_RISCV_RELAX	*ABS*
   d8:	000080e7          	jalr	ra # d4 <.LVL39+0x10>
 
 000000dc <.LVL40>:
   dc:	00040513          	mv	a0,s0
+			dc: R_RISCV_LO12_I	.LC0
+			dc: R_RISCV_RELAX	*ABS*
   e0:	00000097          	auipc	ra,0x0
+			e0: R_RISCV_CALL	at_dump_noend
+			e0: R_RISCV_RELAX	*ABS*
   e4:	000080e7          	jalr	ra # e0 <.LVL40+0x4>
 
 000000e8 <.LVL41>:
   e8:	00000537          	lui	a0,0x0
+			e8: R_RISCV_HI20	.LC1
+			e8: R_RISCV_RELAX	*ABS*
   ec:	860a                	mv	a2,sp
   ee:	85d2                	mv	a1,s4
   f0:	00050513          	mv	a0,a0
+			f0: R_RISCV_LO12_I	.LC1
+			f0: R_RISCV_RELAX	*ABS*
   f4:	00000097          	auipc	ra,0x0
+			f4: R_RISCV_CALL	at_dump_noend
+			f4: R_RISCV_RELAX	*ABS*
   f8:	000080e7          	jalr	ra # f4 <.LVL41+0xc>
 
 000000fc <.LVL42>:
   fc:	00040513          	mv	a0,s0
+			fc: R_RISCV_LO12_I	.LC0
+			fc: R_RISCV_RELAX	*ABS*
  100:	00000097          	auipc	ra,0x0
+			100: R_RISCV_CALL	at_dump_noend
+			100: R_RISCV_RELAX	*ABS*
  104:	000080e7          	jalr	ra # 100 <.LVL42+0x4>
 
 00000108 <.LVL43>:
  108:	bfb5                	j	84 <.L39>
+			108: R_RISCV_RVC_JUMP	.L39
 
 0000010a <.L30>:
  10a:	0485                	addi	s1,s1,1
  10c:	0451                	addi	s0,s0,20
  10e:	f9549fe3          	bne	s1,s5,ac <.L31>
+			10e: R_RISCV_BRANCH	.L31
  112:	451d                	li	a0,7
  114:	bf8d                	j	86 <.L27>
+			114: R_RISCV_RVC_JUMP	.L27
 
 00000116 <.L36>:
  116:	8082                	ret

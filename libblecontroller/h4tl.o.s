@@ -1,3 +1,3 @@
 
-h4tl.o:     file format elf32-littleriscv
+libblecontroller/h4tl.o:     file format elf32-littleriscv
 

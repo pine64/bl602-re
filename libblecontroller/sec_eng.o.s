@@ -1,5 +1,5 @@
 
-sec_eng.o:     file format elf32-littleriscv
+libblecontroller/sec_eng.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.pka0_write_common_op_first_cfg:
@@ -9,9 +9,13 @@ Disassembly of section .text.pka0_write_common_op_first_cfg:
    2:	dc22                	sw	s0,56(sp)
    4:	843a                	mv	s0,a4
    6:	00000737          	lui	a4,0x0
+			6: R_RISCV_HI20	ble_memset_ptr
+			6: R_RISCV_RELAX	*ABS*
 
 0000000a <.LVL1>:
    a:	00072703          	lw	a4,0(a4) # 0 <pka0_write_common_op_first_cfg>
+			a: R_RISCV_LO12_I	ble_memset_ptr
+			a: R_RISCV_RELAX	*ABS*
    e:	da26                	sw	s1,52(sp)
   10:	d84a                	sw	s2,48(sp)
   12:	d64e                	sw	s3,44(sp)
@@ -45,6 +49,7 @@ Disassembly of section .text.pka0_write_common_op_first_cfg:
   3e:	4765                	li	a4,25
   40:	47a2                	lw	a5,8(sp)
   42:	02e40263          	beq	s0,a4,66 <.L2>
+			42: R_RISCV_BRANCH	.L2
   46:	fff01737          	lui	a4,0xfff01
   4a:	46b2                	lw	a3,12(sp)
   4c:	177d                	addi	a4,a4,-1
@@ -85,7 +90,11 @@ Disassembly of section .text.pka0_write_common_op_snd_cfg_S1:
 
 00000000 <pka0_write_common_op_snd_cfg_S1>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	ble_memset_ptr
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <pka0_write_common_op_snd_cfg_S1>
+			4: R_RISCV_LO12_I	ble_memset_ptr
+			4: R_RISCV_RELAX	*ABS*
    8:	1101                	addi	sp,sp,-32
    a:	cc22                	sw	s0,24(sp)
    c:	ca26                	sw	s1,20(sp)
@@ -126,7 +135,11 @@ Disassembly of section .text.pka0_write_common_op_snd_cfg_S1_S2:
 
 00000000 <pka0_write_common_op_snd_cfg_S1_S2>:
    0:	000007b7          	lui	a5,0x0
+			0: R_RISCV_HI20	ble_memset_ptr
+			0: R_RISCV_RELAX	*ABS*
    4:	0007a783          	lw	a5,0(a5) # 0 <pka0_write_common_op_snd_cfg_S1_S2>
+			4: R_RISCV_LO12_I	ble_memset_ptr
+			4: R_RISCV_RELAX	*ABS*
    8:	7179                	addi	sp,sp,-48
    a:	d422                	sw	s0,40(sp)
    c:	d226                	sw	s1,36(sp)
@@ -234,6 +247,7 @@ Disassembly of section .text.sec_eng_pka0_pld:
 
 0000003c <.L11>:
   3c:	00a74363          	blt	a4,a0,42 <.L14>
+			3c: R_RISCV_BRANCH	.L14
 
 00000040 <.LBE9>:
   40:	8082                	ret
@@ -245,6 +259,7 @@ Disassembly of section .text.sec_eng_pka0_pld:
   4c:	078a                	slli	a5,a5,0x2
   4e:	4210                	lw	a2,0(a2)
   50:	00081663          	bnez	a6,5c <.L12>
+			50: R_RISCV_BRANCH	.L12
 
 00000054 <.LVL26>:
   54:	97b6                	add	a5,a5,a3
@@ -253,10 +268,12 @@ Disassembly of section .text.sec_eng_pka0_pld:
   56:	c390                	sw	a2,0(a5)
   58:	0705                	addi	a4,a4,1
   5a:	b7cd                	j	3c <.L11>
+			5a: R_RISCV_RVC_JUMP	.L11
 
 0000005c <.L12>:
   5c:	97c6                	add	a5,a5,a7
   5e:	bfe5                	j	56 <.L15>
+			5e: R_RISCV_RVC_JUMP	.L15
 
 Disassembly of section .text.sec_eng_pka0_wait_4_isr:
 
@@ -272,6 +289,7 @@ Disassembly of section .text.sec_eng_pka0_wait_4_isr:
 
 00000010 <.LVL32>:
   10:	c391                	beqz	a5,14 <.L18>
+			10: R_RISCV_RVC_BRANCH	.L18
   12:	8082                	ret
 
 00000014 <.L18>:
@@ -279,6 +297,7 @@ Disassembly of section .text.sec_eng_pka0_wait_4_isr:
 
 00000018 <.LVL33>:
   18:	bfd5                	j	c <.L17>
+			18: R_RISCV_RVC_JUMP	.L17
 
 Disassembly of section .text.sec_eng_pka0_read_data:
 
@@ -288,8 +307,13 @@ Disassembly of section .text.sec_eng_pka0_read_data:
    8:	4825                	li	a6,9
    a:	4701                	li	a4,0
    c:	00f86a63          	bltu	a6,a5,20 <.L20>
+			c: R_RISCV_BRANCH	.L20
   10:	00000737          	lui	a4,0x0
+			10: R_RISCV_HI20	.LANCHOR0
+			10: R_RISCV_RELAX	*ABS*
   14:	00070713          	mv	a4,a4
+			14: R_RISCV_LO12_I	.LANCHOR0
+			14: R_RISCV_RELAX	*ABS*
   18:	0786                	slli	a5,a5,0x1
   1a:	97ba                	add	a5,a5,a4
   1c:	0007d703          	lhu	a4,0(a5)
@@ -297,6 +321,7 @@ Disassembly of section .text.sec_eng_pka0_read_data:
 00000020 <.L20>:
   20:	0ff77713          	andi	a4,a4,255
   24:	08d76c63          	bltu	a4,a3,bc <.L29>
+			24: R_RISCV_BRANCH	.L29
 
 00000028 <.LBB24>:
   28:	05b2                	slli	a1,a1,0xc
@@ -340,6 +365,8 @@ Disassembly of section .text.sec_eng_pka0_read_data:
 
 0000005e <.LBE34>:
   5e:	00000097          	auipc	ra,0x0
+			5e: R_RISCV_CALL	sec_eng_pka0_wait_4_isr
+			5e: R_RISCV_RELAX	*ABS*
   62:	000080e7          	jalr	ra # 5e <.LBE34>
 
 00000066 <.LBB37>:
@@ -347,6 +374,8 @@ Disassembly of section .text.sec_eng_pka0_read_data:
 
 00000068 <.LBE37>:
   68:	00000097          	auipc	ra,0x0
+			68: R_RISCV_CALL	sec_eng_pka0_clear_int
+			68: R_RISCV_RELAX	*ABS*
   6c:	000080e7          	jalr	ra # 68 <.LBE37>
 
 00000070 <.LBB38>:
@@ -358,9 +387,12 @@ Disassembly of section .text.sec_eng_pka0_read_data:
 00000076 <.LBB39>:
   76:	36090913          	addi	s2,s2,864
   7a:	00000b37          	lui	s6,0x0
+			7a: R_RISCV_HI20	ble_memcpy_ptr
+			7a: R_RISCV_RELAX	*ABS*
 
 0000007e <.L22>:
   7e:	0089cc63          	blt	s3,s0,96 <.L25>
+			7e: R_RISCV_BRANCH	.L25
 
 00000082 <.LBE32>:
   82:	50b2                	lw	ra,44(sp)
@@ -385,6 +417,7 @@ Disassembly of section .text.sec_eng_pka0_read_data:
   9a:	050a                	slli	a0,a0,0x2
   9c:	012507b3          	add	a5,a0,s2
   a0:	000a0463          	beqz	s4,a8 <.L32>
+			a0: R_RISCV_BRANCH	.L32
 
 000000a4 <.LVL47>:
   a4:	015507b3          	add	a5,a0,s5
@@ -397,6 +430,8 @@ Disassembly of section .text.sec_eng_pka0_read_data:
 
 000000b0 <.LVL49>:
   b0:	000b2783          	lw	a5,0(s6) # 0 <sec_eng_pka0_read_data>
+			b0: R_RISCV_LO12_I	ble_memcpy_ptr
+			b0: R_RISCV_RELAX	*ABS*
   b4:	9526                	add	a0,a0,s1
   b6:	0985                	addi	s3,s3,1
 
@@ -405,6 +440,7 @@ Disassembly of section .text.sec_eng_pka0_read_data:
 
 000000ba <.LVL51>:
   ba:	b7d1                	j	7e <.L22>
+			ba: R_RISCV_RVC_JUMP	.L22
 
 000000bc <.L29>:
   bc:	8082                	ret
@@ -444,12 +480,16 @@ Disassembly of section .text.sec_eng_pka0_clir:
 00000024 <.LBE56>:
   24:	3407a023          	sw	zero,832(a5)
   28:	00000097          	auipc	ra,0x0
+			28: R_RISCV_CALL	sec_eng_pka0_wait_4_isr
+			28: R_RISCV_RELAX	*ABS*
   2c:	000080e7          	jalr	ra # 28 <.LBE56+0x4>
 
 00000030 <.LVL59>:
   30:	40b2                	lw	ra,12(sp)
   32:	0141                	addi	sp,sp,16
   34:	00000317          	auipc	t1,0x0
+			34: R_RISCV_CALL	sec_eng_pka0_clear_int
+			34: R_RISCV_RELAX	*ABS*
   38:	00030067          	jr	t1 # 34 <.LVL59+0x4>
 
 Disassembly of section .text.sec_eng_pka0_movdat:
@@ -474,13 +514,18 @@ Disassembly of section .text.sec_eng_pka0_movdat:
 00000016 <.LVL65>:
   16:	c606                	sw	ra,12(sp)
   18:	00000097          	auipc	ra,0x0
+			18: R_RISCV_CALL	pka0_write_common_op_first_cfg
+			18: R_RISCV_RELAX	*ABS*
   1c:	000080e7          	jalr	ra # 18 <.LVL65+0x2>
 
 00000020 <.LVL66>:
   20:	400047b7          	lui	a5,0x40004
   24:	3407a023          	sw	zero,832(a5) # 40004340 <.LLST20+0x40003329>
   28:	cc01                	beqz	s0,40 <.L35>
+			28: R_RISCV_RVC_BRANCH	.L35
   2a:	00000097          	auipc	ra,0x0
+			2a: R_RISCV_CALL	sec_eng_pka0_wait_4_isr
+			2a: R_RISCV_RELAX	*ABS*
   2e:	000080e7          	jalr	ra # 2a <.LVL66+0xa>
 
 00000032 <.LVL67>:
@@ -488,6 +533,8 @@ Disassembly of section .text.sec_eng_pka0_movdat:
   34:	40b2                	lw	ra,12(sp)
   36:	0141                	addi	sp,sp,16
   38:	00000317          	auipc	t1,0x0
+			38: R_RISCV_CALL	sec_eng_pka0_clear_int
+			38: R_RISCV_RELAX	*ABS*
   3c:	00030067          	jr	t1 # 38 <.LVL67+0x6>
 
 00000040 <.L35>:
@@ -525,6 +572,8 @@ Disassembly of section .text.sec_eng_pka0_msub:
   20:	c642                	sw	a6,12(sp)
   22:	c446                	sw	a7,8(sp)
   24:	00000097          	auipc	ra,0x0
+			24: R_RISCV_CALL	pka0_write_common_op_first_cfg
+			24: R_RISCV_RELAX	*ABS*
   28:	000080e7          	jalr	ra # 24 <.LVL74+0x6>
 
 0000002c <.LVL75>:
@@ -541,6 +590,8 @@ Disassembly of section .text.sec_eng_pka0_msub:
 
 00000040 <.LVL76>:
   40:	00000317          	auipc	t1,0x0
+			40: R_RISCV_CALL	pka0_write_common_op_snd_cfg_S1_S2
+			40: R_RISCV_RELAX	*ABS*
   44:	00030067          	jr	t1 # 40 <.LVL76>
 
 Disassembly of section .text.sec_eng_pka0_mrem:
@@ -569,11 +620,17 @@ Disassembly of section .text.sec_eng_pka0_mrem:
   18:	d606                	sw	ra,44(sp)
   1a:	c642                	sw	a6,12(sp)
   1c:	00000097          	auipc	ra,0x0
+			1c: R_RISCV_CALL	pka0_write_common_op_first_cfg
+			1c: R_RISCV_RELAX	*ABS*
   20:	000080e7          	jalr	ra # 1c <.LVL83+0x4>
 
 00000024 <.LBB59>:
   24:	000007b7          	lui	a5,0x0
+			24: R_RISCV_HI20	ble_memset_ptr
+			24: R_RISCV_RELAX	*ABS*
   28:	0007a783          	lw	a5,0(a5) # 0 <sec_eng_pka0_mrem>
+			28: R_RISCV_LO12_I	ble_memset_ptr
+			28: R_RISCV_RELAX	*ABS*
   2c:	0868                	addi	a0,sp,28
   2e:	4611                	li	a2,4
   30:	4581                	li	a1,0
@@ -629,6 +686,8 @@ Disassembly of section .text.sec_eng_pka0_mmul:
   20:	c642                	sw	a6,12(sp)
   22:	c446                	sw	a7,8(sp)
   24:	00000097          	auipc	ra,0x0
+			24: R_RISCV_CALL	pka0_write_common_op_first_cfg
+			24: R_RISCV_RELAX	*ABS*
   28:	000080e7          	jalr	ra # 24 <.LVL93+0x6>
 
 0000002c <.LVL94>:
@@ -645,6 +704,8 @@ Disassembly of section .text.sec_eng_pka0_mmul:
 
 00000040 <.LVL95>:
   40:	00000317          	auipc	t1,0x0
+			40: R_RISCV_CALL	pka0_write_common_op_snd_cfg_S1_S2
+			40: R_RISCV_RELAX	*ABS*
   44:	00030067          	jr	t1 # 40 <.LVL95>
 
 Disassembly of section .text.sec_eng_pka0_mexp:
@@ -676,6 +737,8 @@ Disassembly of section .text.sec_eng_pka0_mexp:
   20:	c642                	sw	a6,12(sp)
   22:	c446                	sw	a7,8(sp)
   24:	00000097          	auipc	ra,0x0
+			24: R_RISCV_CALL	pka0_write_common_op_first_cfg
+			24: R_RISCV_RELAX	*ABS*
   28:	000080e7          	jalr	ra # 24 <.LVL102+0x6>
 
 0000002c <.LVL103>:
@@ -692,6 +755,8 @@ Disassembly of section .text.sec_eng_pka0_mexp:
 
 00000040 <.LVL104>:
   40:	00000317          	auipc	t1,0x0
+			40: R_RISCV_CALL	pka0_write_common_op_snd_cfg_S1_S2
+			40: R_RISCV_RELAX	*ABS*
   44:	00030067          	jr	t1 # 40 <.LVL104>
 
 Disassembly of section .text.sec_eng_pka0_lcmp:
@@ -719,20 +784,28 @@ Disassembly of section .text.sec_eng_pka0_lcmp:
 00000018 <.LVL110>:
   18:	c606                	sw	ra,12(sp)
   1a:	00000097          	auipc	ra,0x0
+			1a: R_RISCV_CALL	pka0_write_common_op_first_cfg
+			1a: R_RISCV_RELAX	*ABS*
   1e:	000080e7          	jalr	ra # 1a <.LVL110+0x2>
 
 00000022 <.LVL111>:
   22:	85ca                	mv	a1,s2
   24:	8526                	mv	a0,s1
   26:	00000097          	auipc	ra,0x0
+			26: R_RISCV_CALL	pka0_write_common_op_snd_cfg_S1
+			26: R_RISCV_RELAX	*ABS*
   2a:	000080e7          	jalr	ra # 26 <.LVL111+0x4>
 
 0000002e <.LVL112>:
   2e:	00000097          	auipc	ra,0x0
+			2e: R_RISCV_CALL	sec_eng_pka0_wait_4_isr
+			2e: R_RISCV_RELAX	*ABS*
   32:	000080e7          	jalr	ra # 2e <.LVL112>
 
 00000036 <.LVL113>:
   36:	00000097          	auipc	ra,0x0
+			36: R_RISCV_CALL	sec_eng_pka0_clear_int
+			36: R_RISCV_RELAX	*ABS*
   3a:	000080e7          	jalr	ra # 36 <.LVL113>
 
 0000003e <.LVL114>:
@@ -780,6 +853,8 @@ Disassembly of section .text.sec_eng_pka0_ladd:
   16:	ce06                	sw	ra,28(sp)
   18:	c642                	sw	a6,12(sp)
   1a:	00000097          	auipc	ra,0x0
+			1a: R_RISCV_CALL	pka0_write_common_op_first_cfg
+			1a: R_RISCV_RELAX	*ABS*
   1e:	000080e7          	jalr	ra # 1a <.LVL123+0x4>
 
 00000022 <.LVL124>:
@@ -790,6 +865,8 @@ Disassembly of section .text.sec_eng_pka0_ladd:
   2a:	8542                	mv	a0,a6
   2c:	6105                	addi	sp,sp,32
   2e:	00000317          	auipc	t1,0x0
+			2e: R_RISCV_CALL	pka0_write_common_op_snd_cfg_S1
+			2e: R_RISCV_RELAX	*ABS*
   32:	00030067          	jr	t1 # 2e <.LVL124+0xc>
 
 Disassembly of section .text.sec_eng_pka0_lsub:
@@ -818,6 +895,8 @@ Disassembly of section .text.sec_eng_pka0_lsub:
   16:	ce06                	sw	ra,28(sp)
   18:	c642                	sw	a6,12(sp)
   1a:	00000097          	auipc	ra,0x0
+			1a: R_RISCV_CALL	pka0_write_common_op_first_cfg
+			1a: R_RISCV_RELAX	*ABS*
   1e:	000080e7          	jalr	ra # 1a <.LVL131+0x4>
 
 00000022 <.LVL132>:
@@ -828,6 +907,8 @@ Disassembly of section .text.sec_eng_pka0_lsub:
   2a:	8542                	mv	a0,a6
   2c:	6105                	addi	sp,sp,32
   2e:	00000317          	auipc	t1,0x0
+			2e: R_RISCV_CALL	pka0_write_common_op_snd_cfg_S1
+			2e: R_RISCV_RELAX	*ABS*
   32:	00030067          	jr	t1 # 2e <.LVL132+0xc>
 
 Disassembly of section .text.sec_eng_pka0_lmul:
@@ -856,6 +937,8 @@ Disassembly of section .text.sec_eng_pka0_lmul:
   16:	ce06                	sw	ra,28(sp)
   18:	c642                	sw	a6,12(sp)
   1a:	00000097          	auipc	ra,0x0
+			1a: R_RISCV_CALL	pka0_write_common_op_first_cfg
+			1a: R_RISCV_RELAX	*ABS*
   1e:	000080e7          	jalr	ra # 1a <.LVL139+0x4>
 
 00000022 <.LVL140>:
@@ -866,6 +949,8 @@ Disassembly of section .text.sec_eng_pka0_lmul:
   2a:	8542                	mv	a0,a6
   2c:	6105                	addi	sp,sp,32
   2e:	00000317          	auipc	t1,0x0
+			2e: R_RISCV_CALL	pka0_write_common_op_snd_cfg_S1
+			2e: R_RISCV_RELAX	*ABS*
   32:	00030067          	jr	t1 # 2e <.LVL140+0xc>
 
 Disassembly of section .text.sec_eng_pka0_lmul2n:
@@ -875,9 +960,13 @@ Disassembly of section .text.sec_eng_pka0_lmul2n:
    2:	d422                	sw	s0,40(sp)
    4:	843e                	mv	s0,a5
    6:	000007b7          	lui	a5,0x0
+			6: R_RISCV_HI20	ble_memset_ptr
+			6: R_RISCV_RELAX	*ABS*
 
 0000000a <.LVL143>:
    a:	0007a783          	lw	a5,0(a5) # 0 <sec_eng_pka0_lmul2n>
+			a: R_RISCV_LO12_I	ble_memset_ptr
+			a: R_RISCV_RELAX	*ABS*
    e:	d606                	sw	ra,44(sp)
   10:	d226                	sw	s1,36(sp)
   12:	d04a                	sw	s2,32(sp)
@@ -906,6 +995,8 @@ Disassembly of section .text.sec_eng_pka0_lmul2n:
   30:	85ca                	mv	a1,s2
   32:	8526                	mv	a0,s1
   34:	00000097          	auipc	ra,0x0
+			34: R_RISCV_CALL	pka0_write_common_op_first_cfg
+			34: R_RISCV_RELAX	*ABS*
   38:	000080e7          	jalr	ra # 34 <.LVL147+0xc>
 
 0000003c <.LVL148>:
@@ -933,9 +1024,13 @@ Disassembly of section .text.sec_eng_pka0_ldiv2n:
    2:	d422                	sw	s0,40(sp)
    4:	843e                	mv	s0,a5
    6:	000007b7          	lui	a5,0x0
+			6: R_RISCV_HI20	ble_memset_ptr
+			6: R_RISCV_RELAX	*ABS*
 
 0000000a <.LVL150>:
    a:	0007a783          	lw	a5,0(a5) # 0 <sec_eng_pka0_ldiv2n>
+			a: R_RISCV_LO12_I	ble_memset_ptr
+			a: R_RISCV_RELAX	*ABS*
    e:	d606                	sw	ra,44(sp)
   10:	d226                	sw	s1,36(sp)
   12:	d04a                	sw	s2,32(sp)
@@ -964,6 +1059,8 @@ Disassembly of section .text.sec_eng_pka0_ldiv2n:
   30:	85ca                	mv	a1,s2
   32:	8526                	mv	a0,s1
   34:	00000097          	auipc	ra,0x0
+			34: R_RISCV_CALL	pka0_write_common_op_first_cfg
+			34: R_RISCV_RELAX	*ABS*
   38:	000080e7          	jalr	ra # 34 <.LVL154+0xc>
 
 0000003c <.LVL155>:

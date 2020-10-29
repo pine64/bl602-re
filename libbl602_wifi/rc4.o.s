@@ -1,5 +1,5 @@
 
-rc4.o:     file format elf32-littleriscv
+libbl602_wifi/rc4.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.prepare_key:
@@ -17,6 +17,7 @@ Disassembly of section .text.prepare_key:
 
 00000010 <.LVL3>:
   10:	fee79be3          	bne	a5,a4,6 <.L2>
+			10: R_RISCV_BRANCH	.L2
   14:	10060023          	sb	zero,256(a2)
   18:	100600a3          	sb	zero,257(a2)
 
@@ -53,6 +54,7 @@ Disassembly of section .text.prepare_key:
 
 00000058 <.LVL11>:
   58:	fcd317e3          	bne	t1,a3,26 <.L3>
+			58: R_RISCV_BRANCH	.L3
   5c:	8082                	ret
 
 Disassembly of section .text.rc4:
@@ -72,6 +74,7 @@ Disassembly of section .text.rc4:
 
 00000012 <.LVL16>:
   12:	00c7ce63          	blt	a5,a2,2e <.L8>
+			12: R_RISCV_BRANCH	.L8
   16:	4881                	li	a7,0
 
 00000018 <.L9>:
@@ -80,6 +83,7 @@ Disassembly of section .text.rc4:
 
 00000020 <.LVL18>:
   20:	02b8cc63          	blt	a7,a1,58 <.L10>
+			20: R_RISCV_BRANCH	.L10
   24:	10f68023          	sb	a5,256(a3)
   28:	10e680a3          	sb	a4,257(a3)
   2c:	8082                	ret
@@ -109,6 +113,7 @@ Disassembly of section .text.rc4:
 
 00000056 <.LVL24>:
   56:	bf55                	j	a <.L7>
+			56: R_RISCV_RVC_JUMP	.L7
 
 00000058 <.L10>:
   58:	0785                	addi	a5,a5,1
@@ -152,6 +157,7 @@ Disassembly of section .text.rc4:
   9a:	8fb1                	xor	a5,a5,a2
   9c:	00f30023          	sb	a5,0(t1)
   a0:	bfa5                	j	18 <.L9>
+			a0: R_RISCV_RVC_JUMP	.L9
 
 Disassembly of section .text.RC4_Encrypt:
 
@@ -167,6 +173,7 @@ Disassembly of section .text.RC4_Encrypt:
   10:	01060a93          	addi	s5,a2,16
   14:	02000893          	li	a7,32
   18:	0558c763          	blt	a7,s5,66 <.L11>
+			18: R_RISCV_BRANCH	.L11
   1c:	8a2a                	mv	s4,a0
   1e:	850a                	mv	a0,sp
 
@@ -176,6 +183,8 @@ Disassembly of section .text.RC4_Encrypt:
   24:	89be                	mv	s3,a5
   26:	893a                	mv	s2,a4
   28:	00000097          	auipc	ra,0x0
+			28: R_RISCV_CALL	memcpy
+			28: R_RISCV_RELAX	*ABS*
   2c:	000080e7          	jalr	ra # 28 <.LVL36+0x8>
 
 00000030 <.LVL37>:
@@ -183,22 +192,34 @@ Disassembly of section .text.RC4_Encrypt:
   32:	85d2                	mv	a1,s4
   34:	00810533          	add	a0,sp,s0
   38:	00000097          	auipc	ra,0x0
+			38: R_RISCV_CALL	memcpy
+			38: R_RISCV_RELAX	*ABS*
   3c:	000080e7          	jalr	ra # 38 <.LVL37+0x8>
 
 00000040 <.LVL38>:
   40:	00000437          	lui	s0,0x0
+			40: R_RISCV_HI20	.LANCHOR0
+			40: R_RISCV_RELAX	*ABS*
   44:	00040613          	mv	a2,s0
+			44: R_RISCV_LO12_I	.LANCHOR0
+			44: R_RISCV_RELAX	*ABS*
   48:	85d6                	mv	a1,s5
   4a:	850a                	mv	a0,sp
   4c:	00000097          	auipc	ra,0x0
+			4c: R_RISCV_CALL	prepare_key
+			4c: R_RISCV_RELAX	*ABS*
   50:	000080e7          	jalr	ra # 4c <.LVL38+0xc>
 
 00000054 <.LVL39>:
   54:	00040693          	mv	a3,s0
+			54: R_RISCV_LO12_I	.LANCHOR0
+			54: R_RISCV_RELAX	*ABS*
   58:	864e                	mv	a2,s3
   5a:	85ca                	mv	a1,s2
   5c:	8526                	mv	a0,s1
   5e:	00000097          	auipc	ra,0x0
+			5e: R_RISCV_CALL	rc4
+			5e: R_RISCV_RELAX	*ABS*
   62:	000080e7          	jalr	ra # 5e <.LVL39+0xa>
 
 00000066 <.L11>:

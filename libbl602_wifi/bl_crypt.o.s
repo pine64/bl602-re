@@ -1,5 +1,5 @@
 
-bl_crypt.o:     file format elf32-littleriscv
+libbl602_wifi/bl_crypt.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.BL_AES_MEMCMP:
@@ -10,6 +10,7 @@ Disassembly of section .text.BL_AES_MEMCMP:
 
 00000004 <.L2>:
    4:	00f81763          	bne	a6,a5,12 <.L4>
+			4: R_RISCV_BRANCH	.L4
    8:	00c03633          	snez	a2,a2
 
 0000000c <.LVL2>:
@@ -24,6 +25,7 @@ Disassembly of section .text.BL_AES_MEMCMP:
   1a:	0006c683          	lbu	a3,0(a3)
   1e:	00074703          	lbu	a4,0(a4)
   22:	00e69363          	bne	a3,a4,28 <.L3>
+			22: R_RISCV_BRANCH	.L3
   26:	167d                	addi	a2,a2,-1
 
 00000028 <.L3>:
@@ -31,6 +33,7 @@ Disassembly of section .text.BL_AES_MEMCMP:
 
 0000002a <.LVL6>:
   2a:	bfe9                	j	4 <.L2>
+			2a: R_RISCV_RVC_JUMP	.L2
 
 Disassembly of section .text.BL_AES_MEMSET:
 
@@ -39,6 +42,7 @@ Disassembly of section .text.BL_AES_MEMSET:
 
 00000002 <.L6>:
    2:	00c51363          	bne	a0,a2,8 <.L7>
+			2: R_RISCV_BRANCH	.L7
    6:	8082                	ret
 
 00000008 <.L7>:
@@ -47,6 +51,7 @@ Disassembly of section .text.BL_AES_MEMSET:
 0000000a <.LVL9>:
    a:	feb50fa3          	sb	a1,-1(a0)
    e:	bfd5                	j	2 <.L6>
+			e: R_RISCV_RVC_JUMP	.L6
 
 Disassembly of section .text.BL_AES_MEMCPY:
 
@@ -55,10 +60,12 @@ Disassembly of section .text.BL_AES_MEMCPY:
 
 00000002 <.LBE4>:
    2:	02b57863          	bgeu	a0,a1,32 <.L10>
+			2: R_RISCV_BRANCH	.L10
    6:	4781                	li	a5,0
 
 00000008 <.L11>:
    8:	00c79363          	bne	a5,a2,e <.L12>
+			8: R_RISCV_BRANCH	.L12
    c:	8082                	ret
 
 0000000e <.L12>:
@@ -72,6 +79,7 @@ Disassembly of section .text.BL_AES_MEMCPY:
 
 00000020 <.LVL14>:
   20:	b7e5                	j	8 <.L11>
+			20: R_RISCV_RVC_JUMP	.L11
 
 00000022 <.L13>:
   22:	00c58733          	add	a4,a1,a2
@@ -84,6 +92,7 @@ Disassembly of section .text.BL_AES_MEMCPY:
 
 00000034 <.LVL17>:
   34:	fef617e3          	bne	a2,a5,22 <.L13>
+			34: R_RISCV_BRANCH	.L13
 
 00000038 <.LBE7>:
   38:	8082                	ret
@@ -112,6 +121,8 @@ Disassembly of section .text.BL_AesEncrypt:
 00000018 <.LVL23>:
   18:	18112e23          	sw	ra,412(sp)
   1c:	00000097          	auipc	ra,0x0
+			1c: R_RISCV_CALL	rijndael_set_key
+			1c: R_RISCV_RELAX	*ABS*
   20:	000080e7          	jalr	ra # 1c <.LVL23+0x4>
 
 00000024 <.LVL24>:
@@ -119,6 +130,8 @@ Disassembly of section .text.BL_AesEncrypt:
   26:	8626                	mv	a2,s1
   28:	85a2                	mv	a1,s0
   2a:	00000097          	auipc	ra,0x0
+			2a: R_RISCV_CALL	rijndael_encrypt
+			2a: R_RISCV_RELAX	*ABS*
   2e:	000080e7          	jalr	ra # 2a <.LVL24+0x6>
 
 00000032 <.LVL25>:
@@ -139,6 +152,7 @@ Disassembly of section .text.BL_AesWrap:
 
 00000000 <BL_AesWrap>:
    0:	10060263          	beqz	a2,104 <.L25>
+			0: R_RISCV_BRANCH	.L25
    4:	715d                	addi	sp,sp,-80
    6:	c4a2                	sw	s0,72(sp)
    8:	d85a                	sw	s6,48(sp)
@@ -169,18 +183,27 @@ Disassembly of section .text.BL_AesWrap:
 
 00000030 <.LVL33>:
   30:	00000097          	auipc	ra,0x0
+			30: R_RISCV_CALL	BL_AES_MEMSET
+			30: R_RISCV_RELAX	*ABS*
   34:	000080e7          	jalr	ra # 30 <.LVL33>
 
 00000038 <.LVL34>:
   38:	4621                	li	a2,8
   3a:	85a6                	mv	a1,s1
   3c:	e489                	bnez	s1,46 <.L30>
+			3c: R_RISCV_RVC_BRANCH	.L30
   3e:	000005b7          	lui	a1,0x0
+			3e: R_RISCV_HI20	.LANCHOR0
+			3e: R_RISCV_RELAX	*ABS*
   42:	00058593          	mv	a1,a1
+			42: R_RISCV_LO12_I	.LANCHOR0
+			42: R_RISCV_RELAX	*ABS*
 
 00000046 <.L30>:
   46:	0028                	addi	a0,sp,8
   48:	00000097          	auipc	ra,0x0
+			48: R_RISCV_CALL	BL_AES_MEMCPY
+			48: R_RISCV_RELAX	*ABS*
   4c:	000080e7          	jalr	ra # 48 <.L30+0x2>
 
 00000050 <.LVL35>:
@@ -189,6 +212,8 @@ Disassembly of section .text.BL_AesWrap:
   56:	8552                	mv	a0,s4
   58:	0ff47c13          	andi	s8,s0,255
   5c:	00000097          	auipc	ra,0x0
+			5c: R_RISCV_CALL	BL_AES_MEMCPY
+			5c: R_RISCV_RELAX	*ABS*
   60:	000080e7          	jalr	ra # 5c <.LVL35+0xc>
 
 00000064 <.LVL36>:
@@ -201,12 +226,15 @@ Disassembly of section .text.BL_AesWrap:
 0000006a <.L21>:
   6a:	4485                	li	s1,1
   6c:	a8a9                	j	c6 <.L24>
+			6c: R_RISCV_RVC_JUMP	.L24
 
 0000006e <.L22>:
   6e:	4621                	li	a2,8
   70:	002c                	addi	a1,sp,8
   72:	0808                	addi	a0,sp,16
   74:	00000097          	auipc	ra,0x0
+			74: R_RISCV_CALL	BL_AES_MEMCPY
+			74: R_RISCV_RELAX	*ABS*
   78:	000080e7          	jalr	ra # 74 <.L22+0x6>
 
 0000007c <.LVL40>:
@@ -214,6 +242,8 @@ Disassembly of section .text.BL_AesWrap:
   7e:	85d2                	mv	a1,s4
   80:	0828                	addi	a0,sp,24
   82:	00000097          	auipc	ra,0x0
+			82: R_RISCV_CALL	BL_AES_MEMCPY
+			82: R_RISCV_RELAX	*ABS*
   86:	000080e7          	jalr	ra # 82 <.LVL40+0x6>
 
 0000008a <.LVL41>:
@@ -222,6 +252,8 @@ Disassembly of section .text.BL_AesWrap:
   8e:	85de                	mv	a1,s7
   90:	855a                	mv	a0,s6
   92:	00000097          	auipc	ra,0x0
+			92: R_RISCV_CALL	BL_AesEncrypt
+			92: R_RISCV_RELAX	*ABS*
   96:	000080e7          	jalr	ra # 92 <.LVL41+0x8>
 
 0000009a <.LVL42>:
@@ -229,6 +261,8 @@ Disassembly of section .text.BL_AesWrap:
   9c:	080c                	addi	a1,sp,16
   9e:	0028                	addi	a0,sp,8
   a0:	00000097          	auipc	ra,0x0
+			a0: R_RISCV_CALL	BL_AES_MEMCPY
+			a0: R_RISCV_RELAX	*ABS*
   a4:	000080e7          	jalr	ra # a0 <.LVL42+0x6>
 
 000000a8 <.LVL43>:
@@ -243,6 +277,8 @@ Disassembly of section .text.BL_AesWrap:
 
 000000be <.LVL44>:
   be:	00000097          	auipc	ra,0x0
+			be: R_RISCV_CALL	BL_AES_MEMCPY
+			be: R_RISCV_RELAX	*ABS*
   c2:	000080e7          	jalr	ra # be <.LVL44>
 
 000000c6 <.L24>:
@@ -251,6 +287,7 @@ Disassembly of section .text.BL_AesWrap:
 
 000000cc <.LVL46>:
   cc:	fa8491e3          	bne	s1,s0,6e <.L22>
+			cc: R_RISCV_BRANCH	.L22
 
 000000d0 <.LVL47>:
   d0:	99e2                	add	s3,s3,s8
@@ -259,10 +296,13 @@ Disassembly of section .text.BL_AesWrap:
 000000d4 <.LVL48>:
   d4:	0ff9f993          	andi	s3,s3,255
   d8:	f80a99e3          	bnez	s5,6a <.L21>
+			d8: R_RISCV_BRANCH	.L21
   dc:	854a                	mv	a0,s2
   de:	002c                	addi	a1,sp,8
   e0:	4621                	li	a2,8
   e2:	00000097          	auipc	ra,0x0
+			e2: R_RISCV_CALL	BL_AES_MEMCPY
+			e2: R_RISCV_RELAX	*ABS*
   e6:	000080e7          	jalr	ra # e2 <.LVL48+0xe>
 
 000000ea <.LVL49>:
@@ -302,6 +342,7 @@ Disassembly of section .text.BL_AesUnWrap:
 
 00000000 <BL_AesUnWrap>:
    0:	14060a63          	beqz	a2,154 <.L37>
+			0: R_RISCV_BRANCH	.L37
    4:	7105                	addi	sp,sp,-480
    6:	1d212823          	sw	s2,464(sp)
    a:	1d512223          	sw	s5,452(sp)
@@ -328,6 +369,8 @@ Disassembly of section .text.BL_AesUnWrap:
   36:	8a36                	mv	s4,a3
   38:	1b712e23          	sw	s7,444(sp)
   3c:	00000097          	auipc	ra,0x0
+			3c: R_RISCV_CALL	BL_AES_MEMSET
+			3c: R_RISCV_RELAX	*ABS*
   40:	000080e7          	jalr	ra # 3c <.LVL61+0x1e>
 
 00000044 <.LVL62>:
@@ -335,6 +378,8 @@ Disassembly of section .text.BL_AesUnWrap:
   46:	4581                	li	a1,0
   48:	0808                	addi	a0,sp,16
   4a:	00000097          	auipc	ra,0x0
+			4a: R_RISCV_CALL	BL_AES_MEMSET
+			4a: R_RISCV_RELAX	*ABS*
   4e:	000080e7          	jalr	ra # 4a <.LVL62+0x6>
 
 00000052 <.LVL63>:
@@ -342,6 +387,8 @@ Disassembly of section .text.BL_AesUnWrap:
   54:	85d2                	mv	a1,s4
   56:	0028                	addi	a0,sp,8
   58:	00000097          	auipc	ra,0x0
+			58: R_RISCV_CALL	BL_AES_MEMCPY
+			58: R_RISCV_RELAX	*ABS*
   5c:	000080e7          	jalr	ra # 58 <.LVL63+0x6>
 
 00000060 <.LVL64>:
@@ -357,6 +404,8 @@ Disassembly of section .text.BL_AesUnWrap:
   72:	028b8433          	mul	s0,s7,s0
   76:	008a0593          	addi	a1,s4,8
   7a:	00000097          	auipc	ra,0x0
+			7a: R_RISCV_CALL	BL_AES_MEMCPY
+			7a: R_RISCV_RELAX	*ABS*
   7e:	000080e7          	jalr	ra # 7a <.LVL65+0x8>
 
 00000082 <.LVL66>:
@@ -367,6 +416,8 @@ Disassembly of section .text.BL_AesUnWrap:
 
 0000008c <.LVL67>:
   8c:	00000097          	auipc	ra,0x0
+			8c: R_RISCV_CALL	rijndael_set_key
+			8c: R_RISCV_RELAX	*ABS*
   90:	000080e7          	jalr	ra # 8c <.LVL67>
 
 00000094 <.LVL68>:
@@ -381,6 +432,7 @@ Disassembly of section .text.BL_AesUnWrap:
 
 0000009e <.L33>:
   9e:	05404e63          	bgtz	s4,fa <.L34>
+			9e: R_RISCV_BRANCH	.L34
 
 000000a2 <.LVL72>:
   a2:	41740433          	sub	s0,s0,s7
@@ -389,19 +441,27 @@ Disassembly of section .text.BL_AesUnWrap:
 000000a8 <.LVL73>:
   a8:	0ff47413          	andi	s0,s0,255
   ac:	fe0b17e3          	bnez	s6,9a <.L35>
+			ac: R_RISCV_BRANCH	.L35
   b0:	4621                	li	a2,8
   b2:	002c                	addi	a1,sp,8
   b4:	854e                	mv	a0,s3
   b6:	00099663          	bnez	s3,c2 <.L43>
+			b6: R_RISCV_BRANCH	.L43
 
 000000ba <.LVL74>:
   ba:	00000537          	lui	a0,0x0
+			ba: R_RISCV_HI20	.LANCHOR0
+			ba: R_RISCV_RELAX	*ABS*
 
 000000be <.LVL75>:
   be:	00050513          	mv	a0,a0
+			be: R_RISCV_LO12_I	.LANCHOR0
+			be: R_RISCV_RELAX	*ABS*
 
 000000c2 <.L43>:
   c2:	00000097          	auipc	ra,0x0
+			c2: R_RISCV_CALL	BL_AES_MEMCMP
+			c2: R_RISCV_RELAX	*ABS*
   c6:	000080e7          	jalr	ra # c2 <.L43>
 
 000000ca <.LVL76>:
@@ -436,6 +496,8 @@ Disassembly of section .text.BL_AesUnWrap:
   fc:	002c                	addi	a1,sp,8
   fe:	0808                	addi	a0,sp,16
  100:	00000097          	auipc	ra,0x0
+			100: R_RISCV_CALL	BL_AES_MEMCPY
+			100: R_RISCV_RELAX	*ABS*
  104:	000080e7          	jalr	ra # 100 <.L34+0x6>
 
 00000108 <.LVL84>:
@@ -447,6 +509,8 @@ Disassembly of section .text.BL_AesUnWrap:
  116:	0828                	addi	a0,sp,24
  118:	00f10ba3          	sb	a5,23(sp)
  11c:	00000097          	auipc	ra,0x0
+			11c: R_RISCV_CALL	BL_AES_MEMCPY
+			11c: R_RISCV_RELAX	*ABS*
  120:	000080e7          	jalr	ra # 11c <.LVL84+0x14>
 
 00000124 <.LVL85>:
@@ -456,6 +520,8 @@ Disassembly of section .text.BL_AesUnWrap:
 
 0000012a <.LVL86>:
  12a:	00000097          	auipc	ra,0x0
+			12a: R_RISCV_CALL	rijndael_decrypt
+			12a: R_RISCV_RELAX	*ABS*
  12e:	000080e7          	jalr	ra # 12a <.LVL86>
 
 00000132 <.LVL87>:
@@ -463,6 +529,8 @@ Disassembly of section .text.BL_AesUnWrap:
  134:	080c                	addi	a1,sp,16
  136:	0028                	addi	a0,sp,8
  138:	00000097          	auipc	ra,0x0
+			138: R_RISCV_CALL	BL_AES_MEMCPY
+			138: R_RISCV_RELAX	*ABS*
  13c:	000080e7          	jalr	ra # 138 <.LVL87+0x6>
 
 00000140 <.LVL88>:
@@ -470,12 +538,15 @@ Disassembly of section .text.BL_AesUnWrap:
  142:	4621                	li	a2,8
  144:	082c                	addi	a1,sp,24
  146:	00000097          	auipc	ra,0x0
+			146: R_RISCV_CALL	BL_AES_MEMCPY
+			146: R_RISCV_RELAX	*ABS*
  14a:	000080e7          	jalr	ra # 146 <.LVL88+0x6>
 
 0000014e <.LVL89>:
  14e:	1ae1                	addi	s5,s5,-8
  150:	1a7d                	addi	s4,s4,-1
  152:	b7b1                	j	9e <.L33>
+			152: R_RISCV_RVC_JUMP	.L33
 
 00000154 <.L37>:
  154:	557d                	li	a0,-1

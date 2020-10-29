@@ -1,5 +1,5 @@
 
-at_upgrade.o:     file format elf32-littleriscv
+libatcmd/at_upgrade.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.at_upgrade:

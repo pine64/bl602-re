@@ -1,5 +1,5 @@
 
-dbg.o:     file format elf32-littleriscv
+libbl602_wifi/dbg.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.dbg_init:
@@ -8,15 +8,23 @@ Disassembly of section .text.dbg_init:
    0:	1141                	addi	sp,sp,-16
    2:	c422                	sw	s0,8(sp)
    4:	00000437          	lui	s0,0x0
+			4: R_RISCV_HI20	dbg_env
+			4: R_RISCV_RELAX	*ABS*
    8:	00040513          	mv	a0,s0
+			8: R_RISCV_LO12_I	dbg_env
+			8: R_RISCV_RELAX	*ABS*
    c:	4621                	li	a2,8
    e:	4581                	li	a1,0
   10:	c606                	sw	ra,12(sp)
   12:	00000097          	auipc	ra,0x0
+			12: R_RISCV_CALL	memset
+			12: R_RISCV_RELAX	*ABS*
   16:	000080e7          	jalr	ra # 12 <dbg_init+0x12>
 
 0000001a <.LVL0>:
   1a:	00040413          	mv	s0,s0
+			1a: R_RISCV_LO12_I	dbg_env
+			1a: R_RISCV_RELAX	*ABS*
   1e:	57fd                	li	a5,-1
   20:	c01c                	sw	a5,0(s0)
   22:	4789                	li	a5,2

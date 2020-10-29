@@ -1,5 +1,5 @@
 
-bl602_calib_data.o:     file format elf32-littleriscv
+libbl602_wifi/bl602_calib_data.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.rf_pri_init_calib_mem:
@@ -8,12 +8,18 @@ Disassembly of section .text.rf_pri_init_calib_mem:
    0:	1141                	addi	sp,sp,-16
    2:	c422                	sw	s0,8(sp)
    4:	00000437          	lui	s0,0x0
+			4: R_RISCV_HI20	.LANCHOR0
+			4: R_RISCV_RELAX	*ABS*
    8:	00040413          	mv	s0,s0
+			8: R_RISCV_LO12_I	.LANCHOR0
+			8: R_RISCV_RELAX	*ABS*
    c:	4008                	lw	a0,0(s0)
    e:	0a800613          	li	a2,168
   12:	4581                	li	a1,0
   14:	c606                	sw	ra,12(sp)
   16:	00000097          	auipc	ra,0x0
+			16: R_RISCV_CALL	memset
+			16: R_RISCV_RELAX	*ABS*
   1a:	000080e7          	jalr	ra # 16 <rf_pri_init_calib_mem+0x16>
 
 0000001e <.LVL0>:
@@ -51,6 +57,7 @@ Disassembly of section .text.rf_pri_init_calib_mem:
   68:	c006f693          	andi	a3,a3,-1024
   6c:	c754                	sw	a3,12(a4)
   6e:	fc6516e3          	bne	a0,t1,3a <.L2>
+			6e: R_RISCV_BRANCH	.L2
   72:	4794                	lw	a3,8(a5)
   74:	787d                	lui	a6,0xfffff
   76:	6505                	lui	a0,0x1
@@ -116,6 +123,7 @@ Disassembly of section .text.rf_pri_init_calib_mem:
  104:	c006f693          	andi	a3,a3,-1024
  108:	c754                	sw	a3,12(a4)
  10a:	fd1617e3          	bne	a2,a7,d8 <.L3>
+			10a: R_RISCV_BRANCH	.L3
  10e:	4b98                	lw	a4,16(a5)
  110:	f8f77713          	andi	a4,a4,-113
  114:	05076713          	ori	a4,a4,80

@@ -1,5 +1,5 @@
 
-bl_ap_mgmt.o:     file format elf32-littleriscv
+libbl602_wifi/bl_ap_mgmt.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.ReInitGTK:
@@ -11,6 +11,8 @@ Disassembly of section .text.ReInitGTK:
    6:	842a                	mv	s0,a0
    8:	c606                	sw	ra,12(sp)
    a:	00000097          	auipc	ra,0x0
+			a: R_RISCV_CALL	cm_GetApInfo
+			a: R_RISCV_RELAX	*ABS*
    e:	000080e7          	jalr	ra # a <ReInitGTK+0xa>
 
 00000012 <.LVL1>:
@@ -20,7 +22,10 @@ Disassembly of section .text.ReInitGTK:
   14:	00344503          	lbu	a0,3(s0)
   18:	0ff00793          	li	a5,255
   1c:	00f50663          	beq	a0,a5,28 <.L2>
+			1c: R_RISCV_BRANCH	.L2
   20:	00000097          	auipc	ra,0x0
+			20: R_RISCV_CALL	mm_sec_machwkey_del
+			20: R_RISCV_RELAX	*ABS*
   24:	000080e7          	jalr	ra # 20 <.LVL2+0xc>
 
 00000028 <.L2>:
@@ -28,12 +33,16 @@ Disassembly of section .text.ReInitGTK:
   2c:	0f448593          	addi	a1,s1,244
   30:	0cc48513          	addi	a0,s1,204
   34:	00000097          	auipc	ra,0x0
+			34: R_RISCV_CALL	ROM_InitGTK
+			34: R_RISCV_RELAX	*ABS*
   38:	000080e7          	jalr	ra # 34 <.L2+0xc>
 
 0000003c <.LVL4>:
   3c:	8522                	mv	a0,s0
   3e:	4581                	li	a1,0
   40:	00000097          	auipc	ra,0x0
+			40: R_RISCV_CALL	add_key_to_mac
+			40: R_RISCV_RELAX	*ABS*
   44:	000080e7          	jalr	ra # 40 <.LVL4+0x4>
 
 00000048 <.LVL5>:
@@ -57,6 +66,8 @@ Disassembly of section .text.KeyMgmtInit:
    6:	ca26                	sw	s1,20(sp)
    8:	84aa                	mv	s1,a0
    a:	00000097          	auipc	ra,0x0
+			a: R_RISCV_CALL	cm_GetApInfo
+			a: R_RISCV_RELAX	*ABS*
    e:	000080e7          	jalr	ra # a <KeyMgmtInit+0xa>
 
 00000012 <.LVL9>:
@@ -67,12 +78,15 @@ Disassembly of section .text.KeyMgmtInit:
   18:	04648613          	addi	a2,s1,70
   1c:	0cc50513          	addi	a0,a0,204
   20:	00000097          	auipc	ra,0x0
+			20: R_RISCV_CALL	ROM_InitGTK
+			20: R_RISCV_RELAX	*ABS*
   24:	000080e7          	jalr	ra # 20 <.LVL10+0xc>
 
 00000028 <.LVL11>:
   28:	0b842703          	lw	a4,184(s0)
   2c:	4785                	li	a5,1
   2e:	02f71b63          	bne	a4,a5,64 <.L4>
+			2e: R_RISCV_BRANCH	.L4
   32:	02c4c583          	lbu	a1,44(s1)
   36:	01840613          	addi	a2,s0,24
 
@@ -81,6 +95,8 @@ Disassembly of section .text.KeyMgmtInit:
   3c:	c62e                	sw	a1,12(sp)
   3e:	c432                	sw	a2,8(sp)
   40:	00000097          	auipc	ra,0x0
+			40: R_RISCV_CALL	strlen
+			40: R_RISCV_RELAX	*ABS*
   44:	000080e7          	jalr	ra # 40 <.LVL12+0x6>
 
 00000048 <.LVL13>:
@@ -92,6 +108,8 @@ Disassembly of section .text.KeyMgmtInit:
 00000054 <.LVL14>:
   54:	00c48513          	addi	a0,s1,12
   58:	00000097          	auipc	ra,0x0
+			58: R_RISCV_CALL	pmkCacheGeneratePSK
+			58: R_RISCV_RELAX	*ABS*
   5c:	000080e7          	jalr	ra # 58 <.LVL14+0x4>
 
 00000060 <.LVL15>:
@@ -122,6 +140,8 @@ Disassembly of section .text.PrepDefaultEapolMsg:
   10:	d452                	sw	s4,40(sp)
   12:	89ae                	mv	s3,a1
   14:	00000097          	auipc	ra,0x0
+			14: R_RISCV_CALL	cm_GetApData
+			14: R_RISCV_RELAX	*ABS*
   18:	000080e7          	jalr	ra # 14 <PrepDefaultEapolMsg+0x14>
 
 0000001c <.LVL20>:
@@ -132,6 +152,8 @@ Disassembly of section .text.PrepDefaultEapolMsg:
 
 00000020 <.LVL22>:
   20:	00000097          	auipc	ra,0x0
+			20: R_RISCV_CALL	cm_GetApInfo
+			20: R_RISCV_RELAX	*ABS*
   24:	000080e7          	jalr	ra # 20 <.LVL22>
 
 00000028 <.LVL23>:
@@ -144,6 +166,8 @@ Disassembly of section .text.PrepDefaultEapolMsg:
 
 00000030 <.LVL25>:
   30:	00000097          	auipc	ra,0x0
+			30: R_RISCV_CALL	GetTxEAPOLBuffer
+			30: R_RISCV_RELAX	*ABS*
   34:	000080e7          	jalr	ra # 30 <.LVL25>
 
 00000038 <.LVL26>:
@@ -151,10 +175,13 @@ Disassembly of section .text.PrepDefaultEapolMsg:
 
 0000003a <.LVL27>:
   3a:	c921                	beqz	a0,8a <.L7>
+			3a: R_RISCV_RVC_BRANCH	.L7
   3c:	4572                	lw	a0,28(sp)
   3e:	07200613          	li	a2,114
   42:	4581                	li	a1,0
   44:	00000097          	auipc	ra,0x0
+			44: R_RISCV_CALL	memset
+			44: R_RISCV_RELAX	*ABS*
   48:	000080e7          	jalr	ra # 44 <.LVL27+0xa>
 
 0000004c <.LVL28>:
@@ -162,6 +189,8 @@ Disassembly of section .text.PrepDefaultEapolMsg:
   4e:	04040593          	addi	a1,s0,64
   52:	04640613          	addi	a2,s0,70
   56:	00000097          	auipc	ra,0x0
+			56: R_RISCV_CALL	formEAPOLEthHdr
+			56: R_RISCV_RELAX	*ABS*
   5a:	000080e7          	jalr	ra # 56 <.LVL28+0xa>
 
 0000005e <.LVL29>:
@@ -173,6 +202,7 @@ Disassembly of section .text.PrepDefaultEapolMsg:
   6c:	8985                	andi	a1,a1,1
   6e:	4685                	li	a3,1
   70:	e789                	bnez	a5,7a <.L9>
+			70: R_RISCV_RVC_BRANCH	.L9
   72:	008a4683          	lbu	a3,8(s4)
   76:	828d                	srli	a3,a3,0x3
   78:	8a85                	andi	a3,a3,1
@@ -180,6 +210,8 @@ Disassembly of section .text.PrepDefaultEapolMsg:
 0000007a <.L9>:
   7a:	4601                	li	a2,0
   7c:	00000097          	auipc	ra,0x0
+			7c: R_RISCV_CALL	SetEAPOLKeyDescTypeVersion
+			7c: R_RISCV_RELAX	*ABS*
   80:	000080e7          	jalr	ra # 7c <.L9+0x2>
 
 00000084 <.LVL30>:
@@ -218,6 +250,8 @@ Disassembly of section .text.GeneratePWKMsg1:
    a:	84aa                	mv	s1,a0
    c:	c62e                	sw	a1,12(sp)
    e:	00000097          	auipc	ra,0x0
+			e: R_RISCV_CALL	cm_GetApData
+			e: R_RISCV_RELAX	*ABS*
   12:	000080e7          	jalr	ra # e <GeneratePWKMsg1+0xe>
 
 00000016 <.LVL38>:
@@ -228,10 +262,13 @@ Disassembly of section .text.GeneratePWKMsg1:
   1a:	084c                	addi	a1,sp,20
   1c:	8526                	mv	a0,s1
   1e:	00000097          	auipc	ra,0x0
+			1e: R_RISCV_CALL	PrepDefaultEapolMsg
+			1e: R_RISCV_RELAX	*ABS*
   22:	000080e7          	jalr	ra # 1e <.LVL39+0x4>
 
 00000026 <.LVL40>:
   26:	c959                	beqz	a0,bc <.L18>
+			26: R_RISCV_RVC_BRANCH	.L18
 
 00000028 <.LBB6>:
   28:	4c5c                	lw	a5,28(s0)
@@ -241,6 +278,7 @@ Disassembly of section .text.GeneratePWKMsg1:
   2c:	0785                	addi	a5,a5,1
   2e:	cc5c                	sw	a5,28(s0)
   30:	e781                	bnez	a5,38 <.L17>
+			30: R_RISCV_RVC_BRANCH	.L17
   32:	5018                	lw	a4,32(s0)
   34:	0705                	addi	a4,a4,1
   36:	d018                	sw	a4,32(s0)
@@ -257,6 +295,8 @@ Disassembly of section .text.GeneratePWKMsg1:
   44:	ce3e                	sw	a5,28(sp)
   46:	cc3a                	sw	a4,24(sp)
   48:	00000097          	auipc	ra,0x0
+			48: R_RISCV_CALL	supplicantGenerateRand
+			48: R_RISCV_RELAX	*ABS*
   4c:	000080e7          	jalr	ra # 48 <.LVL44+0x4>
 
 00000050 <.LVL45>:
@@ -267,6 +307,8 @@ Disassembly of section .text.GeneratePWKMsg1:
   58:	80060613          	addi	a2,a2,-2048 # 800 <.LLST18+0x2>
   5c:	01440593          	addi	a1,s0,20
   60:	00000097          	auipc	ra,0x0
+			60: R_RISCV_CALL	PopulateKeyMsg
+			60: R_RISCV_RELAX	*ABS*
   64:	000080e7          	jalr	ra # 60 <.LVL45+0x10>
 
 00000068 <.LVL46>:
@@ -294,6 +336,8 @@ Disassembly of section .text.GeneratePWKMsg1:
   a0:	83a1                	srli	a5,a5,0x8
   a2:	00f708a3          	sb	a5,17(a4)
   a6:	00000097          	auipc	ra,0x0
+			a6: R_RISCV_CALL	UpdateEAPOLWcbLenAndTransmit
+			a6: R_RISCV_RELAX	*ABS*
   aa:	000080e7          	jalr	ra # a6 <.LVL47+0x22>
 
 000000ae <.LVL48>:
@@ -314,6 +358,7 @@ Disassembly of section .text.GeneratePWKMsg1:
 
 000000be <.LVL52>:
   be:	bfcd                	j	b0 <.L16>
+			be: R_RISCV_RVC_JUMP	.L16
 
 Disassembly of section .text.GeneratePWKMsg3:
 
@@ -331,15 +376,20 @@ Disassembly of section .text.GeneratePWKMsg3:
   10:	ce4e                	sw	s3,28(sp)
   12:	8a2a                	mv	s4,a0
   14:	00000097          	auipc	ra,0x0
+			14: R_RISCV_CALL	PrepDefaultEapolMsg
+			14: R_RISCV_RELAX	*ABS*
   18:	000080e7          	jalr	ra # 14 <.LVL54+0xe>
 
 0000001c <.LVL55>:
   1c:	cd51                	beqz	a0,b8 <.L26>
+			1c: R_RISCV_RVC_BRANCH	.L26
   1e:	84aa                	mv	s1,a0
   20:	8552                	mv	a0,s4
 
 00000022 <.LVL56>:
   22:	00000097          	auipc	ra,0x0
+			22: R_RISCV_CALL	cm_GetApData
+			22: R_RISCV_RELAX	*ABS*
   26:	000080e7          	jalr	ra # 22 <.LVL56>
 
 0000002a <.LVL57>:
@@ -348,6 +398,8 @@ Disassembly of section .text.GeneratePWKMsg3:
 0000002c <.LVL58>:
   2c:	8552                	mv	a0,s4
   2e:	00000097          	auipc	ra,0x0
+			2e: R_RISCV_CALL	cm_GetApInfo
+			2e: R_RISCV_RELAX	*ABS*
   32:	000080e7          	jalr	ra # 2e <.LVL58+0x2>
 
 00000036 <.LBB12>:
@@ -360,6 +412,7 @@ Disassembly of section .text.GeneratePWKMsg3:
   3a:	0785                	addi	a5,a5,1
   3c:	cc5c                	sw	a5,28(s0)
   3e:	e781                	bnez	a5,46 <.L22>
+			3e: R_RISCV_RVC_BRANCH	.L22
   40:	5018                	lw	a4,32(s0)
   42:	0705                	addi	a4,a4,1
   44:	d018                	sw	a4,32(s0)
@@ -385,6 +438,8 @@ Disassembly of section .text.GeneratePWKMsg3:
   6c:	8241                	srli	a2,a2,0x10
   6e:	85ce                	mv	a1,s3
   70:	00000097          	auipc	ra,0x0
+			70: R_RISCV_CALL	PopulateKeyMsg
+			70: R_RISCV_RELAX	*ABS*
   74:	000080e7          	jalr	ra # 70 <.LVL62+0x12>
 
 00000078 <.LVL63>:
@@ -392,43 +447,60 @@ Disassembly of section .text.GeneratePWKMsg3:
   7c:	4681                	li	a3,0
   7e:	0087f713          	andi	a4,a5,8
   82:	eb01                	bnez	a4,92 <.L23>
+			82: R_RISCV_RVC_BRANCH	.L23
   84:	0207f793          	andi	a5,a5,32
   88:	c789                	beqz	a5,92 <.L23>
+			88: R_RISCV_RVC_BRANCH	.L23
   8a:	000006b7          	lui	a3,0x0
+			8a: R_RISCV_HI20	int_rsn_ie
+			8a: R_RISCV_RELAX	*ABS*
   8e:	00068693          	mv	a3,a3
+			8e: R_RISCV_LO12_I	int_rsn_ie
+			8e: R_RISCV_RELAX	*ABS*
 
 00000092 <.L23>:
   92:	4512                	lw	a0,4(sp)
   94:	4601                	li	a2,0
   96:	01240593          	addi	a1,s0,18
   9a:	00000097          	auipc	ra,0x0
+			9a: R_RISCV_CALL	KeyData_UpdateKeyMaterial
+			9a: R_RISCV_RELAX	*ABS*
   9e:	000080e7          	jalr	ra # 9a <.L23+0x8>
 
 000000a2 <.LVL65>:
   a2:	ed09                	bnez	a0,bc <.L24>
+			a2: R_RISCV_RVC_BRANCH	.L24
 
 000000a4 <.L34>:
   a4:	4488                	lw	a0,8(s1)
   a6:	00000097          	auipc	ra,0x0
+			a6: R_RISCV_CALL	vPortFree
+			a6: R_RISCV_RELAX	*ABS*
   aa:	000080e7          	jalr	ra # a6 <.L34+0x2>
 
 000000ae <.LVL66>:
   ae:	8526                	mv	a0,s1
   b0:	00000097          	auipc	ra,0x0
+			b0: R_RISCV_CALL	vPortFree
+			b0: R_RISCV_RELAX	*ABS*
   b4:	000080e7          	jalr	ra # b0 <.LVL66+0x2>
 
 000000b8 <.L26>:
   b8:	4505                	li	a0,1
   ba:	a899                	j	110 <.L21>
+			ba: R_RISCV_RVC_JUMP	.L21
 
 000000bc <.L24>:
   bc:	01245783          	lhu	a5,18(s0)
   c0:	0207f793          	andi	a5,a5,32
   c4:	c39d                	beqz	a5,ea <.L25>
+			c4: R_RISCV_RVC_BRANCH	.L25
   c6:	4512                	lw	a0,4(sp)
   c8:	00890613          	addi	a2,s2,8
   cc:	0cc90593          	addi	a1,s2,204
   d0:	00000097          	auipc	ra,0x0
+			d0: R_RISCV_CALL	prepareKDE
+			d0: R_RISCV_RELAX	*ABS*
   d4:	000080e7          	jalr	ra # d0 <.L24+0x14>
 
 000000d8 <.LVL69>:
@@ -436,10 +508,13 @@ Disassembly of section .text.GeneratePWKMsg3:
   da:	864e                	mv	a2,s3
   dc:	04440593          	addi	a1,s0,68
   e0:	00000097          	auipc	ra,0x0
+			e0: R_RISCV_CALL	Encrypt_keyData
+			e0: R_RISCV_RELAX	*ABS*
   e4:	000080e7          	jalr	ra # e0 <.LVL69+0x8>
 
 000000e8 <.LVL70>:
   e8:	dd55                	beqz	a0,a4 <.L34>
+			e8: R_RISCV_RVC_BRANCH	.L34
 
 000000ea <.L25>:
   ea:	4512                	lw	a0,4(sp)
@@ -448,6 +523,8 @@ Disassembly of section .text.GeneratePWKMsg3:
   f4:	01454683          	lbu	a3,20(a0)
   f8:	8a9d                	andi	a3,a3,7
   fa:	00000097          	auipc	ra,0x0
+			fa: R_RISCV_CALL	KeyMgmtSta_PopulateEAPOLLengthMic
+			fa: R_RISCV_RELAX	*ABS*
   fe:	000080e7          	jalr	ra # fa <.L25+0x10>
 
 00000102 <.LVL71>:
@@ -456,6 +533,8 @@ Disassembly of section .text.GeneratePWKMsg3:
 
 00000106 <.LVL72>:
  106:	00000097          	auipc	ra,0x0
+			106: R_RISCV_CALL	UpdateEAPOLWcbLenAndTransmit
+			106: R_RISCV_RELAX	*ABS*
  10a:	000080e7          	jalr	ra # 106 <.LVL72>
 
 0000010e <.LVL73>:
@@ -489,6 +568,8 @@ Disassembly of section .text.ProcessPWKMsg4:
 
 00000010 <.LVL78>:
   10:	00000097          	auipc	ra,0x0
+			10: R_RISCV_CALL	cm_GetApData
+			10: R_RISCV_RELAX	*ABS*
   14:	000080e7          	jalr	ra # 10 <.LVL78>
 
 00000018 <.LVL79>:
@@ -498,10 +579,13 @@ Disassembly of section .text.ProcessPWKMsg4:
   1a:	03450593          	addi	a1,a0,52
   1e:	00892503          	lw	a0,8(s2)
   22:	00000097          	auipc	ra,0x0
+			22: R_RISCV_CALL	IsEAPOL_MICValid
+			22: R_RISCV_RELAX	*ABS*
   26:	000080e7          	jalr	ra # 22 <.LVL80+0x8>
 
 0000002a <.LVL81>:
   2a:	c939                	beqz	a0,80 <.L37>
+			2a: R_RISCV_RVC_BRANCH	.L37
   2c:	4785                	li	a5,1
   2e:	0ef40423          	sb	a5,232(s0)
   32:	4585                	li	a1,1
@@ -512,11 +596,15 @@ Disassembly of section .text.ProcessPWKMsg4:
   44:	0e0403a3          	sb	zero,231(s0)
   48:	8522                	mv	a0,s0
   4a:	00000097          	auipc	ra,0x0
+			4a: R_RISCV_CALL	add_key_to_mac
+			4a: R_RISCV_RELAX	*ABS*
   4e:	000080e7          	jalr	ra # 4a <.LVL81+0x20>
 
 00000052 <.LVL82>:
   52:	00144503          	lbu	a0,1(s0)
   56:	00000097          	auipc	ra,0x0
+			56: R_RISCV_CALL	apm_sta_add
+			56: R_RISCV_RELAX	*ABS*
   5a:	000080e7          	jalr	ra # 56 <.LVL82+0x4>
 
 0000005e <.LVL83>:
@@ -525,6 +613,7 @@ Disassembly of section .text.ProcessPWKMsg4:
   66:	4501                	li	a0,0
   68:	0207f793          	andi	a5,a5,32
   6c:	c781                	beqz	a5,74 <.L36>
+			6c: R_RISCV_RVC_BRANCH	.L36
   6e:	47a9                	li	a5,10
   70:	00f48b23          	sb	a5,22(s1)
 
@@ -545,6 +634,7 @@ Disassembly of section .text.ProcessPWKMsg4:
 00000080 <.L37>:
   80:	4505                	li	a0,1
   82:	bfcd                	j	74 <.L36>
+			82: R_RISCV_RVC_JUMP	.L36
 
 Disassembly of section .text.GenerateApEapolMsg:
 
@@ -558,6 +648,8 @@ Disassembly of section .text.GenerateApEapolMsg:
    c:	892a                	mv	s2,a0
    e:	c632                	sw	a2,12(sp)
   10:	00000097          	auipc	ra,0x0
+			10: R_RISCV_CALL	cm_GetApData
+			10: R_RISCV_RELAX	*ABS*
   14:	000080e7          	jalr	ra # 10 <GenerateApEapolMsg+0x10>
 
 00000018 <.LVL89>:
@@ -567,6 +659,7 @@ Disassembly of section .text.GenerateApEapolMsg:
 0000001e <.LVL90>:
   1e:	45b2                	lw	a1,12(sp)
   20:	e781                	bnez	a5,28 <.L42>
+			20: R_RISCV_RVC_BRANCH	.L42
   22:	147d                	addi	s0,s0,-1
   24:	0ff47413          	andi	s0,s0,255
 
@@ -575,9 +668,13 @@ Disassembly of section .text.GenerateApEapolMsg:
   2c:	00848b23          	sb	s0,22(s1)
   30:	4785                	li	a5,1
   32:	02f70063          	beq	a4,a5,52 <.L43>
+			32: R_RISCV_BRANCH	.L43
   36:	02f41563          	bne	s0,a5,60 <.L44>
+			36: R_RISCV_BRANCH	.L44
   3a:	854a                	mv	a0,s2
   3c:	00000097          	auipc	ra,0x0
+			3c: R_RISCV_CALL	GeneratePWKMsg1
+			3c: R_RISCV_RELAX	*ABS*
   40:	000080e7          	jalr	ra # 3c <.L42+0x14>
 
 00000044 <.L51>:
@@ -585,6 +682,7 @@ Disassembly of section .text.GenerateApEapolMsg:
 
 00000046 <.LVL93>:
   46:	e521                	bnez	a0,8e <.L47>
+			46: R_RISCV_RVC_BRANCH	.L47
   48:	0164c783          	lbu	a5,22(s1)
   4c:	0785                	addi	a5,a5,1
   4e:	00f48b23          	sb	a5,22(s1)
@@ -595,33 +693,43 @@ Disassembly of section .text.GenerateApEapolMsg:
   58:	0785                	addi	a5,a5,1
   5a:	00f48c23          	sb	a5,24(s1)
   5e:	a805                	j	8e <.L47>
+			5e: R_RISCV_RVC_JUMP	.L47
 
 00000060 <.L44>:
   60:	478d                	li	a5,3
   62:	00f41863          	bne	s0,a5,72 <.L46>
+			62: R_RISCV_BRANCH	.L46
   66:	854a                	mv	a0,s2
   68:	00000097          	auipc	ra,0x0
+			68: R_RISCV_CALL	GeneratePWKMsg3
+			68: R_RISCV_RELAX	*ABS*
   6c:	000080e7          	jalr	ra # 68 <.L44+0x8>
 
 00000070 <.LVL96>:
   70:	bfd1                	j	44 <.L51>
+			70: R_RISCV_RVC_JUMP	.L51
 
 00000072 <.L46>:
   72:	4405                	li	s0,1
 
 00000074 <.LVL98>:
   74:	cd89                	beqz	a1,8e <.L47>
+			74: R_RISCV_RVC_BRANCH	.L47
   76:	4588                	lw	a0,8(a1)
   78:	c62e                	sw	a1,12(sp)
 
 0000007a <.LVL99>:
   7a:	00000097          	auipc	ra,0x0
+			7a: R_RISCV_CALL	vPortFree
+			7a: R_RISCV_RELAX	*ABS*
   7e:	000080e7          	jalr	ra # 7a <.LVL99>
 
 00000082 <.LVL100>:
   82:	45b2                	lw	a1,12(sp)
   84:	852e                	mv	a0,a1
   86:	00000097          	auipc	ra,0x0
+			86: R_RISCV_CALL	vPortFree
+			86: R_RISCV_RELAX	*ABS*
   8a:	000080e7          	jalr	ra # 86 <.LVL100+0x4>
 
 0000008e <.L47>:
@@ -654,6 +762,8 @@ Disassembly of section .text.ProcessPWKMsg2:
 
 00000012 <.LVL106>:
   12:	00000097          	auipc	ra,0x0
+			12: R_RISCV_CALL	cm_GetApData
+			12: R_RISCV_RELAX	*ABS*
   16:	000080e7          	jalr	ra # 12 <.LVL106>
 
 0000001a <.LVL107>:
@@ -664,6 +774,8 @@ Disassembly of section .text.ProcessPWKMsg2:
 
 0000001e <.LVL109>:
   1e:	00000097          	auipc	ra,0x0
+			1e: R_RISCV_CALL	cm_GetApInfo
+			1e: R_RISCV_RELAX	*ABS*
   22:	000080e7          	jalr	ra # 1e <.LVL109>
 
 00000026 <.LVL110>:
@@ -685,16 +797,21 @@ Disassembly of section .text.ProcessPWKMsg2:
 00000048 <.LVL113>:
   48:	03040613          	addi	a2,s0,48
   4c:	00000097          	auipc	ra,0x0
+			4c: R_RISCV_CALL	KeyMgmtAp_DerivePTK
+			4c: R_RISCV_RELAX	*ABS*
   50:	000080e7          	jalr	ra # 4c <.LVL113+0x4>
 
 00000054 <.LVL114>:
   54:	85ce                	mv	a1,s3
   56:	8526                	mv	a0,s1
   58:	00000097          	auipc	ra,0x0
+			58: R_RISCV_CALL	IsEAPOL_MICValid
+			58: R_RISCV_RELAX	*ABS*
   5c:	000080e7          	jalr	ra # 58 <.LVL114+0x4>
 
 00000060 <.LVL115>:
   60:	c51d                	beqz	a0,8e <.L53>
+			60: R_RISCV_RVC_BRANCH	.L53
   62:	00090c23          	sb	zero,24(s2)
   66:	0644c783          	lbu	a5,100(s1)
   6a:	8522                	mv	a0,s0
@@ -713,11 +830,17 @@ Disassembly of section .text.ProcessPWKMsg2:
 00000076 <.LVL119>:
   76:	0789                	addi	a5,a5,2
   78:	00000737          	lui	a4,0x0
+			78: R_RISCV_HI20	.LANCHOR0
+			78: R_RISCV_RELAX	*ABS*
   7c:	00f70023          	sb	a5,0(a4) # 0 <ProcessPWKMsg2>
+			7c: R_RISCV_LO12_S	.LANCHOR0
+			7c: R_RISCV_RELAX	*ABS*
   80:	4601                	li	a2,0
   82:	458d                	li	a1,3
   84:	6145                	addi	sp,sp,48
   86:	00000317          	auipc	t1,0x0
+			86: R_RISCV_CALL	GenerateApEapolMsg
+			86: R_RISCV_RELAX	*ABS*
   8a:	00030067          	jr	t1 # 86 <.LVL119+0x10>
 
 0000008e <.L53>:
@@ -749,6 +872,8 @@ Disassembly of section .text.SendEAPOLMsgUsingBufDesc:
 
 0000000a <.LVL126>:
    a:	00000097          	auipc	ra,0x0
+			a: R_RISCV_CALL	cm_GetApData
+			a: R_RISCV_RELAX	*ABS*
    e:	000080e7          	jalr	ra # a <.LVL126>
 
 00000012 <.LVL127>:
@@ -759,8 +884,11 @@ Disassembly of section .text.SendEAPOLMsgUsingBufDesc:
 0000001a <.LVL128>:
   1a:	0015f713          	andi	a4,a1,1
   1e:	c719                	beqz	a4,2c <.L55>
+			1e: R_RISCV_RVC_BRANCH	.L55
   20:	8522                	mv	a0,s0
   22:	00000097          	auipc	ra,0x0
+			22: R_RISCV_CALL	GenerateApEapolMsg
+			22: R_RISCV_RELAX	*ABS*
   26:	000080e7          	jalr	ra # 22 <.LVL128+0x8>
 
 0000002a <.LVL129>:
@@ -791,6 +919,8 @@ Disassembly of section .text.ProcessKeyMgmtDataAp:
 
 0000000e <.LVL134>:
    e:	00000097          	auipc	ra,0x0
+			e: R_RISCV_CALL	cm_GetApData
+			e: R_RISCV_RELAX	*ABS*
   12:	000080e7          	jalr	ra # e <.LVL134>
 
 00000016 <.LVL135>:
@@ -800,6 +930,7 @@ Disassembly of section .text.ProcessKeyMgmtDataAp:
   1a:	00594783          	lbu	a5,5(s2)
   1e:	8b91                	andi	a5,a5,4
   20:	cb81                	beqz	a5,30 <.L60>
+			20: R_RISCV_RVC_BRANCH	.L60
 
 00000022 <.L63>:
   22:	4505                	li	a0,1
@@ -828,6 +959,8 @@ Disassembly of section .text.ProcessKeyMgmtDataAp:
 
 0000003a <.LVL144>:
   3a:	00000097          	auipc	ra,0x0
+			3a: R_RISCV_CALL	memcpy
+			3a: R_RISCV_RELAX	*ABS*
   3e:	000080e7          	jalr	ra # 3a <.LVL144>
 
 00000042 <.LVL145>:
@@ -835,6 +968,8 @@ Disassembly of section .text.ProcessKeyMgmtDataAp:
   44:	00d90593          	addi	a1,s2,13
   48:	0068                	addi	a0,sp,12
   4a:	00000097          	auipc	ra,0x0
+			4a: R_RISCV_CALL	memcpy
+			4a: R_RISCV_RELAX	*ABS*
   4e:	000080e7          	jalr	ra # 4a <.LVL145+0x8>
 
 00000052 <.LVL146>:
@@ -853,6 +988,7 @@ Disassembly of section .text.ProcessKeyMgmtDataAp:
   76:	8f71                	and	a4,a4,a2
   78:	9736                	add	a4,a4,a3
   7a:	fae794e3          	bne	a5,a4,22 <.L63>
+			7a: R_RISCV_BRANCH	.L63
   7e:	47b2                	lw	a5,12(sp)
   80:	0187d693          	srli	a3,a5,0x18
   84:	01879713          	slli	a4,a5,0x18
@@ -865,27 +1001,36 @@ Disassembly of section .text.ProcessKeyMgmtDataAp:
   96:	97ba                	add	a5,a5,a4
   98:	4cd8                	lw	a4,28(s1)
   9a:	f8f714e3          	bne	a4,a5,22 <.L63>
+			9a: R_RISCV_BRANCH	.L63
 
 0000009e <.LBE22>:
   9e:	0164c783          	lbu	a5,22(s1)
   a2:	4709                	li	a4,2
   a4:	00e79863          	bne	a5,a4,b4 <.L64>
+			a4: R_RISCV_BRANCH	.L64
   a8:	8522                	mv	a0,s0
   aa:	00000097          	auipc	ra,0x0
+			aa: R_RISCV_CALL	ProcessPWKMsg2
+			aa: R_RISCV_RELAX	*ABS*
   ae:	000080e7          	jalr	ra # aa <.LBE22+0xc>
 
 000000b2 <.LVL148>:
   b2:	bf8d                	j	24 <.L61>
+			b2: R_RISCV_RVC_JUMP	.L61
 
 000000b4 <.L64>:
   b4:	4711                	li	a4,4
   b6:	f6e796e3          	bne	a5,a4,22 <.L63>
+			b6: R_RISCV_BRANCH	.L63
   ba:	8522                	mv	a0,s0
   bc:	00000097          	auipc	ra,0x0
+			bc: R_RISCV_CALL	ProcessPWKMsg4
+			bc: R_RISCV_RELAX	*ABS*
   c0:	000080e7          	jalr	ra # bc <.L64+0x8>
 
 000000c4 <.LVL150>:
   c4:	b785                	j	24 <.L61>
+			c4: R_RISCV_RVC_JUMP	.L61
 
 Disassembly of section .text.IsAuthenticatorEnabled:
 
@@ -909,6 +1054,8 @@ Disassembly of section .text.InitStaKeyInfo:
   10:	c636                	sw	a3,12(sp)
   12:	c43a                	sw	a4,8(sp)
   14:	00000097          	auipc	ra,0x0
+			14: R_RISCV_CALL	cm_GetApData
+			14: R_RISCV_RELAX	*ABS*
   18:	000080e7          	jalr	ra # 14 <InitStaKeyInfo+0x14>
 
 0000001c <.LVL154>:
@@ -920,6 +1067,8 @@ Disassembly of section .text.InitStaKeyInfo:
   26:	4581                	li	a1,0
   28:	8526                	mv	a0,s1
   2a:	00000097          	auipc	ra,0x0
+			2a: R_RISCV_CALL	memset
+			2a: R_RISCV_RELAX	*ABS*
   2e:	000080e7          	jalr	ra # 2a <.LVL155+0x8>
 
 00000032 <.LVL156>:
@@ -929,6 +1078,8 @@ Disassembly of section .text.InitStaKeyInfo:
   38:	85ca                	mv	a1,s2
   3a:	8526                	mv	a0,s1
   3c:	00000097          	auipc	ra,0x0
+			3c: R_RISCV_CALL	InitKeyMgmtInfo
+			3c: R_RISCV_RELAX	*ABS*
   40:	000080e7          	jalr	ra # 3c <.LVL156+0xa>
 
 00000044 <.LVL157>:
@@ -958,7 +1109,10 @@ Disassembly of section .text.RemoveAPKeyInfo:
 00000004 <.LVL163>:
    4:	0ff00793          	li	a5,255
    8:	00f50663          	beq	a0,a5,14 <.L70>
+			8: R_RISCV_BRANCH	.L70
    c:	00000317          	auipc	t1,0x0
+			c: R_RISCV_CALL	mm_sec_machwkey_del
+			c: R_RISCV_RELAX	*ABS*
   10:	00030067          	jr	t1 # c <.LVL163+0x8>
 
 00000014 <.L70>:
@@ -973,6 +1127,8 @@ Disassembly of section .text.InitGroupKey:
    6:	c226                	sw	s1,4(sp)
    8:	84aa                	mv	s1,a0
    a:	00000097          	auipc	ra,0x0
+			a: R_RISCV_CALL	cm_GetApInfo
+			a: R_RISCV_RELAX	*ABS*
    e:	000080e7          	jalr	ra # a <InitGroupKey+0xa>
 
 00000012 <.LVL166>:
@@ -983,11 +1139,14 @@ Disassembly of section .text.InitGroupKey:
   18:	10052c23          	sw	zero,280(a0)
   1c:	8526                	mv	a0,s1
   1e:	00000097          	auipc	ra,0x0
+			1e: R_RISCV_CALL	KeyMgmtInit
+			1e: R_RISCV_RELAX	*ABS*
   22:	000080e7          	jalr	ra # 1e <.LVL167+0xa>
 
 00000026 <.LVL169>:
   26:	485c                	lw	a5,20(s0)
   28:	cb9d                	beqz	a5,5e <.L73>
+			28: R_RISCV_RVC_BRANCH	.L73
   2a:	677d                	lui	a4,0x1f
   2c:	84870713          	addi	a4,a4,-1976 # 1e848 <.LASF992+0x1ac61>
   30:	02e785b3          	mul	a1,a5,a4
@@ -1000,6 +1159,8 @@ Disassembly of section .text.InitGroupKey:
   48:	17fd                	addi	a5,a5,-1
   4a:	95be                	add	a1,a1,a5
   4c:	00000097          	auipc	ra,0x0
+			4c: R_RISCV_CALL	__udivdi3
+			4c: R_RISCV_RELAX	*ABS*
   50:	000080e7          	jalr	ra # 4c <.LVL169+0x26>
   54:	0505                	addi	a0,a0,1
   56:	10a42a23          	sw	a0,276(s0)
@@ -1009,6 +1170,8 @@ Disassembly of section .text.InitGroupKey:
   5e:	4581                	li	a1,0
   60:	8526                	mv	a0,s1
   62:	00000097          	auipc	ra,0x0
+			62: R_RISCV_CALL	add_key_to_mac
+			62: R_RISCV_RELAX	*ABS*
   66:	000080e7          	jalr	ra # 62 <.L73+0x4>
 
 0000006a <.LVL171>:
@@ -1022,7 +1185,13 @@ Disassembly of section .text.InitGroupKey:
 00000074 <.LVL173>:
   74:	85aa                	mv	a1,a0
   76:	00000537          	lui	a0,0x0
+			76: R_RISCV_HI20	.LC0
+			76: R_RISCV_RELAX	*ABS*
   7a:	00050513          	mv	a0,a0
+			7a: R_RISCV_LO12_I	.LC0
+			7a: R_RISCV_RELAX	*ABS*
   7e:	0141                	addi	sp,sp,16
   80:	00000317          	auipc	t1,0x0
+			80: R_RISCV_CALL	printf
+			80: R_RISCV_RELAX	*ABS*
   84:	00030067          	jr	t1 # 80 <.LVL173+0xc>

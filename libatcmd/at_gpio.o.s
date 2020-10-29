@@ -1,5 +1,5 @@
 
-at_gpio.o:     file format elf32-littleriscv
+libatcmd/at_gpio.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.at_gpioc:

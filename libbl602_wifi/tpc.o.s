@@ -1,5 +1,5 @@
 
-tpc.o:     file format elf32-littleriscv
+libbl602_wifi/tpc.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text.bl_tpc_update_power_table:
@@ -10,6 +10,8 @@ Disassembly of section .text.bl_tpc_update_power_table:
    4:	c686                	sw	ra,76(sp)
    6:	842a                	mv	s0,a0
    8:	00000097          	auipc	ra,0x0
+			8: R_RISCV_CALL	trpc_update_power
+			8: R_RISCV_RELAX	*ABS*
    c:	000080e7          	jalr	ra # 8 <bl_tpc_update_power_table+0x8>
 
 00000010 <.LVL1>:
@@ -20,7 +22,10 @@ Disassembly of section .text.bl_tpc_update_power_table:
 
 0000001c <.L2>:
   1c:	00879a63          	bne	a5,s0,30 <.L3>
+			1c: R_RISCV_BRANCH	.L3
   20:	00000097          	auipc	ra,0x0
+			20: R_RISCV_CALL	rf_pri_update_power_offset
+			20: R_RISCV_RELAX	*ABS*
   24:	000080e7          	jalr	ra # 20 <.L2+0x4>
 
 00000028 <.LVL3>:
@@ -41,6 +46,7 @@ Disassembly of section .text.bl_tpc_update_power_table:
 
 0000003c <.LVL7>:
   3c:	b7c5                	j	1c <.L2>
+			3c: R_RISCV_RVC_JUMP	.L2
 
 Disassembly of section .text.bl_tpc_power_table_get:
 
@@ -50,6 +56,8 @@ Disassembly of section .text.bl_tpc_power_table_get:
    4:	c606                	sw	ra,12(sp)
    6:	842a                	mv	s0,a0
    8:	00000097          	auipc	ra,0x0
+			8: R_RISCV_CALL	trpc_power_get
+			8: R_RISCV_RELAX	*ABS*
    c:	000080e7          	jalr	ra # 8 <bl_tpc_power_table_get+0x8>
 
 00000010 <.LVL9>:
@@ -61,6 +69,7 @@ Disassembly of section .text.bl_tpc_power_table_get:
   1a:	00068023          	sb	zero,0(a3)
   1e:	0785                	addi	a5,a5,1
   20:	fee79be3          	bne	a5,a4,16 <.L6>
+			20: R_RISCV_BRANCH	.L6
   24:	40b2                	lw	ra,12(sp)
   26:	4422                	lw	s0,8(sp)
 
@@ -72,30 +81,40 @@ Disassembly of section .text.bl_tpc_update_power_table_rate:
 
 00000000 <bl_tpc_update_power_table_rate>:
    0:	00000317          	auipc	t1,0x0
+			0: R_RISCV_CALL	trpc_update_power
+			0: R_RISCV_RELAX	*ABS*
    4:	00030067          	jr	t1 # 0 <bl_tpc_update_power_table_rate>
 
 Disassembly of section .text.bl_tpc_update_power_table_channel_offset:
 
 00000000 <bl_tpc_update_power_table_channel_offset>:
    0:	00000317          	auipc	t1,0x0
+			0: R_RISCV_CALL	trpc_update_power
+			0: R_RISCV_RELAX	*ABS*
    4:	00030067          	jr	t1 # 0 <bl_tpc_update_power_table_channel_offset>
 
 Disassembly of section .text.bl_tpc_update_power_rate_11b:
 
 00000000 <bl_tpc_update_power_rate_11b>:
    0:	00000317          	auipc	t1,0x0
+			0: R_RISCV_CALL	trpc_update_power_11b
+			0: R_RISCV_RELAX	*ABS*
    4:	00030067          	jr	t1 # 0 <bl_tpc_update_power_rate_11b>
 
 Disassembly of section .text.bl_tpc_update_power_rate_11g:
 
 00000000 <bl_tpc_update_power_rate_11g>:
    0:	00000317          	auipc	t1,0x0
+			0: R_RISCV_CALL	trpc_update_power_11g
+			0: R_RISCV_RELAX	*ABS*
    4:	00030067          	jr	t1 # 0 <bl_tpc_update_power_rate_11g>
 
 Disassembly of section .text.bl_tpc_update_power_rate_11n:
 
 00000000 <bl_tpc_update_power_rate_11n>:
    0:	00000317          	auipc	t1,0x0
+			0: R_RISCV_CALL	trpc_update_power_11n
+			0: R_RISCV_RELAX	*ABS*
    4:	00030067          	jr	t1 # 0 <bl_tpc_update_power_rate_11n>
 
 Disassembly of section .text.tpc_update_tx_power:
@@ -109,6 +128,8 @@ Disassembly of section .text.tpc_update_tx_power:
    6:	c606                	sw	ra,12(sp)
    8:	c422                	sw	s0,8(sp)
    a:	00000097          	auipc	ra,0x0
+			a: R_RISCV_CALL	trpc_get_default_power_idx
+			a: R_RISCV_RELAX	*ABS*
    e:	000080e7          	jalr	ra # a <.LVL22+0x4>
 
 00000012 <.LBB14>:
@@ -128,6 +149,8 @@ Disassembly of section .text.tpc_update_tx_power:
 00000026 <.LBE17>:
   26:	4501                	li	a0,0
   28:	00000097          	auipc	ra,0x0
+			28: R_RISCV_CALL	trpc_get_default_power_idx
+			28: R_RISCV_RELAX	*ABS*
   2c:	000080e7          	jalr	ra # 28 <.LBE17+0x2>
 
 00000030 <.LBB18>:
@@ -163,6 +186,7 @@ Disassembly of section .text.tpc_update_vif_tx_power:
    0:	00058703          	lb	a4,0(a1)
    4:	07f00793          	li	a5,127
    8:	0af70263          	beq	a4,a5,ac <.L31>
+			8: R_RISCV_BRANCH	.L31
    c:	1101                	addi	sp,sp,-32
    e:	cc22                	sw	s0,24(sp)
 
@@ -182,6 +206,8 @@ Disassembly of section .text.tpc_update_vif_tx_power:
 00000024 <.LVL32>:
   24:	8932                	mv	s2,a2
   26:	00000097          	auipc	ra,0x0
+			26: R_RISCV_CALL	phy_get_rf_gain_idx
+			26: R_RISCV_RELAX	*ABS*
   2a:	000080e7          	jalr	ra # 26 <.LVL32+0x2>
 
 0000002e <.LVL33>:
@@ -189,33 +215,44 @@ Disassembly of section .text.tpc_update_vif_tx_power:
   32:	05a40783          	lb	a5,90(s0)
   36:	04e40ca3          	sb	a4,89(s0)
   3a:	00e7da63          	bge	a5,a4,4e <.L20>
+			3a: R_RISCV_BRANCH	.L20
   3e:	00f48023          	sb	a5,0(s1)
   42:	85ca                	mv	a1,s2
   44:	8526                	mv	a0,s1
   46:	00000097          	auipc	ra,0x0
+			46: R_RISCV_CALL	phy_get_rf_gain_idx
+			46: R_RISCV_RELAX	*ABS*
   4a:	000080e7          	jalr	ra # 46 <.LVL33+0x18>
 
 0000004e <.L20>:
   4e:	00048783          	lb	a5,0(s1)
   52:	05378663          	beq	a5,s3,9e <.L17>
+			52: R_RISCV_BRANCH	.L17
 
 00000056 <.LBB22>:
   56:	35042783          	lw	a5,848(s0)
 
 0000005a <.L22>:
   5a:	eb95                	bnez	a5,8e <.L23>
+			5a: R_RISCV_RVC_BRANCH	.L23
   5c:	4028                	lw	a0,64(s0)
   5e:	c121                	beqz	a0,9e <.L17>
+			5e: R_RISCV_RVC_BRANCH	.L17
   60:	00000097          	auipc	ra,0x0
+			60: R_RISCV_CALL	chan_update_tx_power
+			60: R_RISCV_RELAX	*ABS*
   64:	000080e7          	jalr	ra # 60 <.L22+0x6>
 
 00000068 <.LVL36>:
   68:	8522                	mv	a0,s0
   6a:	00000097          	auipc	ra,0x0
+			6a: R_RISCV_CALL	chan_is_on_channel
+			6a: R_RISCV_RELAX	*ABS*
   6e:	000080e7          	jalr	ra # 6a <.LVL36+0x2>
 
 00000072 <.LVL37>:
   72:	c515                	beqz	a0,9e <.L17>
+			72: R_RISCV_RVC_BRANCH	.L17
   74:	403c                	lw	a5,64(s0)
 
 00000076 <.LBE24>:
@@ -239,6 +276,8 @@ Disassembly of section .text.tpc_update_vif_tx_power:
 
 00000086 <.LBB26>:
   86:	00000317          	auipc	t1,0x0
+			86: R_RISCV_CALL	tpc_update_tx_power
+			86: R_RISCV_RELAX	*ABS*
   8a:	00030067          	jr	t1 # 86 <.LBB26>
 
 0000008e <.L23>:
@@ -249,6 +288,7 @@ Disassembly of section .text.tpc_update_vif_tx_power:
 
 0000009c <.LBE23>:
   9c:	bf7d                	j	5a <.L22>
+			9c: R_RISCV_RVC_JUMP	.L22
 
 0000009e <.L17>:
   9e:	40f2                	lw	ra,28(sp)
@@ -280,8 +320,10 @@ Disassembly of section .text.tpc_get_vif_tx_power_vs_rate:
 
 0000000c <.LVL50>:
    c:	ed01                	bnez	a0,24 <.L36>
+			c: R_RISCV_RVC_BRANCH	.L36
    e:	07c7f513          	andi	a0,a5,124
   12:	c509                	beqz	a0,1c <.L35>
+			12: R_RISCV_RVC_BRANCH	.L35
   14:	15f1                	addi	a1,a1,-4
 
 00000016 <.LVL51>:
@@ -292,11 +334,14 @@ Disassembly of section .text.tpc_get_vif_tx_power_vs_rate:
 
 0000001c <.L35>:
   1c:	00000317          	auipc	t1,0x0
+			1c: R_RISCV_CALL	trpc_get_default_power_idx
+			1c: R_RISCV_RELAX	*ABS*
   20:	00030067          	jr	t1 # 1c <.L35>
 
 00000024 <.L36>:
   24:	4509                	li	a0,2
   26:	bfdd                	j	1c <.L35>
+			26: R_RISCV_RVC_JUMP	.L35
 
 Disassembly of section .text.tpc_update_frame_tx_power:
 
@@ -312,6 +357,8 @@ Disassembly of section .text.tpc_update_frame_tx_power:
 
 0000000c <.LVL57>:
    c:	00000097          	auipc	ra,0x0
+			c: R_RISCV_CALL	tpc_get_vif_tx_power_vs_rate
+			c: R_RISCV_RELAX	*ABS*
   10:	000080e7          	jalr	ra # c <.LVL57>
 
 00000014 <.LVL58>:
