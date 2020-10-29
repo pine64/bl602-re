@@ -1,0 +1,35 @@
+= Pine64's BLE602 reverse engineering working group
+
+== Notes
+
+* The blobs were compiled using
+  `riscv32-unknown-elf-gcc_8.3.0 -march=rv32imfc -mabi=ilp32f -gdwarf -Os -std=gnu99 -ffunction-sections -fdata-sections -fstrict-volatile-bitfields -fshort-enums -ffreestanding -fno-strict-aliasing`
+
+* The target likely supports atomics. If so we may use `-march=rv32imafc`.
+
+== Toolset
+
+* https://github.com/riscv/riscv-gnu-toolchain[RISC-V GNU Compiler Toolchain]
+
+* https://cutter.re/[Cutter, a graphical frontend for]
+  https://www.radare.org/r/[radare2]
+
+* Add your favorite disassembly tools here. If the tool is not free, mark it
+  with (non-free).
+
+== Resources
+
+* https://files.pine64.org/doc/datasheet/padi-ii/BL602_BL604_DS_Datasheet.pdf[BL602_BL604 Datasheet]
+
+* https://github.com/pine64/bl_iot_sdk[SDK]
+
+== Work log (top-down append-only)
+
+=== WildCryptoFox (29 Oct 2020)
+
+* Initialized README.adoc and copied LICENSE from the SDK.
+
+* Split objects out of archives `ar x libx.a`.
+
+* Disassembled objects to their assembly
+  `git/github/pine64/bl_iot_sdk/toolchain/riscv/Linux/bin/riscv64-unknown-elf-objdump -S xx.o"`
