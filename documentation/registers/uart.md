@@ -108,15 +108,15 @@ The BL602 has two UART peripherals
 
 # Baudrate divisor
 
-'''
+```
 divisor = clockFrequency / baudrate
 fraction = clockFrequency * 10 / baudrate % 10
-'''
+```
 
 If the fraction is equal or higher to 5 the divisor must be incremented by 1.
 
 The baud rate divisor register (Offset 0x08) is set to the following value:
 
-'''
+```
 (baudRateDivisor - 1) << 0x10) | ((baudRateDivisor - 1) & 0xFFFF)
-'''
+```
