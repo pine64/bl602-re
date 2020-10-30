@@ -14,6 +14,9 @@
 * https://cutter.re/[Cutter], a graphical frontend for
   https://www.radare.org/r/[radare2]
 
+* https://github.com/sevaa/dwex[DWARF Explorer], an explorer for DWARF debugging data
+ ** The proprietary libraries still contain DWARF data, but tool support for showing it varies greatly. This will show you the raw DWARF information (e.g. structures, function local variables, inlined function information).
+
 * Add your favorite disassembly tools here. If the tool is not free, mark it
   with (non-free).
 
