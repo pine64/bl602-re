@@ -1,0 +1,2857 @@
+void AON_Power_On_BG()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+AON_Power_On_BG_entry:
+l4200C498:
+	call Mem0[0x21010828<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+AON_Power_On_BG_exit:
+
+
+void AON_Power_Off_BG()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+AON_Power_Off_BG_entry:
+l4200C4A2:
+	call Mem0[0x2101082C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+AON_Power_Off_BG_exit:
+
+
+void AON_Power_On_LDO11_SOC()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+AON_Power_On_LDO11_SOC_entry:
+l4200C4AC:
+	call Mem0[0x21010830<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+AON_Power_On_LDO11_SOC_exit:
+
+
+void AON_Power_Off_LDO11_SOC()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+AON_Power_Off_LDO11_SOC_entry:
+l4200C4B6:
+	call Mem0[0x21010834<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+AON_Power_Off_LDO11_SOC_exit:
+
+
+void AON_Power_On_LDO15_RF()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+AON_Power_On_LDO15_RF_entry:
+l4200C4C0:
+	call Mem0[0x21010838<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+AON_Power_On_LDO15_RF_exit:
+
+
+void AON_Power_Off_LDO15_RF()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+AON_Power_Off_LDO15_RF_entry:
+l4200C4CA:
+	call Mem0[0x2101083C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+AON_Power_Off_LDO15_RF_exit:
+
+
+void AON_Power_On_SFReg()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+AON_Power_On_SFReg_entry:
+l4200C4D4:
+	call Mem0[0x21010840<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+AON_Power_On_SFReg_exit:
+
+
+void AON_Power_Off_SFReg()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+AON_Power_Off_SFReg_entry:
+l4200C4DE:
+	call Mem0[0x21010844<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+AON_Power_Off_SFReg_exit:
+
+
+void AON_LowPower_Enter_PDS0()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+AON_LowPower_Enter_PDS0_entry:
+l4200C4E8:
+	call Mem0[0x21010848<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+AON_LowPower_Enter_PDS0_exit:
+
+
+void AON_LowPower_Exit_PDS0()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+AON_LowPower_Exit_PDS0_entry:
+l4200C4F2:
+	call Mem0[0x2101084C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+AON_LowPower_Exit_PDS0_exit:
+
+
+void ASM_Delay_Us()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+ASM_Delay_Us_entry:
+l4200C4FC:
+	call Mem0[0x21010850<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+ASM_Delay_Us_exit:
+
+
+void BL602_Delay_US()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+BL602_Delay_US_entry:
+l4200C506:
+	call Mem0[0x21010854<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+BL602_Delay_US_exit:
+
+
+void BL602_Delay_MS()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+BL602_Delay_MS_entry:
+l4200C510:
+	call Mem0[0x21010858<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+BL602_Delay_MS_exit:
+
+
+void BL602_MemCpy()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+BL602_MemCpy_entry:
+l4200C51A:
+	call Mem0[0x2101085C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+BL602_MemCpy_exit:
+
+
+void BL602_MemCpy4()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+BL602_MemCpy4_entry:
+l4200C524:
+	call Mem0[0x21010860<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+BL602_MemCpy4_exit:
+
+
+void BL602_MemCpy_Fast()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+BL602_MemCpy_Fast_entry:
+l4200C52E:
+	call Mem0[0x21010864<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+BL602_MemCpy_Fast_exit:
+
+
+void BL602_MemSet()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+BL602_MemSet_entry:
+l4200C538:
+	call Mem0[0x21010868<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+BL602_MemSet_exit:
+
+
+void BL602_MemSet4()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+BL602_MemSet4_entry:
+l4200C542:
+	call Mem0[0x2101086C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+BL602_MemSet4_exit:
+
+
+void BL602_MemCmp()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+BL602_MemCmp_entry:
+l4200C54C:
+	call Mem0[0x21010870<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+BL602_MemCmp_exit:
+
+
+void EF_Ctrl_Sw_AHB_Clk_0()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// Called from:
+//      EF_Ctrl_Read_TSEN_Trim
+//      EF_Ctrl_Read_ADC_Gain_Trim
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+EF_Ctrl_Sw_AHB_Clk_0_entry:
+l4200C556:
+	call Mem0[0x21010874<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+EF_Ctrl_Sw_AHB_Clk_0_exit:
+
+
+void EF_Ctrl_Program_Efuse_0()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+EF_Ctrl_Program_Efuse_0_entry:
+l4200C560:
+	call Mem0[0x21010878<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+EF_Ctrl_Program_Efuse_0_exit:
+
+
+void EF_Ctrl_Load_Efuse_R0()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// Called from:
+//      EF_Ctrl_Read_TSEN_Trim
+//      EF_Ctrl_Read_ADC_Gain_Trim
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+EF_Ctrl_Load_Efuse_R0_entry:
+l4200C56A:
+	call Mem0[0x2101087C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+EF_Ctrl_Load_Efuse_R0_exit:
+
+
+void EF_Ctrl_Busy()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+EF_Ctrl_Busy_entry:
+l4200C574:
+	call Mem0[0x21010880<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+EF_Ctrl_Busy_exit:
+
+
+void EF_Ctrl_AutoLoad_Done()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+EF_Ctrl_AutoLoad_Done_entry:
+l4200C57E:
+	call Mem0[0x21010884<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+EF_Ctrl_AutoLoad_Done_exit:
+
+
+void EF_Ctrl_Clear()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+EF_Ctrl_Clear_entry:
+l4200C588:
+	call Mem0[0x21010894<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+EF_Ctrl_Clear_exit:
+
+
+void GLB_SW_System_Reset()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+GLB_SW_System_Reset_entry:
+l4200C592:
+	call Mem0[0x210108BC<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+GLB_SW_System_Reset_exit:
+
+
+void GLB_SW_CPU_Reset()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+GLB_SW_CPU_Reset_entry:
+l4200C59C:
+	call Mem0[0x210108C0<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+GLB_SW_CPU_Reset_exit:
+
+
+void GLB_SW_POR_Reset()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+GLB_SW_POR_Reset_entry:
+l4200C5A6:
+	call Mem0[0x210108C4<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+GLB_SW_POR_Reset_exit:
+
+
+void GLB_Select_Internal_Flash()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+GLB_Select_Internal_Flash_entry:
+l4200C5B0:
+	call Mem0[0x210108C8<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+GLB_Select_Internal_Flash_exit:
+
+
+void GLB_Select_External_Flash()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+GLB_Select_External_Flash_entry:
+l4200C5BA:
+	call Mem0[0x210108CC<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+GLB_Select_External_Flash_exit:
+
+
+void GLB_Deswap_Flash_Pin()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+GLB_Deswap_Flash_Pin_entry:
+l4200C5C4:
+	call Mem0[0x210108D0<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+GLB_Deswap_Flash_Pin_exit:
+
+
+void GLB_Swap_Flash_Pin()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+GLB_Swap_Flash_Pin_entry:
+l4200C5CE:
+	call Mem0[0x210108D4<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+GLB_Swap_Flash_Pin_exit:
+
+
+void GLB_GPIO_Init()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+GLB_GPIO_Init_entry:
+l4200C5D8:
+	call Mem0[0x210108D8<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+GLB_GPIO_Init_exit:
+
+
+void GLB_GPIO_OUTPUT_Enable()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+GLB_GPIO_OUTPUT_Enable_entry:
+l4200C5E2:
+	call Mem0[0x210108DC<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+GLB_GPIO_OUTPUT_Enable_exit:
+
+
+void GLB_GPIO_OUTPUT_Disable()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+GLB_GPIO_OUTPUT_Disable_entry:
+l4200C5EC:
+	call Mem0[0x210108E0<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+GLB_GPIO_OUTPUT_Disable_exit:
+
+
+void GLB_GPIO_Set_HZ()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+GLB_GPIO_Set_HZ_entry:
+l4200C5F6:
+	call Mem0[0x210108E4<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+GLB_GPIO_Set_HZ_exit:
+
+
+void GLB_GPIO_Get_Fun()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+GLB_GPIO_Get_Fun_entry:
+l4200C600:
+	call Mem0[0x210108E8<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+GLB_GPIO_Get_Fun_exit:
+
+
+void HBN_Mode_Enter()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+HBN_Mode_Enter_entry:
+l4200C60A:
+	call Mem0[0x210108EC<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+HBN_Mode_Enter_exit:
+
+
+void HBN_Power_Down_Flash()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+HBN_Power_Down_Flash_entry:
+l4200C614:
+	call Mem0[0x210108F0<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+HBN_Power_Down_Flash_exit:
+
+
+void HBN_Enable()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+HBN_Enable_entry:
+l4200C61E:
+	call Mem0[0x210108F4<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+HBN_Enable_exit:
+
+
+void HBN_Reset()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+HBN_Reset_entry:
+l4200C628:
+	call Mem0[0x210108F8<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+HBN_Reset_exit:
+
+
+void HBN_Set_Ldo11_Aon_Vout()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+HBN_Set_Ldo11_Aon_Vout_entry:
+l4200C632:
+	call Mem0[0x210108FC<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+HBN_Set_Ldo11_Aon_Vout_exit:
+
+
+void HBN_Set_Ldo11_Rt_Vout()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+HBN_Set_Ldo11_Rt_Vout_entry:
+l4200C63C:
+	call Mem0[0x21010900<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+HBN_Set_Ldo11_Rt_Vout_exit:
+
+
+void HBN_Set_Ldo11_Soc_Vout()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+HBN_Set_Ldo11_Soc_Vout_entry:
+l4200C646:
+	call Mem0[0x21010904<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+HBN_Set_Ldo11_Soc_Vout_exit:
+
+
+void HBN_Hw_Pu_Pd_Cfg()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+HBN_Hw_Pu_Pd_Cfg_entry:
+l4200C650:
+	call Mem0[0x21010924<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+HBN_Hw_Pu_Pd_Cfg_exit:
+
+
+void HBN_Pin_WakeUp_Mask()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+HBN_Pin_WakeUp_Mask_entry:
+l4200C65A:
+	call Mem0[0x21010928<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+HBN_Pin_WakeUp_Mask_exit:
+
+
+void HBN_GPIO7_Dbg_Pull_Cfg()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+HBN_GPIO7_Dbg_Pull_Cfg_entry:
+l4200C664:
+	call Mem0[0x2101092C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+HBN_GPIO7_Dbg_Pull_Cfg_exit:
+
+
+void HBN_Set_Embedded_Flash_Pullup()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+HBN_Set_Embedded_Flash_Pullup_entry:
+l4200C66E:
+	call Mem0[0x21010930<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+HBN_Set_Embedded_Flash_Pullup_exit:
+
+
+void L1C_Set_Wrap()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+L1C_Set_Wrap_entry:
+l4200C678:
+	call Mem0[0x21010934<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+L1C_Set_Wrap_exit:
+
+
+void L1C_Set_Way_Disable()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+L1C_Set_Way_Disable_entry:
+l4200C682:
+	call Mem0[0x21010938<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+L1C_Set_Way_Disable_exit:
+
+
+void L1C_IROM_2T_Access_Set()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+L1C_IROM_2T_Access_Set_entry:
+l4200C68C:
+	call Mem0[0x2101093C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+L1C_IROM_2T_Access_Set_exit:
+
+
+void PDS_Reset()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+PDS_Reset_entry:
+l4200C696:
+	call Mem0[0x21010940<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+PDS_Reset_exit:
+
+
+void PDS_Force_Config()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+PDS_Force_Config_entry:
+l4200C6A0:
+	call Mem0[0x21010948<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+PDS_Force_Config_exit:
+
+
+void PDS_RAM_Config()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+PDS_RAM_Config_entry:
+l4200C6AA:
+	call Mem0[0x2101094C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+PDS_RAM_Config_exit:
+
+
+void PDS_Default_Level_Config()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+PDS_Default_Level_Config_entry:
+l4200C6B4:
+	call Mem0[0x21010950<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+PDS_Default_Level_Config_exit:
+
+
+void SEC_Eng_Turn_On_Sec_Ring()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SEC_Eng_Turn_On_Sec_Ring_entry:
+l4200C6BE:
+	call Mem0[0x21010978<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SEC_Eng_Turn_On_Sec_Ring_exit:
+
+
+void SEC_Eng_Turn_Off_Sec_Ring()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SEC_Eng_Turn_Off_Sec_Ring_entry:
+l4200C6C8:
+	call Mem0[0x2101097C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SEC_Eng_Turn_Off_Sec_Ring_exit:
+
+
+void SFlash_Init()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Init_entry:
+l4200C6D2:
+	call Mem0[0x21010980<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Init_exit:
+
+
+void SFlash_SetSPIMode()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_SetSPIMode_entry:
+l4200C6DC:
+	call Mem0[0x21010984<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_SetSPIMode_exit:
+
+
+void SFlash_Read_Reg()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Read_Reg_entry:
+l4200C6E6:
+	call Mem0[0x21010988<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Read_Reg_exit:
+
+
+void SFlash_Write_Reg()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Write_Reg_entry:
+l4200C6F0:
+	call Mem0[0x2101098C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Write_Reg_exit:
+
+
+void SFlash_Busy()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Busy_entry:
+l4200C6FA:
+	call Mem0[0x21010990<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Busy_exit:
+
+
+void SFlash_Write_Enable()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Write_Enable_entry:
+l4200C704:
+	call Mem0[0x21010994<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Write_Enable_exit:
+
+
+void SFlash_Qspi_Enable()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Qspi_Enable_entry:
+l4200C70E:
+	call Mem0[0x21010998<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Qspi_Enable_exit:
+
+
+void SFlash_Volatile_Reg_Write_Enable()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Volatile_Reg_Write_Enable_entry:
+l4200C718:
+	call Mem0[0x2101099C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Volatile_Reg_Write_Enable_exit:
+
+
+void SFlash_Chip_Erase()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Chip_Erase_entry:
+l4200C722:
+	call Mem0[0x210109A0<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Chip_Erase_exit:
+
+
+void SFlash_Sector_Erase()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Sector_Erase_entry:
+l4200C72C:
+	call Mem0[0x210109A4<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Sector_Erase_exit:
+
+
+void SFlash_Blk32_Erase()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Blk32_Erase_entry:
+l4200C736:
+	call Mem0[0x210109A8<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Blk32_Erase_exit:
+
+
+void SFlash_Blk64_Erase()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Blk64_Erase_entry:
+l4200C740:
+	call Mem0[0x210109AC<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Blk64_Erase_exit:
+
+
+void SFlash_Erase()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Erase_entry:
+l4200C74A:
+	call Mem0[0x210109B0<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Erase_exit:
+
+
+void SFlash_Program()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Program_entry:
+l4200C754:
+	call Mem0[0x210109B4<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Program_exit:
+
+
+void SFlash_GetUniqueId()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_GetUniqueId_entry:
+l4200C75E:
+	call Mem0[0x210109B8<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_GetUniqueId_exit:
+
+
+void SFlash_GetJedecId()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_GetJedecId_entry:
+l4200C768:
+	call Mem0[0x210109BC<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_GetJedecId_exit:
+
+
+void SFlash_GetDeviceId()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_GetDeviceId_entry:
+l4200C772:
+	call Mem0[0x210109C0<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_GetDeviceId_exit:
+
+
+void SFlash_Powerdown()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Powerdown_entry:
+l4200C77C:
+	call Mem0[0x210109C4<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Powerdown_exit:
+
+
+void SFlash_Releae_Powerdown()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Releae_Powerdown_entry:
+l4200C786:
+	call Mem0[0x210109C8<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Releae_Powerdown_exit:
+
+
+void SFlash_SetBurstWrap()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_SetBurstWrap_entry:
+l4200C790:
+	call Mem0[0x210109CC<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_SetBurstWrap_exit:
+
+
+void SFlash_DisableBurstWrap()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_DisableBurstWrap_entry:
+l4200C79A:
+	call Mem0[0x210109D0<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_DisableBurstWrap_exit:
+
+
+void SFlash_Software_Reset()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Software_Reset_entry:
+l4200C7A4:
+	call Mem0[0x210109D4<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Software_Reset_exit:
+
+
+void SFlash_Reset_Continue_Read()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Reset_Continue_Read_entry:
+l4200C7AE:
+	call Mem0[0x210109D8<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Reset_Continue_Read_exit:
+
+
+void SFlash_Set_IDbus_Cfg()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Set_IDbus_Cfg_entry:
+l4200C7B8:
+	call Mem0[0x210109DC<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Set_IDbus_Cfg_exit:
+
+
+void SFlash_IDbus_Read_Enable()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_IDbus_Read_Enable_entry:
+l4200C7C2:
+	call Mem0[0x210109E0<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_IDbus_Read_Enable_exit:
+
+
+void SFlash_Cache_Enable_Set()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Cache_Enable_Set_entry:
+l4200C7CC:
+	call Mem0[0x210109E4<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Cache_Enable_Set_exit:
+
+
+void SFlash_Cache_Flush()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Cache_Flush_entry:
+l4200C7D6:
+	call Mem0[0x210109E8<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Cache_Flush_exit:
+
+
+void SFlash_Cache_Read_Enable()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Cache_Read_Enable_entry:
+l4200C7E0:
+	call Mem0[0x210109EC<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Cache_Read_Enable_exit:
+
+
+void SFlash_Cache_Hit_Count_Get()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Cache_Hit_Count_Get_entry:
+l4200C7EA:
+	call Mem0[0x210109F0<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Cache_Hit_Count_Get_exit:
+
+
+void SFlash_Cache_Miss_Count_Get()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Cache_Miss_Count_Get_entry:
+l4200C7F4:
+	call Mem0[0x210109F4<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Cache_Miss_Count_Get_exit:
+
+
+void SFlash_Cache_Read_Disable()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Cache_Read_Disable_entry:
+l4200C7FE:
+	call Mem0[0x210109F8<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Cache_Read_Disable_exit:
+
+
+void SFlash_Read()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a6 t1
+// Preserved: sp
+SFlash_Read_entry:
+l4200C808:
+	call Mem0[0x210109FC<32>:int32] (retsize: 0;)
+		uses: a6:0x21011000<32>
+	return
+SFlash_Read_exit:
+
+
+void SFlash_Read_Reg_With_Cmd()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Read_Reg_With_Cmd_entry:
+l4200C812:
+	call Mem0[0x21010A00<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Read_Reg_With_Cmd_exit:
+
+
+void SFlash_Write_Reg_With_Cmd()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SFlash_Write_Reg_With_Cmd_entry:
+l4200C81C:
+	call Mem0[0x21010A04<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SFlash_Write_Reg_With_Cmd_exit:
+
+
+void SF_Cfg_Init_Ext_Flash_Gpio()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Cfg_Init_Ext_Flash_Gpio_entry:
+l4200C826:
+	call Mem0[0x21010A0C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Cfg_Init_Ext_Flash_Gpio_exit:
+
+
+void SF_Cfg_Init_Internal_Flash_Gpio()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Cfg_Init_Internal_Flash_Gpio_entry:
+l4200C830:
+	call Mem0[0x21010A10<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Cfg_Init_Internal_Flash_Gpio_exit:
+
+
+void SF_Cfg_Deinit_Ext_Flash_Gpio()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Cfg_Deinit_Ext_Flash_Gpio_entry:
+l4200C83A:
+	call Mem0[0x21010A14<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Cfg_Deinit_Ext_Flash_Gpio_exit:
+
+
+void SF_Cfg_Restore_GPIO17_Fun()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Cfg_Restore_GPIO17_Fun_entry:
+l4200C844:
+	call Mem0[0x21010A18<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Cfg_Restore_GPIO17_Fun_exit:
+
+
+void SF_Cfg_Get_Flash_Cfg_Need_Lock()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Cfg_Get_Flash_Cfg_Need_Lock_entry:
+l4200C84E:
+	call Mem0[0x21010A1C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Cfg_Get_Flash_Cfg_Need_Lock_exit:
+
+
+void SF_Cfg_Init_Flash_Gpio()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Cfg_Init_Flash_Gpio_entry:
+l4200C858:
+	call Mem0[0x21010A20<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Cfg_Init_Flash_Gpio_exit:
+
+
+void SF_Cfg_Flash_Identify()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Cfg_Flash_Identify_entry:
+l4200C862:
+	call Mem0[0x21010A24<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Cfg_Flash_Identify_exit:
+
+
+void SF_Ctrl_Enable()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_Enable_entry:
+l4200C86C:
+	call Mem0[0x21010A28<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_Enable_exit:
+
+
+void SF_Ctrl_Select_Pad()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_Select_Pad_entry:
+l4200C876:
+	call Mem0[0x21010A2C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_Select_Pad_exit:
+
+
+void SF_Ctrl_Set_Owner()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_Set_Owner_entry:
+l4200C880:
+	call Mem0[0x21010A30<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_Set_Owner_exit:
+
+
+void SF_Ctrl_Disable()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_Disable_entry:
+l4200C88A:
+	call Mem0[0x21010A34<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_Disable_exit:
+
+
+void SF_Ctrl_AES_Enable_BE()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_AES_Enable_BE_entry:
+l4200C894:
+	call Mem0[0x21010A38<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_AES_Enable_BE_exit:
+
+
+void SF_Ctrl_AES_Enable_LE()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_AES_Enable_LE_entry:
+l4200C89E:
+	call Mem0[0x21010A3C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_AES_Enable_LE_exit:
+
+
+void SF_Ctrl_AES_Set_Region()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a6 t1
+// Preserved: sp
+SF_Ctrl_AES_Set_Region_entry:
+l4200C8A8:
+	call Mem0[0x21010A40<32>:int32] (retsize: 0;)
+		uses: a6:0x21011000<32>
+	return
+SF_Ctrl_AES_Set_Region_exit:
+
+
+void SF_Ctrl_AES_Set_Key()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_AES_Set_Key_entry:
+l4200C8B2:
+	call Mem0[0x21010A44<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_AES_Set_Key_exit:
+
+
+void SF_Ctrl_AES_Set_Key_BE()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_AES_Set_Key_BE_entry:
+l4200C8BC:
+	call Mem0[0x21010A48<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_AES_Set_Key_BE_exit:
+
+
+void SF_Ctrl_AES_Set_IV()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_AES_Set_IV_entry:
+l4200C8C6:
+	call Mem0[0x21010A4C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_AES_Set_IV_exit:
+
+
+void SF_Ctrl_AES_Set_IV_BE()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_AES_Set_IV_BE_entry:
+l4200C8D0:
+	call Mem0[0x21010A50<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_AES_Set_IV_BE_exit:
+
+
+void SF_Ctrl_AES_Enable()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_AES_Enable_entry:
+l4200C8DA:
+	call Mem0[0x21010A54<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_AES_Enable_exit:
+
+
+void SF_Ctrl_AES_Disable()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_AES_Disable_entry:
+l4200C8E4:
+	call Mem0[0x21010A58<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_AES_Disable_exit:
+
+
+void SF_Ctrl_Set_Flash_Image_Offset()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_Set_Flash_Image_Offset_entry:
+l4200C8EE:
+	call Mem0[0x21010A5C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_Set_Flash_Image_Offset_exit:
+
+
+void SF_Ctrl_Get_Flash_Image_Offset()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_Get_Flash_Image_Offset_entry:
+l4200C8F8:
+	call Mem0[0x21010A60<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_Get_Flash_Image_Offset_exit:
+
+
+void SF_Ctrl_Select_Clock()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_Select_Clock_entry:
+l4200C902:
+	call Mem0[0x21010A64<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_Select_Clock_exit:
+
+
+void SF_Ctrl_SendCmd()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_SendCmd_entry:
+l4200C90C:
+	call Mem0[0x21010A68<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_SendCmd_exit:
+
+
+void SF_Ctrl_Icache_Set()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_Icache_Set_entry:
+l4200C916:
+	call Mem0[0x21010A6C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_Icache_Set_exit:
+
+
+void SF_Ctrl_Icache2_Set()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_Icache2_Set_entry:
+l4200C920:
+	call Mem0[0x21010A70<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_Icache2_Set_exit:
+
+
+void SF_Ctrl_GetBusyState()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_GetBusyState_entry:
+l4200C92A:
+	call Mem0[0x21010A74<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_GetBusyState_exit:
+
+
+void SF_Ctrl_Is_AES_Enable()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_Is_AES_Enable_entry:
+l4200C934:
+	call Mem0[0x21010A78<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_Is_AES_Enable_exit:
+
+
+void SF_Ctrl_Get_Clock_Delay()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_Get_Clock_Delay_entry:
+l4200C93E:
+	call Mem0[0x21010A7C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_Get_Clock_Delay_exit:
+
+
+void SF_Ctrl_Set_Clock_Delay()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+SF_Ctrl_Set_Clock_Delay_entry:
+l4200C948:
+	call Mem0[0x21010A80<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+SF_Ctrl_Set_Clock_Delay_exit:
+
+
+void XIP_SFlash_State_Save()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+XIP_SFlash_State_Save_entry:
+l4200C952:
+	call Mem0[0x21010A84<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+XIP_SFlash_State_Save_exit:
+
+
+void XIP_SFlash_State_Restore()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+XIP_SFlash_State_Restore_entry:
+l4200C95C:
+	call Mem0[0x21010A88<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+XIP_SFlash_State_Restore_exit:
+
+
+void XIP_SFlash_Erase_Need_Lock()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+XIP_SFlash_Erase_Need_Lock_entry:
+l4200C966:
+	call Mem0[0x21010A8C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+XIP_SFlash_Erase_Need_Lock_exit:
+
+
+void XIP_SFlash_Write_Need_Lock()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+XIP_SFlash_Write_Need_Lock_entry:
+l4200C970:
+	call Mem0[0x21010A90<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+XIP_SFlash_Write_Need_Lock_exit:
+
+
+void XIP_SFlash_Read_Need_Lock()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+XIP_SFlash_Read_Need_Lock_entry:
+l4200C97A:
+	call Mem0[0x21010A94<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+XIP_SFlash_Read_Need_Lock_exit:
+
+
+void XIP_SFlash_GetJedecId_Need_Lock()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+XIP_SFlash_GetJedecId_Need_Lock_entry:
+l4200C984:
+	call Mem0[0x21010A98<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+XIP_SFlash_GetJedecId_Need_Lock_exit:
+
+
+void XIP_SFlash_GetDeviceId_Need_Lock()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+XIP_SFlash_GetDeviceId_Need_Lock_entry:
+l4200C98E:
+	call Mem0[0x21010A9C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+XIP_SFlash_GetDeviceId_Need_Lock_exit:
+
+
+void XIP_SFlash_GetUniqueId_Need_Lock()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+XIP_SFlash_GetUniqueId_Need_Lock_entry:
+l4200C998:
+	call Mem0[0x21010AA0<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+XIP_SFlash_GetUniqueId_Need_Lock_exit:
+
+
+void XIP_SFlash_Read_Via_Cache_Need_Lock()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+XIP_SFlash_Read_Via_Cache_Need_Lock_entry:
+l4200C9A2:
+	call Mem0[0x21010AA4<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+XIP_SFlash_Read_Via_Cache_Need_Lock_exit:
+
+
+void XIP_SFlash_Read_With_Lock()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+XIP_SFlash_Read_With_Lock_entry:
+l4200C9AC:
+	call Mem0[0x21010AA8<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+XIP_SFlash_Read_With_Lock_exit:
+
+
+void XIP_SFlash_Write_With_Lock()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+XIP_SFlash_Write_With_Lock_entry:
+l4200C9B6:
+	call Mem0[0x21010AAC<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+XIP_SFlash_Write_With_Lock_exit:
+
+
+void XIP_SFlash_Erase_With_Lock()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+XIP_SFlash_Erase_With_Lock_entry:
+l4200C9C0:
+	call Mem0[0x21010AB0<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+XIP_SFlash_Erase_With_Lock_exit:
+
+
+void XIP_SFlash_Opt_Enter()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+XIP_SFlash_Opt_Enter_entry:
+l4200C9CA:
+	call Mem0[0x21010AB4<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+XIP_SFlash_Opt_Enter_exit:
+
+
+void XIP_SFlash_Opt_Exit()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+XIP_SFlash_Opt_Exit_entry:
+l4200C9D4:
+	call Mem0[0x21010AB8<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+XIP_SFlash_Opt_Exit_exit:
+
+
+void BFLB_Soft_CRC32()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+BFLB_Soft_CRC32_entry:
+l4200C9DE:
+	call Mem0[0x21010ABC<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+BFLB_Soft_CRC32_exit:
+
+
+void ADC_Trim_TSEN(word32 a0, word32 a4, word32 s4, word32 s5, word32 dwArg04, word32 dwArgA4)
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse:  a0:[0..31] a4:[0..31] s4:[0..31] s5:[0..31] Stack +0004:[0..31] Stack +00A4:[0..31]
+// LiveOut:
+// Trashed: a0 a1 a2 a3 a4 a5 a6 fa0 fs0 fs1 ra s0 s1 s2 s3 s4 s5 s8 t1 t3 tp
+// Preserved: sp
+ADC_Trim_TSEN_entry:
+l4200C9E8:
+	word32 s2_106 = a0
+	word32 a0_24 = EF_Ctrl_Read_TSEN_Trim(a4)
+	branch a0_24 << 0x12<u32> < 0<32> l4200CA26
+l4200CA26:
+	word32 a0_39 = (a0_24 & 0xFFFFFF<32>) << 16<i32>
+	word32 a0_107 = a0_39 >>u 16<i32>
+	word32 a5_43 = EF_Ctrl_Get_Trim_Parity()
+	branch (a0_24 >>u 0xC<u32> & 1<32>) != a0_39 >>u 16<i32> l4200CA0C
+l4200CA3E:
+	Mem48[a0:word16] = SLICE(a5_43 & 0xFFFFFF<32>, word16, 0)
+	word32 s1_108 = a5_43 & 0x4000000<32>
+	word32 s0_50 = 0<32>
+	branch (a5_43 & 0x4000000<32>) != 0<32> l4200CA0E
+l4200CA4E:
+	Mem56[0x4001090C<32>:word32] = Mem48[0x4000F90C<32>:int32] & 0xFFF7FFFF<32>
+	word32 a4_54 = 0xFFF7FFFF<32>
+	word32 s3_109 = 50<i32>
+l4200CA66:
+	word32 s0_73
+	word32 s3_75
+	word32 fs1_87
+	word32 fs0_88
+	word32 fa0_89
+	call 0x23052E86<p32> (retsize: 0;)
+		uses: a0:a0_62,a4:a4_67,fa0:fa0_89,fs0:fs0_88,fs1:fs1_87,ra:0x23052A68<p32>,s0:s0_63,s1:s1_64,s2:s2_61,s3:s3_58 + 0xFFFFFFFF<32>,s4:s4_65,s5:s5_66,Stack +0004:dwArg04,Stack +00A4:dwArgA4
+		defs: a0:a0_71,a4:a4_86,fa0:fa0_89,fs0:fs0_88,fs1:fs1_87,s0:s0_73,s1:s1_74,s2:s2_70,s3:s3_75,s4:s4_76,s5:s5_77
+	s3_109 = s3_75 & 255<i32>
+	s0_50 = s0_73 + a0_107
+	branch (s3_75 & 255<i32>) != 0<32> l4200CA66
+l4200CA7A:
+	Mem100[0x4001090C<32>:word32] = Mem56[0x4000F90C<32>:int32] | 0x80000<32>
+	word32 a4_112 = 0x40010000<32>
+	word32 s0_102 = 50<i32>
+l4200CA9C:
+	word32 s0_118
+	word32 s1_119
+	word32 fs1_132
+	word32 fs0_133
+	word32 fa0_134
+	call 0x23052E86<p32> (retsize: 0;)
+		uses: a0:a0_107,a4:a4_112,fa0:fa0_134,fs0:fs0_133,fs1:fs1_132,ra:0x23052A9E<p32>,s0:s0_103 + 0xFFFFFFFF<32>,s1:s1_108,s2:s2_106,s3:s3_109,s4:s4_110,s5:s5_111,Stack +0004:dwArg04,Stack +00A4:dwArgA4
+		defs: a0:a0_116,a4:a4_131,fa0:fa0_134,fs0:fs0_133,fs1:fs1_132,s0:s0_118,s1:s1_119,s2:s2_115,s3:s3_120,s4:s4_121,s5:s5_122
+	s0_102 = s0_118 & 255<i32>
+	s1_108 = s1_119 + a0_107
+	branch (s0_118 & 255<i32>) != 0<32> l4200CA9C
+l4200CAAE:
+	word32 s2_146
+	word32 a0_147
+	word32 s0_149
+	word32 s1_150
+	word32 s3_151
+	word32 a1_160
+	word32 a4_162
+	word32 fs1_163
+	call 0x23070708<p32> (retsize: 0;)
+		uses: a0:a0_116,a4:a4_131,a5:50<i32>,fa0:CONVERT(s1_137 >>u 50<i32>, word32, real32),fs0:CONVERT(CONVERT(Mem100[s2_115:uint16], uint16, word32), word32, real32),fs1:fs1_370,ra:0x23070AC2<p32>,s0:s0_118 & 255<i32>,s1:s1_137 >>u 50<i32>,s2:s2_115,s3:s3_120,s4:s4_121,s5:s5_122,Stack +0004:dwArg04,Stack +00A4:dwArgA4
+		defs: a0:a0_147,a1:a1_160,a4:a4_162,fs1:fs1_163,s0:s0_149,s1:s1_150,s2:s2_146,s3:s3_151
+	word32 s2_172
+	word32 a0_173
+	word32 s0_175
+	word32 s1_176
+	word32 s3_177
+	word32 s4_178
+	word32 s5_179
+	word32 a4_188
+	call 0x23070708<p32> (retsize: 0;)
+		uses: a0:a0_147,a4:a4_162,fa0:fs1_163,fs0:fs0_371,fs1:fs1_370,ra:0x23070AD2<p32>,s0:s0_149,s1:s1_150,s2:s2_146,s3:s3_151,s4:a0_147,s5:a1_160,Stack +0004:dwArg04,Stack +00A4:dwArgA4
+		defs: a0:a0_173,a4:a4_188,s0:s0_175,s1:s1_176,s2:s2_172,s3:s3_177,s4:s4_178,s5:s5_179
+	word32 s2_198
+	word32 a0_199
+	word32 s0_201
+	word32 s1_202
+	word32 s3_203
+	word32 s4_204
+	word32 s5_205
+	word32 a1_212
+	word32 a4_214
+	call 0x2306F140<p32> (retsize: 0;)
+		uses: a0:a0_173,a2:Mem100[0x4200D998<32>:int32],a3:Mem100[0x4200D99C<32>:int32],a4:a4_188,a5:0x4200E000<32>,fa0:fa0_374,fs0:fs0_371,fs1:fs1_370,ra:0x2306EAE6<p32>,s0:s0_175,s1:s1_176,s2:s2_172,s3:s3_177,s4:s4_178,s5:s5_179,Stack +0004:dwArg04,Stack +00A4:dwArgA4
+		defs: a0:a0_199,a1:a1_212,a4:a4_214,s0:s0_201,s1:s1_202,s2:s2_198,s3:s3_203,s4:s4_204,s5:s5_205
+	word32 s2_225
+	word32 a0_226
+	word32 s0_228
+	word32 s1_229
+	word32 s3_230
+	word32 a1_239
+	word32 a4_241
+	word32 fs0_243
+	call 0x2306F8DC<p32> (retsize: 0;)
+		uses: a0:s4_204,a1:s5_205,a2:a0_199,a3:a1_212,a4:a4_214,fa0:fa0_374,fs0:fs0_371,fs1:fs1_370,ra:0x2306FAF6<p32>,s0:s0_201,s1:s1_202,s2:s2_198,s3:s3_203,s4:s4_204,s5:s5_205,Stack +0004:dwArg04,Stack +00A4:dwArgA4
+		defs: a0:a0_226,a1:a1_239,a4:a4_241,fs0:fs0_243,s0:s0_228,s1:s1_229,s2:s2_225,s3:s3_230
+	word32 s2_251
+	word32 a0_252
+	word32 s0_254
+	word32 s1_255
+	word32 s3_256
+	word32 s4_257
+	word32 s5_258
+	word32 a4_267
+	call 0x23070708<p32> (retsize: 0;)
+		uses: a0:a0_226,a4:a4_241,fa0:fs0_243,fs0:fs0_371,fs1:fs1_370,ra:0x23070B06<p32>,s0:s0_228,s1:s1_229,s2:s2_225,s3:s3_230,s4:a0_226,s5:a1_239,Stack +0004:dwArg04,Stack +00A4:dwArgA4
+		defs: a0:a0_252,a4:a4_267,s0:s0_254,s1:s1_255,s2:s2_251,s3:s3_256,s4:s4_257,s5:s5_258
+	word32 s2_277
+	word32 a0_278
+	word32 s0_280
+	word32 s1_281
+	word32 s3_282
+	word32 s4_283
+	word32 s5_284
+	word32 a1_291
+	word32 a4_293
+	call 0x2306F140<p32> (retsize: 0;)
+		uses: a0:a0_252,a2:Mem100[0x4200D9A0<32>:int32],a3:Mem100[0x4200D9A4<32>:int32],a4:a4_267,a5:0x4200E000<32>,fa0:fa0_374,fs0:fs0_371,fs1:fs1_370,ra:0x2306EB1A<p32>,s0:s0_254,s1:s1_255,s2:s2_251,s3:s3_256,s4:s4_257,s5:s5_258,Stack +0004:dwArg04,Stack +00A4:dwArgA4
+		defs: a0:a0_278,a1:a1_291,a4:a4_293,s0:s0_280,s1:s1_281,s2:s2_277,s3:s3_282,s4:s4_283,s5:s5_284
+	word32 s2_304
+	word32 a0_305
+	word32 s0_307
+	word32 s1_308
+	word32 s3_309
+	word32 s4_310
+	word32 s5_311
+	word32 a4_320
+	call 0x2306DAA4<p32> (retsize: 0;)
+		uses: a0:s4_283,a1:s5_284,a2:a0_278,a3:a1_291,a4:a4_293,fa0:fa0_374,fs0:fs0_371,fs1:fs1_370,ra:0x2306DB2A<p32>,s0:s0_280,s1:s1_281,s2:s2_277,s3:s3_282,s4:s4_283,s5:s5_284,Stack +0004:dwArg04,Stack +00A4:dwArgA4
+		defs: a0:a0_305,a4:a4_320,s0:s0_307,s1:s1_308,s2:s2_304,s3:s3_309,s4:s4_310,s5:s5_311
+	word32 s2_330
+	word32 a0_331
+	word32 s0_333
+	word32 s1_334
+	word32 s3_335
+	word32 s4_336
+	word32 s5_337
+	word32 a4_346
+	call 0x2306DAA4<p32> (retsize: 0;)
+		uses: a0:a0_305,a2:Mem100[0x4200D9A8<32>:int32],a3:Mem100[0x4200D9AC<32>:int32],a4:a4_320,a5:0x4200E000<32>,fa0:fa0_374,fs0:fs0_371,fs1:fs1_370,ra:0x2306DB3E<p32>,s0:s0_307,s1:s1_308,s2:s2_304,s3:s3_309,s4:s4_310,s5:s5_311,Stack +0004:dwArg04,Stack +00A4:dwArgA4
+		defs: a0:a0_331,a4:a4_346,s0:s0_333,s1:s1_334,s2:s2_330,s3:s3_335,s4:s4_336,s5:s5_337
+	word32 s2_353
+	word32 fs1_370
+	word32 fs0_371
+	word32 fa0_372
+	call 0x23070818<p32> (retsize: 0;)
+		uses: a0:a0_331,a4:a4_346,fa0:fa0_374,fs0:fs0_371,fs1:fs1_370,ra:0x23070B46<p32>,s0:s0_333,s1:s1_334,s2:s2_330,s3:s3_335,s4:s4_336,s5:s5_337,Stack +0004:dwArg04,Stack +00A4:dwArgA4
+		defs: fa0:fa0_372,fs0:fs0_371,fs1:fs1_370,s2:s2_353
+	word32 fa0_374 = fa0_372 + fs0_371
+	Mem376[s2_353:word16] = SLICE(CONVERT(fa0_374, word32, uint32), word16, 0)
+l4200CA0C:
+l4200CA0E:
+	return
+ADC_Trim_TSEN_exit:
+
+
+void ADC_Gain_Trim(word32 a4, word32 dwArg14, word32 dwArgB4, word32 dwArg0128)
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse:  a4:[0..31] Stack +0014:[0..31] Stack +00B4:[0..31] Stack +0128:[0..31]
+// LiveOut:
+// Trashed: a0 a1 a2 a3 a4 a5 fa0 ra s0 s1 s2 s3 s4 s8 t1 t3 tp
+// Preserved: sp
+ADC_Gain_Trim_entry:
+l4200CB5C:
+	word32 a4_21
+	word32 a0_18 = EF_Ctrl_Read_ADC_Gain_Trim(a4, out a4_21)
+	branch a0_18 << 0x12<u32> < 0<32> l4200CB8A
+l4200CB8A:
+	EF_Ctrl_Get_Trim_Parity()
+	branch (a0_18 >>u 0xC<u32> & 1<32>) != CONVERT(SLICE(a0_18 & 0xFFFFFF<32>, word16, 0), word16, word32) l4200CB78
+l4200CBA6:
+	word32 a4_112
+	word32 s4_103
+	word32 s3_102
+	word32 s2_101
+	word32 s1_100
+	word32 s0_163
+	Mem40[0x4200D96C<32>:byte] = 1<8>
+	Mem47[0x4200D96E<32>:word16] = 1<16>
+	branch true l4200CC14
+l4200CC14:
+	word32 s0_55
+	word32 s1_56
+	word32 s2_57
+	word32 s3_58
+	word32 s4_59
+	word32 a4_68
+	call 0x23070708<p32> (retsize: 0;)
+		uses: a1:a1_109,a4:a4_21,fa0:1.0F,ra:0x23070C18<p32>,s0:0x4200D96C<32>,s1:0<32>,s2:0xFFFFFF<32>,s3:0x4200E000<32>,s4:0x23088000<32>,Stack +0044:dwArg14,Stack +00E4:dwArgB4
+		defs: a4:a4_68,s0:s0_55,s1:s1_56,s2:s2_57,s3:s3_58,s4:s4_59
+	word32 a0_74
+	word32 s0_76
+	word32 s1_77
+	word32 s2_78
+	word32 s3_79
+	word32 s4_80
+	word32 a1_86
+	word32 a4_89
+	call 0x2306F140<p32> (retsize: 0;)
+		uses: a1:a1_109,a2:Mem47[s4_59 + 1600<i32>:int32],a3:Mem47[s4_59 + 1604<i32>:int32],a4:a4_68,fa0:fa0_110,ra:0x2306EC28<p32>,s0:s0_55,s1:s1_56,s2:s2_57,s3:s3_58,s4:s4_59,Stack +0014:dwArg14,Stack +00B4:dwArgB4
+		defs: a0:a0_74,a1:a1_86,a4:a4_89,s0:s0_76,s1:s1_77,s2:s2_78,s3:s3_79,s4:s4_80
+	word32 a1_109
+	word32 fa0_110
+	call 0x2306F8DC<p32> (retsize: 0;)
+		uses: a0:Mem47[s3_79 + -1616<i32>:int32],a1:Mem47[s3_79 + -1612<i32>:int32],a2:a0_74,a3:a1_86,a4:a4_89,fa0:fa0_110,ra:0x2306FC3C<p32>,s0:s0_76,s1:s1_77,s2:s2_78,s3:s3_79,s4:s4_80,Stack +0014:dwArg14,Stack +00B4:dwArgB4
+		defs: a1:a1_109,a4:a4_112,fa0:fa0_110,s0:s0_99,s1:s1_100,s2:s2_101,s3:s3_102,s4:s4_103
+l4200CBD2:
+	word32 s0_121
+	word32 s1_122
+	word32 s2_123
+	word32 s3_124
+	word32 s4_125
+	word32 a4_134
+	call 0x23070708<p32> (retsize: 0;)
+		uses: a1:a1_173,a4:a4_21,a5:0xFFFFFF<32>,fa0:1.677722e+07F,ra:0x23070BDE<p32>,s0:0x4200D96C<32>,s1:0<32>,s2:0xFFFFFF<32>,s3:0x4200E000<32>,s4:0x23088000<32>,Stack +0044:dwArg14,Stack +00E4:dwArgB4
+		defs: a4:a4_134,s0:s0_121,s1:s1_122,s2:s2_123,s3:s3_124,s4:s4_125
+	word32 s0_142
+	word32 s1_143
+	word32 s2_144
+	word32 s3_145
+	word32 s4_146
+	word32 a4_155
+	call 0x2306F140<p32> (retsize: 0;)
+		uses: a1:a1_173,a2:Mem47[s4_125 + 1600<i32>:int32],a3:Mem47[s4_125 + 1604<i32>:int32],a4:a4_134,fa0:fa0_174,ra:0x2306EBEE<p32>,s0:s0_121,s1:s1_122,s2:s2_123,s3:s3_124,s4:s4_125,Stack +0014:dwArg14,Stack +00B4:dwArgB4
+		defs: a4:a4_155,s0:s0_142,s1:s1_143,s2:s2_144,s3:s3_145,s4:s4_146
+	word32 a1_173
+	word32 fa0_174
+	call 0x2306DAA4<p32> (retsize: 0;)
+		uses: a1:a1_173,a2:Mem47[s3_145 + -1616<i32>:int32],a3:Mem47[s3_145 + -1612<i32>:int32],a4:a4_155,fa0:fa0_174,ra:0x2306DBFE<p32>,s0:s0_142,s1:s1_143,s2:s2_144,s3:s3_145,s4:s4_146,Stack +0014:dwArg14,Stack +00B4:dwArgB4
+		defs: a1:a1_173,a4:a4_176,fa0:fa0_174,s0:s0_163,s1:s1_164,s2:s2_165,s3:s3_166,s4:s4_167
+l4200CC06:
+	word32 a0_187
+	word32 s0_189
+	word32 a1_199
+	word32 fa0_200
+	call 0x23070818<p32> (retsize: 0;)
+		uses: a1:a1_199,a4:a4_184,fa0:fa0_200,ra:0x23070C06<p32>,s0:s0_179,s1:s1_180,s2:s2_181,s3:s3_182,s4:s4_183,Stack +0014:dwArg14,Stack +00B4:dwArgB4
+		defs: a0:a0_187,a1:a1_199,fa0:fa0_200,s0:s0_189
+	Mem204[a0_187 + 4<i32>:real32] = s0_189
+l4200CB78:
+l4200CB7A:
+	0<32> = dwArg0128
+	return
+ADC_Gain_Trim_exit:
+
+
+word32 EF_Ctrl_Read_TSEN_Trim(word32 a4)
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// Called from:
+//      ADC_Trim_TSEN
+// MayUse:  a4:[0..31]
+// LiveOut: a0
+// Trashed: a0 a1 a2 a3 a4 a5 a6 t1 t3
+// Preserved: sp
+EF_Ctrl_Read_TSEN_Trim_entry:
+l4200CCE4:
+	EF_Ctrl_Sw_AHB_Clk_0()
+	EF_Ctrl_Load_Efuse_R0()
+	word32 a0_18 = Mem7[a4 & 1<32>:word32]
+	word32 a4_22 = a4 & 1<32> & 0xFDFFFFFF<32> | (a4 & 1<32>) << 0xD<u32>
+	Mem23[a4_22:word32] = a0_18
+	word32 a5_33 = (a4_22 & 0xFF000000<32> | 0xFFF<32>) & 0xFEFFFFFF<32> | 0x1000000<32>
+	Mem34[a5_33:word32] = a0_18
+	Mem43[a5_33 & 0xFBFFFFFF<32>:word32] = a0_18
+	return a0_18
+EF_Ctrl_Read_TSEN_Trim_exit:
+
+
+word32 EF_Ctrl_Read_ADC_Gain_Trim(word32 a4, ptr32 & a4Out)
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// Called from:
+//      ADC_Gain_Trim
+// MayUse:  a4:[0..31]
+// LiveOut: a0 a4
+// Trashed: a0 a2 a3 a4 a5 t1 t3
+// Preserved: sp
+EF_Ctrl_Read_ADC_Gain_Trim_entry:
+l4200CD40:
+	EF_Ctrl_Sw_AHB_Clk_0()
+	EF_Ctrl_Load_Efuse_R0()
+	word32 a5_14 = Mem7[a4 + 120<i32>:word32]
+	word32 a4_29 = a4 >>u 14<i32> & 1<32>
+	word32 a0_15 = Mem7[a5_14:word32]
+	Mem34[((a5_14 & 0xFF000000<32> | (a4 << 0x13<u32>) >>u 20<i32>) & 0xFEFFFFFF<32> | (a4 >>u 0xD<u32> & 1<32>) << 12<i32>) & 0xFDFFFFFF<32> | a4_29 << 13<i32>:word32] = a0_15
+	a4Out = a4_29 << 13<i32>
+	return a0_15
+EF_Ctrl_Read_ADC_Gain_Trim_exit:
+
+
+void AON_Power_On_MBG()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+AON_Power_On_MBG_entry:
+l4200CD86:
+	call Mem0[0x21010810<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+AON_Power_On_MBG_exit:
+
+
+void AON_Power_Off_MBG()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+AON_Power_Off_MBG_entry:
+l4200CD90:
+	call Mem0[0x21010814<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+AON_Power_Off_MBG_exit:
+
+
+void AON_Power_On_XTAL()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+AON_Power_On_XTAL_entry:
+l4200CD9A:
+	call Mem0[0x21010818<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+AON_Power_On_XTAL_exit:
+
+
+void AON_Set_Xtal_CapCode()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+AON_Set_Xtal_CapCode_entry:
+l4200CDA4:
+	call Mem0[0x2101081C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+AON_Set_Xtal_CapCode_exit:
+
+
+void AON_Get_Xtal_CapCode()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+AON_Get_Xtal_CapCode_entry:
+l4200CDAE:
+	call Mem0[0x21010820<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+AON_Get_Xtal_CapCode_exit:
+
+
+void AON_Power_Off_XTAL()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+AON_Power_Off_XTAL_entry:
+l4200CDB8:
+	call Mem0[0x21010824<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+AON_Power_Off_XTAL_exit:
+
+
+word32 EF_Ctrl_Get_Trim_Parity()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// Called from:
+//      ADC_Trim_TSEN
+//      ADC_Gain_Trim
+// MayUse: 
+// LiveOut: a5
+// Trashed: a5 t1
+// Preserved: sp
+EF_Ctrl_Get_Trim_Parity_entry:
+l4200CDC2:
+	word32 a5_7
+	call Mem0[0x21010888<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+		defs: a5:a5_7
+	return a5_7
+EF_Ctrl_Get_Trim_Parity_exit:
+
+
+void EF_Ctrl_Read_RC32M_Trim()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+EF_Ctrl_Read_RC32M_Trim_entry:
+l4200CDCC:
+	call Mem0[0x2101088C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+EF_Ctrl_Read_RC32M_Trim_exit:
+
+
+void EF_Ctrl_Read_RC32K_Trim()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+EF_Ctrl_Read_RC32K_Trim_entry:
+l4200CDD6:
+	call Mem0[0x21010890<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+EF_Ctrl_Read_RC32K_Trim_exit:
+
+
+void GLB_Get_Root_CLK_Sel()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+GLB_Get_Root_CLK_Sel_entry:
+l4200CDE0:
+	call Mem0[0x21010898<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+GLB_Get_Root_CLK_Sel_exit:
+
+
+void GLB_Set_System_CLK_Div()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+GLB_Set_System_CLK_Div_entry:
+l4200CDEA:
+	call Mem0[0x2101089C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+GLB_Set_System_CLK_Div_exit:
+
+
+void GLB_Get_BCLK_Div()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+GLB_Get_BCLK_Div_entry:
+l4200CDF4:
+	call Mem0[0x210108A0<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+GLB_Get_BCLK_Div_exit:
+
+
+void GLB_Get_HCLK_Div()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+GLB_Get_HCLK_Div_entry:
+l4200CDFE:
+	call Mem0[0x210108A4<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+GLB_Get_HCLK_Div_exit:
+
+
+void Update_SystemCoreClockWith_XTAL()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+Update_SystemCoreClockWith_XTAL_entry:
+l4200CE08:
+	call Mem0[0x210108A8<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+Update_SystemCoreClockWith_XTAL_exit:
+
+
+void GLB_Set_System_CLK()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+GLB_Set_System_CLK_entry:
+l4200CE12:
+	call Mem0[0x210108AC<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+GLB_Set_System_CLK_exit:
+
+
+void System_Core_Clock_Update_From_RC32M()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+System_Core_Clock_Update_From_RC32M_entry:
+l4200CE1C:
+	call Mem0[0x210108B0<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+System_Core_Clock_Update_From_RC32M_exit:
+
+
+void GLB_Set_SF_CLK()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+GLB_Set_SF_CLK_entry:
+l4200CE26:
+	call Mem0[0x210108B4<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+GLB_Set_SF_CLK_exit:
+
+
+void GLB_Set_PKA_CLK_Sel()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+GLB_Set_PKA_CLK_Sel_entry:
+l4200CE30:
+	call Mem0[0x210108B8<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+GLB_Set_PKA_CLK_Sel_exit:
+
+
+void HBN_32K_Sel()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+HBN_32K_Sel_entry:
+l4200CE3A:
+	call Mem0[0x21010908<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+HBN_32K_Sel_exit:
+
+
+void HBN_Set_ROOT_CLK_Sel()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+HBN_Set_ROOT_CLK_Sel_entry:
+l4200CE44:
+	call Mem0[0x2101090C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+HBN_Set_ROOT_CLK_Sel_exit:
+
+
+void HBN_Power_On_Xtal_32K()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+HBN_Power_On_Xtal_32K_entry:
+l4200CE4E:
+	call Mem0[0x21010910<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+HBN_Power_On_Xtal_32K_exit:
+
+
+void HBN_Power_Off_Xtal_32K()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+HBN_Power_Off_Xtal_32K_entry:
+l4200CE58:
+	call Mem0[0x21010914<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+HBN_Power_Off_Xtal_32K_exit:
+
+
+void HBN_Power_On_RC32K()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+HBN_Power_On_RC32K_entry:
+l4200CE62:
+	call Mem0[0x21010918<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+HBN_Power_On_RC32K_exit:
+
+
+void HBN_Power_Off_RC32K()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+HBN_Power_Off_RC32K_entry:
+l4200CE6C:
+	call Mem0[0x2101091C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+HBN_Power_Off_RC32K_exit:
+
+
+void HBN_Trim_RC32K()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+HBN_Trim_RC32K_entry:
+l4200CE76:
+	call Mem0[0x21010920<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+HBN_Trim_RC32K_exit:
+
+
+void PDS_Trim_RC32M()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+PDS_Trim_RC32M_entry:
+l4200CE80:
+	call Mem0[0x21010954<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+PDS_Trim_RC32M_exit:
+
+
+void PDS_Select_RC32M_As_PLL_Ref()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+PDS_Select_RC32M_As_PLL_Ref_entry:
+l4200CE8A:
+	call Mem0[0x21010958<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+PDS_Select_RC32M_As_PLL_Ref_exit:
+
+
+void PDS_Select_XTAL_As_PLL_Ref()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+PDS_Select_XTAL_As_PLL_Ref_entry:
+l4200CE94:
+	call Mem0[0x2101095C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+PDS_Select_XTAL_As_PLL_Ref_exit:
+
+
+void PDS_Power_On_PLL()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+PDS_Power_On_PLL_entry:
+l4200CE9E:
+	call Mem0[0x21010960<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+PDS_Power_On_PLL_exit:
+
+
+void PDS_Enable_PLL_All_Clks()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+PDS_Enable_PLL_All_Clks_entry:
+l4200CEA8:
+	call Mem0[0x21010964<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+PDS_Enable_PLL_All_Clks_exit:
+
+
+void PDS_Disable_PLL_All_Clks()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+PDS_Disable_PLL_All_Clks_entry:
+l4200CEB2:
+	call Mem0[0x21010968<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+PDS_Disable_PLL_All_Clks_exit:
+
+
+void PDS_Enable_PLL_Clk()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+PDS_Enable_PLL_Clk_entry:
+l4200CEBC:
+	call Mem0[0x2101096C<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+PDS_Enable_PLL_Clk_exit:
+
+
+void PDS_Disable_PLL_Clk()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+PDS_Disable_PLL_Clk_entry:
+l4200CEC6:
+	call Mem0[0x21010970<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+PDS_Disable_PLL_Clk_exit:
+
+
+void PDS_Power_Off_PLL()
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse: 
+// LiveOut:
+// Trashed: a5 t1
+// Preserved: sp
+PDS_Power_Off_PLL_entry:
+l4200CED0:
+	call Mem0[0x21010974<32>:int32] (retsize: 0;)
+		uses: a5:0x21011000<32>
+	return
+PDS_Power_Off_PLL_exit:
+
+
