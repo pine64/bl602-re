@@ -1,0 +1,7 @@
+= BL602 WiFi Headers
+
+These headers were obtained from https://code.aliyun.com/alios_bull/alios/tree/cd8a215d9572f3b07d0f30fc96f43392b27cb2e4/platform/mcu/bk7231s/beken/ip[an AliOS Git repo]. They are purportedly for a Beken BK7231s chip. The WiFi on that chip however is IP from https://www.ceva-dsp.com[CEVA/RivieraWaves]. There is astonishing overlap between the headers and the function names, object files and structures used in the BL602 proprietary WiFi library, suggesting the WiFi functionality in the BL602 is also CEVA/RivieraWaves IP.
+
+== See also
+
+* https://www.ceva-dsp.com/press/ceva-extends-its-ip-platforms-for-bluetooth-and-wi-fi-with-risc-v/[CEVA Extends its IP Platforms for Bluetooth and Wi-Fi with RISC-V]
