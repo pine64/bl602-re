@@ -45,3 +45,7 @@
   * The three examples are from commit 9a10205e96a6b10e22069c87625550cad666b1b4, bl602_demo_at, bl602_demo_wifi and sdk_app_ble_sync.
   
   * They are compiled with the riscv toolchain shipped with the sdk and using `make -j` directly in the folders with `CONFIG_CHIP_NAME=BL602` and `CONFIG_LINK_ROM=1`. The disassembly is generated with `riscv64-unknown-elf-objdump -d ./x.elf > ./x.S`
+
+
+=== Yangff (2 Nov 2020)
+  * Added Ghidra decompile results, using all default setting on ghidra. 
