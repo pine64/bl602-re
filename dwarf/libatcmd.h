@@ -1,9 +1,9 @@
 /* ======== components/stage/atcmd/at_bl602/at_server.c ======== */
 
 struct _at_evt {
-    int evt_id;
-    uint8_t ctx_buf[20];
-    uint32_t ctx_size;
+    int evt_id; // +0
+    uint8_t ctx_buf[20]; // +4
+    uint32_t ctx_size; // +24
 }; // :34:8
 
 static at_sever_t g_at_server; // :40:19
@@ -51,8 +51,8 @@ static err_t tcp_accept_callback(void *arg, struct altcp_pcb *new_conn, err_t er
 AT_ERROR_CODE bl_tcpserver(at_callback_para_t *para, at_callback_rsp_t *rsp); // :579:15
 
 struct send_data_ctx {
-    int linkId;
-    uint8_t *buf;
+    int linkId; // +0
+    uint8_t *buf; // +4
 }; // :665:8
 
 static void tcp_send_data(void *arg); // :672:13
@@ -65,27 +65,27 @@ AT_ERROR_CODE bl_cipsslcalpn(at_callback_para_t *para, at_callback_rsp_t *unused
 /* ======== components/stage/atcmd/at_bl602/bl_socket.h ======== */
 
 struct server_arg {
-    s16 port;
-    s32 protocol;
+    s16 port; // +0
+    s32 protocol; // +4
 }; // :25:8
 
 typedef struct {
-    u32 flag;
-    s16 port;
-    s32 protocol;
-    u32 auth_mode;
-    const char *cert;
-    const char *key;
-    const char *ca;
-    const char **alpn;
+    u32 flag; // +0
+    s16 port; // +4
+    s32 protocol; // +8
+    u32 auth_mode; // +12
+    const char *cert; // +16
+    const char *key; // +20
+    const char *ca; // +24
+    const char **alpn; // +28
     union {
         struct udp_pcb *udp;
         struct altcp_pcb *tcp;
         struct {
-            struct altcp_pcb *pcb;
-            struct altcp_tls_config *config;
+            struct altcp_pcb *pcb; // +0
+            struct altcp_tls_config *config; // +4
         } tls;
-    } pcb;
+    } pcb; // +32
 } server_ctrl_t; // :48:3
 
 enum socket_state {
@@ -109,36 +109,36 @@ enum auth_mode {
 }; // :63:6
 
 typedef struct {
-    char ip[16];
-    u32 port;
-    enum socket_type protocol;
-    enum auth_mode auth_mode;
-    const char *sni;
-    const char *ca;
-    const char *cert;
-    const char *key;
-    const char **alpn;
+    char ip[16]; // +0
+    u32 port; // +16
+    enum socket_type protocol; // +20
+    enum auth_mode auth_mode; // +21
+    const char *sni; // +24
+    const char *ca; // +28
+    const char *cert; // +32
+    const char *key; // +36
+    const char **alpn; // +40
     union {
         struct udp_pcb *udp;
         struct altcp_pcb *tcp;
         struct {
-            struct altcp_pcb *pcb;
-            struct altcp_tls_config *config;
+            struct altcp_pcb *pcb; // +0
+            struct altcp_tls_config *config; // +4
         } tls;
-    } pcb;
-    enum socket_state status;
+    } pcb; // +44
+    enum socket_state status; // +52
 } connect_t; // :87:3
 
 typedef struct {
-    s32 count;
-    connect_t connect[5];
+    s32 count; // +0
+    connect_t connect[5]; // +4
 } network_t; // :92:3
 
 /* ======== components/stage/atcmd/at_bl602/functions.c ======== */
 
 typedef struct {
-    s32 cmd;
-    AT_ERROR_CODE (*handler)(at_callback_para_t *, at_callback_rsp_t *);
+    s32 cmd; // +0
+    AT_ERROR_CODE (*handler)(at_callback_para_t *, at_callback_rsp_t *); // +4
 } callback_handler_t; // :68:3
 
 static wifi_interface_t g_wifi_interface; // :81:25
@@ -209,8 +209,8 @@ static AT_ERROR_CODE set_ip_handler(at_para_t *at_para); // :1688:22
 /* ======== components/stage/atcmd/src/at_common.c ======== */
 
 typedef struct {
-    AT_ERROR_CODE aec;
-    const char *info;
+    AT_ERROR_CODE aec; // +0
+    const char *info; // +4
 } err_info_t; // :40:3
 
 static const err_info_t err_info[24]; // :42:25
