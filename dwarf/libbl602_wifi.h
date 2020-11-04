@@ -8,14 +8,14 @@ int cfg_api_element_set(uint32_t task, uint32_t element, uint32_t type, void *ar
 /* ======== components/bl602/bl602_wifi/ip/cfg/cfg_api.h ======== */
 
 struct cfg_element_entry {
-    uint32_t task;
-    uint16_t element;
-    uint16_t type;
-    char *name;
-    void *val;
-    int (*set)(struct cfg_element_entry *, void *, void *);
-    int (*get)(struct cfg_element_entry *, void *, void *);
-    int (*notify)(struct cfg_element_entry *, void *, void *, enum CFG_ELEMENT_TYPE_OPS);
+    uint32_t task; // +0
+    uint16_t element; // +4
+    uint16_t type; // +6
+    char *name; // +8
+    void *val; // +12
+    int (*set)(struct cfg_element_entry *, void *, void *); // +16
+    int (*get)(struct cfg_element_entry *, void *, void *); // +20
+    int (*notify)(struct cfg_element_entry *, void *, void *, enum CFG_ELEMENT_TYPE_OPS); // +24
 }; // :7:8
 
 /* ======== components/bl602/bl602_wifi/ip/cfg/cfg_task.c ======== */
@@ -40,35 +40,35 @@ enum cfg_msg_tag {
 }; // :20:6
 
 struct {
-    uint32_t task;
-    uint32_t element;
-    uint32_t length;
-    uint32_t buf[0];
+    uint32_t task; // +0
+    uint32_t element; // +4
+    uint32_t length; // +8
+    uint32_t buf[0]; // +12
 } cfg_start_req_u_tlv_t; // :37:3
 
 struct cfg_start_req {
-    uint32_t ops;
+    uint32_t ops; // +0
     union {
         struct {
-            uint32_t task;
-            uint32_t element;
+            uint32_t task; // +0
+            uint32_t element; // +4
         } get[];
         struct {
-            uint32_t task;
-            uint32_t element;
+            uint32_t task; // +0
+            uint32_t element; // +4
         } reset[];
         struct {
-            uint32_t task;
-            uint32_t element;
-            uint32_t type;
-            uint32_t length;
-            uint32_t buf[0];
+            uint32_t task; // +0
+            uint32_t element; // +4
+            uint32_t type; // +8
+            uint32_t length; // +12
+            uint32_t buf[0]; // +16
         } set[];
-    } u;
+    } u; // +4
 }; // :39:8
 
 struct cfg_start_cfm {
-    uint8_t status;
+    uint8_t status; // +0
 }; // :76:8
 
 const struct ke_state_handler cfg_default_handler; // :82:38
@@ -96,8 +96,8 @@ int bl_nap_hook_call_fromCritical(int event, void *env); // :326:5
 /* ======== components/bl602/bl602_wifi/ip/lmac/src/bl/bl.h ======== */
 
 struct bl_env_tag {
-    uint8_t prev_hw_state;
-    int hw_in_doze;
+    uint8_t prev_hw_state; // +0
+    int hw_in_doze; // +4
 }; // :33:8
 
 struct bl_env_tag bl_env; // :48:26
@@ -163,43 +163,43 @@ enum chan_env_status_bit {
 }; // :122:6
 
 struct chan_tbtt_tag {
-    struct co_list_hdr list_hdr;
-    uint32_t time;
-    uint8_t vif_index;
-    uint8_t priority;
-    uint8_t status;
+    struct co_list_hdr list_hdr; // +0
+    uint32_t time; // +4
+    uint8_t vif_index; // +8
+    uint8_t priority; // +9
+    uint8_t status; // +10
 }; // :148:8
 
 struct chan_ctxt_tag {
-    struct co_list_hdr list_hdr;
-    struct mm_chan_ctxt_add_req channel;
-    ke_task_id_t taskid;
-    uint16_t nb_slots;
-    uint16_t nb_rem_slots;
-    uint16_t nb_res_slots;
-    uint8_t status;
-    uint8_t idx;
-    uint8_t nb_linked_vif;
-    uint8_t vif_index;
+    struct co_list_hdr list_hdr; // +0
+    struct mm_chan_ctxt_add_req channel; // +4
+    ke_task_id_t taskid; // +14
+    uint16_t nb_slots; // +16
+    uint16_t nb_rem_slots; // +18
+    uint16_t nb_res_slots; // +20
+    uint8_t status; // +22
+    uint8_t idx; // +23
+    uint8_t nb_linked_vif; // +24
+    uint8_t vif_index; // +25
 }; // :165:8
 
 struct chan_env_tag {
-    struct co_list list_free_ctxt;
-    struct co_list list_sched_ctxt;
-    struct co_list list_tbtt;
-    struct co_list list_tbtt_delay;
-    struct chan_ctxt_tag *current_channel;
-    struct chan_ctxt_tag *chan_switch;
-    struct mm_timer_tag tmr_tbtt_switch;
-    struct mm_timer_tag tmr_cde;
-    struct mm_timer_tag tmr_ctxt_op;
-    struct mm_timer_tag tmr_conn_less;
-    uint32_t cde_dur_us;
-    uint32_t cde_time;
-    uint8_t status;
-    uint8_t cfm_cnt;
-    uint8_t nb_sched_ctxt;
-    uint8_t pm;
+    struct co_list list_free_ctxt; // +0
+    struct co_list list_sched_ctxt; // +8
+    struct co_list list_tbtt; // +16
+    struct co_list list_tbtt_delay; // +24
+    struct chan_ctxt_tag *current_channel; // +32
+    struct chan_ctxt_tag *chan_switch; // +36
+    struct mm_timer_tag tmr_tbtt_switch; // +40
+    struct mm_timer_tag tmr_cde; // +56
+    struct mm_timer_tag tmr_ctxt_op; // +72
+    struct mm_timer_tag tmr_conn_less; // +88
+    uint32_t cde_dur_us; // +104
+    uint32_t cde_time; // +108
+    uint8_t status; // +112
+    uint8_t cfm_cnt; // +113
+    uint8_t nb_sched_ctxt; // +114
+    uint8_t pm; // +115
 }; // :211:8
 
 struct chan_env_tag chan_env; // :268:28
@@ -214,119 +214,119 @@ struct dma_desc bcn_dwnld_desc; // :47:17
 /* ======== components/bl602/bl602_wifi/ip/lmac/src/hal/hal_desc.h ======== */
 
 struct tx_policy_tbl {
-    uint32_t upatterntx;
-    uint32_t phycntrlinfo1;
-    uint32_t phycntrlinfo2;
-    uint32_t maccntrlinfo1;
-    uint32_t maccntrlinfo2;
-    uint32_t ratecntrlinfo[4];
-    uint32_t powercntrlinfo[4];
+    uint32_t upatterntx; // +0
+    uint32_t phycntrlinfo1; // +4
+    uint32_t phycntrlinfo2; // +8
+    uint32_t maccntrlinfo1; // +12
+    uint32_t maccntrlinfo2; // +16
+    uint32_t ratecntrlinfo[4]; // +20
+    uint32_t powercntrlinfo[4]; // +36
 }; // :669:8
 
 struct tx_compressed_policy_tbl {
-    uint32_t upatterntx;
-    uint32_t sec_user_control;
+    uint32_t upatterntx; // +0
+    uint32_t sec_user_control; // +4
 }; // :689:8
 
 struct tx_hd {
-    uint32_t upatterntx;
-    uint32_t nextfrmexseq_ptr;
-    uint32_t nextmpdudesc_ptr;
+    uint32_t upatterntx; // +0
+    uint32_t nextfrmexseq_ptr; // +4
+    uint32_t nextmpdudesc_ptr; // +8
     union {
         uint32_t first_pbd_ptr;
         uint32_t sec_user1_ptr;
-    } ;
+    }; // +12
     union {
         uint32_t datastartptr;
         uint32_t sec_user2_ptr;
-    } ;
+    }; // +16
     union {
         uint32_t dataendptr;
         uint32_t sec_user3_ptr;
-    } ;
-    uint32_t frmlen;
-    uint32_t frmlifetime;
-    uint32_t phyctrlinfo;
-    uint32_t policyentryaddr;
-    uint32_t optlen[3];
-    uint32_t macctrlinfo1;
-    uint32_t macctrlinfo2;
-    uint32_t statinfo;
-    uint32_t mediumtimeused;
+    }; // +20
+    uint32_t frmlen; // +24
+    uint32_t frmlifetime; // +28
+    uint32_t phyctrlinfo; // +32
+    uint32_t policyentryaddr; // +36
+    uint32_t optlen[3]; // +40
+    uint32_t macctrlinfo1; // +52
+    uint32_t macctrlinfo2; // +56
+    uint32_t statinfo; // +60
+    uint32_t mediumtimeused; // +64
 }; // :698:8
 
 struct tx_pbd {
-    uint32_t upatterntx;
-    uint32_t next;
-    uint32_t datastartptr;
-    uint32_t dataendptr;
-    uint32_t bufctrlinfo;
+    uint32_t upatterntx; // +0
+    uint32_t next; // +4
+    uint32_t datastartptr; // +8
+    uint32_t dataendptr; // +12
+    uint32_t bufctrlinfo; // +16
 }; // :748:8
 
 struct rx_hd {
-    uint32_t upatternrx;
-    uint32_t next;
-    uint32_t first_pbd_ptr;
-    struct rx_swdesc *swdesc;
-    uint32_t datastartptr;
-    uint32_t dataendptr;
-    uint32_t headerctrlinfo;
-    uint16_t frmlen;
-    uint16_t ampdu_stat_info;
-    uint32_t tsflo;
-    uint32_t tsfhi;
-    uint32_t recvec1a;
-    uint32_t recvec1b;
-    uint32_t recvec1c;
-    uint32_t recvec1d;
-    uint32_t recvec2a;
-    uint32_t recvec2b;
-    uint32_t statinfo;
+    uint32_t upatternrx; // +0
+    uint32_t next; // +4
+    uint32_t first_pbd_ptr; // +8
+    struct rx_swdesc *swdesc; // +12
+    uint32_t datastartptr; // +16
+    uint32_t dataendptr; // +20
+    uint32_t headerctrlinfo; // +24
+    uint16_t frmlen; // +28
+    uint16_t ampdu_stat_info; // +30
+    uint32_t tsflo; // +32
+    uint32_t tsfhi; // +36
+    uint32_t recvec1a; // +40
+    uint32_t recvec1b; // +44
+    uint32_t recvec1c; // +48
+    uint32_t recvec1d; // +52
+    uint32_t recvec2a; // +56
+    uint32_t recvec2b; // +60
+    uint32_t statinfo; // +64
 }; // :774:8
 
 struct rx_pbd {
-    uint32_t upattern;
-    uint32_t next;
-    uint32_t datastartptr;
-    uint32_t dataendptr;
-    uint16_t bufstatinfo;
-    uint16_t reserved;
+    uint32_t upattern; // +0
+    uint32_t next; // +4
+    uint32_t datastartptr; // +8
+    uint32_t dataendptr; // +12
+    uint16_t bufstatinfo; // +16
+    uint16_t reserved; // +18
 }; // :816:8
 
 struct rx_dmadesc {
-    struct rx_hd hd;
-    struct phy_channel_info phy_info;
-    uint32_t flags;
-    uint32_t pattern;
-    uint32_t payl_offset;
-    uint32_t reserved_pad[2];
-    uint32_t use_in_tcpip;
+    struct rx_hd hd; // +0
+    struct phy_channel_info phy_info; // +68
+    uint32_t flags; // +76
+    uint32_t pattern; // +80
+    uint32_t payl_offset; // +84
+    uint32_t reserved_pad[2]; // +88
+    uint32_t use_in_tcpip; // +96
 }; // :834:8
 
 struct rx_payloaddesc {
-    struct rx_pbd pbd;
-    uint32_t pd_status;
-    uint32_t *buffer_rx;
-    void *pbuf_holder[6];
+    struct rx_pbd pbd; // +0
+    uint32_t pd_status; // +20
+    uint32_t *buffer_rx; // +24
+    void *pbuf_holder[6]; // +28
 }; // :854:8
 
 struct tx_cfm_tag {
-    uint16_t pn[4];
-    uint16_t sn;
-    uint16_t timestamp;
-    int8_t credits;
-    uint8_t ampdu_size;
-    uint8_t pad[2];
-    uint32_t status;
+    uint16_t pn[4]; // +0
+    uint16_t sn; // +8
+    uint16_t timestamp; // +10
+    int8_t credits; // +12
+    uint8_t ampdu_size; // +13
+    uint8_t pad[2]; // +14
+    uint32_t status; // +16
 }; // :865:8
 
 struct tx_hw_desc {
-    struct tx_cfm_tag *cfm_ptr;
-    struct tx_hd thd;
+    struct tx_cfm_tag *cfm_ptr; // +0
+    struct tx_hd thd; // +4
 }; // :885:8
 
 struct tx_agg_desc {
-    uint8_t reserved;
+    uint8_t reserved; // +0
 }; // :979:8
 
 struct dma_desc bcn_dwnld_desc; // :1048:24
@@ -349,16 +349,16 @@ void hal_dma_evt(int dma_queue); // :159:6
 typedef void (*cb_dma_func_ptr)(void *, int); // :78:16
 
 struct hal_dma_desc_tag {
-    struct co_list_hdr hdr;
-    struct dma_desc *dma_desc;
-    cb_dma_func_ptr cb;
-    void *env;
+    struct co_list_hdr hdr; // +0
+    struct dma_desc *dma_desc; // +4
+    cb_dma_func_ptr cb; // +8
+    void *env; // +12
 }; // :81:8
 
 struct hal_dma_env_tag {
-    struct co_list prog[2];
-    struct co_list free_gp_dma_descs;
-    uint16_t lli_cnt[2];
+    struct co_list prog[2]; // +0
+    struct co_list free_gp_dma_descs; // +16
+    uint16_t lli_cnt[2]; // +24
 }; // :94:8
 
 struct hal_dma_env_tag hal_dma_env; // :109:31
@@ -384,58 +384,58 @@ const uint8_t rxv2macrate[]; // :236:22
 /* ======== components/bl602/bl602_wifi/ip/lmac/src/hal/hal_machw_mib.h ======== */
 
 struct machw_mib_tag {
-    uint32_t dot11_wep_excluded_count;
-    uint32_t dot11_fcs_error_count;
-    uint32_t nx_rx_phy_error_count;
-    uint32_t nx_rd_fifo_overflow_count;
-    uint32_t nx_tx_underun_count;
-    uint32_t reserved_1[7];
-    uint32_t nx_qos_utransmitted_mpdu_count[8];
-    uint32_t nx_qos_gtransmitted_mpdu_count[8];
-    uint32_t dot11_qos_failed_count[8];
-    uint32_t dot11_qos_retry_count[8];
-    uint32_t dot11_qos_rts_success_count[8];
-    uint32_t dot11_qos_rts_failure_count[8];
-    uint32_t nx_qos_ack_failure_count[8];
-    uint32_t nx_qos_ureceived_mpdu_count[8];
-    uint32_t nx_qos_greceived_mpdu_count[8];
-    uint32_t nx_qos_ureceived_other_mpdu[8];
-    uint32_t dot11_qos_retries_received_count[8];
-    uint32_t nx_utransmitted_amsdu_count[8];
-    uint32_t nx_gtransmitted_amsdu_count[8];
-    uint32_t dot11_failed_amsdu_count[8];
-    uint32_t dot11_retry_amsdu_count[8];
-    uint32_t dot11_transmitted_octets_in_amsdu[8];
-    uint32_t dot11_amsdu_ack_failure_count[8];
-    uint32_t nx_ureceived_amsdu_count[8];
-    uint32_t nx_greceived_amsdu_count[8];
-    uint32_t nx_ureceived_other_amsdu[8];
-    uint32_t dot11_received_octets_in_amsdu_count[8];
-    uint32_t reserved_2[24];
-    uint32_t dot11_transmitted_ampdu_count;
-    uint32_t dot11_transmitted_mpdus_in_ampdu_count;
-    uint32_t dot11_transmitted_octets_in_ampdu_count;
-    uint32_t wnlu_ampdu_received_count;
-    uint32_t nx_gampdu_received_count;
-    uint32_t nx_other_ampdu_received_count;
-    uint32_t dot11_mpdu_in_received_ampdu_count;
-    uint32_t dot11_received_octets_in_ampdu_count;
-    uint32_t dot11_ampdu_delimiter_crc_error_count;
-    uint32_t dot11_implicit_bar_failure_count;
-    uint32_t dot11_explicit_bar_failure_count;
-    uint32_t reserved_3[5];
-    uint32_t dot11_20mhz_frame_transmitted_count;
-    uint32_t dot11_40mhz_frame_transmitted_count;
-    uint32_t dot11_20mhz_frame_received_count;
-    uint32_t dot11_40mhz_frame_received_count;
-    uint32_t nx_failed_40mhz_txop;
-    uint32_t nx_successful_txops;
-    uint32_t reserved_4[4];
-    uint32_t dot11_dualcts_success_count;
-    uint32_t dot11_stbc_cts_success_count;
-    uint32_t dot11_stbc_cts_failure_count;
-    uint32_t dot11_non_stbc_cts_success_count;
-    uint32_t dot11_non_stbc_cts_failure_count;
+    uint32_t dot11_wep_excluded_count; // +0
+    uint32_t dot11_fcs_error_count; // +4
+    uint32_t nx_rx_phy_error_count; // +8
+    uint32_t nx_rd_fifo_overflow_count; // +12
+    uint32_t nx_tx_underun_count; // +16
+    uint32_t reserved_1[7]; // +20
+    uint32_t nx_qos_utransmitted_mpdu_count[8]; // +48
+    uint32_t nx_qos_gtransmitted_mpdu_count[8]; // +80
+    uint32_t dot11_qos_failed_count[8]; // +112
+    uint32_t dot11_qos_retry_count[8]; // +144
+    uint32_t dot11_qos_rts_success_count[8]; // +176
+    uint32_t dot11_qos_rts_failure_count[8]; // +208
+    uint32_t nx_qos_ack_failure_count[8]; // +240
+    uint32_t nx_qos_ureceived_mpdu_count[8]; // +272
+    uint32_t nx_qos_greceived_mpdu_count[8]; // +304
+    uint32_t nx_qos_ureceived_other_mpdu[8]; // +336
+    uint32_t dot11_qos_retries_received_count[8]; // +368
+    uint32_t nx_utransmitted_amsdu_count[8]; // +400
+    uint32_t nx_gtransmitted_amsdu_count[8]; // +432
+    uint32_t dot11_failed_amsdu_count[8]; // +464
+    uint32_t dot11_retry_amsdu_count[8]; // +496
+    uint32_t dot11_transmitted_octets_in_amsdu[8]; // +528
+    uint32_t dot11_amsdu_ack_failure_count[8]; // +560
+    uint32_t nx_ureceived_amsdu_count[8]; // +592
+    uint32_t nx_greceived_amsdu_count[8]; // +624
+    uint32_t nx_ureceived_other_amsdu[8]; // +656
+    uint32_t dot11_received_octets_in_amsdu_count[8]; // +688
+    uint32_t reserved_2[24]; // +720
+    uint32_t dot11_transmitted_ampdu_count; // +816
+    uint32_t dot11_transmitted_mpdus_in_ampdu_count; // +820
+    uint32_t dot11_transmitted_octets_in_ampdu_count; // +824
+    uint32_t wnlu_ampdu_received_count; // +828
+    uint32_t nx_gampdu_received_count; // +832
+    uint32_t nx_other_ampdu_received_count; // +836
+    uint32_t dot11_mpdu_in_received_ampdu_count; // +840
+    uint32_t dot11_received_octets_in_ampdu_count; // +844
+    uint32_t dot11_ampdu_delimiter_crc_error_count; // +848
+    uint32_t dot11_implicit_bar_failure_count; // +852
+    uint32_t dot11_explicit_bar_failure_count; // +856
+    uint32_t reserved_3[5]; // +860
+    uint32_t dot11_20mhz_frame_transmitted_count; // +880
+    uint32_t dot11_40mhz_frame_transmitted_count; // +884
+    uint32_t dot11_20mhz_frame_received_count; // +888
+    uint32_t dot11_40mhz_frame_received_count; // +892
+    uint32_t nx_failed_40mhz_txop; // +896
+    uint32_t nx_successful_txops; // +900
+    uint32_t reserved_4[4]; // +904
+    uint32_t dot11_dualcts_success_count; // +920
+    uint32_t dot11_stbc_cts_success_count; // +924
+    uint32_t dot11_stbc_cts_failure_count; // +928
+    uint32_t dot11_non_stbc_cts_success_count; // +932
+    uint32_t dot11_non_stbc_cts_failure_count; // +936
 }; // :35:8
 
 /* ======== components/bl602/bl602_wifi/ip/lmac/src/hal/hal_mib.c ======== */
@@ -522,18 +522,18 @@ enum mm_features {
 }; // :199:6
 
 struct mm_env_tag {
-    uint32_t rx_filter_umac;
-    uint32_t rx_filter_lmac_enable;
-    uint16_t ampdu_max_dur[5];
-    uint8_t prev_mm_state;
-    uint8_t prev_hw_state;
-    uint32_t basic_rates[2];
-    uint32_t uapsd_timeout;
-    uint16_t lp_clk_accuracy;
-    uint8_t host_idle;
-    bool keep_alive_status_enabled;
-    uint32_t keep_alive_packet_counter;
-    uint32_t keep_alive_time_last_received;
+    uint32_t rx_filter_umac; // +0
+    uint32_t rx_filter_lmac_enable; // +4
+    uint16_t ampdu_max_dur[5]; // +8
+    uint8_t prev_mm_state; // +18
+    uint8_t prev_hw_state; // +19
+    uint32_t basic_rates[2]; // +20
+    uint32_t uapsd_timeout; // +28
+    uint16_t lp_clk_accuracy; // +32
+    uint8_t host_idle; // +34
+    bool keep_alive_status_enabled; // +35
+    uint32_t keep_alive_packet_counter; // +36
+    uint32_t keep_alive_time_last_received; // +40
 }; // :258:8
 
 struct mm_env_tag mm_env; // :297:26
@@ -555,13 +555,13 @@ void mm_bcn_transmit(void); // :819:6
 /* ======== components/bl602/bl602_wifi/ip/lmac/src/mm/mm_bcn.h ======== */
 
 struct mm_bcn_env_tag {
-    const struct mm_bcn_change_req *param;
-    int tx_cfm;
-    bool tx_pending;
-    bool update_ongoing;
-    bool update_pending;
-    struct hal_dma_desc_tag dma;
-    struct co_list tim_list;
+    const struct mm_bcn_change_req *param; // +0
+    int tx_cfm; // +4
+    bool tx_pending; // +8
+    bool update_ongoing; // +9
+    bool update_pending; // +10
+    struct hal_dma_desc_tag dma; // +12
+    struct co_list tim_list; // +28
 }; // :56:8
 
 struct mm_bcn_env_tag mm_bcn_env; // :85:30
@@ -714,298 +714,298 @@ enum mm_msg_tag {
 }; // :69:6
 
 struct mm_monitor_cfm {
-    uint32_t status;
-    uint32_t enable;
-    uint32_t data[8];
+    uint32_t status; // +0
+    uint32_t enable; // +4
+    uint32_t data[8]; // +8
 }; // :280:8
 
 struct mm_monitor_req {
-    uint32_t enable;
+    uint32_t enable; // +0
 }; // :288:8
 
 struct mm_monitor_channel_cfm {
-    uint32_t status;
-    uint32_t freq;
-    uint32_t data[8];
+    uint32_t status; // +0
+    uint32_t freq; // +4
+    uint32_t data[8]; // +8
 }; // :294:8
 
 struct mm_monitor_channel_req {
-    uint32_t freq;
-    uint32_t use_40Mhz;
-    uint32_t higher_band;
+    uint32_t freq; // +0
+    uint32_t use_40Mhz; // +4
+    uint32_t higher_band; // +8
 }; // :302:8
 
 struct mm_start_req {
-    struct phy_cfg_tag phy_cfg;
-    uint32_t uapsd_timeout;
-    uint16_t lp_clk_accuracy;
+    struct phy_cfg_tag phy_cfg; // +0
+    uint32_t uapsd_timeout; // +64
+    uint16_t lp_clk_accuracy; // +68
 }; // :310:8
 
 struct mm_set_channel_req {
-    uint8_t band;
-    uint8_t type;
-    uint16_t prim20_freq;
-    uint16_t center1_freq;
-    uint16_t center2_freq;
-    uint8_t index;
-    int8_t tx_power;
+    uint8_t band; // +0
+    uint8_t type; // +1
+    uint16_t prim20_freq; // +2
+    uint16_t center1_freq; // +4
+    uint16_t center2_freq; // +6
+    uint8_t index; // +8
+    int8_t tx_power; // +9
 }; // :321:8
 
 struct mm_set_channel_cfm {
-    uint8_t radio_idx;
-    int8_t power;
+    uint8_t radio_idx; // +0
+    int8_t power; // +1
 }; // :342:8
 
 struct mm_set_dtim_req {
-    uint8_t dtim_period;
+    uint8_t dtim_period; // +0
 }; // :351:8
 
 struct mm_set_power_req {
-    uint8_t inst_nbr;
-    int8_t power;
+    uint8_t inst_nbr; // +0
+    int8_t power; // +1
 }; // :358:8
 
 struct mm_set_power_cfm {
-    uint8_t radio_idx;
-    int8_t power;
+    uint8_t radio_idx; // +0
+    int8_t power; // +1
 }; // :367:8
 
 struct mm_set_beacon_int_req {
-    uint16_t beacon_int;
-    uint8_t inst_nbr;
+    uint16_t beacon_int; // +0
+    uint8_t inst_nbr; // +2
 }; // :376:8
 
 struct mm_set_basic_rates_req {
-    uint32_t rates;
-    uint8_t inst_nbr;
-    uint8_t band;
+    uint32_t rates; // +0
+    uint8_t inst_nbr; // +4
+    uint8_t band; // +5
 }; // :385:8
 
 struct mm_set_bssid_req {
-    struct mac_addr bssid;
-    uint8_t inst_nbr;
+    struct mac_addr bssid; // +0
+    uint8_t inst_nbr; // +6
 }; // :396:8
 
 struct mm_set_filter_req {
-    uint32_t filter;
+    uint32_t filter; // +0
 }; // :405:8
 
 struct mm_add_if_req {
-    uint8_t type;
-    struct mac_addr addr;
-    bool p2p;
+    uint8_t type; // +0
+    struct mac_addr addr; // +1
+    bool p2p; // +7
 }; // :412:8
 
 struct mm_set_edca_req {
-    uint32_t ac_param;
-    bool uapsd;
-    uint8_t hw_queue;
-    uint8_t inst_nbr;
+    uint32_t ac_param; // +0
+    bool uapsd; // +4
+    uint8_t hw_queue; // +5
+    uint8_t inst_nbr; // +6
 }; // :423:8
 
 struct mm_set_slottime_req {
-    uint8_t slottime;
+    uint8_t slottime; // +0
 }; // :436:8
 
 struct mm_set_mode_req {
-    uint8_t abgnmode;
+    uint8_t abgnmode; // +0
 }; // :443:8
 
 struct mm_set_vif_state_req {
-    uint16_t aid;
-    bool active;
-    uint8_t inst_nbr;
+    uint16_t aid; // +0
+    bool active; // +2
+    uint8_t inst_nbr; // +3
 }; // :450:8
 
 struct mm_add_if_cfm {
-    uint8_t status;
-    uint8_t inst_nbr;
+    uint8_t status; // +0
+    uint8_t inst_nbr; // +1
 }; // :461:8
 
 struct mm_remove_if_req {
-    uint8_t inst_nbr;
+    uint8_t inst_nbr; // +0
 }; // :470:8
 
 struct mm_version_cfm {
-    uint32_t version_lmac;
-    uint32_t version_machw_1;
-    uint32_t version_machw_2;
-    uint32_t version_phy_1;
-    uint32_t version_phy_2;
-    uint32_t features;
+    uint32_t version_lmac; // +0
+    uint32_t version_machw_1; // +4
+    uint32_t version_machw_2; // +8
+    uint32_t version_phy_1; // +12
+    uint32_t version_phy_2; // +16
+    uint32_t features; // +20
 }; // :477:8
 
 struct mm_sta_add_req {
-    uint32_t ampdu_size_max_vht;
-    uint32_t paid_gid;
-    uint16_t ampdu_size_max_ht;
-    struct mac_addr mac_addr;
-    uint8_t ampdu_spacing_min;
-    uint8_t inst_nbr;
-    bool tdls_sta;
-    int8_t rssi;
-    uint32_t tsflo;
-    uint32_t tsfhi;
-    uint8_t data_rate;
+    uint32_t ampdu_size_max_vht; // +0
+    uint32_t paid_gid; // +4
+    uint16_t ampdu_size_max_ht; // +8
+    struct mac_addr mac_addr; // +10
+    uint8_t ampdu_spacing_min; // +16
+    uint8_t inst_nbr; // +17
+    bool tdls_sta; // +18
+    int8_t rssi; // +19
+    uint32_t tsflo; // +20
+    uint32_t tsfhi; // +24
+    uint8_t data_rate; // +28
 }; // :494:8
 
 struct mm_sta_add_cfm {
-    uint8_t status;
-    uint8_t sta_idx;
-    uint8_t hw_sta_idx;
+    uint8_t status; // +0
+    uint8_t sta_idx; // +1
+    uint8_t hw_sta_idx; // +2
 }; // :517:8
 
 struct mm_sta_del_req {
-    uint8_t sta_idx;
+    uint8_t sta_idx; // +0
 }; // :528:8
 
 struct mm_set_idle_req {
-    uint8_t hw_idle;
+    uint8_t hw_idle; // +0
 }; // :542:8
 
 struct mm_key_add_req {
-    uint8_t key_idx;
-    uint8_t sta_idx;
-    struct mac_sec_key key;
-    uint8_t cipher_suite;
-    uint8_t inst_nbr;
-    uint8_t spp;
-    bool pairwise;
+    uint8_t key_idx; // +0
+    uint8_t sta_idx; // +1
+    struct mac_sec_key key; // +4
+    uint8_t cipher_suite; // +40
+    uint8_t inst_nbr; // +41
+    uint8_t spp; // +42
+    bool pairwise; // +43
 }; // :549:8
 
 struct mm_key_add_cfm {
-    uint8_t status;
-    uint8_t hw_key_idx;
+    uint8_t status; // +0
+    uint8_t hw_key_idx; // +1
 }; // :568:8
 
 struct mm_key_del_req {
-    uint8_t hw_key_idx;
+    uint8_t hw_key_idx; // +0
 }; // :577:8
 
 struct mm_ba_add_req {
-    uint8_t type;
-    uint8_t sta_idx;
-    uint8_t tid;
-    uint8_t bufsz;
-    uint16_t ssn;
+    uint8_t type; // +0
+    uint8_t sta_idx; // +1
+    uint8_t tid; // +2
+    uint8_t bufsz; // +3
+    uint16_t ssn; // +4
 }; // :584:8
 
 struct mm_ba_add_cfm {
-    uint8_t sta_idx;
-    uint8_t tid;
-    uint8_t status;
+    uint8_t sta_idx; // +0
+    uint8_t tid; // +1
+    uint8_t status; // +2
 }; // :599:8
 
 struct mm_connection_loss_ind {
-    uint8_t inst_nbr;
+    uint8_t inst_nbr; // +0
 }; // :654:8
 
 struct mm_set_ps_mode_req {
-    uint8_t new_state;
+    uint8_t new_state; // +0
 }; // :669:8
 
 struct mm_chan_ctxt_add_req {
-    uint8_t band;
-    uint8_t type;
-    uint16_t prim20_freq;
-    uint16_t center1_freq;
-    uint16_t center2_freq;
-    int8_t tx_power;
+    uint8_t band; // +0
+    uint8_t type; // +1
+    uint16_t prim20_freq; // +2
+    uint16_t center1_freq; // +4
+    uint16_t center2_freq; // +6
+    int8_t tx_power; // +8
 }; // :682:8
 
 struct mm_chan_ctxt_update_req {
-    uint8_t chan_index;
-    uint8_t band;
-    uint8_t type;
-    uint16_t prim20_freq;
-    uint16_t center1_freq;
-    uint16_t center2_freq;
-    int8_t tx_power;
+    uint8_t chan_index; // +0
+    uint8_t band; // +1
+    uint8_t type; // +2
+    uint16_t prim20_freq; // +4
+    uint16_t center1_freq; // +6
+    uint16_t center2_freq; // +8
+    int8_t tx_power; // +10
 }; // :735:8
 
 struct mm_bcn_change_req {
-    uint32_t bcn_ptr;
-    uint16_t bcn_len;
-    uint16_t tim_oft;
-    uint8_t tim_len;
-    uint8_t inst_nbr;
-    uint8_t csa_oft[2];
-    uint8_t bcn_buf[0];
+    uint32_t bcn_ptr; // +0
+    uint16_t bcn_len; // +4
+    uint16_t tim_oft; // +6
+    uint8_t tim_len; // +8
+    uint8_t inst_nbr; // +9
+    uint8_t csa_oft[2]; // +10
+    uint8_t bcn_buf[0]; // +12
 }; // :768:8
 
 struct mm_tim_update_req {
-    uint16_t aid;
-    uint8_t tx_avail;
-    uint8_t inst_nbr;
+    uint16_t aid; // +0
+    uint8_t tx_avail; // +2
+    uint8_t inst_nbr; // +3
 }; // :787:8
 
 struct mm_ps_change_ind {
-    uint8_t sta_idx;
-    uint8_t ps_state;
+    uint8_t sta_idx; // +0
+    uint8_t ps_state; // +1
 }; // :798:8
 
 struct mm_traffic_req_ind {
-    uint8_t sta_idx;
-    uint8_t pkt_cnt;
-    bool uapsd;
+    uint8_t sta_idx; // +0
+    uint8_t pkt_cnt; // +1
+    bool uapsd; // +2
 }; // :816:8
 
 struct mm_remain_on_channel_req {
-    uint8_t op_code;
-    uint8_t vif_index;
-    uint8_t band;
-    uint8_t type;
-    uint16_t prim20_freq;
-    uint16_t center1_freq;
-    uint16_t center2_freq;
-    uint32_t duration_ms;
-    int8_t tx_power;
+    uint8_t op_code; // +0
+    uint8_t vif_index; // +1
+    uint8_t band; // +2
+    uint8_t type; // +3
+    uint16_t prim20_freq; // +4
+    uint16_t center1_freq; // +6
+    uint16_t center2_freq; // +8
+    uint32_t duration_ms; // +12
+    int8_t tx_power; // +16
 }; // :828:8
 
 struct mm_remain_on_channel_cfm {
-    uint8_t op_code;
-    uint8_t status;
-    uint8_t chan_ctxt_index;
+    uint8_t op_code; // +0
+    uint8_t status; // +1
+    uint8_t chan_ctxt_index; // +2
 }; // :851:8
 
 struct mm_set_ps_options_req {
-    uint8_t vif_index;
-    uint16_t listen_interval;
-    bool dont_listen_bc_mc;
+    uint8_t vif_index; // +0
+    uint16_t listen_interval; // +2
+    bool dont_listen_bc_mc; // +4
 }; // :871:8
 
 struct mm_csa_counter_ind {
-    uint8_t vif_index;
-    uint8_t csa_count;
+    uint8_t vif_index; // +0
+    uint8_t csa_count; // +1
 }; // :882:8
 
 struct mm_cfg_rssi_req {
-    uint8_t vif_index;
-    int8_t rssi_thold;
-    uint8_t rssi_hyst;
+    uint8_t vif_index; // +0
+    int8_t rssi_thold; // +1
+    uint8_t rssi_hyst; // +2
 }; // :919:8
 
 struct mm_rssi_status_ind {
-    uint8_t vif_index;
-    bool rssi_status;
-    int8_t rssi;
+    uint8_t vif_index; // +0
+    bool rssi_status; // +1
+    int8_t rssi; // +2
 }; // :930:8
 
 struct mm_csa_finish_ind {
-    uint8_t vif_index;
-    uint8_t status;
-    uint8_t chan_idx;
+    uint8_t vif_index; // +0
+    uint8_t status; // +1
+    uint8_t chan_idx; // +2
 }; // :941:8
 
 struct mm_csa_traffic_ind {
-    uint8_t vif_index;
-    bool enable;
+    uint8_t vif_index; // +0
+    bool enable; // +1
 }; // :952:8
 
 typedef void (*cb_idle_func_ptr)(void); // :961:16
 
 struct mm_force_idle_req {
-    cb_idle_func_ptr cb;
+    cb_idle_func_ptr cb; // +0
 }; // :964:8
 
 const struct ke_state_handler mm_state_handler[4]; // :1052:38
@@ -1028,14 +1028,14 @@ void mm_timer_schedule(int dummy); // :187:6
 typedef void (*cb_timer_func_ptr)(void *); // :44:16
 
 struct mm_timer_tag {
-    struct co_list_hdr list_hdr;
-    cb_timer_func_ptr cb;
-    void *env;
-    uint32_t time;
+    struct co_list_hdr list_hdr; // +0
+    cb_timer_func_ptr cb; // +4
+    void *env; // +8
+    uint32_t time; // +12
 }; // :47:8
 
 struct mm_timer_env_tag {
-    struct co_list prog;
+    struct co_list prog; // +0
 }; // :60:8
 
 struct mm_timer_env_tag mm_timer_env; // :70:32
@@ -1069,16 +1069,16 @@ enum ps_dpsm_state_bit_pos {
 }; // :134:6
 
 struct ps_env_tag {
-    bool ps_on;
-    ke_task_id_t taskid;
-    uint32_t prevent_sleep;
-    uint8_t cfm_cnt;
-    struct mm_timer_tag uapsd_timer;
-    bool uapsd_tmr_on;
-    bool uapsd_on;
-    uint32_t uapsd_timeout;
-    uint8_t dpsm_state;
-    uint8_t next_mode;
+    bool ps_on; // +0
+    ke_task_id_t taskid; // +2
+    uint32_t prevent_sleep; // +4
+    uint8_t cfm_cnt; // +8
+    struct mm_timer_tag uapsd_timer; // +12
+    bool uapsd_tmr_on; // +28
+    bool uapsd_on; // +29
+    uint32_t uapsd_timeout; // +32
+    uint8_t dpsm_state; // +36
+    uint8_t next_mode; // +37
 }; // :158:8
 
 struct ps_env_tag ps_env; // :192:26
@@ -1086,7 +1086,7 @@ struct ps_env_tag ps_env; // :192:26
 /* ======== components/bl602/bl602_wifi/ip/lmac/src/rd/rd.h ======== */
 
 struct rd_env_tag {
-    struct co_list event_free_list;
+    struct co_list event_free_list; // +0
 }; // :44:8
 
 /* ======== components/bl602/bl602_wifi/ip/lmac/src/rx/rx_swdesc.c ======== */
@@ -1098,16 +1098,16 @@ void rx_swdesc_init(void); // :46:6
 /* ======== components/bl602/bl602_wifi/ip/lmac/src/rx/rx_swdesc.h ======== */
 
 struct rx_swdesc {
-    struct co_list_hdr list_hdr;
-    struct rx_dmadesc *dma_hdrdesc;
-    struct rx_payloaddesc *pd;
-    struct rx_pbd *last_pbd;
-    struct rx_pbd *spare_pbd;
-    uint32_t host_id;
-    uint32_t frame_len;
-    uint8_t status;
-    uint8_t pbd_count;
-    uint8_t use_in_tcpip;
+    struct co_list_hdr list_hdr; // +0
+    struct rx_dmadesc *dma_hdrdesc; // +4
+    struct rx_payloaddesc *pd; // +8
+    struct rx_pbd *last_pbd; // +12
+    struct rx_pbd *spare_pbd; // +16
+    uint32_t host_id; // +20
+    uint32_t frame_len; // +24
+    uint8_t status; // +28
+    uint8_t pbd_count; // +29
+    uint8_t use_in_tcpip; // +30
 }; // :52:8
 
 struct rx_swdesc rx_swdesc_tab[13]; // :74:25
@@ -1127,11 +1127,11 @@ void rxl_reset(void); // :952:6
 /* ======== components/bl602/bl602_wifi/ip/lmac/src/rx/rxl/rxl_cntrl.h ======== */
 
 struct rxl_cntrl_env_tag {
-    struct co_list ready;
-    struct rx_dmadesc *first;
-    struct rx_dmadesc *last;
-    struct rx_dmadesc *free;
-    uint32_t packet_stack_cnt;
+    struct co_list ready; // +0
+    struct rx_dmadesc *first; // +8
+    struct rx_dmadesc *last; // +12
+    struct rx_dmadesc *free; // +16
+    uint32_t packet_stack_cnt; // +20
 }; // :90:8
 
 struct rxl_cntrl_env_tag rxl_cntrl_env; // :108:33
@@ -1148,8 +1148,8 @@ void rxl_pd_append(struct rx_pbd *first, struct rx_pbd *last, struct rx_pbd *spa
 /* ======== components/bl602/bl602_wifi/ip/lmac/src/rx/rxl/rxl_hwdesc.h ======== */
 
 struct rxl_hwdesc_env_tag {
-    struct rx_pbd *last;
-    struct rx_pbd *free;
+    struct rx_pbd *last; // +0
+    struct rx_pbd *free; // +4
 }; // :45:8
 
 struct rxl_hwdesc_env_tag rx_hwdesc_env; // :58:34
@@ -1163,25 +1163,25 @@ const struct scan_chan_tag *scan_get_chan(void); // :241:29
 /* ======== components/bl602/bl602_wifi/ip/lmac/src/scan/scan.h ======== */
 
 struct scan_chan_tag {
-    uint16_t freq;
-    uint8_t band;
-    uint8_t flags;
-    int8_t tx_power;
+    uint16_t freq; // +0
+    uint8_t band; // +2
+    uint8_t flags; // +3
+    int8_t tx_power; // +4
 }; // :74:8
 
 struct scan_probe_req_ie_tag {
-    struct dma_desc dma_desc;
-    struct tx_pbd pbd;
-    uint32_t buf[50];
+    struct dma_desc dma_desc; // +0
+    struct tx_pbd pbd; // +16
+    uint32_t buf[50]; // +36
 }; // :87:8
 
 struct scan_env_tag {
-    struct hal_dma_desc_tag dma_desc;
-    const struct scan_start_req *param;
-    uint32_t ds_ie;
-    ke_task_id_t req_id;
-    uint8_t chan_idx;
-    bool abort;
+    struct hal_dma_desc_tag dma_desc; // +0
+    const struct scan_start_req *param; // +16
+    uint32_t ds_ie; // +20
+    ke_task_id_t req_id; // +24
+    uint8_t chan_idx; // +26
+    bool abort; // +27
 }; // :98:8
 
 struct scan_env_tag scan_env; // :119:28
@@ -1223,23 +1223,23 @@ enum scan_msg_tag {
 }; // :62:6
 
 struct scan_start_req {
-    struct scan_chan_tag chan[42];
-    struct mac_ssid ssid[2];
-    struct mac_addr bssid;
-    uint32_t add_ies;
-    uint16_t add_ie_len;
-    uint8_t vif_idx;
-    uint8_t chan_cnt;
-    uint8_t ssid_cnt;
-    bool no_cck;
+    struct scan_chan_tag chan[42]; // +0
+    struct mac_ssid ssid[2]; // +252
+    struct mac_addr bssid; // +320
+    uint32_t add_ies; // +328
+    uint16_t add_ie_len; // +332
+    uint8_t vif_idx; // +334
+    uint8_t chan_cnt; // +335
+    uint8_t ssid_cnt; // +336
+    bool no_cck; // +337
 }; // :85:8
 
 struct scan_start_cfm {
-    uint8_t status;
+    uint8_t status; // +0
 }; // :109:8
 
 struct scan_cancel_cfm {
-    uint8_t status;
+    uint8_t status; // +0
 }; // :116:8
 
 const struct ke_state_handler scan_default_handler; // :126:38
@@ -1291,63 +1291,63 @@ enum sta_ps_sp {
 typedef int sta_ps_sp_t; // :146:13
 
 struct sta_mgmt_sec_info {
-    struct key_info_tag key_info;
-    struct key_info_tag *pairwise_key;
-    struct key_info_tag **cur_key;
+    struct key_info_tag key_info; // +0
+    struct key_info_tag *pairwise_key; // +104
+    struct key_info_tag **cur_key; // +108
 }; // :170:8
 
 struct sta_pol_tbl_cntl {
-    struct txl_buffer_control *buf_ctrl;
-    struct rc_sta_stats *sta_stats;
-    uint32_t prot_cfg;
-    uint16_t ppdu_tx_cfg;
-    uint8_t upd_field;
+    struct txl_buffer_control *buf_ctrl; // +0
+    struct rc_sta_stats *sta_stats; // +4
+    uint32_t prot_cfg; // +8
+    uint16_t ppdu_tx_cfg; // +12
+    uint8_t upd_field; // +14
 }; // :186:8
 
 struct sta_mgmt_ba_info {
-    uint32_t last_tx_time;
-    uint32_t last_ba_add_time;
-    uint8_t bam_idx_rx;
-    uint8_t bam_idx_tx;
-    int8_t credit_oft;
+    uint32_t last_tx_time; // +0
+    uint32_t last_ba_add_time; // +4
+    uint8_t bam_idx_rx; // +8
+    uint8_t bam_idx_tx; // +9
+    int8_t credit_oft; // +10
 }; // :214:8
 
 struct sta_info_tag {
-    struct co_list_hdr list_hdr;
-    uint32_t bcn_int;
-    uint32_t ampdu_size_max_vht;
-    uint16_t ampdu_size_max_ht;
-    uint32_t paid_gid;
-    uint8_t ampdu_spacing_min;
-    uint16_t drift;
-    uint16_t aid;
-    uint8_t inst_nbr;
-    uint8_t staid;
-    uint8_t ps_state;
-    bool valid;
-    struct mac_addr mac_addr;
-    int8_t rssi;
-    uint32_t tsflo;
-    uint32_t tsfhi;
-    uint8_t data_rate;
-    uint8_t ctrl_port_state;
-    enum sta_ps_traffic traffic_avail;
-    sta_ps_sp_t ps_service_period;
-    uint16_t ctrl_port_ethertype;
-    struct sta_mgmt_sec_info sta_sec_info;
-    struct mac_sta_info info;
-    uint16_t seq_nbr[9];
-    struct sta_pol_tbl_cntl pol_tbl;
-    struct sta_mgmt_ba_info ba_info[9];
-    uint16_t rx_nqos_last_seqcntl;
-    uint16_t rx_qos_last_seqcntl[9];
-    struct co_list tx_desc_post;
-    void *suppData;
-    uint32_t time_last_seen;
+    struct co_list_hdr list_hdr; // +0
+    uint32_t bcn_int; // +4
+    uint32_t ampdu_size_max_vht; // +8
+    uint16_t ampdu_size_max_ht; // +12
+    uint32_t paid_gid; // +16
+    uint8_t ampdu_spacing_min; // +20
+    uint16_t drift; // +22
+    uint16_t aid; // +24
+    uint8_t inst_nbr; // +26
+    uint8_t staid; // +27
+    uint8_t ps_state; // +28
+    bool valid; // +29
+    struct mac_addr mac_addr; // +30
+    int8_t rssi; // +36
+    uint32_t tsflo; // +40
+    uint32_t tsfhi; // +44
+    uint8_t data_rate; // +48
+    uint8_t ctrl_port_state; // +49
+    enum sta_ps_traffic traffic_avail; // +50
+    sta_ps_sp_t ps_service_period; // +52
+    uint16_t ctrl_port_ethertype; // +56
+    struct sta_mgmt_sec_info sta_sec_info; // +64
+    struct mac_sta_info info; // +176
+    uint16_t seq_nbr[9]; // +248
+    struct sta_pol_tbl_cntl pol_tbl; // +268
+    struct sta_mgmt_ba_info ba_info[9]; // +284
+    uint16_t rx_nqos_last_seqcntl; // +392
+    uint16_t rx_qos_last_seqcntl[9]; // +394
+    struct co_list tx_desc_post; // +412
+    void *suppData; // +420
+    uint32_t time_last_seen; // +424
 }; // :287:8
 
 struct sta_info_env_tag {
-    struct co_list free_sta_list;
+    struct co_list free_sta_list; // +0
 }; // :392:8
 
 struct sta_info_env_tag sta_info_env; // :410:32
@@ -1374,15 +1374,15 @@ enum td_status_bit {
 }; // :49:6
 
 struct td_env_tag {
-    struct mm_timer_tag td_timer;
-    uint32_t pck_cnt_tx;
-    uint32_t pck_cnt_rx;
-    uint32_t pck_cnt_tx_ps;
-    uint32_t pck_cnt_rx_ps;
-    uint8_t vif_index;
-    uint8_t status;
-    bool is_on;
-    bool has_active_chan;
+    struct mm_timer_tag td_timer; // +0
+    uint32_t pck_cnt_tx; // +16
+    uint32_t pck_cnt_rx; // +20
+    uint32_t pck_cnt_tx_ps; // +24
+    uint32_t pck_cnt_rx_ps; // +28
+    uint8_t vif_index; // +32
+    uint8_t status; // +33
+    bool is_on; // +34
+    bool has_active_chan; // +35
 }; // :73:8
 
 struct td_env_tag td_env[2]; // :110:26
@@ -1405,54 +1405,54 @@ uint8_t tpc_get_vif_tx_power_vs_rate(uint32_t rate_config); // :195:9
 /* ======== components/bl602/bl602_wifi/ip/lmac/src/tx/tx_swdesc.h ======== */
 
 struct hostdesc {
-    uint32_t pbuf_addr;
-    uint32_t packet_addr;
-    uint16_t packet_len;
-    uint32_t status_addr;
-    struct mac_addr eth_dest_addr;
-    struct mac_addr eth_src_addr;
-    uint16_t ethertype;
-    uint16_t pn[4];
-    uint16_t sn;
-    uint16_t timestamp;
-    uint8_t tid;
-    uint8_t vif_idx;
-    uint8_t staid;
-    uint16_t flags;
-    uint32_t pbuf_chained_ptr[4];
-    uint32_t pbuf_chained_len[4];
+    uint32_t pbuf_addr; // +0
+    uint32_t packet_addr; // +4
+    uint16_t packet_len; // +8
+    uint32_t status_addr; // +12
+    struct mac_addr eth_dest_addr; // +16
+    struct mac_addr eth_src_addr; // +22
+    uint16_t ethertype; // +28
+    uint16_t pn[4]; // +30
+    uint16_t sn; // +38
+    uint16_t timestamp; // +40
+    uint8_t tid; // +42
+    uint8_t vif_idx; // +43
+    uint8_t staid; // +44
+    uint16_t flags; // +46
+    uint32_t pbuf_chained_ptr[4]; // +48
+    uint32_t pbuf_chained_len[4]; // +64
 }; // :59:8
 
 struct umacdesc {
-    struct txl_buffer_control *buf_control;
-    uint32_t buff_offset;
-    uint16_t payl_len;
-    uint8_t head_len;
-    uint8_t hdr_len_802_2;
-    uint8_t tail_len;
+    struct txl_buffer_control *buf_control; // +0
+    uint32_t buff_offset; // +4
+    uint16_t payl_len; // +8
+    uint8_t head_len; // +10
+    uint8_t hdr_len_802_2; // +11
+    uint8_t tail_len; // +12
 }; // :95:8
 
 struct lmacdesc {
-    struct tx_agg_desc *agg_desc;
-    struct txl_buffer_tag *buffer;
-    struct tx_hw_desc *hw_desc;
+    struct tx_agg_desc *agg_desc; // +0
+    struct txl_buffer_tag *buffer; // +4
+    struct tx_hw_desc *hw_desc; // +8
 }; // :112:8
 
 struct txdesc {
-    struct co_list_hdr list_hdr;
-    struct hostdesc host;
-    struct umacdesc umac;
-    struct lmacdesc lmac;
-    struct tx_hw_desc hw_desc;
-    struct tx_cfm_tag hw_cfm;
-    uint32_t buf[128];
+    struct co_list_hdr list_hdr; // +0
+    struct hostdesc host; // +4
+    struct umacdesc umac; // +84
+    struct lmacdesc lmac; // +100
+    struct tx_hw_desc hw_desc; // +112
+    struct tx_cfm_tag hw_cfm; // +184
+    uint32_t buf[128]; // +204
 }; // :123:8
 
 struct txdesc_host {
-    uint32_t ready;
-    struct hostdesc host;
-    uint32_t pad_txdesc[55];
-    uint32_t pad_buf[128];
+    uint32_t ready; // +0
+    struct hostdesc host; // +4
+    uint32_t pad_txdesc[55]; // +84
+    uint32_t pad_buf[128]; // +304
 }; // :143:8
 
 /* ======== components/bl602/bl602_wifi/ip/lmac/src/tx/txl/txl_buffer.c ======== */
@@ -1466,57 +1466,57 @@ void txl_buffer_update_thd(struct txdesc *txdesc); // :183:6
 /* ======== components/bl602/bl602_wifi/ip/lmac/src/tx/txl/txl_buffer.h ======== */
 
 struct txl_buffer_hw_desc_tag {
-    struct dma_desc dma_desc;
-    struct tx_pbd pbd;
+    struct dma_desc dma_desc; // +0
+    struct tx_pbd pbd; // +16
 }; // :128:8
 
 struct txl_buffer_list_tag {
-    struct txl_buffer_tag *first;
-    struct txl_buffer_tag *last;
+    struct txl_buffer_tag *first; // +0
+    struct txl_buffer_tag *last; // +4
 }; // :137:8
 
 struct txl_buffer_idx_tag {
-    uint32_t used_area;
-    uint32_t free;
-    uint32_t free_size;
-    uint32_t last;
-    uint32_t next_needed;
-    uint32_t buf_size;
-    uint32_t *pool;
-    struct txl_buffer_hw_desc_tag *desc;
-    uint8_t count;
+    uint32_t used_area; // +0
+    uint32_t free; // +4
+    uint32_t free_size; // +8
+    uint32_t last; // +12
+    uint32_t next_needed; // +16
+    uint32_t buf_size; // +20
+    uint32_t *pool; // +24
+    struct txl_buffer_hw_desc_tag *desc; // +28
+    uint8_t count; // +32
 }; // :146:8
 
 struct txl_buffer_control {
     union {
         struct tx_policy_tbl policy_tbl;
         struct tx_compressed_policy_tbl comp_pol_tbl;
-    } ;
-    uint32_t mac_control_info;
-    uint32_t phy_control_info;
+    }; // +0
+    uint32_t mac_control_info; // +52
+    uint32_t phy_control_info; // +56
 }; // :171:8
 
 struct txl_buffer_env_tag {
-    struct txl_buffer_idx_tag buf_idx[5];
-    struct txl_buffer_list_tag list[5];
+    struct txl_buffer_idx_tag buf_idx[5]; // +0
+    struct txl_buffer_list_tag list[5]; // +180
 }; // :198:8
 
 struct txl_buffer_tag {
-    uint32_t length;
-    uint32_t lenheader;
-    uint32_t lenpad;
-    uint32_t flags;
-    struct txl_buffer_tag *next;
-    struct txdesc *txdesc;
-    struct dma_desc dma_desc[1];
-    struct dma_desc dma_desc_pat;
-    struct tx_pbd tbd;
-    struct tx_pbd tbd_body[8];
-    uint8_t user_idx;
-    struct txl_buffer_control buffer_control;
-    struct tx_pbd tkip_mic_icv_pbd;
-    uint8_t tkip_mic_icv[12];
-    uint32_t payload[0];
+    uint32_t length; // +0
+    uint32_t lenheader; // +4
+    uint32_t lenpad; // +8
+    uint32_t flags; // +12
+    struct txl_buffer_tag *next; // +16
+    struct txdesc *txdesc; // +20
+    struct dma_desc dma_desc[1]; // +24
+    struct dma_desc dma_desc_pat; // +40
+    struct tx_pbd tbd; // +56
+    struct tx_pbd tbd_body[8]; // +76
+    uint8_t user_idx; // +236
+    struct txl_buffer_control buffer_control; // +240
+    struct tx_pbd tkip_mic_icv_pbd; // +300
+    uint8_t tkip_mic_icv[12]; // +320
+    uint32_t payload[0]; // +332
 }; // :207:8
 
 struct txl_buffer_env_tag txl_buffer_env; // :247:34
@@ -1545,7 +1545,7 @@ void txl_cfm_dump(void); // :597:6
 const uint32_t txl_cfm_evt_bit[5]; // :59:23
 
 struct txl_cfm_env_tag {
-    struct co_list cfmlist[5];
+    struct co_list cfmlist[5]; // +0
 }; // :62:8
 
 struct txl_cfm_env_tag txl_cfm_env; // :73:31
@@ -1569,17 +1569,17 @@ void txl_cntrl_env_dump(void); // :2501:6
 /* ======== components/bl602/bl602_wifi/ip/lmac/src/tx/txl/txl_cntrl.h ======== */
 
 struct txl_list {
-    struct tx_hd *last_frame_exch;
-    struct co_list transmitting;
-    uint16_t bridgedmacnt;
-    uint8_t chk_state;
+    struct tx_hd *last_frame_exch; // +0
+    struct co_list transmitting; // +4
+    uint16_t bridgedmacnt; // +12
+    uint8_t chk_state; // +14
 }; // :200:8
 
 struct txl_cntrl_env_tag {
-    struct txl_list txlist[5];
-    uint32_t pck_cnt;
-    uint16_t seqnbr;
-    bool reset;
+    struct txl_list txlist[5]; // +0
+    uint32_t pck_cnt; // +80
+    uint16_t seqnbr; // +84
+    bool reset; // +86
 }; // :238:8
 
 struct txl_cntrl_env_tag txl_cntrl_env; // :267:33
@@ -1612,21 +1612,21 @@ void txl_frame_dump(void); // :1495:6
 typedef void (*cfm_func_ptr)(void *, uint32_t); // :69:16
 
 struct txl_frame_cfm_tag {
-    cfm_func_ptr cfm_func;
-    void *env;
+    cfm_func_ptr cfm_func; // +0
+    void *env; // +4
 }; // :72:8
 
 struct txl_frame_desc_tag {
-    struct txdesc txdesc;
-    struct txl_frame_cfm_tag cfm;
-    uint8_t type;
-    bool postponed;
-    bool keep_desc;
+    struct txdesc txdesc; // +0
+    struct txl_frame_cfm_tag cfm; // +716
+    uint8_t type; // +724
+    bool postponed; // +725
+    bool keep_desc; // +726
 }; // :81:8
 
 struct txl_frame_env_tag {
-    struct co_list desc_free;
-    struct co_list desc_done;
+    struct co_list desc_free; // +0
+    struct co_list desc_done; // +8
 }; // :97:8
 
 struct txl_frame_env_tag txl_frame_env; // :111:33
@@ -1679,72 +1679,72 @@ enum VIF_AP_BCMC_STATUS {
 }; // :83:6
 
 struct vif_info_tag {
-    struct co_list_hdr list_hdr;
-    uint32_t prevent_sleep;
-    uint32_t txq_params[4];
-    struct mm_timer_tag tbtt_timer;
-    struct mm_timer_tag tmr_bcn_to;
-    struct mac_addr bssid;
-    struct chan_ctxt_tag *chan_ctxt;
-    struct chan_tbtt_tag tbtt_switch;
-    struct mac_addr mac_addr;
-    uint8_t type;
-    uint8_t index;
-    bool active;
-    int8_t tx_power;
-    int8_t user_tx_power;
+    struct co_list_hdr list_hdr; // +0
+    uint32_t prevent_sleep; // +4
+    uint32_t txq_params[4]; // +8
+    struct mm_timer_tag tbtt_timer; // +24
+    struct mm_timer_tag tmr_bcn_to; // +40
+    struct mac_addr bssid; // +56
+    struct chan_ctxt_tag *chan_ctxt; // +64
+    struct chan_tbtt_tag tbtt_switch; // +68
+    struct mac_addr mac_addr; // +80
+    uint8_t type; // +86
+    uint8_t index; // +87
+    bool active; // +88
+    int8_t tx_power; // +89
+    int8_t user_tx_power; // +90
     union {
         struct {
-            uint16_t listen_interval;
-            bool dont_wait_bcmc;
-            uint8_t ps_retry;
-            uint8_t ap_id;
-            uint32_t uapsd_last_rxtx;
-            uint8_t uapsd_queues;
-            uint32_t mon_last_tx;
-            uint32_t mon_last_crc;
-            uint8_t beacon_loss_cnt;
-            int8_t rssi;
-            int8_t rssi_thold;
-            uint8_t rssi_hyst;
-            bool rssi_status;
-            uint8_t csa_count;
-            bool csa_occured;
+            uint16_t listen_interval; // +0
+            bool dont_wait_bcmc; // +2
+            uint8_t ps_retry; // +3
+            uint8_t ap_id; // +4
+            uint32_t uapsd_last_rxtx; // +8
+            uint8_t uapsd_queues; // +12
+            uint32_t mon_last_tx; // +16
+            uint32_t mon_last_crc; // +20
+            uint8_t beacon_loss_cnt; // +24
+            int8_t rssi; // +25
+            int8_t rssi_thold; // +26
+            uint8_t rssi_hyst; // +27
+            bool rssi_status; // +28
+            uint8_t csa_count; // +29
+            bool csa_occured; // +30
         } sta;
         struct {
-            uint32_t dummy;
-            struct txl_frame_desc_tag bcn_desc;
-            uint16_t bcn_len;
-            uint16_t tim_len;
-            uint16_t tim_bitmap_set;
-            uint16_t bcn_int;
-            uint8_t bcn_tbtt_ratio;
-            uint8_t bcn_tbtt_cnt;
-            bool bcn_configured;
-            uint8_t dtim_count;
-            uint8_t tim_n1;
-            uint8_t tim_n2;
-            uint8_t bc_mc_status;
-            uint8_t csa_count;
-            uint8_t csa_oft[2];
-            uint8_t ps_sta_cnt;
-            uint16_t ctrl_port_ethertype;
+            uint32_t dummy; // +0
+            struct txl_frame_desc_tag bcn_desc; // +4
+            uint16_t bcn_len; // +732
+            uint16_t tim_len; // +734
+            uint16_t tim_bitmap_set; // +736
+            uint16_t bcn_int; // +738
+            uint8_t bcn_tbtt_ratio; // +740
+            uint8_t bcn_tbtt_cnt; // +741
+            bool bcn_configured; // +742
+            uint8_t dtim_count; // +743
+            uint8_t tim_n1; // +744
+            uint8_t tim_n2; // +745
+            uint8_t bc_mc_status; // +746
+            uint8_t csa_count; // +747
+            uint8_t csa_oft[2]; // +748
+            uint8_t ps_sta_cnt; // +750
+            uint16_t ctrl_port_ethertype; // +752
         } ap;
-    } u;
-    struct co_list sta_list;
-    struct mac_bss_info bss_info;
-    struct key_info_tag key_info[4];
-    struct key_info_tag *default_key;
-    uint32_t flags;
-    struct mm_chan_ctxt_add_req csa_channel;
+    } u; // +92
+    struct co_list sta_list; // +848
+    struct mac_bss_info bss_info; // +856
+    struct key_info_tag key_info[4]; // +1056
+    struct key_info_tag *default_key; // +1472
+    uint32_t flags; // +1476
+    struct mm_chan_ctxt_add_req csa_channel; // +1480
 }; // :93:8
 
 struct vif_mgmt_env_tag {
-    struct co_list free_list;
-    struct co_list used_list;
-    uint8_t vif_sta_cnt;
-    uint8_t vif_ap_cnt;
-    uint8_t low_bcn_int_idx;
+    struct co_list free_list; // +0
+    struct co_list used_list; // +8
+    uint8_t vif_sta_cnt; // +16
+    uint8_t vif_ap_cnt; // +17
+    uint8_t low_bcn_int_idx; // +18
 }; // :314:8
 
 struct vif_mgmt_env_tag vif_mgmt_env; // :350:32
@@ -1782,18 +1782,18 @@ void apm_sta_remove(uint8_t vif_idx, uint8_t sta_idx); // :1022:6
 /* ======== components/bl602/bl602_wifi/ip/umac/src/apm/apm.h ======== */
 
 struct apm {
-    const struct apm_start_req *param;
-    struct co_list bss_config;
-    uint8_t aging_sta_idx;
-    uint8_t *bcn_buf;
-    bool apm_emb_enabled;
-    uint8_t hidden_ssid;
-    uint8_t assoc_sta_count;
-    uint8_t max_sta_supported;
+    const struct apm_start_req *param; // +0
+    struct co_list bss_config; // +4
+    uint8_t aging_sta_idx; // +12
+    uint8_t *bcn_buf; // +16
+    bool apm_emb_enabled; // +20
+    uint8_t hidden_ssid; // +21
+    uint8_t assoc_sta_count; // +22
+    uint8_t max_sta_supported; // +23
     struct {
-        uint8_t mac[6];
-        uint8_t used;
-    } aid_list[10];
+        uint8_t mac[6]; // +0
+        uint8_t used; // +6
+    } aid_list[10]; // +24
 }; // :32:8
 
 struct apm apm_env; // :205:19
@@ -1846,86 +1846,86 @@ enum apm_msg_tag {
 }; // :53:6
 
 struct apm_start_req {
-    struct mac_rateset basic_rates;
-    struct scan_chan_tag chan;
-    uint32_t center_freq1;
-    uint32_t center_freq2;
-    uint8_t ch_width;
-    uint8_t hidden_ssid;
-    uint32_t bcn_addr;
-    uint16_t bcn_len;
-    uint16_t tim_oft;
-    uint16_t bcn_int;
-    uint32_t flags;
-    uint16_t ctrl_port_ethertype;
-    uint8_t tim_len;
-    uint8_t vif_idx;
-    bool apm_emb_enabled;
-    struct mac_rateset rate_set;
-    uint8_t beacon_period;
-    uint8_t qos_supported;
-    struct mac_ssid ssid;
-    uint8_t ap_sec_type;
-    uint8_t phrase[64];
-    uint8_t bcn_buf[];
+    struct mac_rateset basic_rates; // +0
+    struct scan_chan_tag chan; // +14
+    uint32_t center_freq1; // +20
+    uint32_t center_freq2; // +24
+    uint8_t ch_width; // +28
+    uint8_t hidden_ssid; // +29
+    uint32_t bcn_addr; // +32
+    uint16_t bcn_len; // +36
+    uint16_t tim_oft; // +38
+    uint16_t bcn_int; // +40
+    uint32_t flags; // +44
+    uint16_t ctrl_port_ethertype; // +48
+    uint8_t tim_len; // +50
+    uint8_t vif_idx; // +51
+    bool apm_emb_enabled; // +52
+    struct mac_rateset rate_set; // +53
+    uint8_t beacon_period; // +66
+    uint8_t qos_supported; // +67
+    struct mac_ssid ssid; // +68
+    uint8_t ap_sec_type; // +102
+    uint8_t phrase[64]; // +103
+    uint8_t bcn_buf[]; // +167
 }; // :88:8
 
 struct apm_start_cfm {
-    uint8_t status;
-    uint8_t vif_idx;
-    uint8_t ch_idx;
-    uint8_t bcmc_idx;
+    uint8_t status; // +0
+    uint8_t vif_idx; // +1
+    uint8_t ch_idx; // +2
+    uint8_t bcmc_idx; // +3
 }; // :139:8
 
 struct apm_stop_req {
-    uint8_t vif_idx;
+    uint8_t vif_idx; // +0
 }; // :152:8
 
 struct apm_conf_max_sta_req {
-    uint8_t max_sta_supported;
+    uint8_t max_sta_supported; // +0
 }; // :159:8
 
 struct apm_start_cac_req {
-    struct scan_chan_tag chan;
-    uint32_t center_freq1;
-    uint32_t center_freq2;
-    uint8_t ch_width;
-    uint8_t vif_idx;
+    struct scan_chan_tag chan; // +0
+    uint32_t center_freq1; // +8
+    uint32_t center_freq2; // +12
+    uint8_t ch_width; // +16
+    uint8_t vif_idx; // +17
 }; // :166:8
 
 struct apm_start_cac_cfm {
-    uint8_t status;
-    uint8_t ch_idx;
+    uint8_t status; // +0
+    uint8_t ch_idx; // +1
 }; // :181:8
 
 struct apm_stop_cac_req {
-    uint8_t vif_idx;
+    uint8_t vif_idx; // +0
 }; // :190:8
 
 struct apm_sta_del_req {
-    uint8_t vif_idx;
-    uint8_t sta_idx;
+    uint8_t vif_idx; // +0
+    uint8_t sta_idx; // +1
 }; // :196:8
 
 struct apm_sta_del_cfm {
-    uint8_t status;
-    uint8_t vif_idx;
-    uint8_t sta_idx;
+    uint8_t status; // +0
+    uint8_t vif_idx; // +1
+    uint8_t sta_idx; // +2
 }; // :205:8
 
 struct apm_sta_add_ind {
-    uint32_t flags;
-    struct mac_addr sta_addr;
-    uint8_t vif_idx;
-    uint8_t sta_idx;
-    int8_t rssi;
-    uint32_t tsflo;
-    uint32_t tsfhi;
-    uint8_t data_rate;
+    uint32_t flags; // +0
+    struct mac_addr sta_addr; // +4
+    uint8_t vif_idx; // +10
+    uint8_t sta_idx; // +11
+    int8_t rssi; // +12
+    uint32_t tsflo; // +16
+    uint32_t tsfhi; // +20
+    uint8_t data_rate; // +24
 }; // :216:8
 
 struct apm_sta_del_ind {
-    uint8_t sta_idx;
+    uint8_t sta_idx; // +0
 }; // :233:8
 
 const struct ke_state_handler apm_default_handler; // :239:38
@@ -1943,28 +1943,28 @@ void bam_send_air_action_frame(uint8_t sta_idx, struct bam_env_tag *bam_env, uin
 typedef unsigned int (*bam_baw_index_func_ptr)(struct bam_baw *, unsigned int); // :192:24
 
 struct bam_baw {
-    bam_baw_index_func_ptr idx_compute;
-    uint16_t fsn;
-    uint8_t states[64];
-    uint8_t fsn_idx;
-    uint8_t buf_size;
-    uint8_t mask;
+    bam_baw_index_func_ptr idx_compute; // +0
+    uint16_t fsn; // +4
+    uint8_t states[64]; // +6
+    uint8_t fsn_idx; // +70
+    uint8_t buf_size; // +71
+    uint8_t mask; // +72
 }; // :272:8
 
 struct bam_env_tag {
-    uint32_t pkt_cnt;
-    uint32_t last_activity_time;
-    uint16_t ssn;
-    uint16_t ba_timeout;
-    uint8_t sta_idx;
-    uint8_t dev_type;
-    uint8_t ba_policy;
-    uint8_t buffer_size;
-    uint8_t tid;
-    uint8_t dialog_token;
-    uint8_t amsdu;
-    uint8_t delba_count;
-    struct bam_baw baw;
+    uint32_t pkt_cnt; // +0
+    uint32_t last_activity_time; // +4
+    uint16_t ssn; // +8
+    uint16_t ba_timeout; // +10
+    uint8_t sta_idx; // +12
+    uint8_t dev_type; // +13
+    uint8_t ba_policy; // +14
+    uint8_t buffer_size; // +15
+    uint8_t tid; // +16
+    uint8_t dialog_token; // +17
+    uint8_t amsdu; // +18
+    uint8_t delba_count; // +19
+    struct bam_baw baw; // +20
 }; // :288:8
 
 struct bam_env_tag bam_env[1]; // :324:27
@@ -2016,16 +2016,16 @@ ke_state_t hostapd_u_state[1]; // :13:19
 /* ======== components/bl602/bl602_wifi/ip/umac/src/llc/llc.h ======== */
 
 struct llc_snap_short {
-    uint16_t dsap_ssap;
-    uint16_t control_oui0;
-    uint16_t oui1_2;
+    uint16_t dsap_ssap; // +0
+    uint16_t control_oui0; // +2
+    uint16_t oui1_2; // +4
 }; // :89:8
 
 struct llc_snap {
-    uint16_t dsap_ssap;
-    uint16_t control_oui0;
-    uint16_t oui1_2;
-    uint16_t proto_id;
+    uint16_t dsap_ssap; // +0
+    uint16_t control_oui0; // +2
+    uint16_t oui1_2; // +4
+    uint16_t proto_id; // +6
 }; // :100:8
 
 /* ======== components/bl602/bl602_wifi/ip/umac/src/me/me.c ======== */
@@ -2038,59 +2038,59 @@ struct scan_chan_tag *me_freq_to_chan_ptr(uint8_t band, uint16_t freq); // :99:2
 /* ======== components/bl602/bl602_wifi/ip/umac/src/me/me.h ======== */
 
 struct me_env_tag {
-    uint32_t active_vifs;
-    uint32_t ps_disable_vifs;
-    ke_task_id_t requester_id;
-    struct mac_htcapability ht_cap;
-    uint16_t tx_lft;
-    bool ht_supported;
-    struct me_chan_config_req chan;
-    uint8_t stbc_nss;
-    uint8_t phy_bw_max;
-    bool ps_on;
+    uint32_t active_vifs; // +0
+    uint32_t ps_disable_vifs; // +4
+    ke_task_id_t requester_id; // +8
+    struct mac_htcapability ht_cap; // +12
+    uint16_t tx_lft; // +44
+    bool ht_supported; // +46
+    struct me_chan_config_req chan; // +48
+    uint8_t stbc_nss; // +302
+    uint8_t phy_bw_max; // +303
+    bool ps_on; // +304
 }; // :66:8
 
 struct mobility_domain {
-    uint16_t mdid;
-    uint8_t ft_capability_policy;
+    uint16_t mdid; // +0
+    uint8_t ft_capability_policy; // +2
 }; // :99:8
 
 struct mac_bss_info {
-    struct mac_htcapability ht_cap;
-    struct mac_addr bssid;
-    struct mac_ssid ssid;
-    uint16_t bsstype;
-    struct scan_chan_tag *chan;
-    uint16_t center_freq1;
-    uint16_t center_freq2;
-    uint16_t beacon_period;
-    uint16_t cap_info;
-    struct mac_rateset rate_set;
-    struct mac_edca_param_set edca_param;
-    int8_t rssi;
-    int8_t ppm_rel;
-    int8_t ppm_abs;
-    uint8_t high_11b_rate;
-    uint16_t prot_status;
-    uint8_t bw;
-    uint8_t phy_bw;
-    uint8_t power_constraint;
-    uint32_t valid_flags;
-    struct mobility_domain mde;
-    bool is_supplicant_enabled;
-    SecurityMode_t wpa_wpa2_wep;
-    Cipher_t wpa_mcstCipher;
-    Cipher_t wpa_ucstCipher;
-    Cipher_t rsn_mcstCipher;
-    Cipher_t rsn_ucstCipher;
-    bool is_pmf_required;
-    bool is_wpa2_prefered;
-    uint8_t rsn_wpa_ie[32];
-    uint8_t rsn_wpa_ie_len;
-    uint16_t beacon_interval;
-    uint16_t aid_bitmap;
-    uint16_t max_listen_interval;
-    uint8_t sec_type;
+    struct mac_htcapability ht_cap; // +0
+    struct mac_addr bssid; // +32
+    struct mac_ssid ssid; // +38
+    uint16_t bsstype; // +72
+    struct scan_chan_tag *chan; // +76
+    uint16_t center_freq1; // +80
+    uint16_t center_freq2; // +82
+    uint16_t beacon_period; // +84
+    uint16_t cap_info; // +86
+    struct mac_rateset rate_set; // +88
+    struct mac_edca_param_set edca_param; // +104
+    int8_t rssi; // +124
+    int8_t ppm_rel; // +125
+    int8_t ppm_abs; // +126
+    uint8_t high_11b_rate; // +127
+    uint16_t prot_status; // +128
+    uint8_t bw; // +130
+    uint8_t phy_bw; // +131
+    uint8_t power_constraint; // +132
+    uint32_t valid_flags; // +136
+    struct mobility_domain mde; // +140
+    bool is_supplicant_enabled; // +144
+    SecurityMode_t wpa_wpa2_wep; // +145
+    Cipher_t wpa_mcstCipher; // +147
+    Cipher_t wpa_ucstCipher; // +148
+    Cipher_t rsn_mcstCipher; // +149
+    Cipher_t rsn_ucstCipher; // +150
+    bool is_pmf_required; // +151
+    bool is_wpa2_prefered; // +152
+    uint8_t rsn_wpa_ie[32]; // +153
+    uint8_t rsn_wpa_ie_len; // +185
+    uint16_t beacon_interval; // +186
+    uint16_t aid_bitmap; // +188
+    uint16_t max_listen_interval; // +190
+    uint8_t sec_type; // +192
 }; // :108:8
 
 struct me_env_tag me_env; // :188:26
@@ -2132,10 +2132,10 @@ void me_mic_end(struct mic_calc *mic_calc_ptr); // :379:6
 /* ======== components/bl602/bl602_wifi/ip/umac/src/me/me_mic.h ======== */
 
 struct mic_calc {
-    uint32_t mic_key_least;
-    uint32_t mic_key_most;
-    uint32_t last_m_i;
-    uint8_t last_m_i_len;
+    uint32_t mic_key_least; // +0
+    uint32_t mic_key_most; // +4
+    uint32_t last_m_i; // +8
+    uint8_t last_m_i_len; // +12
 }; // :41:8
 
 /* ======== components/bl602/bl602_wifi/ip/umac/src/me/me_task.c ======== */
@@ -2160,99 +2160,99 @@ ke_state_t me_state[1]; // :852:12
 /* ======== components/bl602/bl602_wifi/ip/umac/src/me/me_task.h ======== */
 
 struct me_config_req {
-    struct mac_htcapability ht_cap;
-    struct mac_vhtcapability vht_cap;
-    uint16_t tx_lft;
-    bool ht_supp;
-    bool vht_supp;
-    bool ps_on;
+    struct mac_htcapability ht_cap; // +0
+    struct mac_vhtcapability vht_cap; // +32
+    uint16_t tx_lft; // +44
+    bool ht_supp; // +46
+    bool vht_supp; // +47
+    bool ps_on; // +48
 }; // :96:8
 
 struct me_chan_config_req {
-    struct scan_chan_tag chan2G4[14];
-    struct scan_chan_tag chan5G[28];
-    uint8_t chan2G4_cnt;
-    uint8_t chan5G_cnt;
+    struct scan_chan_tag chan2G4[14]; // +0
+    struct scan_chan_tag chan5G[28]; // +84
+    uint8_t chan2G4_cnt; // +252
+    uint8_t chan5G_cnt; // +253
 }; // :113:8
 
 struct me_set_control_port_req {
-    uint8_t sta_idx;
-    bool control_port_open;
+    uint8_t sta_idx; // +0
+    bool control_port_open; // +1
 }; // :126:8
 
 struct me_tkip_mic_failure_ind {
-    struct mac_addr addr;
-    uint64_t tsc;
-    bool ga;
-    uint8_t keyid;
-    uint8_t vif_idx;
+    struct mac_addr addr; // +0
+    uint64_t tsc; // +8
+    bool ga; // +16
+    uint8_t keyid; // +17
+    uint8_t vif_idx; // +18
 }; // :135:8
 
 struct me_sta_add_req {
-    struct mac_addr mac_addr;
-    struct mac_rateset rate_set;
-    struct mac_htcapability ht_cap;
-    struct mac_vhtcapability vht_cap;
-    uint32_t flags;
-    uint16_t aid;
-    uint8_t uapsd_queues;
-    uint8_t max_sp_len;
-    uint8_t opmode;
-    uint8_t vif_idx;
-    bool tdls_sta;
-    uint32_t tsflo;
-    uint32_t tsfhi;
-    int8_t rssi;
-    uint8_t data_rate;
+    struct mac_addr mac_addr; // +0
+    struct mac_rateset rate_set; // +6
+    struct mac_htcapability ht_cap; // +20
+    struct mac_vhtcapability vht_cap; // +52
+    uint32_t flags; // +64
+    uint16_t aid; // +68
+    uint8_t uapsd_queues; // +70
+    uint8_t max_sp_len; // +71
+    uint8_t opmode; // +72
+    uint8_t vif_idx; // +73
+    bool tdls_sta; // +74
+    uint32_t tsflo; // +76
+    uint32_t tsfhi; // +80
+    int8_t rssi; // +84
+    uint8_t data_rate; // +85
 }; // :150:8
 
 struct me_sta_add_cfm {
-    uint8_t sta_idx;
-    uint8_t status;
-    uint8_t pm_state;
+    uint8_t sta_idx; // +0
+    uint8_t status; // +1
+    uint8_t pm_state; // +2
 }; // :182:8
 
 struct me_sta_del_req {
-    uint8_t sta_idx;
-    bool tdls_sta;
+    uint8_t sta_idx; // +0
+    bool tdls_sta; // +1
 }; // :193:8
 
 struct me_set_active_req {
-    bool active;
-    uint8_t vif_idx;
+    bool active; // +0
+    uint8_t vif_idx; // +1
 }; // :213:8
 
 struct me_set_ps_disable_req {
-    bool ps_disable;
-    uint8_t vif_idx;
+    bool ps_disable; // +0
+    uint8_t vif_idx; // +1
 }; // :222:8
 
 struct me_traffic_ind_req {
-    uint8_t sta_idx;
-    uint8_t tx_avail;
-    bool uapsd;
+    uint8_t sta_idx; // +0
+    uint8_t tx_avail; // +1
+    bool uapsd; // +2
 }; // :231:8
 
 struct me_rc_stats_req {
-    uint8_t sta_idx;
+    uint8_t sta_idx; // +0
 }; // :242:8
 
 struct me_rc_stats_cfm {
-    uint8_t sta_idx;
-    uint16_t no_samples;
-    uint16_t ampdu_len;
-    uint16_t ampdu_packets;
-    uint32_t avg_ampdu_len;
-    uint8_t sw_retry_step;
-    uint8_t sample_wait;
-    struct step retry[4];
-    struct rc_rate_stats rate_stats[10];
-    uint32_t tp[10];
+    uint8_t sta_idx; // +0
+    uint16_t no_samples; // +2
+    uint16_t ampdu_len; // +4
+    uint16_t ampdu_packets; // +6
+    uint32_t avg_ampdu_len; // +8
+    uint8_t sw_retry_step; // +12
+    uint8_t sample_wait; // +13
+    struct step retry[4]; // +16
+    struct rc_rate_stats rate_stats[10]; // +48
+    uint32_t tp[10]; // +168
 }; // :249:8
 
 struct me_rc_set_rate_req {
-    uint8_t sta_idx;
-    uint16_t fixed_rate_cfg;
+    uint8_t sta_idx; // +0
+    uint16_t fixed_rate_cfg; // +2
 }; // :274:8
 
 const struct ke_state_handler me_default_handler; // :282:38
@@ -2316,50 +2316,50 @@ uint32_t rc_calc_tp(struct rc_sta_stats *rc_ss, uint8_t sample_idx); // :2610:10
 /* ======== components/bl602/bl602_wifi/ip/umac/src/rc/rc.h ======== */
 
 struct rc_rate_stats {
-    uint16_t attempts;
-    uint16_t success;
-    uint16_t probability;
-    uint16_t rate_config;
-    uint8_t sample_skipped;
-    bool old_prob_available;
-    uint8_t n_retry;
-    bool rate_allowed;
+    uint16_t attempts; // +0
+    uint16_t success; // +2
+    uint16_t probability; // +4
+    uint16_t rate_config; // +6
+    uint8_t sample_skipped; // +8
+    bool old_prob_available; // +9
+    uint8_t n_retry; // +10
+    bool rate_allowed; // +11
 }; // :133:8
 
 struct step {
-    uint32_t tp;
-    uint16_t idx;
+    uint32_t tp; // +0
+    uint16_t idx; // +4
 }; // :154:8
 
 struct rc_sta_stats {
-    uint32_t last_rc_time;
-    struct rc_rate_stats rate_stats[10];
-    struct step retry[4];
-    struct step max_tp_2_trial;
-    uint16_t ampdu_len;
-    uint16_t ampdu_packets;
-    uint32_t avg_ampdu_len;
-    uint8_t sample_wait;
-    uint8_t sample_slow;
-    uint8_t trial_status;
-    uint8_t info;
-    uint8_t sw_retry_step;
-    uint8_t format_mod;
+    uint32_t last_rc_time; // +0
+    struct rc_rate_stats rate_stats[10]; // +4
+    struct step retry[4]; // +124
+    struct step max_tp_2_trial; // +156
+    uint16_t ampdu_len; // +164
+    uint16_t ampdu_packets; // +166
+    uint32_t avg_ampdu_len; // +168
+    uint8_t sample_wait; // +172
+    uint8_t sample_slow; // +173
+    uint8_t trial_status; // +174
+    uint8_t info; // +175
+    uint8_t sw_retry_step; // +176
+    uint8_t format_mod; // +177
     union {
         uint8_t ht[4];
-    } rate_map;
-    uint16_t rate_map_l;
-    uint8_t mcs_max;
-    uint8_t r_idx_min;
-    uint8_t r_idx_max;
-    uint8_t bw_max;
-    uint8_t no_ss;
-    uint8_t short_gi;
-    uint8_t p_type;
-    uint16_t no_samples;
-    uint16_t max_amsdu_len;
-    uint16_t curr_amsdu_len;
-    uint16_t fixed_rate_cfg;
+    } rate_map; // +178
+    uint16_t rate_map_l; // +182
+    uint8_t mcs_max; // +184
+    uint8_t r_idx_min; // +185
+    uint8_t r_idx_max; // +186
+    uint8_t bw_max; // +187
+    uint8_t no_ss; // +188
+    uint8_t short_gi; // +189
+    uint8_t p_type; // +190
+    uint16_t no_samples; // +192
+    uint16_t max_amsdu_len; // +194
+    uint16_t curr_amsdu_len; // +196
+    uint16_t fixed_rate_cfg; // +198
 }; // :163:8
 
 /* ======== components/bl602/bl602_wifi/ip/umac/src/rxu/rxu_cntrl.c ======== */
@@ -2385,9 +2385,9 @@ uint8_t rxu_cntrl_get_pm(void); // :2012:9
 void rxu_cntrl_evt(int dummy); // :2024:6
 
 struct wifi_pkt {
-    uint32_t pkt[4];
-    void *pbuf[4];
-    uint16_t len[4];
+    uint32_t pkt[4]; // +0
+    void *pbuf[4]; // +16
+    uint16_t len[4]; // +32
 }; // :2039:8
 
 void rxu_swdesc_upload_evt(int arg); // :2047:6
@@ -2410,57 +2410,57 @@ enum rxu_cntrl_frame_info_pos {
 }; // :106:6
 
 struct rxu_mic_calc {
-    struct mic_calc mic_calc;
-    uint32_t last_bytes[2];
+    struct mic_calc mic_calc; // +0
+    uint32_t last_bytes[2]; // +16
 }; // :127:8
 
 struct rx_cntrl_rx_status {
-    uint16_t frame_cntl;
-    uint16_t seq_cntl;
-    uint16_t sn;
-    uint8_t fn;
-    uint8_t tid;
-    uint8_t machdr_len;
-    uint8_t sta_idx;
-    uint8_t vif_idx;
-    uint8_t dst_idx;
-    uint64_t pn;
-    uint32_t statinfo;
-    uint32_t host_buf_addr;
-    struct key_info_tag *key;
-    struct mac_addr da;
-    struct mac_addr sa;
-    uint8_t frame_info;
-    bool eth_len_present;
-    uint8_t payl_offset;
+    uint16_t frame_cntl; // +0
+    uint16_t seq_cntl; // +2
+    uint16_t sn; // +4
+    uint8_t fn; // +6
+    uint8_t tid; // +7
+    uint8_t machdr_len; // +8
+    uint8_t sta_idx; // +9
+    uint8_t vif_idx; // +10
+    uint8_t dst_idx; // +11
+    uint64_t pn; // +16
+    uint32_t statinfo; // +24
+    uint32_t host_buf_addr; // +28
+    struct key_info_tag *key; // +32
+    struct mac_addr da; // +36
+    struct mac_addr sa; // +42
+    uint8_t frame_info; // +48
+    bool eth_len_present; // +49
+    uint8_t payl_offset; // +50
 }; // :213:8
 
 struct rx_cntrl_ipcdesc {
-    uint32_t host_id;
+    uint32_t host_id; // +0
 }; // :262:8
 
 struct rx_cntrl_dupli {
-    struct mac_addr last_src_addr;
-    uint16_t last_seq_cntl;
+    struct mac_addr last_src_addr; // +0
+    uint16_t last_seq_cntl; // +6
 }; // :269:8
 
 struct rx_cntrl_pm_mon {
-    struct mac_addr addr;
-    uint8_t pm_state;
-    bool mon;
+    struct mac_addr addr; // +0
+    uint8_t pm_state; // +6
+    bool mon; // +7
 }; // :278:8
 
 struct rxu_cntrl_env_tag {
-    struct rx_cntrl_rx_status rx_status;
-    struct co_list rxdesc_pending;
-    struct co_list rxdesc_ready;
-    struct rx_cntrl_ipcdesc rx_ipcdesc_stat;
-    struct co_list rxu_defrag_free;
-    struct co_list rxu_defrag_used;
-    struct rx_cntrl_dupli rxu_dupli;
-    struct mac_addr *mac_addr_ptr;
-    struct rx_cntrl_pm_mon pm_mon;
-    uint32_t ttr;
+    struct rx_cntrl_rx_status rx_status; // +0
+    struct co_list rxdesc_pending; // +56
+    struct co_list rxdesc_ready; // +64
+    struct rx_cntrl_ipcdesc rx_ipcdesc_stat; // +72
+    struct co_list rxu_defrag_free; // +76
+    struct co_list rxu_defrag_used; // +84
+    struct rx_cntrl_dupli rxu_dupli; // +92
+    struct mac_addr *mac_addr_ptr; // +100
+    struct rx_cntrl_pm_mon pm_mon; // +104
+    uint32_t ttr; // +112
 }; // :290:8
 
 struct rxu_cntrl_env_tag rxu_cntrl_env; // :322:33
@@ -2473,20 +2473,20 @@ enum rxu_msg_tag {
 }; // :27:6
 
 struct rxu_mgt_ind {
-    uint16_t length;
-    uint16_t framectrl;
-    uint16_t center_freq;
-    uint8_t band;
-    uint8_t sta_idx;
-    uint8_t inst_nbr;
-    uint8_t sa[6];
-    uint32_t tsflo;
-    uint32_t tsfhi;
-    int8_t rssi;
-    int8_t ppm_abs;
-    int8_t ppm_rel;
-    uint8_t data_rate;
-    uint32_t payload[0];
+    uint16_t length; // +0
+    uint16_t framectrl; // +2
+    uint16_t center_freq; // +4
+    uint8_t band; // +6
+    uint8_t sta_idx; // +7
+    uint8_t inst_nbr; // +8
+    uint8_t sa[6]; // +9
+    uint32_t tsflo; // +16
+    uint32_t tsfhi; // +20
+    int8_t rssi; // +24
+    int8_t ppm_abs; // +25
+    int8_t ppm_rel; // +26
+    uint8_t data_rate; // +27
+    uint32_t payload[0]; // +28
 }; // :45:8
 
 /* ======== components/bl602/bl602_wifi/ip/umac/src/scanu/scanu.c ======== */
@@ -2508,20 +2508,20 @@ void scanu_scan_next(void); // :801:6
 /* ======== components/bl602/bl602_wifi/ip/umac/src/scanu/scanu.h ======== */
 
 struct scanu_env_tag {
-    const struct scanu_start_req *param;
-    struct hal_dma_desc_tag dma_desc;
-    uint16_t result_cnt;
-    struct mac_scan_result scan_result[6];
-    ke_task_id_t src_id;
-    bool joining;
-    uint8_t band;
-    struct mac_addr bssid;
-    struct mac_ssid ssid;
+    const struct scanu_start_req *param; // +0
+    struct hal_dma_desc_tag dma_desc; // +4
+    uint16_t result_cnt; // +20
+    struct mac_scan_result scan_result[6]; // +24
+    ke_task_id_t src_id; // +360
+    bool joining; // +362
+    uint8_t band; // +363
+    struct mac_addr bssid; // +364
+    struct mac_ssid ssid; // +370
 }; // :42:8
 
 struct scanu_add_ie_tag {
-    struct dma_desc dma_desc;
-    uint32_t buf[50];
+    struct dma_desc dma_desc; // +0
+    uint32_t buf[50]; // +16
 }; // :69:8
 
 struct scanu_env_tag scanu_env; // :81:29
@@ -2551,28 +2551,28 @@ ke_state_t scanu_state[1]; // :312:12
 /* ======== components/bl602/bl602_wifi/ip/umac/src/scanu/scanu_task.h ======== */
 
 struct scanu_start_req {
-    struct scan_chan_tag chan[42];
-    struct mac_ssid ssid[2];
-    struct mac_addr bssid;
-    uint32_t add_ies;
-    uint16_t add_ie_len;
-    uint8_t vif_idx;
-    uint8_t chan_cnt;
-    uint8_t ssid_cnt;
-    bool no_cck;
+    struct scan_chan_tag chan[42]; // +0
+    struct mac_ssid ssid[2]; // +252
+    struct mac_addr bssid; // +320
+    uint32_t add_ies; // +328
+    uint16_t add_ie_len; // +332
+    uint8_t vif_idx; // +334
+    uint8_t chan_cnt; // +335
+    uint8_t ssid_cnt; // +336
+    bool no_cck; // +337
 }; // :62:8
 
 struct scanu_raw_send_req {
-    void *pkt;
-    uint32_t len;
+    void *pkt; // +0
+    uint32_t len; // +4
 }; // :85:8
 
 struct scanu_raw_send_cfm {
-    uint32_t status;
+    uint32_t status; // +0
 }; // :91:8
 
 struct scanu_start_cfm {
-    uint8_t status;
+    uint8_t status; // +0
 }; // :97:8
 
 const struct ke_state_handler scanu_state_handler[2]; // :103:38
@@ -2608,13 +2608,13 @@ void sm_handle_supplicant_result(uint8_t sta_id, uint16_t reason_code); // :1153
 /* ======== components/bl602/bl602_wifi/ip/umac/src/sm/sm.h ======== */
 
 struct sm_env_tag {
-    struct sm_connect_req *connect_param;
-    struct sm_connect_ind *connect_ind;
-    struct co_list bss_config;
-    bool join_passive;
-    bool ft_over_ds;
-    int exist_ssid_idx;
-    struct mac_addr ft_old_bssid;
+    struct sm_connect_req *connect_param; // +0
+    struct sm_connect_ind *connect_ind; // +4
+    struct co_list bss_config; // +8
+    bool join_passive; // +16
+    bool ft_over_ds; // +17
+    int exist_ssid_idx; // +20
+    struct mac_addr ft_old_bssid; // +24
 }; // :36:8
 
 struct sm_env_tag sm_env; // :239:26
@@ -2664,57 +2664,57 @@ enum sm_msg_tag {
 }; // :57:6
 
 struct sm_connect_req {
-    struct mac_ssid ssid;
-    struct mac_addr bssid;
-    struct scan_chan_tag chan;
-    uint32_t flags;
-    uint16_t ctrl_port_ethertype;
-    uint16_t ie_len;
-    uint16_t listen_interval;
-    bool dont_wait_bcmc;
-    uint8_t auth_type;
-    uint8_t uapsd_queues;
-    uint8_t vif_idx;
-    uint32_t ie_buf[64];
-    bool is_supplicant_enabled;
-    uint8_t phrase[64];
-    uint8_t phrase_pmk[64];
+    struct mac_ssid ssid; // +0
+    struct mac_addr bssid; // +34
+    struct scan_chan_tag chan; // +40
+    uint32_t flags; // +48
+    uint16_t ctrl_port_ethertype; // +52
+    uint16_t ie_len; // +54
+    uint16_t listen_interval; // +56
+    bool dont_wait_bcmc; // +58
+    uint8_t auth_type; // +59
+    uint8_t uapsd_queues; // +60
+    uint8_t vif_idx; // +61
+    uint32_t ie_buf[64]; // +64
+    bool is_supplicant_enabled; // +320
+    uint8_t phrase[64]; // +321
+    uint8_t phrase_pmk[64]; // +385
 }; // :76:8
 
 struct sm_connect_cfm {
-    uint8_t status;
+    uint8_t status; // +0
 }; // :113:8
 
 struct sm_connect_ind {
-    uint16_t status_code;
-    struct mac_addr bssid;
-    bool roamed;
-    uint8_t vif_idx;
-    uint8_t ap_idx;
-    uint8_t ch_idx;
-    bool qos;
-    uint8_t acm;
-    uint16_t assoc_req_ie_len;
-    uint16_t assoc_rsp_ie_len;
-    uint32_t assoc_ie_buf[200];
-    uint16_t aid;
-    uint8_t band;
-    uint16_t center_freq;
-    uint8_t width;
-    uint32_t center_freq1;
-    uint32_t center_freq2;
-    uint32_t ac_param[4];
+    uint16_t status_code; // +0
+    struct mac_addr bssid; // +2
+    bool roamed; // +8
+    uint8_t vif_idx; // +9
+    uint8_t ap_idx; // +10
+    uint8_t ch_idx; // +11
+    bool qos; // +12
+    uint8_t acm; // +13
+    uint16_t assoc_req_ie_len; // +14
+    uint16_t assoc_rsp_ie_len; // +16
+    uint32_t assoc_ie_buf[200]; // +20
+    uint16_t aid; // +820
+    uint8_t band; // +822
+    uint16_t center_freq; // +824
+    uint8_t width; // +826
+    uint32_t center_freq1; // +828
+    uint32_t center_freq2; // +832
+    uint32_t ac_param[4]; // +836
 }; // :126:8
 
 struct sm_disconnect_req {
-    uint16_t reason_code;
-    uint8_t vif_idx;
+    uint16_t reason_code; // +0
+    uint8_t vif_idx; // +2
 }; // :167:8
 
 struct sm_disconnect_ind {
-    uint16_t reason_code;
-    uint8_t vif_idx;
-    bool ft_over_ds;
+    uint16_t reason_code; // +0
+    uint8_t vif_idx; // +2
+    bool ft_over_ds; // +3
 }; // :176:8
 
 const struct ke_state_handler sm_default_handler; // :188:38
@@ -2740,14 +2740,14 @@ void co_dlist_extract(struct co_dlist *list, const struct co_dlist_hdr *list_hdr
 /* ======== components/bl602/bl602_wifi/modules/common/src/co_dlist.h ======== */
 
 struct co_dlist_hdr {
-    struct co_dlist_hdr *next;
-    struct co_dlist_hdr *prev;
+    struct co_dlist_hdr *next; // +0
+    struct co_dlist_hdr *prev; // +4
 }; // :48:8
 
 struct co_dlist {
-    struct co_dlist_hdr *first;
-    struct co_dlist_hdr *last;
-    uint32_t cnt;
+    struct co_dlist_hdr *first; // +0
+    struct co_dlist_hdr *last; // +4
+    uint32_t cnt; // +8
 }; // :57:8
 
 /* ======== components/bl602/bl602_wifi/modules/common/src/co_list.c ======== */
@@ -2769,12 +2769,12 @@ void co_list_remove(struct co_list *list, struct co_list_hdr *prev_element, stru
 /* ======== components/bl602/bl602_wifi/modules/common/src/co_list.h ======== */
 
 struct co_list_hdr {
-    struct co_list_hdr *next;
+    struct co_list_hdr *next; // +0
 }; // :47:8
 
 struct co_list {
-    struct co_list_hdr *first;
-    struct co_list_hdr *last;
+    struct co_list_hdr *first; // +0
+    struct co_list_hdr *last; // +4
 }; // :54:8
 
 /* ======== components/bl602/bl602_wifi/modules/common/src/co_math.c ======== */
@@ -2796,13 +2796,13 @@ void co_pool_free(struct co_pool *pool, struct co_pool_hdr *elements, uint32_t n
 /* ======== components/bl602/bl602_wifi/modules/common/src/co_pool.h ======== */
 
 struct co_pool_hdr {
-    struct co_pool_hdr *next;
-    void *element;
+    struct co_pool_hdr *next; // +0
+    void *element; // +4
 }; // :53:8
 
 struct co_pool {
-    struct co_pool_hdr *first_ptr;
-    uint32_t freecnt;
+    struct co_pool_hdr *first_ptr; // +0
+    uint32_t freecnt; // +4
 }; // :64:8
 
 /* ======== components/bl602/bl602_wifi/modules/common/src/notifier.c ======== */
@@ -2817,9 +2817,9 @@ int notifier_chain_call_fromeCritical(struct notifier_block **list, int event, v
 /* ======== components/bl602/bl602_wifi/modules/common/src/notifier.h ======== */
 
 struct notifier_block {
-    int (*cb)(struct notifier_block *, int, void *);
-    struct notifier_block *next;
-    int priority;
+    int (*cb)(struct notifier_block *, int, void *); // +0
+    struct notifier_block *next; // +4
+    int priority; // +8
 }; // :3:8
 
 /* ======== components/bl602/bl602_wifi/modules/dbg/src/dbg.c ======== */
@@ -2854,8 +2854,8 @@ enum dbg_sev_tag {
 }; // :108:6
 
 struct debug_env_tag {
-    uint32_t filter_module;
-    uint32_t filter_severity;
+    uint32_t filter_module; // +0
+    uint32_t filter_severity; // +4
 }; // :1287:8
 
 struct debug_env_tag dbg_env; // :1300:29
@@ -2897,36 +2897,36 @@ enum dbg_msg_tag {
 }; // :41:6
 
 struct dbg_mem_read_req {
-    uint32_t memaddr;
+    uint32_t memaddr; // +0
 }; // :76:8
 
 struct dbg_mem_read_cfm {
-    uint32_t memaddr;
-    uint32_t memdata;
+    uint32_t memaddr; // +0
+    uint32_t memdata; // +4
 }; // :83:8
 
 struct dbg_mem_write_req {
-    uint32_t memaddr;
-    uint32_t memdata;
+    uint32_t memaddr; // +0
+    uint32_t memdata; // +4
 }; // :92:8
 
 struct dbg_mem_write_cfm {
-    uint32_t memaddr;
-    uint32_t memdata;
+    uint32_t memaddr; // +0
+    uint32_t memdata; // +4
 }; // :101:8
 
 struct dbg_set_mod_filter_req {
-    uint32_t mod_filter;
+    uint32_t mod_filter; // +0
 }; // :110:8
 
 struct dbg_set_sev_filter_req {
-    uint32_t sev_filter;
+    uint32_t sev_filter; // +0
 }; // :117:8
 
 struct dbg_get_sys_stat_cfm {
-    uint32_t cpu_sleep_time;
-    uint32_t doze_time;
-    uint32_t stats_time;
+    uint32_t cpu_sleep_time; // +0
+    uint32_t doze_time; // +4
+    uint32_t stats_time; // +8
 }; // :124:8
 
 const struct ke_state_handler dbg_default_handler; // :138:38
@@ -2940,11 +2940,11 @@ struct ke_env_tag ke_env; // :26:19
 typedef uint32_t evt_field_t; // :43:18
 
 struct ke_env_tag {
-    volatile evt_field_t evt_field;
-    struct co_list queue_sent;
-    struct co_list queue_saved;
-    struct co_list queue_timer;
-    struct mblock_free *mblock_first;
+    volatile evt_field_t evt_field; // +0
+    struct co_list queue_sent; // +4
+    struct co_list queue_saved; // +12
+    struct co_list queue_timer; // +20
+    struct mblock_free *mblock_first; // +28
 }; // :46:8
 
 struct ke_env_tag ke_env; // :70:26
@@ -2954,8 +2954,8 @@ struct ke_env_tag ke_env; // :70:26
 typedef void (*evt_ptr_t)(int); // :43:16
 
 struct ke_evt_tag {
-    evt_ptr_t func;
-    int param;
+    evt_ptr_t func; // +0
+    int param; // +4
 }; // :47:8
 
 void bl_event_handle(int param); // :73:6
@@ -2973,12 +2973,12 @@ void ke_flush(void); // :270:6
 /* ======== components/bl602/bl602_wifi/modules/ke/src/ke_mem.c ======== */
 
 struct mblock_free {
-    struct mblock_free *next;
-    uint32_t size;
+    struct mblock_free *next; // +0
+    uint32_t size; // +4
 }; // :45:8
 
 struct mblock_used {
-    uint32_t size;
+    uint32_t size; // +0
 }; // :56:8
 
 uint8_t ke_mem_heap[5248]; // :69:9
@@ -3003,12 +3003,12 @@ typedef uint16_t ke_state_t; // :75:18
 typedef uint16_t ke_msg_id_t; // :81:18
 
 struct ke_msg {
-    struct co_list_hdr hdr;
-    ke_msg_id_t id;
-    ke_task_id_t dest_id;
-    ke_task_id_t src_id;
-    uint16_t param_len;
-    uint32_t param[0];
+    struct co_list_hdr hdr; // +0
+    ke_msg_id_t id; // +4
+    ke_task_id_t dest_id; // +6
+    ke_task_id_t src_id; // +8
+    uint16_t param_len; // +10
+    uint32_t param[0]; // +12
 }; // :84:8
 
 enum ke_msg_status_tag {
@@ -3038,21 +3038,21 @@ int ke_msg_save(const ke_msg_id_t msgid, const void *param, const ke_task_id_t d
 typedef int (*ke_msg_func_t)(const ke_msg_id_t, const void *, const ke_task_id_t, const ke_task_id_t); // :120:15
 
 struct ke_msg_handler {
-    ke_msg_id_t id;
-    ke_msg_func_t func;
+    ke_msg_id_t id; // +0
+    ke_msg_func_t func; // +4
 }; // :126:8
 
 struct ke_state_handler {
-    const struct ke_msg_handler *msg_table;
-    uint16_t msg_cnt;
+    const struct ke_msg_handler *msg_table; // +0
+    uint16_t msg_cnt; // +4
 }; // :135:8
 
 struct ke_task_desc {
-    const struct ke_state_handler *state_handler;
-    const struct ke_state_handler *default_handler;
-    ke_state_t *state;
-    uint16_t state_max;
-    uint16_t idx_max;
+    const struct ke_state_handler *state_handler; // +0
+    const struct ke_state_handler *default_handler; // +4
+    ke_state_t *state; // +8
+    uint16_t state_max; // +12
+    uint16_t idx_max; // +14
 }; // :151:8
 
 static bool ke_task_local(const ke_task_id_t id); // :179:21
@@ -3070,10 +3070,10 @@ bool ke_timer_active(const ke_msg_id_t timer_id, const ke_task_id_t task_id); //
 /* ======== components/bl602/bl602_wifi/modules/ke/src/ke_timer.h ======== */
 
 struct ke_timer {
-    struct ke_timer *next;
-    ke_msg_id_t id;
-    ke_task_id_t task;
-    uint32_t time;
+    struct ke_timer *next; // +0
+    ke_msg_id_t id; // +4
+    ke_task_id_t task; // +6
+    uint32_t time; // +8
 }; // :62:8
 
 /* ======== components/bl602/bl602_wifi/modules/mac/src/mac.c ======== */
@@ -3090,89 +3090,89 @@ void bl60x_current_time_us(long long *time_now); // :123:6
 /* ======== components/bl602/bl602_wifi/modules/mac/src/mac.h ======== */
 
 struct mac_addr {
-    uint16_t array[3];
+    uint16_t array[3]; // +0
 }; // :207:8
 
 struct mac_ssid {
-    uint8_t length;
-    uint8_t array[32];
-    uint8_t array_tail[1];
+    uint8_t length; // +0
+    uint8_t array[32]; // +1
+    uint8_t array_tail[1]; // +33
 }; // :217:8
 
 struct mac_rateset {
-    uint8_t length;
-    uint8_t array[12];
+    uint8_t length; // +0
+    uint8_t array[12]; // +1
 }; // :232:8
 
 struct key_info_tag {
-    uint64_t rx_pn[9];
-    uint64_t tx_pn;
+    uint64_t rx_pn[9]; // +0
+    uint64_t tx_pn; // +72
     union {
         struct {
-            uint32_t tx_key[2];
-            uint32_t rx_key[2];
+            uint32_t tx_key[2]; // +0
+            uint32_t rx_key[2]; // +8
         } mic;
         struct {
-            uint32_t key[4];
+            uint32_t key[4]; // +0
         } mfp;
-    } u;
-    uint8_t cipher;
-    uint8_t key_idx;
-    uint8_t hw_key_idx;
-    bool valid;
+    } u; // +80
+    uint8_t cipher; // +96
+    uint8_t key_idx; // +97
+    uint8_t hw_key_idx; // +98
+    bool valid; // +99
 }; // :257:8
 
 struct mac_sec_key {
-    uint8_t length;
-    uint32_t array[8];
+    uint8_t length; // +0
+    uint32_t array[8]; // +4
 }; // :292:8
 
 struct mac_htcapability {
-    uint16_t ht_capa_info;
-    uint8_t a_mpdu_param;
-    uint8_t mcs_rate[16];
-    uint16_t ht_extended_capa;
-    uint32_t tx_beamforming_capa;
-    uint8_t asel_capa;
+    uint16_t ht_capa_info; // +0
+    uint8_t a_mpdu_param; // +2
+    uint8_t mcs_rate[16]; // +3
+    uint16_t ht_extended_capa; // +20
+    uint32_t tx_beamforming_capa; // +24
+    uint8_t asel_capa; // +28
 }; // :303:8
 
 struct mac_vhtcapability {
-    uint32_t vht_capa_info;
-    uint16_t rx_mcs_map;
-    uint16_t rx_highest;
-    uint16_t tx_mcs_map;
-    uint16_t tx_highest;
+    uint32_t vht_capa_info; // +0
+    uint16_t rx_mcs_map; // +4
+    uint16_t rx_highest; // +6
+    uint16_t tx_mcs_map; // +8
+    uint16_t tx_highest; // +10
 }; // :321:8
 
 struct mac_edca_param_set {
-    uint8_t qos_info;
-    uint8_t acm;
-    uint32_t ac_param[4];
+    uint8_t qos_info; // +0
+    uint8_t acm; // +1
+    uint32_t ac_param[4]; // +4
 }; // :353:8
 
 struct mac_scan_result {
-    struct mac_addr bssid;
-    struct mac_ssid ssid;
-    uint16_t bsstype;
-    struct scan_chan_tag *chan;
-    uint16_t beacon_period;
-    uint16_t cap_info;
-    bool valid_flag;
-    int8_t rssi;
-    int8_t ppm_rel;
-    int8_t ppm_abs;
+    struct mac_addr bssid; // +0
+    struct mac_ssid ssid; // +6
+    uint16_t bsstype; // +40
+    struct scan_chan_tag *chan; // +44
+    uint16_t beacon_period; // +48
+    uint16_t cap_info; // +50
+    bool valid_flag; // +52
+    int8_t rssi; // +53
+    int8_t ppm_rel; // +54
+    int8_t ppm_abs; // +55
 }; // :381:8
 
 struct mac_sta_info {
-    struct mac_rateset rate_set;
-    struct mac_htcapability ht_cap;
-    struct mac_vhtcapability vht_cap;
-    uint32_t capa_flags;
-    uint8_t phy_bw_max;
-    uint8_t bw_cur;
-    uint8_t uapsd_queues;
-    uint8_t max_sp_len;
-    uint8_t stbc_nss;
+    struct mac_rateset rate_set; // +0
+    struct mac_htcapability ht_cap; // +16
+    struct mac_vhtcapability vht_cap; // +48
+    uint32_t capa_flags; // +60
+    uint8_t phy_bw_max; // +64
+    uint8_t bw_cur; // +65
+    uint8_t uapsd_queues; // +66
+    uint8_t max_sp_len; // +67
+    uint8_t stbc_nss; // +68
 }; // :471:8
 
 const uint8_t mac_tid2ac[]; // :499:22
@@ -3183,69 +3183,69 @@ const struct mac_addr mac_addr_bcst; // :512:30
 /* ======== components/bl602/bl602_wifi/modules/mac/src/mac_frame.h ======== */
 
 struct mac_hdr_ctrl {
-    uint16_t fctl;
-    uint16_t durid;
-    struct mac_addr addr1;
-    struct mac_addr addr2;
+    uint16_t fctl; // +0
+    uint16_t durid; // +2
+    struct mac_addr addr1; // +4
+    struct mac_addr addr2; // +10
 }; // :1774:8
 
 struct mac_hdr {
-    uint16_t fctl;
-    uint16_t durid;
-    struct mac_addr addr1;
-    struct mac_addr addr2;
-    struct mac_addr addr3;
-    uint16_t seq;
+    uint16_t fctl; // +0
+    uint16_t durid; // +2
+    struct mac_addr addr1; // +4
+    struct mac_addr addr2; // +10
+    struct mac_addr addr3; // +16
+    uint16_t seq; // +22
 }; // :1787:8
 
 struct mac_hdr_qos {
-    uint16_t fctl;
-    uint16_t durid;
-    struct mac_addr addr1;
-    struct mac_addr addr2;
-    struct mac_addr addr3;
-    uint16_t seq;
-    uint16_t qos;
+    uint16_t fctl; // +0
+    uint16_t durid; // +2
+    struct mac_addr addr1; // +4
+    struct mac_addr addr2; // +10
+    struct mac_addr addr3; // +16
+    uint16_t seq; // +22
+    uint16_t qos; // +24
 }; // :1804:8
 
 struct mac_hdr_long {
-    uint16_t fctl;
-    uint16_t durid;
-    struct mac_addr addr1;
-    struct mac_addr addr2;
-    struct mac_addr addr3;
-    uint16_t seq;
-    struct mac_addr addr4;
+    uint16_t fctl; // +0
+    uint16_t durid; // +2
+    struct mac_addr addr1; // +4
+    struct mac_addr addr2; // +10
+    struct mac_addr addr3; // +16
+    uint16_t seq; // +22
+    struct mac_addr addr4; // +24
 }; // :1823:8
 
 struct mac_hdr_long_qos {
-    uint16_t fctl;
-    uint16_t durid;
-    struct mac_addr addr1;
-    struct mac_addr addr2;
-    struct mac_addr addr3;
-    uint16_t seq;
-    struct mac_addr addr4;
-    uint16_t qos;
+    uint16_t fctl; // +0
+    uint16_t durid; // +2
+    struct mac_addr addr1; // +4
+    struct mac_addr addr2; // +10
+    struct mac_addr addr3; // +16
+    uint16_t seq; // +22
+    struct mac_addr addr4; // +24
+    uint16_t qos; // +30
 }; // :1843:8
 
 struct eth_hdr {
-    struct mac_addr da;
-    struct mac_addr sa;
-    uint16_t len;
+    struct mac_addr da; // +0
+    struct mac_addr sa; // +6
+    uint16_t len; // +12
 }; // :1864:8
 
 struct bcn_frame {
-    struct mac_hdr h;
-    uint64_t tsf;
-    uint16_t bcnint;
-    uint16_t capa;
-    uint8_t variable[0];
+    struct mac_hdr h; // +0
+    uint64_t tsf; // +24
+    uint16_t bcnint; // +32
+    uint16_t capa; // +34
+    uint8_t variable[0]; // +36
 }; // :1875:8
 
 struct preq_frame {
-    struct mac_hdr h;
-    uint8_t payload[0];
+    struct mac_hdr h; // +0
+    uint8_t payload[0]; // +24
 }; // :1890:8
 
 /* ======== components/bl602/bl602_wifi/modules/mac/src/mac_ie.c ======== */
@@ -3419,56 +3419,56 @@ typedef UINT16 IEEEtypes_BcnInterval_t; // :1183:16
 typedef UINT8 IEEEtypes_DtimPeriod_t; // :1189:15
 
 typedef struct {
-    IEEEtypes_ElementId_e ElementId;
-    IEEEtypes_Len_t Len;
+    IEEEtypes_ElementId_e ElementId; // +0
+    IEEEtypes_Len_t Len; // +1
 } IEEEtypes_InfoElementHdr_t; // :1246:25
 
 typedef struct {
-    IEEEtypes_ElementId_e ElementId;
-    IEEEtypes_Len_t Len;
-    IEEEtypes_SsId_t SsId;
+    IEEEtypes_ElementId_e ElementId; // +0
+    IEEEtypes_Len_t Len; // +1
+    IEEEtypes_SsId_t SsId; // +2
 } IEEEtypes_SsIdElement_t; // :1266:25
 
 typedef struct {
-    IEEEtypes_ElementId_e ElementId;
-    IEEEtypes_Len_t Len;
-    UINT8 OuiType[4];
-    UINT16 Ver;
-    UINT8 GrpKeyCipher[4];
-    UINT16 PwsKeyCnt;
-    UINT8 PwsKeyCipherList[4];
-    UINT16 AuthKeyCnt;
-    UINT8 AuthKeyList[4];
+    IEEEtypes_ElementId_e ElementId; // +0
+    IEEEtypes_Len_t Len; // +1
+    UINT8 OuiType[4]; // +2
+    UINT16 Ver; // +6
+    UINT8 GrpKeyCipher[4]; // +8
+    UINT16 PwsKeyCnt; // +12
+    UINT8 PwsKeyCipherList[4]; // +14
+    UINT16 AuthKeyCnt; // +18
+    UINT8 AuthKeyList[4]; // +20
 } IEEEtypes_WPAElement_t; // :2232:25
 
 typedef struct {
-    UINT8 PreAuth:1;
-    UINT8 NoPairwise:1;
-    UINT8 PtksaReplayCtr:2;
-    UINT8 GtksaReplayCtr:2;
-    UINT8 MFPR:1;
-    UINT8 MFPC:1;
-    UINT8 Reserved_8:1;
-    UINT8 PeerkeyEnabled:1;
-    UINT8 SppAmsduCap:1;
-    UINT8 SppAmsduReq:1;
-    UINT8 PBAC:1;
-    UINT8 Reserved_13_15:3;
+    UINT8 PreAuth:1; // +0
+    UINT8 NoPairwise:1; // +0
+    UINT8 PtksaReplayCtr:2; // +0
+    UINT8 GtksaReplayCtr:2; // +0
+    UINT8 MFPR:1; // +0
+    UINT8 MFPC:1; // +0
+    UINT8 Reserved_8:1; // +1
+    UINT8 PeerkeyEnabled:1; // +1
+    UINT8 SppAmsduCap:1; // +1
+    UINT8 SppAmsduReq:1; // +1
+    UINT8 PBAC:1; // +1
+    UINT8 Reserved_13_15:3; // +1
 } IEEEtypes_RSNCapability_t; // :2251:25
 
 typedef struct {
-    IEEEtypes_ElementId_e ElementId;
-    IEEEtypes_Len_t Len;
-    UINT16 Ver;
-    UINT8 GrpKeyCipher[4];
-    UINT16 PwsKeyCnt;
-    UINT8 PwsKeyCipherList[4];
-    UINT16 AuthKeyCnt;
-    UINT8 AuthKeyList[4];
-    IEEEtypes_RSNCapability_t RsnCap;
-    UINT16 PMKIDCnt;
-    UINT8 PMKIDList[16];
-    UINT8 GrpMgmtCipher[4];
+    IEEEtypes_ElementId_e ElementId; // +0
+    IEEEtypes_Len_t Len; // +1
+    UINT16 Ver; // +2
+    UINT8 GrpKeyCipher[4]; // +4
+    UINT16 PwsKeyCnt; // +8
+    UINT8 PwsKeyCipherList[4]; // +10
+    UINT16 AuthKeyCnt; // +14
+    UINT8 AuthKeyList[4]; // +16
+    IEEEtypes_RSNCapability_t RsnCap; // +20
+    UINT16 PMKIDCnt; // +22
+    UINT8 PMKIDList[16]; // +24
+    UINT8 GrpMgmtCipher[4]; // +40
 } IEEEtypes_RSNElement_t; // :2286:25
 
 typedef enum {
@@ -3496,66 +3496,66 @@ typedef enum {
 } ScanMode_e; // :2696:3
 
 typedef struct {
-    ChanBand_e chanBand:2;
-    ChanWidth_e chanWidth:2;
-    Chan2Offset_e chan2Offset:2;
-    ScanMode_e scanMode:2;
+    ChanBand_e chanBand:2; // +0
+    ChanWidth_e chanWidth:2; // +0
+    Chan2Offset_e chan2Offset:2; // +0
+    ScanMode_e scanMode:2; // +0
 } BandConfig_t; // :2712:27
 
 typedef struct {
-    BandConfig_t bandConfig;
-    UINT8 chanNum;
+    BandConfig_t bandConfig; // +0
+    UINT8 chanNum; // +1
 } ChanBandInfo_t; // :2724:27
 
 typedef struct {
-    IEEEtypes_MacAddr_t da;
-    IEEEtypes_MacAddr_t sa;
-    UINT16 type;
+    IEEEtypes_MacAddr_t da; // +0
+    IEEEtypes_MacAddr_t sa; // +6
+    UINT16 type; // +12
 } ether_hdr_t; // :2995:25
 
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/KeyApiStaDefs.h ======== */
 
 typedef struct {
-    UINT8 key[16];
-    UINT8 txMicKey[8];
-    UINT8 rxMicKey[8];
+    UINT8 key[16]; // +0
+    UINT8 txMicKey[8]; // +16
+    UINT8 rxMicKey[8]; // +24
 } key_Type_TKIP_t; // :60:25
 
 typedef struct {
-    UINT8 keyIndex;
-    UINT8 isDefaultTx;
-    UINT8 key[13];
+    UINT8 keyIndex; // +0
+    UINT8 isDefaultTx; // +1
+    UINT8 key[13]; // +2
 } key_Type_WEP_t; // :71:25
 
 typedef struct {
-    UINT8 key[16];
+    UINT8 key[16]; // +0
 } key_Type_AES_t; // :77:25
 
 typedef struct {
-    UINT8 keyIndex;
-    UINT8 isDefKey;
-    UINT8 key[16];
-    UINT8 mickey[16];
-    UINT8 rxPN[16];
+    UINT8 keyIndex; // +0
+    UINT8 isDefKey; // +1
+    UINT8 key[16]; // +2
+    UINT8 mickey[16]; // +18
+    UINT8 rxPN[16]; // +34
 } key_Type_WAPI_t; // :87:25
 
 typedef struct {
-    UINT8 ipn[6];
-    UINT8 reserved[2];
-    UINT8 key[16];
+    UINT8 ipn[6]; // +0
+    UINT8 reserved[2]; // +6
+    UINT8 key[16]; // +8
 } key_Type_AES_CMAC_t; // :95:25
 
 typedef struct {
-    UINT16 keyType;
-    UINT16 keyInfo;
-    UINT16 keyLen;
+    UINT16 keyType; // +0
+    UINT16 keyInfo; // +2
+    UINT16 keyLen; // +4
     union {
         key_Type_TKIP_t TKIP;
         key_Type_AES_t AES1;
         key_Type_WEP_t WEP;
         key_Type_WAPI_t WAPI;
         key_Type_AES_CMAC_t iGTK;
-    } keyEncypt;
+    } keyEncypt; // +6
 } key_MgtMaterial_t; // :115:25
 
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/ap/bl_ap_init.c ======== */
@@ -3709,42 +3709,42 @@ void keyMgmtPlumbPairwiseKey(cm_ConnectionInfo_t *connPtr); // :1980:6
 void supplicantRemoveKeyInfo(cm_ConnectionInfo_t *connPtr); // :2317:6
 
 struct _wpa_suite_t {
-    uint8_t oui[3];
-    uint8_t type;
+    uint8_t oui[3]; // +0
+    uint8_t type; // +3
 }; // :2331:16
 
 typedef struct _wpa_suite_t wpa_suite_mcast_t; // :2337:38
 typedef struct _wpa_suite_t wpa_suite; // :2337:27
 
 typedef struct {
-    uint16_t count;
-    wpa_suite list[2];
+    uint16_t count; // +0
+    wpa_suite list[2]; // +2
 } wpa_suite_auth_key_mgmt_t; // :2346:46
 
 typedef struct {
-    uint16_t count;
-    wpa_suite list[2];
+    uint16_t count; // +0
+    wpa_suite list[2]; // +2
 } wpa_suite_ucast_t; // :2346:27
 
 struct _IEEEtypes_Rsn_t {
-    uint8_t element_id;
-    uint8_t len;
-    uint16_t version;
-    wpa_suite_mcast_t group_cipher;
-    wpa_suite_ucast_t pairwise_cipher;
-    wpa_suite_auth_key_mgmt_t auth_key_mgmt;
+    uint8_t element_id; // +0
+    uint8_t len; // +1
+    uint16_t version; // +2
+    wpa_suite_mcast_t group_cipher; // +4
+    wpa_suite_ucast_t pairwise_cipher; // +8
+    wpa_suite_auth_key_mgmt_t auth_key_mgmt; // +18
 }; // :2348:16
 
 typedef struct _IEEEtypes_Rsn_t IEEEtypes_Rsn_t; // :2362:27
 
 struct _IEEEtypes_Wpa_t {
-    uint8_t element_id;
-    uint8_t len;
-    uint8_t oui[4];
-    uint16_t version;
-    wpa_suite_mcast_t group_cipher;
-    wpa_suite_ucast_t pairwise_cipher;
-    wpa_suite_auth_key_mgmt_t auth_key_mgmt;
+    uint8_t element_id; // +0
+    uint8_t len; // +1
+    uint8_t oui[4]; // +2
+    uint16_t version; // +6
+    wpa_suite_mcast_t group_cipher; // +8
+    wpa_suite_ucast_t pairwise_cipher; // +12
+    wpa_suite_auth_key_mgmt_t auth_key_mgmt; // +22
 }; // :2365:16
 
 typedef struct _IEEEtypes_Wpa_t IEEEtypes_Wpa_t; // :2381:27
@@ -3823,9 +3823,9 @@ struct BufferDesc {
     union {
         uint32 Interface;
         struct cm_ConnectionInfo *connPtr;
-    } intf;
-    uint16 DataLen;
-    void *Buffer;
+    } intf; // +0
+    uint16 DataLen; // +4
+    void *Buffer; // +8
 }; // :71:16
 
 typedef struct BufferDesc BufferDesc_t; // :119:3
@@ -3833,31 +3833,31 @@ typedef struct BufferDesc BufferDesc_t; // :119:3
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/crypt_new_rom.h ======== */
 
 typedef struct {
-    UINT8 enDeAction;
-    UINT8 *pData;
+    UINT8 enDeAction; // +0
+    UINT8 *pData; // +4
 } BL_ENDECRYPT_t; // :56:3
 
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/customApp_mib.h ======== */
 
 typedef struct {
-    UINT8 RSNEnabled:1;
-    UINT8 pmkidValid:1;
-    UINT8 rsnCapValid:1;
-    UINT8 grpMgmtCipherValid:1;
-    UINT8 rsvd:4;
-    SecurityMode_t wpaType;
-    Cipher_t mcstCipher;
-    Cipher_t ucstCipher;
-    AkmSuite_t AKM;
-    UINT8 PMKID[16];
-    IEEEtypes_RSNCapability_t rsnCap;
-    Cipher_t grpMgmtCipher;
+    UINT8 RSNEnabled:1; // +0
+    UINT8 pmkidValid:1; // +0
+    UINT8 rsnCapValid:1; // +0
+    UINT8 grpMgmtCipherValid:1; // +0
+    UINT8 rsvd:4; // +0
+    SecurityMode_t wpaType; // +1
+    Cipher_t mcstCipher; // +3
+    Cipher_t ucstCipher; // +4
+    AkmSuite_t AKM; // +5
+    UINT8 PMKID[16]; // +9
+    IEEEtypes_RSNCapability_t rsnCap; // +25
+    Cipher_t grpMgmtCipher; // +27
 } RSNConfig_t; // :37:3
 
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/keyApiStaTypes.h ======== */
 
 struct cipher_key_buf {
-    cipher_key_t cipher_key;
+    cipher_key_t cipher_key; // +0
 }; // :157:16
 
 typedef struct cipher_key_buf cipher_key_buf_t; // :165:27
@@ -3865,12 +3865,12 @@ typedef struct cipher_key_buf cipher_key_buf_t; // :165:27
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/keyApiStaTypes_rom.h ======== */
 
 typedef struct {
-    UINT8 ANonce[32];
-    KeyData_t pwsKeyData;
+    UINT8 ANonce[32]; // +0
+    KeyData_t pwsKeyData; // +32
 } eapolHskData_t; // :98:27
 
 struct cipher_key_t {
-    union ckd ckd;
+    union ckd ckd; // +0
 }; // :101:16
 
 union ckd {
@@ -3882,15 +3882,15 @@ typedef struct cipher_key_t cipher_key_t; // :115:27
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/keyMgmtApTypes.h ======== */
 
 typedef struct {
-    apKeyMgmtInfoStaRom_t rom;
-    UINT8 numHskTries;
-    UINT32 counterLo;
-    UINT32 counterHi;
-    struct mm_timer_tag HskTimer;
-    UINT8 EAPOL_MIC_Key[16];
-    UINT8 EAPOL_Encr_Key[16];
-    UINT8 EAPOLProtoVersion;
-    UINT8 rsvd[3];
+    apKeyMgmtInfoStaRom_t rom; // +0
+    UINT8 numHskTries; // +8
+    UINT32 counterLo; // +12
+    UINT32 counterHi; // +16
+    struct mm_timer_tag HskTimer; // +20
+    UINT8 EAPOL_MIC_Key[16]; // +36
+    UINT8 EAPOL_Encr_Key[16]; // +52
+    UINT8 EAPOLProtoVersion; // +68
+    UINT8 rsvd[3]; // +69
 } apKeyMgmtInfoSta_t; // :46:3
 
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/keyMgmtApTypes_rom.h ======== */
@@ -3910,90 +3910,90 @@ typedef enum {
 } keyMgmtState_e; // :35:3
 
 typedef struct {
-    UINT16 staRsnCap;
-    SecurityMode_t staSecType;
-    Cipher_t staUcstCipher;
-    UINT8 staAkmType;
-    keyMgmtState_e keyMgmtState;
+    UINT16 staRsnCap; // +0
+    SecurityMode_t staSecType; // +2
+    Cipher_t staUcstCipher; // +4
+    UINT8 staAkmType; // +5
+    keyMgmtState_e keyMgmtState; // +6
 } apKeyMgmtInfoStaRom_t; // :45:3
 
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/keyMgmtCommon.h ======== */
 
 typedef struct {
-    UINT8 protocol_ver;
-    IEEEtypes_8021x_PacketType_e pckt_type;
-    UINT16 pckt_body_len;
+    UINT8 protocol_ver; // +0
+    IEEEtypes_8021x_PacketType_e pckt_type; // +1
+    UINT16 pckt_body_len; // +2
 } Hdr_8021x_t; // :36:25
 
 typedef struct {
-    UINT16 KeyMIC:1;
-    UINT16 Secure:1;
-    UINT16 Error:1;
-    UINT16 Request:1;
-    UINT16 EncryptedKeyData:1;
-    UINT16 Reserved:3;
-    UINT16 KeyDescriptorVersion:3;
-    UINT16 KeyType:1;
-    UINT16 KeyIndex:2;
-    UINT16 Install:1;
-    UINT16 KeyAck:1;
+    UINT16 KeyMIC:1; // +0
+    UINT16 Secure:1; // +0
+    UINT16 Error:1; // +0
+    UINT16 Request:1; // +0
+    UINT16 EncryptedKeyData:1; // +0
+    UINT16 Reserved:3; // +0
+    UINT16 KeyDescriptorVersion:3; // +0
+    UINT16 KeyType:1; // +0
+    UINT16 KeyIndex:2; // +0
+    UINT16 Install:1; // +0
+    UINT16 KeyAck:1; // +0
 } key_info_t; // :59:27
 
 typedef struct {
-    UINT8 KeyID:2;
-    UINT8 Tx:1;
-    UINT8 rsvd:5;
-    UINT8 rsvd1;
-    UINT8 GTK[1];
+    UINT8 KeyID:2; // +0
+    UINT8 Tx:1; // +0
+    UINT8 rsvd:5; // +0
+    UINT8 rsvd1; // +1
+    UINT8 GTK[1]; // +2
 } GTK_KDE_t; // :73:25
 
 typedef struct {
-    UINT8 type;
-    UINT8 length;
-    UINT8 OUI[3];
-    UINT8 dataType;
-    UINT8 data[1];
+    UINT8 type; // +0
+    UINT8 length; // +1
+    UINT8 OUI[3]; // +2
+    UINT8 dataType; // +5
+    UINT8 data[1]; // +6
 } KDE_t; // :84:25
 
 typedef struct {
-    Hdr_8021x_t hdr_8021x;
-    UINT8 desc_type;
-    key_info_t key_info;
-    UINT16 key_length;
-    UINT32 replay_cnt[2];
-    UINT8 key_nonce[32];
-    UINT8 EAPOL_key_IV[16];
-    UINT8 key_RSC[8];
-    UINT8 key_ID[8];
-    UINT8 key_MIC[16];
-    UINT16 key_material_len;
-    UINT8 key_data[1];
+    Hdr_8021x_t hdr_8021x; // +0
+    UINT8 desc_type; // +4
+    key_info_t key_info; // +5
+    UINT16 key_length; // +7
+    UINT32 replay_cnt[2]; // +9
+    UINT8 key_nonce[32]; // +17
+    UINT8 EAPOL_key_IV[16]; // +49
+    UINT8 key_RSC[8]; // +65
+    UINT8 key_ID[8]; // +73
+    UINT8 key_MIC[16]; // +81
+    UINT16 key_material_len; // +97
+    UINT8 key_data[1]; // +99
 } EAPOL_KeyMsg_t; // :109:25
 
 typedef struct {
-    Hdr_8021x_t hdr_8021x;
-    IEEEtypes_8021x_CodeType_e code;
-    UINT8 identifier;
-    UINT16 length;
-    UINT8 data[1];
+    Hdr_8021x_t hdr_8021x; // +0
+    IEEEtypes_8021x_CodeType_e code; // +4
+    UINT8 identifier; // +5
+    UINT16 length; // +6
+    UINT8 data[1]; // +8
 } EAP_PacketMsg_t; // :120:25
 
 typedef struct {
-    ether_hdr_t ethHdr;
-    EAPOL_KeyMsg_t keyMsg;
+    ether_hdr_t ethHdr; // +0
+    EAPOL_KeyMsg_t keyMsg; // +14
 } EAPOL_KeyMsg_Tx_t; // :128:25
 
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/keyMgmtSta.h ======== */
 
 struct supplicantData {
-    BOOLEAN inUse;
-    IEEEtypes_SsIdElement_t hashSsId;
-    IEEEtypes_MacAddr_t localBssid;
-    IEEEtypes_MacAddr_t localStaAddr;
-    customMIB_RSNStats_t customMIB_RSNStats;
-    RSNConfig_t customMIB_RSNConfig;
-    keyMgmtInfoSta_t keyMgmtInfoSta;
-    SecurityParams_t currParams;
+    BOOLEAN inUse; // +0
+    IEEEtypes_SsIdElement_t hashSsId; // +4
+    IEEEtypes_MacAddr_t localBssid; // +38
+    IEEEtypes_MacAddr_t localStaAddr; // +44
+    customMIB_RSNStats_t customMIB_RSNStats; // +50
+    RSNConfig_t customMIB_RSNConfig; // +53
+    keyMgmtInfoSta_t keyMgmtInfoSta; // +84
+    SecurityParams_t currParams; // +408
 }; // :37:16
 
 typedef struct supplicantData supplicantData_t; // :47:3
@@ -4001,35 +4001,35 @@ typedef struct supplicantData supplicantData_t; // :47:3
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/keyMgmtStaHostTypes_rom.h ======== */
 
 typedef struct {
-    UINT8 Key[16];
-    UINT8 RxMICKey[8];
-    UINT8 TxMICKey[8];
-    UINT32 TxIV32;
-    UINT16 TxIV16;
-    UINT16 KeyIndex;
+    UINT8 Key[16]; // +0
+    UINT8 RxMICKey[8]; // +16
+    UINT8 TxMICKey[8]; // +24
+    UINT32 TxIV32; // +32
+    UINT16 TxIV16; // +36
+    UINT16 KeyIndex; // +38
 } KeyData_t; // :14:3
 
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/keyMgmtStaTypes.h ======== */
 
 typedef struct {
-    UINT8 wep40:1;
-    UINT8 wep104:1;
-    UINT8 tkip:1;
-    UINT8 ccmp:1;
-    UINT8 rsvd:4;
+    UINT8 wep40:1; // +0
+    UINT8 wep104:1; // +0
+    UINT8 tkip:1; // +0
+    UINT8 ccmp:1; // +0
+    UINT8 rsvd:4; // +0
 } Cipher_t; // :34:3
 
 typedef struct {
-    UINT16 noRsn:1;
-    UINT16 wepStatic:1;
-    UINT16 wepDynamic:1;
-    UINT16 wpa:1;
-    UINT16 wpaNone:1;
-    UINT16 wpa2:1;
-    UINT16 cckm:1;
-    UINT16 wapi:1;
-    UINT16 wpa3:1;
-    UINT16 rsvd:7;
+    UINT16 noRsn:1; // +0
+    UINT16 wepStatic:1; // +0
+    UINT16 wepDynamic:1; // +0
+    UINT16 wpa:1; // +0
+    UINT16 wpaNone:1; // +0
+    UINT16 wpa2:1; // +0
+    UINT16 cckm:1; // +0
+    UINT16 wapi:1; // +0
+    UINT16 wpa3:1; // +0
+    UINT16 rsvd:7; // +0
 } SecurityMode_t; // :50:27
 
 typedef enum {
@@ -4050,14 +4050,14 @@ typedef enum {
 typedef AkmType_e AkmTypePacked_e; // :73:19
 
 typedef struct {
-    UINT8 akmOui[3];
-    AkmTypePacked_e akmType;
+    UINT8 akmOui[3]; // +0
+    AkmTypePacked_e akmType; // +3
 } AkmSuite_t; // :80:3
 
 typedef struct {
-    SecurityMode_t wpaType;
-    Cipher_t mcstCipher;
-    Cipher_t ucstCipher;
+    SecurityMode_t wpaType; // +0
+    Cipher_t mcstCipher; // +2
+    Cipher_t ucstCipher; // +3
 } SecurityParams_t; // :88:3
 
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/keyMgmtSta_rom.h ======== */
@@ -4069,122 +4069,122 @@ typedef enum {
 } MIC_Fail_State_e; // :31:3
 
 typedef struct {
-    MIC_Fail_State_e status;
-    BOOLEAN MICCounterMeasureEnabled;
-    UINT32 disableStaAsso;
+    MIC_Fail_State_e status; // +0
+    BOOLEAN MICCounterMeasureEnabled; // +4
+    UINT32 disableStaAsso; // +8
 } MIC_Error_t; // :39:3
 
 typedef struct {
-    UINT8 TKIPICVErrors;
-    UINT8 TKIPLocalMICFailures;
-    UINT8 TKIPCounterMeasuresInvoked;
+    UINT8 TKIPICVErrors; // +0
+    UINT8 TKIPLocalMICFailures; // +1
+    UINT8 TKIPCounterMeasuresInvoked; // +2
 } customMIB_RSNStats_t; // :47:3
 
 typedef struct {
-    UINT8 ANonce[32];
-    UINT8 SNonce[32];
-    UINT8 EAPOL_MIC_Key[16];
-    UINT8 EAPOL_Encr_Key[16];
-    UINT32 apCounterLo;
-    UINT32 apCounterHi;
-    UINT32 apCounterZeroDone;
-    UINT32 staCounterLo;
-    UINT32 staCounterHi;
-    BOOLEAN RSNDataTrafficEnabled;
-    BOOLEAN RSNSecured;
-    BOOLEAN pwkHandshakeComplete;
-    cipher_key_t *pRxDecryptKey;
-    KeyData_t PWKey;
-    KeyData_t GRKey;
-    KeyData_t newPWKey;
-    MIC_Error_t sta_MIC_Error;
-    struct mm_timer_tag rsnTimer;
-    struct cm_ConnectionInfo *connPtr;
-    KeyData_t IGtk;
+    UINT8 ANonce[32]; // +0
+    UINT8 SNonce[32]; // +32
+    UINT8 EAPOL_MIC_Key[16]; // +64
+    UINT8 EAPOL_Encr_Key[16]; // +80
+    UINT32 apCounterLo; // +96
+    UINT32 apCounterHi; // +100
+    UINT32 apCounterZeroDone; // +104
+    UINT32 staCounterLo; // +108
+    UINT32 staCounterHi; // +112
+    BOOLEAN RSNDataTrafficEnabled; // +116
+    BOOLEAN RSNSecured; // +120
+    BOOLEAN pwkHandshakeComplete; // +124
+    cipher_key_t *pRxDecryptKey; // +128
+    KeyData_t PWKey; // +132
+    KeyData_t GRKey; // +172
+    KeyData_t newPWKey; // +212
+    MIC_Error_t sta_MIC_Error; // +252
+    struct mm_timer_tag rsnTimer; // +264
+    struct cm_ConnectionInfo *connPtr; // +280
+    KeyData_t IGtk; // +284
 } keyMgmtInfoSta_t; // :82:3
 
 typedef struct {
-    UINT8 kck[16];
-    UINT8 kek[16];
-    UINT8 tk[16];
-    UINT8 rxMicKey[8];
-    UINT8 txMicKey[8];
+    UINT8 kck[16]; // +0
+    UINT8 kek[16]; // +16
+    UINT8 tk[16]; // +32
+    UINT8 rxMicKey[8]; // +48
+    UINT8 txMicKey[8]; // +56
 } TkipPtk_t; // :100:3
 
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/macMgmtMain.h ======== */
 
 typedef struct {
-    IEEEtypes_SsId_t SsId;
-    IEEEtypes_Len_t SsIdLen;
-    IEEEtypes_DtimPeriod_t DtimPeriod;
-    IEEEtypes_BcnInterval_t BcnPeriod;
-    IEEEtypes_MacAddr_t BssId;
-    UINT16 RtsThresh;
-    UINT16 FragThresh;
-    UINT8 ShortRetryLim;
-    UINT8 LongRetryLim;
-    UINT8 MbssBcnIntFac;
-    UINT8 MbssCurBcnIntCnt;
-    UINT16 Reserved;
+    IEEEtypes_SsId_t SsId; // +0
+    IEEEtypes_Len_t SsIdLen; // +32
+    IEEEtypes_DtimPeriod_t DtimPeriod; // +33
+    IEEEtypes_BcnInterval_t BcnPeriod; // +34
+    IEEEtypes_MacAddr_t BssId; // +36
+    UINT16 RtsThresh; // +42
+    UINT16 FragThresh; // +44
+    UINT8 ShortRetryLim; // +46
+    UINT8 LongRetryLim; // +47
+    UINT8 MbssBcnIntFac; // +48
+    UINT8 MbssCurBcnIntCnt; // +49
+    UINT16 Reserved; // +50
 } CommonMlmeData_t; // :367:3
 
 struct _txQingInfo_t {
-    IEEEtypes_PwrMgmtMode_e mode;
+    IEEEtypes_PwrMgmtMode_e mode; // +0
 }; // :426:16
 
 typedef struct _txQingInfo_t txQingInfo_t; // :439:1
 
 typedef struct {
-    UINT16 keyExchange:1;
-    UINT16 authenticate:1;
-    UINT16 reserved:14;
+    UINT16 keyExchange:1; // +0
+    UINT16 authenticate:1; // +0
+    UINT16 reserved:14; // +0
 } Operation_t; // :550:2
 
 typedef struct {
-    Cipher_t mcstCipher;
-    UINT8 mcstCipherCount;
-    Cipher_t wpaUcstCipher;
-    UINT8 wpaUcstCipherCount;
-    Cipher_t wpa2UcstCipher;
-    UINT8 wpa2UcstCipherCount;
-    UINT16 AuthKey;
-    UINT16 AuthKeyCount;
-    Operation_t Akmp;
-    UINT32 GrpReKeyTime;
-    UINT8 PSKPassPhrase[64];
-    UINT8 PSKPassPhraseLen;
-    UINT8 PSKValue[32];
-    UINT8 MaxPwsHskRetries;
-    UINT8 MaxGrpHskRetries;
-    UINT32 PwsHskTimeOut;
-    UINT32 GrpHskTimeOut;
+    Cipher_t mcstCipher; // +0
+    UINT8 mcstCipherCount; // +1
+    Cipher_t wpaUcstCipher; // +2
+    UINT8 wpaUcstCipherCount; // +3
+    Cipher_t wpa2UcstCipher; // +4
+    UINT8 wpa2UcstCipherCount; // +5
+    UINT16 AuthKey; // +6
+    UINT16 AuthKeyCount; // +8
+    Operation_t Akmp; // +10
+    UINT32 GrpReKeyTime; // +12
+    UINT8 PSKPassPhrase[64]; // +16
+    UINT8 PSKPassPhraseLen; // +80
+    UINT8 PSKValue[32]; // +81
+    UINT8 MaxPwsHskRetries; // +113
+    UINT8 MaxGrpHskRetries; // +114
+    UINT32 PwsHskTimeOut; // +116
+    UINT32 GrpHskTimeOut; // +120
 } apRsnConfig_t; // :577:3
 
 typedef struct {
-    UINT32 StaAgeOutTime;
-    UINT32 PsStaAgeOutTime;
-    apRsnConfig_t RsnConfig;
-    CommonMlmeData_t comData;
+    UINT32 StaAgeOutTime; // +0
+    UINT32 PsStaAgeOutTime; // +4
+    apRsnConfig_t RsnConfig; // +8
+    CommonMlmeData_t comData; // +132
 } BssConfig_t; // :695:3
 
 typedef struct {
-    BOOLEAN updatePassPhrase;
-    struct mm_timer_tag apMicTimer;
-    KeyData_t grpKeyData;
-    UINT8 GNonce[32];
-    UINT32 grpRekeyBcnCntConfigured;
-    UINT32 grpRekeyBcnCntRemaining;
+    BOOLEAN updatePassPhrase; // +0
+    struct mm_timer_tag apMicTimer; // +4
+    KeyData_t grpKeyData; // +20
+    UINT8 GNonce[32]; // +60
+    UINT32 grpRekeyBcnCntConfigured; // +92
+    UINT32 grpRekeyBcnCntRemaining; // +96
 } BssData_t; // :813:3
 
 typedef struct {
-    txQingInfo_t pwrSaveInfo;
-    apKeyMgmtInfoSta_t keyMgmtInfo;
+    txQingInfo_t pwrSaveInfo; // +0
+    apKeyMgmtInfoSta_t keyMgmtInfo; // +4
 } staData_t; // :879:3
 
 typedef struct {
-    BssConfig_t bssConfig;
-    BssData_t bssData;
-    UINT8 ApStop_Req_Pending;
+    BssConfig_t bssConfig; // +0
+    BssData_t bssData; // +184
+    UINT8 ApStop_Req_Pending; // +284
 } apInfo_t; // :886:3
 
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/md5.c ======== */
@@ -4199,19 +4199,19 @@ static void wpa_MD5Transform(UINT32 *state, unsigned long *block); // :166:13
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/md5.h ======== */
 
 typedef struct {
-    unsigned long state[4];
-    unsigned long count[2];
-    unsigned long scratch[16];
-    unsigned char buffer[64];
+    unsigned long state[4]; // +0
+    unsigned long count[2]; // +16
+    unsigned long scratch[16]; // +24
+    unsigned char buffer[64]; // +88
 } Bl_MD5_CTX; // :23:1
 
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/nohostSecurityParams.h ======== */
 
 typedef struct {
-    UINT8 CipherType;
-    UINT8 MulticastCipher;
-    UINT8 UnicastCipher;
-    char PSKPassPhrase[64];
+    UINT8 CipherType; // +0
+    UINT8 MulticastCipher; // +1
+    UINT8 UnicastCipher; // +2
+    char PSKPassPhrase[64]; // +3
 } NoHostSecurityParams_t; // :23:3
 
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/pmkCache.h ======== */
@@ -4224,11 +4224,11 @@ typedef struct {
     union {
         IEEEtypes_MacAddr_t Bssid;
         char Ssid[32];
-    } key;
-    UINT8 PMK[32];
-    UINT8 length;
-    UINT8 psk_length;
-    SINT8 replacementRank;
+    } key; // +0
+    UINT8 PMK[32]; // +32
+    UINT8 length; // +64
+    UINT8 psk_length; // +65
+    SINT8 replacementRank; // +66
 } pmkElement_t; // :31:3
 
 SINT8 replacementRankMax; // :104:14
@@ -4239,9 +4239,9 @@ UINT8 *ramHook_PSKPassPhrase; // :109:16
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/rc4.c ======== */
 
 struct rc4_key {
-    unsigned char state[256];
-    unsigned char x;
-    unsigned char y;
+    unsigned char state[256]; // +0
+    unsigned char x; // +256
+    unsigned char y; // +257
 }; // :5:16
 
 typedef struct rc4_key rc4_key; // :10:3
@@ -4277,9 +4277,9 @@ typedef unsigned char u8; // :44:23
 typedef unsigned int u32; // :46:22
 
 typedef struct {
-    int decrypt;
-    int Nr;
-    u32 key[60];
+    int decrypt; // +0
+    int Nr; // +4
+    u32 key[60]; // +8
 } rijndael_ctx; // :53:3
 
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/sae/bl_buf.c ======== */
@@ -4291,9 +4291,9 @@ void *wpabuf_put(struct wpabuf *buf, size_t len); // :45:8
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/sae/bl_buf.h ======== */
 
 struct wpabuf {
-    size_t size;
-    size_t used;
-    uint8 *ext_data;
+    size_t size; // +0
+    size_t used; // +4
+    uint8 *ext_data; // +8
 }; // :14:8
 
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/sae/bl_sae.c ======== */
@@ -4320,24 +4320,24 @@ const char *sae_state_txt(enum sae_state state); // :1586:14
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/sae/bl_sae.h ======== */
 
 struct sae_temporary_data {
-    uint8 kck[32];
-    struct crypto_bignum *own_commit_scalar;
-    struct crypto_bignum *own_commit_element_ffc;
-    struct crypto_ec_point *own_commit_element_ecc;
-    struct crypto_bignum *peer_commit_element_ffc;
-    struct crypto_ec_point *peer_commit_element_ecc;
-    struct crypto_ec_point *pwe_ecc;
-    struct crypto_bignum *pwe_ffc;
-    struct crypto_bignum *sae_rand;
-    struct crypto_ec *ec;
-    sint32 prime_len;
-    const struct dh_group *dh;
-    const struct crypto_bignum *prime;
-    const struct crypto_bignum *order;
-    struct crypto_bignum *prime_buf;
-    struct crypto_bignum *order_buf;
-    struct wpabuf *anti_clogging_token;
-    char *pw_id;
+    uint8 kck[32]; // +0
+    struct crypto_bignum *own_commit_scalar; // +32
+    struct crypto_bignum *own_commit_element_ffc; // +36
+    struct crypto_ec_point *own_commit_element_ecc; // +40
+    struct crypto_bignum *peer_commit_element_ffc; // +44
+    struct crypto_ec_point *peer_commit_element_ecc; // +48
+    struct crypto_ec_point *pwe_ecc; // +52
+    struct crypto_bignum *pwe_ffc; // +56
+    struct crypto_bignum *sae_rand; // +60
+    struct crypto_ec *ec; // +64
+    sint32 prime_len; // +68
+    const struct dh_group *dh; // +72
+    const struct crypto_bignum *prime; // +76
+    const struct crypto_bignum *order; // +80
+    struct crypto_bignum *prime_buf; // +84
+    struct crypto_bignum *order_buf; // +88
+    struct wpabuf *anti_clogging_token; // +92
+    char *pw_id; // +96
 }; // :25:8
 
 enum sae_state {
@@ -4348,15 +4348,15 @@ enum sae_state {
 }; // :51:6
 
 struct sae_data {
-    enum sae_state state;
-    uint16 send_confirm;
-    uint8 pmk[32];
-    uint8 pmkid[16];
-    struct crypto_bignum *peer_commit_scalar;
-    sint32 group;
-    uint32 sync;
-    uint16 rc;
-    struct sae_temporary_data *tmp;
+    enum sae_state state; // +0
+    uint16 send_confirm; // +2
+    uint8 pmk[32]; // +4
+    uint8 pmkid[16]; // +36
+    struct crypto_bignum *peer_commit_scalar; // +52
+    sint32 group; // +56
+    uint32 sync; // +60
+    uint16 rc; // +64
+    struct sae_temporary_data *tmp; // +68
 }; // :55:8
 
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/sha1.c ======== */
@@ -4369,14 +4369,14 @@ static void Bl_SHA1ProcessMessageBlock(Bl_SHA1_CTX *context); // :236:6
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/sha1.h ======== */
 
 typedef struct {
-    UINT32 Intermediate_Hash[5];
-    UINT32 Length_Low;
-    UINT32 Length_High;
-    UINT32 Scratch[16];
-    UINT8 Message_Block[64];
-    SINT16 Message_Block_Index;
-    UINT8 Computed;
-    UINT8 Corrupted;
+    UINT32 Intermediate_Hash[5]; // +0
+    UINT32 Length_Low; // +20
+    UINT32 Length_High; // +24
+    UINT32 Scratch[16]; // +28
+    UINT8 Message_Block[64]; // +92
+    SINT16 Message_Block_Index; // +156
+    UINT8 Computed; // +158
+    UINT8 Corrupted; // +159
 } Bl_SHA1_CTX; // :46:1
 
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/sha256.c ======== */
@@ -4392,36 +4392,36 @@ void sha256_init(struct sha256_state *md); // :302:6
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/sha_256.h ======== */
 
 struct sha256_state {
-    UINT64 length;
-    UINT32 state[8];
-    UINT32 curlen;
-    UINT8 buf[64];
+    UINT64 length; // +0
+    UINT32 state[8]; // +8
+    UINT32 curlen; // +40
+    UINT8 buf[64]; // +44
 }; // :23:8
 
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/w81connmgr.h ======== */
 
 typedef struct {
-    apInfo_t *apInfo;
-    BufferDesc_t *apInfoBuffDesc;
-    ChanBandInfo_t chanBandInfo;
-    staData_t staData;
+    apInfo_t *apInfo; // +0
+    BufferDesc_t *apInfoBuffDesc; // +4
+    ChanBandInfo_t chanBandInfo; // +8
+    staData_t staData; // +12
 } apSpecificData_t; // :345:3
 
 struct cm_ConnectionInfo {
-    UINT8 conType;
-    UINT8 staId;
-    UINT8 instNbr;
-    UINT8 gtkHwKeyId;
-    UINT8 ptkHwKeyId;
-    UINT8 mfpHwKeyId;
-    struct supplicantData *suppData;
-    CommonMlmeData_t comData;
-    IEEEtypes_MacAddr_t peerMacAddr;
-    IEEEtypes_MacAddr_t localMacAddr;
+    UINT8 conType; // +0
+    UINT8 staId; // +1
+    UINT8 instNbr; // +2
+    UINT8 gtkHwKeyId; // +3
+    UINT8 ptkHwKeyId; // +4
+    UINT8 mfpHwKeyId; // +5
+    struct supplicantData *suppData; // +8
+    CommonMlmeData_t comData; // +12
+    IEEEtypes_MacAddr_t peerMacAddr; // +64
+    IEEEtypes_MacAddr_t localMacAddr; // +70
     union {
         apSpecificData_t apData;
-    } specDat;
-    cipher_key_buf_t TxRxCipherKeyBuf;
+    } specDat; // +76
+    cipher_key_buf_t TxRxCipherKeyBuf; // +164
 }; // :787:16
 
 typedef struct cm_ConnectionInfo cm_ConnectionInfo_t; // :807:3
@@ -4431,7 +4431,7 @@ cm_ConnectionInfo_t *uap_conn_info; // :823:29
 
 /* ======== components/bl602/bl602_wifi/modules/supplicant/src/wltypes.h ======== */
 
-typedef long long unsigned int UINT64; // :29:28
+typedef unsigned long long UINT64; // :29:28
 typedef unsigned long UINT32; // :31:23
 typedef long SINT32; // :32:21
 typedef unsigned short UINT16; // :33:24
@@ -4485,15 +4485,15 @@ void coex_wifi_pta_forece_enable(int enable); // :687:6
 /* ======== components/bl602/bl602_wifi/plf/refip/src/driver/dma/dma.h ======== */
 
 struct dma_desc {
-    uint32_t src;
-    uint32_t dest;
-    uint16_t length;
-    uint16_t ctrl;
-    uint32_t next;
+    uint32_t src; // +0
+    uint32_t dest; // +4
+    uint16_t length; // +8
+    uint16_t ctrl; // +10
+    uint32_t next; // +12
 }; // :120:8
 
 struct dma_env_tag {
-    volatile struct dma_desc *last_dma[4];
+    volatile struct dma_desc *last_dma[4]; // +0
 }; // :137:8
 
 /* ======== components/bl602/bl602_wifi/plf/refip/src/driver/intc/rv32i/intc.c ======== */
@@ -4525,16 +4525,16 @@ void ipc_emb_dump(void); // :593:6
 /* ======== components/bl602/bl602_wifi/plf/refip/src/driver/ipc/ipc_emb.h ======== */
 
 struct ipc_emb_env_tag {
-    struct co_list rx_queue;
-    struct co_list cfm_queue;
-    uint8_t ipc_rxdesc_idx;
-    uint8_t ipc_rxbuf_idx;
-    uint8_t ipc_radar_buf_idx;
-    uint8_t ipc_msge2a_buf_idx;
-    uint8_t ipc_dbg_buf_idx;
-    uint8_t ipc_msgacke2a_cnt;
-    uint32_t txdesc_idx;
-    volatile struct txdesc_host *txdesc;
+    struct co_list rx_queue; // +0
+    struct co_list cfm_queue; // +8
+    uint8_t ipc_rxdesc_idx; // +16
+    uint8_t ipc_rxbuf_idx; // +17
+    uint8_t ipc_radar_buf_idx; // +18
+    uint8_t ipc_msge2a_buf_idx; // +19
+    uint8_t ipc_dbg_buf_idx; // +20
+    uint8_t ipc_msgacke2a_cnt; // +21
+    uint32_t txdesc_idx; // +24
+    volatile struct txdesc_host *txdesc; // +28
 }; // :41:8
 
 struct ipc_emb_env_tag ipc_emb_env; // :71:31
@@ -4547,14 +4547,14 @@ struct ipc_shared_env_tag ipc_shared_env; // :24:27
 /* ======== components/bl602/bl602_wifi/plf/refip/src/driver/ipc/ipc_shared.h ======== */
 
 struct ipc_a2e_msg {
-    uint32_t dummy_word;
-    uint32_t msg[127];
+    uint32_t dummy_word; // +0
+    uint32_t msg[127]; // +4
 }; // :213:8
 
 struct ipc_shared_env_tag {
-    volatile struct ipc_a2e_msg msg_a2e_buf;
-    volatile uint32_t pattern_addr;
-    volatile struct txdesc_host volatile txdesc0[4];
+    volatile struct ipc_a2e_msg msg_a2e_buf; // +0
+    volatile uint32_t pattern_addr; // +512
+    volatile struct txdesc_host volatile txdesc0[4]; // +516
 }; // :244:8
 
 struct ipc_shared_env_tag ipc_shared_env; // :257:34
@@ -4562,7 +4562,7 @@ struct ipc_shared_env_tag ipc_shared_env; // :257:34
 /* ======== components/bl602/bl602_wifi/plf/refip/src/driver/la/la_mem.h ======== */
 
 struct la_mem_format {
-    uint32_t word[4];
+    uint32_t word[4]; // +0
 }; // :37:8
 
 /* ======== components/bl602/bl602_wifi/plf/refip/src/driver/phy/bl602_phy_rf/agcmem_bl602.c ======== */
@@ -4572,72 +4572,72 @@ const uint32_t agcmem[512]; // :3:16
 /* ======== components/bl602/bl602_wifi/plf/refip/src/driver/phy/bl602_phy_rf/phy_adapt.c ======== */
 
 typedef struct {
-    int8_t rssi;
-    int8_t lna;
-    float ppm;
-    uint8_t new;
+    int8_t rssi; // +0
+    int8_t lna; // +1
+    float ppm; // +4
+    uint8_t new; // +8
 } input_t; // :53:3
 
 typedef struct {
-    uint8_t used;
-    uint32_t vif_tag;
-    input_t input_buffer[8];
-    int8_t input_buffer_ptr;
-    uint32_t last_update;
-    int8_t rss;
-    int8_t rss_acq;
-    int8_t rss_trk;
-    int8_t rss_state;
-    uint8_t rss_hit_count;
-    uint32_t rss_count;
-    int8_t ris;
-    float ce;
-    int8_t ce_in;
-    int8_t ce_acq;
-    int8_t ce_trk;
-    int8_t ce_state;
-    int8_t ce_num_up_cmds;
-    int8_t ce_num_dn_cmds;
+    uint8_t used; // +0
+    uint32_t vif_tag; // +4
+    input_t input_buffer[8]; // +8
+    int8_t input_buffer_ptr; // +104
+    uint32_t last_update; // +108
+    int8_t rss; // +112
+    int8_t rss_acq; // +113
+    int8_t rss_trk; // +114
+    int8_t rss_state; // +115
+    uint8_t rss_hit_count; // +116
+    uint32_t rss_count; // +120
+    int8_t ris; // +124
+    float ce; // +128
+    int8_t ce_in; // +132
+    int8_t ce_acq; // +133
+    int8_t ce_trk; // +134
+    int8_t ce_state; // +135
+    int8_t ce_num_up_cmds; // +136
+    int8_t ce_num_dn_cmds; // +137
 } pa_state_t; // :83:3
 
 typedef struct {
-    uint32_t leg_length:12;
-    uint32_t leg_rate:4;
-    uint32_t ht_length:16;
-    uint32_t _ht_length:4;
-    uint32_t short_gi:1;
-    uint32_t stbc:2;
-    uint32_t smoothing:1;
-    uint32_t mcs:7;
-    uint32_t pre_type:1;
-    uint32_t format_mod:3;
-    uint32_t ch_bw:2;
-    uint32_t n_sts:3;
-    uint32_t lsig_valid:1;
-    uint32_t sounding:1;
-    uint32_t num_extn_ss:2;
-    uint32_t aggregation:1;
-    uint32_t fec_coding:1;
-    uint32_t dyn_bw:1;
-    uint32_t doze_not_allowed:1;
-    uint32_t antenna_set:8;
-    uint32_t partial_aid:9;
-    uint32_t group_id:6;
-    uint32_t reserved_1c:1;
-    int32_t rssi1:8;
-    int32_t rssi2:8;
-    int32_t agc_lna:4;
-    int32_t agc_rbb1:5;
-    int32_t agc_dg:7;
-    uint32_t reserved_1d:8;
-    uint32_t rcpi:8;
-    uint32_t evm1:8;
-    uint32_t evm2:8;
-    uint32_t freqoff_lo:8;
-    uint32_t freqoff_hi:8;
-    uint32_t reserved2b_1:8;
-    uint32_t reserved2b_2:8;
-    uint32_t reserved2b_3:8;
+    uint32_t leg_length:12; // +0
+    uint32_t leg_rate:4; // +0
+    uint32_t ht_length:16; // +0
+    uint32_t _ht_length:4; // +4
+    uint32_t short_gi:1; // +4
+    uint32_t stbc:2; // +4
+    uint32_t smoothing:1; // +4
+    uint32_t mcs:7; // +4
+    uint32_t pre_type:1; // +4
+    uint32_t format_mod:3; // +4
+    uint32_t ch_bw:2; // +4
+    uint32_t n_sts:3; // +4
+    uint32_t lsig_valid:1; // +4
+    uint32_t sounding:1; // +4
+    uint32_t num_extn_ss:2; // +4
+    uint32_t aggregation:1; // +4
+    uint32_t fec_coding:1; // +4
+    uint32_t dyn_bw:1; // +4
+    uint32_t doze_not_allowed:1; // +4
+    uint32_t antenna_set:8; // +8
+    uint32_t partial_aid:9; // +8
+    uint32_t group_id:6; // +8
+    uint32_t reserved_1c:1; // +8
+    int32_t rssi1:8; // +8
+    int32_t rssi2:8; // +12
+    int32_t agc_lna:4; // +12
+    int32_t agc_rbb1:5; // +12
+    int32_t agc_dg:7; // +12
+    uint32_t reserved_1d:8; // +12
+    uint32_t rcpi:8; // +16
+    uint32_t evm1:8; // +16
+    uint32_t evm2:8; // +16
+    uint32_t freqoff_lo:8; // +16
+    uint32_t freqoff_hi:8; // +20
+    uint32_t reserved2b_1:8; // +20
+    uint32_t reserved2b_2:8; // +20
+    uint32_t reserved2b_3:8; // +20
 } rvec_t; // :134:3
 
 static pa_state_t pa_env[4]; // :136:19
@@ -4652,16 +4652,16 @@ void pa_adapt(uint8_t id); // :247:6
 /* ======== components/bl602/bl602_wifi/plf/refip/src/driver/phy/bl602_phy_rf/phy_bl602.c ======== */
 
 struct phy_bl602_cfg_tag {
-    uint32_t reserved;
+    uint32_t reserved; // +0
 }; // :48:8
 
 struct phy_env_tag {
-    struct phy_bl602_cfg_tag cfg;
-    uint16_t chnl_prim20_freq;
-    uint16_t chnl_center1_freq;
-    uint16_t chnl_center2_freq;
-    uint8_t band;
-    uint8_t chnl_type;
+    struct phy_bl602_cfg_tag cfg; // +0
+    uint16_t chnl_prim20_freq; // +4
+    uint16_t chnl_center1_freq; // +6
+    uint16_t chnl_center2_freq; // +8
+    uint8_t band; // +10
+    uint8_t chnl_type; // +11
 }; // :54:8
 
 struct phy_env_tag phy_env[1]; // :75:20
@@ -4674,8 +4674,8 @@ void phy_rc_isr(void); // :716:6
 /* ======== components/bl602/bl602_wifi/plf/refip/src/driver/phy/bl602_phy_rf/phy_hal.c ======== */
 
 struct phy_hal_tag {
-    int16_t temperature;
-    uint8_t capcode;
+    int16_t temperature; // +0
+    uint8_t capcode; // +2
 }; // :6:8
 
 static struct phy_hal_tag hal_env; // :15:27
@@ -4693,28 +4693,28 @@ static char *rc_state_str[8]; // :35:14
 static char *rf_state_str[8]; // :47:14
 
 struct HWStateMachineReg {
-    uint32_t rxControl:6;
-    uint32_t reserved_7_6:2;
-    uint32_t txControl:9;
-    uint32_t reserved_23_17:7;
-    uint32_t macControl:8;
+    uint32_t rxControl:6; // +0
+    uint32_t reserved_7_6:2; // +0
+    uint32_t txControl:9; // +0
+    uint32_t reserved_23_17:7; // +0
+    uint32_t macControl:8; // +0
 }; // :59:8
 
 struct dump_data_t {
-    uint32_t time;
-    const char *func_name;
-    uint32_t rc_state;
-    uint32_t rf_state;
-    uint32_t mac_debugRegHWSM1;
-    uint32_t mac_debugRegHWSM2;
-    uint16_t mac_debugPortCoex;
-    uint16_t mac_debugPortBackoff;
-    uint16_t mac_debugPortMacPhyIf;
-    uint16_t mac_debugPortMacPhyIf2;
-    uint16_t phy_debugPortMainFSM;
-    uint16_t phy_debugPortTDTX;
-    uint16_t phy_debugPortDSSSCCK1;
-    uint16_t phy_debugPortDSSSCCKTx;
+    uint32_t time; // +0
+    const char *func_name; // +4
+    uint32_t rc_state; // +8
+    uint32_t rf_state; // +12
+    uint32_t mac_debugRegHWSM1; // +16
+    uint32_t mac_debugRegHWSM2; // +20
+    uint16_t mac_debugPortCoex; // +24
+    uint16_t mac_debugPortBackoff; // +26
+    uint16_t mac_debugPortMacPhyIf; // +28
+    uint16_t mac_debugPortMacPhyIf2; // +30
+    uint16_t phy_debugPortMainFSM; // +32
+    uint16_t phy_debugPortTDTX; // +34
+    uint16_t phy_debugPortDSSSCCK1; // +36
+    uint16_t phy_debugPortDSSSCCKTx; // +38
 }; // :68:8
 
 static struct dump_data_t dump_data_poll[18]; // :86:27
@@ -4727,11 +4727,11 @@ void helper_channel_monitor(uint32_t chanfreq, timer_func_ptr timer_func, int nr
 /* ======== components/bl602/bl602_wifi/plf/refip/src/driver/phy/bl602_phy_rf/phy_tcal.c ======== */
 
 struct tcal_tag {
-    int16_t prev_temperature;
-    uint32_t last_action_time[4];
-    uint32_t last_action_temperature[4];
-    int32_t last_action_out[4];
-    bool enabled;
+    int16_t prev_temperature; // +0
+    uint32_t last_action_time[4]; // +4
+    uint32_t last_action_temperature[4]; // +20
+    int32_t last_action_out[4]; // +36
+    bool enabled; // +52
 }; // :29:8
 
 static struct tcal_tag tcal_env; // :41:24
@@ -4755,12 +4755,12 @@ void trpc_update_vs_temperature(int8_t temperature); // :178:6
 /* ======== components/bl602/bl602_wifi/plf/refip/src/driver/phy/bl602_phy_rf/phy_trpc.h ======== */
 
 struct trpc_env_tag {
-    int8_t power_dbm_max_rf;
-    int8_t power_dbm_min_rf;
-    int8_t power_dbm_lim_reg;
-    int16_t channel_freq;
-    int8_t temperature;
-    int8_t temperature_compensate;
+    int8_t power_dbm_max_rf; // +0
+    int8_t power_dbm_min_rf; // +1
+    int8_t power_dbm_lim_reg; // +2
+    int16_t channel_freq; // +4
+    int8_t temperature; // +6
+    int8_t temperature_compensate; // +7
 }; // :13:8
 
 struct trpc_env_tag trpc_env; // :33:28
@@ -4768,53 +4768,53 @@ struct trpc_env_tag trpc_env; // :33:28
 /* ======== components/bl602/bl602_wifi/plf/refip/src/driver/phy/bl602_phy_rf/rf/Inc/bl602_rf_calib_data.h ======== */
 
 typedef struct {
-    uint32_t gpadc_oscode:12;
-    uint32_t rx_offset_i:10;
-    uint32_t rx_offset_q:10;
-    uint32_t rbb_cap1_fc_i:6;
-    uint32_t rbb_cap1_fc_q:6;
-    uint32_t rbb_cap2_fc_i:6;
-    uint32_t rbb_cap2_fc_q:6;
-    uint32_t tx_dc_comp_i:12;
-    uint32_t tx_dc_comp_q:12;
-    uint32_t tmx_cs:3;
-    uint32_t txpwr_att_rec:3;
-    uint32_t pa_pwrmx_osdac:4;
-    uint32_t tmx_csh:3;
-    uint32_t tmx_csl:3;
-    uint32_t tsen_refcode_rfcal:12;
-    uint32_t tsen_refcode_corner:12;
-    uint32_t rc32k_code_fr_ext:10;
-    uint32_t rc32m_code_fr_ext:8;
-    uint32_t saradc_oscode:10;
-    uint16_t fcal_4osmx:4;
+    uint32_t gpadc_oscode:12; // +0
+    uint32_t rx_offset_i:10; // +0
+    uint32_t rx_offset_q:10; // +0
+    uint32_t rbb_cap1_fc_i:6; // +4
+    uint32_t rbb_cap1_fc_q:6; // +4
+    uint32_t rbb_cap2_fc_i:6; // +4
+    uint32_t rbb_cap2_fc_q:6; // +4
+    uint32_t tx_dc_comp_i:12; // +8
+    uint32_t tx_dc_comp_q:12; // +8
+    uint32_t tmx_cs:3; // +8
+    uint32_t txpwr_att_rec:3; // +8
+    uint32_t pa_pwrmx_osdac:4; // +12
+    uint32_t tmx_csh:3; // +12
+    uint32_t tmx_csl:3; // +12
+    uint32_t tsen_refcode_rfcal:12; // +12
+    uint32_t tsen_refcode_corner:12; // +16
+    uint32_t rc32k_code_fr_ext:10; // +16
+    uint32_t rc32m_code_fr_ext:8; // +16
+    uint32_t saradc_oscode:10; // +20
+    uint16_t fcal_4osmx:4; // +20
 } rf_calib1_tag; // :37:3
 
 typedef struct {
-    uint16_t fcal:8;
-    uint16_t acal:5;
+    uint16_t fcal:8; // +0
+    uint16_t acal:5; // +0
 } rf_calib2_tag; // :44:3
 
 typedef struct {
-    uint32_t rosdac_i:6;
-    uint32_t rosdac_q:6;
-    uint32_t rx_iq_gain_comp:11;
-    uint32_t rx_iq_phase_comp:10;
+    uint32_t rosdac_i:6; // +0
+    uint32_t rosdac_q:6; // +0
+    uint32_t rx_iq_gain_comp:11; // +0
+    uint32_t rx_iq_phase_comp:10; // +4
 } rf_calib3_tag; // :53:3
 
 typedef struct {
-    uint32_t tosdac_i:6;
-    uint32_t tosdac_q:6;
-    uint32_t tx_iq_gain_comp:11;
-    uint32_t tx_iq_phase_comp:10;
+    uint32_t tosdac_i:6; // +0
+    uint32_t tosdac_q:6; // +0
+    uint32_t tx_iq_gain_comp:11; // +0
+    uint32_t tx_iq_phase_comp:10; // +4
 } rf_calib4_tag; // :62:3
 
 typedef volatile struct {
-    uint32_t inited;
-    rf_calib1_tag cal;
-    rf_calib2_tag lo[21];
-    rf_calib3_tag rxcal[4];
-    rf_calib4_tag txcal[8];
+    uint32_t inited; // +0
+    rf_calib1_tag cal; // +4
+    rf_calib2_tag lo[21]; // +28
+    rf_calib3_tag rxcal[4]; // +72
+    rf_calib4_tag txcal[8]; // +104
 } rf_calib_data_tag; // :72:3
 
 rf_calib_data_tag *rf_calib_data; // :75:27
@@ -4822,31 +4822,31 @@ rf_calib_data_tag *rf_calib_data; // :75:27
 /* ======== components/bl602/bl602_wifi/plf/refip/src/driver/phy/bl602_phy_rf/rf/Inc/bl602_rf_private.h ======== */
 
 typedef volatile struct {
-    uint32_t index;
-    int32_t dvga;
+    uint32_t index; // +0
+    int32_t dvga; // +4
 } tx_pwr_index; // :61:3
 
 tx_pwr_index *tp_index; // :62:22
 
 typedef volatile struct {
-    uint32_t notch_en;
-    int32_t spur_freq;
+    uint32_t notch_en; // +0
+    int32_t spur_freq; // +4
 } notch_param; // :67:3
 
 typedef volatile struct {
-    uint32_t vbcore;
-    uint32_t iet;
-    uint32_t vbcore_11n;
-    uint32_t iet_11n;
-    uint32_t vbcore_11g;
-    uint32_t iet_11g;
-    uint32_t vbcore_11b;
-    uint32_t iet_11b;
-    uint32_t lo_fbdv_halfstep_en;
-    uint32_t lo_fbdv_halfstep_en_tx;
-    uint32_t lo_fbdv_halfstep_en_rx;
-    uint32_t clkpll_reset_postdiv;
-    uint32_t clkpll_dither_sel;
+    uint32_t vbcore; // +0
+    uint32_t iet; // +4
+    uint32_t vbcore_11n; // +8
+    uint32_t iet_11n; // +12
+    uint32_t vbcore_11g; // +16
+    uint32_t iet_11g; // +20
+    uint32_t vbcore_11b; // +24
+    uint32_t iet_11b; // +28
+    uint32_t lo_fbdv_halfstep_en; // +32
+    uint32_t lo_fbdv_halfstep_en_tx; // +36
+    uint32_t lo_fbdv_halfstep_en_rx; // +40
+    uint32_t clkpll_reset_postdiv; // +44
+    uint32_t clkpll_dither_sel; // +48
 } regs_to_opti; // :84:3
 
 regs_to_opti *opti_regs; // :85:22
@@ -4990,58 +4990,58 @@ void rfc_apply_tx_power_offset(uint8_t channel, int8_t *power_offset); // :1643:
 /* ======== components/bl602/bl602_wifi/plf/refip/src/driver/phy/bl602_phy_rf/rfc_bl602.h ======== */
 
 struct rfc_status_tag {
-    uint32_t pkdet_out_raw:1;
-    uint32_t dig_xtal_clk_dbg:1;
-    uint32_t clk_ble_16m_dbg:1;
-    uint32_t clk_rc_dbg0:1;
-    uint32_t clk_adcpow_dbg:1;
-    uint32_t clk_fetx_dbg:1;
-    uint32_t clk_ferx_dbg:1;
-    uint32_t clkpll_postdiv_outclk_dbg:1;
-    uint32_t clk_soc_480m_dbg:1;
-    uint32_t clk_soc_240m_dbg:1;
-    uint32_t clk_soc_192m_dbg:1;
-    uint32_t clk_soc_160m_dbg:1;
-    uint32_t clk_soc_120m_dbg:1;
-    uint32_t clk_soc_96m_dbg:1;
-    uint32_t clk_soc_80m_dbg:1;
-    uint32_t clk_soc_48m_dbg:1;
-    uint32_t clk_soc_32m_dbg:1;
-    uint32_t pad_pkdet_out:1;
-    uint32_t pad_agc_ctrl:10;
-    uint32_t rf_pkdet_rst_hw:1;
-    uint32_t rf_cbw_wifi:2;
-    uint32_t lo_unlocked:1;
-    uint32_t fsm_pu_txbuf:1;
-    uint32_t fsm_pu_rxbuf:1;
-    uint32_t fsm_pu_tosdac:1;
-    uint32_t fsm_pu_dac:1;
-    uint32_t fsm_trsw_en:1;
-    uint32_t fsm_pu_adc:1;
-    uint32_t fsm_pu_pkdet:1;
-    uint32_t fsm_pu_rbb:1;
-    uint32_t fsm_pu_rmx:1;
-    uint32_t fsm_pu_rmxgm:1;
-    uint32_t fsm_pu_lna:1;
-    uint32_t clk_rc_dbg2:1;
-    uint32_t rf_lna_ind_hw:4;
-    uint32_t rf_rbb_ind_hw:4;
-    uint32_t rf_tx_pow_lvl_hw:4;
-    uint32_t rf_rc_lo_rdy:1;
-    uint32_t rf_fsm_state:3;
-    uint32_t rf_rc_state:3;
-    uint32_t clk_rc_dbg:1;
+    uint32_t pkdet_out_raw:1; // +0
+    uint32_t dig_xtal_clk_dbg:1; // +0
+    uint32_t clk_ble_16m_dbg:1; // +0
+    uint32_t clk_rc_dbg0:1; // +0
+    uint32_t clk_adcpow_dbg:1; // +0
+    uint32_t clk_fetx_dbg:1; // +0
+    uint32_t clk_ferx_dbg:1; // +0
+    uint32_t clkpll_postdiv_outclk_dbg:1; // +0
+    uint32_t clk_soc_480m_dbg:1; // +0
+    uint32_t clk_soc_240m_dbg:1; // +0
+    uint32_t clk_soc_192m_dbg:1; // +0
+    uint32_t clk_soc_160m_dbg:1; // +0
+    uint32_t clk_soc_120m_dbg:1; // +0
+    uint32_t clk_soc_96m_dbg:1; // +0
+    uint32_t clk_soc_80m_dbg:1; // +0
+    uint32_t clk_soc_48m_dbg:1; // +0
+    uint32_t clk_soc_32m_dbg:1; // +0
+    uint32_t pad_pkdet_out:1; // +0
+    uint32_t pad_agc_ctrl:10; // +0
+    uint32_t rf_pkdet_rst_hw:1; // +0
+    uint32_t rf_cbw_wifi:2; // +0
+    uint32_t lo_unlocked:1; // +0
+    uint32_t fsm_pu_txbuf:1; // +4
+    uint32_t fsm_pu_rxbuf:1; // +4
+    uint32_t fsm_pu_tosdac:1; // +4
+    uint32_t fsm_pu_dac:1; // +4
+    uint32_t fsm_trsw_en:1; // +4
+    uint32_t fsm_pu_adc:1; // +4
+    uint32_t fsm_pu_pkdet:1; // +4
+    uint32_t fsm_pu_rbb:1; // +4
+    uint32_t fsm_pu_rmx:1; // +4
+    uint32_t fsm_pu_rmxgm:1; // +4
+    uint32_t fsm_pu_lna:1; // +4
+    uint32_t clk_rc_dbg2:1; // +4
+    uint32_t rf_lna_ind_hw:4; // +4
+    uint32_t rf_rbb_ind_hw:4; // +4
+    uint32_t rf_tx_pow_lvl_hw:4; // +4
+    uint32_t rf_rc_lo_rdy:1; // +4
+    uint32_t rf_fsm_state:3; // +4
+    uint32_t rf_rc_state:3; // +4
+    uint32_t clk_rc_dbg:1; // +4
 }; // :84:8
 
 /* ======== components/bl602/bl602_wifi/plf/refip/src/driver/phy/phy.h ======== */
 
 struct phy_channel_info {
-    uint32_t info1;
-    uint32_t info2;
+    uint32_t info1; // +0
+    uint32_t info2; // +4
 }; // :97:8
 
 struct phy_cfg_tag {
-    uint32_t parameters[16];
+    uint32_t parameters[16]; // +0
 }; // :113:8
 
 /* ======== components/bl602/bl602_wifi/plf/refip/src/driver/phy/rf.c ======== */
@@ -5051,42 +5051,42 @@ void rf_clkpll_isr(void); // :45:6
 /* ======== components/bl602/bl602_wifi/plf/refip/src/driver/phyif/phyif_utils.c ======== */
 
 typedef struct {
-    uint32_t leg_length:12;
-    uint32_t leg_rate:4;
-    uint32_t ht_length:16;
-    uint32_t _ht_length:4;
-    uint32_t short_gi:1;
-    uint32_t stbc:2;
-    uint32_t smoothing:1;
-    uint32_t mcs:7;
-    uint32_t pre_type:1;
-    uint32_t format_mod:3;
-    uint32_t ch_bw:2;
-    uint32_t n_sts:3;
-    uint32_t lsig_valid:1;
-    uint32_t sounding:1;
-    uint32_t num_extn_ss:2;
-    uint32_t aggregation:1;
-    uint32_t fec_coding:1;
-    uint32_t dyn_bw:1;
-    uint32_t doze_not_allowed:1;
-    uint32_t antenna_set:8;
-    uint32_t partial_aid:9;
-    uint32_t group_id:6;
-    uint32_t reserved_1c:1;
-    int32_t rssi1:8;
-    int32_t rssi2:8;
-    int32_t rssi3:8;
-    int32_t rssi4:8;
-    uint32_t reserved_1d:8;
-    uint32_t rcpi:8;
-    uint32_t evm1:8;
-    uint32_t evm2:8;
-    uint32_t evm3:8;
-    uint32_t evm4:8;
-    uint32_t reserved2b_1:8;
-    uint32_t reserved2b_2:8;
-    uint32_t reserved2b_3:8;
+    uint32_t leg_length:12; // +0
+    uint32_t leg_rate:4; // +0
+    uint32_t ht_length:16; // +0
+    uint32_t _ht_length:4; // +4
+    uint32_t short_gi:1; // +4
+    uint32_t stbc:2; // +4
+    uint32_t smoothing:1; // +4
+    uint32_t mcs:7; // +4
+    uint32_t pre_type:1; // +4
+    uint32_t format_mod:3; // +4
+    uint32_t ch_bw:2; // +4
+    uint32_t n_sts:3; // +4
+    uint32_t lsig_valid:1; // +4
+    uint32_t sounding:1; // +4
+    uint32_t num_extn_ss:2; // +4
+    uint32_t aggregation:1; // +4
+    uint32_t fec_coding:1; // +4
+    uint32_t dyn_bw:1; // +4
+    uint32_t doze_not_allowed:1; // +4
+    uint32_t antenna_set:8; // +8
+    uint32_t partial_aid:9; // +8
+    uint32_t group_id:6; // +8
+    uint32_t reserved_1c:1; // +8
+    int32_t rssi1:8; // +8
+    int32_t rssi2:8; // +12
+    int32_t rssi3:8; // +12
+    int32_t rssi4:8; // +12
+    uint32_t reserved_1d:8; // +12
+    uint32_t rcpi:8; // +16
+    uint32_t evm1:8; // +16
+    uint32_t evm2:8; // +16
+    uint32_t evm3:8; // +16
+    uint32_t evm4:8; // +20
+    uint32_t reserved2b_1:8; // +20
+    uint32_t reserved2b_2:8; // +20
+    uint32_t reserved2b_3:8; // +20
 } phyif_utils_recvtable_priv_t; // :47:3
 
 int phyif_utils_decode(phyif_utils_recvtable_t *vec, int8_t *ppm); // :49:5
@@ -5094,12 +5094,12 @@ int phyif_utils_decode(phyif_utils_recvtable_t *vec, int8_t *ppm); // :49:5
 /* ======== components/bl602/bl602_wifi/plf/refip/src/driver/phyif/phyif_utils.h ======== */
 
 typedef struct {
-    uint32_t recvtable1;
-    uint32_t recvtable2;
-    uint32_t recvtable3;
-    uint32_t recvtable4;
-    uint32_t recvtable5;
-    uint32_t recvtable6;
+    uint32_t recvtable1; // +0
+    uint32_t recvtable2; // +4
+    uint32_t recvtable3; // +8
+    uint32_t recvtable4; // +12
+    uint32_t recvtable5; // +16
+    uint32_t recvtable6; // +20
 } phyif_utils_recvtable_t; // :11:3
 
 /* ======== components/bl602/bl602_wifi/plf/refip/src/driver/sysctrl/sysctrl.c ======== */

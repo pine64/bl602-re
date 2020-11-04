@@ -11,34 +11,34 @@ bool em_buf_tx_free(struct em_desc_node *desc_to_be_freed); // :198:5
 /* ======== components/network/ble/blecontroller/ip/ble/ll/src/em/em_buf.h ======== */
 
 struct em_buf_node {
-    struct co_list_hdr hdr;
-    uint16_t idx;
-    uint16_t buf_ptr;
+    struct co_list_hdr hdr; // +0
+    uint16_t idx; // +4
+    uint16_t buf_ptr; // +6
 }; // :54:8
 
 struct em_desc_node {
-    struct co_list_hdr hdr;
-    uint16_t idx;
-    uint16_t buffer_idx;
-    uint16_t buffer_ptr;
-    uint8_t llid;
-    uint8_t length;
+    struct co_list_hdr hdr; // +0
+    uint16_t idx; // +4
+    uint16_t buffer_idx; // +6
+    uint16_t buffer_ptr; // +8
+    uint8_t llid; // +10
+    uint8_t length; // +11
 }; // :63:8
 
 struct em_buf_tx_desc {
-    uint16_t txptr;
-    uint16_t txheader;
-    uint16_t txdataptr;
-    uint16_t txdle;
+    uint16_t txptr; // +0
+    uint16_t txheader; // +2
+    uint16_t txdataptr; // +4
+    uint16_t txdle; // +6
 }; // :79:8
 
 struct em_buf_env_tag {
-    struct co_list tx_desc_free;
-    struct co_list tx_buff_free;
-    struct em_desc_node tx_desc_node[26];
-    struct em_buf_node tx_buff_node[2];
-    struct em_buf_tx_desc *tx_desc;
-    uint8_t rx_current;
+    struct co_list tx_desc_free; // +0
+    struct co_list tx_buff_free; // +8
+    struct em_desc_node tx_desc_node[26]; // +16
+    struct em_buf_node tx_buff_node[2]; // +328
+    struct em_buf_tx_desc *tx_desc; // +344
+    uint8_t rx_current; // +348
 }; // :92:8
 
 struct em_buf_env_tag em_buf_env; // :116:30
@@ -108,52 +108,52 @@ enum llc_dle_flag {
 }; // :122:6
 
 struct rem_version {
-    uint8_t vers;
-    uint16_t compid;
-    uint16_t subvers;
+    uint8_t vers; // +0
+    uint16_t compid; // +2
+    uint16_t subvers; // +4
 }; // :185:8
 
 struct encrypt {
-    struct sess_k_div skd;
-    struct ltk ltk;
-    uint8_t randn[16];
+    struct sess_k_div skd; // +0
+    struct ltk ltk; // +16
+    uint8_t randn[16]; // +32
 }; // :196:8
 
 struct data_len_ext_tag {
-    uint16_t conn_max_tx_octets;
-    uint16_t conn_max_rx_octets;
-    uint16_t conn_eff_max_tx_octets;
-    uint16_t conn_eff_max_rx_octets;
-    uint16_t conn_max_tx_time;
-    uint16_t conn_max_rx_time;
-    uint16_t conn_eff_max_tx_time;
-    uint16_t conn_eff_max_rx_time;
-    bool send_req_not_allowed;
-    uint8_t data_len_ext_flag;
+    uint16_t conn_max_tx_octets; // +0
+    uint16_t conn_max_rx_octets; // +2
+    uint16_t conn_eff_max_tx_octets; // +4
+    uint16_t conn_eff_max_rx_octets; // +6
+    uint16_t conn_max_tx_time; // +8
+    uint16_t conn_max_rx_time; // +10
+    uint16_t conn_eff_max_tx_time; // +12
+    uint16_t conn_eff_max_rx_time; // +14
+    bool send_req_not_allowed; // +16
+    uint8_t data_len_ext_flag; // +17
 }; // :207:8
 
 struct llc_env_tag {
-    void *operation[4];
-    struct ea_elt_tag *elt;
-    struct llc_ch_asses_tag chnl_assess;
-    struct rem_version peer_version;
-    struct data_len_ext_tag data_len_ext_info;
-    uint16_t sup_to;
-    uint16_t n_sup_to;
-    uint16_t auth_payl_to;
-    uint16_t auth_payl_to_margin;
-    uint16_t llc_status;
-    struct le_chnl_map ch_map;
-    struct le_chnl_map n_ch_map;
-    int8_t rssi;
-    struct le_features feats_used;
-    struct encrypt encrypt;
-    uint8_t disc_reason;
-    bool disc_event_sent;
-    uint8_t loc_proc_state;
-    uint8_t rem_proc_state;
-    uint8_t encryption_state;
-    bool peer_sup_conn_param_req;
+    void *operation[4]; // +0
+    struct ea_elt_tag *elt; // +16
+    struct llc_ch_asses_tag chnl_assess; // +20
+    struct rem_version peer_version; // +60
+    struct data_len_ext_tag data_len_ext_info; // +66
+    uint16_t sup_to; // +84
+    uint16_t n_sup_to; // +86
+    uint16_t auth_payl_to; // +88
+    uint16_t auth_payl_to_margin; // +90
+    uint16_t llc_status; // +92
+    struct le_chnl_map ch_map; // +94
+    struct le_chnl_map n_ch_map; // +99
+    int8_t rssi; // +104
+    struct le_features feats_used; // +105
+    struct encrypt encrypt; // +113
+    uint8_t disc_reason; // +161
+    bool disc_event_sent; // +162
+    uint8_t loc_proc_state; // +163
+    uint8_t rem_proc_state; // +164
+    uint8_t encryption_state; // +165
+    bool peer_sup_conn_param_req; // +166
 }; // :269:8
 
 struct llc_env_tag *llc_env[2]; // :368:28
@@ -176,10 +176,10 @@ enum lld_ch_asses_ponderation {
 }; // :59:6
 
 struct llc_ch_asses_tag {
-    int8_t rcvd_quality[37];
-    bool latency_en;
-    uint8_t reassess_count;
-    uint8_t reassess_cursor;
+    int8_t rcvd_quality[37]; // +0
+    bool latency_en; // +37
+    uint8_t reassess_count; // +38
+    uint8_t reassess_cursor; // +39
 }; // :80:8
 
 /* ======== components/network/ble/blecontroller/ip/ble/ll/src/llc/llc_hci.c ======== */
@@ -220,9 +220,9 @@ enum llc_instant_state {
 typedef int (*llcp_pdu_handler_func_t)(uint16_t, ke_task_id_t, bool, union llcp_pdu *); // :98:15
 
 struct llcp_pdu_handler_info {
-    llcp_pdu_handler_func_t handler;
-    bool int_ctx_allowed;
-    uint8_t enc_auth;
+    llcp_pdu_handler_func_t handler; // +0
+    bool int_ctx_allowed; // +4
+    uint8_t enc_auth; // +5
 }; // :137:8
 
 static const struct llcp_pdu_handler_info llcp_pdu_handler[22]; // :149:43
@@ -277,10 +277,10 @@ uint8_t llc_llcp_get_autorize(uint8_t opcode); // :3236:9
 /* ======== components/network/ble/blecontroller/ip/ble/ll/src/llc/llc_llcp.h ======== */
 
 struct llcp_pdu_tag {
-    struct co_list_hdr hdr;
-    uint16_t idx;
-    void *ptr;
-    uint8_t opcode;
+    struct co_list_hdr hdr; // +0
+    uint16_t idx; // +4
+    void *ptr; // +8
+    uint8_t opcode; // +12
 }; // :48:8
 
 enum llc_llcp_authorize {
@@ -394,28 +394,28 @@ enum LLC_MSG {
 }; // :254:6
 
 struct llc_create_con_req_ind {
-    uint16_t con_int;
-    uint16_t con_lat;
-    uint16_t sup_to;
-    uint16_t ral_ptr;
-    struct bd_addr peer_addr;
-    uint8_t peer_addr_type;
-    uint8_t hop_inc;
-    uint8_t sleep_clk_acc;
-    uint8_t filter_policy;
+    uint16_t con_int; // +0
+    uint16_t con_lat; // +2
+    uint16_t sup_to; // +4
+    uint16_t ral_ptr; // +6
+    struct bd_addr peer_addr; // +8
+    uint8_t peer_addr_type; // +14
+    uint8_t hop_inc; // +15
+    uint8_t sleep_clk_acc; // +16
+    uint8_t filter_policy; // +17
 }; // :366:8
 
 struct llc_data_ind {
-    uint16_t conhdl;
-    uint8_t pb_bc_flag;
-    uint16_t length;
-    uint8_t rx_hdl;
+    uint16_t conhdl; // +0
+    uint8_t pb_bc_flag; // +2
+    uint16_t length; // +4
+    uint8_t rx_hdl; // +6
 }; // :389:8
 
 struct llc_llcp_recv_ind {
-    uint8_t status;
-    uint8_t dummy;
-    union llcp_pdu pdu;
+    uint8_t status; // +0
+    uint8_t dummy; // +1
+    union llcp_pdu pdu; // +2
 }; // :410:8
 
 enum llc_con_up_op {
@@ -427,23 +427,23 @@ enum llc_con_up_op {
 }; // :422:6
 
 struct llc_con_upd_req_ind {
-    uint8_t operation;
-    uint16_t con_intv_min;
-    uint16_t con_intv_max;
-    uint16_t con_latency;
-    uint16_t superv_to;
-    uint16_t ce_len_min;
-    uint16_t ce_len_max;
-    uint16_t interval_min;
-    uint16_t interval_max;
-    uint8_t pref_period;
-    uint16_t ref_con_event_count;
-    uint16_t offset0;
-    uint16_t offset1;
-    uint16_t offset2;
-    uint16_t offset3;
-    uint16_t offset4;
-    uint16_t offset5;
+    uint8_t operation; // +0
+    uint16_t con_intv_min; // +2
+    uint16_t con_intv_max; // +4
+    uint16_t con_latency; // +6
+    uint16_t superv_to; // +8
+    uint16_t ce_len_min; // +10
+    uint16_t ce_len_max; // +12
+    uint16_t interval_min; // +14
+    uint16_t interval_max; // +16
+    uint8_t pref_period; // +18
+    uint16_t ref_con_event_count; // +20
+    uint16_t offset0; // +22
+    uint16_t offset1; // +24
+    uint16_t offset2; // +26
+    uint16_t offset3; // +28
+    uint16_t offset4; // +30
+    uint16_t offset5; // +32
 }; // :439:8
 
 const struct ke_state_handler llc_default_handler; // :489:38
@@ -598,55 +598,55 @@ enum lld_evt_cs_format {
 }; // :204:6
 
 struct lld_evt_anchor {
-    uint32_t basetime_cnt;
-    uint16_t finetime_cnt;
-    uint16_t evt_cnt;
+    uint32_t basetime_cnt; // +0
+    uint16_t finetime_cnt; // +4
+    uint16_t evt_cnt; // +6
 }; // :235:8
 
 struct lld_non_conn {
-    uint32_t window;
-    uint32_t anchor;
-    uint32_t end_ts;
-    bool initiate;
-    bool connect_req_sent;
+    uint32_t window; // +0
+    uint32_t anchor; // +4
+    uint32_t end_ts; // +8
+    bool initiate; // +12
+    bool connect_req_sent; // +13
 }; // :246:8
 
 struct lld_conn {
-    uint32_t sync_win_size;
-    uint32_t sca_drift;
-    uint16_t instant;
-    uint16_t latency;
-    uint16_t counter;
-    uint16_t missed_cnt;
-    uint16_t duration_dft;
-    uint16_t update_offset;
-    uint16_t eff_max_tx_time;
-    uint16_t eff_max_tx_size;
-    uint8_t update_size;
-    uint8_t instant_action;
-    uint8_t mst_sca;
-    uint8_t last_md_rx;
-    uint8_t tx_prog_pkt_cnt;
-    bool wait_con_up_sync;
+    uint32_t sync_win_size; // +0
+    uint32_t sca_drift; // +4
+    uint16_t instant; // +8
+    uint16_t latency; // +10
+    uint16_t counter; // +12
+    uint16_t missed_cnt; // +14
+    uint16_t duration_dft; // +16
+    uint16_t update_offset; // +18
+    uint16_t eff_max_tx_time; // +20
+    uint16_t eff_max_tx_size; // +22
+    uint8_t update_size; // +24
+    uint8_t instant_action; // +25
+    uint8_t mst_sca; // +26
+    uint8_t last_md_rx; // +27
+    uint8_t tx_prog_pkt_cnt; // +28
+    bool wait_con_up_sync; // +29
 }; // :267:8
 
 struct lld_evt_tag {
-    struct lld_evt_anchor anchor_point;
-    struct co_list tx_acl_rdy;
-    struct co_list tx_acl_tofree;
-    struct co_list tx_llcp_pdu_rdy;
-    struct co_list tx_prog;
-    struct ea_interval_tag *interval_elt;
-    union lld_evt_info evt;
-    uint16_t conhdl;
-    uint16_t cs_ptr;
-    uint16_t interval;
-    uint8_t rx_cnt;
-    uint8_t mode;
-    uint8_t tx_pwr;
-    uint8_t default_prio;
-    uint8_t evt_flag;
-    bool delete_ongoing;
+    struct lld_evt_anchor anchor_point; // +0
+    struct co_list tx_acl_rdy; // +8
+    struct co_list tx_acl_tofree; // +16
+    struct co_list tx_llcp_pdu_rdy; // +24
+    struct co_list tx_prog; // +32
+    struct ea_interval_tag *interval_elt; // +40
+    union lld_evt_info evt; // +44
+    uint16_t conhdl; // +76
+    uint16_t cs_ptr; // +78
+    uint16_t interval; // +80
+    uint8_t rx_cnt; // +82
+    uint8_t mode; // +83
+    uint8_t tx_pwr; // +84
+    uint8_t default_prio; // +85
+    uint8_t evt_flag; // +86
+    bool delete_ongoing; // +87
 }; // :304:8
 
 union lld_evt_info {
@@ -655,39 +655,39 @@ union lld_evt_info {
 }; // :325:11
 
 struct lld_evt_update_tag {
-    uint16_t win_offset;
-    uint16_t instant;
-    uint8_t win_size;
+    uint16_t win_offset; // +0
+    uint16_t instant; // +2
+    uint8_t win_size; // +4
 }; // :361:8
 
 struct lld_evt_env_tag {
-    struct co_list elt_prog;
-    struct co_list elt_wait;
-    struct co_list elt_deferred;
-    struct co_list rx_pkt_deferred;
-    struct co_list elt_to_be_deleted;
-    uint8_t sca;
-    bool renew;
-    uint8_t hw_wa_sleep_compensation;
+    struct co_list elt_prog; // +0
+    struct co_list elt_wait; // +8
+    struct co_list elt_deferred; // +16
+    struct co_list rx_pkt_deferred; // +24
+    struct co_list elt_to_be_deleted; // +32
+    uint8_t sca; // +40
+    bool renew; // +41
+    uint8_t hw_wa_sleep_compensation; // +42
 }; // :385:8
 
 struct lld_evt_wait_tag {
-    struct co_list_hdr hdr;
-    struct ea_elt_tag *elt_ptr;
+    struct co_list_hdr hdr; // +0
+    struct ea_elt_tag *elt_ptr; // +4
 }; // :406:8
 
 struct lld_evt_deferred_tag {
-    struct co_list_hdr hdr;
-    struct ea_elt_tag *elt_ptr;
-    uint8_t type;
-    uint8_t rx_desc_cnt;
+    struct co_list_hdr hdr; // +0
+    struct ea_elt_tag *elt_ptr; // +4
+    uint8_t type; // +8
+    uint8_t rx_desc_cnt; // +9
 }; // :415:8
 
 struct lld_evt_delete_tag {
-    struct co_list_hdr hdr;
-    struct ea_elt_tag *elt_ptr;
-    bool flush;
-    bool send_ind;
+    struct co_list_hdr hdr; // +0
+    struct ea_elt_tag *elt_ptr; // +4
+    bool flush; // +8
+    bool send_ind; // +9
 }; // :431:8
 
 struct lld_evt_env_tag lld_evt_env; // :450:31
@@ -703,21 +703,21 @@ enum lld_pdu_pack_status {
 typedef void (*llcp_pdu_unpk_func_t)(uint16_t, uint8_t, uint8_t *); // :94:16
 
 struct lld_pdu_rx_info {
-    struct co_list_hdr hdr;
-    uint8_t rx_hdl;
-    bool free;
-    uint16_t conhdl;
-    uint16_t status;
-    uint8_t length;
-    uint8_t channel;
-    uint8_t rssi;
-    uint8_t audio;
+    struct co_list_hdr hdr; // +0
+    uint8_t rx_hdl; // +4
+    bool free; // +5
+    uint16_t conhdl; // +6
+    uint16_t status; // +8
+    uint8_t length; // +10
+    uint8_t channel; // +11
+    uint8_t rssi; // +12
+    uint8_t audio; // +13
 }; // :98:8
 
 struct lld_pdu_pack_desc {
-    uint8_t pdu_len;
-    void *pack_fmt;
-    llcp_pdu_unpk_func_t unpack_func;
+    uint8_t pdu_len; // +0
+    void *pack_fmt; // +4
+    llcp_pdu_unpk_func_t unpack_func; // +8
 }; // :121:8
 
 const struct lld_pdu_pack_desc lld_pdu_adv_pk_desc_tab[7]; // :132:32
@@ -743,23 +743,23 @@ void lld_pdu_rx_handler(struct lld_evt_tag *evt, uint8_t nb_rx_desc); // :1677:6
 /* ======== components/network/ble/blecontroller/ip/ble/ll/src/lld/lld_pdu.h ======== */
 
 struct lld_pdu_data_tx_tag {
-    struct co_list_hdr hdr;
-    uint16_t idx;
-    uint16_t conhdl;
-    uint16_t length;
-    uint8_t pb_bc_flag;
-    struct em_buf_node *buf;
+    struct co_list_hdr hdr; // +0
+    uint16_t idx; // +4
+    uint16_t conhdl; // +6
+    uint16_t length; // +8
+    uint8_t pb_bc_flag; // +10
+    struct em_buf_node *buf; // +12
 }; // :45:8
 
 /* ======== components/network/ble/blecontroller/ip/ble/ll/src/lld/lld_sleep.c ======== */
 
 struct lld_sleep_env_tag {
-    uint32_t irq_mask;
-    int32_t last_sleep_dur;
-    bool sw_wakeup;
-    bool pds_reset;
-    uint32_t basetimecnt;
-    uint32_t finetimecnt;
+    uint32_t irq_mask; // +0
+    int32_t last_sleep_dur; // +4
+    bool sw_wakeup; // +8
+    bool pds_reset; // +9
+    uint32_t basetimecnt; // +12
+    uint32_t finetimecnt; // +16
 }; // :44:8
 
 static struct lld_sleep_env_tag lld_sleep_env; // :68:33
@@ -849,88 +849,88 @@ enum llm_enh_priv {
 }; // :74:6
 
 struct advertising_pdu_params {
-    struct ke_msg *adv_data_req;
-    struct ke_msg *scan_rsp_req;
-    struct em_buf_node *adv_desc_node;
-    struct em_buf_node *scan_rsp_desc_node;
-    struct bd_addr peer_addr;
-    uint16_t intervalmin;
-    uint16_t intervalmax;
-    uint8_t channelmap;
-    uint8_t filterpolicy;
-    uint8_t type;
-    uint8_t datalen;
-    uint8_t scanrsplen;
-    uint8_t own_addr_type;
-    uint8_t peer_addr_type;
-    bool adv_ldc_flag;
+    struct ke_msg *adv_data_req; // +0
+    struct ke_msg *scan_rsp_req; // +4
+    struct em_buf_node *adv_desc_node; // +8
+    struct em_buf_node *scan_rsp_desc_node; // +12
+    struct bd_addr peer_addr; // +16
+    uint16_t intervalmin; // +22
+    uint16_t intervalmax; // +24
+    uint8_t channelmap; // +26
+    uint8_t filterpolicy; // +27
+    uint8_t type; // +28
+    uint8_t datalen; // +29
+    uint8_t scanrsplen; // +30
+    uint8_t own_addr_type; // +31
+    uint8_t peer_addr_type; // +32
+    bool adv_ldc_flag; // +33
 }; // :94:8
 
 struct scanning_pdu_params {
-    struct em_buf_node *conn_req_desc_node;
-    uint16_t interval;
-    uint16_t window;
-    uint8_t filterpolicy;
-    uint8_t type;
-    uint8_t filter_duplicate;
-    uint8_t own_addr_type;
+    struct em_buf_node *conn_req_desc_node; // +0
+    uint16_t interval; // +4
+    uint16_t window; // +6
+    uint8_t filterpolicy; // +8
+    uint8_t type; // +9
+    uint8_t filter_duplicate; // +10
+    uint8_t own_addr_type; // +11
 }; // :138:8
 
 struct access_addr_gen {
-    uint8_t intrand;
-    uint8_t ct1_idx;
-    uint8_t ct2_idx;
+    uint8_t intrand; // +0
+    uint8_t ct1_idx; // +1
+    uint8_t ct2_idx; // +2
 }; // :183:8
 
 struct adv_device_list {
-    struct co_list_hdr hdr;
-    uint8_t adv_type;
-    struct bd_addr adv_addr;
+    struct co_list_hdr hdr; // +0
+    uint8_t adv_type; // +4
+    struct bd_addr adv_addr; // +5
 }; // :194:8
 
 struct llm_pdu_adv {
-    struct bd_addr adva;
-    uint8_t *adva_data;
+    struct bd_addr adva; // +0
+    uint8_t *adva_data; // +8
 }; // :215:8
 
 struct llm_pdu_con_req_rx {
-    struct bd_addr inita;
-    struct bd_addr adva;
-    struct access_addr aa;
-    struct crc_init crcinit;
-    uint8_t winsize;
-    uint16_t winoffset;
-    uint16_t interval;
-    uint16_t latency;
-    uint16_t timeout;
-    struct le_chnl_map chm;
-    uint8_t hop_sca;
+    struct bd_addr inita; // +0
+    struct bd_addr adva; // +6
+    struct access_addr aa; // +12
+    struct crc_init crcinit; // +16
+    uint8_t winsize; // +19
+    uint16_t winoffset; // +20
+    uint16_t interval; // +22
+    uint16_t latency; // +24
+    uint16_t timeout; // +26
+    struct le_chnl_map chm; // +28
+    uint8_t hop_sca; // +33
 }; // :251:8
 
 struct llm_pdu_con_req_tx {
-    struct access_addr aa;
-    struct crc_init crcinit;
-    uint8_t winsize;
-    uint16_t winoffset;
-    uint16_t interval;
-    uint16_t latency;
-    uint16_t timeout;
-    struct le_chnl_map chm;
-    uint8_t hop_sca;
+    struct access_addr aa; // +0
+    struct crc_init crcinit; // +4
+    uint8_t winsize; // +7
+    uint16_t winoffset; // +8
+    uint16_t interval; // +10
+    uint16_t latency; // +12
+    uint16_t timeout; // +14
+    struct le_chnl_map chm; // +16
+    uint8_t hop_sca; // +21
 }; // :277:8
 
 struct llm_test_mode {
-    bool end_of_tst;
-    uint8_t directtesttype;
+    bool end_of_tst; // +0
+    uint8_t directtesttype; // +1
 }; // :324:8
 
 struct data_len_ext {
-    uint16_t conn_initial_max_tx_octets;
-    uint16_t conn_initial_max_tx_time;
-    uint16_t suppted_max_tx_octets;
-    uint16_t suppted_max_tx_time;
-    uint16_t suppted_max_rx_octets;
-    uint16_t suppted_max_rx_time;
+    uint16_t conn_initial_max_tx_octets; // +0
+    uint16_t conn_initial_max_tx_time; // +2
+    uint16_t suppted_max_tx_octets; // +4
+    uint16_t suppted_max_tx_time; // +6
+    uint16_t suppted_max_rx_octets; // +8
+    uint16_t suppted_max_rx_time; // +10
 }; // :337:8
 
 enum t_key_multiplication_type {
@@ -942,53 +942,53 @@ enum t_key_multiplication_type {
 typedef enum t_key_multiplication_type t_key_multi_type; // :359:3
 
 struct t_public_key256 {
-    uint8_t x[32];
-    uint8_t y[32];
+    uint8_t x[32]; // +0
+    uint8_t y[32]; // +32
 }; // :361:16
 
 typedef struct t_public_key256 t_public_key256; // :365:3
 
 struct channel_map_assess {
-    uint16_t assess_timer;
-    int8_t lower_limit;
-    int8_t upper_limit;
-    int8_t rssi_noise_limit;
-    uint8_t reassess_count;
-    struct le_chnl_map ch_map;
-    bool llm_le_set_host_ch_class_cmd_sto;
+    uint16_t assess_timer; // +0
+    int8_t lower_limit; // +2
+    int8_t upper_limit; // +3
+    int8_t rssi_noise_limit; // +4
+    uint8_t reassess_count; // +5
+    struct le_chnl_map ch_map; // +6
+    bool llm_le_set_host_ch_class_cmd_sto; // +11
 }; // :369:8
 
 struct llm_le_env_tag {
-    struct co_list enc_req;
-    struct co_list adv_list;
-    struct scanning_pdu_params *scanning_params;
-    struct advertising_pdu_params *advertising_params;
-    struct co_list cnx_list;
-    struct data_len_ext data_len_val;
-    struct channel_map_assess ch_map_assess;
-    struct evt_mask eventmask;
-    struct access_addr_gen aa;
-    uint16_t conhdl_alloc;
-    struct ea_elt_tag *elt;
-    bool last_opcode;
-    uint16_t opcode2;
-    uint8_t state2;
-    struct ea_elt_tag *elt_coext_scan;
-    bool enc_pend;
-    struct llm_test_mode test_mode;
-    struct bd_addr rand_add;
-    struct bd_addr public_add;
-    uint16_t enh_priv_rpa_timeout;
-    uint16_t p256_byte_process_timeout;
-    uint16_t opcode;
-    uint8_t state;
-    uint8_t enh_priv_info;
-    uint8_t curr_addr_type;
-    uint8_t nb_dev_in_wl;
-    uint8_t nb_dev_in_hw_wl;
-    t_public_key256 public_key256;
-    uint8_t secret_key256[32];
-    t_key_multi_type cur_ecc_multiplication;
+    struct co_list enc_req; // +0
+    struct co_list adv_list; // +8
+    struct scanning_pdu_params *scanning_params; // +16
+    struct advertising_pdu_params *advertising_params; // +20
+    struct co_list cnx_list; // +24
+    struct data_len_ext data_len_val; // +32
+    struct channel_map_assess ch_map_assess; // +44
+    struct evt_mask eventmask; // +56
+    struct access_addr_gen aa; // +64
+    uint16_t conhdl_alloc; // +68
+    struct ea_elt_tag *elt; // +72
+    bool last_opcode; // +76
+    uint16_t opcode2; // +78
+    uint8_t state2; // +80
+    struct ea_elt_tag *elt_coext_scan; // +84
+    bool enc_pend; // +88
+    struct llm_test_mode test_mode; // +89
+    struct bd_addr rand_add; // +91
+    struct bd_addr public_add; // +97
+    uint16_t enh_priv_rpa_timeout; // +104
+    uint16_t p256_byte_process_timeout; // +106
+    uint16_t opcode; // +108
+    uint8_t state; // +110
+    uint8_t enh_priv_info; // +111
+    uint8_t curr_addr_type; // +112
+    uint8_t nb_dev_in_wl; // +113
+    uint8_t nb_dev_in_hw_wl; // +114
+    t_public_key256 public_key256; // +115
+    uint8_t secret_key256[32]; // +179
+    t_key_multi_type cur_ecc_multiplication; // +211
 }; // :406:8
 
 const struct supp_cmds llm_local_cmds; // :558:31
@@ -1099,13 +1099,13 @@ enum llm_msg_id {
 }; // :121:6
 
 struct llm_enc_req {
-    struct ltk key;
-    uint8_t plain_data[16];
+    struct ltk key; // +0
+    uint8_t plain_data[16]; // +16
 }; // :171:8
 
 struct llm_enc_ind {
-    uint8_t status;
-    uint8_t encrypted_data[16];
+    uint8_t status; // +0
+    uint8_t encrypted_data[16]; // +1
 }; // :180:8
 
 const struct ke_state_handler llm_default_handler; // :192:38
@@ -1117,11 +1117,11 @@ const uint8_t LLM_AA_CT1[3]; // :48:15
 const uint8_t LLM_AA_CT2[2]; // :51:15
 
 struct llm_util_cnx_bd_addr_tag {
-    struct co_list_hdr hdr;
-    struct bd_addr dev_addr;
-    uint16_t conhdl;
-    uint8_t dev_addr_type;
-    bool in_wl;
+    struct co_list_hdr hdr; // +0
+    struct bd_addr dev_addr; // +4
+    uint16_t conhdl; // +10
+    uint8_t dev_addr_type; // +12
+    bool in_wl; // +13
 }; // :59:8
 
 uint16_t llm_util_bd_addr_wl_position(const struct bd_addr *bd_address, uint8_t bd_addr_type); // :79:10
@@ -1192,51 +1192,51 @@ enum ea_elt_asap_parity {
 }; // :115:6
 
 struct ea_elt_tag {
-    struct co_list_hdr hdr;
-    struct ea_elt_tag *linked_element;
-    uint32_t timestamp;
-    uint32_t asap_limit;
-    uint16_t asap_settings;
-    uint16_t duration_min;
-    uint16_t delay;
-    uint8_t current_prio;
-    uint8_t stop_latency1;
-    uint8_t stop_latency2;
-    uint8_t start_latency;
-    void (*ea_cb_start)(struct ea_elt_tag *);
-    void (*ea_cb_stop)(struct ea_elt_tag *);
-    void (*ea_cb_cancel)(struct ea_elt_tag *);
-    void *env;
+    struct co_list_hdr hdr; // +0
+    struct ea_elt_tag *linked_element; // +4
+    uint32_t timestamp; // +8
+    uint32_t asap_limit; // +12
+    uint16_t asap_settings; // +16
+    uint16_t duration_min; // +18
+    uint16_t delay; // +20
+    uint8_t current_prio; // +22
+    uint8_t stop_latency1; // +23
+    uint8_t stop_latency2; // +24
+    uint8_t start_latency; // +25
+    void (*ea_cb_start)(struct ea_elt_tag *); // +28
+    void (*ea_cb_stop)(struct ea_elt_tag *); // +32
+    void (*ea_cb_cancel)(struct ea_elt_tag *); // +36
+    void *env; // +40
 }; // :130:8
 
 struct ea_interval_tag {
-    struct co_list_hdr hdr;
-    uint16_t interval_used;
-    uint16_t offset_used;
-    uint16_t bandwidth_used;
-    uint16_t conhdl_used;
-    uint16_t role_used;
-    uint16_t linkid;
+    struct co_list_hdr hdr; // +0
+    uint16_t interval_used; // +4
+    uint16_t offset_used; // +6
+    uint16_t bandwidth_used; // +8
+    uint16_t conhdl_used; // +10
+    uint16_t role_used; // +12
+    uint16_t linkid; // +14
 }; // :217:8
 
 struct ea_param_input {
-    uint16_t interval_min;
-    uint16_t interval_max;
-    uint32_t duration_min;
-    uint16_t duration_max;
-    uint8_t pref_period;
-    uint16_t offset;
-    uint8_t action;
-    uint16_t conhdl;
-    uint16_t role;
-    bool odd_offset;
-    uint16_t linkid;
+    uint16_t interval_min; // +0
+    uint16_t interval_max; // +2
+    uint32_t duration_min; // +4
+    uint16_t duration_max; // +8
+    uint8_t pref_period; // +10
+    uint16_t offset; // +12
+    uint8_t action; // +14
+    uint16_t conhdl; // +16
+    uint16_t role; // +18
+    bool odd_offset; // +20
+    uint16_t linkid; // +22
 }; // :236:8
 
 struct ea_param_output {
-    uint16_t interval;
-    uint32_t duration;
-    uint16_t offset;
+    uint16_t interval; // +0
+    uint32_t duration; // +4
+    uint16_t offset; // +8
 }; // :263:8
 
 /* ======== components/network/ble/blecontroller/ip/ea/src/ea.c ======== */
@@ -1251,11 +1251,11 @@ enum ea_conflict {
 }; // :81:6
 
 struct ea_env_tag {
-    struct co_list elt_wait;
-    struct ea_elt_tag *elt_prog;
-    struct co_list elt_canceled;
-    struct co_list interval_list;
-    uint32_t finetarget_time;
+    struct co_list elt_wait; // +0
+    struct ea_elt_tag *elt_prog; // +8
+    struct co_list elt_canceled; // +12
+    struct co_list interval_list; // +20
+    uint32_t finetarget_time; // +28
 }; // :97:8
 
 static struct ea_env_tag ea_env; // :122:26
@@ -1310,19 +1310,19 @@ uint8_t hci_evt_mask_set(const struct evt_mask *evt_msk, uint8_t page); // :1128
 /* ======== components/network/ble/blecontroller/ip/hci/src/hci_fc.c ======== */
 
 struct host_set_fc {
-    bool acl_flow_cntl_en;
-    uint16_t acl_pkt_len;
-    uint16_t acl_pkt_nb;
-    uint16_t curr_pkt_nb;
+    bool acl_flow_cntl_en; // +0
+    uint16_t acl_pkt_len; // +2
+    uint16_t acl_pkt_nb; // +4
+    uint16_t curr_pkt_nb; // +6
 }; // :67:8
 
 struct counter_fc {
-    uint16_t acl_pkt_sent;
+    uint16_t acl_pkt_sent; // +0
 }; // :90:8
 
 struct hci_fc_tag {
-    struct host_set_fc host_set;
-    struct counter_fc cntr;
+    struct host_set_fc host_set; // +0
+    struct counter_fc cntr; // +8
 }; // :102:8
 
 struct hci_fc_tag hci_fc_env; // :122:19
@@ -1363,31 +1363,31 @@ enum HCI_PACK_STATUS {
 }; // :148:6
 
 struct hci_cmd_desc_tab_ref {
-    uint8_t ogf;
-    uint16_t nb_cmds;
-    const struct hci_cmd_desc_tag *cmd_desc_tab;
+    uint8_t ogf; // +0
+    uint16_t nb_cmds; // +2
+    const struct hci_cmd_desc_tag *cmd_desc_tab; // +4
 }; // :178:8
 
 struct hci_cmd_desc_tag {
-    uint16_t opcode;
-    uint8_t dest_field;
-    uint8_t par_size_max;
-    void *par_fmt;
-    void *ret_par_fmt;
+    uint16_t opcode; // +0
+    uint8_t dest_field; // +2
+    uint8_t par_size_max; // +3
+    void *par_fmt; // +4
+    void *ret_par_fmt; // +8
 }; // :191:8
 
 struct hci_evt_desc_tag {
-    uint8_t code;
-    uint8_t dest_field;
-    uint8_t special_pack;
-    void *par_fmt;
+    uint8_t code; // +0
+    uint8_t dest_field; // +1
+    uint8_t special_pack; // +2
+    void *par_fmt; // +4
 }; // :212:8
 
 typedef uint16_t (*hci_pkupk_func_t)(uint8_t *, uint8_t *, uint16_t *, uint16_t); // :231:20
 
 struct hci_env_tag {
-    struct evt_mask evt_msk;
-    struct evt_mask evt_msk_page_2;
+    struct evt_mask evt_msk; // +0
+    struct evt_mask evt_msk_page_2; // +8
 }; // :288:8
 
 struct hci_env_tag hci_env; // :339:27
@@ -1432,12 +1432,12 @@ enum HCI_TX_STATE {
 }; // :92:6
 
 struct hci_tl_env_tag {
-    struct co_list tx_queue;
-    struct co_list acl_queue;
-    struct ke_msg *curr_tx_msg;
-    struct em_buf_node *txtag;
-    uint8_t tx_state;
-    int8_t nb_h2c_cmd_pkts;
+    struct co_list tx_queue; // +0
+    struct co_list acl_queue; // +8
+    struct ke_msg *curr_tx_msg; // +16
+    struct em_buf_node *txtag; // +20
+    uint8_t tx_state; // +24
+    int8_t nb_h2c_cmd_pkts; // +25
 }; // :107:8
 
 static struct hci_tl_env_tag hci_tl_env; // :154:30
@@ -1542,104 +1542,104 @@ enum scan_dup_filter_policy {
 }; // :1735:6
 
 struct evt_mask {
-    uint8_t mask[8];
+    uint8_t mask[8]; // +0
 }; // :1928:8
 
 struct bd_addr {
-    uint8_t addr[6];
+    uint8_t addr[6]; // +0
 }; // :1944:8
 
 struct back_packet_info {
-    uint8_t used;
-    uint8_t advmode_headlen;
-    uint8_t head_flags;
-    struct bd_addr adva_addr;
-    struct bd_addr targeta_addr;
-    uint16_t adi;
-    uint8_t auxptr[3];
-    uint8_t syncinfo[18];
-    uint8_t txpwr;
-    uint8_t datalen;
-    uint8_t data[255];
+    uint8_t used; // +0
+    uint8_t advmode_headlen; // +1
+    uint8_t head_flags; // +2
+    struct bd_addr adva_addr; // +3
+    struct bd_addr targeta_addr; // +9
+    uint16_t adi; // +16
+    uint8_t auxptr[3]; // +18
+    uint8_t syncinfo[18]; // +21
+    uint8_t txpwr; // +39
+    uint8_t datalen; // +40
+    uint8_t data[255]; // +41
 }; // :1951:8
 
 struct access_addr {
-    uint8_t addr[4];
+    uint8_t addr[4]; // +0
 }; // :1968:8
 
 struct adv_data {
-    uint8_t data[31];
+    uint8_t data[31]; // +0
 }; // :1975:8
 
 struct scan_rsp_data {
-    uint8_t data[31];
+    uint8_t data[31]; // +0
 }; // :1988:8
 
 struct le_chnl_map {
-    uint8_t map[5];
+    uint8_t map[5]; // +0
 }; // :2010:8
 
 struct ltk {
-    uint8_t ltk[16];
+    uint8_t ltk[16]; // +0
 }; // :2017:8
 
 struct rand_nb {
-    uint8_t nb[8];
+    uint8_t nb[8]; // +0
 }; // :2047:8
 
 struct adv_report {
-    uint8_t evt_type;
-    uint8_t adv_addr_type;
-    struct bd_addr adv_addr;
-    uint8_t data_len;
-    uint8_t data[31];
-    uint8_t rssi;
+    uint8_t evt_type; // +0
+    uint8_t adv_addr_type; // +1
+    struct bd_addr adv_addr; // +2
+    uint8_t data_len; // +8
+    uint8_t data[31]; // +9
+    uint8_t rssi; // +40
 }; // :2054:8
 
 struct dir_adv_report {
-    uint8_t evt_type;
-    uint8_t addr_type;
-    struct bd_addr addr;
-    uint8_t dir_addr_type;
-    struct bd_addr dir_addr;
-    uint8_t rssi;
+    uint8_t evt_type; // +0
+    uint8_t addr_type; // +1
+    struct bd_addr addr; // +2
+    uint8_t dir_addr_type; // +8
+    struct bd_addr dir_addr; // +9
+    uint8_t rssi; // +15
 }; // :2111:8
 
 struct le_features {
-    uint8_t feats[8];
+    uint8_t feats[8]; // +0
 }; // :2129:8
 
 struct features {
-    uint8_t feats[8];
+    uint8_t feats[8]; // +0
 }; // :2186:8
 
 struct supp_cmds {
-    uint8_t cmds[64];
+    uint8_t cmds[64]; // +0
 }; // :2193:8
 
 struct le_states {
-    uint8_t supp_states[8];
+    uint8_t supp_states[8]; // +0
 }; // :2248:8
 
 struct crc_init {
-    uint8_t crc[3];
+    uint8_t crc[3]; // +0
 }; // :2264:8
 
 struct sess_k_div_x {
-    uint8_t skdiv[8];
+    uint8_t skdiv[8]; // +0
 }; // :2271:8
 
 struct sess_k_div {
-    uint8_t skd[16];
+    uint8_t skd[16]; // +0
 }; // :2278:8
 
 struct init_vect {
-    uint8_t iv[4];
+    uint8_t iv[4]; // +0
 }; // :2285:8
 
 struct t_public_key {
-    uint8_t x[32];
-    uint8_t y[32];
+    uint8_t x[32]; // +0
+    uint8_t y[32]; // +32
 }; // :2291:16
 
 typedef struct t_public_key t_public_key; // :2296:3
@@ -2071,514 +2071,514 @@ enum hci_evt_mask_page {
 }; // :642:6
 
 struct hci_acl_data_rx {
-    uint16_t conhdl;
-    uint8_t pb_bc_flag;
-    uint16_t length;
-    uint8_t rx_hdl;
+    uint16_t conhdl; // +0
+    uint8_t pb_bc_flag; // +2
+    uint16_t length; // +4
+    uint8_t rx_hdl; // +6
 }; // :654:8
 
 struct hci_acl_data_tx {
-    uint16_t conhdl;
-    uint8_t pb_bc_flag;
-    uint16_t length;
-    struct em_buf_node *buf;
+    uint16_t conhdl; // +0
+    uint8_t pb_bc_flag; // +2
+    uint16_t length; // +4
+    struct em_buf_node *buf; // +8
 }; // :673:8
 
 struct hci_basic_conhdl_cmd {
-    uint16_t conhdl;
+    uint16_t conhdl; // +0
 }; // :735:8
 
 struct hci_disconnect_cmd {
-    uint16_t conhdl;
-    uint8_t reason;
+    uint16_t conhdl; // +0
+    uint8_t reason; // +2
 }; // :1120:8
 
 struct hci_le_generate_dh_key_cmd {
-    uint8_t public_key[64];
+    uint8_t public_key[64]; // +0
 }; // :1396:8
 
 struct hci_set_evt_mask_cmd {
-    struct evt_mask event_mask;
+    struct evt_mask event_mask; // +0
 }; // :1445:8
 
 struct hci_flush_cmd_cmp_evt {
-    uint8_t status;
-    uint16_t conhdl;
+    uint8_t status; // +0
+    uint16_t conhdl; // +2
 }; // :1535:8
 
 struct hci_set_ctrl_to_host_flow_ctrl_cmd {
-    uint8_t flow_cntl;
+    uint8_t flow_cntl; // +0
 }; // :1788:8
 
 struct hci_host_buf_size_cmd {
-    uint16_t acl_pkt_len;
-    uint8_t sync_pkt_len;
-    uint16_t nb_acl_pkts;
-    uint16_t nb_sync_pkts;
+    uint16_t acl_pkt_len; // +0
+    uint8_t sync_pkt_len; // +2
+    uint16_t nb_acl_pkts; // +4
+    uint16_t nb_sync_pkts; // +6
 }; // :1795:8
 
 struct hci_host_nb_cmp_pkts_cmd {
-    uint8_t nb_of_hdl;
-    uint16_t con_hdl[3];
-    uint16_t nb_comp_pkt[3];
+    uint8_t nb_of_hdl; // +0
+    uint16_t con_hdl[3]; // +2
+    uint16_t nb_comp_pkt[3]; // +8
 }; // :1820:8
 
 struct hci_rd_auth_payl_to_cmd {
-    uint16_t conhdl;
+    uint16_t conhdl; // +0
 }; // :2334:8
 
 struct hci_rd_auth_payl_to_cmd_cmp_evt {
-    uint8_t status;
-    uint16_t conhdl;
-    uint16_t auth_payl_to;
+    uint8_t status; // +0
+    uint16_t conhdl; // +2
+    uint16_t auth_payl_to; // +4
 }; // :2341:8
 
 struct hci_rd_local_ver_info_cmd_cmp_evt {
-    uint8_t status;
-    uint8_t hci_ver;
-    uint16_t hci_rev;
-    uint8_t lmp_ver;
-    uint16_t manuf_name;
-    uint16_t lmp_subver;
+    uint8_t status; // +0
+    uint8_t hci_ver; // +1
+    uint16_t hci_rev; // +2
+    uint8_t lmp_ver; // +4
+    uint16_t manuf_name; // +6
+    uint16_t lmp_subver; // +8
 }; // :2412:8
 
 struct hci_rd_local_supp_cmds_cmd_cmp_evt {
-    uint8_t status;
-    struct supp_cmds local_cmds;
+    uint8_t status; // +0
+    struct supp_cmds local_cmds; // +1
 }; // :2429:8
 
 struct hci_rd_local_supp_feats_cmd_cmp_evt {
-    uint8_t status;
-    struct features feats;
+    uint8_t status; // +0
+    struct features feats; // +1
 }; // :2438:8
 
 struct hci_rd_buff_size_cmd_cmp_evt {
-    uint8_t status;
-    uint16_t hc_data_pk_len;
-    uint8_t hc_sync_pk_len;
-    uint16_t hc_tot_nb_data_pkts;
-    uint16_t hc_tot_nb_sync_pkts;
+    uint8_t status; // +0
+    uint16_t hc_data_pk_len; // +2
+    uint8_t hc_sync_pk_len; // +4
+    uint16_t hc_tot_nb_data_pkts; // +6
+    uint16_t hc_tot_nb_sync_pkts; // +8
 }; // :2466:8
 
 struct hci_rd_bd_addr_cmd_cmp_evt {
-    uint8_t status;
-    struct bd_addr local_addr;
+    uint8_t status; // +0
+    struct bd_addr local_addr; // +1
 }; // :2481:8
 
 struct hci_rd_rssi_cmd_cmp_evt {
-    uint8_t status;
-    uint16_t conhdl;
-    int8_t rssi;
+    uint8_t status; // +0
+    uint16_t conhdl; // +2
+    int8_t rssi; // +4
 }; // :2507:8
 
 struct hci_le_set_evt_mask_cmd {
-    struct evt_mask le_mask;
+    struct evt_mask le_mask; // +0
 }; // :2604:8
 
 struct hci_le_set_rand_addr_cmd {
-    struct bd_addr rand_addr;
+    struct bd_addr rand_addr; // +0
 }; // :2611:8
 
 struct hci_le_set_adv_param_cmd {
-    uint16_t adv_intv_min;
-    uint16_t adv_intv_max;
-    uint8_t adv_type;
-    uint8_t own_addr_type;
-    uint8_t peer_addr_type;
-    struct bd_addr peer_addr;
-    uint8_t adv_chnl_map;
-    uint8_t adv_filt_policy;
+    uint16_t adv_intv_min; // +0
+    uint16_t adv_intv_max; // +2
+    uint8_t adv_type; // +4
+    uint8_t own_addr_type; // +5
+    uint8_t peer_addr_type; // +6
+    struct bd_addr peer_addr; // +7
+    uint8_t adv_chnl_map; // +13
+    uint8_t adv_filt_policy; // +14
 }; // :2754:8
 
 struct hci_le_set_adv_data_cmd {
-    uint8_t adv_data_len;
-    struct adv_data data;
+    uint8_t adv_data_len; // +0
+    struct adv_data data; // +1
 }; // :2775:8
 
 struct hci_le_set_scan_rsp_data_cmd {
-    uint8_t scan_rsp_data_len;
-    struct scan_rsp_data data;
+    uint8_t scan_rsp_data_len; // +0
+    struct scan_rsp_data data; // +1
 }; // :2784:8
 
 struct hci_le_set_adv_en_cmd {
-    uint8_t adv_en;
+    uint8_t adv_en; // +0
 }; // :2793:8
 
 struct hci_le_set_scan_param_cmd {
-    uint8_t scan_type;
-    uint16_t scan_intv;
-    uint16_t scan_window;
-    uint8_t own_addr_type;
-    uint8_t scan_filt_policy;
+    uint8_t scan_type; // +0
+    uint16_t scan_intv; // +2
+    uint16_t scan_window; // +4
+    uint8_t own_addr_type; // +6
+    uint8_t scan_filt_policy; // +7
 }; // :2852:8
 
 struct hci_le_set_scan_en_cmd {
-    uint8_t scan_en;
-    uint8_t filter_duplic_en;
+    uint8_t scan_en; // +0
+    uint8_t filter_duplic_en; // +1
 }; // :2867:8
 
 struct hci_le_create_con_cmd {
-    uint16_t scan_intv;
-    uint16_t scan_window;
-    uint8_t init_filt_policy;
-    uint8_t peer_addr_type;
-    struct bd_addr peer_addr;
-    uint8_t own_addr_type;
-    uint16_t con_intv_min;
-    uint16_t con_intv_max;
-    uint16_t con_latency;
-    uint16_t superv_to;
-    uint16_t ce_len_min;
-    uint16_t ce_len_max;
+    uint16_t scan_intv; // +0
+    uint16_t scan_window; // +2
+    uint8_t init_filt_policy; // +4
+    uint8_t peer_addr_type; // +5
+    struct bd_addr peer_addr; // +6
+    uint8_t own_addr_type; // +12
+    uint16_t con_intv_min; // +14
+    uint16_t con_intv_max; // +16
+    uint16_t con_latency; // +18
+    uint16_t superv_to; // +20
+    uint16_t ce_len_min; // +22
+    uint16_t ce_len_max; // +24
 }; // :2876:8
 
 struct hci_le_wr_rfpath_cps_cmd {
-    uint16_t rf_txpath_compensation_value;
-    uint16_t rf_rxpath_compensation_value;
+    uint16_t rf_txpath_compensation_value; // +0
+    uint16_t rf_rxpath_compensation_value; // +2
 }; // :2974:8
 
 struct hci_le_add_dev_to_wlst_cmd {
-    uint8_t dev_addr_type;
-    struct bd_addr dev_addr;
+    uint8_t dev_addr_type; // +0
+    struct bd_addr dev_addr; // +1
 }; // :2983:8
 
 struct hci_le_set_host_ch_class_cmd {
-    struct le_chnl_map chmap;
+    struct le_chnl_map chmap; // +0
 }; // :3002:8
 
 struct hci_le_rx_test_cmd {
-    uint8_t rx_freq;
+    uint8_t rx_freq; // +0
 }; // :3010:8
 
 struct hci_le_tx_test_cmd {
-    uint8_t tx_freq;
-    uint8_t test_data_len;
-    uint8_t pk_payload_type;
+    uint8_t tx_freq; // +0
+    uint8_t test_data_len; // +1
+    uint8_t pk_payload_type; // +2
 }; // :3017:8
 
 struct hci_le_enc_cmd {
-    struct ltk key;
-    uint8_t plain_data[16];
+    struct ltk key; // +0
+    uint8_t plain_data[16]; // +16
 }; // :3054:8
 
 struct hci_le_con_update_cmd {
-    uint16_t conhdl;
-    uint16_t con_intv_min;
-    uint16_t con_intv_max;
-    uint16_t con_latency;
-    uint16_t superv_to;
-    uint16_t ce_len_min;
-    uint16_t ce_len_max;
+    uint16_t conhdl; // +0
+    uint16_t con_intv_min; // +2
+    uint16_t con_intv_max; // +4
+    uint16_t con_latency; // +6
+    uint16_t superv_to; // +8
+    uint16_t ce_len_min; // +10
+    uint16_t ce_len_max; // +12
 }; // :3063:8
 
 struct hci_le_start_enc_cmd {
-    uint16_t conhdl;
-    struct rand_nb nb;
-    uint16_t enc_div;
-    struct ltk ltk;
+    uint16_t conhdl; // +0
+    struct rand_nb nb; // +2
+    uint16_t enc_div; // +10
+    struct ltk ltk; // +12
 }; // :3082:8
 
 struct hci_le_ltk_req_reply_cmd {
-    uint16_t conhdl;
-    struct ltk ltk;
+    uint16_t conhdl; // +0
+    struct ltk ltk; // +2
 }; // :3095:8
 
 struct hci_le_rem_con_param_req_reply_cmd {
-    uint16_t conhdl;
-    uint16_t interval_min;
-    uint16_t interval_max;
-    uint16_t latency;
-    uint16_t timeout;
-    uint16_t min_ce_len;
-    uint16_t max_ce_len;
+    uint16_t conhdl; // +0
+    uint16_t interval_min; // +2
+    uint16_t interval_max; // +4
+    uint16_t latency; // +6
+    uint16_t timeout; // +8
+    uint16_t min_ce_len; // +10
+    uint16_t max_ce_len; // +12
 }; // :3104:8
 
 struct hci_le_rem_con_param_req_neg_reply_cmd {
-    uint16_t conhdl;
-    uint8_t reason;
+    uint16_t conhdl; // +0
+    uint8_t reason; // +2
 }; // :3123:8
 
 struct hci_le_set_data_len_cmd {
-    uint16_t conhdl;
-    uint16_t tx_octets;
-    uint16_t tx_time;
+    uint16_t conhdl; // +0
+    uint16_t tx_octets; // +2
+    uint16_t tx_time; // +4
 }; // :3133:8
 
 struct hci_le_wr_suggted_dft_data_len_cmd {
-    uint16_t suggted_max_tx_octets;
-    uint16_t suggted_max_tx_time;
+    uint16_t suggted_max_tx_octets; // +0
+    uint16_t suggted_max_tx_time; // +2
 }; // :3146:8
 
 struct hci_vsc_set_tx_pwr_cmd {
-    int8_t power;
+    int8_t power; // +0
 }; // :3259:8
 
 struct hci_disc_cmp_evt {
-    uint8_t status;
-    uint16_t conhdl;
-    uint8_t reason;
+    uint8_t status; // +0
+    uint16_t conhdl; // +2
+    uint8_t reason; // +4
 }; // :3341:8
 
 struct hci_basic_cmd_cmp_evt {
-    uint8_t status;
+    uint8_t status; // +0
 }; // :3352:8
 
 struct hci_basic_conhdl_cmd_cmp_evt {
-    uint8_t status;
-    uint16_t conhdl;
+    uint8_t status; // +0
+    uint16_t conhdl; // +2
 }; // :3359:8
 
 struct hci_cmd_stat_event {
-    uint8_t status;
+    uint8_t status; // +0
 }; // :3393:8
 
 struct hci_nb_cmp_pkts_evt {
-    uint8_t nb_of_hdl;
-    uint16_t conhdl[1];
-    uint16_t nb_comp_pkt[1];
+    uint8_t nb_of_hdl; // +0
+    uint16_t conhdl[1]; // +2
+    uint16_t nb_comp_pkt[1]; // +4
 }; // :3400:8
 
 struct hci_data_buf_ovflw_evt {
-    uint8_t link_type;
+    uint8_t link_type; // +0
 }; // :3411:8
 
 struct hci_enc_change_evt {
-    uint8_t status;
-    uint16_t conhdl;
-    uint8_t enc_stat;
+    uint8_t status; // +0
+    uint16_t conhdl; // +2
+    uint8_t enc_stat; // +4
 }; // :3425:8
 
 struct hci_enc_key_ref_cmp_evt {
-    uint8_t status;
-    uint16_t conhdl;
+    uint8_t status; // +0
+    uint16_t conhdl; // +2
 }; // :3436:8
 
 struct hci_auth_payl_to_exp_evt {
-    uint16_t conhdl;
+    uint16_t conhdl; // +0
 }; // :3445:8
 
 struct hci_flush_occurred_evt {
-    uint16_t conhdl;
+    uint16_t conhdl; // +0
 }; // :3533:8
 
 struct hci_rd_rem_ver_info_cmp_evt {
-    uint8_t status;
-    uint16_t conhdl;
-    uint8_t vers;
-    uint16_t compid;
-    uint16_t subvers;
+    uint8_t status; // +0
+    uint16_t conhdl; // +2
+    uint8_t vers; // +4
+    uint16_t compid; // +6
+    uint16_t subvers; // +8
 }; // :3601:8
 
 struct hci_le_rd_local_supp_feats_cmd_cmp_evt {
-    uint8_t status;
-    struct le_features feats;
+    uint8_t status; // +0
+    struct le_features feats; // +1
 }; // :3881:8
 
 struct hci_rd_adv_chnl_tx_pw_cmd_cmp_evt {
-    uint8_t status;
-    int8_t adv_tx_pw_lvl;
+    uint8_t status; // +0
+    int8_t adv_tx_pw_lvl; // +1
 }; // :3890:8
 
 struct hci_rd_wlst_size_cmd_cmp_evt {
-    uint8_t status;
-    uint8_t wlst_size;
+    uint8_t status; // +0
+    uint8_t wlst_size; // +1
 }; // :3899:8
 
 struct hci_le_rd_buff_size_cmd_cmp_evt {
-    uint8_t status;
-    uint16_t hc_data_pk_len;
-    uint8_t hc_tot_nb_data_pkts;
+    uint8_t status; // +0
+    uint16_t hc_data_pk_len; // +2
+    uint8_t hc_tot_nb_data_pkts; // +4
 }; // :3908:8
 
 struct hci_le_rand_cmd_cmp_evt {
-    uint8_t status;
-    struct rand_nb nb;
+    uint8_t status; // +0
+    struct rand_nb nb; // +1
 }; // :3927:8
 
 struct hci_rd_supp_states_cmd_cmp_evt {
-    uint8_t status;
-    struct le_states states;
+    uint8_t status; // +0
+    struct le_states states; // +1
 }; // :3936:8
 
 struct hci_rd_trans_pwr_cmd_cmp_evt {
-    uint8_t status;
-    char min_tx_pwr;
-    char max_tx_pwr;
+    uint8_t status; // +0
+    char min_tx_pwr; // +1
+    char max_tx_pwr; // +2
 }; // :3962:8
 
 struct hci_rd_rfpath_cps_cmd_cmp_evt {
-    uint8_t status;
-    uint16_t rf_txpath_compensation_value;
-    uint16_t rf_rxpath_compensation_value;
+    uint8_t status; // +0
+    uint16_t rf_txpath_compensation_value; // +2
+    uint16_t rf_rxpath_compensation_value; // +4
 }; // :3972:8
 
 struct hci_test_end_cmd_cmp_evt {
-    uint8_t status;
-    uint16_t nb_packet_received;
+    uint8_t status; // +0
+    uint16_t nb_packet_received; // +2
 }; // :3984:8
 
 struct hci_le_enc_cmd_cmp_evt {
-    uint8_t status;
-    uint8_t encrypted_data[16];
+    uint8_t status; // +0
+    uint8_t encrypted_data[16]; // +1
 }; // :3993:8
 
 struct hci_le_adv_report_evt {
-    uint8_t subcode;
-    uint8_t nb_reports;
-    struct adv_report adv_rep[1];
+    uint8_t subcode; // +0
+    uint8_t nb_reports; // +1
+    struct adv_report adv_rep[1]; // +2
 }; // :4003:8
 
 struct hci_le_rd_chnl_map_cmd_cmp_evt {
-    uint8_t status;
-    uint16_t conhdl;
-    struct le_chnl_map ch_map;
+    uint8_t status; // +0
+    uint16_t conhdl; // +2
+    struct le_chnl_map ch_map; // +4
 }; // :4035:8
 
 struct hci_le_rd_suggted_dft_data_len_cmd_cmp_evt {
-    uint8_t status;
-    uint16_t suggted_max_tx_octets;
-    uint16_t suggted_max_tx_time;
+    uint8_t status; // +0
+    uint16_t suggted_max_tx_octets; // +2
+    uint16_t suggted_max_tx_time; // +4
 }; // :4064:8
 
 struct hci_le_rd_max_data_len_cmd_cmp_evt {
-    uint8_t status;
-    uint16_t suppted_max_tx_octets;
-    uint16_t suppted_max_tx_time;
-    uint16_t suppted_max_rx_octets;
-    uint16_t suppted_max_rx_time;
+    uint8_t status; // +0
+    uint16_t suppted_max_tx_octets; // +2
+    uint16_t suppted_max_tx_time; // +4
+    uint16_t suppted_max_rx_octets; // +6
+    uint16_t suppted_max_rx_time; // +8
 }; // :4074:8
 
 struct hci_wr_auth_payl_to_cmd {
-    uint16_t conhdl;
-    uint16_t auth_payl_to;
+    uint16_t conhdl; // +0
+    uint16_t auth_payl_to; // +2
 }; // :4117:8
 
 struct hci_wr_auth_payl_to_cmd_cmp_evt {
-    uint8_t status;
-    uint16_t conhdl;
+    uint8_t status; // +0
+    uint16_t conhdl; // +2
 }; // :4126:8
 
 struct hci_le_con_update_cmp_evt {
-    uint8_t subcode;
-    uint8_t status;
-    uint16_t conhdl;
-    uint16_t con_interval;
-    uint16_t con_latency;
-    uint16_t sup_to;
+    uint8_t subcode; // +0
+    uint8_t status; // +1
+    uint16_t conhdl; // +2
+    uint16_t con_interval; // +4
+    uint16_t con_latency; // +6
+    uint16_t sup_to; // +8
 }; // :4135:8
 
 struct hci_le_con_cmp_evt {
-    uint8_t subcode;
-    uint8_t status;
-    uint16_t conhdl;
-    uint8_t role;
-    uint8_t peer_addr_type;
-    struct bd_addr peer_addr;
-    uint16_t con_interval;
-    uint16_t con_latency;
-    uint16_t sup_to;
-    uint8_t clk_accuracy;
+    uint8_t subcode; // +0
+    uint8_t status; // +1
+    uint16_t conhdl; // +2
+    uint8_t role; // +4
+    uint8_t peer_addr_type; // +5
+    struct bd_addr peer_addr; // +6
+    uint16_t con_interval; // +12
+    uint16_t con_latency; // +14
+    uint16_t sup_to; // +16
+    uint8_t clk_accuracy; // +18
 }; // :4152:8
 
 struct hci_le_rd_rem_used_feats_cmd {
-    uint16_t conhdl;
+    uint16_t conhdl; // +0
 }; // :4177:8
 
 struct hci_le_rd_rem_used_feats_cmd_cmp_evt {
-    uint8_t subcode;
-    uint8_t status;
-    uint16_t conhdl;
-    struct le_features feats_used;
+    uint8_t subcode; // +0
+    uint8_t status; // +1
+    uint16_t conhdl; // +2
+    struct le_features feats_used; // +4
 }; // :4184:8
 
 struct hci_rd_tx_pwr_lvl_cmd {
-    uint16_t conhdl;
-    uint8_t type;
+    uint16_t conhdl; // +0
+    uint8_t type; // +2
 }; // :4197:8
 
 struct hci_rd_tx_pwr_lvl_cmd_cmp_evt {
-    uint8_t status;
-    uint16_t conhdl;
-    uint8_t tx_pow_lvl;
+    uint8_t status; // +0
+    uint16_t conhdl; // +2
+    uint8_t tx_pow_lvl; // +4
 }; // :4206:8
 
 struct hci_rd_rem_ver_info_cmd {
-    uint16_t conhdl;
+    uint16_t conhdl; // +0
 }; // :4217:8
 
 struct hci_le_rem_con_param_req_evt {
-    uint8_t subcode;
-    uint16_t conhdl;
-    uint16_t interval_min;
-    uint16_t interval_max;
-    uint16_t latency;
-    uint16_t timeout;
+    uint8_t subcode; // +0
+    uint16_t conhdl; // +2
+    uint16_t interval_min; // +4
+    uint16_t interval_max; // +6
+    uint16_t latency; // +8
+    uint16_t timeout; // +10
 }; // :4224:8
 
 struct hci_le_enh_con_cmp_evt {
-    uint8_t subcode;
-    uint8_t status;
-    uint16_t conhdl;
-    uint8_t role;
-    uint8_t peer_addr_type;
-    struct bd_addr peer_addr;
-    struct bd_addr loc_rslv_priv_addr;
-    struct bd_addr peer_rslv_priv_addr;
-    uint16_t con_interval;
-    uint16_t con_latency;
-    uint16_t sup_to;
-    uint8_t clk_accuracy;
+    uint8_t subcode; // +0
+    uint8_t status; // +1
+    uint16_t conhdl; // +2
+    uint8_t role; // +4
+    uint8_t peer_addr_type; // +5
+    struct bd_addr peer_addr; // +6
+    struct bd_addr loc_rslv_priv_addr; // +12
+    struct bd_addr peer_rslv_priv_addr; // +18
+    uint16_t con_interval; // +24
+    uint16_t con_latency; // +26
+    uint16_t sup_to; // +28
+    uint8_t clk_accuracy; // +30
 }; // :4242:8
 
 struct hci_le_dir_adv_rep_evt {
-    uint8_t subcode;
-    uint8_t nb_reports;
-    struct dir_adv_report adv_rep[1];
+    uint8_t subcode; // +0
+    uint8_t nb_reports; // +1
+    struct dir_adv_report adv_rep[1]; // +2
 }; // :4295:8
 
 struct hci_le_ltk_request_evt {
-    uint8_t subcode;
-    uint16_t conhdl;
-    struct rand_nb rand;
-    uint16_t ediv;
+    uint8_t subcode; // +0
+    uint16_t conhdl; // +2
+    struct rand_nb rand; // +4
+    uint16_t ediv; // +12
 }; // :4307:8
 
 struct hci_le_data_len_chg_evt {
-    uint8_t subcode;
-    uint16_t conhdl;
-    uint16_t max_tx_octets;
-    uint16_t max_tx_time;
-    uint16_t max_rx_octets;
-    uint16_t max_rx_time;
+    uint8_t subcode; // +0
+    uint16_t conhdl; // +2
+    uint16_t max_tx_octets; // +4
+    uint16_t max_tx_time; // +6
+    uint16_t max_rx_octets; // +8
+    uint16_t max_rx_time; // +10
 }; // :4320:8
 
 struct hci_le_generate_dhkey_cmp_evt {
-    uint8_t subcode;
-    uint8_t status;
-    uint8_t dh_key[32];
+    uint8_t subcode; // +0
+    uint8_t status; // +1
+    uint8_t dh_key[32]; // +2
 }; // :4412:8
 
 struct hci_le_generate_p256_public_key_cmp_evt {
-    uint8_t subcode;
-    uint8_t status;
-    t_public_key public_key;
+    uint8_t subcode; // +0
+    uint8_t status; // +1
+    t_public_key public_key; // +2
 }; // :4420:8
 
 struct hci_le_ch_sel_algo_evt {
-    uint8_t subcode;
-    uint16_t conhdl;
-    uint8_t chSel;
+    uint8_t subcode; // +0
+    uint16_t conhdl; // +2
+    uint8_t chSel; // +4
 }; // :4445:8
 
 /* ======== components/network/ble/blecontroller/modules/common/api/co_list.h ======== */
 
 struct co_list_hdr {
-    struct co_list_hdr *next;
+    struct co_list_hdr *next; // +0
 }; // :53:8
 
 struct co_list {
-    struct co_list_hdr *first;
-    struct co_list_hdr *last;
+    struct co_list_hdr *first; // +0
+    struct co_list_hdr *last; // +4
 }; // :60:8
 
 /* ======== components/network/ble/blecontroller/modules/common/api/co_llcp.h ======== */
@@ -2637,148 +2637,148 @@ enum co_llcp_length {
 }; // :106:6
 
 struct llcp_con_upd_ind {
-    uint8_t opcode;
-    uint8_t win_size;
-    uint16_t win_off;
-    uint16_t interv;
-    uint16_t latency;
-    uint16_t timeout;
-    uint16_t instant;
+    uint8_t opcode; // +0
+    uint8_t win_size; // +1
+    uint16_t win_off; // +2
+    uint16_t interv; // +4
+    uint16_t latency; // +6
+    uint16_t timeout; // +8
+    uint16_t instant; // +10
 }; // :146:8
 
 struct llcp_channel_map_ind {
-    uint8_t opcode;
-    struct le_chnl_map ch_map;
-    uint16_t instant;
+    uint8_t opcode; // +0
+    struct le_chnl_map ch_map; // +1
+    uint16_t instant; // +6
 }; // :165:8
 
 struct llcp_terminate_ind {
-    uint8_t opcode;
-    uint8_t err_code;
+    uint8_t opcode; // +0
+    uint8_t err_code; // +1
 }; // :176:8
 
 struct llcp_enc_req {
-    uint8_t opcode;
-    struct rand_nb rand;
-    uint8_t ediv[2];
-    struct sess_k_div_x skdm;
-    struct init_vect ivm;
+    uint8_t opcode; // +0
+    struct rand_nb rand; // +1
+    uint8_t ediv[2]; // +9
+    struct sess_k_div_x skdm; // +11
+    struct init_vect ivm; // +19
 }; // :185:8
 
 struct llcp_enc_rsp {
-    uint8_t opcode;
-    struct sess_k_div_x skds;
-    struct init_vect ivs;
+    uint8_t opcode; // +0
+    struct sess_k_div_x skds; // +1
+    struct init_vect ivs; // +9
 }; // :200:8
 
 struct llcp_start_enc_req {
-    uint8_t opcode;
+    uint8_t opcode; // +0
 }; // :211:8
 
 struct llcp_start_enc_rsp {
-    uint8_t opcode;
+    uint8_t opcode; // +0
 }; // :218:8
 
 struct llcp_unknown_rsp {
-    uint8_t opcode;
-    uint8_t unk_type;
+    uint8_t opcode; // +0
+    uint8_t unk_type; // +1
 }; // :225:8
 
 struct llcp_feats_req {
-    uint8_t opcode;
-    struct le_features feats;
+    uint8_t opcode; // +0
+    struct le_features feats; // +1
 }; // :234:8
 
 struct llcp_feats_rsp {
-    uint8_t opcode;
-    struct le_features feats;
+    uint8_t opcode; // +0
+    struct le_features feats; // +1
 }; // :243:8
 
 struct llcp_pause_enc_req {
-    uint8_t opcode;
+    uint8_t opcode; // +0
 }; // :252:8
 
 struct llcp_pause_enc_rsp {
-    uint8_t opcode;
+    uint8_t opcode; // +0
 }; // :259:8
 
 struct llcp_vers_ind {
-    uint8_t opcode;
-    uint8_t vers;
-    uint16_t compid;
-    uint16_t subvers;
+    uint8_t opcode; // +0
+    uint8_t vers; // +1
+    uint16_t compid; // +2
+    uint16_t subvers; // +4
 }; // :266:8
 
 struct llcp_reject_ind {
-    uint8_t opcode;
-    uint8_t err_code;
+    uint8_t opcode; // +0
+    uint8_t err_code; // +1
 }; // :279:8
 
 struct llcp_slave_feature_req {
-    uint8_t opcode;
-    struct le_features feats;
+    uint8_t opcode; // +0
+    struct le_features feats; // +1
 }; // :288:8
 
 struct llcp_con_param_req {
-    uint8_t opcode;
-    uint16_t interval_min;
-    uint16_t interval_max;
-    uint16_t latency;
-    uint16_t timeout;
-    uint8_t pref_period;
-    uint16_t ref_con_event_count;
-    uint16_t offset0;
-    uint16_t offset1;
-    uint16_t offset2;
-    uint16_t offset3;
-    uint16_t offset4;
-    uint16_t offset5;
+    uint8_t opcode; // +0
+    uint16_t interval_min; // +2
+    uint16_t interval_max; // +4
+    uint16_t latency; // +6
+    uint16_t timeout; // +8
+    uint8_t pref_period; // +10
+    uint16_t ref_con_event_count; // +12
+    uint16_t offset0; // +14
+    uint16_t offset1; // +16
+    uint16_t offset2; // +18
+    uint16_t offset3; // +20
+    uint16_t offset4; // +22
+    uint16_t offset5; // +24
 }; // :297:8
 
 struct llcp_con_param_rsp {
-    uint8_t opcode;
-    uint16_t interval_min;
-    uint16_t interval_max;
-    uint16_t latency;
-    uint16_t timeout;
-    uint8_t pref_period;
-    uint16_t ref_con_event_count;
-    uint16_t offset0;
-    uint16_t offset1;
-    uint16_t offset2;
-    uint16_t offset3;
-    uint16_t offset4;
-    uint16_t offset5;
+    uint8_t opcode; // +0
+    uint16_t interval_min; // +2
+    uint16_t interval_max; // +4
+    uint16_t latency; // +6
+    uint16_t timeout; // +8
+    uint8_t pref_period; // +10
+    uint16_t ref_con_event_count; // +12
+    uint16_t offset0; // +14
+    uint16_t offset1; // +16
+    uint16_t offset2; // +18
+    uint16_t offset3; // +20
+    uint16_t offset4; // +22
+    uint16_t offset5; // +24
 }; // :328:8
 
 struct llcp_reject_ind_ext {
-    uint8_t opcode;
-    uint8_t rej_opcode;
-    uint8_t err_code;
+    uint8_t opcode; // +0
+    uint8_t rej_opcode; // +1
+    uint8_t err_code; // +2
 }; // :359:8
 
 struct llcp_ping_req {
-    uint8_t opcode;
+    uint8_t opcode; // +0
 }; // :370:8
 
 struct llcp_ping_rsp {
-    uint8_t opcode;
+    uint8_t opcode; // +0
 }; // :377:8
 
 struct llcp_length_req {
-    uint8_t opcode;
-    uint16_t max_rx_octets;
-    uint16_t max_rx_time;
-    uint16_t max_tx_octets;
-    uint16_t max_tx_time;
+    uint8_t opcode; // +0
+    uint16_t max_rx_octets; // +2
+    uint16_t max_rx_time; // +4
+    uint16_t max_tx_octets; // +6
+    uint16_t max_tx_time; // +8
 }; // :384:8
 
 struct llcp_length_rsp {
-    uint8_t opcode;
-    uint16_t max_rx_octets;
-    uint16_t max_rx_time;
-    uint16_t max_tx_octets;
-    uint16_t max_tx_time;
+    uint8_t opcode; // +0
+    uint16_t max_rx_octets; // +2
+    uint16_t max_rx_time; // +4
+    uint16_t max_tx_octets; // +6
+    uint16_t max_tx_time; // +8
 }; // :399:8
 
 union llcp_pdu {
@@ -2865,55 +2865,55 @@ void ble_dbg_platform_reset_complete(uint32_t error); // :81:6
 /* ======== components/network/ble/blecontroller/modules/ecc_p256/api/ecc_p256.h ======== */
 
 struct ecc_result_ind {
-    uint8_t key_res_x[32];
-    uint8_t key_res_y[32];
+    uint8_t key_res_x[32]; // +0
+    uint8_t key_res_y[32]; // +32
 }; // :47:8
 
 /* ======== components/network/ble/blecontroller/modules/ecc_p256/src/ecc_p256.c ======== */
 
-typedef long long unsigned int u64; // :110:32
+typedef unsigned long long u64; // :110:32
 typedef uint8_t u_int8; // :112:17
 typedef uint32_t u_int32; // :114:18
 
 struct bigHex256 {
-    u_int32 num[8];
-    u_int32 len;
-    u_int32 sign;
+    u_int32 num[8]; // +0
+    u_int32 len; // +32
+    u_int32 sign; // +36
 }; // :143:16
 
 typedef struct bigHex256 bigHex256; // :148:3
 
 struct ECC_Point256 {
-    bigHex256 x;
-    bigHex256 y;
+    bigHex256 x; // +0
+    bigHex256 y; // +40
 }; // :159:16
 
 typedef struct ECC_Point256 ECC_Point256; // :163:3
 
 struct ECC_Jacobian_Point256 {
-    bigHex256 x;
-    bigHex256 y;
-    bigHex256 z;
+    bigHex256 x; // +0
+    bigHex256 y; // +40
+    bigHex256 z; // +80
 }; // :165:16
 
 typedef struct ECC_Jacobian_Point256 ECC_Jacobian_Point256; // :170:3
 
 struct ecc_elt_tag {
-    struct co_list_hdr hdr;
-    u_int32 Point_Mul_Word256;
-    ECC_Jacobian_Point256 Jacobian_PointQ256;
-    ECC_Jacobian_Point256 Jacobian_PointR256;
-    bigHex256 Pk256;
-    ke_msg_id_t msg_id;
-    ke_task_id_t client_id;
-    uint32_t current_val;
-    uint32_t bit_cursor;
-    uint8_t key_type;
-    ECC_Jacobian_Point256 *win_4_table;
+    struct co_list_hdr hdr; // +0
+    u_int32 Point_Mul_Word256; // +4
+    ECC_Jacobian_Point256 Jacobian_PointQ256; // +8
+    ECC_Jacobian_Point256 Jacobian_PointR256; // +128
+    bigHex256 Pk256; // +248
+    ke_msg_id_t msg_id; // +288
+    ke_task_id_t client_id; // +290
+    uint32_t current_val; // +292
+    uint32_t bit_cursor; // +296
+    uint8_t key_type; // +300
+    ECC_Jacobian_Point256 *win_4_table; // +304
 }; // :175:8
 
 struct ecc_env_tag {
-    struct co_list ongoing_mul;
+    struct co_list ongoing_mul; // +0
 }; // :209:8
 
 const u_int8 BasePoint_x_256[32]; // :227:14
@@ -2966,12 +2966,12 @@ typedef uint8_t ke_state_t; // :70:17
 typedef uint16_t ke_msg_id_t; // :76:18
 
 struct ke_msg {
-    struct co_list_hdr hdr;
-    ke_msg_id_t id;
-    ke_task_id_t dest_id;
-    ke_task_id_t src_id;
-    uint16_t param_len;
-    uint32_t param[1];
+    struct co_list_hdr hdr; // +0
+    ke_msg_id_t id; // +4
+    ke_task_id_t dest_id; // +6
+    ke_task_id_t src_id; // +8
+    uint16_t param_len; // +10
+    uint32_t param[1]; // +12
 }; // :79:8
 
 enum ke_msg_status_tag {
@@ -2993,30 +2993,30 @@ enum KE_TASK_STATUS {
 typedef int (*ke_msg_func_t)(const ke_msg_id_t, const void *, const ke_task_id_t, const ke_task_id_t); // :62:15
 
 struct ke_msg_handler {
-    ke_msg_id_t id;
-    ke_msg_func_t func;
+    ke_msg_id_t id; // +0
+    ke_msg_func_t func; // +4
 }; // :78:8
 
 struct ke_state_handler {
-    const struct ke_msg_handler *msg_table;
-    uint16_t msg_cnt;
+    const struct ke_msg_handler *msg_table; // +0
+    uint16_t msg_cnt; // +4
 }; // :87:8
 
 struct ke_task_desc {
-    const struct ke_state_handler *state_handler;
-    const struct ke_state_handler *default_handler;
-    ke_state_t *state;
-    uint16_t state_max;
-    uint16_t idx_max;
+    const struct ke_state_handler *state_handler; // +0
+    const struct ke_state_handler *default_handler; // +4
+    ke_state_t *state; // +8
+    uint16_t state_max; // +12
+    uint16_t idx_max; // +14
 }; // :102:8
 
 /* ======== components/network/ble/blecontroller/modules/ke/api/ke_timer.h ======== */
 
 struct ke_timer {
-    struct ke_timer *next;
-    ke_msg_id_t id;
-    ke_task_id_t task;
-    uint32_t time;
+    struct ke_timer *next; // +0
+    ke_msg_id_t id; // +4
+    ke_task_id_t task; // +6
+    uint32_t time; // +8
 }; // :47:8
 
 /* ======== components/network/ble/blecontroller/modules/ke/src/ke.c ======== */
@@ -3033,11 +3033,11 @@ bool ble_ke_sleep_check(void); // :207:24
 /* ======== components/network/ble/blecontroller/modules/ke/src/ke_env.h ======== */
 
 struct ble_ke_env_tag {
-    struct co_list queue_sent;
-    struct co_list queue_saved;
-    struct co_list queue_timer;
-    struct mblock_free *heap[2];
-    uint16_t heap_size[2];
+    struct co_list queue_sent; // +0
+    struct co_list queue_saved; // +8
+    struct co_list queue_timer; // +16
+    struct mblock_free *heap[2]; // +24
+    uint16_t heap_size[2]; // +32
 }; // :40:8
 
 struct ble_ke_env_tag ble_ke_env; // :67:30
@@ -3047,9 +3047,9 @@ struct ble_ke_env_tag ble_ke_env; // :67:30
 typedef void (*p_callback_t)(void); // :48:16
 
 struct ble_ke_event_env_tag {
-    uint32_t event_field;
-    p_callback_t callback[10];
-    uint8_t state;
+    uint32_t event_field; // +0
+    p_callback_t callback[10]; // +4
+    uint8_t state; // +44
 }; // :61:8
 
 struct ble_ke_event_env_tag ble_ke_event_env; // :80:30
@@ -3073,15 +3073,15 @@ void ble_ke_event_schedule(void); // :342:7
 /* ======== components/network/ble/blecontroller/modules/ke/src/ke_mem.c ======== */
 
 struct mblock_free {
-    uint16_t corrupt_check;
-    uint16_t free_size;
-    struct mblock_free *next;
-    struct mblock_free *previous;
+    uint16_t corrupt_check; // +0
+    uint16_t free_size; // +2
+    struct mblock_free *next; // +4
+    struct mblock_free *previous; // +8
 }; // :49:8
 
 struct mblock_used {
-    uint16_t corrupt_check;
-    uint16_t size;
+    uint16_t corrupt_check; // +0
+    uint16_t size; // +2
 }; // :62:8
 
 uint32_t _patch_ble_ke_mem_is_in_heap(void *pRet, uint8_t type, void *mem_ptr); // :76:10
@@ -3125,11 +3125,11 @@ void ble_ke_queue_insert(struct co_list *const queue, struct co_list_hdr *const 
 /* ======== components/network/ble/blecontroller/modules/ke/src/ke_task.c ======== */
 
 struct ke_task_elem {
-    const struct ke_task_desc *p_desc;
+    const struct ke_task_desc *p_desc; // +0
 }; // :54:8
 
 struct ble_ke_task_env_tag {
-    struct ke_task_elem task_list[5];
+    struct ke_task_elem task_list[5]; // +0
 }; // :60:8
 
 struct ble_ke_task_env_tag ble_ke_task_env; // :73:29
@@ -3208,8 +3208,8 @@ void ble_rf_init(struct rwip_rf_api *api); // :229:6
 /* ======== components/network/ble/blecontroller/modules/rwip/api/rwip.h ======== */
 
 typedef struct {
-    uint8_t msg_type;
-    void *params;
+    uint8_t msg_type; // +0
+    void *params; // +4
 } rw_task_msg_t; // :48:2
 
 enum rw_task_msg_type {
@@ -3235,36 +3235,36 @@ enum rwip_eif_types {
 }; // :91:6
 
 struct rwip_rf_api {
-    void (*reset)(void);
-    void (*force_agc_enable)(bool);
-    bool (*txpwr_dec)(uint8_t);
-    bool (*txpwr_inc)(uint8_t);
-    void (*txpwr_max_set)(int8_t);
-    uint8_t (*txpwr_dbm_get)(uint8_t, uint8_t);
-    uint8_t (*txpwr_cs_get)(int8_t);
-    int8_t (*rssi_convert)(uint8_t);
-    uint32_t (*reg_rd)(uint16_t);
-    void (*reg_wr)(uint16_t, uint32_t);
-    void (*sleep)(void);
-    uint8_t txpwr_max;
-    int8_t rssi_high_thr;
-    int8_t rssi_low_thr;
-    int8_t rssi_interf_thr;
-    uint8_t wakeup_delay;
+    void (*reset)(void); // +0
+    void (*force_agc_enable)(bool); // +4
+    bool (*txpwr_dec)(uint8_t); // +8
+    bool (*txpwr_inc)(uint8_t); // +12
+    void (*txpwr_max_set)(int8_t); // +16
+    uint8_t (*txpwr_dbm_get)(uint8_t, uint8_t); // +20
+    uint8_t (*txpwr_cs_get)(int8_t); // +24
+    int8_t (*rssi_convert)(uint8_t); // +28
+    uint32_t (*reg_rd)(uint16_t); // +32
+    void (*reg_wr)(uint16_t, uint32_t); // +36
+    void (*sleep)(void); // +40
+    uint8_t txpwr_max; // +44
+    int8_t rssi_high_thr; // +45
+    int8_t rssi_low_thr; // +46
+    int8_t rssi_interf_thr; // +47
+    uint8_t wakeup_delay; // +48
 }; // :129:8
 
 struct rwip_prio {
-    uint8_t value;
-    uint8_t increment;
+    uint8_t value; // +0
+    uint8_t increment; // +1
 }; // :166:8
 
 typedef void (*rwip_eif_callback)(void *, uint8_t); // :190:16
 
 struct rwip_eif_api {
-    void (*read)(uint8_t *, uint32_t, rwip_eif_callback, void *);
-    void (*write)(const uint8_t *, uint32_t, rwip_eif_callback, void *);
-    void (*flow_on)(void);
-    bool (*flow_off)(void);
+    void (*read)(uint8_t *, uint32_t, rwip_eif_callback, void *); // +0
+    void (*write)(const uint8_t *, uint32_t, rwip_eif_callback, void *); // +4
+    void (*flow_on)(void); // +8
+    bool (*flow_off)(void); // +12
 }; // :195:8
 
 struct rwip_rf_api rwip_rf; // :244:27
@@ -3415,20 +3415,20 @@ enum TASK_API_ID {
 /* ======== components/network/ble/blecontroller/modules/rwip/src/rwip.c ======== */
 
 typedef struct {
-    uint32_t time;
-    uint32_t next_tick;
+    uint32_t time; // +0
+    uint32_t next_tick; // +4
 } rwip_time_t; // :142:3
 
 const struct rwip_prio rwip_priority[7]; // :190:24
 const uint8_t rwip_coex_cfg[5]; // :225:15
 
 struct rwip_env_tag {
-    uint32_t lp_cycle_wakeup_delay;
-    uint32_t sleep_acc_error;
-    uint16_t sleep_algo_dur;
-    uint16_t prevent_sleep;
-    bool sleep_enable;
-    bool ext_wakeup_enable;
+    uint32_t lp_cycle_wakeup_delay; // +0
+    uint32_t sleep_acc_error; // +4
+    uint16_t sleep_algo_dur; // +8
+    uint16_t prevent_sleep; // +10
+    bool sleep_enable; // +12
+    bool ext_wakeup_enable; // +13
 }; // :258:8
 
 static struct rwip_env_tag rwip_env; // :280:28
@@ -3487,74 +3487,74 @@ const struct rwip_eif_api *rwip_eif_get(uint8_t type); // :890:28
 struct pka0_pld_cfg {
     union {
         struct {
-            uint32_t size:12;
-            uint32_t d_reg_index:8;
-            uint32_t d_reg_type:4;
-            uint32_t op:7;
-            uint32_t last_op:1;
+            uint32_t size:12; // +0
+            uint32_t d_reg_index:8; // +0
+            uint32_t d_reg_type:4; // +0
+            uint32_t op:7; // +0
+            uint32_t last_op:1; // +0
         } BF;
         uint32_t WORD;
-    } value;
+    } value; // +0
 }; // :48:8
 
 struct pka0_common_op_first_cfg {
     union {
         struct {
-            uint32_t s0_reg_idx:8;
-            uint32_t s0_reg_type:4;
-            uint32_t d_reg_idx:8;
-            uint32_t d_reg_type:4;
-            uint32_t op:7;
-            uint32_t last_op:1;
+            uint32_t s0_reg_idx:8; // +0
+            uint32_t s0_reg_type:4; // +0
+            uint32_t d_reg_idx:8; // +0
+            uint32_t d_reg_type:4; // +0
+            uint32_t op:7; // +0
+            uint32_t last_op:1; // +0
         } BF;
         uint32_t WORD;
-    } value;
+    } value; // +0
 }; // :61:8
 
 struct pka0_common_op_snd_cfg_S1_only {
     union {
         struct {
-            uint32_t reserved_0_11:12;
-            uint32_t s1_reg_idx:8;
-            uint32_t s1_reg_type:4;
-            uint32_t reserved_24_31:8;
+            uint32_t reserved_0_11:12; // +0
+            uint32_t s1_reg_idx:8; // +0
+            uint32_t s1_reg_type:4; // +0
+            uint32_t reserved_24_31:8; // +0
         } BF;
         uint32_t WORD;
-    } value;
+    } value; // +0
 }; // :75:8
 
 struct pka0_common_op_snd_cfg_S2_only {
     union {
         struct {
-            uint32_t s2_reg_idx:8;
-            uint32_t s2_reg_type:4;
-            uint32_t reserved_12_31:20;
+            uint32_t s2_reg_idx:8; // +0
+            uint32_t s2_reg_type:4; // +0
+            uint32_t reserved_12_31:20; // +0
         } BF;
         uint32_t WORD;
-    } value;
+    } value; // +0
 }; // :87:8
 
 struct pka0_common_op_snd_cfg_S1_S2 {
     union {
         struct {
-            uint32_t s2_reg_idx:8;
-            uint32_t s2_reg_type:4;
-            uint32_t s1_reg_idx:8;
-            uint32_t s1_reg_type:4;
-            uint32_t reserved_24_31:8;
+            uint32_t s2_reg_idx:8; // +0
+            uint32_t s2_reg_type:4; // +0
+            uint32_t s1_reg_idx:8; // +0
+            uint32_t s1_reg_type:4; // +0
+            uint32_t reserved_24_31:8; // +0
         } BF;
         uint32_t WORD;
-    } value;
+    } value; // +0
 }; // :98:8
 
 struct pka0_bit_shift_op_cfg {
     union {
         struct {
-            uint32_t bit_shift:15;
-            uint32_t reserved_24_31:17;
+            uint32_t bit_shift:15; // +0
+            uint32_t reserved_24_31:17; // +0
         } BF;
         uint32_t WORD;
-    } value;
+    } value; // +0
 }; // :111:8
 
 void sec_eng_pka0_reset(void); // :124:6
@@ -3581,22 +3581,22 @@ void sec_eng_pka0_ldiv2n(uint8_t last_op, uint8_t d_reg_type, uint8_t d_reg_idx,
 /* ======== components/network/ble/blecontroller/plf/refip/src/driver/uart/uart.c ======== */
 
 struct uart_txchannel {
-    void (*callback)(void *, uint8_t);
-    void *dummy;
-    uint32_t remain_size;
-    const uint8_t *remain_data;
+    void (*callback)(void *, uint8_t); // +0
+    void *dummy; // +4
+    uint32_t remain_size; // +8
+    const uint8_t *remain_data; // +12
 }; // :48:8
 
 struct uart_rxchannel {
-    void (*callback)(void *, uint8_t);
-    void *dummy;
-    uint32_t remain_size;
-    uint8_t *remain_data;
+    void (*callback)(void *, uint8_t); // +0
+    void *dummy; // +4
+    uint32_t remain_size; // +8
+    uint8_t *remain_data; // +12
 }; // :58:8
 
 struct uart_env_tag {
-    struct uart_txchannel tx;
-    struct uart_rxchannel rx;
+    struct uart_txchannel tx; // +0
+    struct uart_rxchannel rx; // +16
 }; // :69:8
 
 static struct uart_env_tag uart_env; // :83:28
