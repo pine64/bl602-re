@@ -30,6 +30,8 @@
 
 * https://github.com/pine64/bl_iot_sdk[SDK]
 
+* https://pine64.gami.ee/bl602/HF-LPS170_Linus_Driver_20200924.zip[Linux Driver and Firmware for SDIO WiFi & BT Module based on BL602]
+
 == Work log (top-down append-only)
 
 === WildCryptoFox (29 Oct 2020)
