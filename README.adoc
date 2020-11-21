@@ -1,4 +1,4 @@
-= Pine64's BLE602 reverse engineering working group
+= Pine64's BL602 reverse engineering working group
 
 == Notes
 
