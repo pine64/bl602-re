@@ -1,0 +1,20 @@
+
+void me_11n_nss_max(void);
+void me_add_chan_ctx(void);
+void me_beacon_check(void);
+void me_build_capability(void);
+void me_bw_check(void);
+void me_check_rc(void);
+void me_get_basic_rates(void);
+uint8_t me_get_sta_bw(uint8_t sta_phy_bw, uint8_t bss_phy_bw);
+void me_init_bcmc_rate(void);
+void me_init_rate(void);
+void me_legacy_rate_bitfield_build(void);
+void me_legacy_ridx_max(void);
+void me_legacy_ridx_min(void);
+uint8_t me_phy2mac_bw(uint8_t phy_bw);
+void me_rate_translate(void);
+void me_set_sta_ht_vht_param(void);
+void me_sta_bw_nss_max_upd(void);
+void me_tx_cfm_singleton(void);
+void me_update_buffer_control(void);

@@ -1,0 +1,25 @@
+
+uint8_t me_11ac_mcs_max(uint16_t mcs_map);
+uint8_t me_11ac_nss_max(uint16_t mcs_map);
+uint8_t me_11n_nss_max(uint8_t * mcs_set);
+uint8_t me_add_chan_ctx(uint8_t * p_chan_idx, scan_chan_tag * p_chan, uint32_t center_freq1, uint32_t center_freq2, uint8_t ch_width);
+void me_beacon_check(uint8_t vif_idx, uint16_t length, uint32_t bcn_addr);
+uint16_t me_build_capability(uint8_t vif_idx);
+void me_bw_check(uint32_t ht_op_addr, uint32_t vht_op_addr, mac_bss_info * bss);
+void me_chan_ctxt_update(vif_info_tag * vif);
+void me_check_rc(uint8_t sta_idx, _Bool * tx_ampdu);
+void me_erp_prot_check(uint32_t erp_addr, uint16_t * prot_status);
+void me_get_basic_rates(mac_rateset * rateset, mac_rateset * basic_ratest);
+void me_init_bcmc_rate(sta_info_tag * sta_entry);
+void me_init_rate(sta_info_tag * sta_entry);
+uint16_t me_legacy_rate_bitfield_build(mac_rateset * rateset, _Bool basic_only);
+uint8_t me_legacy_ridx_max(uint16_t rate_map);
+uint8_t me_legacy_ridx_min(uint16_t rate_map);
+uint16_t me_rate_bitfield_vht_build(uint16_t mcs_map_1, uint16_t mcs_map_2);
+uint8_t me_rate_translate(uint8_t rate);
+_Bool me_set_sta_ht_vht_param(sta_info_tag * sta, mac_bss_info * bss);
+void me_sta_bw_nss_max_upd(uint8_t sta_idx, uint8_t bw, uint8_t nss);
+void me_tx_cfm_ampdu(uint8_t sta_idx, uint32_t txed, uint32_t txok, _Bool retry_required);
+uint16_t me_tx_cfm_amsdu(txdesc * txdesc);
+void me_tx_cfm_singleton(txdesc * txdesc);
+txl_buffer_control * me_update_buffer_control(sta_info_tag * sta_info);
