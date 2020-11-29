@@ -68,3 +68,39 @@ struct tx_pwr_index {
     int32_t dvga;
 };
 
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file bl602_rf_private.h
+* Header file for BL602
+*/
+#ifndef __BL602_RF_PRIVATE_H__
+#define __BL602_RF_PRIVATE_H__
+
+typedef volatile struct {
+    uint32_t index; // +0
+    int32_t dvga; // +4
+} tx_pwr_index;
+tx_pwr_index *tp_index;
+typedef volatile struct {
+    uint32_t notch_en; // +0
+    int32_t spur_freq; // +4
+} notch_param;
+typedef volatile struct {
+    uint32_t vbcore; // +0
+    uint32_t iet; // +4
+    uint32_t vbcore_11n; // +8
+    uint32_t iet_11n; // +12
+    uint32_t vbcore_11g; // +16
+    uint32_t iet_11g; // +20
+    uint32_t vbcore_11b; // +24
+    uint32_t iet_11b; // +28
+    uint32_t lo_fbdv_halfstep_en; // +32
+    uint32_t lo_fbdv_halfstep_en_tx; // +36
+    uint32_t lo_fbdv_halfstep_en_rx; // +40
+    uint32_t clkpll_reset_postdiv; // +44
+    uint32_t clkpll_dither_sel; // +48
+} regs_to_opti;
+regs_to_opti *opti_regs;
+
+#endif // __BL602_RF_PRIVATE_H__
+#endf 0 //TODO EXISTS ALEADY

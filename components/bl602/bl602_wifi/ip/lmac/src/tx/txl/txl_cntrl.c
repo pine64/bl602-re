@@ -29,3 +29,100 @@ void txl_payload_handle_backup(void);
 _Bool txl_payload_transfer(txdesc * txdesc, uint8_t access_category, uint8_t user_idx);
 void txl_timer_move(uint8_t ac);
 void txl_transmit_trigger(void);
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file txl_cntrl.c
+* Source file for BL602
+*/
+#include "txl_cntrl.h"
+
+
+const uint16_t VHT_NDBPS[4];
+const uint32_t TX_TIMEOUT[5];
+struct txl_cntrl_env_tag txl_cntrl_env;
+
+void txl_cntrl_inc_pck_cnt(void);
+bool txl_cntrl_push_int(struct txdesc *txdesc, uint8_t access_category);
+bool txl_cntrl_push_int_force(struct txdesc *txdesc, uint8_t access_category);
+void txl_payload_handle(void);
+void txl_payload_handle_backup(void);
+void txl_transmit_trigger(void);
+void txl_current_desc_get(int access_category, struct tx_hd **thd);
+void txl_reset(void);
+void txl_cntrl_env_dump(void);
+
+
+
+
+/** txl_cntrl_inc_pck_cnt
+ */
+void txl_cntrl_inc_pck_cnt(void)
+{
+	ASSER_ERR(FALSE);
+	return;
+}
+
+/** txl_cntrl_push_int
+ */
+bool txl_cntrl_push_int(struct txdesc *txdesc, uint8_t access_category)
+{
+	ASSER_ERR(FALSE);
+	return false;
+}
+
+/** txl_cntrl_push_int_force
+ */
+bool txl_cntrl_push_int_force(struct txdesc *txdesc, uint8_t access_category)
+{
+	ASSER_ERR(FALSE);
+	return false;
+}
+
+/** txl_payload_handle
+ */
+void txl_payload_handle(void)
+{
+	ASSER_ERR(FALSE);
+	return;
+}
+
+/** txl_payload_handle_backup
+ */
+void txl_payload_handle_backup(void)
+{
+	ASSER_ERR(FALSE);
+	return;
+}
+
+/** txl_transmit_trigger
+ */
+void txl_transmit_trigger(void)
+{
+	ASSER_ERR(FALSE);
+	return;
+}
+
+/** txl_current_desc_get
+ */
+void txl_current_desc_get(int access_category, struct tx_hd **thd)
+{
+	ASSER_ERR(FALSE);
+	return;
+}
+
+/** txl_reset
+ */
+void txl_reset(void)
+{
+	ASSER_ERR(FALSE);
+	return;
+}
+
+/** txl_cntrl_env_dump
+ */
+void txl_cntrl_env_dump(void)
+{
+	ASSER_ERR(FALSE);
+	return;
+}
+#endf 0 //TODO EXISTS ALEADY

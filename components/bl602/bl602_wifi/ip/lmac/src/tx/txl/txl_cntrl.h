@@ -91,3 +91,27 @@ void txl_cntrl_tx_check(void);
 uint16_t txl_get_seq_ctrl(void);
 void txl_reset(void);
 _Bool txl_sleep_check(void);
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file txl_cntrl.h
+* Header file for BL602
+*/
+#ifndef __TXL_CNTRL_H__
+#define __TXL_CNTRL_H__
+
+struct txl_list {
+    struct tx_hd *last_frame_exch; // +0
+    struct co_list transmitting; // +4
+    uint16_t bridgedmacnt; // +12
+    uint8_t chk_state; // +14
+};
+struct txl_cntrl_env_tag {
+    struct txl_list txlist[5]; // +0
+    uint32_t pck_cnt; // +80
+    uint16_t seqnbr; // +84
+    bool reset; // +86
+};
+struct txl_cntrl_env_tag txl_cntrl_env;
+
+#endif // __TXL_CNTRL_H__
+#endf 0 //TODO EXISTS ALEADY

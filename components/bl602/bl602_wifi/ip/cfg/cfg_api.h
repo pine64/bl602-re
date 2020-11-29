@@ -32,3 +32,24 @@ struct cfg_element_entry {
     int (* notify)(struct cfg_element_entry *, void *, void *, enum CFG_ELEMENT_TYPE_OPS);
 };
 
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file cfg_api.h
+* Header file for BL602
+*/
+#ifndef __CFG_API_H__
+#define __CFG_API_H__
+
+struct cfg_element_entry {
+    uint32_t task; // +0
+    uint16_t element; // +4
+    uint16_t type; // +6
+    char *name; // +8
+    void *val; // +12
+    int (*set)(struct cfg_element_entry *, void *, void *); // +16
+    int (*get)(struct cfg_element_entry *, void *, void *); // +20
+    int (*notify)(struct cfg_element_entry *, void *, void *, enum CFG_ELEMENT_TYPE_OPS); // +24
+};
+
+#endif // __CFG_API_H__
+#endf 0 //TODO EXISTS ALEADY

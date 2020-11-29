@@ -65,3 +65,34 @@ _Bool ps_sleep_check(void);
 void ps_traffic_status_update(void);
 _Bool ps_uapsd_enabled(void);
 void ps_uapsd_set(void);
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file ps.h
+* Header file for BL602
+*/
+#ifndef __PS_H__
+#define __PS_H__
+
+enum ps_dpsm_state_bit_pos {
+    PS_DPSM_STATE_ON = 0,
+    PS_DPSM_STATE_PAUSING = 1,
+    PS_DPSM_STATE_RESUMING = 2,
+    PS_DPSM_STATE_PAUSE = 3,
+    PS_DPSM_STATE_SET_MODE_REQ = 4,
+};
+struct ps_env_tag {
+    bool ps_on; // +0
+    ke_task_id_t taskid; // +2
+    uint32_t prevent_sleep; // +4
+    uint8_t cfm_cnt; // +8
+    struct mm_timer_tag uapsd_timer; // +12
+    bool uapsd_tmr_on; // +28
+    bool uapsd_on; // +29
+    uint32_t uapsd_timeout; // +32
+    uint8_t dpsm_state; // +36
+    uint8_t next_mode; // +37
+};
+struct ps_env_tag ps_env;
+
+#endif // __PS_H__
+#endf 0 //TODO EXISTS ALEADY

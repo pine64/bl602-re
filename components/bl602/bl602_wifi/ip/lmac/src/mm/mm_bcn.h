@@ -70,3 +70,24 @@ void mm_bcn_init(void);
 void mm_bcn_init_vif(void);
 void mm_bcn_transmit(void);
 void mm_tim_update(void);
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file mm_bcn.h
+* Header file for BL602
+*/
+#ifndef __MM_BCN_H__
+#define __MM_BCN_H__
+
+struct mm_bcn_env_tag {
+    const struct mm_bcn_change_req *param; // +0
+    int tx_cfm; // +4
+    bool tx_pending; // +8
+    bool update_ongoing; // +9
+    bool update_pending; // +10
+    struct hal_dma_desc_tag dma; // +12
+    struct co_list tim_list; // +28
+};
+struct mm_bcn_env_tag mm_bcn_env;
+
+#endif // __MM_BCN_H__
+#endf 0 //TODO EXISTS ALEADY

@@ -142,3 +142,24 @@ void sm_get_bss_params(void);
 void sm_init(void);
 void sm_join_bss(void);
 void sm_scan_bss(void);
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file sm.h
+* Header file for BL602
+*/
+#ifndef __SM_H__
+#define __SM_H__
+
+struct sm_env_tag {
+    struct sm_connect_req *connect_param; // +0
+    struct sm_connect_ind *connect_ind; // +4
+    struct co_list bss_config; // +8
+    bool join_passive; // +16
+    bool ft_over_ds; // +17
+    int exist_ssid_idx; // +20
+    struct mac_addr ft_old_bssid; // +24
+};
+struct sm_env_tag sm_env;
+
+#endif // __SM_H__
+#endf 0 //TODO EXISTS ALEADY

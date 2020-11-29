@@ -273,3 +273,31 @@ void txl_frame_release(void);
 void txl_frame_send_eapol_frame(void);
 void txl_frame_send_null_frame(void);
 void txl_frame_send_qosnull_frame(void);
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file txl_frame.h
+* Header file for BL602
+*/
+#ifndef __TXL_FRAME_H__
+#define __TXL_FRAME_H__
+
+typedef void (*cfm_func_ptr)(void *, uint32_t);
+struct txl_frame_cfm_tag {
+    cfm_func_ptr cfm_func; // +0
+    void *env; // +4
+};
+struct txl_frame_desc_tag {
+    struct txdesc txdesc; // +0
+    struct txl_frame_cfm_tag cfm; // +716
+    uint8_t type; // +724
+    bool postponed; // +725
+    bool keep_desc; // +726
+};
+struct txl_frame_env_tag {
+    struct co_list desc_free; // +0
+    struct co_list desc_done; // +8
+};
+struct txl_frame_env_tag txl_frame_env;
+
+#endif // __TXL_FRAME_H__
+#endf 0 //TODO EXISTS ALEADY
