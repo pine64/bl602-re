@@ -81,3 +81,58 @@ struct rc_sta_stats {
 
 void rc_update_bw_nss_max(void);
 void rc_update_counters(void);
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file rc.h
+* Header file for BL602
+*/
+#ifndef __RC_H__
+#define __RC_H__
+
+struct rc_rate_stats {
+    uint16_t attempts; // +0
+    uint16_t success; // +2
+    uint16_t probability; // +4
+    uint16_t rate_config; // +6
+    uint8_t sample_skipped; // +8
+    bool old_prob_available; // +9
+    uint8_t n_retry; // +10
+    bool rate_allowed; // +11
+};
+struct step {
+    uint32_t tp; // +0
+    uint16_t idx; // +4
+};
+struct rc_sta_stats {
+    uint32_t last_rc_time; // +0
+    struct rc_rate_stats rate_stats[10]; // +4
+    struct step retry[4]; // +124
+    struct step max_tp_2_trial; // +156
+    uint16_t ampdu_len; // +164
+    uint16_t ampdu_packets; // +166
+    uint32_t avg_ampdu_len; // +168
+    uint8_t sample_wait; // +172
+    uint8_t sample_slow; // +173
+    uint8_t trial_status; // +174
+    uint8_t info; // +175
+    uint8_t sw_retry_step; // +176
+    uint8_t format_mod; // +177
+    union {
+        uint8_t ht[4];
+    } rate_map; // +178
+    uint16_t rate_map_l; // +182
+    uint8_t mcs_max; // +184
+    uint8_t r_idx_min; // +185
+    uint8_t r_idx_max; // +186
+    uint8_t bw_max; // +187
+    uint8_t no_ss; // +188
+    uint8_t short_gi; // +189
+    uint8_t p_type; // +190
+    uint16_t no_samples; // +192
+    uint16_t max_amsdu_len; // +194
+    uint16_t curr_amsdu_len; // +196
+    uint16_t fixed_rate_cfg; // +198
+};
+
+#endif // __RC_H__
+#endf 0 //TODO EXISTS ALEADY

@@ -20,3 +20,66 @@ struct tcal_tag {
     undefined field_0x37;
 };
 
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file phy_tcal.c
+* Source file for BL602
+*/
+#include "phy_tcal.h"
+
+
+struct tcal_tag {
+    int16_t prev_temperature;
+ // +0
+    uint32_t last_action_time[4];
+ // +4
+    uint32_t last_action_temperature[4];
+ // +20
+    int32_t last_action_out[4];
+ // +36
+    bool enabled;
+ // +52
+};
+
+static struct tcal_tag tcal_env;
+
+void phy_tcal_stop(void);
+void phy_tcal_handle(void);
+void phy_tcal_callback(int16_t temperature);
+void phy_tcal_txpwr(int16_t curr_temperature);
+
+
+
+
+/** phy_tcal_stop
+ */
+void phy_tcal_stop(void)
+{
+	ASSER_ERR(FALSE);
+	return;
+}
+
+/** phy_tcal_handle
+ */
+void phy_tcal_handle(void)
+{
+	ASSER_ERR(FALSE);
+	return;
+}
+
+/** phy_tcal_callback
+ */
+void phy_tcal_callback(int16_t temperature)
+{
+	ASSER_ERR(FALSE);
+	return;
+}
+
+/** phy_tcal_txpwr
+ */
+void phy_tcal_txpwr(int16_t curr_temperature)
+{
+	ASSER_ERR(FALSE);
+	return;
+}
+#endf 0 //TODO EXISTS ALEADY

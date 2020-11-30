@@ -111,3 +111,22 @@ void rxl_init(void);
 void rxl_mpdu_free(void);
 void rxl_mpdu_transfer(void);
 void rxl_reset(void);
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file rxl_cntrl.h
+* Header file for BL602
+*/
+#ifndef __RXL_CNTRL_H__
+#define __RXL_CNTRL_H__
+
+struct rxl_cntrl_env_tag {
+    struct co_list ready; // +0
+    struct rx_dmadesc *first; // +8
+    struct rx_dmadesc *last; // +12
+    struct rx_dmadesc *free; // +16
+    uint32_t packet_stack_cnt; // +20
+};
+struct rxl_cntrl_env_tag rxl_cntrl_env;
+
+#endif // __RXL_CNTRL_H__
+#endf 0 //TODO EXISTS ALEADY

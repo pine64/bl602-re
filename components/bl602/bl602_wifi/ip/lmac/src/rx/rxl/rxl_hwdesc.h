@@ -24,3 +24,19 @@ struct rxl_hwdesc_env_tag {
 
 void rxl_hwdesc_init(void);
 void rxl_pd_append(void);
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file rxl_hwdesc.h
+* Header file for BL602
+*/
+#ifndef __RXL_HWDESC_H__
+#define __RXL_HWDESC_H__
+
+struct rxl_hwdesc_env_tag {
+    struct rx_pbd *last; // +0
+    struct rx_pbd *free; // +4
+};
+struct rxl_hwdesc_env_tag rx_hwdesc_env;
+
+#endif // __RXL_HWDESC_H__
+#endf 0 //TODO EXISTS ALEADY

@@ -42,3 +42,117 @@ struct wifi_pkt {
     uint16_t len[4];
 };
 
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file rxu_cntrl.c
+* Source file for BL602
+*/
+#include "rxu_cntrl.h"
+
+
+struct rxu_cntrl_env_tag rxu_cntrl_env;
+static const struct llc_snap_short rxu_cntrl_rfc1042_hdr;
+static const struct llc_snap_short rxu_cntrl_bridge_tunnel_hdr;
+
+static uint8_t rxu_cntrl_machdr_len_get(uint16_t frame_cntl);
+static bool rxu_cntrl_protected_handle(uint8_t *frame, uint32_t statinfo);
+
+uint32_t mac_payload_offset;
+
+static bool rxu_mgt_frame_check(struct rx_swdesc *swdesc, uint8_t sta_idx);
+
+cm_ConnectionInfo_t sta_conn_info;
+cm_ConnectionInfo_t *uap_conn_info;
+
+void rxu_cntrl_init(void);
+bool rxu_cntrl_frame_handle(struct rx_swdesc *swdesc);
+void rxu_cntrl_monitor_pm(struct mac_addr *addr);
+uint8_t rxu_cntrl_get_pm(void);
+void rxu_cntrl_evt(int dummy);
+
+struct wifi_pkt {
+    uint32_t pkt[4];
+ // +0
+    void *pbuf[4];
+ // +16
+    uint16_t len[4];
+ // +32
+};
+
+void rxu_swdesc_upload_evt(int arg);
+
+
+
+
+/** rxu_cntrl_init
+ */
+void rxu_cntrl_init(void)
+{
+	ASSER_ERR(FALSE);
+	return;
+}
+
+/** rxu_cntrl_frame_handle
+ */
+bool rxu_cntrl_frame_handle(struct rx_swdesc *swdesc)
+{
+	ASSER_ERR(FALSE);
+	return false;
+}
+
+/** rxu_cntrl_monitor_pm
+ */
+void rxu_cntrl_monitor_pm(struct mac_addr *addr)
+{
+	ASSER_ERR(FALSE);
+	return;
+}
+
+/** rxu_cntrl_get_pm
+ */
+uint8_t rxu_cntrl_get_pm(void)
+{
+	ASSER_ERR(FALSE);
+	return 0xff;
+}
+
+/** rxu_cntrl_evt
+ */
+void rxu_cntrl_evt(int dummy)
+{
+	ASSER_ERR(FALSE);
+	return;
+}
+
+/** rxu_swdesc_upload_evt
+ */
+void rxu_swdesc_upload_evt(int arg)
+{
+	ASSER_ERR(FALSE);
+	return;
+}
+
+/** rxu_cntrl_machdr_len_get
+ */
+static uint8_t rxu_cntrl_machdr_len_get(uint16_t frame_cntl)
+{
+	ASSER_ERR(FALSE);
+	return 0xff;
+}
+
+/** rxu_cntrl_protected_handle
+ */
+static bool rxu_cntrl_protected_handle(uint8_t *frame, uint32_t statinfo)
+{
+	ASSER_ERR(FALSE);
+	return false;
+}
+
+/** rxu_mgt_frame_check
+ */
+static bool rxu_mgt_frame_check(struct rx_swdesc *swdesc, uint8_t sta_idx)
+{
+	ASSER_ERR(FALSE);
+	return false;
+}
+#endf 0 //TODO EXISTS ALEADY

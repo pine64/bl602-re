@@ -122,3 +122,29 @@ void apm_tx_int_ps_check(void);
 void apm_tx_int_ps_clear(void);
 void apm_tx_int_ps_get_postpone(void);
 void apm_tx_int_ps_postpone(void);
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file apm.h
+* Header file for BL602
+*/
+#ifndef __APM_H__
+#define __APM_H__
+
+struct apm {
+    const struct apm_start_req *param; // +0
+    struct co_list bss_config; // +4
+    uint8_t aging_sta_idx; // +12
+    uint8_t *bcn_buf; // +16
+    bool apm_emb_enabled; // +20
+    uint8_t hidden_ssid; // +21
+    uint8_t assoc_sta_count; // +22
+    uint8_t max_sta_supported; // +23
+    struct {
+        uint8_t mac[6]; // +0
+        uint8_t used; // +6
+    } aid_list[10]; // +24
+};
+struct apm apm_env;
+
+#endif // __APM_H__
+#endf 0 //TODO EXISTS ALEADY

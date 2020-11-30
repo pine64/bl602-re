@@ -18,3 +18,20 @@ struct mic_calc {
     undefined field_0xf;
 };
 
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file me_mic.h
+* Header file for BL602
+*/
+#ifndef __ME_MIC_H__
+#define __ME_MIC_H__
+
+struct mic_calc {
+    uint32_t mic_key_least; // +0
+    uint32_t mic_key_most; // +4
+    uint32_t last_m_i; // +8
+    uint8_t last_m_i_len; // +12
+};
+
+#endif // __ME_MIC_H__
+#endf 0 //TODO EXISTS ALEADY

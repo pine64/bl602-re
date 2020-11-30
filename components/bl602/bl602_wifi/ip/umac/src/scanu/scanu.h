@@ -138,3 +138,30 @@ void scanu_raw_send_cfm.conflict1(void);
 void scanu_rm_exist_ssid(void);
 void scanu_search_by_bssid(void);
 void scanu_search_by_ssid(void);
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file scanu.h
+* Header file for BL602
+*/
+#ifndef __SCANU_H__
+#define __SCANU_H__
+
+struct scanu_env_tag {
+    const struct scanu_start_req *param; // +0
+    struct hal_dma_desc_tag dma_desc; // +4
+    uint16_t result_cnt; // +20
+    struct mac_scan_result scan_result[6]; // +24
+    ke_task_id_t src_id; // +360
+    bool joining; // +362
+    uint8_t band; // +363
+    struct mac_addr bssid; // +364
+    struct mac_ssid ssid; // +370
+};
+struct scanu_add_ie_tag {
+    struct dma_desc dma_desc; // +0
+    uint32_t buf[50]; // +16
+};
+struct scanu_env_tag scanu_env;struct scanu_add_ie_tag scanu_add_ie;
+
+#endif // __SCANU_H__
+#endf 0 //TODO EXISTS ALEADY

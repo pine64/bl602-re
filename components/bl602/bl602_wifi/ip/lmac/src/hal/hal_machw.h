@@ -232,3 +232,15 @@ void hal_machw_sleep_check(void);
 uint32_t hal_machw_time(void);
 _Bool hal_machw_time_cmp(uint32_t time1, uint32_t time2);
 _Bool hal_machw_time_past(uint32_t time);
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file hal_machw.h
+* Header file for BL602
+*/
+#ifndef __HAL_MACHW_H__
+#define __HAL_MACHW_H__
+
+const uint8_t rxv2macrate[];
+
+#endif // __HAL_MACHW_H__
+#endf 0 //TODO EXISTS ALEADY

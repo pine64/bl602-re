@@ -18,3 +18,17 @@ struct rd_env_tag {
     struct co_list event_free_list;
 };
 
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file rd.h
+* Header file for BL602
+*/
+#ifndef __RD_H__
+#define __RD_H__
+
+struct rd_env_tag {
+    struct co_list event_free_list; // +0
+};
+
+#endif // __RD_H__
+#endf 0 //TODO EXISTS ALEADY

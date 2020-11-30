@@ -47,3 +47,57 @@ void phy_set_channel(uint8_t band, uint8_t type, uint16_t prim20_freq, uint16_t 
 void phy_stop(void);
 _Bool phy_vht_supported(void);
 void tx_power_config(void);
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file phy_bl602.c
+* Source file for BL602
+*/
+#include "phy_bl602.h"
+
+
+struct phy_bl602_cfg_tag {
+    uint32_t reserved;
+ // +0
+};
+
+struct phy_env_tag {
+    struct phy_bl602_cfg_tag cfg;
+ // +0
+    uint16_t chnl_prim20_freq;
+ // +4
+    uint16_t chnl_center1_freq;
+ // +6
+    uint16_t chnl_center2_freq;
+ // +8
+    uint8_t band;
+ // +10
+    uint8_t chnl_type;
+ // +11
+};
+
+struct phy_env_tag phy_env[1];
+static int8_t rxgain_offset_vs_temperature;
+static int8_t poweroffset[14];
+
+void phy_mdm_isr(void);
+void phy_rc_isr(void);
+
+
+
+
+/** phy_mdm_isr
+ */
+void phy_mdm_isr(void)
+{
+	ASSER_ERR(FALSE);
+	return;
+}
+
+/** phy_rc_isr
+ */
+void phy_rc_isr(void)
+{
+	ASSER_ERR(FALSE);
+	return;
+}
+#endf 0 //TODO EXISTS ALEADY

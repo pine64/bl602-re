@@ -24,3 +24,21 @@ void phy_get_version(void);
 void phy_init(void);
 void phy_ldpc_tx_supported(void);
 void phy_set_channel(void);
+#if 0 //TODO EXISTS ALEADY
+/**
+* @file phy.h
+* Header file for BL602
+*/
+#ifndef __PHY_H__
+#define __PHY_H__
+
+struct phy_channel_info {
+    uint32_t info1; // +0
+    uint32_t info2; // +4
+};
+struct phy_cfg_tag {
+    uint32_t parameters[16]; // +0
+};
+
+#endif // __PHY_H__
+#endf 0 //TODO EXISTS ALEADY
