@@ -24,9 +24,9 @@
 
 * https://github.com/pine64/bl602-docs[Pine64 SDK fork's documentation], if you figure something out that's documentation-worthy, please update that documentation.
 
-* https://github.com/pine64/bl602-docs/blob/main/mirrored/Bouffalo%20Lab%20BL602_BL604_DS_en_Combo_1.2.pdf[BL602/BL604 Datasheet]
+* https://github.com/pine64/bl602-docs/blob/main/mirrored/BL602_BL604_DS_1.6_en.pdf[BL602/BL604 Datasheet]
 
-* https://github.com/pine64/bl602-docs/blob/main/mirrored/Bouffalo%20Lab%20BL602_Reference_Manual_en_1.1.pdf[BL602/BL604 Reference Manual]
+* https://github.com/pine64/bl602-docs/blob/main/mirrored/BL602_BL604_RM_1.2_en.pdf[BL602/BL604 Reference Manual]
 
 * https://github.com/pine64/bl_iot_sdk[SDK]
 
