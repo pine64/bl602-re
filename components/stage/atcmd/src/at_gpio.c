@@ -2,36 +2,32 @@
 * @file at_gpio.c
 * Source file for BL602
 */
-#include "at_gpio.h"
-
-
-AT_ERROR_CODE at_gpioc(s32 num, char *direction, char *interrupt);
-AT_ERROR_CODE at_gpior(s32 num);
-AT_ERROR_CODE at_gpiow(s32 num, s32 value);
-
-
-
+#include <atcmd/at_command.h>
+#include <atcmd/at_types.h>
 
 /** at_gpioc
  */
 AT_ERROR_CODE at_gpioc(s32 num, char *direction, char *interrupt)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	(void) num;
+	(void) direction;
+	(void) interrupt;
+	return AEC_OK;
 }
 
 /** at_gpior
  */
 AT_ERROR_CODE at_gpior(s32 num)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	(void) num;
+	return AEC_OK;
 }
 
 /** at_gpiow
  */
 AT_ERROR_CODE at_gpiow(s32 num, s32 value)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	(void) num;
+	(void) value;
+	return AEC_OK;
 }
