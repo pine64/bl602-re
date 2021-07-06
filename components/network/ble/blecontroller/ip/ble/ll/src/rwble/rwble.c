@@ -20,8 +20,11 @@ void rwble_isr(void);
  */
 void rwble_init(void)
 {
-	ASSER_ERR(FALSE);
-	return;
+	em_buf_init();
+	lld_init(0);
+	llc_init();
+	llm_init(0);
+	_DAT_28000050 = 0;
 }
 
 /** rwble_reset
