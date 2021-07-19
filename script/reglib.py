@@ -209,11 +209,13 @@ context = Context()
 
 def Peripheral(p):
     context.p = p
+    return p
 
 def Reg(name, addr):
     if context.p:
         r = context.p.addReg(name, addr)
         context.r = r
+        return r
     else:
         print("You are not in any peripheral")
 
@@ -221,6 +223,7 @@ def Buf(name, addrBegin, addrEnd, nBytes = 4):
     n = (addrEnd - addrBegin) // nBytes + 1
     if context.p:
         r = context.p.addBuf(name, addrBegin, n, nBytes)
+        return r
     else:
         print("You are not in any peripheral")
 
@@ -251,6 +254,30 @@ def FieldBit(name, bit, len=1):
         context.r.addField(name, (~(((2**len)-1)<<bit) & 0xFFFFFFFF))
     else:
         print("You are not in any register")
+
+def RegFromComment(addr, comment:str):
+    name = ""
+    import re
+    name_pattern = r'\* @name ([^\s]+)'
+    field_pattern = r'\*\s+(\d\d)(:(\d\d))*\s*([^\s]+)'
+    name_match = re.search(name_pattern, comment)
+    if name_match:
+        name = name_match.group(1)
+        print(name)
+    else:
+        print("Cannot find group.")
+        return
+    r = Reg(name, addr)
+    field_matches = re.finditer(field_pattern, comment)
+
+    for g in field_matches:
+        msb = int(g.group(1))
+        lsb = g.group(3)
+        if not lsb:
+            lsb = msb
+        else:
+            lsb = int(lsb)
+        FieldBit(g.group(4), lsb, msb-lsb+1)
 
 
 if __name__ == '__main__':
