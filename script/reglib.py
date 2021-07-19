@@ -127,13 +127,26 @@ class buf(gen):
     def genHeader(self):
         return [f'{self.typename} {self.name}[{hex(self.dim)}]; // @ {hex(self.offset)}']
 
+class ints(gen):
+    def __init__(self, name, intid):
+        self.name = name
+        self.intid = intid
+    def genSVD(self):
+        return [
+             '<interrupt>',
+            f'    <name>{self.name}</name>',
+            f'    <value>{self.intid}</value>',
+             '</interrupt>'
+        ]
 
 class peripheral(gen):
-    def __init__(self, name, base, size):
+    def __init__(self, name, base, size, interrupt=None):
         self.name = name
         self.base = base
         self.size = size
         self.regs:List[Union[buf, reg]] = []
+        self.interrupt = interrupt
+
     def addReg(self, name, addr):
         r = self.findReg(addr)
         if r:
@@ -166,9 +179,13 @@ class peripheral(gen):
              '        <offset>0</offset>',
             f'        <size>{hex(self.size)}</size>',
              '        <usage>registers</usage>',
-             '    </addressBlock>',
-             '    <registers>'
+             '    </addressBlock>'
         ]
+
+        if self.interrupt:
+            s.extend(ident(self.interrupt.genSVD(), 1))
+
+        s.append('    <registers>')
         for i in self.regs:
             s.extend(ident(i.genSVD(), 2))
         s.append('    </registers>')
@@ -210,6 +227,13 @@ context = Context()
 def Peripheral(p):
     context.p = p
     return p
+
+def Int(name, irq):
+    if context.p:
+        it = context.p.interrupt = ints(name, irq)
+        return it
+    else:
+        print("You are not in any peripheral")
 
 def Reg(name, addr):
     if context.p:
