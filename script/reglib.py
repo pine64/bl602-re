@@ -282,11 +282,11 @@ def FieldBit(name, bit, len=1):
 def RegFromComment(addr, comment:str):
     name = ""
     import re
-    name_pattern = r'\* @name ([^\s]+)'
+    name_pattern = r'\* @(name|brief) ([^\s]+)'
     field_pattern = r'\*\s+(\d\d)(:(\d\d))*\s*([^\s]+)'
     name_match = re.search(name_pattern, comment)
     if name_match:
-        name = name_match.group(1)
+        name = name_match.group(2)
         print(name)
     else:
         print("Cannot find group.")
