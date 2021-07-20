@@ -89,7 +89,6 @@ Reg('r874', 0x44c00874)
 Field('resetto1', 0xf7ffffff)
 Field('set1beforewriteagcmem', 0xdfffffff)
 
-
 open('../src/include/phy/mdm.h', 'w').write('\n'.join(GenHeader()))
 print('\n'.join(GenSVD()))
 
@@ -137,6 +136,10 @@ Reg('r420', 0x44c0b420)
 
 Reg('rc218', 0x44c0c218)
 Field('set0', 0xffff0000)
+
+Buf('rxgain_offset_vs_temperature', 0x44c0c080, 0x44c0c088, 1)
+
+
 
 open('../src/include/phy/agc.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))

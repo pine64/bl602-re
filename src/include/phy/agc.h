@@ -70,7 +70,9 @@ typedef union {
 				uint32_t set20 : 10; // @ 0x19 -- 0x10 
 			};
 		} rc020; // @ 0x1020
-		uint8_t pad9[0x1f4];
+		uint8_t pad9[0x5c];
+		uint8_t rxgain_offset_vs_temperature[0x9]; // @ 0x1080
+		uint8_t pad10[0x194];
 		union {
 			uint32_t value;
 			struct {
