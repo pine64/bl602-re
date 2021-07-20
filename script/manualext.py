@@ -150,4 +150,140 @@ open('../src/include/phy/agcram.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
 print('\n'.join(GenSVD()))
 
+
+
+############# MAC
+
 MAC_IRQ = 0x46
+
+def getregs(fname):
+    import re
+    state = "idle"
+    regs = []
+    name_pattern = r'\* @(name|brief) ([^\s]+)'
+    addr_pattern = r'#define .*_ADDR\s+0x([0-9A-F]+)'
+    for i in open(fname).readlines():
+        if state == "idle":
+            if re.search(name_pattern, i):
+                regs.append(i)
+                state = "find_reg"
+        elif state == "find_reg":
+            g = re.search(addr_pattern, i)
+            if g:
+                yield "".join(regs), int(g.group(1), 16) & 0xFFFFF
+                regs.clear()
+                state = "idle"
+            else:
+                regs.append(i)
+
+
+
+Peripheral(peripheral('mac_core', 0x44b00000, 0x1000))
+
+for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver/reg_mac_core.h"):
+    RegFromComment(offset + 0x44b00000, code)
+
+open('../src/include/phy/mac_core.h', 'w').write('\n'.join(GenHeader()))
+#print('\n'.join(GenHeader()))
+print('\n'.join(GenSVD()))
+
+
+Peripheral(peripheral('mac_pl', 0x44b08000, 0x1000))
+
+for code, offset in getregs("../alios/mac_pl.h"):
+    RegFromComment(offset + 0x44b00000, code)
+
+
+open('../src/include/phy/mac_pl.h', 'w').write('\n'.join(GenHeader()))
+#print('\n'.join(GenHeader()))
+print('\n'.join(GenSVD()))
+
+
+############# DMA, addres is in mac pl TX_***_PTR/RX_***_PTR
+## it's  mroe like a status, and the DMA master seems to be 
+## the mac co-processor???
+## look txl_payload_handle_backup for more info
+####
+
+Peripheral(peripheral('dma', 0x44a00000, 0x1000))
+
+Reg('status', 0x44a00024)
+Field("TX", 0x1f)
+FieldBit("RXHeader", 5) ## guess
+FieldBit("RXPayload", 6) ## guess
+FieldBit("b8", 8)
+
+Reg('tx_reset', 0x44a00020) # my guess, setting of r20 should reset 0x24??
+# kind like response...
+FieldBit("b8", 8) # set at txl_cfm_dma_int_handler
+FieldBit("b7", 7) # set at ipc_emb_dbg_dma_int_handler
+FieldBit("RXHeader", 5) ## guess
+FieldBit("RXPayload", 6) ## guess
+Field("TX", 0x1f)
+
+Reg("dma_status", 0x44a00010)
+Field("busyatffff", 0xffff)
+
+# my guess!!
+Reg('TX_BCN', 0x44a00080)
+FieldBit('bridgedmacnt', 0, 16)
+Reg('TX_AC_0', 0x44a00084)
+FieldBit('bridgedmacnt', 0, 16)
+Reg('TX_AC_1', 0x44a00088)
+FieldBit('bridgedmacnt', 0, 16)
+Reg('TX_AC_2', 0x44a0008c)
+FieldBit('bridgedmacnt', 0, 16)
+Reg('TX_AC_3', 0x44a00090)
+FieldBit('bridgedmacnt', 0, 16)
+
+Reg('LinkListItem0', 0x44a000a4)
+FieldBit("lli", 0, 16)
+Reg('LinkListItem1', 0x44a000ac)
+FieldBit("lli", 0, 16)
+
+open('../src/include/phy/dma.h', 'w').write('\n'.join(GenHeader()))
+#print('\n'.join(GenHeader()))
+print('\n'.join(GenSVD()))
+
+############# sysctrl
+
+Peripheral(peripheral('sysctrl', 0x44900000, 0x1000))
+Reg('time', 0x44900084)
+FieldBit('time_greater_on_bit12', 0)
+Reg("sysctrl_r68", 0x44900068) # set to 0x8000000c for init
+Reg("sysctrl_re0", 0x449000e0) # or with 0x1ff00
+Field("set1", (~0x1ff00) & 0xffffffff)
+
+
+## two regs for helper_record_all_states
+Reg("r068", 0x44900068)
+Field("set14", 0xffff0000)
+
+Reg("r074", 0x44900068) # set to b09
+
+open('../src/include/phy/sysctrl.h', 'w').write('\n'.join(GenHeader()))
+#print('\n'.join(GenHeader()))
+print('\n'.join(GenSVD()))
+
+
+############# Wifi Regs 92
+## wtf is this???
+
+Peripheral(peripheral('sysctrl92', 0x44920000, 0x1000))
+Reg("set5010001f", 0x44920004)
+
+open('../src/include/phy/sysctrl92.h', 'w').write('\n'.join(GenHeader()))
+#print('\n'.join(GenHeader()))
+print('\n'.join(GenSVD()))
+
+
+############# Wifi IPC (EMB/Core)
+Peripheral(peripheral('ipc', 0x44800000, 0x1000))
+
+for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver/reg_ipc_app.h"):
+    print(offset)
+    RegFromComment(offset + 0x44800000, code)
+
+open('../src/include/phy/ipc.h', 'w').write('\n'.join(GenHeader()))
+#print('\n'.join(GenHeader()))
+print('\n'.join(GenSVD()))
