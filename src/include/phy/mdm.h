@@ -59,9 +59,9 @@ typedef union {
 				uint32_t rxndpnstsmax : 3; // @ 14 -- 12 # 0xffff8fff
 				uint32_t pad3 : 1;
 				uint32_t v30 : 1; // @ 16 -- 16 # 0xfffeffff
-				uint32_t pad4 : 3;
+				uint32_t pad3 : 3;
 				uint32_t _v30 : 1; // @ 20 -- 20 # 0xffefffff
-				uint32_t pad5 : 3;
+				uint32_t pad4 : 3;
 				uint32_t rxcbwmax : 2; // @ 25 -- 24 # 0xfcffffff
 			};
 		} rxchan; // @ 0x820

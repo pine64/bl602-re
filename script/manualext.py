@@ -25,10 +25,7 @@ Field('vht', 0xfffffffd) # very high throughput
 Field('v30', 0xfffeffff) # some switch? DAT_44c00000>>30
 Field('_v30', 0xffefffff) # some switch? DAT_44c00000>>30
 FieldBit('reset', 0) # set 1 in phy_hw_set_channel for.. reset?
-<<<<<<< HEAD
 Field('rxndpnstsmax', 0xffff8fff)
-=======
->>>>>>> 42c4e98 (add missing bit)
 
 Reg('version', 0x44c00000)
 FieldBit('vht', 31-9)
