@@ -129,10 +129,10 @@ Field('set0', 0xffff0000)
 Buf('rxgain_offset_vs_temperature', 0x44c0c080, 0x44c0c088, 1)
 
 
-
+gid = 0
 def scan_write(code):
+    global gid
     write_pattern = r'write_volatile_4\(DAT_([0-9a-f]+),uVar\d( & 0x([0-9a-f]+))*( \| 0x([0-9a-f]+))*\);'
-    gid = 0
     for l in code:
         import re
         g = re.search(write_pattern, l)

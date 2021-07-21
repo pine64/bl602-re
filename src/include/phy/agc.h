@@ -14,10 +14,10 @@ typedef union {
 		union {
 			uint32_t value;
 			struct {
-				uint32_t set_0x0_6 : 1; // @ 0 -- 0 # 0xfffffffe
-				uint32_t set_0x0_5 : 1; // @ 1 -- 1 # 0xfffffffd
-				uint32_t set_0x0_4 : 1; // @ 2 -- 2 # 0xfffffffb
-				uint32_t set_0x0_3 : 1; // @ 3 -- 3 # 0xfffffff7
+				uint32_t set_0x0_66 : 1; // @ 0 -- 0 # 0xfffffffe
+				uint32_t set_0x0_65 : 1; // @ 1 -- 1 # 0xfffffffd
+				uint32_t set_0x0_64 : 1; // @ 2 -- 2 # 0xfffffffb
+				uint32_t set_0x0_63 : 1; // @ 3 -- 3 # 0xfffffff7
 			};
 		} r0xb110; // @ 0x110
 		uint8_t pad1[0x4];
@@ -114,7 +114,7 @@ typedef union {
 			struct {
 				uint32_t set1 : 2; // @ 1 -- 0 # 0xfffffffc
 				uint32_t pad0 : 6;
-				uint32_t set_0x0_1 : 1; // @ 8 -- 8 # 0xfffffeff
+				uint32_t set_0x0_61 : 1; // @ 8 -- 8 # 0xfffffeff
 				uint32_t pad1 : 1;
 				uint32_t set_0x0_1 : 1; // @ 10 -- 10 # 0xfffffbff
 				uint32_t pad2 : 1;
@@ -190,7 +190,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t pad0 : 12;
-				uint32_t set_0x2_2 : 2; // @ 13 -- 12 # 0xffffcfff
+				uint32_t set_0x2_62 : 2; // @ 13 -- 12 # 0xffffcfff
 			};
 		} r0xb500; // @ 0x500
 		uint8_t pad10[0xb1c];
@@ -198,7 +198,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t pad0 : 16;
-				uint32_t set_0x14_0 : 10; // @ 25 -- 16 # 0xfc00ffff
+				uint32_t set_0x14_60 : 10; // @ 25 -- 16 # 0xfc00ffff
 			};
 		} r0xc020; // @ 0x1020
 		uint8_t pad11[0x1c];

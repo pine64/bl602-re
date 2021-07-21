@@ -32,7 +32,7 @@ class field(gen):
             '</field>'
         ]
     def genHeader(self):
-        return [f'uint32_t {self.name} : {self.len}; // @ {hex(self.msb)} -- {hex(self.lsb)} ']
+        return [f'uint32_t {self.name} : {self.len}; // @ {self.msb} -- {self.lsb} # {hex(self.mask)}']
 
 class reg(gen):
     def __init__(self, name, offset):
@@ -40,6 +40,7 @@ class reg(gen):
         self.offset = offset
         self.fields: List[field] = []
     def addField(self, name, mask):
+        oldmask = mask
         f = self.hasField(mask)
         if f:
             return f
@@ -52,7 +53,7 @@ class reg(gen):
             msb = msb + 1
             mask >>= 1
         msb = msb - 1
-        f = field(name, msb, lsb, mask)
+        f = field(name, msb, lsb, oldmask)
         self.fields.append(f)
         return f
         
