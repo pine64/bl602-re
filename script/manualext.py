@@ -13,7 +13,6 @@ Field('v18', 0xfffffeff) # some switch? DAT_44c00000>>18
 Field('vht', 0xfffffffd) # very high throughput
 Field('v31', 0xfffeffff) # some switch? DAT_44c00000>>31
 
-
 Reg('rxchan', 0x44c00820)
 Field('rxcbwmax', 0xfcffffff) # Channel bandwidth
 Field('rxnssmax', 0xffffff8f) # number of spatial streams
@@ -29,11 +28,14 @@ FieldBit('nss', 8, 4) # phy_get_nss (nss + 1)
 FieldBit('rxndpnstsmax', 0xc, 4)
 FieldBit('v18', 0x12)
 FieldBit('v19', 0x13)
-FieldBit('v30', 0x1e)
-FieldBit('v31', 0x1f)
+FieldBit('mu_mimo_rx', 0x1e)
+FieldBit('mu_mimo_tx', 0x1f)
 FieldBit('ldpctx', 0x1a)
+FieldBit('ldpcrx', 0x1b)
 FieldBit('ntx', 4, 4) # phy_get_ntx (ntx + 1)
 FieldBit('txcbwmax', 0x18, 2)
+FieldBit('bfmee_supported', 0x1c)
+FieldBit('bfmer_supported', 0x1d)
 
 Reg('mdmconf', 0x44c00800)
 
