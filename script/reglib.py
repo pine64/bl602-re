@@ -281,7 +281,7 @@ def Goto(addr):
 
 def Field(name, mask):
     if context.r:
-        context.r.addField(name, mask)
+        return context.r.addField(name, mask)
     else:
         print("You are not in any register")
 
