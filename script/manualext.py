@@ -186,11 +186,14 @@ open('../src/include/phy/agcram.h', 'w').write('\n'.join(GenHeader()))
 
 MAC_IRQ = 0x46
 
-def getregs(fname):
+def getregs(fname, pattern='name'):
     import re
     state = "idle"
     regs = []
-    name_pattern = r'\* @(name|brief) ([^\s]+)'
+    if pattern == 'name':
+        name_pattern = r'\* @(name) ([^\s]+)'
+    else:
+        name_pattern = r'\* @(brief) ([^\s]+)'
     addr_pattern = r'#define .*_ADDR\s+0x([0-9A-F]+)'
     for i in open(fname).readlines():
         if state == "idle":
@@ -210,7 +213,7 @@ def getregs(fname):
 
 Peripheral(peripheral('mac_core', 0x44b00000, 0x1000))
 
-for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver/reg_mac_core.h"):
+for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver/reg_mac_core.h", pattern='brief'):
     RegFromComment(offset + 0x44b00000, code)
 
 open('../src/include/phy/mac_core.h', 'w').write('\n'.join(GenHeader()))
@@ -310,7 +313,7 @@ open('../src/include/phy/sysctrl92.h', 'w').write('\n'.join(GenHeader()))
 ############# Wifi IPC (EMB/Core)
 Peripheral(peripheral('ipc', 0x44800000, 0x1000))
 
-for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver/reg_ipc_app.h"):
+for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver/reg_ipc_app.h", pattern='brief'):
     RegFromComment(offset + 0x44800000, code)
 
 open('../src/include/phy/ipc.h', 'w').write('\n'.join(GenHeader()))
