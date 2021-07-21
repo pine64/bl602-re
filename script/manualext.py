@@ -90,7 +90,7 @@ Field('resetto1', 0xf7ffffff)
 Field('set1beforewriteagcmem', 0xdfffffff)
 
 open('../src/include/phy/mdm.h', 'w').write('\n'.join(GenHeader()))
-print('\n'.join(GenSVD()))
+#print('\n'.join(GenSVD()))
 
 
 
@@ -111,14 +111,6 @@ Reg('riu_rwnxagcaci20marg2', 0x44c0b348)
 
 Reg('riu_iqestiterclr', 0x44c0b118)
 
-Reg('r500', 0x44c0b500)
-Field('set10', 0xffffcfff)
-Reg('r110', 0x44c0b110)
-Field('set0a', 0xfffffff7)
-Field('set0b', 0xfffffffb)
-Field('set0c', 0xfffffffd)
-Field('set0d', 0xfffffffe)
-
 Reg('activeant', 0x44c0b004)
 
 Reg('RWNXAGCCCATIMEOUT', 0x44c0b3bc) # 4000000
@@ -126,12 +118,9 @@ Reg('RWNXAGCCCATIMEOUT', 0x44c0b3bc) # 4000000
 Reg('irqmacccatimeouten', 0x44c0b414)
 Field('set1', 0xFFFFFEFF)
 
-Reg('rc020', 0x44c0c020)
-Field('set20', 0xfc00ffff)
-
 Reg('r41c', 0x44c0b41c)
-FieldBit('rc_resetmdm', 8) # guess
-Reg('r420', 0x44c0b420)
+FieldBit('needreset', 8) # guess
+Reg('r420_copy41c', 0x44c0b420)
 
 
 Reg('rc218', 0x44c0c218)
@@ -141,9 +130,47 @@ Buf('rxgain_offset_vs_temperature', 0x44c0c080, 0x44c0c088, 1)
 
 
 
+def scan_write(code):
+    write_pattern = r'write_volatile_4\(DAT_([0-9a-f]+),uVar\d( & 0x([0-9a-f]+))*( \| 0x([0-9a-f]+))*\);'
+    gid = 0
+    for l in code:
+        import re
+        g = re.search(write_pattern, l)
+        if not g:
+            continue
+        value = 0
+        addr = int(g.group(1), 16)
+        if g.group(3) == None: # mask
+            value = int(g.group(5), 16)
+            mask = (~value) & 0xffffffff
+            value = value >> ((value & (-value)).bit_length() - 1)
+        else:
+            mask = int(g.group(3), 16)
+            if g.group(5): # value
+                lsb = ((~mask) & 0xffffffff)
+                lsb = lsb & (-lsb)
+                lsb = lsb.bit_length() - 1
+                value = int(g.group(5), 16)
+                value = value >> lsb
+        name_f = f'set_{hex(value)}_{gid}'
+        name_r = f'r{hex(addr&0xffff)}'
+        gid = gid + 1
+        Reg(name_r, addr)
+        Field(name_f, mask)
+
+scan_write(open('../blobs/agc_config.c').readlines())
+scan_write([
+    "write_volatile_4(DAT_44c0c020,uVar4 & 0xfc00ffff | 0x140000);",
+    "write_volatile_4(DAT_44c0b390,uVar1 & 0xfffffeff);",
+    "write_volatile_4(DAT_44c0b500,uVar4 & 0xffffcfff | 0x2000);",
+    "write_volatile_4(DAT_44c0b110,uVar4 & 0xfffffff7);",
+    "write_volatile_4(DAT_44c0b110,uVar4 & 0xfffffffb);",
+    "write_volatile_4(DAT_44c0b110,uVar4 & 0xfffffffd);",
+    "write_volatile_4(DAT_44c0b110,uVar4 & 0xfffffffe);",
+])
 open('../src/include/phy/agc.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
-print('\n'.join(GenSVD()))
+#print('\n'.join(GenSVD()))
 
 
 Peripheral(peripheral('agcram', 0x54c0a000, 0x800))
@@ -151,8 +178,8 @@ Buf('agcram', 0x54c0a000, 0x54c0a800 - 4)
 
 open('../src/include/phy/agcram.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
-print('\n'.join(GenSVD()))
-
+#print('\n'.join(GenSVD()))
+#
 
 
 ############# MAC
@@ -188,7 +215,7 @@ for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver
 
 open('../src/include/phy/mac_core.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
-print('\n'.join(GenSVD()))
+#print('\n'.join(GenSVD()))
 
 
 Peripheral(peripheral('mac_pl', 0x44b08000, 0x1000))
@@ -199,7 +226,7 @@ for code, offset in getregs("../alios/mac_pl.h"):
 
 open('../src/include/phy/mac_pl.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
-print('\n'.join(GenSVD()))
+#print('\n'.join(GenSVD()))
 
 
 ############# DMA, addres is in mac pl TX_***_PTR/RX_***_PTR
@@ -246,7 +273,7 @@ FieldBit("lli", 0, 16)
 
 open('../src/include/phy/dma.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
-print('\n'.join(GenSVD()))
+#print('\n'.join(GenSVD()))
 
 ############# sysctrl
 
@@ -266,7 +293,7 @@ Reg("r074", 0x44900068) # set to b09
 
 open('../src/include/phy/sysctrl.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
-print('\n'.join(GenSVD()))
+#print('\n'.join(GenSVD()))
 
 
 ############# Wifi Regs 92
@@ -277,16 +304,15 @@ Reg("set5010001f", 0x44920004)
 
 open('../src/include/phy/sysctrl92.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
-print('\n'.join(GenSVD()))
+#print('\n'.join(GenSVD()))
 
 
 ############# Wifi IPC (EMB/Core)
 Peripheral(peripheral('ipc', 0x44800000, 0x1000))
 
 for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver/reg_ipc_app.h"):
-    print(offset)
     RegFromComment(offset + 0x44800000, code)
 
 open('../src/include/phy/ipc.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
-print('\n'.join(GenSVD()))
+#print('\n'.join(GenSVD()))
