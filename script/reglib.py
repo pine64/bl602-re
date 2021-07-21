@@ -13,11 +13,12 @@ class gen:
         return []
 
 class field(gen):
-    def __init__(self, name, msb, lsb):
+    def __init__(self, name, msb, lsb, mask):
         self.name = name
         self.msb = msb
         self.lsb = lsb
         self.len = msb - lsb + 1
+        self.mask = mask
     def __str__(self):
         return f"('{self.name}', {self.msb}, {self.lsb}, {self.len})"
     def __gt__(self, f2):
@@ -39,6 +40,9 @@ class reg(gen):
         self.offset = offset
         self.fields: List[field] = []
     def addField(self, name, mask):
+        f = self.hasField(mask)
+        if f:
+            return f
         lsb = 0
         while mask % 2 == 1:
             lsb = lsb + 1
@@ -48,9 +52,16 @@ class reg(gen):
             msb = msb + 1
             mask >>= 1
         msb = msb - 1
-        f = field(name, msb, lsb)
+        f = field(name, msb, lsb, mask)
         self.fields.append(f)
         return f
+        
+    def hasField(self, mask):
+        for i in self.fields:
+            if i.mask == mask:
+                return i
+        return None
+
     def __gt__(self, reg2):
         return self.offset > reg2.offset
     def __str__(self):
@@ -278,6 +289,11 @@ def FieldBit(name, bit, len=1):
         context.r.addField(name, (~(((2**len)-1)<<bit) & 0xFFFFFFFF))
     else:
         print("You are not in any register")
+        
+def HasField(addr):
+    if context.r:
+        return context.r.hasField(addr)
+    print("You are not in any register")
 
 def RegFromComment(addr, comment:str):
     name = ""
@@ -287,7 +303,7 @@ def RegFromComment(addr, comment:str):
     name_match = re.search(name_pattern, comment)
     if name_match:
         name = name_match.group(2)
-        print(name)
+        #print(name)
     else:
         print("Cannot find group.")
         return
