@@ -17,9 +17,11 @@ typedef union {
 				uint32_t pad3 : 1;
 				uint32_t txcbwmax : 2; // @ 25 -- 24 # 0xfcffffff
 				uint32_t ldpctx : 1; // @ 26 -- 26 # 0xfbffffff
-				uint32_t pad4 : 3;
-				uint32_t v30 : 1; // @ 30 -- 30 # 0xbfffffff
-				uint32_t v31 : 1; // @ 31 -- 31 # 0x7fffffff
+				uint32_t ldpcrx : 1; // @ 27 -- 27 # 0xf7ffffff
+				uint32_t bfmee_supported : 1; // @ 28 -- 28 # 0xefffffff
+				uint32_t bfmer_supported : 1; // @ 29 -- 29 # 0xdfffffff
+				uint32_t mu_mimo_rx : 1; // @ 30 -- 30 # 0xbfffffff
+				uint32_t mu_mimo_tx : 1; // @ 31 -- 31 # 0x7fffffff
 			};
 		} version; // @ 0x0
 		uint8_t pad0[0x7fc];
