@@ -8,7 +8,7 @@ typedef union {
 			struct {
 				uint32_t nextTBTT : 16; // @ 0xf -- 0x0 
 			};
-		} Definitions; // @ 0x40
+		} NEXT_TBTT; // @ 0x40
 		uint8_t pad1[0x4];
 		union {
 			uint32_t value;
@@ -17,14 +17,14 @@ typedef union {
 				uint32_t pad0 : 30;
 				uint32_t wakeUpFromDoze : 1; // @ 0x1f -- 0x1f 
 			};
-		} Returns; // @ 0x48
+		} DOZE_CNTRL_2; // @ 0x48
 		uint8_t pad2[0x4];
 		union {
 			uint32_t value;
 			struct {
 				uint32_t softReset : 1; // @ 0x0 -- 0x0 
 			};
-		} Returns; // @ 0x50
+		} MAC_CNTRL_2; // @ 0x50
 		uint8_t pad3[0x18];
 		union {
 			uint32_t value;
@@ -56,7 +56,7 @@ typedef union {
 				uint32_t rxHeaderDMADead : 1; // @ 0x18 -- 0x18 
 				uint32_t rxPayloadDMADead : 1; // @ 0x19 -- 0x19 
 			};
-		} Returns; // @ 0x6c
+		} GEN_INT_STATUS; // @ 0x6c
 		union {
 			uint32_t value;
 			struct {
@@ -86,7 +86,7 @@ typedef union {
 				uint32_t rxHeaderDMADead : 1; // @ 0x18 -- 0x18 
 				uint32_t rxPayloadDMADead : 1; // @ 0x19 -- 0x19 
 			};
-		} Returns; // @ 0x70
+		} GEN_INT_ACK; // @ 0x70
 		union {
 			uint32_t value;
 			struct {
@@ -119,7 +119,7 @@ typedef union {
 				uint32_t pad1 : 5;
 				uint32_t masterGenIntEn : 1; // @ 0x1f -- 0x1f 
 			};
-		} Sets; // @ 0x74
+		} GEN_INT_ENABLE; // @ 0x74
 		union {
 			uint32_t value;
 			struct {
@@ -153,7 +153,7 @@ typedef union {
 				uint32_t ac3TxBufTrigger : 1; // @ 0x1b -- 0x1b 
 				uint32_t bcnTxBufTrigger : 1; // @ 0x1c -- 0x1c 
 			};
-		} Returns; // @ 0x78
+		} TX_RX_INT_STATUS; // @ 0x78
 		union {
 			uint32_t value;
 			struct {
@@ -187,7 +187,7 @@ typedef union {
 				uint32_t ac3TxBufTrigger : 1; // @ 0x1b -- 0x1b 
 				uint32_t bcnTxBufTrigger : 1; // @ 0x1c -- 0x1c 
 			};
-		} Returns; // @ 0x7c
+		} TX_RX_INT_ACK; // @ 0x7c
 		union {
 			uint32_t value;
 			struct {
@@ -223,7 +223,7 @@ typedef union {
 				uint32_t pad0 : 2;
 				uint32_t masterTxRxIntEn : 1; // @ 0x1f -- 0x1f 
 			};
-		} Sets; // @ 0x80
+		} TX_RX_INT_ENABLE; // @ 0x80
 		union {
 			uint32_t value;
 			struct {
@@ -238,7 +238,7 @@ typedef union {
 				uint32_t absTimers8 : 1; // @ 0x8 -- 0x8 
 				uint32_t absTimers9 : 1; // @ 0x9 -- 0x9 
 			};
-		} Returns; // @ 0x84
+		} TIMERS_INT_EVENT_SET; // @ 0x84
 		union {
 			uint32_t value;
 			struct {
@@ -253,7 +253,7 @@ typedef union {
 				uint32_t absTimers8 : 1; // @ 0x8 -- 0x8 
 				uint32_t absTimers9 : 1; // @ 0x9 -- 0x9 
 			};
-		} Returns; // @ 0x88
+		} TIMERS_INT_EVENT_CLEAR; // @ 0x88
 		union {
 			uint32_t value;
 			struct {
@@ -268,20 +268,20 @@ typedef union {
 				uint32_t maskabsTimers8 : 1; // @ 0x8 -- 0x8 
 				uint32_t maskabsTimers9 : 1; // @ 0x9 -- 0x9 
 			};
-		} Sets; // @ 0x8c
+		} TIMERS_INT_UN_MASK; // @ 0x8c
 		uint8_t pad4[0x14];
 		union {
 			uint32_t value;
 			struct {
 				uint32_t tsfTimerLow : 32; // @ 0x1f -- 0x0 
 			};
-		} Returns; // @ 0xa4
+		} TSF_LO; // @ 0xa4
 		union {
 			uint32_t value;
 			struct {
 				uint32_t tsfTimerHigh : 32; // @ 0x1f -- 0x0 
 			};
-		} Returns; // @ 0xa8
+		} TSF_HI; // @ 0xa8
 		uint8_t pad5[0xb4];
 		union {
 			uint32_t value;
@@ -294,13 +294,13 @@ typedef union {
 				uint32_t ppduNumExtnSS : 2; // @ 0x1d -- 0x1c 
 				uint32_t ppduSTBC : 2; // @ 0x1f -- 0x1e 
 			};
-		} Returns; // @ 0x160
+		} TIME_ON_AIR_PARAM_1; // @ 0x160
 		union {
 			uint32_t value;
 			struct {
 				uint32_t ppduMCSIndex : 7; // @ 0x6 -- 0x0 
 			};
-		} Returns; // @ 0x164
+		} TIME_ON_AIR_PARAM_2; // @ 0x164
 		union {
 			uint32_t value;
 			struct {
@@ -309,7 +309,7 @@ typedef union {
 				uint32_t timeOnAirValid : 1; // @ 0x1e -- 0x1e 
 				uint32_t computeDuration : 1; // @ 0x1f -- 0x1f 
 			};
-		} Returns; // @ 0x168
+		} TIME_ON_AIR_VALUE; // @ 0x168
 		uint8_t pad6[0x14];
 		union {
 			uint32_t value;
@@ -337,7 +337,7 @@ typedef union {
 				uint32_t rxHeaderNewHead : 1; // @ 0x1a -- 0x1a 
 				uint32_t rxPayloadNewHead : 1; // @ 0x1b -- 0x1b 
 			};
-		} Returns; // @ 0x180
+		} DMA_CNTRL_SET; // @ 0x180
 		union {
 			uint32_t value;
 			struct {
@@ -364,7 +364,7 @@ typedef union {
 				uint32_t rxHeaderNewHead : 1; // @ 0x1a -- 0x1a 
 				uint32_t rxPayloadNewHead : 1; // @ 0x1b -- 0x1b 
 			};
-		} Returns; // @ 0x184
+		} DMA_CNTRL_CLEAR; // @ 0x184
 		union {
 			uint32_t value;
 			struct {
@@ -382,7 +382,7 @@ typedef union {
 				uint32_t pad5 : 2;
 				uint32_t rxPayloadState : 2; // @ 0x1d -- 0x1c 
 			};
-		} Sets; // @ 0x188
+		} DMA_STATUS_1; // @ 0x188
 		union {
 			uint32_t value;
 			struct {
@@ -417,7 +417,7 @@ typedef union {
 				uint32_t txAC2NewHeadErr : 1; // @ 0x1c -- 0x1c 
 				uint32_t txAC3NewHeadErr : 1; // @ 0x1d -- 0x1d 
 			};
-		} Returns; // @ 0x18c
+		} DMA_STATUS_2; // @ 0x18c
 		union {
 			uint32_t value;
 			struct {
@@ -430,7 +430,7 @@ typedef union {
 				uint32_t rxHdrNewHeadErr : 1; // @ 0x6 -- 0x6 
 				uint32_t rxPayNewHeadErr : 1; // @ 0x7 -- 0x7 
 			};
-		} Returns; // @ 0x190
+		} DMA_STATUS_3; // @ 0x190
 		union {
 			uint32_t value;
 			struct {
@@ -450,37 +450,37 @@ typedef union {
 				uint32_t txAC2HaltAfterTXOP : 1; // @ 0xd -- 0xd 
 				uint32_t txAC3HaltAfterTXOP : 1; // @ 0xe -- 0xe 
 			};
-		} Returns; // @ 0x194
+		} DMA_STATUS_4; // @ 0x194
 		union {
 			uint32_t value;
 			struct {
 				uint32_t txBcnHeadPtr : 32; // @ 0x1f -- 0x0 
 			};
-		} Returns; // @ 0x198
+		} TX_BCN_HEAD_PTR; // @ 0x198
 		union {
 			uint32_t value;
 			struct {
 				uint32_t txAC0HeadPtr : 32; // @ 0x1f -- 0x0 
 			};
-		} Returns; // @ 0x19c
+		} TX_AC_0_HEAD_PTR; // @ 0x19c
 		union {
 			uint32_t value;
 			struct {
 				uint32_t txAC1HeadPtr : 32; // @ 0x1f -- 0x0 
 			};
-		} Returns; // @ 0x1a0
+		} TX_AC_1_HEAD_PTR; // @ 0x1a0
 		union {
 			uint32_t value;
 			struct {
 				uint32_t txAC2HeadPtr : 32; // @ 0x1f -- 0x0 
 			};
-		} Returns; // @ 0x1a4
+		} TX_AC_2_HEAD_PTR; // @ 0x1a4
 		union {
 			uint32_t value;
 			struct {
 				uint32_t txAC3HeadPtr : 32; // @ 0x1f -- 0x0 
 			};
-		} Returns; // @ 0x1a8
+		} TX_AC_3_HEAD_PTR; // @ 0x1a8
 		union {
 			uint32_t value;
 			struct {
@@ -490,7 +490,7 @@ typedef union {
 				uint32_t dmaRHDSize : 6; // @ 0x17 -- 0x12 
 				uint32_t dmaRBDSize : 6; // @ 0x1d -- 0x18 
 			};
-		} Returns; // @ 0x1ac
+		} TX_STRUCT_SIZES; // @ 0x1ac
 		uint8_t pad7[0x8];
 		union {
 			uint32_t value;
@@ -499,7 +499,7 @@ typedef union {
 				uint32_t pad0 : 1;
 				uint32_t rxHeaderHeadPtr : 30; // @ 0x1f -- 0x2 
 			};
-		} Returns; // @ 0x1b8
+		} RX_HEADER_HEAD_PTR; // @ 0x1b8
 		union {
 			uint32_t value;
 			struct {
@@ -507,7 +507,7 @@ typedef union {
 				uint32_t pad0 : 1;
 				uint32_t rxPayloadHeadPtr : 30; // @ 0x1f -- 0x2 
 			};
-		} Returns; // @ 0x1bc
+		} RX_PAYLOAD_HEAD_PTR; // @ 0x1bc
 		union {
 			uint32_t value;
 			struct {
@@ -515,7 +515,7 @@ typedef union {
 				uint32_t pad0 : 8;
 				uint32_t rxFIFOThreshold : 8; // @ 0x17 -- 0x10 
 			};
-		} Returns; // @ 0x1c0
+		} DMA_THRESHOLD; // @ 0x1c0
 		uint8_t pad8[0x4c];
 		union {
 			uint32_t value;
@@ -525,7 +525,7 @@ typedef union {
 				uint32_t ac2HasData : 1; // @ 0x2 -- 0x2 
 				uint32_t ac3HasData : 1; // @ 0x3 -- 0x3 
 			};
-		} Returns; // @ 0x210
+		} EDCA_AC_HAS_DATA_SET; // @ 0x210
 		union {
 			uint32_t value;
 			struct {
@@ -534,7 +534,7 @@ typedef union {
 				uint32_t ac2HasData : 1; // @ 0x2 -- 0x2 
 				uint32_t ac3HasData : 1; // @ 0x3 -- 0x3 
 			};
-		} Returns; // @ 0x214
+		} EDCA_AC_HAS_DATA_CLEAR; // @ 0x214
 		uint8_t pad9[0x10];
 		union {
 			uint32_t value;
@@ -542,28 +542,28 @@ typedef union {
 				uint32_t ac0MOT : 16; // @ 0xf -- 0x0 
 				uint32_t ac1MOT : 16; // @ 0x1f -- 0x10 
 			};
-		} Sets; // @ 0x228
+		} MOT_1; // @ 0x228
 		union {
 			uint32_t value;
 			struct {
 				uint32_t ac2MOT : 16; // @ 0xf -- 0x0 
 				uint32_t ac3MOT : 16; // @ 0x1f -- 0x10 
 			};
-		} Returns; // @ 0x22c
+		} MOT_2; // @ 0x22c
 		union {
 			uint32_t value;
 			struct {
 				uint32_t hccaQAPMOT : 16; // @ 0xf -- 0x0 
 				uint32_t miscMOT : 16; // @ 0x1f -- 0x10 
 			};
-		} Returns; // @ 0x230
+		} MOT_3; // @ 0x230
 		uint8_t pad10[0xfc];
 		union {
 			uint32_t value;
 			struct {
 				uint32_t txBWAfterDrop : 2; // @ 0x1 -- 0x0 
 			};
-		} Returns; // @ 0x330
+		} TX_BW_DROP_INFO; // @ 0x330
 		uint8_t pad11[0x30];
 		union {
 			uint32_t value;
@@ -593,7 +593,7 @@ typedef union {
 				uint32_t secU3ac2TxBufTrigger : 1; // @ 0x16 -- 0x16 
 				uint32_t secU3ac3TxBufTrigger : 1; // @ 0x17 -- 0x17 
 			};
-		} Returns; // @ 0x364
+		} SEC_USERS_TX_INT_EVENT_SET; // @ 0x364
 		union {
 			uint32_t value;
 			struct {
@@ -622,7 +622,7 @@ typedef union {
 				uint32_t secU3ac2TxBufTrigger : 1; // @ 0x16 -- 0x16 
 				uint32_t secU3ac3TxBufTrigger : 1; // @ 0x17 -- 0x17 
 			};
-		} Returns; // @ 0x368
+		} SEC_USERS_TX_INT_EVENT_CLEAR; // @ 0x368
 		union {
 			uint32_t value;
 			struct {
@@ -653,63 +653,63 @@ typedef union {
 				uint32_t pad0 : 7;
 				uint32_t masterSecUsersTxIntEn : 1; // @ 0x1f -- 0x1f 
 			};
-		} Sets; // @ 0x36c
+		} SEC_USERS_TX_INT_EVENT_UN_MASK; // @ 0x36c
 		uint8_t pad12[0x1b4];
 		union {
 			uint32_t value;
 			struct {
 				uint32_t bcnStatusPointer : 32; // @ 0x1f -- 0x0 
 			};
-		} Returns; // @ 0x524
+		} DEBUG_BCN_S_PTR; // @ 0x524
 		union {
 			uint32_t value;
 			struct {
 				uint32_t ac0StatusPointer : 32; // @ 0x1f -- 0x0 
 			};
-		} Returns; // @ 0x528
+		} DEBUG_AC_0S_PTR; // @ 0x528
 		union {
 			uint32_t value;
 			struct {
 				uint32_t ac1StatusPointer : 32; // @ 0x1f -- 0x0 
 			};
-		} Returns; // @ 0x52c
+		} DEBUG_AC_1S_PTR; // @ 0x52c
 		union {
 			uint32_t value;
 			struct {
 				uint32_t ac2StatusPointer : 32; // @ 0x1f -- 0x0 
 			};
-		} Returns; // @ 0x530
+		} DEBUG_AC_2S_PTR; // @ 0x530
 		union {
 			uint32_t value;
 			struct {
 				uint32_t ac3StatusPointer : 32; // @ 0x1f -- 0x0 
 			};
-		} Returns; // @ 0x534
+		} DEBUG_AC_3S_PTR; // @ 0x534
 		uint8_t pad13[0x8];
 		union {
 			uint32_t value;
 			struct {
 				uint32_t txCurrentPointer : 32; // @ 0x1f -- 0x0 
 			};
-		} Returns; // @ 0x540
+		} DEBUG_TX_C_PTR; // @ 0x540
 		union {
 			uint32_t value;
 			struct {
 				uint32_t rxPayStatPointer : 32; // @ 0x1f -- 0x0 
 			};
-		} Returns; // @ 0x544
+		} DEBUG_RX_PAY_S_PTR; // @ 0x544
 		union {
 			uint32_t value;
 			struct {
 				uint32_t rxHdrStatPointer : 32; // @ 0x1f -- 0x0 
 			};
-		} Returns; // @ 0x548
+		} DEBUG_RX_HDR_C_PTR; // @ 0x548
 		union {
 			uint32_t value;
 			struct {
 				uint32_t rxPayCurrentPointer : 32; // @ 0x1f -- 0x0 
 			};
-		} Returns; // @ 0x54c
+		} DEBUG_RX_PAY_C_PTR; // @ 0x54c
 		uint8_t pad14[0x10];
 		union {
 			uint32_t value;
@@ -747,7 +747,7 @@ typedef union {
 				uint32_t swProf30 : 1; // @ 0x1e -- 0x1e 
 				uint32_t swProf31 : 1; // @ 0x1f -- 0x1f 
 			};
-		} Returns; // @ 0x560
+		} SW_PROFILING; // @ 0x560
 		union {
 			uint32_t value;
 			struct {
@@ -784,7 +784,7 @@ typedef union {
 				uint32_t swSetProf30 : 1; // @ 0x1e -- 0x1e 
 				uint32_t swSetProf31 : 1; // @ 0x1f -- 0x1f 
 			};
-		} Returns; // @ 0x564
+		} SW_SET_PROFILING; // @ 0x564
 		union {
 			uint32_t value;
 			struct {
@@ -821,26 +821,26 @@ typedef union {
 				uint32_t swClearProf30 : 1; // @ 0x1e -- 0x1e 
 				uint32_t swClearProf31 : 1; // @ 0x1f -- 0x1f 
 			};
-		} Returns; // @ 0x568
+		} SW_CLEAR_PROFILING; // @ 0x568
 		uint8_t pad15[0x4];
 		union {
 			uint32_t value;
 			struct {
 				uint32_t secU1TxCurrentPointer : 32; // @ 0x1f -- 0x0 
 			};
-		} Returns; // @ 0x570
+		} DEBUG_SEC_U_1_TX_C_PTR; // @ 0x570
 		union {
 			uint32_t value;
 			struct {
 				uint32_t secU2TxCurrentPointer : 32; // @ 0x1f -- 0x0 
 			};
-		} Returns; // @ 0x574
+		} DEBUG_SEC_U_2_TX_C_PTR; // @ 0x574
 		union {
 			uint32_t value;
 			struct {
 				uint32_t secU3TxCurrentPointer : 32; // @ 0x1f -- 0x0 
 			};
-		} Returns; // @ 0x578
+		} DEBUG_SEC_U_3_TX_C_PTR; // @ 0x578
 	};
 } mac_pl_regs;
 #define MAC_PL_BASE 0x44b08000
