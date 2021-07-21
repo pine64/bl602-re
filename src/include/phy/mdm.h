@@ -49,17 +49,17 @@ typedef union {
 		union {
 			uint32_t value;
 			struct {
-				uint32_t pad0 : 1;
+				uint32_t reset : 1; // @ 0 -- 0 # 0xfffffffe
 				uint32_t vht : 1; // @ 1 -- 1 # 0xfffffffd
-				uint32_t pad1 : 2;
+				uint32_t pad0 : 2;
 				uint32_t rxnssmax : 3; // @ 6 -- 4 # 0xffffff8f
-				uint32_t pad2 : 1;
+				uint32_t pad1 : 1;
 				uint32_t v19 : 1; // @ 8 -- 8 # 0xfffffeff
-				uint32_t pad3 : 7;
+				uint32_t pad2 : 7;
 				uint32_t v30 : 1; // @ 16 -- 16 # 0xfffeffff
-				uint32_t pad4 : 3;
+				uint32_t pad3 : 3;
 				uint32_t _v30 : 1; // @ 20 -- 20 # 0xffefffff
-				uint32_t pad5 : 3;
+				uint32_t pad4 : 3;
 				uint32_t rxcbwmax : 2; // @ 25 -- 24 # 0xfcffffff
 			};
 		} rxchan; // @ 0x820
