@@ -2,6 +2,7 @@
 #include <phy/mdm.h>
 #include <phy/agc.h>
 #include <phy/agcram.h>
+#include <phy/bz_phy.h>
 
 #include "phy_bl602.h"
 #include "phy_trpc.h"
@@ -123,7 +124,16 @@ void agc_config(void) {
 }
 
 void bz_phy_reset(void) {
-    // UNUSED Function
+    BZ_PHY->r0x2808.set_0x1_67 = 0x1;
+    BZ_PHY->r0x2808.set_0x8_68 = 0x8;
+    BZ_PHY->r0x280c.set_0x1_69 = 0x1;
+    BZ_PHY->r0x280c.set_0x4_70 = 0x4;
+    BZ_PHY->r0x280c.set_0x0_71 = 0x0;
+    BZ_PHY->r0x2854.set_0x20_72 = 0x20;
+    BZ_PHY->r0x2854.set_0x1e_73 = 0x1e;
+    BZ_PHY->r0x2854.set_0xa_74 = 0xa;
+    BZ_PHY->r0x2854.set_0x1e_75 = 0x1e;
+    BZ_PHY->r0x2810.set_0x0_76 = 0x0;
     return ;
 }
 
