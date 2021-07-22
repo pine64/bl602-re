@@ -134,9 +134,12 @@ Buf('rxgain_offset_vs_temperature', 0x44c0c080, 0x44c0c088, 1)
 
 
 gid = 0
-def scan_write(code):
+def scan_write(code, dat="dat"):
     global gid
-    write_pattern = r'write_volatile_4\(DAT_([0-9a-f]+),uVar\d( & 0x([0-9a-f]+))*( \| 0x([0-9a-f]+))*\);'
+    if dat == 'dat':
+        write_pattern = r'write_volatile_4\(DAT_([0-9a-f]+),uVar\d( & 0x([0-9a-f]+))*( \| 0x([0-9a-f]+))*\);'
+    else:
+        write_pattern = r'write_volatile_4\(0x([0-9a-f]+),uVar\d( & 0x([0-9a-f]+))*( \| 0x([0-9a-f]+))*\);'
     for l in code:
         import re
         g = re.search(write_pattern, l)
@@ -333,7 +336,7 @@ for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver
 
 
 peris['bz_phy'] = Peripheral(peripheral('bz_phy', 0x40002000, 0x1000))
-scan_write(open('../blobs/bz_phy.c').readlines())
+scan_write(open('../blobs/bz_phy.c').readlines(), '0x')
 
 
 if __name__ == '__main__':
