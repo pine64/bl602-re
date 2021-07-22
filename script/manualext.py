@@ -334,16 +334,12 @@ for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver
 #print('\n'.join(GenHeader()))
 #print('\n'.join(GenSVD()))
 
-<<<<<<< HEAD
 
 peris['bz_phy'] = Peripheral(peripheral('bz_phy', 0x40002000, 0x1000))
 for rn, fn, val in scan_write(open('../blobs/bz_phy.c').readlines(), '0x'):
     pass
     #print(f"BZ_PHY->{rn}.{fn} = {hex(val)}")
 
-
-=======
->>>>>>> d18fd82 (support parse bl svd file and find reg with addr and mask)
 if __name__ == '__main__':
     import sys
     if len(sys.argv) == 1:
