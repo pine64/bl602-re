@@ -24,6 +24,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t set_0x0_76 : 1; // @ 0 -- 0 # 0xfffffffe
+				uint32_t set_0x1_77 : 1; // @ 1 -- 1 # 0xfffffffd
 			};
 		} r0x2810; // @ 0x810
 		uint8_t pad1[0x40];
@@ -36,6 +37,13 @@ typedef union {
 				uint32_t set_0x1e_73 : 8; // @ 31 -- 24 # 0xffffff
 			};
 		} r0x2854; // @ 0x854
+		uint8_t pad2[0x454];
+		union {
+			uint32_t value;
+			struct {
+				uint32_t set_0x4_78 : 5; // @ 4 -- 0 # 0xffffffe0
+			};
+		} r0x2cac; // @ 0xcac
 	};
 } bz_phy_regs;
 #define BZ_PHY_BASE 0x40002000
