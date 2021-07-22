@@ -296,6 +296,24 @@ def HasField(addr):
         return context.r.hasField(addr)
     print("You are not in any register")
 
+def CAccess(peris, addr, mask):
+    for p_name, p in peris.items():
+        if p.base <= addr and p.base + p.size >= addr:
+            r = p.findReg(addr)
+            if r:
+                if r.fields:
+                    if mask == 0:
+                        return f"{p_name.upper()}->{r.name}.value"
+                    else:
+                        f = r.hasField(mask)
+                        if f:
+                            return f"{p_name.upper()}->{r.name}.{f.name}"
+                        else:
+                            return f"({p_name.upper()}->{r.name}.value) & {hex(mask)}"
+                else:
+                    return f"{p_name.upper()}->{r.name}"
+            
+
 def RegFromComment(addr, comment:str):
     name = ""
     import re

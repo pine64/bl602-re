@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 from reglib import *
+from typing import Mapping
+
+peris :Mapping[str, peripheral] = {}
 
 ############ MDM
 
-Peripheral(peripheral('mdm', 0x44c00000, 0x4000))
+peris['mdm'] = Peripheral(peripheral('mdm', 0x44c00000, 0x4000))
 
 Reg('txchan', 0x44c00824)
 Field('txcbwmax', 0xfcffffff) # Channel bandwidth
@@ -92,16 +95,13 @@ Reg('rxctrl1', 0x44c0083c) # reset to 0x4920492
 Reg('r874', 0x44c00874)
 Field('resetto1', 0xf7ffffff)
 Field('set1beforewriteagcmem', 0xdfffffff)
-
-open('../src/include/phy/mdm.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenSVD()))
 
 
 
 ############# AGC
 
-
-Peripheral(peripheral('agc', 0x44c0b000, 0x2000))
+peris['agc'] = Peripheral(peripheral('agc', 0x44c0b000, 0x2000))
 Reg('r000', 0x44c0b000)
 FieldBit('iqcomp', 31-10)
 
@@ -177,15 +177,15 @@ for rn, fn, val in scan_write([
     "write_volatile_4(DAT_44c0b110,uVar4 & 0xfffffffe);",
 ]):
     print(f"AGC->{rn}.{fn} = {hex(val)}")
-open('../src/include/phy/agc.h', 'w').write('\n'.join(GenHeader()))
+#open('../src/include/phy/agc.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
 #print('\n'.join(GenSVD()))
 
 
-Peripheral(peripheral('agcram', 0x54c0a000, 0x800))
+peris['agcram'] = Peripheral(peripheral('agcram', 0x54c0a000, 0x800))
 Buf('agcram', 0x54c0a000, 0x54c0a800 - 4)
 
-open('../src/include/phy/agcram.h', 'w').write('\n'.join(GenHeader()))
+#open('../src/include/phy/agcram.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
 #print('\n'.join(GenSVD()))
 #
@@ -220,23 +220,23 @@ def getregs(fname, pattern='name'):
 
 
 
-Peripheral(peripheral('mac_core', 0x44b00000, 0x1000))
+peris['mac_core'] = Peripheral(peripheral('mac_core', 0x44b00000, 0x1000))
 
 for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver/reg_mac_core.h", pattern='brief'):
     RegFromComment(offset + 0x44b00000, code)
 
-open('../src/include/phy/mac_core.h', 'w').write('\n'.join(GenHeader()))
+#open('../src/include/phy/mac_core.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
 #print('\n'.join(GenSVD()))
 
 
-Peripheral(peripheral('mac_pl', 0x44b08000, 0x1000))
+peris['mac_pl'] = Peripheral(peripheral('mac_pl', 0x44b08000, 0x1000))
 
 for code, offset in getregs("../alios/mac_pl.h"):
     RegFromComment(offset + 0x44b00000, code)
 
 
-open('../src/include/phy/mac_pl.h', 'w').write('\n'.join(GenHeader()))
+#open('../src/include/phy/mac_pl.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
 #print('\n'.join(GenSVD()))
 
@@ -247,7 +247,7 @@ open('../src/include/phy/mac_pl.h', 'w').write('\n'.join(GenHeader()))
 ## look txl_payload_handle_backup for more info
 ####
 
-Peripheral(peripheral('dma', 0x44a00000, 0x1000))
+peris['dma'] = Peripheral(peripheral('dma', 0x44a00000, 0x1000))
 
 Reg('status', 0x44a00024)
 Field("TX", 0x1f)
@@ -283,13 +283,13 @@ FieldBit("lli", 0, 16)
 Reg('LinkListItem1', 0x44a000ac)
 FieldBit("lli", 0, 16)
 
-open('../src/include/phy/dma.h', 'w').write('\n'.join(GenHeader()))
+#open('../src/include/phy/dma.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
 #print('\n'.join(GenSVD()))
 
 ############# sysctrl
 
-Peripheral(peripheral('sysctrl', 0x44900000, 0x1000))
+peris['sysctrl'] = Peripheral(peripheral('sysctrl', 0x44900000, 0x1000))
 Reg('time', 0x44900084)
 FieldBit('time_greater_on_bit12', 0)
 Reg("sysctrl_r68", 0x44900068) # set to 0x8000000c for init
@@ -303,7 +303,7 @@ Field("set14", 0xffff0000)
 
 Reg("r074", 0x44900068) # set to b09
 
-open('../src/include/phy/sysctrl.h', 'w').write('\n'.join(GenHeader()))
+#open('../src/include/phy/sysctrl.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
 #print('\n'.join(GenSVD()))
 
@@ -311,20 +311,33 @@ open('../src/include/phy/sysctrl.h', 'w').write('\n'.join(GenHeader()))
 ############# Wifi Regs 92
 ## wtf is this???
 
-Peripheral(peripheral('sysctrl92', 0x44920000, 0x1000))
+peris['sysctrl92'] = Peripheral(peripheral('sysctrl92', 0x44920000, 0x1000))
 Reg("set5010001f", 0x44920004)
 
-open('../src/include/phy/sysctrl92.h', 'w').write('\n'.join(GenHeader()))
+#open('../src/include/phy/sysctrl92.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
 #print('\n'.join(GenSVD()))
 
 
 ############# Wifi IPC (EMB/Core)
-Peripheral(peripheral('ipc', 0x44800000, 0x1000))
+peris['ipc'] = Peripheral(peripheral('ipc', 0x44800000, 0x1000))
 
 for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver/reg_ipc_app.h", pattern='brief'):
     RegFromComment(offset + 0x44800000, code)
 
-open('../src/include/phy/ipc.h', 'w').write('\n'.join(GenHeader()))
+#open('../src/include/phy/ipc.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
 #print('\n'.join(GenSVD()))
+
+if __name__ == '__main__':
+    import sys
+    if len(sys.argv) == 1:
+        for p_name, p in peris.items():
+            open(f"../src/include/phy/{p_name}.h", "w").write("\n".join(p.genHeader()))
+    else:
+        if len(sys.argv) >= 2:
+            addr = int(sys.argv[1], 16)
+            mask = 0
+            if len(sys.argv) == 3:
+                mask = int(sys.argv[2], 16)
+            print(CAccess(peris, addr, mask))
