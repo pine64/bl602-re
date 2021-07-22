@@ -336,7 +336,9 @@ for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver
 
 
 peris['bz_phy'] = Peripheral(peripheral('bz_phy', 0x40002000, 0x1000))
-scan_write(open('../blobs/bz_phy.c').readlines(), '0x')
+for rn, fn, val in scan_write(open('../blobs/bz_phy.c').readlines(), '0x'):
+    pass
+    #print(f"BZ_PHY->{rn}.{fn} = {hex(val)}")
 
 
 if __name__ == '__main__':
