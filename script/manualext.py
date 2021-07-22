@@ -163,10 +163,11 @@ def scan_write(code):
         f = Field(name_f, mask)
         yield r.name, f.name, value
 
-print("agc_config")
+#print("agc_config")
 for rn, fn, val in scan_write(open('../blobs/agc_config.c').readlines()):
-    print(f"AGC->{rn}.{fn} = {hex(val)}")
-print("ex")
+    pass
+    #print(f"AGC->{rn}.{fn} = {hex(val)}")
+#print("ex")
 for rn, fn, val in scan_write([
     "write_volatile_4(DAT_44c0c020,uVar4 & 0xfc00ffff | 0x140000);",
     "write_volatile_4(DAT_44c0b390,uVar1 & 0xfffffeff);",
@@ -176,7 +177,8 @@ for rn, fn, val in scan_write([
     "write_volatile_4(DAT_44c0b110,uVar4 & 0xfffffffd);",
     "write_volatile_4(DAT_44c0b110,uVar4 & 0xfffffffe);",
 ]):
-    print(f"AGC->{rn}.{fn} = {hex(val)}")
+    pass
+    #print(f"AGC->{rn}.{fn} = {hex(val)}")
 #open('../src/include/phy/agc.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
 #print('\n'.join(GenSVD()))
