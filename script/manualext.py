@@ -324,6 +324,11 @@ for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver
 #print('\n'.join(GenHeader()))
 #print('\n'.join(GenSVD()))
 
+
+peris['bz_phy'] = Peripheral(peripheral('bz_phy', 0x40002000, 0x1000))
+scan_write(open('../blobs/bz_phy.c').readlines())
+
+
 if __name__ == '__main__':
     import sys
     if len(sys.argv) == 1:
