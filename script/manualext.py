@@ -147,10 +147,12 @@ def scan_write(code, dat="dat"):
             continue
         value = 0
         addr = int(g.group(1), 16)
+        lsb = 0
         if g.group(3) == None: # mask
             value = int(g.group(5), 16)
             mask = (~value) & 0xffffffff
-            value = value >> ((value & (-value)).bit_length() - 1)
+            lsb = ((value & (-value)).bit_length() - 1)
+            value = value >> lsb
         else:
             mask = int(g.group(3), 16)
             if g.group(5): # value
@@ -159,7 +161,9 @@ def scan_write(code, dat="dat"):
                 lsb = lsb.bit_length() - 1
                 value = int(g.group(5), 16)
                 value = value >> lsb
-        name_f = f'set_{hex(value)}_{gid}'
+            else:
+                lsb = 0
+        name_f = f'set_{hex(value)}_{lsb}'
         name_r = f'r{hex(addr&0xffff)}'
         gid = gid + 1
         Reg(name_r, addr)
