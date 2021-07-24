@@ -112,7 +112,7 @@ typedef union {
 		union {
 			uint32_t value;
 			struct {
-				uint32_t set1 : 2; // @ 1 -- 0 # 0xfffffffc
+				uint32_t combpathsel : 2; // @ 1 -- 0 # 0xfffffffc
 				uint32_t pad0 : 6;
 				uint32_t riu_rifsdeten : 1; // @ 8 -- 8 # 0xfffffeff
 				uint32_t pad1 : 1;
@@ -183,8 +183,8 @@ typedef union {
 				uint32_t pad0 : 8;
 				uint32_t needreset : 1; // @ 8 -- 8 # 0xfffffeff
 			};
-		} r41c; // @ 0x41c
-		uint32_t r420_copy41c; // @ 0x420
+		} rwnxmacintstatmasked; // @ 0x41c
+		uint32_t rwnxmacintack; // @ 0x420
 		uint8_t pad9[0xdc];
 		union {
 			uint32_t value;
@@ -223,7 +223,7 @@ typedef union {
 		union {
 			uint32_t value;
 			struct {
-				uint32_t set0 : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t txhbf20coeffsel : 16; // @ 15 -- 0 # 0xffff0000
 			};
 		} rc218; // @ 0x1218
 		uint8_t pad14[0x5f8];

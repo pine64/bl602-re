@@ -12,33 +12,33 @@ Reg('txchan', 0x44c00824)
 Field('txcbwmax', 0xfcffffff) # Channel bandwidth
 Field('txnssmax', 0xffffff8f) # number of spatial streams
 Field('ntxmax', 0xff8fffff) # tx chan?
-Field('v18', 0xfffffeff) # some switch? DAT_44c00000>>18
+Field('txldpcen', 0xfffffeff) # some switch? DAT_44c00000>>18
 Field('vht', 0xfffffffd) # very high throughput
-Field('v31', 0xfffeffff) # some switch? DAT_44c00000>>31
+Field('txmumimoen', 0xfffeffff) # some switch? DAT_44c00000>>31
 
 Reg('rxchan', 0x44c00820)
 Field('rxcbwmax', 0xfcffffff) # Channel bandwidth
 Field('rxnssmax', 0xffffff8f) # number of spatial streams
 # Field('nrxmax', 0xff8fffff) # not exists
-Field('v19', 0xfffffeff) # some switch? DAT_44c00000>>19
-Field('vht', 0xfffffffd) # very high throughput
-Field('v30', 0xfffeffff) # some switch? DAT_44c00000>>30
-Field('_v30', 0xffefffff) # some switch? DAT_44c00000>>30
-FieldBit('reset', 0) # set 1 in phy_hw_set_channel for.. reset?
+Field('rxldpcen', 0xfffffeff) # some switch? DAT_44c00000>>19
+Field('rxvhten', 0xfffffffd) # very high throughput
+Field('rxmumimoen', 0xfffeffff) # some switch? DAT_44c00000>>30
+Field('rxmumimoapeplenen', 0xffefffff) # some switch? DAT_44c00000>>30
+FieldBit('rxdsssen', 0) # set 1 in phy_hw_set_channel for.. reset?
 Field('rxndpnstsmax', 0xffff8fff)
 
 Reg('version', 0x44c00000)
 FieldBit('vht', 31-9)
 FieldBit('nss', 8, 4) # phy_get_nss (nss + 1)
-FieldBit('rxndpnstsmax', 0xc, 4)
-FieldBit('v18', 0x12)
-FieldBit('v19', 0x13)
+FieldBit('nsts', 0xc, 4)
+FieldBit('ldpcenc', 0x12)
+FieldBit('ldpcdec', 0x13)
 FieldBit('mu_mimo_rx', 0x1e)
 FieldBit('mu_mimo_tx', 0x1f)
 FieldBit('ldpctx', 0x1a)
 FieldBit('ldpcrx', 0x1b)
 FieldBit('ntx', 4, 4) # phy_get_ntx (ntx + 1)
-FieldBit('txcbwmax', 0x18, 2)
+FieldBit('chbw', 0x18, 2)
 FieldBit('bfmee_supported', 0x1c)
 FieldBit('bfmer_supported', 0x1d)
 
@@ -50,9 +50,9 @@ FieldBit('DSPSWRESET', 8)
 FieldBit('FSMSWRESET', 4)
 FieldBit('MDMSWRESET', 0)
 
-Reg('TXCTRL0', 0x44c00838)
-Reg('TXCTRL1', 0x44c0088c)
-Reg('TXCTRL3', 0x44c00898)
+Reg('txstartdelay', 0x44c00838)
+Reg('txctrl1', 0x44c0088c)
+Reg('txctrl3', 0x44c00898)
 
 Reg('TBECTRL0', 0x44c00858)
 Field('tbe_count_adjust_20', 0xffffff00)
@@ -62,8 +62,8 @@ Field('delaynormalgi', 0xFFFFC0FF)
 Field('WAITHTSTF', 0xffffff80)
 
 Reg('r834', 0x44c00834)
-Field('set60h', 0x00ffffff)
-FieldBit('set1', 0)
+Field('tddchtstfmargin', 0x00ffffff)
+FieldBit('rxtdctrl1', 0)
 
 Reg('SMOOTHCTRL', 0x44c00818)
 FieldBit('TDCYCROTVAL20', 0, 8)
@@ -93,7 +93,7 @@ Field('smoothsnrthrmid', 0xffffff00)
 Reg('rxctrl1', 0x44c0083c) # reset to 0x4920492
 
 Reg('r0x874', 0x44c00874)
-Field('resetto1', 0xf7ffffff)
+Field('rcclkforce', 0xf7ffffff)
 Field('mdm_agcmemclkforce', 0xdfffffff)
 #print('\n'.join(GenSVD()))
 
@@ -116,9 +116,9 @@ FieldBit('RAMPUPGAPQDB', 0, 8) # 0x20
 
 
 Reg('RWNXAGCCNTL', 0x44c0b390)
-Field('set1', 0xfffffffc)
+Field('combpathsel', 0xfffffffc)
 Field('agcfsmreset', 0xffffefff) # set 1 before agc mem, maybe
-
+Field('rifsdeten', 0xfffffbff)
 Reg('riu_rwnxagcaci20marg0', 0x44c0b340)
 Reg('riu_rwnxagcaci20marg1', 0x44c0b344)
 Reg('riu_rwnxagcaci20marg2', 0x44c0b348)
@@ -132,13 +132,14 @@ Reg('RWNXAGCCCATIMEOUT', 0x44c0b3bc) # 4000000
 Reg('irqmacccatimeouten', 0x44c0b414)
 Field('set1', 0xFFFFFEFF)
 
-Reg('r41c', 0x44c0b41c)
+Reg('rwnxmacintstatmasked', 0x44c0b41c)
 FieldBit('needreset', 8) # guess
-Reg('r420_copy41c', 0x44c0b420)
+
+Reg('rwnxmacintack', 0x44c0b420)
 
 
 Reg('rc218', 0x44c0c218)
-Field('set0', 0xffff0000)
+Field('txhbf20coeffsel', 0xffff0000)
 
 Buf('rxgain_offset_vs_temperature', 0x44c0c080, 0x44c0c088, 1)
 
@@ -347,13 +348,13 @@ for code, offset in getregs("../alios/mac_pl.h"):
 
 peris['dma'] = Peripheral(peripheral('dma', 0x44a00000, 0x1000))
 
-Reg('status', 0x44a00024)
+Reg('int_status', 0x44a00024)
 Field("TX", 0x1f)
 FieldBit("RXHeader", 5) ## guess
 FieldBit("RXPayload", 6) ## guess
 FieldBit("b8", 8)
 
-Reg('tx_reset', 0x44a00020) # my guess, setting of r20 should reset 0x24??
+Reg('int_ack', 0x44a00020) # my guess, setting of r20 should reset 0x24??
 # kind like response...
 FieldBit("b8", 8) # set at txl_cfm_dma_int_handler
 FieldBit("b7", 7) # set at ipc_emb_dbg_dma_int_handler
@@ -362,9 +363,10 @@ FieldBit("RXPayload", 6) ## guess
 Field("TX", 0x1f)
 
 Reg("dma_status", 0x44a00010)
-Field("busyatffff", 0xffff)
+Field("dma_status_oft_free", 0xffff)
 
 # my guess!!
+# access with dma_lli_counter_get(reg_idx)
 Reg('TX_BCN', 0x44a00080)
 FieldBit('bridgedmacnt', 0, 16)
 Reg('TX_AC_0', 0x44a00084)
@@ -377,9 +379,9 @@ Reg('TX_AC_3', 0x44a00090)
 FieldBit('bridgedmacnt', 0, 16)
 
 Reg('LinkListItem0', 0x44a000a4)
-FieldBit("lli", 0, 16)
+FieldBit("counter", 0, 16)
 Reg('LinkListItem1', 0x44a000ac)
-FieldBit("lli", 0, 16)
+FieldBit("counter", 0, 16)
 
 #open('../src/include/phy/dma.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
@@ -390,16 +392,14 @@ FieldBit("lli", 0, 16)
 peris['sysctrl'] = Peripheral(peripheral('sysctrl', 0x44900000, 0x1000))
 Reg('time', 0x44900084)
 FieldBit('time_greater_on_bit12', 0)
-Reg("sysctrl_r68", 0x44900068) # set to 0x8000000c for init
-Reg("sysctrl_re0", 0x449000e0) # or with 0x1ff00
+Reg("diag_conf", 0x44900068) # set to 0x8000000c for init
+Field("diag_sel", 0xffff0000)
+
+Reg("misc_cntl", 0x449000e0) # or with 0x1ff00
 Field("set1", (~0x1ff00) & 0xffffffff)
 
 
-## two regs for helper_record_all_states
-Reg("r068", 0x44900068)
-Field("set14", 0xffff0000)
-
-Reg("r074", 0x44900068) # set to b09
+Reg("r074", 0x44900074) # set to b09
 
 #open('../src/include/phy/sysctrl.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
@@ -410,7 +410,7 @@ Reg("r074", 0x44900068) # set to b09
 ## wtf is this???
 
 peris['sysctrl92'] = Peripheral(peripheral('sysctrl92', 0x44920000, 0x1000))
-Reg("set5010001f", 0x44920004)
+Reg("ptr_config", 0x44920004)
 
 #open('../src/include/phy/sysctrl92.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
