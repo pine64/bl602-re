@@ -38,30 +38,35 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t bridgedmacnt : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} TX_BCN; // @ 0x80
 		union {
 			uint32_t value;
 			struct {
 				uint32_t bridgedmacnt : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} TX_AC_0; // @ 0x84
 		union {
 			uint32_t value;
 			struct {
 				uint32_t bridgedmacnt : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} TX_AC_1; // @ 0x88
 		union {
 			uint32_t value;
 			struct {
 				uint32_t bridgedmacnt : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} TX_AC_2; // @ 0x8c
 		union {
 			uint32_t value;
 			struct {
 				uint32_t bridgedmacnt : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} TX_AC_3; // @ 0x90
 		uint8_t pad3[0x10];
@@ -69,6 +74,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t counter : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} LinkListItem0; // @ 0xa4
 		uint8_t pad4[0x4];
@@ -76,6 +82,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t counter : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} LinkListItem1; // @ 0xac
 	};

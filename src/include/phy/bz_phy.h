@@ -25,6 +25,7 @@ typedef union {
 			struct {
 				uint32_t bz_phy_rx_dfe_notch_en : 1; // @ 0 -- 0 # 0xfffffffe
 				uint32_t bz_phy_rx_dfe_toc_en : 1; // @ 1 -- 1 # 0xfffffffd
+				uint32_t pad0 : 30;
 			};
 		} r0x2810; // @ 0x810
 		uint8_t pad1[0x40];
@@ -42,6 +43,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t bz_agc_rbb_ind_min : 5; // @ 4 -- 0 # 0xffffffe0
+				uint32_t pad0 : 27;
 			};
 		} r0x2cac; // @ 0xcac
 	};

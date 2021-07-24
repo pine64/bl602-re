@@ -7,6 +7,7 @@ typedef union {
 			struct {
 				uint32_t pad0 : 21;
 				uint32_t iqcomp : 1; // @ 21 -- 21 # 0xffdfffff
+				uint32_t pad1 : 10;
 			};
 		} r000; // @ 0x0
 		uint32_t activeant; // @ 0x4
@@ -18,6 +19,7 @@ typedef union {
 				uint32_t riu_adcpowmindbm : 1; // @ 1 -- 1 # 0xfffffffd
 				uint32_t riu_vpeakadcqdbv : 1; // @ 2 -- 2 # 0xfffffffb
 				uint32_t riu_fe40gain : 1; // @ 3 -- 3 # 0xfffffff7
+				uint32_t pad0 : 28;
 			};
 		} r0xb110; // @ 0x110
 		uint8_t pad1[0x4];
@@ -37,6 +39,7 @@ typedef union {
 				uint32_t riu_sathighthrdbv : 6; // @ 21 -- 16 # 0xffc0ffff
 				uint32_t pad2 : 2;
 				uint32_t riu_satdelay50ns : 5; // @ 28 -- 24 # 0xe0ffffff
+				uint32_t pad3 : 3;
 			};
 		} r0xb364; // @ 0x364
 		union {
@@ -45,6 +48,7 @@ typedef union {
 				uint32_t riu_crossupthrqdbm : 10; // @ 9 -- 0 # 0xfffffc00
 				uint32_t pad0 : 2;
 				uint32_t riu_crossdnthrqdbm : 10; // @ 21 -- 12 # 0xffc00fff
+				uint32_t pad1 : 10;
 			};
 		} r0xb368; // @ 0x368
 		union {
@@ -55,6 +59,7 @@ typedef union {
 				uint32_t pad0 : 5;
 				uint32_t riu_rampdngapqdb : 8; // @ 23 -- 16 # 0xff00ffff
 				uint32_t riu_rampdnndlindex : 3; // @ 26 -- 24 # 0xf8ffffff
+				uint32_t pad1 : 5;
 			};
 		} RWNXAGCRAMP; // @ 0x36c
 		union {
@@ -62,6 +67,7 @@ typedef union {
 			struct {
 				uint32_t pad0 : 16;
 				uint32_t riu_adcpowdisthrdbv : 7; // @ 22 -- 16 # 0xff80ffff
+				uint32_t pad1 : 9;
 			};
 		} r0xb370; // @ 0x370
 		uint8_t pad4[0xc];
@@ -121,6 +127,7 @@ typedef union {
 				uint32_t agcfsmreset : 1; // @ 12 -- 12 # 0xffffefff
 				uint32_t pad3 : 3;
 				uint32_t riu_htstfgainen : 1; // @ 16 -- 16 # 0xfffeffff
+				uint32_t pad4 : 15;
 			};
 		} RWNXAGCCNTL; // @ 0x390
 		union {
@@ -128,6 +135,7 @@ typedef union {
 			struct {
 				uint32_t pad0 : 16;
 				uint32_t riu_vpeakadcqdbv : 8; // @ 23 -- 16 # 0xff00ffff
+				uint32_t pad1 : 8;
 			};
 		} r0xb394; // @ 0x394
 		union {
@@ -135,6 +143,7 @@ typedef union {
 			struct {
 				uint32_t pad0 : 8;
 				uint32_t riu_adcpowmindbm : 8; // @ 15 -- 8 # 0xffff00ff
+				uint32_t pad1 : 16;
 			};
 		} r0xb398; // @ 0x398
 		uint8_t pad5[0x4];
@@ -142,6 +151,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t riu_inbdpowmindbm : 8; // @ 7 -- 0 # 0xffffff00
+				uint32_t pad0 : 24;
 			};
 		} r0xb3a0; // @ 0x3a0
 		union {
@@ -149,6 +159,7 @@ typedef union {
 			struct {
 				uint32_t riu_fe20gain : 8; // @ 7 -- 0 # 0xffffff00
 				uint32_t riu_fe40gain : 8; // @ 15 -- 8 # 0xffff00ff
+				uint32_t pad0 : 16;
 			};
 		} r0xb3a4; // @ 0x3a4
 		uint8_t pad6[0x14];
@@ -166,6 +177,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t riu_adcpowsupthrdbm : 8; // @ 7 -- 0 # 0xffffff00
+				uint32_t pad0 : 24;
 			};
 		} r0xb3c4; // @ 0x3c4
 		uint8_t pad7[0x4c];
@@ -174,6 +186,7 @@ typedef union {
 			struct {
 				uint32_t pad0 : 8;
 				uint32_t set1 : 1; // @ 8 -- 8 # 0xfffffeff
+				uint32_t pad1 : 23;
 			};
 		} irqmacccatimeouten; // @ 0x414
 		uint8_t pad8[0x4];
@@ -182,6 +195,7 @@ typedef union {
 			struct {
 				uint32_t pad0 : 8;
 				uint32_t needreset : 1; // @ 8 -- 8 # 0xfffffeff
+				uint32_t pad1 : 23;
 			};
 		} rwnxmacintstatmasked; // @ 0x41c
 		uint32_t rwnxmacintack; // @ 0x420
@@ -191,6 +205,7 @@ typedef union {
 			struct {
 				uint32_t pad0 : 12;
 				uint32_t riu_fe20gain : 2; // @ 13 -- 12 # 0xffffcfff
+				uint32_t pad1 : 18;
 			};
 		} r0xb500; // @ 0x500
 		uint8_t pad10[0xb1c];
@@ -199,6 +214,7 @@ typedef union {
 			struct {
 				uint32_t pad0 : 16;
 				uint32_t riu_htstfgainen : 10; // @ 25 -- 16 # 0xfc00ffff
+				uint32_t pad1 : 6;
 			};
 		} r0xc020; // @ 0x1020
 		uint8_t pad11[0x1c];
@@ -208,6 +224,7 @@ typedef union {
 				uint32_t pad0 : 15;
 				uint32_t rc2_rx0_vga_idx_min : 5; // @ 19 -- 15 # 0xfff07fff
 				uint32_t rc2_rx0_vga_idx_max : 5; // @ 24 -- 20 # 0xfe0fffff
+				uint32_t pad1 : 7;
 			};
 		} r0xc040; // @ 0x1040
 		union {
@@ -215,6 +232,7 @@ typedef union {
 			struct {
 				uint32_t rc2_rx0_lna_idx_min : 8; // @ 7 -- 0 # 0xffffff00
 				uint32_t rc2_rx0_lna_idx_max : 8; // @ 15 -- 8 # 0xffff00ff
+				uint32_t pad0 : 16;
 			};
 		} r0xc044; // @ 0x1044
 		uint8_t pad12[0x38];
@@ -224,6 +242,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t txhbf20coeffsel : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} rc218; // @ 0x1218
 		uint8_t pad14[0x5f8];
@@ -232,6 +251,7 @@ typedef union {
 			struct {
 				uint32_t rc2_pkdet_mode : 2; // @ 1 -- 0 # 0xfffffffc
 				uint32_t rc2_pkdet_cnt_thr : 4; // @ 5 -- 2 # 0xffffffc3
+				uint32_t pad0 : 26;
 			};
 		} r0xc814; // @ 0x1814
 		uint8_t pad15[0x14];
@@ -244,6 +264,7 @@ typedef union {
 				uint32_t rc2_inbdpowinfthr_adj_en : 1; // @ 11 -- 11 # 0xfffff7ff
 				uint32_t pad1 : 3;
 				uint32_t rc2_inbdpowfastvalid_cnt : 9; // @ 23 -- 15 # 0xff007fff
+				uint32_t pad2 : 8;
 			};
 		} r0xc82c; // @ 0x182c
 		union {

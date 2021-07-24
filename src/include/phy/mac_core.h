@@ -28,6 +28,7 @@ typedef union {
 				uint32_t coex : 1; // @ 14 -- 14 # 0xffffbfff
 				uint32_t pad1 : 1;
 				uint32_t mac80211MHFormat : 1; // @ 16 -- 16 # 0xfffeffff
+				uint32_t pad2 : 15;
 			};
 		} VERSION_1; // @ 0x4
 		union {
@@ -37,12 +38,14 @@ typedef union {
 				uint32_t ieRelease : 1; // @ 7 -- 7 # 0xffffff7f
 				uint32_t releaseNumber : 6; // @ 13 -- 8 # 0xffffc0ff
 				uint32_t phaseNumber : 3; // @ 16 -- 14 # 0xfffe3fff
+				uint32_t pad0 : 15;
 			};
 		} VERSION_2; // @ 0x8
 		union {
 			uint32_t value;
 			struct {
 				uint32_t bitmapCnt : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} BITMAP_CNT; // @ 0xc
 		union {
@@ -55,6 +58,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t macAddrHigh : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} MAC_ADDR_HI; // @ 0x14
 		union {
@@ -67,6 +71,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t macAddrHighMask : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} MAC_ADDR_HI_MASK; // @ 0x1c
 		union {
@@ -79,6 +84,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t bssIDHigh : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} BSS_ID_HI; // @ 0x24
 		union {
@@ -91,6 +97,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t bssIDHighMask : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} BSS_ID_HI_MASK; // @ 0x2c
 		uint8_t pad0[0x8];
@@ -99,12 +106,14 @@ typedef union {
 			struct {
 				uint32_t currentState : 4; // @ 3 -- 0 # 0xfffffff0
 				uint32_t nextState : 4; // @ 7 -- 4 # 0xffffff0f
+				uint32_t pad0 : 24;
 			};
 		} STATE_CNTRL; // @ 0x38
 		union {
 			uint32_t value;
 			struct {
 				uint32_t probeDelay : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} SCAN_CNTRL; // @ 0x3c
 		uint8_t pad1[0x4];
@@ -138,6 +147,7 @@ typedef union {
 				uint32_t tsfUpdatedBySW : 1; // @ 24 -- 24 # 0xfeffffff
 				uint32_t tsfMgtDisable : 1; // @ 25 -- 25 # 0xfdffffff
 				uint32_t rxRIFSEn : 1; // @ 26 -- 26 # 0xfbffffff
+				uint32_t pad2 : 5;
 			};
 		} MAC_CNTRL_1; // @ 0x4c
 		uint8_t pad3[0x4];
@@ -154,6 +164,7 @@ typedef union {
 				uint32_t baPSBitmapReset : 1; // @ 7 -- 7 # 0xffffff7f
 				uint32_t pad0 : 8;
 				uint32_t rxFlowCntrlEn : 1; // @ 16 -- 16 # 0xfffeffff
+				uint32_t pad1 : 15;
 			};
 		} MAC_ERR_REC_CNTRL; // @ 0x54
 		union {
@@ -163,6 +174,7 @@ typedef union {
 				uint32_t errInRxLevel1 : 1; // @ 1 -- 1 # 0xfffffffd
 				uint32_t errInTxRxLevel2 : 1; // @ 2 -- 2 # 0xfffffffb
 				uint32_t errInHWLevel3 : 1; // @ 3 -- 3 # 0xfffffff7
+				uint32_t pad0 : 28;
 			};
 		} MAC_ERR_SET_STATUS; // @ 0x58
 		union {
@@ -172,6 +184,7 @@ typedef union {
 				uint32_t clearErrInRxLevel1 : 1; // @ 1 -- 1 # 0xfffffffd
 				uint32_t clearErrInTxRxLevel2 : 1; // @ 2 -- 2 # 0xfffffffb
 				uint32_t clearErrInHWLevel3 : 1; // @ 3 -- 3 # 0xfffffff7
+				uint32_t pad0 : 28;
 			};
 		} MAC_ERR_CLEAR_STATUS; // @ 0x5c
 		union {
@@ -226,6 +239,7 @@ typedef union {
 				uint32_t bcnUpdateOffset : 8; // @ 7 -- 0 # 0xffffff00
 				uint32_t timOffset : 8; // @ 15 -- 8 # 0xffff00ff
 				uint32_t aid : 12; // @ 27 -- 16 # 0xf000ffff
+				uint32_t pad0 : 4;
 			};
 		} BCN_CNTRL_2; // @ 0x68
 		uint8_t pad4[0x24];
@@ -242,6 +256,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t cfpMaxDuration : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} DTIM_CFP_2; // @ 0x94
 		union {
@@ -249,6 +264,7 @@ typedef union {
 			struct {
 				uint32_t dot11ShortRetryLimit : 8; // @ 7 -- 0 # 0xffffff00
 				uint32_t dot11LongRetryLimit : 8; // @ 15 -- 8 # 0xffff00ff
+				uint32_t pad0 : 16;
 			};
 		} RETRY_LIMITS; // @ 0x98
 		union {
@@ -258,6 +274,7 @@ typedef union {
 				uint32_t bbServiceB : 8; // @ 23 -- 16 # 0xff00ffff
 				uint32_t pad0 : 2;
 				uint32_t maxPHYNtx : 3; // @ 28 -- 26 # 0xe3ffffff
+				uint32_t pad1 : 3;
 			};
 		} BB_SERVICE; // @ 0x9c
 		union {
@@ -265,6 +282,7 @@ typedef union {
 			struct {
 				uint32_t ofdmMaxPwrLevel : 8; // @ 7 -- 0 # 0xffffff00
 				uint32_t dsssMaxPwrLevel : 8; // @ 15 -- 8 # 0xffff00ff
+				uint32_t pad0 : 16;
 			};
 		} MAX_POWER_LEVEL; // @ 0xa0
 		uint8_t pad5[0x8];
@@ -302,6 +320,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t macAddrRAMHigh : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} ENCR_MAC_ADDR_HIGH; // @ 0xc0
 		union {
@@ -348,6 +367,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t bssBasicRateSet : 12; // @ 11 -- 0 # 0xfffff000
+				uint32_t pad0 : 20;
 			};
 		} RATES; // @ 0xdc
 		union {
@@ -364,6 +384,7 @@ typedef union {
 				uint32_t macCoreClkFreq : 8; // @ 7 -- 0 # 0xffffff00
 				uint32_t txRFDelayInMACClk : 10; // @ 17 -- 8 # 0xfffc00ff
 				uint32_t txChainDelayInMACClk : 10; // @ 27 -- 18 # 0xf003ffff
+				uint32_t pad0 : 4;
 			};
 		} TIMINGS_1; // @ 0xe4
 		union {
@@ -371,6 +392,7 @@ typedef union {
 			struct {
 				uint32_t slotTime : 8; // @ 7 -- 0 # 0xffffff00
 				uint32_t slotTimeInMACClk : 16; // @ 23 -- 8 # 0xff0000ff
+				uint32_t pad0 : 8;
 			};
 		} TIMINGS_2; // @ 0xe8
 		union {
@@ -379,6 +401,7 @@ typedef union {
 				uint32_t macProcDelayInMACClk : 10; // @ 9 -- 0 # 0xfffffc00
 				uint32_t txDelayRFOnInMACClk : 10; // @ 19 -- 10 # 0xfff003ff
 				uint32_t rxRFDelayInMACClk : 10; // @ 29 -- 20 # 0xc00fffff
+				uint32_t pad0 : 2;
 			};
 		} TIMINGS_3; // @ 0xec
 		union {
@@ -394,6 +417,7 @@ typedef union {
 			struct {
 				uint32_t sifsB : 8; // @ 7 -- 0 # 0xffffff00
 				uint32_t sifsBInMACClk : 16; // @ 23 -- 8 # 0xff0000ff
+				uint32_t pad0 : 8;
 			};
 		} TIMINGS_5; // @ 0xf4
 		union {
@@ -401,6 +425,7 @@ typedef union {
 			struct {
 				uint32_t sifsA : 8; // @ 7 -- 0 # 0xffffff00
 				uint32_t sifsAInMACClk : 16; // @ 23 -- 8 # 0xff0000ff
+				uint32_t pad0 : 8;
 			};
 		} TIMINGS_6; // @ 0xf8
 		union {
@@ -408,6 +433,7 @@ typedef union {
 			struct {
 				uint32_t rifs : 8; // @ 7 -- 0 # 0xffffff00
 				uint32_t rxCCADelay : 4; // @ 11 -- 8 # 0xfffff0ff
+				uint32_t pad0 : 20;
 			};
 		} TIMINGS_7; // @ 0xfc
 		union {
@@ -425,6 +451,7 @@ typedef union {
 				uint32_t txDMAProcDlyInMACClk : 10; // @ 9 -- 0 # 0xfffffc00
 				uint32_t rifsInMACClk : 10; // @ 19 -- 10 # 0xfff003ff
 				uint32_t rifsTOInMACClk : 10; // @ 29 -- 20 # 0xc00fffff
+				uint32_t pad0 : 2;
 			};
 		} TIMINGS_9; // @ 0x104
 		uint8_t pad7[0x4];
@@ -433,6 +460,7 @@ typedef union {
 			struct {
 				uint32_t edcaTriggerTimer : 8; // @ 7 -- 0 # 0xffffff00
 				uint32_t hccaTriggerTimer : 8; // @ 15 -- 8 # 0xffff00ff
+				uint32_t pad0 : 16;
 			};
 		} PROT_TRIG_TIMER; // @ 0x10c
 		union {
@@ -440,6 +468,7 @@ typedef union {
 			struct {
 				uint32_t txAbsoluteTimeout : 8; // @ 7 -- 0 # 0xffffff00
 				uint32_t txPacketTimeout : 8; // @ 15 -- 8 # 0xffff00ff
+				uint32_t pad0 : 16;
 			};
 		} TX_TRIGGER_TIMER; // @ 0x110
 		union {
@@ -448,6 +477,7 @@ typedef union {
 				uint32_t rxAbsoluteTimeout : 8; // @ 7 -- 0 # 0xffffff00
 				uint32_t rxPacketTimeout : 8; // @ 15 -- 8 # 0xffff00ff
 				uint32_t rxPayloadUsedCount : 8; // @ 23 -- 16 # 0xff00ffff
+				uint32_t pad0 : 8;
 			};
 		} RX_TRIGGER_TIMER; // @ 0x114
 		union {
@@ -476,6 +506,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t monotonicCounterHigh2 : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} MONOTONIC_COUNTER_2_HI; // @ 0x124
 		union {
@@ -489,6 +520,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t maxAllowedLength : 20; // @ 19 -- 0 # 0xfff00000
+				uint32_t pad0 : 12;
 			};
 		} MAX_RX_LENGTH; // @ 0x150
 		uint8_t pad9[0xac];
@@ -499,6 +531,7 @@ typedef union {
 				uint32_t cwMin0 : 4; // @ 7 -- 4 # 0xffffff0f
 				uint32_t cwMax0 : 4; // @ 11 -- 8 # 0xfffff0ff
 				uint32_t txOpLimit0 : 16; // @ 27 -- 12 # 0xf0000fff
+				uint32_t pad0 : 4;
 			};
 		} EDCA_AC_0; // @ 0x200
 		union {
@@ -508,6 +541,7 @@ typedef union {
 				uint32_t cwMin1 : 4; // @ 7 -- 4 # 0xffffff0f
 				uint32_t cwMax1 : 4; // @ 11 -- 8 # 0xfffff0ff
 				uint32_t txOpLimit1 : 16; // @ 27 -- 12 # 0xf0000fff
+				uint32_t pad0 : 4;
 			};
 		} EDCA_AC_1; // @ 0x204
 		union {
@@ -517,6 +551,7 @@ typedef union {
 				uint32_t cwMin2 : 4; // @ 7 -- 4 # 0xffffff0f
 				uint32_t cwMax2 : 4; // @ 11 -- 8 # 0xfffff0ff
 				uint32_t txOpLimit2 : 16; // @ 27 -- 12 # 0xf0000fff
+				uint32_t pad0 : 4;
 			};
 		} EDCA_AC_2; // @ 0x208
 		union {
@@ -526,6 +561,7 @@ typedef union {
 				uint32_t cwMin3 : 4; // @ 7 -- 4 # 0xffffff0f
 				uint32_t cwMax3 : 4; // @ 11 -- 8 # 0xfffff0ff
 				uint32_t txOpLimit3 : 16; // @ 27 -- 12 # 0xf0000fff
+				uint32_t pad0 : 4;
 			};
 		} EDCA_AC_3; // @ 0x20c
 		uint8_t pad10[0x10];
@@ -543,6 +579,7 @@ typedef union {
 				uint32_t pad0 : 2;
 				uint32_t remTXOPInDurField : 1; // @ 4 -- 4 # 0xffffffef
 				uint32_t keepTXOPOpen : 1; // @ 5 -- 5 # 0xffffffdf
+				uint32_t pad1 : 26;
 			};
 		} EDCA_CNTRL; // @ 0x224
 		uint8_t pad11[0x58];
@@ -558,6 +595,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t quietOffset1 : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} QUIET_ELEMENT_1B; // @ 0x284
 		union {
@@ -572,6 +610,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t quietOffset2 : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} QUIET_ELEMENT_2B; // @ 0x28c
 		union {
@@ -614,12 +653,14 @@ typedef union {
 				uint32_t startTxFormatMod : 3; // @ 26 -- 24 # 0xf8ffffff
 				uint32_t startTxPreType : 1; // @ 27 -- 27 # 0xf7ffffff
 				uint32_t startTxBW : 2; // @ 29 -- 28 # 0xcfffffff
+				uint32_t pad1 : 2;
 			};
 		} START_TX_1; // @ 0x304
 		union {
 			uint32_t value;
 			struct {
 				uint32_t durControlFrm : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} START_TX_2; // @ 0x308
 		union {
@@ -648,6 +689,7 @@ typedef union {
 				uint32_t dynBWEn : 1; // @ 7 -- 7 # 0xffffff7f
 				uint32_t aPPDUMaxTime : 8; // @ 15 -- 8 # 0xffff00ff
 				uint32_t maxSupportedBW : 2; // @ 17 -- 16 # 0xfffcffff
+				uint32_t pad0 : 14;
 			};
 		} TX_BW_CNTRL; // @ 0x310
 		union {
@@ -655,6 +697,7 @@ typedef union {
 			struct {
 				uint32_t bssBasicHTMCSSetEM : 16; // @ 15 -- 0 # 0xffff0000
 				uint32_t bssBasicHTMCSSetUM : 6; // @ 21 -- 16 # 0xffc0ffff
+				uint32_t pad0 : 10;
 			};
 		} HTMCS; // @ 0x314
 		uint8_t pad13[0x4];
@@ -662,12 +705,14 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t bssBasicVHTMCSSet : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} VHTMCS; // @ 0x31c
 		union {
 			uint32_t value;
 			struct {
 				uint32_t supportLSTP : 1; // @ 0 -- 0 # 0xfffffffe
+				uint32_t pad0 : 31;
 			};
 		} LSTP; // @ 0x320
 		uint8_t pad14[0xdc];
@@ -679,6 +724,7 @@ typedef union {
 				uint32_t coexWlanChanOffset : 1; // @ 12 -- 12 # 0xffffefff
 				uint32_t pad1 : 3;
 				uint32_t coexWlanChanFreq : 7; // @ 22 -- 16 # 0xff80ffff
+				uint32_t pad2 : 9;
 			};
 		} COEX_CONTROL; // @ 0x400
 		union {
@@ -727,12 +773,14 @@ typedef union {
 			struct {
 				uint32_t debugPortSel1 : 8; // @ 7 -- 0 # 0xffffff00
 				uint32_t debugPortSel2 : 8; // @ 15 -- 8 # 0xffff00ff
+				uint32_t pad0 : 16;
 			};
 		} DEBUG_PORT_SEL; // @ 0x510
 		union {
 			uint32_t value;
 			struct {
 				uint32_t navCounter : 26; // @ 25 -- 0 # 0xfc000000
+				uint32_t pad0 : 6;
 			};
 		} DEBUG_NAV; // @ 0x514
 		union {
@@ -745,6 +793,7 @@ typedef union {
 				uint32_t activeAC : 2; // @ 17 -- 16 # 0xfffcffff
 				uint32_t pad0 : 6;
 				uint32_t backoffOffset : 2; // @ 25 -- 24 # 0xfcffffff
+				uint32_t pad1 : 6;
 			};
 		} DEBUG_CW; // @ 0x518
 		union {
@@ -770,6 +819,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t rxReqForceDeassertion : 1; // @ 0 -- 0 # 0xfffffffe
+				uint32_t pad0 : 31;
 			};
 		} DEBUG_PHY; // @ 0x55c
 	};

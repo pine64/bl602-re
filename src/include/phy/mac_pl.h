@@ -7,6 +7,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t nextTBTT : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t pad0 : 16;
 			};
 		} NEXT_TBTT; // @ 0x40
 		uint8_t pad1[0x4];
@@ -23,6 +24,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t softReset : 1; // @ 0 -- 0 # 0xfffffffe
+				uint32_t pad0 : 31;
 			};
 		} MAC_CNTRL_2; // @ 0x50
 		uint8_t pad3[0x18];
@@ -55,6 +57,7 @@ typedef union {
 				uint32_t phyRxStart : 1; // @ 23 -- 23 # 0xff7fffff
 				uint32_t rxHeaderDMADead : 1; // @ 24 -- 24 # 0xfeffffff
 				uint32_t rxPayloadDMADead : 1; // @ 25 -- 25 # 0xfdffffff
+				uint32_t pad1 : 6;
 			};
 		} GEN_INT_STATUS; // @ 0x6c
 		union {
@@ -85,6 +88,7 @@ typedef union {
 				uint32_t phyRxStart : 1; // @ 23 -- 23 # 0xff7fffff
 				uint32_t rxHeaderDMADead : 1; // @ 24 -- 24 # 0xfeffffff
 				uint32_t rxPayloadDMADead : 1; // @ 25 -- 25 # 0xfdffffff
+				uint32_t pad1 : 6;
 			};
 		} GEN_INT_ACK; // @ 0x70
 		union {
@@ -152,6 +156,7 @@ typedef union {
 				uint32_t ac2TxBufTrigger : 1; // @ 26 -- 26 # 0xfbffffff
 				uint32_t ac3TxBufTrigger : 1; // @ 27 -- 27 # 0xf7ffffff
 				uint32_t bcnTxBufTrigger : 1; // @ 28 -- 28 # 0xefffffff
+				uint32_t pad0 : 3;
 			};
 		} TX_RX_INT_STATUS; // @ 0x78
 		union {
@@ -186,6 +191,7 @@ typedef union {
 				uint32_t ac2TxBufTrigger : 1; // @ 26 -- 26 # 0xfbffffff
 				uint32_t ac3TxBufTrigger : 1; // @ 27 -- 27 # 0xf7ffffff
 				uint32_t bcnTxBufTrigger : 1; // @ 28 -- 28 # 0xefffffff
+				uint32_t pad1 : 3;
 			};
 		} TX_RX_INT_ACK; // @ 0x7c
 		union {
@@ -237,6 +243,7 @@ typedef union {
 				uint32_t absTimers7 : 1; // @ 7 -- 7 # 0xffffff7f
 				uint32_t absTimers8 : 1; // @ 8 -- 8 # 0xfffffeff
 				uint32_t absTimers9 : 1; // @ 9 -- 9 # 0xfffffdff
+				uint32_t pad0 : 22;
 			};
 		} TIMERS_INT_EVENT_SET; // @ 0x84
 		union {
@@ -252,6 +259,7 @@ typedef union {
 				uint32_t absTimers7 : 1; // @ 7 -- 7 # 0xffffff7f
 				uint32_t absTimers8 : 1; // @ 8 -- 8 # 0xfffffeff
 				uint32_t absTimers9 : 1; // @ 9 -- 9 # 0xfffffdff
+				uint32_t pad0 : 22;
 			};
 		} TIMERS_INT_EVENT_CLEAR; // @ 0x88
 		union {
@@ -267,6 +275,7 @@ typedef union {
 				uint32_t maskabsTimers7 : 1; // @ 7 -- 7 # 0xffffff7f
 				uint32_t maskabsTimers8 : 1; // @ 8 -- 8 # 0xfffffeff
 				uint32_t maskabsTimers9 : 1; // @ 9 -- 9 # 0xfffffdff
+				uint32_t pad0 : 22;
 			};
 		} TIMERS_INT_UN_MASK; // @ 0x8c
 		uint8_t pad4[0x14];
@@ -299,6 +308,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t ppduMCSIndex : 7; // @ 6 -- 0 # 0xffffff80
+				uint32_t pad0 : 25;
 			};
 		} TIME_ON_AIR_PARAM_2; // @ 0x164
 		union {
@@ -336,6 +346,7 @@ typedef union {
 				uint32_t rxPayloadNewTail : 1; // @ 25 -- 25 # 0xfdffffff
 				uint32_t rxHeaderNewHead : 1; // @ 26 -- 26 # 0xfbffffff
 				uint32_t rxPayloadNewHead : 1; // @ 27 -- 27 # 0xf7ffffff
+				uint32_t pad3 : 4;
 			};
 		} DMA_CNTRL_SET; // @ 0x180
 		union {
@@ -363,6 +374,7 @@ typedef union {
 				uint32_t rxPayloadNewTail : 1; // @ 25 -- 25 # 0xfdffffff
 				uint32_t rxHeaderNewHead : 1; // @ 26 -- 26 # 0xfbffffff
 				uint32_t rxPayloadNewHead : 1; // @ 27 -- 27 # 0xf7ffffff
+				uint32_t pad3 : 4;
 			};
 		} DMA_CNTRL_CLEAR; // @ 0x184
 		union {
@@ -381,6 +393,7 @@ typedef union {
 				uint32_t rxHeaderState : 2; // @ 25 -- 24 # 0xfcffffff
 				uint32_t pad5 : 2;
 				uint32_t rxPayloadState : 2; // @ 29 -- 28 # 0xcfffffff
+				uint32_t pad6 : 2;
 			};
 		} DMA_STATUS_1; // @ 0x188
 		union {
@@ -416,6 +429,7 @@ typedef union {
 				uint32_t txAC1NewHeadErr : 1; // @ 27 -- 27 # 0xf7ffffff
 				uint32_t txAC2NewHeadErr : 1; // @ 28 -- 28 # 0xefffffff
 				uint32_t txAC3NewHeadErr : 1; // @ 29 -- 29 # 0xdfffffff
+				uint32_t pad0 : 2;
 			};
 		} DMA_STATUS_2; // @ 0x18c
 		union {
@@ -429,6 +443,7 @@ typedef union {
 				uint32_t rxPayBusErr : 1; // @ 5 -- 5 # 0xffffffdf
 				uint32_t rxHdrNewHeadErr : 1; // @ 6 -- 6 # 0xffffffbf
 				uint32_t rxPayNewHeadErr : 1; // @ 7 -- 7 # 0xffffff7f
+				uint32_t pad0 : 24;
 			};
 		} DMA_STATUS_3; // @ 0x190
 		union {
@@ -449,6 +464,7 @@ typedef union {
 				uint32_t txAC1HaltAfterTXOP : 1; // @ 12 -- 12 # 0xffffefff
 				uint32_t txAC2HaltAfterTXOP : 1; // @ 13 -- 13 # 0xffffdfff
 				uint32_t txAC3HaltAfterTXOP : 1; // @ 14 -- 14 # 0xffffbfff
+				uint32_t pad0 : 17;
 			};
 		} DMA_STATUS_4; // @ 0x194
 		union {
@@ -489,6 +505,7 @@ typedef union {
 				uint32_t dmaTBDSize : 6; // @ 17 -- 12 # 0xfffc0fff
 				uint32_t dmaRHDSize : 6; // @ 23 -- 18 # 0xff03ffff
 				uint32_t dmaRBDSize : 6; // @ 29 -- 24 # 0xc0ffffff
+				uint32_t pad0 : 2;
 			};
 		} TX_STRUCT_SIZES; // @ 0x1ac
 		uint8_t pad7[0x8];
@@ -514,6 +531,7 @@ typedef union {
 				uint32_t txFIFOThreshold : 8; // @ 7 -- 0 # 0xffffff00
 				uint32_t pad0 : 8;
 				uint32_t rxFIFOThreshold : 8; // @ 23 -- 16 # 0xff00ffff
+				uint32_t pad1 : 8;
 			};
 		} DMA_THRESHOLD; // @ 0x1c0
 		uint8_t pad8[0x4c];
@@ -524,6 +542,7 @@ typedef union {
 				uint32_t ac1HasData : 1; // @ 1 -- 1 # 0xfffffffd
 				uint32_t ac2HasData : 1; // @ 2 -- 2 # 0xfffffffb
 				uint32_t ac3HasData : 1; // @ 3 -- 3 # 0xfffffff7
+				uint32_t pad0 : 28;
 			};
 		} EDCA_AC_HAS_DATA_SET; // @ 0x210
 		union {
@@ -533,6 +552,7 @@ typedef union {
 				uint32_t ac1HasData : 1; // @ 1 -- 1 # 0xfffffffd
 				uint32_t ac2HasData : 1; // @ 2 -- 2 # 0xfffffffb
 				uint32_t ac3HasData : 1; // @ 3 -- 3 # 0xfffffff7
+				uint32_t pad0 : 28;
 			};
 		} EDCA_AC_HAS_DATA_CLEAR; // @ 0x214
 		uint8_t pad9[0x10];
@@ -562,6 +582,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t txBWAfterDrop : 2; // @ 1 -- 0 # 0xfffffffc
+				uint32_t pad0 : 30;
 			};
 		} TX_BW_DROP_INFO; // @ 0x330
 		uint8_t pad11[0x30];
@@ -592,6 +613,7 @@ typedef union {
 				uint32_t secU3ac1TxBufTrigger : 1; // @ 21 -- 21 # 0xffdfffff
 				uint32_t secU3ac2TxBufTrigger : 1; // @ 22 -- 22 # 0xffbfffff
 				uint32_t secU3ac3TxBufTrigger : 1; // @ 23 -- 23 # 0xff7fffff
+				uint32_t pad0 : 8;
 			};
 		} SEC_USERS_TX_INT_EVENT_SET; // @ 0x364
 		union {
@@ -621,6 +643,7 @@ typedef union {
 				uint32_t secU3ac1TxBufTrigger : 1; // @ 21 -- 21 # 0xffdfffff
 				uint32_t secU3ac2TxBufTrigger : 1; // @ 22 -- 22 # 0xffbfffff
 				uint32_t secU3ac3TxBufTrigger : 1; // @ 23 -- 23 # 0xff7fffff
+				uint32_t pad0 : 8;
 			};
 		} SEC_USERS_TX_INT_EVENT_CLEAR; // @ 0x368
 		union {
