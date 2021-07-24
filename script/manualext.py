@@ -92,9 +92,9 @@ Field('smoothsnrthrhigh', 0xffff00ff)
 Field('smoothsnrthrmid', 0xffffff00)
 Reg('rxctrl1', 0x44c0083c) # reset to 0x4920492
 
-Reg('r874', 0x44c00874)
+Reg('r0x874', 0x44c00874)
 Field('resetto1', 0xf7ffffff)
-Field('set1beforewriteagcmem', 0xdfffffff)
+Field('mdm_agcmemclkforce', 0xdfffffff)
 #print('\n'.join(GenSVD()))
 
 
@@ -104,6 +104,16 @@ Field('set1beforewriteagcmem', 0xdfffffff)
 peris['agc'] = Peripheral(peripheral('agc', 0x44c0b000, 0x2000))
 Reg('r000', 0x44c0b000)
 FieldBit('iqcomp', 31-10)
+
+### guess
+Reg('RWNXAGCRAMP', 0x44c0b36c)
+FieldBit('RAMPDNNDLINDEX', 24, 3) # 0x05
+FieldBit('RAMPDNGAPQDB', 16, 8) # 0x20
+FieldBit('RAMPUPNDLINDEX', 8, 3) # 0x7
+FieldBit('RAMPUPGAPQDB', 0, 8) # 0x20
+
+###
+
 
 Reg('RWNXAGCCNTL', 0x44c0b390)
 Field('set1', 0xfffffffc)
@@ -137,9 +147,9 @@ gid = 0
 def scan_write(code, dat="dat"):
     global gid
     if dat == 'dat':
-        write_pattern = r'write_volatile_4\(DAT_([0-9a-f]+),uVar\d( & 0x([0-9a-f]+))*( \| 0x([0-9a-f]+))*\);'
+        write_pattern = r'write_volatile_4\(DAT_([0-9a-f]+),uVar\d( & 0x([0-9a-f]+))*( \| ([0-9a-z]+))*\);'
     else:
-        write_pattern = r'write_volatile_4\(0x([0-9a-f]+),uVar\d( & 0x([0-9a-f]+))*( \| 0x([0-9a-f]+))*\);'
+        write_pattern = r'write_volatile_4\(0x([0-9a-f]+),uVar\d( & 0x([0-9a-f]+))*( \| ([0-9a-z]+))*\);'
     for l in code:
         import re
         g = re.search(write_pattern, l)
@@ -167,15 +177,94 @@ def scan_write(code, dat="dat"):
         name_r = f'r{hex(addr&0xffff)}'
         gid = gid + 1
         r = Reg(name_r, addr)
-        f = Field(name_f, mask)
-        yield r.name, f.name, value
+        yield r, Field(name_f, mask)
 
-#print("agc_config")
-for rn, fn, val in scan_write(open('../blobs/agc_config.c').readlines()):
-    pass
-    #print(f"AGC->{rn}.{fn} = {hex(val)}")
-#print("ex")
-for rn, fn, val in scan_write([
+
+agc_attr = [
+    (0x44c0b390, "riu_htstfgainen"),
+    (0x44c0b390, "riu_rifsdeten"),
+    (0x44c0b3a4, "riu_fe20gain"),
+    (0x44c0b3a4, "riu_fe40gain"),
+    (0x44c0b394, "riu_vpeakadcqdbv"),
+    (0x44c0b398, "riu_adcpowmindbm"),
+    (0x44c0b3c4, "riu_adcpowsupthrdbm"),
+    (0x44c0b364, "riu_satdelay50ns"),
+    (0x44c0b364, "riu_sathighthrdbv"),
+    (0x44c0b364, "riu_satlowthrdbv"),
+    (0x44c0b364, "riu_satthrdbv"),
+    (0x44c0b368, "riu_crossdnthrqdbm"),
+    (0x44c0b368, "riu_crossupthrqdbm"),
+    (0x44c0b36c, "riu_rampupgapqdb"),
+    (0x44c0b36c, "riu_rampupndlindex"),
+    (0x44c0b36c, "riu_rampdngapqdb"),
+    (0x44c0b36c, "riu_rampdnndlindex"),
+    (0x44c0b370, "riu_adcpowdisthrdbv"),
+    (0x44c0b3c0, "riu_idinbdpowgapdnqdbm"),
+    (0x44c0b380, "riu_evt0op3"),
+    (0x44c0b380, "riu_evt0op2"),
+    (0x44c0b380, "riu_evt0op1"),
+    (0x44c0b380, "riu_evt0pathcomb"),
+    (0x44c0b380, "riu_evt0opcomb"),
+    (0x44c0b384, "riu_evt1op1"),
+    (0x44c0b384, "riu_evt1op2"),
+    (0x44c0b384, "riu_evt1op3"),
+    (0x44c0b384, "riu_evt1pathcomb"),
+    (0x44c0b384, "riu_evt1opcomb"),
+    (0x44c0b388, "riu_evt2op1"),
+    (0x44c0b388, "riu_evt2op2"),
+    (0x44c0b388, "riu_evt2op3"),
+    (0x44c0b388, "riu_evt2pathcomb"),
+    (0x44c0b388, "riu_evt2opcomb"),
+    (0x44c0b38c, "riu_evt3op1"),
+    (0x44c0b38c, "riu_evt3op2"),
+    (0x44c0b38c, "riu_evt3op3"),
+    (0x44c0b38c, "riu_evt3opcomb"),
+    (0x44c0c830, "rc2_evt4op1"),
+    (0x44c0c830, "rc2_evt4op2"),
+    (0x44c0c830, "rc2_evt4op3"),
+    (0x44c0c830, "rc2_evt4opcomb"),
+    (0x44c0c814, "rc2_pkdet_mode"),
+    (0x44c0c814, "rc2_pkdet_cnt_thr"),
+    (0x44c0c814, "rc2_pkdet_cnt_thr"),
+    (0x44c0c040, "rc2_rx0_vga_idx_max"),
+    (0x44c0c040, "rc2_rx0_vga_idx_min"),
+    (0x44c0c044, "rc2_rx0_lna_idx_max"),
+    (0x44c0c044, "rc2_rx0_lna_idx_min"),
+    (0x44c0b3a0, "riu_inbdpowmindbm"),
+    (0x44c0b3c0, "riu_inbdpowsupthrdbm"),
+    (0x44c0b3c0, "riu_inbdpowinfthrdbm"),
+    (0x44c0c82c, "rc2_inbdpow_adj_thr_dbm"),
+    (0x44c0c82c, "rc2_inbdpowsupthr_adj_en"),
+    (0x44c0c82c, "rc2_inbdpowinfthr_adj_en"),
+    (0x44c0c838, "rc2_reflevofdmthd_en"),
+    (0x44c0c838, "rc2_reflevofdmthd"),
+    (0x44c0c83c, "rc2_reflevdsssthd_en"),
+    (0x44c0c83c, "rc2_reflevdsssthd"),
+    (0x44c0c840, "rc2_reflevdssscontthd_en"),
+    (0x44c0c840, "rc2_reflevdssscontthd"),
+    (0x44c0c82c, "rc2_inbdpowfastvalid_cnt"),
+]
+
+i = 0
+for r, f in scan_write(open('../blobs/agc_config.c').readlines()):
+    if r.offset == agc_attr[i][0] - 0x44c0b000:
+        f.name = agc_attr[i][1]
+    else:
+        print(f"mismatched {i} {agc_attr[i][1]} {hex(r.offset + 0x44c0b000)} {hex(agc_attr[i][0])}")
+    i = i + 1
+
+extra_regs = [
+    "rc_paoff_delay",
+    "riu_agcfsmreset",
+    "riu_txshift4044",
+    "riu_rxiqphaseesten",
+    "riu_rxiqgainesten",
+    "riu_rxiqphasecompen",
+    "riu_rxiqgaincompen"
+]
+
+i = 0
+for _, f in scan_write([
     "write_volatile_4(DAT_44c0c020,uVar4 & 0xfc00ffff | 0x140000);",
     "write_volatile_4(DAT_44c0b390,uVar1 & 0xfffffeff);",
     "write_volatile_4(DAT_44c0b500,uVar4 & 0xffffcfff | 0x2000);",
@@ -184,8 +273,8 @@ for rn, fn, val in scan_write([
     "write_volatile_4(DAT_44c0b110,uVar4 & 0xfffffffd);",
     "write_volatile_4(DAT_44c0b110,uVar4 & 0xfffffffe);",
 ]):
-    pass
-    #print(f"AGC->{rn}.{fn} = {hex(val)}")
+    f.name = agc_attr[i][1]
+    i = i + 1
 #open('../src/include/phy/agc.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
 #print('\n'.join(GenSVD()))
@@ -340,9 +429,29 @@ for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver
 
 
 peris['bz_phy'] = Peripheral(peripheral('bz_phy', 0x40002000, 0x1000))
-for rn, fn, val in scan_write(open('../blobs/bz_phy.c').readlines(), '0x'):
-    pass
-    #print(f"BZ_PHY->{rn}.{fn} = {hex(val)}")
+
+extra_bz_phy = [
+(0x40002808,"bz_phy_tx_rampup_fm_on"),
+(0x40002808,"bz_phy_tx_rampup_time_us"),
+(0x4000280c,"bz_phy_tx_rampdn_fm_on"),
+(0x4000280c,"bz_phy_tx_rampdn_time_us"),
+(0x4000280c,"bz_phy_tx_rampdn_pad0_time_us"),
+(0x40002854,"bz_phy_rx_proc_time_mlsd_us"),
+(0x40002854,"bz_phy_rx_proc_time_direct_us"),
+(0x40002854,"bz_phy_rx_proc_time_eq_us"),
+(0x40002854,"bz_phy_rx_proc_time_viterbi_us"),
+(0x40002810,"bz_phy_rx_dfe_notch_en"),
+(0x40002810,"bz_phy_rx_dfe_toc_en"),
+(0x40002cac,"bz_agc_rbb_ind_min"),
+]
+
+i = 0
+for r, f in scan_write(open('../blobs/bz_phy.c').readlines(), '0x'):
+    if r.offset == extra_bz_phy[i][0] - 0x40002000:
+        f.name = extra_bz_phy[i][1]
+    else:
+        print(f"mismatched {i} {extra_bz_phy[i][1]} {hex(r.offset + 0x40002000)} {hex(extra_bz_phy[i][0])}")
+    i = i + 1
 
 if __name__ == '__main__':
     import sys
