@@ -36,6 +36,7 @@ typedef union {
 				uint32_t CFGSMOOTHFORCE : 1; // @ 18 -- 18 # 0xfffbffff
 				uint32_t SMOOTHEN : 1; // @ 19 -- 19 # 0xfff7ffff
 				uint32_t TDCYCROTVAL80 : 8; // @ 27 -- 20 # 0xf00fffff
+				uint32_t pad0 : 4;
 			};
 		} SMOOTHCTRL; // @ 0x818
 		union {
@@ -44,6 +45,7 @@ typedef union {
 				uint32_t WAITHTSTF : 7; // @ 6 -- 0 # 0xffffff80
 				uint32_t pad0 : 1;
 				uint32_t delaynormalgi : 6; // @ 13 -- 8 # 0xffffc0ff
+				uint32_t pad1 : 18;
 			};
 		} DCESTIMCTRL; // @ 0x81c
 		union {
@@ -63,6 +65,7 @@ typedef union {
 				uint32_t rxmumimoapeplenen : 1; // @ 20 -- 20 # 0xffefffff
 				uint32_t pad5 : 3;
 				uint32_t rxcbwmax : 2; // @ 25 -- 24 # 0xfcffffff
+				uint32_t pad6 : 6;
 			};
 		} rxchan; // @ 0x820
 		union {
@@ -80,6 +83,7 @@ typedef union {
 				uint32_t ntxmax : 3; // @ 22 -- 20 # 0xff8fffff
 				uint32_t pad5 : 1;
 				uint32_t txcbwmax : 2; // @ 25 -- 24 # 0xfcffffff
+				uint32_t pad6 : 6;
 			};
 		} txchan; // @ 0x824
 		uint8_t pad2[0x8];
@@ -88,6 +92,7 @@ typedef union {
 			struct {
 				uint32_t smoothsnrthrmid : 8; // @ 7 -- 0 # 0xffffff00
 				uint32_t smoothsnrthrhigh : 8; // @ 15 -- 8 # 0xffff00ff
+				uint32_t pad0 : 16;
 			};
 		} SMOOTHSNRTHR; // @ 0x830
 		union {
@@ -105,6 +110,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t tbe_count_adjust_20 : 8; // @ 7 -- 0 # 0xffffff00
+				uint32_t pad0 : 24;
 			};
 		} TBECTRL0; // @ 0x858
 		uint8_t pad4[0x4];
@@ -117,6 +123,7 @@ typedef union {
 				uint32_t rcclkforce : 1; // @ 27 -- 27 # 0xf7ffffff
 				uint32_t pad1 : 1;
 				uint32_t mdm_agcmemclkforce : 1; // @ 29 -- 29 # 0xdfffffff
+				uint32_t pad2 : 2;
 			};
 		} r0x874; // @ 0x874
 		uint8_t pad6[0x10];
@@ -130,6 +137,7 @@ typedef union {
 				uint32_t DSPSWRESET : 1; // @ 8 -- 8 # 0xfffffeff
 				uint32_t pad2 : 3;
 				uint32_t AGCSWRESET : 1; // @ 12 -- 12 # 0xffffefff
+				uint32_t pad3 : 19;
 			};
 		} swreset; // @ 0x888
 		uint32_t txctrl1; // @ 0x88c
@@ -142,6 +150,7 @@ typedef union {
 			struct {
 				uint32_t pad0 : 16;
 				uint32_t precomp : 6; // @ 21 -- 16 # 0xffc0ffff
+				uint32_t pad1 : 10;
 			};
 		} r3024; // @ 0x3024
 		uint8_t pad9[0x8];
