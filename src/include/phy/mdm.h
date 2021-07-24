@@ -116,9 +116,9 @@ typedef union {
 				uint32_t pad0 : 27;
 				uint32_t resetto1 : 1; // @ 27 -- 27 # 0xf7ffffff
 				uint32_t pad1 : 1;
-				uint32_t set1beforewriteagcmem : 1; // @ 29 -- 29 # 0xdfffffff
+				uint32_t mdm_agcmemclkforce : 1; // @ 29 -- 29 # 0xdfffffff
 			};
-		} r874; // @ 0x874
+		} r0x874; // @ 0x874
 		uint8_t pad6[0x10];
 		union {
 			uint32_t value;
