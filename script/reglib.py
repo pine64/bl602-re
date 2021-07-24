@@ -97,6 +97,8 @@ class reg(gen):
                     padId = padId + 1
                 s.extend(ident(i.genHeader(), 2, '\t'))
                 currentBit = i.msb + 1
+            if currentBit != 32:
+                s.append(f'\t\tuint32_t pad{padId} : {32 - currentBit};')
 
             s.extend([
                 "\t};",
@@ -290,6 +292,12 @@ def FieldBit(name, bit, len=1):
         context.r.addField(name, (~(((2**len)-1)<<bit) & 0xFFFFFFFF))
     else:
         print("You are not in any register")
+
+def FieldRename(lsb, name):
+    if context.r:
+        for f in context.r.fields:
+            if f.lsb == lsb:
+                f.name = name
         
 def HasField(addr):
     if context.r:
