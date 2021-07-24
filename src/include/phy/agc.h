@@ -15,10 +15,10 @@ typedef union {
 		union {
 			uint32_t value;
 			struct {
-				uint32_t riu_adcpowsupthrdbm : 1; // @ 0 -- 0 # 0xfffffffe
-				uint32_t riu_adcpowmindbm : 1; // @ 1 -- 1 # 0xfffffffd
-				uint32_t riu_vpeakadcqdbv : 1; // @ 2 -- 2 # 0xfffffffb
-				uint32_t riu_fe40gain : 1; // @ 3 -- 3 # 0xfffffff7
+				uint32_t riu_rxiqgaincompen : 1; // @ 0 -- 0 # 0xfffffffe
+				uint32_t riu_rxiqphasecompen : 1; // @ 1 -- 1 # 0xfffffffd
+				uint32_t riu_rxiqgainesten : 1; // @ 2 -- 2 # 0xfffffffb
+				uint32_t riu_rxiqphaseesten : 1; // @ 3 -- 3 # 0xfffffff7
 				uint32_t pad0 : 28;
 			};
 		} r0xb110; // @ 0x110
@@ -120,7 +120,7 @@ typedef union {
 			struct {
 				uint32_t combpathsel : 2; // @ 1 -- 0 # 0xfffffffc
 				uint32_t pad0 : 6;
-				uint32_t riu_rifsdeten : 1; // @ 8 -- 8 # 0xfffffeff
+				uint32_t riu_ofdmonly : 1; // @ 8 -- 8 # 0xfffffeff
 				uint32_t pad1 : 1;
 				uint32_t riu_rifsdeten : 1; // @ 10 -- 10 # 0xfffffbff
 				uint32_t pad2 : 1;
@@ -204,7 +204,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t pad0 : 12;
-				uint32_t riu_fe20gain : 2; // @ 13 -- 12 # 0xffffcfff
+				uint32_t riu_txshift4044 : 2; // @ 13 -- 12 # 0xffffcfff
 				uint32_t pad1 : 18;
 			};
 		} r0xb500; // @ 0x500
@@ -213,7 +213,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t pad0 : 16;
-				uint32_t riu_htstfgainen : 10; // @ 25 -- 16 # 0xfc00ffff
+				uint32_t rc_paoff_delay : 10; // @ 25 -- 16 # 0xfc00ffff
 				uint32_t pad1 : 6;
 			};
 		} r0xc020; // @ 0x1020

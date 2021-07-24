@@ -118,7 +118,9 @@ FieldBit('RAMPUPGAPQDB', 0, 8) # 0x20
 Reg('RWNXAGCCNTL', 0x44c0b390)
 Field('combpathsel', 0xfffffffc)
 Field('agcfsmreset', 0xffffefff) # set 1 before agc mem, maybe
-Field('rifsdeten', 0xfffffbff)
+#Field('rifsdeten', 0xfffffbff)
+#Field('riu_ofdmonly_setf', 0xfffffeff)
+
 Reg('riu_rwnxagcaci20marg0', 0x44c0b340)
 Reg('riu_rwnxagcaci20marg1', 0x44c0b344)
 Reg('riu_rwnxagcaci20marg2', 0x44c0b348)
@@ -256,7 +258,7 @@ for r, f in scan_write(open('../blobs/agc_config.c').readlines()):
 
 extra_regs = [
     "rc_paoff_delay",
-    "riu_agcfsmreset",
+    "riu_ofdmonly",
     "riu_txshift4044",
     "riu_rxiqphaseesten",
     "riu_rxiqgainesten",
@@ -274,7 +276,7 @@ for _, f in scan_write([
     "write_volatile_4(DAT_44c0b110,uVar4 & 0xfffffffd);",
     "write_volatile_4(DAT_44c0b110,uVar4 & 0xfffffffe);",
 ]):
-    f.name = agc_attr[i][1]
+    f.name = extra_regs[i]
     i = i + 1
 #open('../src/include/phy/agc.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
