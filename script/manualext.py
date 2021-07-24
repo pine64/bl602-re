@@ -130,7 +130,7 @@ Reg('activeant', 0x44c0b004)
 Reg('RWNXAGCCCATIMEOUT', 0x44c0b3bc) # 4000000
 
 Reg('irqmacccatimeouten', 0x44c0b414)
-Field('set1', 0xFFFFFEFF)
+Field('irqmacccatimeouten', 0xFFFFFEFF)
 
 Reg('rwnxmacintstatmasked', 0x44c0b41c)
 FieldBit('needreset', 8) # guess

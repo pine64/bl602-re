@@ -185,7 +185,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t pad0 : 8;
-				uint32_t set1 : 1; // @ 8 -- 8 # 0xfffffeff
+				uint32_t irqmacccatimeouten : 1; // @ 8 -- 8 # 0xfffffeff
 				uint32_t pad1 : 23;
 			};
 		} irqmacccatimeouten; // @ 0x414
