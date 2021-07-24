@@ -8,14 +8,14 @@ typedef union {
 				uint32_t pad0 : 4;
 				uint32_t ntx : 4; // @ 7 -- 4 # 0xffffff0f
 				uint32_t nss : 4; // @ 11 -- 8 # 0xfffff0ff
-				uint32_t rxndpnstsmax : 4; // @ 15 -- 12 # 0xffff0fff
+				uint32_t nsts : 4; // @ 15 -- 12 # 0xffff0fff
 				uint32_t pad1 : 2;
-				uint32_t v18 : 1; // @ 18 -- 18 # 0xfffbffff
-				uint32_t v19 : 1; // @ 19 -- 19 # 0xfff7ffff
+				uint32_t ldpcenc : 1; // @ 18 -- 18 # 0xfffbffff
+				uint32_t ldpcdec : 1; // @ 19 -- 19 # 0xfff7ffff
 				uint32_t pad2 : 2;
 				uint32_t vht : 1; // @ 22 -- 22 # 0xffbfffff
 				uint32_t pad3 : 1;
-				uint32_t txcbwmax : 2; // @ 25 -- 24 # 0xfcffffff
+				uint32_t chbw : 2; // @ 25 -- 24 # 0xfcffffff
 				uint32_t ldpctx : 1; // @ 26 -- 26 # 0xfbffffff
 				uint32_t ldpcrx : 1; // @ 27 -- 27 # 0xf7ffffff
 				uint32_t bfmee_supported : 1; // @ 28 -- 28 # 0xefffffff
@@ -49,18 +49,18 @@ typedef union {
 		union {
 			uint32_t value;
 			struct {
-				uint32_t reset : 1; // @ 0 -- 0 # 0xfffffffe
-				uint32_t vht : 1; // @ 1 -- 1 # 0xfffffffd
+				uint32_t rxdsssen : 1; // @ 0 -- 0 # 0xfffffffe
+				uint32_t rxvhten : 1; // @ 1 -- 1 # 0xfffffffd
 				uint32_t pad0 : 2;
 				uint32_t rxnssmax : 3; // @ 6 -- 4 # 0xffffff8f
 				uint32_t pad1 : 1;
-				uint32_t v19 : 1; // @ 8 -- 8 # 0xfffffeff
+				uint32_t rxldpcen : 1; // @ 8 -- 8 # 0xfffffeff
 				uint32_t pad2 : 3;
 				uint32_t rxndpnstsmax : 3; // @ 14 -- 12 # 0xffff8fff
 				uint32_t pad3 : 1;
-				uint32_t v30 : 1; // @ 16 -- 16 # 0xfffeffff
+				uint32_t rxmumimoen : 1; // @ 16 -- 16 # 0xfffeffff
 				uint32_t pad4 : 3;
-				uint32_t _v30 : 1; // @ 20 -- 20 # 0xffefffff
+				uint32_t rxmumimoapeplenen : 1; // @ 20 -- 20 # 0xffefffff
 				uint32_t pad5 : 3;
 				uint32_t rxcbwmax : 2; // @ 25 -- 24 # 0xfcffffff
 			};
@@ -73,9 +73,9 @@ typedef union {
 				uint32_t pad1 : 2;
 				uint32_t txnssmax : 3; // @ 6 -- 4 # 0xffffff8f
 				uint32_t pad2 : 1;
-				uint32_t v18 : 1; // @ 8 -- 8 # 0xfffffeff
+				uint32_t txldpcen : 1; // @ 8 -- 8 # 0xfffffeff
 				uint32_t pad3 : 7;
-				uint32_t v31 : 1; // @ 16 -- 16 # 0xfffeffff
+				uint32_t txmumimoen : 1; // @ 16 -- 16 # 0xfffeffff
 				uint32_t pad4 : 3;
 				uint32_t ntxmax : 3; // @ 22 -- 20 # 0xff8fffff
 				uint32_t pad5 : 1;
@@ -93,12 +93,12 @@ typedef union {
 		union {
 			uint32_t value;
 			struct {
-				uint32_t set1 : 1; // @ 0 -- 0 # 0xfffffffe
+				uint32_t rxtdctrl1 : 1; // @ 0 -- 0 # 0xfffffffe
 				uint32_t pad0 : 23;
-				uint32_t set60h : 8; // @ 31 -- 24 # 0xffffff
+				uint32_t tddchtstfmargin : 8; // @ 31 -- 24 # 0xffffff
 			};
 		} r834; // @ 0x834
-		uint32_t TXCTRL0; // @ 0x838
+		uint32_t txstartdelay; // @ 0x838
 		uint32_t rxctrl1; // @ 0x83c
 		uint8_t pad3[0x18];
 		union {
@@ -114,7 +114,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t pad0 : 27;
-				uint32_t resetto1 : 1; // @ 27 -- 27 # 0xf7ffffff
+				uint32_t rcclkforce : 1; // @ 27 -- 27 # 0xf7ffffff
 				uint32_t pad1 : 1;
 				uint32_t mdm_agcmemclkforce : 1; // @ 29 -- 29 # 0xdfffffff
 			};
@@ -132,9 +132,9 @@ typedef union {
 				uint32_t AGCSWRESET : 1; // @ 12 -- 12 # 0xffffefff
 			};
 		} swreset; // @ 0x888
-		uint32_t TXCTRL1; // @ 0x88c
+		uint32_t txctrl1; // @ 0x88c
 		uint8_t pad7[0x8];
-		uint32_t TXCTRL3; // @ 0x898
+		uint32_t txctrl3; // @ 0x898
 		uint32_t rxframeviolationmask; // @ 0x89c
 		uint8_t pad8[0x2784];
 		union {

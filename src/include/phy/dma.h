@@ -7,7 +7,7 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t pad0 : 16;
-				uint32_t busyatffff : 16; // @ 31 -- 16 # 0xffff
+				uint32_t dma_status_oft_free : 16; // @ 31 -- 16 # 0xffff
 			};
 		} dma_status; // @ 0x10
 		uint8_t pad1[0xc];
@@ -21,7 +21,7 @@ typedef union {
 				uint32_t b8 : 1; // @ 8 -- 8 # 0xfffffeff
 				uint32_t TX : 27; // @ 31 -- 5 # 0x1f
 			};
-		} tx_reset; // @ 0x20
+		} int_ack; // @ 0x20
 		union {
 			uint32_t value;
 			struct {
@@ -32,7 +32,7 @@ typedef union {
 				uint32_t b8 : 1; // @ 8 -- 8 # 0xfffffeff
 				uint32_t TX : 27; // @ 31 -- 5 # 0x1f
 			};
-		} status; // @ 0x24
+		} int_status; // @ 0x24
 		uint8_t pad2[0x58];
 		union {
 			uint32_t value;
@@ -68,14 +68,14 @@ typedef union {
 		union {
 			uint32_t value;
 			struct {
-				uint32_t lli : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t counter : 16; // @ 15 -- 0 # 0xffff0000
 			};
 		} LinkListItem0; // @ 0xa4
 		uint8_t pad4[0x4];
 		union {
 			uint32_t value;
 			struct {
-				uint32_t lli : 16; // @ 15 -- 0 # 0xffff0000
+				uint32_t counter : 16; // @ 15 -- 0 # 0xffff0000
 			};
 		} LinkListItem1; // @ 0xac
 	};
