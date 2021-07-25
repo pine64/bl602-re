@@ -180,7 +180,7 @@ def scan_write(code, dat="dat"):
         name_r = f'r{hex(addr&0xffff)}'
         gid = gid + 1
         r = Reg(name_r, addr)
-        yield r, Field(name_f, mask)
+        yield r, Field(name_f, mask), value
 
 
 agc_attr = [
@@ -249,12 +249,13 @@ agc_attr = [
 ]
 
 i = 0
-for r, f in scan_write(open('../blobs/agc_config.c').readlines()):
+for r, f, val in scan_write(open('../blobs/agc_config.c').readlines()):
     if r.offset == agc_attr[i][0] - 0x44c0b000:
         f.name = agc_attr[i][1]
     else:
         print(f"mismatched {i} {agc_attr[i][1]} {hex(r.offset + 0x44c0b000)} {hex(agc_attr[i][0])}")
     i = i + 1
+    #print(f"AGC->{r.name}.{f.name} = {hex(val)};")
 
 extra_regs = [
     "rc_paoff_delay",
@@ -267,7 +268,7 @@ extra_regs = [
 ]
 
 i = 0
-for _, f in scan_write([
+for _, f, _ in scan_write([
     "write_volatile_4(DAT_44c0c020,uVar4 & 0xfc00ffff | 0x140000);",
     "write_volatile_4(DAT_44c0b390,uVar1 & 0xfffffeff);",
     "write_volatile_4(DAT_44c0b500,uVar4 & 0xffffcfff | 0x2000);",
@@ -448,12 +449,13 @@ extra_bz_phy = [
 ]
 
 i = 0
-for r, f in scan_write(open('../blobs/bz_phy.c').readlines(), '0x'):
+for r, f, val in scan_write(open('../blobs/bz_phy.c').readlines(), '0x'):
     if r.offset == extra_bz_phy[i][0] - 0x40002000:
         f.name = extra_bz_phy[i][1]
     else:
         print(f"mismatched {i} {extra_bz_phy[i][1]} {hex(r.offset + 0x40002000)} {hex(extra_bz_phy[i][0])}")
     i = i + 1
+    # print(f"BZ_PHY->{r.name}.{f.name} = {hex(val)}")
 
 if __name__ == '__main__':
     import sys

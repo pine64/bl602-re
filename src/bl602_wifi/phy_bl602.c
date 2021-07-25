@@ -10,14 +10,7 @@
 #include "phy_adapt.h"
 #include "phy_tcal.h"
 #include "rf.h"
-
-void assert_err(char * condition, char * file, int line);
-
-#define ASSERT_ERR(cond) if (!(cond)) assert_err(#cond, __FILE__, __LINE__);
-
-#define PHY_FORMATMOD_11B 0
-#define PHY_FORMATMOD_11G 1
-#define PHY_FORMATMOD_11N 2
+#include "assert.h"
 
 static int8_t rxgain_offset_vs_temperature; // :79:15
 static int8_t poweroffset[14]; // :80:15
@@ -168,11 +161,11 @@ void phy_get_rf_gain_idx(int8_t *power,uint8_t *idx) {
     *idx = (uint8_t)rfc_get_power_level(2, (int)*power * 10);
 }
 
-void phy_get_rf_gain_idx_vs_mode(uint8_t mode,int8_t *power,uint8_t *idx){
+void phy_get_rf_gain_idx_vs_mode(uint8_t mode,int8_t *power,uint8_t *idx) {
     *idx = (uint8_t)rfc_get_power_level(mode, (int)*power * 10);
 }
 
-void  phy_get_trpc_idx(uint8_t formatmod,uint8_t mcs,int8_t power,uint8_t *idx) {
+void phy_get_trpc_idx(uint8_t formatmod,uint8_t mcs,int8_t power,uint8_t *idx) {
     // THIS IS ONLY MY GUESS. THE REAL DISASSEMBLY LOOKS VERY WEIRD AND IT MUST BE WRONG
     ASSERT_ERR(formatmod <= PHY_FORMATMOD_11N);
     if (formatmod == PHY_FORMATMOD_11G)
@@ -189,8 +182,6 @@ void phy_powroffset_set(int8_t *power_offset) {
         poweroffset[i] = power_offset[i];
     }
 }
-
-int phy_freq_to_channel(uint8_t band, uint16_t freq);
 
 void phy_hw_set_channel(uint8_t band, uint16_t freq, uint16_t freq1, uint8_t chantype) {
     ASSERT_ERR(chantype == PHY_CHNL_BW_20);
@@ -222,19 +213,6 @@ void phy_hw_set_channel(uint8_t band, uint16_t freq, uint16_t freq1, uint8_t cha
 
     uint8_t channel = 0;
 
-    /*
-    int iVar3 = 0;
-    if (band == PHY_BAND_2G4)  {
-        if ((freq - 0x96cU & 0xffff) >= 0x48) {
-            channel = 0xe;
-            if (freq != 0x9b4) {
-                channel = (uint8_t)((freq -0x967) / 5);
-            }
-        }
-            
-    }
-    */
-    // TODO: are these two functions equivelant???
     channel = phy_freq_to_channel(band, freq);
     rfc_apply_tx_power_offset(channel, poweroffset);
     trpc_update_vs_channel((int8_t)freq1);
@@ -315,17 +293,17 @@ void phy_init(phy_cfg_tag *config) {
     phy_tcal_start();
 }
 
-uint8_t phy_vht_supported(){
+uint8_t phy_vht_supported() {
     if (MDM->version.vht) // TODO: verify this cond
         return 1;
     return ((MDM->version.chbw) >> 1) & 1;
 }
 
-uint8_t phy_ldpc_rx_supported(void){
+uint8_t phy_ldpc_rx_supported(void) {
     return MDM->version.ldpcrx;
 }
 
-uint8_t phy_ldpc_tx_supported(void){
+uint8_t phy_ldpc_tx_supported(void) {
     return MDM->version.ldpctx;
 }
 
@@ -353,6 +331,6 @@ void phy_reset(void) {
     return ;
 }
 
-void phy_stop(void){
+void phy_stop(void) {
     return ;
 }
