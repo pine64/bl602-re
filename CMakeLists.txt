@@ -4,7 +4,7 @@ set(CMAKE_SYSTEM_PROCESSOR riscv)
 SET(CMAKE_CROSSCOMPILING 1)
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 
-
+add_compile_options(-std=c11 -march=rv32imfc -mabi=ilp32f)
 project(bl602_re VERSION 0.1.0)
 
 include_directories(./src/include)
