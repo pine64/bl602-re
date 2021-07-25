@@ -1,6 +1,6 @@
 #ifndef _PHY_BL602_H_
 #include <stdint.h>
-
+#include "phy.h"
 enum
 {
     /// 2.4GHz Band
@@ -26,14 +26,6 @@ enum
     PHY_FORMATMOD_11B,
     PHY_FORMATMOD_11G,
     PHY_FORMATMOD_11N,
-};
-
-struct phy_channel_info
-{
-    /// PHY channel information 1
-    uint32_t info1;
-    /// PHY channel information 2
-    uint32_t info2;
 };
 
 typedef struct phy_cfg_tag phy_cfg_tag;

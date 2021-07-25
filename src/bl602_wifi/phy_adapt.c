@@ -136,7 +136,7 @@ float calc_ppm(rvec_t * rvec) {
 void pa_input(uint8_t id, struct rx_hd *rhd) {
     if (id < 4) {
         int ptr = pa_env[id].input_buffer_ptr;
-        rvec_t *rvec = &(rhd->recvec1a);
+        rvec_t *rvec = (rvec_t *)&(rhd->recvec1a);
         input_t *buffer = &(pa_env[id].input_buffer[ptr]);
         pa_env[id].last_update = rhd->tsflo;
         buffer->new = 1;

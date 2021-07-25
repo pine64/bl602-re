@@ -2,6 +2,7 @@
 #ifndef _HAL_DESC_H_
 #define _HAL_DESC_H_
 #include <stdint.h>
+#include "phy.h"
 struct tx_policy_tbl {
     uint32_t upatterntx; // +0
     uint32_t phycntrlinfo1; // +4
