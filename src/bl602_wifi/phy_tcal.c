@@ -3,6 +3,7 @@
 #include "phy_bl602.h"
 #include "phy_trpc.h"
 #include "bl602_rf_private.h"
+#include "utils.h"
 
 static struct tcal_tag tcal_env; // :41:24
 

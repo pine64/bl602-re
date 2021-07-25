@@ -2,12 +2,12 @@
 #define _BL602_RF_PRIVATE_H_
 #include <stdint.h>
 
-struct anon_struct {
+struct anon_struct1 {
     uint32_t index;
     int32_t dvga;
 };
 
-typedef struct anon_struct anon_struct;
+typedef struct anon_struct1 anon_struct1;
 
 struct anon_struct {
     uint32_t vbcore;
