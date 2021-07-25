@@ -35,6 +35,7 @@ void hal_get_capcode_asymm(uint8_t *capcode_in, uint8_t *capcode_out) {
 
 bool hal_get_temperature(int16_t *temperature) {
     *temperature = hal_env.temperature;
+    return 1;
 }
 
 void hal_set_temperature(int16_t temperature) {
