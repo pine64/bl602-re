@@ -91,4 +91,7 @@ void pa_input(uint8_t id, struct rx_hd *rhd);
 int8_t pa_alloc(uint32_t vif_addr);
 void pa_reset(uint8_t id);
 void pa_free(uint8_t id);
+
+float calc_ppm_dsss(uint8_t rxv_freqoff);
+float calc_ppm_ofdm(uint16_t rxv_freqoff);
 #endif
