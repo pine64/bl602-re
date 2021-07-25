@@ -48,7 +48,7 @@ uint8_t trpc_get_power_idx(uint8_t formatmod, uint8_t mcs, int8_t pwr_dbm) {
     uint32_t z = (y + x) & 0xff;
     if (z > 0xf)
         z = 0xf;
-    return x << 2;
+    return z << 2;
 }
 
 int8_t trpc_get_rf_max_power() {
