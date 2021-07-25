@@ -1,12 +1,11 @@
 #ifndef _PHY_HAL_H_
 #define _PHY_HAL_H_
 #include <stdint.h>
+
 struct phy_hal_tag {
     int16_t temperature; // +0
     uint8_t capcode; // +2
 }; // :6:8
-
-//static struct phy_hal_tag hal_env; // :15:27
 
 uint8_t hal_get_capcode(void); // :43:9
 void hal_set_capcode(uint32_t capcode); // :48:6
