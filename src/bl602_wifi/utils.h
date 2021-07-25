@@ -6,4 +6,5 @@ int puts(char *s);
 int printf(char *fmt,...);
 void* memset(void *, int,  long unsigned int);
 void* memcpy(void*, const void*, unsigned int);
+void wait_us(uint32_t us);
 #endif

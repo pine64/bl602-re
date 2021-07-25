@@ -40,12 +40,9 @@ uint8_t trpc_get_power_idx(uint8_t formatmod, uint8_t mcs, int8_t pwr_dbm) {
     pwr = MIN(pwr, pwr_dbm);
     pwr = MIN(pwr, txpwr_vs_rate_table[formatmod][mcs]);
     pwr = MAX(pwr, trpc_env.power_dbm_min_rf);
-    int x = (int)(((double)((int)(pwr * -510 + trpc_env.power_dbm_max_rf) / 512)) + (double)0.5) & 0xff;
-    int y = 3;
-    if (formatmod) {
-        y = 0;
-    }
-    uint32_t z = (y + x) & 0xff;
+    uint8_t z = trpc_env.power_dbm_max_rf - pwr;
+    if (formatmod == PHY_FORMATMOD_11B)
+        z += 3;
     if (z > 0xf)
         z = 0xf;
     return z << 2;
