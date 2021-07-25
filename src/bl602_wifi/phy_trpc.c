@@ -45,9 +45,9 @@ uint8_t trpc_get_power_idx(uint8_t formatmod, uint8_t mcs, int8_t pwr_dbm) {
     if (formatmod) {
         y = 0;
     }
-    x = (y + x) & 0xff;
-    if (x > 0xf)
-        x = 0xf;
+    uint32_t z = (y + x) & 0xff;
+    if (z > 0xf)
+        z = 0xf;
     return x << 2;
 }
 
