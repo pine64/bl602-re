@@ -224,7 +224,8 @@ typedef union {
 				uint32_t pad0 : 15;
 				uint32_t rc2_rx0_vga_idx_min : 5; // @ 19 -- 15 # 0xfff07fff
 				uint32_t rc2_rx0_vga_idx_max : 5; // @ 24 -- 20 # 0xfe0fffff
-				uint32_t pad1 : 7;
+				uint32_t rc2_rx0_vga_gain_min_db : 6; // @ 30 -- 25 # 0x81ffffff
+				uint32_t rc2_rx0_vga_approx_mode : 1; // @ 31 -- 31 # 0x7fffffff
 			};
 		} r0xc040; // @ 0x1040
 		union {
@@ -232,12 +233,47 @@ typedef union {
 			struct {
 				uint32_t rc2_rx0_lna_idx_min : 8; // @ 7 -- 0 # 0xffffff00
 				uint32_t rc2_rx0_lna_idx_max : 8; // @ 15 -- 8 # 0xffff00ff
-				uint32_t pad0 : 16;
+				uint32_t rc2_rx0_lna_idx : 8; // @ 23 -- 16 # 0xff00ffff
+				uint32_t pad0 : 8;
 			};
 		} r0xc044; // @ 0x1044
 		uint8_t pad12[0x38];
 		uint8_t rxgain_offset_vs_temperature[0x9]; // @ 0x1080
-		uint8_t pad13[0x194];
+		uint8_t pad13[0xfc];
+		union {
+			uint32_t value;
+			struct {
+				uint32_t rc2_rx0_nf_gain_0 : 6; // @ 5 -- 0 # 0xffffffc0
+				uint32_t pad0 : 2;
+				uint32_t rc2_rx0_nf_gain_1 : 6; // @ 13 -- 8 # 0xffffc0ff
+				uint32_t pad1 : 2;
+				uint32_t rc2_rx0_nf_gain_2 : 6; // @ 21 -- 16 # 0xffc0ffff
+				uint32_t pad2 : 2;
+				uint32_t rc2_rx0_nf_gain_3 : 6; // @ 29 -- 24 # 0xc0ffffff
+				uint32_t pad3 : 2;
+			};
+		} r0xc180; // @ 0x1180
+		union {
+			uint32_t value;
+			struct {
+				uint32_t rc2_rx0_nf_gain_4 : 6; // @ 5 -- 0 # 0xffffffc0
+				uint32_t pad0 : 2;
+				uint32_t rc2_rx0_nf_gain_5 : 6; // @ 13 -- 8 # 0xffffc0ff
+				uint32_t pad1 : 2;
+				uint32_t rc2_rx0_nf_gain_6 : 6; // @ 21 -- 16 # 0xffc0ffff
+				uint32_t pad2 : 2;
+				uint32_t rc2_rx0_nf_gain_7 : 6; // @ 29 -- 24 # 0xc0ffffff
+				uint32_t pad3 : 2;
+			};
+		} r0xc184; // @ 0x1184
+		union {
+			uint32_t value;
+			struct {
+				uint32_t rc2_rx0_nf_gain_8 : 6; // @ 5 -- 0 # 0xffffffc0
+				uint32_t pad0 : 26;
+			};
+		} r0xc188; // @ 0x1188
+		uint8_t pad14[0x8c];
 		union {
 			uint32_t value;
 			struct {
@@ -245,40 +281,73 @@ typedef union {
 				uint32_t pad0 : 16;
 			};
 		} rc218; // @ 0x1218
-		uint8_t pad14[0x5f8];
+		uint8_t pad15[0x5e4];
+		union {
+			uint32_t value;
+			struct {
+				uint32_t rc2_fe0dcest_dly_num_40 : 4; // @ 3 -- 0 # 0xfffffff0
+				uint32_t rc2_fe0dcest_dly_ena_40 : 1; // @ 4 -- 4 # 0xffffffef
+				uint32_t pad0 : 3;
+				uint32_t rc2_fe0dcest_dly_num_20 : 4; // @ 11 -- 8 # 0xfffff0ff
+				uint32_t rc2_fe0dcest_dly_ena_20 : 1; // @ 12 -- 12 # 0xffffefff
+				uint32_t pad1 : 3;
+				uint32_t rc2_feadc0_dly_num : 3; // @ 18 -- 16 # 0xfff8ffff
+				uint32_t rc2_feadc0_dly_ena : 1; // @ 19 -- 19 # 0xfff7ffff
+				uint32_t pad2 : 10;
+				uint32_t rc2_rx_ramp_ctrl : 2; // @ 31 -- 30 # 0x3fffffff
+			};
+		} r0xc800; // @ 0x1800
+		uint8_t pad16[0x8];
+		union {
+			uint32_t value;
+			struct {
+				uint32_t pad0 : 24;
+				uint32_t rc2_txdsssdiggainlin0 : 8; // @ 31 -- 24 # 0xffffff
+			};
+		} r0xc80c; // @ 0x180c
+		uint8_t pad17[0x4];
 		union {
 			uint32_t value;
 			struct {
 				uint32_t rc2_pkdet_mode : 2; // @ 1 -- 0 # 0xfffffffc
 				uint32_t rc2_pkdet_cnt_thr : 4; // @ 5 -- 2 # 0xffffffc3
-				uint32_t pad0 : 26;
+				uint32_t rc2_pkdet_cnt_win : 4; // @ 9 -- 6 # 0xfffffc3f
+				uint32_t pad0 : 22;
 			};
 		} r0xc814; // @ 0x1814
-		uint8_t pad15[0x14];
+		uint8_t pad18[0x14];
 		union {
 			uint32_t value;
 			struct {
 				uint32_t rc2_inbdpow_adj_thr_dbm : 8; // @ 7 -- 0 # 0xffffff00
 				uint32_t rc2_inbdpowsupthr_adj_en : 1; // @ 8 -- 8 # 0xfffffeff
-				uint32_t pad0 : 2;
+				uint32_t rc2_inbdpowsupthr_adj_step : 2; // @ 10 -- 9 # 0xfffff9ff
 				uint32_t rc2_inbdpowinfthr_adj_en : 1; // @ 11 -- 11 # 0xfffff7ff
-				uint32_t pad1 : 3;
+				uint32_t rc2_inbdpowinfthr_adj_step : 2; // @ 13 -- 12 # 0xffffcfff
+				uint32_t rc2_inbdpowfastvalid_en : 1; // @ 14 -- 14 # 0xffffbfff
 				uint32_t rc2_inbdpowfastvalid_cnt : 9; // @ 23 -- 15 # 0xff007fff
-				uint32_t pad2 : 8;
+				uint32_t pad0 : 8;
 			};
 		} r0xc82c; // @ 0x182c
 		union {
 			uint32_t value;
 			struct {
-				uint32_t pad0 : 10;
+				uint32_t rc2_evt4tgtadd : 9; // @ 8 -- 0 # 0xfffffe00
+				uint32_t pad0 : 1;
 				uint32_t rc2_evt4opcomb : 3; // @ 12 -- 10 # 0xffffe3ff
-				uint32_t pad1 : 1;
+				uint32_t rc2_evt4pathcomb : 1; // @ 13 -- 13 # 0xffffdfff
 				uint32_t rc2_evt4op3 : 6; // @ 19 -- 14 # 0xfff03fff
 				uint32_t rc2_evt4op2 : 6; // @ 25 -- 20 # 0xfc0fffff
 				uint32_t rc2_evt4op1 : 6; // @ 31 -- 26 # 0x3ffffff
 			};
 		} r0xc830; // @ 0x1830
-		uint8_t pad16[0x4];
+		union {
+			uint32_t value;
+			struct {
+				uint32_t rc2_adcpowinsel : 2; // @ 1 -- 0 # 0xfffffffc
+				uint32_t pad0 : 30;
+			};
+		} r0xc834; // @ 0x1834
 		union {
 			uint32_t value;
 			struct {
@@ -303,6 +372,59 @@ typedef union {
 				uint32_t rc2_reflevdssscontthd_en : 1; // @ 31 -- 31 # 0x7fffffff
 			};
 		} r0xc840; // @ 0x1840
+		union {
+			uint32_t value;
+			struct {
+				uint32_t rc2_agcrampupthr1 : 14; // @ 13 -- 0 # 0xffffc000
+				uint32_t pad0 : 2;
+				uint32_t rc2_agcrampupthr2 : 14; // @ 29 -- 16 # 0xc000ffff
+				uint32_t pad1 : 2;
+			};
+		} r0xc844; // @ 0x1844
+		union {
+			uint32_t value;
+			struct {
+				uint32_t rc2_agcrampupthr3 : 14; // @ 13 -- 0 # 0xffffc000
+				uint32_t pad0 : 18;
+			};
+		} r0xc848; // @ 0x1848
+		union {
+			uint32_t value;
+			struct {
+				uint32_t rc2_agcrampupcorrect1 : 8; // @ 7 -- 0 # 0xffffff00
+				uint32_t rc2_agcrampupcorrect2 : 8; // @ 15 -- 8 # 0xffff00ff
+				uint32_t rc2_agcrampupcorrect3 : 8; // @ 23 -- 16 # 0xff00ffff
+				uint32_t pad0 : 7;
+				uint32_t rc2_agcrampupcorrecten : 1; // @ 31 -- 31 # 0x7fffffff
+			};
+		} r0xc84c; // @ 0x184c
+		uint8_t pad19[0xb0];
+		union {
+			uint32_t value;
+			struct {
+				uint32_t rc2_sts_agc_gain_target0 : 8; // @ 7 -- 0 # 0xffffff00
+				uint32_t pad0 : 24;
+			};
+		} r0xc900; // @ 0x1900
+		union {
+			uint32_t value;
+			struct {
+				uint32_t pad0 : 16;
+				uint32_t rc2_sts_rx0_rbb_cfg_idx : 5; // @ 20 -- 16 # 0xffe0ffff
+				uint32_t pad1 : 3;
+				uint32_t rc2_sts_rx0_lna_gain_idx : 8; // @ 31 -- 24 # 0xffffff
+			};
+		} r0xc904; // @ 0x1904
+		union {
+			uint32_t value;
+			struct {
+				uint32_t rc2_sts_rx0_nf_gain : 6; // @ 5 -- 0 # 0xffffffc0
+				uint32_t pad0 : 2;
+				uint32_t rc2_sts_rx0_total_gain_db_s : 8; // @ 15 -- 8 # 0xffff00ff
+				uint32_t rc2_sts_rx0_vga_gain_db_s : 8; // @ 23 -- 16 # 0xff00ffff
+				uint32_t rc2_sts_rx0_lna_gain_db_s : 8; // @ 31 -- 24 # 0xffffff
+			};
+		} r0xc908; // @ 0x1908
 	};
 } agc_regs;
 #define AGC_BASE 0x44c0b000

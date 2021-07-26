@@ -25,7 +25,5 @@ void bz_phy_reset(void)
   write_volatile_4(0x40002810,uVar1 & 0xfffffffe);
   uVar1 = read_volatile_4(0x40002810);
   write_volatile_4(0x40002810,uVar1 | 0x2);
-  uVar1 = read_volatile_4(0x40002cac);
-  write_volatile_4(0x40002cac,uVar1 & 0xffffffe0 | 0x4);
   return;
 }

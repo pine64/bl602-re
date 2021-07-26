@@ -29,7 +29,20 @@ else:
                 msb = int(f.find('msb').text)
                 FieldBit(f_name, lsb, msb - lsb + 1)
         peris[p_name] = pp
+
+    import leak_scan
+    
+    rf_base = 0x40002c00
+    Peripheral(peris['rf'])
+
+    for reg_addr,field_name,mask in leak_scan.scan_leak_source(open('../blobs/reg/reg_rf.h').readlines()):
+        r = Reg(f'r{hex(reg_addr & 0xffff)}', reg_addr)
+        f = Field(field_name, mask)
+        pass
+
     pickle.dump(peris, open("./peris.cache", "wb"))
+
+
 
 if __name__ == '__main__':
     import sys
