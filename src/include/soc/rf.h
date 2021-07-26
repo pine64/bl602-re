@@ -1915,6 +1915,19 @@ typedef union {
 				uint32_t pad2 : 9;
 			};
 		} dfe_ctrl_18; // @ 0x648
+		uint8_t pad4[0xb4];
+		union {
+			uint32_t value;
+			struct {
+				uint32_t rf_rx_notch0_alpha : 3; // @ 2 -- 0 # 0xfffffff8
+				uint32_t rf_rx_notch1_alpha : 3; // @ 5 -- 3 # 0xffffffc7
+				uint32_t rf_rx_notch0_en : 1; // @ 6 -- 6 # 0xffffffbf
+				uint32_t rf_rx_notch1_en : 1; // @ 7 -- 7 # 0xffffff7f
+				uint32_t rf_rx_notch0_nrmfc : 8; // @ 15 -- 8 # 0xffff00ff
+				uint32_t rf_rx_notch1_nrmfc : 8; // @ 23 -- 16 # 0xff00ffff
+				uint32_t pad0 : 8;
+			};
+		} r0x1700; // @ 0x700
 	};
 } rf_regs;
 #define RF_BASE 0x40001000
