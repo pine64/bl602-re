@@ -23,7 +23,7 @@ else:
             r_name = r.find('name').text
             r_offset = int(r.find('addressOffset').text, 16)
             Reg(r_name, r_offset + baseAddress)
-            for f in p.iter('field'):
+            for f in r.iter('field'):
                 f_name = f.find('name').text
                 lsb = int(f.find('lsb').text)
                 msb = int(f.find('msb').text)
