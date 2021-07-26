@@ -487,6 +487,10 @@ if __name__ == '__main__':
             open(f"../src/include/phy/{p_name}.h", "w").write("\n".join(p.genHeader()))
     else:
         if len(sys.argv) >= 2:
+            if sys.argv[1] == '--svd':
+                for p_name, p in peris.items():
+                    open(f"../src/svd/{p_name}.svd", "w").write("\n".join(p.genSVD()))
+                sys.exit(0)
             addr = int(sys.argv[1], 16)
             mask = 0
             if len(sys.argv) == 3:
