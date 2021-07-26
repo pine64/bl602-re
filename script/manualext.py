@@ -2,6 +2,8 @@
 from reglib import *
 from typing import Mapping
 
+import leak_scan
+
 peris :Mapping[str, peripheral] = {}
 
 ############ MDM
@@ -102,6 +104,7 @@ Field('mdm_agcmemclkforce', 0xdfffffff)
 ############# AGC
 
 peris['agc'] = Peripheral(peripheral('agc', 0x44c0b000, 0x2000))
+
 Reg('r000', 0x44c0b000)
 FieldBit('iqcomp', 31-10)
 
@@ -282,6 +285,12 @@ for _, f in scan_write([
 #print('\n'.join(GenHeader()))
 #print('\n'.join(GenSVD()))
 
+for reg_addr,field_name,mask in leak_scan.scan_leak_source(open('../blobs/reg/reg_bl_rc2.h').readlines()):
+    if reg_addr >= 0x44c0c080 and reg_addr <= 0x44c0c088:
+        continue # skip buf
+    r = Reg(f'r{hex(reg_addr & 0xffff)}', reg_addr)
+    f = Field(field_name, mask)
+    pass
 
 peris['agcram'] = Peripheral(peripheral('agcram', 0x54c0a000, 0x800))
 Buf('agcram', 0x54c0a000, 0x54c0a800 - 4)
@@ -429,8 +438,9 @@ for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver
 #print('\n'.join(GenHeader()))
 #print('\n'.join(GenSVD()))
 
-
-peris['bz_phy'] = Peripheral(peripheral('bz_phy', 0x40002000, 0x1000))
+            
+bz_phy_base = 0x40002800
+peris['bz_phy'] = Peripheral(peripheral('bz_phy', bz_phy_base, 0x300))
 
 extra_bz_phy = [
 (0x40002808,"bz_phy_tx_rampup_fm_on"),
@@ -444,16 +454,31 @@ extra_bz_phy = [
 (0x40002854,"bz_phy_rx_proc_time_viterbi_us"),
 (0x40002810,"bz_phy_rx_dfe_notch_en"),
 (0x40002810,"bz_phy_rx_dfe_toc_en"),
-(0x40002cac,"bz_agc_rbb_ind_min"),
+(0x40002caa,"bz_agc_rbb_ind_min"),
 ]
 
 i = 0
 for r, f in scan_write(open('../blobs/bz_phy.c').readlines(), '0x'):
-    if r.offset == extra_bz_phy[i][0] - 0x40002000:
+    if r.offset == extra_bz_phy[i][0] - bz_phy_base:
         f.name = extra_bz_phy[i][1]
     else:
-        print(f"mismatched {i} {extra_bz_phy[i][1]} {hex(r.offset + 0x40002000)} {hex(extra_bz_phy[i][0])}")
+        print(f"mismatched {i} {extra_bz_phy[i][1]} {hex(r.offset + bz_phy_base)} {hex(extra_bz_phy[i][0])}")
     i = i + 1
+
+
+for reg_addr,field_name,mask in leak_scan.scan_leak_source(open('../blobs/reg/reg_bz_phy.h').readlines()):
+    r = Reg(f'r{hex(reg_addr & 0xffff)}', reg_addr)
+    f = Field(field_name, mask)
+    pass
+
+bz_phy_agc_base = 0x40002c00
+peris['bz_phy_agc'] = Peripheral(peripheral('bz_phy_agc', bz_phy_agc_base, 0x100))
+
+for reg_addr,field_name,mask in leak_scan.scan_leak_source(open('../blobs/reg/reg_bz_phy_agc.h').readlines()):
+    r = Reg(f'r{hex(reg_addr & 0xffff)}', reg_addr)
+    f = Field(field_name, mask)
+    pass
+
 
 if __name__ == '__main__':
     import sys
