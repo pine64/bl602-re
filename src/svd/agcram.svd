@@ -1,0 +1,24 @@
+<peripheral>
+    <name>agcram</name>
+    <description>agcram.</description>
+    <baseAddress>0x54c0a000</baseAddress>
+    <groupName>agcram</groupName>
+    <size>32</size>
+    <access>read-write</access>
+    <addressBlock>
+        <offset>0</offset>
+        <size>0x800</size>
+        <usage>registers</usage>
+    </addressBlock>
+    <registers>
+        <register>
+            <name>agcram%s</name>
+            <description>agcram.</description>
+            <addressOffset>0x0</addressOffset>
+            <size>16</size>
+            <dim>512</dim>
+            <dimIncrement>4</dimIncrement>
+            <dimIndex>0-511</dimIndex>
+        </register>
+    </registers>
+</peripheral>

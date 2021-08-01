@@ -1,0 +1,20 @@
+<peripheral>
+    <name>sysctrl92</name>
+    <description>sysctrl92.</description>
+    <baseAddress>0x44920000</baseAddress>
+    <groupName>sysctrl92</groupName>
+    <size>32</size>
+    <access>read-write</access>
+    <addressBlock>
+        <offset>0</offset>
+        <size>0x1000</size>
+        <usage>registers</usage>
+    </addressBlock>
+    <registers>
+        <register>
+            <name>ptr_config</name>
+            <description>ptr_config.</description>
+            <addressOffset>0x4</addressOffset>
+        </register>
+    </registers>
+</peripheral>
