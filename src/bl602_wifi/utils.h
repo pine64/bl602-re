@@ -7,4 +7,5 @@ int printf(char *fmt,...);
 void* memset(void *, int,  long unsigned int);
 void* memcpy(void*, const void*, unsigned int);
 void wait_us(uint32_t us);
+void BL602_Delay_US(uint32_t cnt);
 #endif
