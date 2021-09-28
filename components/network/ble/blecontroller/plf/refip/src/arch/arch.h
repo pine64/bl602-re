@@ -1,10 +1,9 @@
-/**
-* @file arch.h
-* Header file for BL602
-*/
-#ifndef __ARCH_H__
-#define __ARCH_H__
+#ifndef BLECONTROLLER_PLF_REFIP_ARCH_ARCH_H
+#define BLECONTROLLER_PLF_REFIP_ARCH_ARCH_H
 
-void (*ble_post_task_ptr)(void);uint32_t (*_rom_patch_hook)(void *, ...);
+#include <stdint.h>
 
-#endif // __ARCH_H__
+void (*ble_post_task_ptr)(void);
+uint32_t (*_rom_patch_hook)(void *, ...);
+
+#endif /* BLECONTROLLER_PLF_REFIP_ARCH_ARCH_H */

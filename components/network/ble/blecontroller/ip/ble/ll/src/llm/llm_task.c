@@ -46,8 +46,7 @@ static int lld_stop_ind_handler(const ke_msg_id_t msgid, const void *param, cons
  */
 static int llm_dft_handler(const ke_msg_id_t msgid, void *param, const ke_task_id_t dest_id, const ke_task_id_t src_id)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	return 0;
 }
 
 /** llm_le_set_host_ch_class_cmd_sto_handler

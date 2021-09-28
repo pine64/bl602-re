@@ -1,9 +1,11 @@
-/**
-* @file arch_main.c
-* Source file for BL602
-*/
-#include "arch_main.h"
+#include <stdbool.h>
 
+#include <FreeRTOS.h>
+#include <queue.h>
+
+#include <bl_wifi.h>
+#include <driver/uart/uart.h>
+#include <rwip.h>
 
 QueueHandle_t xRwmainQueue;
 uint32_t rw_main_task_hdl;
@@ -17,11 +19,11 @@ void (*ble_post_task_ptr)(void);
 uint32_t (*_rom_patch_hook)(void *, ...);
 
 void BLE_ROM_hook_init(void);
-uint32_t BLE_ROM_patch(void *pRet);
+uint32_t BLE_ROM_patch(void *pRet, ...);
 uint16_t get_stack_usage(void);
 void platform_reset(uint32_t error);
 void blecontroller_main(void *pvParameters);
-bool rw_main_task_post(void *msg, uint32_t timeout);
+bool rw_main_task_post(void *msg, TickType_t timeout);
 void rw_main_task_post_from_isr(void);
 void rw_main_task_post_from_fw(void);
 void bdaddr_init(void);
@@ -60,16 +62,17 @@ uint32_t BLE_ROM_patch(void *pRet, ...)
  */
 uint16_t get_stack_usage(void)
 {
-	ASSER_ERR(FALSE);
-	return 0xffff;
+	__builtin_trap();
 }
 
 /** platform_reset
  */
 void platform_reset(uint32_t error)
 {
-	ASSER_ERR(FALSE);
-	return;
+	uart_finish_transfers();
+	if ((error != 0xc3c3c3c3) && (error != 0xa5a5a5a5)) {
+		((void(*)(void)) NULL)();
+	}
 }
 
 /** blecontroller_main
@@ -95,7 +98,7 @@ bool rw_main_task_post(void *msg, TickType_t timeout)
 {
 	if (msg != NULL)
 	{
-		return xQueueGenericSend(xRwmainQueue, msg, timeout) == pdTRUE;
+		return xQueueGenericSend(xRwmainQueue, msg, timeout, queueSEND_TO_BACK) == pdTRUE;
 	}
 	return false;
 }
@@ -109,7 +112,7 @@ void rw_main_task_post_from_isr(void)
 		.params = NULL
 	};
 	BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-	xQueueGenericSendFromISR(xRwmainQueue, &msg, &xHigherPriorityTaskWoken);
+	xQueueGenericSendFromISR(xRwmainQueue, &msg, &xHigherPriorityTaskWoken, queueSEND_TO_BACK);
 	if (xHigherPriorityTaskWoken == pdTRUE)
 	{
 		vTaskSwitchContext();
@@ -131,7 +134,7 @@ void rw_main_task_post_from_fw(void)
 	else
 	{
 		BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-		xQueueGenericSendFromISR(xRwmainQueue, &msg, &xHigherPriorityTaskWoken);
+		xQueueGenericSendFromISR(xRwmainQueue, &msg, &xHigherPriorityTaskWoken, queueSEND_TO_BACK);
 		if (xHigherPriorityTaskWoken == pdTRUE)
 		{
 			vTaskSwitchContext();
@@ -180,8 +183,7 @@ void ble_controller_init(uint8_t task_priority)
 	bl_irq_enable(0x48);
 	bdaddr_init();
 	rwip_init(error);
-	xQueueGenericCreate(0x14, 8, 0);
-	xRwmainQueue = (QueueHandle_t) 0x0;
+	xRwmainQueue = xQueueGenericCreate(20, sizeof(rw_task_msg_t));
 	xTaskCreate(blecontroller_main, "blecontroller", 0x200, 0, task_priority, &rw_main_task_hdl);
 }
 
@@ -194,7 +196,7 @@ void ble_controller_deinit(void)
 	bl_irq_disable(0x48);
 	vTaskDelete(rw_main_task_hdl);
 	rw_main_task_hdl = 0;
-	while (xQueueReceive(xRwmainQueue,&task_msg,0) == pdTRUE)
+	while (xQueueReceive(xRwmainQueue, &task_msg, 0) == pdTRUE)
 	{
 		if (task_msg.params != NULL)
 		{
@@ -202,7 +204,7 @@ void ble_controller_deinit(void)
 		}
 	}
 	vQueueDelete(xRwmainQueue);
-	xRwmainQueue = (QueueHandle_t) 0x0;
+	xRwmainQueue = NULL;
 }
 
 /** *rwip_eif_get

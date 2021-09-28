@@ -1,9 +1,6 @@
-/**
-* @file at_status.c
-* Source file for BL602
-*/
-#include "at_status.h"
+#include <at_status.h>
 
+#include <at_command.h>
 
 static at_status_t at_sts;
 static at_peer_t dummy_peer;
@@ -21,22 +18,19 @@ AT_ERROR_CODE at_peer(s32 pn, at_peer_t *peer, char *var);
  */
 AT_ERROR_CODE at_status(char *sts_var)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }
 
 /** at_setsts
  */
 AT_ERROR_CODE at_setsts(char *key, at_value_t *value)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }
 
 /** at_peer
  */
 AT_ERROR_CODE at_peer(s32 pn, at_peer_t *peer, char *var)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }

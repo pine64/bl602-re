@@ -27,6 +27,7 @@ AT_ERROR_CODE at_mode(AT_MODE mode);
  */
 void at_response(AT_ERROR_CODE aec)
 {
+#ifdef EQUIVALENT_CODE
 	if (aec == AEC_NO_RESPONSE)
 	{
 		return;
@@ -38,7 +39,8 @@ void at_response(AT_ERROR_CODE aec)
 		at_dump_noend("OK");
 		at_dump_noend("\r\n");
 	}
-	else if (aec == AEC_CMD_FAIL) {
+	else if (aec == AEC_CMD_FAIL)
+    {
 		at_dump_noend("\r\n");
 		at_dump_noend("FAIL");
 		at_dump_noend("\r\n");
@@ -70,6 +72,54 @@ void at_response(AT_ERROR_CODE aec)
 		}
 		at_dump_noend("\r\n");
 	}
+#else
+  char *pcVar1;
+  char *pcVar2;
+  const err_info_t *peVar3;
+  int iVar4;
+  
+  if (aec == AEC_NO_RESPONSE) {
+    return;
+  }
+  if (aec == AEC_OK) {
+    at_dump_noend("\r\n");
+    pcVar1 = "OK";
+  }
+  else {
+    if (aec != AEC_CMD_FAIL) {
+      peVar3 = err_info;
+      iVar4 = 0;
+	  while (peVar3->aec != aec) {
+        iVar4 = iVar4 + 1;
+        peVar3 = peVar3 + 1;
+        if (iVar4 == 0x18) {
+          if (aec != AEC_BLANK_LINE) {
+            printf("[atcmd] \r\nno rsp message!\r\n");
+            return;
+          }
+          return;
+        }
+      }
+      pcVar1 = err_info[iVar4].info;
+      if (aec == AEC_SEND_READY) {
+        at_dump_noend("\r\n");
+        pcVar2 = "%s";
+      }
+      else {
+        at_dump_noend("\r\n");
+        pcVar2 = "ERROR: %s";
+      }
+      at_dump_noend(pcVar2,pcVar1);
+      goto L0;
+    }
+    at_dump_noend("\r\n");
+    pcVar1 = "FAIL";
+  }
+  at_dump_noend(pcVar1);
+L0:
+  at_dump_noend("\r\n");
+  return;
+#endif
 }
 
 /** at_event

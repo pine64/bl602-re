@@ -1,8 +1,7 @@
-/**
-* @file at_server.c
-* Source file for BL602
-*/
-#include "at_server.h"
+#include <FreeRTOS.h>
+#include <queue.h>
+#include <semphr.h>
+#include <at_server.h>
 
 
 struct _at_evt {
@@ -26,7 +25,7 @@ int at_serial_unlock(void);
 int at_data_output(char *buf, int size);
 int at_key_value_set(char *key, void *p_value);
 int at_key_value_get(char *key, void *p_value);
-s32 at_dump_noend(char *format);
+s32 at_dump_noend(char *format, ...);
 void at_async_event(void *param);
 void at_cmd_init(void);
 static void at_cmd_exec(void *param);
@@ -42,142 +41,124 @@ void at_uart_reinit(at_serial_para_t *at_para);
  */
 int at_serial_cfg_set(uint32_t baud, uint8_t data_bit, uint8_t stop_bit, uint8_t parity, uint8_t hwfc)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
 /** at_serial_open
  */
 int at_serial_open(void)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
 /** at_serial_close
  */
 int at_serial_close(void)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
 /** at_serial_lock
  */
 int at_serial_lock(void)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
 /** at_serial_unlock
  */
 int at_serial_unlock(void)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
 /** at_data_output
  */
 int at_data_output(char *buf, int size)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
 /** at_key_value_set
  */
 int at_key_value_set(char *key, void *p_value)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
 /** at_key_value_get
  */
 int at_key_value_get(char *key, void *p_value)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
 /** at_dump_noend
  */
-s32 at_dump_noend(char *format)
+s32 at_dump_noend(char *format, ...)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
 /** at_async_event
  */
 void at_async_event(void *param)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** at_cmd_init
  */
 void at_cmd_init(void)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** at_server_init
  */
 int at_server_init(void)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
 /** at_server_notify
  */
 int at_server_notify(at_evt_t event)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
 /** at_server_notify_with_ctx
  */
 int at_server_notify_with_ctx(at_evt_t event, void *p_ctx, uint32_t ctx_size)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
 /** at_uart_reinit
  */
 void at_uart_reinit(at_serial_para_t *at_para)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** at_serial_read
  */
 static int at_serial_read(unsigned char *buf, int size)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
 /** at_serial_write
  */
 static int at_serial_write(unsigned char *buf, int len)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
 /** at_cmd_exec
  */
 static void at_cmd_exec(void *param)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }

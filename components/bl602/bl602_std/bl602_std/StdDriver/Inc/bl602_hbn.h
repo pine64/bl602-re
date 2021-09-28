@@ -1,238 +1,478 @@
+/**
+  ******************************************************************************
+  * @file    bl602_hbn.h
+  * @version V1.0
+  * @date
+  * @brief   This file is the standard driver header file
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; COPYRIGHT(c) 2020 Bouffalo Lab</center></h2>
+  *
+  * Redistribution and use in source and binary forms, with or without modification,
+  * are permitted provided that the following conditions are met:
+  *   1. Redistributions of source code must retain the above copyright notice,
+  *      this list of conditions and the following disclaimer.
+  *   2. Redistributions in binary form must reproduce the above copyright notice,
+  *      this list of conditions and the following disclaimer in the documentation
+  *      and/or other materials provided with the distribution.
+  *   3. Neither the name of Bouffalo Lab nor the names of its contributors
+  *      may be used to endorse or promote products derived from this software
+  *      without specific prior written permission.
+  *
+  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  *
+  ******************************************************************************
+  */
+#ifndef __BL602_HBN_H__
+#define __BL602_HBN_H__
 
-typedef enum HBN_32K_CLK_Type {
-    HBN_32K_XTAL=1,
-    HBN_32K_RC=0,
-    HBN_32K_DIG=3
-} HBN_32K_CLK_Type;
+#include "hbn_reg.h"
+#include "bl602_aon.h"
+#include "bl602_sflash.h"
+#include "bl602_common.h"
 
-void HBN_32K_Sel(void);
-typedef struct HBN_APP_CFG_Type HBN_APP_CFG_Type, *HBN_APP_CFG_Type;
+/** @addtogroup  BL602_Peripheral_Driver
+ *  @{
+ */
 
-typedef uchar uint8_t;
+/** @addtogroup  HBN
+ *  @{
+ */
 
-typedef ulong uint32_t;
+/** @defgroup  HBN_Public_Types
+ *  @{
+ */
 
-typedef enum HBN_GPIO_INT_Trigger_Type {
-    HBN_GPIO_INT_TRIGGER_ASYNC_RISING_EDGE=5,
-    HBN_GPIO_INT_TRIGGER_ASYNC_LOW_LEVEL=6,
-    HBN_GPIO_INT_TRIGGER_SYNC_RISING_EDGE=1,
-    HBN_GPIO_INT_TRIGGER_ASYNC_FALLING_EDGE=4,
-    HBN_GPIO_INT_TRIGGER_SYNC_HIGH_LEVEL=3,
-    HBN_GPIO_INT_TRIGGER_SYNC_FALLING_EDGE=0,
-    HBN_GPIO_INT_TRIGGER_SYNC_LOW_LEVEL=2,
-    HBN_GPIO_INT_TRIGGER_ASYNC_HIGH_LEVEL=7
-} HBN_GPIO_INT_Trigger_Type;
+/**
+ *  @brief HBN PIR interrupt configuration type definition
+ */
+typedef struct {
+    BL_Fun_Type lowIntEn;                   /*!< Low will trigger interrupt */
+    BL_Fun_Type highIntEn;                  /*!< High will trigger interrupt */
+}HBN_PIR_INT_CFG_Type;
 
-typedef struct SPI_Flash_Cfg_Type SPI_Flash_Cfg_Type, *SPI_Flash_Cfg_Type;
+/**
+ *  @brief HBN PIR low pass filter type definition
+ */
+typedef enum {
+    HBN_PIR_LPF_DIV1,                       /*!< HBN PIR lpf div 1 */
+    HBN_PIR_LPF_DIV2,                       /*!< HBN PIR lpf div 2 */
+}HBN_PIR_LPF_Type;
 
-typedef enum HBN_LEVEL_Type {
-    HBN_LEVEL_3=3,
-    HBN_LEVEL_2=2,
-    HBN_LEVEL_1=1,
-    HBN_LEVEL_0=0
-} HBN_LEVEL_Type;
+/**
+ *  @brief HBN PIR high pass filter type definition
+ */
+typedef enum {
+    HBN_PIR_HPF_METHOD0,                    /*!< HBN PIR hpf calc method 0, 1-z^-1 */
+    HBN_PIR_HPF_METHOD1,                    /*!< HBN PIR hpf calc method 1, 1-z^-2 */
+    HBN_PIR_HPF_METHOD2,                    /*!< HBN PIR hpf calc method 2, 1-z^-3 */
+}HBN_PIR_HPF_Type;
 
-typedef enum HBN_LDO_LEVEL_Type {
-    HBN_LDO_LEVEL_0P90V=6,
-    HBN_LDO_LEVEL_0P80V=4,
-    HBN_LDO_LEVEL_1P30V=14,
-    HBN_LDO_LEVEL_1P20V=12,
-    HBN_LDO_LEVEL_1P10V=10,
-    HBN_LDO_LEVEL_1P00V=8,
-    HBN_LDO_LEVEL_0P65V=1,
-    HBN_LDO_LEVEL_1P35V=15,
-    HBN_LDO_LEVEL_1P25V=13,
-    HBN_LDO_LEVEL_0P85V=5,
-    HBN_LDO_LEVEL_1P15V=11,
-    HBN_LDO_LEVEL_0P75V=3,
-    HBN_LDO_LEVEL_1P05V=9,
-    HBN_LDO_LEVEL_0P95V=7,
-    HBN_LDO_LEVEL_0P70V=2,
-    HBN_LDO_LEVEL_0P60V=0
-} HBN_LDO_LEVEL_Type;
+/**
+ *  @brief HBN BOR threshold type definition
+ */
+typedef enum {
+    HBN_BOR_THRES_2P0V,                     /*!< BOR threshold 2.0V */
+    HBN_BOR_THRES_2P4V,                     /*!< BOR threshold 2.4V */
+}HBN_BOR_THRES_Type;
 
-typedef ushort uint16_t;
+/**
+ *  @brief HBN BOR mode type definition
+ */
+typedef enum {
+    HBN_BOR_MODE_POR_INDEPENDENT,           /*!< POR is independent of BOR */
+    HBN_BOR_MODE_POR_RELEVANT,              /*!< POR is relevant to BOR */
+}HBN_BOR_MODE_Type;
 
-struct HBN_APP_CFG_Type {
-    uint8_t useXtal32k;
-    undefined field_0x1;
-    undefined field_0x2;
-    undefined field_0x3;
-    uint32_t sleepTime;
-    uint8_t gpioWakeupSrc;
-    enum HBN_GPIO_INT_Trigger_Type gpioTrigType;
-    undefined field_0xa;
-    undefined field_0xb;
-    struct SPI_Flash_Cfg_Type * flashCfg;
-    enum HBN_LEVEL_Type hbnLevel;
-    enum HBN_LDO_LEVEL_Type ldoLevel;
-    undefined field_0x12;
-    undefined field_0x13;
-};
+/**
+ *  @brief HBN 32K clock type definition
+ */
+typedef enum {
+    HBN_32K_RC=0,                           /*!< HBN use rc 32k */
+    HBN_32K_XTAL,                           /*!< HBN use xtal 32k */
+    HBN_32K_DIG=3,                          /*!< HBN use dig 32k */
+}HBN_32K_CLK_Type;
 
-struct SPI_Flash_Cfg_Type {
-    uint8_t ioMode;
-    uint8_t cReadSupport;
-    uint8_t clkDelay;
-    uint8_t clkInvert;
-    uint8_t resetEnCmd;
-    uint8_t resetCmd;
-    uint8_t resetCreadCmd;
-    uint8_t resetCreadCmdSize;
-    uint8_t jedecIdCmd;
-    uint8_t jedecIdCmdDmyClk;
-    uint8_t qpiJedecIdCmd;
-    uint8_t qpiJedecIdCmdDmyClk;
-    uint8_t sectorSize;
-    uint8_t mid;
-    uint16_t pageSize;
-    uint8_t chipEraseCmd;
-    uint8_t sectorEraseCmd;
-    uint8_t blk32EraseCmd;
-    uint8_t blk64EraseCmd;
-    uint8_t writeEnableCmd;
-    uint8_t pageProgramCmd;
-    uint8_t qpageProgramCmd;
-    uint8_t qppAddrMode;
-    uint8_t fastReadCmd;
-    uint8_t frDmyClk;
-    uint8_t qpiFastReadCmd;
-    uint8_t qpiFrDmyClk;
-    uint8_t fastReadDoCmd;
-    uint8_t frDoDmyClk;
-    uint8_t fastReadDioCmd;
-    uint8_t frDioDmyClk;
-    uint8_t fastReadQoCmd;
-    uint8_t frQoDmyClk;
-    uint8_t fastReadQioCmd;
-    uint8_t frQioDmyClk;
-    uint8_t qpiFastReadQioCmd;
-    uint8_t qpiFrQioDmyClk;
-    uint8_t qpiPageProgramCmd;
-    uint8_t writeVregEnableCmd;
-    uint8_t wrEnableIndex;
-    uint8_t qeIndex;
-    uint8_t busyIndex;
-    uint8_t wrEnableBit;
-    uint8_t qeBit;
-    uint8_t busyBit;
-    uint8_t wrEnableWriteRegLen;
-    uint8_t wrEnableReadRegLen;
-    uint8_t qeWriteRegLen;
-    uint8_t qeReadRegLen;
-    uint8_t releasePowerDown;
-    uint8_t busyReadRegLen;
-    uint8_t readRegCmd[4];
-    uint8_t writeRegCmd[4];
-    uint8_t enterQpi;
-    uint8_t exitQpi;
-    uint8_t cReadMode;
-    uint8_t cRExit;
-    uint8_t burstWrapCmd;
-    uint8_t burstWrapCmdDmyClk;
-    uint8_t burstWrapDataMode;
-    uint8_t burstWrapData;
-    uint8_t deBurstWrapCmd;
-    uint8_t deBurstWrapCmdDmyClk;
-    uint8_t deBurstWrapDataMode;
-    uint8_t deBurstWrapData;
-    uint16_t timeEsector;
-    uint16_t timeE32k;
-    uint16_t timeE64k;
-    uint16_t timePagePgm;
-    uint16_t timeCe;
-    uint8_t pdDelay;
-    uint8_t qeData;
-};
+/**
+ *  @brief HBN xclk clock type definition
+ */
+typedef enum {
+    HBN_XCLK_CLK_RC32M,                     /*!< use RC32M as xclk clock */
+    HBN_XCLK_CLK_XTAL,                      /*!< use XTAL as xclk clock */
+}HBN_XCLK_CLK_Type;
 
-typedef struct HBN_BOR_CFG_Type HBN_BOR_CFG_Type, *HBN_BOR_CFG_Type;
+/**
+ *  @brief HBN root clock type definition
+ */
+typedef enum {
+    HBN_ROOT_CLK_RC32M,                     /*!< use RC32M as root clock */
+    HBN_ROOT_CLK_XTAL,                      /*!< use XTAL as root clock */
+    HBN_ROOT_CLK_PLL,                       /*!< use PLL as root clock */
+}HBN_ROOT_CLK_Type;
 
-struct HBN_BOR_CFG_Type {
-    uint8_t enableBor;
-    uint8_t enableBorInt;
-    uint8_t borThreshold;
-    uint8_t enablePorInBor;
-};
+/**
+ *  @brief HBN UART clock type definition
+ */
+typedef enum {
+    HBN_UART_CLK_FCLK=0,                    /*!< Select FCLK as UART clock */
+    HBN_UART_CLK_160M,                      /*!< Select 160M as UART clock */
+}HBN_UART_CLK_Type;
 
-typedef enum HBN_BOR_MODE_Type {
-    HBN_BOR_MODE_POR_INDEPENDENT=0,
-    HBN_BOR_MODE_POR_RELEVANT=1
-} HBN_BOR_MODE_Type;
+/**
+ *  @brief HBN RTC interrupt delay type definition
+ */
+typedef enum {
+    HBN_RTC_INT_DELAY_32T=0,                /*!< HBN RTC interrupt delay 32T */
+    HBN_RTC_INT_DELAY_0T=1,                 /*!< HBN RTC interrupt delay 0T */
+}HBN_RTC_INT_Delay_Type;
 
-typedef enum HBN_BOR_THRES_Type {
-    HBN_BOR_THRES_2P0V=0,
-    HBN_BOR_THRES_2P4V=1
-} HBN_BOR_THRES_Type;
+/**
+ *  @brief HBN interrupt type definition
+ */
+typedef enum {
+    HBN_INT_GPIO7=0,                        /*!< HBN interrupt type: GPIO7 */
+    HBN_INT_GPIO8=1,                        /*!< HBN interrupt type: GPIO8 */
+    HBN_INT_RTC=16,                         /*!< HBN interrupt type: RTC */
+    HBN_INT_PIR=17,                         /*!< HBN interrupt type: PIR */
+    HBN_INT_BOR=18,                         /*!< HBN interrupt type: BOR */
+    HBN_INT_ACOMP0=20,                      /*!< HBN interrupt type: ACOMP0 */
+    HBN_INT_ACOMP1=22,                      /*!< HBN interrupt type: ACOMP1 */
+}HBN_INT_Type;
 
-void HBN_Clear_RTC_Counter(void);
-void HBN_Enable_RTC_Counter(void);
-void HBN_Get_RTC_Timer_Val(void);
-typedef enum HBN_INT_Type {
-    HBN_INT_RTC=16,
-    HBN_INT_GPIO8=1,
-    HBN_INT_GPIO7=0,
-    HBN_INT_PIR=17,
-    HBN_INT_ACOMP1=22,
-    HBN_INT_BOR=18,
-    HBN_INT_ACOMP0=20
-} HBN_INT_Type;
+/**
+ *  @brief HBN GPIO interrupt trigger type definition
+ */
+typedef enum {
+    HBN_GPIO_INT_TRIGGER_SYNC_FALLING_EDGE, /*!< HBN GPIO INT trigger type: sync falling edge trigger */
+    HBN_GPIO_INT_TRIGGER_SYNC_RISING_EDGE,  /*!< HBN GPIO INT trigger type: sync rising edge trigger */
+    HBN_GPIO_INT_TRIGGER_SYNC_LOW_LEVEL,    /*!< HBN GPIO INT trigger type: sync low level trigger */
+    HBN_GPIO_INT_TRIGGER_SYNC_HIGH_LEVEL,   /*!< HBN GPIO INT trigger type: sync high level trigger */
+    HBN_GPIO_INT_TRIGGER_ASYNC_FALLING_EDGE,    /*!< HBN GPIO INT trigger type: async falling edge trigger */
+    HBN_GPIO_INT_TRIGGER_ASYNC_RISING_EDGE, /*!< HBN GPIO INT trigger type: async rising edge trigger */
+    HBN_GPIO_INT_TRIGGER_ASYNC_LOW_LEVEL,   /*!< HBN GPIO INT trigger type: async low level trigger */
+    HBN_GPIO_INT_TRIGGER_ASYNC_HIGH_LEVEL,  /*!< HBN GPIO INT trigger type: async high level trigger */
+}HBN_GPIO_INT_Trigger_Type;
 
-typedef enum HBN_OUT0_INT_Type {
-    HBN_OUT0_INT_GPIO8=1,
-    HBN_OUT0_INT_GPIO7=0,
-    HBN_OUT0_INT_RTC=2
-} HBN_OUT0_INT_Type;
+/**
+ *  @brief HBN OUT0 interrupt type definition
+ */
+typedef enum {
+    HBN_OUT0_INT_GPIO7=0,                   /*!< HBN out 0 interrupt type: GPIO7 */
+    HBN_OUT0_INT_GPIO8,                     /*!< HBN out 0 interrupt type: GPIO8 */
+    HBN_OUT0_INT_RTC,                       /*!< HBN out 0 interrupt type: RTC */
+}HBN_OUT0_INT_Type;
 
-typedef enum HBN_OUT1_INT_Type {
-    HBN_OUT1_INT_PIR=0,
-    HBN_OUT1_INT_ACOMP1=3,
-    HBN_OUT1_INT_BOR=1,
-    HBN_OUT1_INT_ACOMP0=2
-} HBN_OUT1_INT_Type;
+/**
+ *  @brief HBN OUT0 interrupt type definition
+ */
+typedef enum {
+    HBN_OUT1_INT_PIR,                       /*!< HBN out 1 interrupt type: PIR */
+    HBN_OUT1_INT_BOR,                       /*!< HBN out 1 interrupt type: BOR */
+    HBN_OUT1_INT_ACOMP0,                    /*!< HBN out 1 interrupt type: ACOMP0 */
+    HBN_OUT1_INT_ACOMP1,                    /*!< HBN out 1 interrupt type: ACOMP1 */
+}HBN_OUT1_INT_Type;
 
-typedef enum HBN_PIR_HPF_Type {
-    HBN_PIR_HPF_METHOD1=1,
-    HBN_PIR_HPF_METHOD2=2,
-    HBN_PIR_HPF_METHOD0=0
-} HBN_PIR_HPF_Type;
+/**
+ *  @brief HBN LDO level type definition
+ */
+typedef enum {
+    HBN_LDO_LEVEL_0P60V=0,                  /*!< HBN LDO voltage 0.60V */
+    HBN_LDO_LEVEL_0P65V=1,                  /*!< HBN LDO voltage 0.65V */
+    HBN_LDO_LEVEL_0P70V=2,                  /*!< HBN LDO voltage 0.70V */
+    HBN_LDO_LEVEL_0P75V=3,                  /*!< HBN LDO voltage 0.75V */
+    HBN_LDO_LEVEL_0P80V=4,                  /*!< HBN LDO voltage 0.80V */
+    HBN_LDO_LEVEL_0P85V=5,                  /*!< HBN LDO voltage 0.85V */
+    HBN_LDO_LEVEL_0P90V=6,                  /*!< HBN LDO voltage 0.90V */
+    HBN_LDO_LEVEL_0P95V=7,                  /*!< HBN LDO voltage 0.95V */
+    HBN_LDO_LEVEL_1P00V=8,                  /*!< HBN LDO voltage 1.00V */
+    HBN_LDO_LEVEL_1P05V=9,                  /*!< HBN LDO voltage 1.05V */
+    HBN_LDO_LEVEL_1P10V=10,                 /*!< HBN LDO voltage 1.10V */
+    HBN_LDO_LEVEL_1P15V=11,                 /*!< HBN LDO voltage 1.15V */
+    HBN_LDO_LEVEL_1P20V=12,                 /*!< HBN LDO voltage 1.20V */
+    HBN_LDO_LEVEL_1P25V=13,                 /*!< HBN LDO voltage 1.25V */
+    HBN_LDO_LEVEL_1P30V=14,                 /*!< HBN LDO voltage 1.30V */
+    HBN_LDO_LEVEL_1P35V=15,                 /*!< HBN LDO voltage 1.35V */
+}HBN_LDO_LEVEL_Type;
 
-typedef struct HBN_PIR_INT_CFG_Type HBN_PIR_INT_CFG_Type, *HBN_PIR_INT_CFG_Type;
+/**
+ *  @brief HBN level type definition
+ */
+typedef enum {
+    HBN_LEVEL_0,                            /*!< HBN pd_core */
+    HBN_LEVEL_1,                            /*!< HBN pd_aon_hbncore + pd_core */
+    HBN_LEVEL_2,                            /*!< HBN pd_aon_hbnrtc + pd_aon_hbncore + pd_core */
+    HBN_LEVEL_3,                            /*!< HBN pd_aon_hbnrtc + pd_aon_hbncore + pd_core */
+}HBN_LEVEL_Type;
 
-typedef enum BL_Fun_Type {
-    DISABLE=0,
-    ENABLE=1
-} BL_Fun_Type;
+/**
+ *  @brief HBN BOR configuration type definition
+ */
+typedef struct {
+    uint8_t enableBor;                      /*!< Enable BOR or not */
+    uint8_t enableBorInt;                   /*!< Enable BOR interrupt or not */
+    uint8_t borThreshold;                   /*!< BOR threshold */
+    uint8_t enablePorInBor;                 /*!< Enable POR when BOR occure or not */
+}HBN_BOR_CFG_Type;
 
-struct HBN_PIR_INT_CFG_Type {
-    enum BL_Fun_Type lowIntEn;
-    enum BL_Fun_Type highIntEn;
-};
+/**
+ *  @brief HBN APP configuration type definition
+ */
+typedef struct {
+    uint8_t useXtal32k;                     /*!< Whether use xtal 32K as 32K clock source,otherwise use rc32k */
+    uint32_t sleepTime;                     /*!< HBN sleep time */
+    uint8_t gpioWakeupSrc;                  /*!< GPIO Wakeup source */
+    HBN_GPIO_INT_Trigger_Type gpioTrigType; /*!< GPIO Triger type */
+    SPI_Flash_Cfg_Type *flashCfg;           /*!< Flash config pointer, used when power down flash */
+    HBN_LEVEL_Type hbnLevel;                /*!< HBN level */
+    HBN_LDO_LEVEL_Type ldoLevel;            /*!< LDO level */
+}HBN_APP_CFG_Type;
 
-typedef enum HBN_PIR_LPF_Type {
-    HBN_PIR_LPF_DIV1=0,
-    HBN_PIR_LPF_DIV2=1
-} HBN_PIR_LPF_Type;
+/*@} end of group HBN_Public_Types */
 
-typedef enum HBN_ROOT_CLK_Type {
-    HBN_ROOT_CLK_PLL=2,
-    HBN_ROOT_CLK_RC32M=0,
-    HBN_ROOT_CLK_XTAL=1
-} HBN_ROOT_CLK_Type;
+/** @defgroup  HBN_Public_Constants
+ *  @{
+ */
 
-typedef enum HBN_RTC_INT_Delay_Type {
-    HBN_RTC_INT_DELAY_0T=1,
-    HBN_RTC_INT_DELAY_32T=0
-} HBN_RTC_INT_Delay_Type;
+/** @defgroup  HBN_PIR_LPF_TYPE
+ *  @{
+ */
+#define IS_HBN_PIR_LPF_TYPE(type)                        (((type) == HBN_PIR_LPF_DIV1) || \
+                                                          ((type) == HBN_PIR_LPF_DIV2))
 
-void HBN_Set_ROOT_CLK_Sel(void);
-void HBN_Set_UART_CLK_Sel(void);
-typedef enum HBN_UART_CLK_Type {
-    HBN_UART_CLK_FCLK=0,
-    HBN_UART_CLK_160M=1
-} HBN_UART_CLK_Type;
+/** @defgroup  HBN_PIR_HPF_TYPE
+ *  @{
+ */
+#define IS_HBN_PIR_HPF_TYPE(type)                        (((type) == HBN_PIR_HPF_METHOD0) || \
+                                                          ((type) == HBN_PIR_HPF_METHOD1) || \
+                                                          ((type) == HBN_PIR_HPF_METHOD2))
 
-typedef enum HBN_XCLK_CLK_Type {
-    HBN_XCLK_CLK_XTAL=1,
-    HBN_XCLK_CLK_RC32M=0
-} HBN_XCLK_CLK_Type;
+/** @defgroup  HBN_BOR_THRES_TYPE
+ *  @{
+ */
+#define IS_HBN_BOR_THRES_TYPE(type)                      (((type) == HBN_BOR_THRES_2P0V) || \
+                                                          ((type) == HBN_BOR_THRES_2P4V))
 
+/** @defgroup  HBN_BOR_MODE_TYPE
+ *  @{
+ */
+#define IS_HBN_BOR_MODE_TYPE(type)                       (((type) == HBN_BOR_MODE_POR_INDEPENDENT) || \
+                                                          ((type) == HBN_BOR_MODE_POR_RELEVANT))
+
+/** @defgroup  HBN_32K_CLK_TYPE
+ *  @{
+ */
+#define IS_HBN_32K_CLK_TYPE(type)                        (((type) == HBN_32K_RC) || \
+                                                          ((type) == HBN_32K_XTAL) || \
+                                                          ((type) == HBN_32K_DIG))
+
+/** @defgroup  HBN_XCLK_CLK_TYPE
+ *  @{
+ */
+#define IS_HBN_XCLK_CLK_TYPE(type)                       (((type) == HBN_XCLK_CLK_RC32M) || \
+                                                          ((type) == HBN_XCLK_CLK_XTAL))
+
+/** @defgroup  HBN_ROOT_CLK_TYPE
+ *  @{
+ */
+#define IS_HBN_ROOT_CLK_TYPE(type)                       (((type) == HBN_ROOT_CLK_RC32M) || \
+                                                          ((type) == HBN_ROOT_CLK_XTAL) || \
+                                                          ((type) == HBN_ROOT_CLK_PLL))
+
+/** @defgroup  HBN_UART_CLK_TYPE
+ *  @{
+ */
+#define IS_HBN_UART_CLK_TYPE(type)                       (((type) == HBN_UART_CLK_FCLK) || \
+                                                          ((type) == HBN_UART_CLK_160M))
+
+/** @defgroup  HBN_RTC_INT_DELAY_TYPE
+ *  @{
+ */
+#define IS_HBN_RTC_INT_DELAY_TYPE(type)                  (((type) == HBN_RTC_INT_DELAY_32T) || \
+                                                          ((type) == HBN_RTC_INT_DELAY_0T))
+
+/** @defgroup  HBN_INT_TYPE
+ *  @{
+ */
+#define IS_HBN_INT_TYPE(type)                            (((type) == HBN_INT_GPIO7) || \
+                                                          ((type) == HBN_INT_GPIO8) || \
+                                                          ((type) == HBN_INT_RTC) || \
+                                                          ((type) == HBN_INT_PIR) || \
+                                                          ((type) == HBN_INT_BOR) || \
+                                                          ((type) == HBN_INT_ACOMP0) || \
+                                                          ((type) == HBN_INT_ACOMP1))
+
+/** @defgroup  HBN_GPIO_INT_TRIGGER_TYPE
+ *  @{
+ */
+#define IS_HBN_GPIO_INT_TRIGGER_TYPE(type)               (((type) == HBN_GPIO_INT_TRIGGER_SYNC_FALLING_EDGE) || \
+                                                          ((type) == HBN_GPIO_INT_TRIGGER_SYNC_RISING_EDGE) || \
+                                                          ((type) == HBN_GPIO_INT_TRIGGER_SYNC_LOW_LEVEL) || \
+                                                          ((type) == HBN_GPIO_INT_TRIGGER_SYNC_HIGH_LEVEL) || \
+                                                          ((type) == HBN_GPIO_INT_TRIGGER_ASYNC_FALLING_EDGE) || \
+                                                          ((type) == HBN_GPIO_INT_TRIGGER_ASYNC_RISING_EDGE) || \
+                                                          ((type) == HBN_GPIO_INT_TRIGGER_ASYNC_LOW_LEVEL) || \
+                                                          ((type) == HBN_GPIO_INT_TRIGGER_ASYNC_HIGH_LEVEL))
+
+/** @defgroup  HBN_OUT0_INT_TYPE
+ *  @{
+ */
+#define IS_HBN_OUT0_INT_TYPE(type)                       (((type) == HBN_OUT0_INT_GPIO7) || \
+                                                          ((type) == HBN_OUT0_INT_GPIO8) || \
+                                                          ((type) == HBN_OUT0_INT_RTC))
+
+/** @defgroup  HBN_OUT1_INT_TYPE
+ *  @{
+ */
+#define IS_HBN_OUT1_INT_TYPE(type)                       (((type) == HBN_OUT1_INT_PIR) || \
+                                                          ((type) == HBN_OUT1_INT_BOR) || \
+                                                          ((type) == HBN_OUT1_INT_ACOMP0) || \
+                                                          ((type) == HBN_OUT1_INT_ACOMP1))
+
+/** @defgroup  HBN_LDO_LEVEL_TYPE
+ *  @{
+ */
+#define IS_HBN_LDO_LEVEL_TYPE(type)                      (((type) == HBN_LDO_LEVEL_0P60V) || \
+                                                          ((type) == HBN_LDO_LEVEL_0P65V) || \
+                                                          ((type) == HBN_LDO_LEVEL_0P70V) || \
+                                                          ((type) == HBN_LDO_LEVEL_0P75V) || \
+                                                          ((type) == HBN_LDO_LEVEL_0P80V) || \
+                                                          ((type) == HBN_LDO_LEVEL_0P85V) || \
+                                                          ((type) == HBN_LDO_LEVEL_0P90V) || \
+                                                          ((type) == HBN_LDO_LEVEL_0P95V) || \
+                                                          ((type) == HBN_LDO_LEVEL_1P00V) || \
+                                                          ((type) == HBN_LDO_LEVEL_1P05V) || \
+                                                          ((type) == HBN_LDO_LEVEL_1P10V) || \
+                                                          ((type) == HBN_LDO_LEVEL_1P15V) || \
+                                                          ((type) == HBN_LDO_LEVEL_1P20V) || \
+                                                          ((type) == HBN_LDO_LEVEL_1P25V) || \
+                                                          ((type) == HBN_LDO_LEVEL_1P30V) || \
+                                                          ((type) == HBN_LDO_LEVEL_1P35V))
+
+/** @defgroup  HBN_LEVEL_TYPE
+ *  @{
+ */
+#define IS_HBN_LEVEL_TYPE(type)                          (((type) == HBN_LEVEL_0) || \
+                                                          ((type) == HBN_LEVEL_1) || \
+                                                          ((type) == HBN_LEVEL_2) || \
+                                                          ((type) == HBN_LEVEL_3))
+
+/*@} end of group HBN_Public_Constants */
+
+/** @defgroup  HBN_Public_Macros
+ *  @{
+ */
+#define HBN_RAM_SIZE                    (4*1024)
+#define HBN_RTC_COMP_BIT0_39            0x01
+#define HBN_RTC_COMP_BIT0_23            0x02
+#define HBN_RTC_COMP_BIT13_39           0x04
+#define HBN_STATUS_ENTER_FLAG           0x4e424845
+#define HBN_STATUS_WAKEUP_FLAG          0x4e424857
+#define HBN_WAKEUP_GPIO_NONE            0x00
+#define HBN_WAKEUP_GPIO_7               0x01
+#define HBN_WAKEUP_GPIO_8               0x02
+#define HBN_WAKEUP_GPIO_ALL             0x03
+
+/*@} end of group HBN_Public_Macros */
+
+/** @defgroup  HBN_Public_Functions
+ *  @{
+ */
+/*----------*/
+#ifndef BL602_USE_HAL_DRIVER
+void HBN_OUT0_IRQHandler(void);
+void HBN_OUT1_IRQHandler(void);
+#endif
+/*----------*/
+void HBN_Mode_Enter(HBN_APP_CFG_Type *cfg);
+void HBN_Power_Down_Flash(SPI_Flash_Cfg_Type *flashCfg);
+void HBN_Enable(uint8_t aGPIOIeCfg,HBN_LDO_LEVEL_Type ldoLevel,HBN_LEVEL_Type hbnLevel);
+BL_Err_Type HBN_Reset(void);
+BL_Err_Type HBN_App_Reset(uint8_t npXtalType,uint8_t bclkDiv,uint8_t apXtalType,uint8_t fclkDiv);
+BL_Err_Type HBN_Disable(void);
+/*----------*/
+BL_Err_Type HBN_PIR_Enable(void);
+BL_Err_Type HBN_PIR_Disable(void);
+BL_Err_Type HBN_PIR_INT_Config(HBN_PIR_INT_CFG_Type* pirIntCfg);
+BL_Err_Type HBN_PIR_LPF_Sel(HBN_PIR_LPF_Type lpf);
+BL_Err_Type HBN_PIR_HPF_Sel(HBN_PIR_HPF_Type hpf);
+BL_Err_Type HBN_Set_PIR_Threshold(uint16_t threshold);
+uint16_t HBN_Get_PIR_Threshold(void);
+BL_Err_Type HBN_Set_PIR_Interval(uint16_t interval);
+uint16_t HBN_Get_PIR_Interval(void);
+/*----------*/
+BL_Sts_Type HBN_Get_BOR_OUT_State(void);
+BL_Err_Type HBN_Set_BOR_Config(uint8_t enable,HBN_BOR_THRES_Type threshold,HBN_BOR_MODE_Type mode);
+/*----------*/
+BL_Err_Type HBN_Set_Ldo11_Aon_Vout(HBN_LDO_LEVEL_Type ldoLevel);
+BL_Err_Type HBN_Set_Ldo11_Rt_Vout(HBN_LDO_LEVEL_Type ldoLevel);
+BL_Err_Type HBN_Set_Ldo11_Soc_Vout(HBN_LDO_LEVEL_Type ldoLevel);
+BL_Err_Type HBN_Set_Ldo11_All_Vout(HBN_LDO_LEVEL_Type ldoLevel);
+/*----------*/
+BL_Err_Type HBN_32K_Sel(HBN_32K_CLK_Type clkType);
+BL_Err_Type HBN_Set_UART_CLK_Sel(HBN_UART_CLK_Type clkSel);
+BL_Err_Type HBN_Set_XCLK_CLK_Sel(HBN_XCLK_CLK_Type xClk);
+BL_Err_Type HBN_Set_ROOT_CLK_Sel(HBN_ROOT_CLK_Type rootClk);
+/*----------*/
+BL_Err_Type HBN_Set_HRAM_slp(void);
+BL_Err_Type HBN_Set_HRAM_Ret(void);
+/*----------*/
+uint32_t HBN_Get_Status_Flag(void);
+BL_Err_Type HBN_Set_Status_Flag(uint32_t flag);
+uint32_t HBN_Get_Wakeup_Addr(void);
+BL_Err_Type HBN_Set_Wakeup_Addr(uint32_t addr);
+/*----------*/
+BL_Err_Type HBN_Clear_RTC_Counter(void);
+BL_Err_Type HBN_Enable_RTC_Counter(void);
+BL_Err_Type HBN_Set_RTC_Timer(HBN_RTC_INT_Delay_Type delay,uint32_t compValLow,uint32_t compValHigh,uint8_t compMode);
+BL_Err_Type HBN_Get_RTC_Timer_Val(uint32_t *valLow,uint32_t *valHigh);
+BL_Err_Type HBN_Clear_RTC_IRQ(void);
+/*----------*/
+BL_Err_Type HBN_GPIO_INT_Enable(HBN_GPIO_INT_Trigger_Type gpioIntTrigType);
+BL_Err_Type HBN_GPIO_INT_Disable(void);
+BL_Sts_Type HBN_Get_INT_State(HBN_INT_Type irqType);
+uint8_t HBN_Get_Pin_Wakeup_Mode(void);
+BL_Err_Type HBN_Clear_IRQ(HBN_INT_Type irqType);
+BL_Err_Type HBN_Hw_Pu_Pd_Cfg(uint8_t enable);
+BL_Err_Type HBN_Aon_Pad_IeSmt_Cfg(uint8_t padCfg);
+BL_Err_Type HBN_Pin_WakeUp_Mask(uint8_t maskVal);
+/*----------*/
+BL_Err_Type HBN_Enable_AComp0_IRQ(void);
+BL_Err_Type HBN_Disable_AComp0_IRQ(void);
+BL_Err_Type HBN_Enable_AComp1_IRQ(void);
+BL_Err_Type HBN_Disable_AComp1_IRQ(void);
+/*----------*/
+BL_Err_Type HBN_Enable_BOR_IRQ(void);
+BL_Err_Type HBN_Disable_BOR_IRQ(void);
+/*----------*/
+BL_Err_Type HBN_Out0_Callback_Install(HBN_OUT0_INT_Type intType,
+                                                     intCallback_Type* cbFun);
+BL_Err_Type HBN_Out1_Callback_Install(HBN_OUT1_INT_Type intType,intCallback_Type* cbFun);
+/*----------*/
+BL_Err_Type HBN_GPIO7_Dbg_Pull_Cfg(BL_Fun_Type pupdEn,BL_Fun_Type iesmtEn,
+                                                  BL_Fun_Type dlyEn,uint8_t dlySec);
+/*----------*/
+BL_Err_Type HBN_Power_On_Xtal_32K(void);
+BL_Err_Type HBN_Power_Off_Xtal_32K(void);
+BL_Err_Type HBN_Power_On_RC32K(void);
+BL_Err_Type HBN_Power_Off_RC32K(void);
+BL_Err_Type HBN_Trim_RC32K(void);
+BL_Err_Type HBN_Set_Embedded_Flash_Pullup(uint8_t enable);
+BL_Err_Type HBN_Set_BOR_Cfg(HBN_BOR_CFG_Type *cfg);
+
+/*@} end of group HBN_Public_Functions */
+
+/*@} end of group HBN */
+
+/*@} end of group BL602_Peripheral_Driver */
+
+#endif /* __BL602_HBN_H__ */

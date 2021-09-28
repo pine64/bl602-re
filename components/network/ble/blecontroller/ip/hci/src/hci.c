@@ -9,11 +9,7 @@ static const struct evt_mask hci_def_evt_msk;
 static const struct evt_mask hci_rsvd_evt_msk;
 struct hci_env_tag hci_env;
 
-void hci_init(void);
-void hci_reset(void);
-void hci_send_2_host(void *param);
-void hci_send_2_controller(void *param);
-uint8_t hci_evt_mask_set(const struct evt_mask *evt_msk, uint8_t page);
+
 
 
 
