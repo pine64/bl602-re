@@ -1,9 +1,7 @@
-/**
-* @file co_bt_defines.h
-* Header file for BL602
-*/
-#ifndef __CO_BT_DEFINES_H__
-#define __CO_BT_DEFINES_H__
+#ifndef BLECONTROLLER_MODULES_COMMON_CO_BT_DEFINED_H
+#define BLECONTROLLER_MODULES_COMMON_CO_BT_DEFINED_H
+
+#include <stdint.h>
 
 enum le_evt_mask {
     LE_CON_CMP_EVT_BIT = 0,
@@ -162,4 +160,4 @@ struct t_public_key {
 };
 typedef struct t_public_key t_public_key;
 
-#endif // __CO_BT_DEFINES_H__
+#endif /* BLECONTROLLER_MODULES_COMMON_CO_BT_DEFINED_H */

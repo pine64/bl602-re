@@ -94,6 +94,7 @@ AT_ERROR_CODE at_typecfg(const char *key)
  */
 AT_ERROR_CODE at_setcfg(const char *key, at_value_t *value)
 {
+#ifdef EQUIVALENT_CODE
 	if (key == NULL || value == NULL)
 	{
 		return AEC_NOT_FOUND; // Probably should be AEC_NULL_POINTER
@@ -126,6 +127,37 @@ AT_ERROR_CODE at_setcfg(const char *key, at_value_t *value)
 	at_set_value(var->pt, var->pvar, var->vsize, value);
 
 	return AEC_OK;
+#else
+	  int i;
+	int cmp;
+	s32 sVar1;
+	at_var_descriptor_t *var;
+	
+	if (key == NULL) {
+		return AEC_NOT_FOUND;
+	}
+	else if (value == NULL) {
+		return AEC_NOT_FOUND;
+	}
+	var = at_cfg_table;
+	i = 0;
+	while (cmp = strcmp(key,var->key), cmp != 0) {
+		i = i + 1;
+		var = var + 1;
+		if (i == sizeof(at_cfg_table) / sizeof(at_cfg_table[0])) {
+			return AEC_NOT_FOUND;
+		}
+	}
+	if (at_cfg_table[i].po != APO_RW) {
+		return AEC_READ_ONLY;
+	}
+	if ((at_cfg_table[i].verify != NULL) &&
+		(sVar1 = (*at_cfg_table[i].verify)(value), sVar1 != 0)) {
+		return AEC_OUT_OF_RANGE;
+	}
+	at_set_value(at_cfg_table[i].pt,at_cfg_table[i].pvar,at_cfg_table[i].vsize,value);
+	return AEC_OK;
+#endif
 }
 
 /** at_ssidtxt
@@ -137,9 +169,10 @@ AT_ERROR_CODE at_ssidtxt(const char *ssid)
 		return AEC_NOT_FOUND;
 	}
 
+	size_t ssid_len = strlen(ssid);
 	memset(at_cfg.wifi_ssid, 0, sizeof(at_cfg.wifi_ssid));
-	memcpy(at_cfg.wifi_ssid, ssid, strlen(ssid));
-	at_cfg.wifi_ssid_len = 0; // ???
+	memcpy(at_cfg.wifi_ssid, ssid, ssid_len);
+	at_cfg.wifi_ssid_len = ssid_len;
 
 	return AEC_OK;
 }
@@ -207,6 +240,7 @@ static at_di_t speed_tbl[5] =
  */
 static s32 console1_speed_verify(at_value_t *value)
 {
+#ifdef EQUIVALENT_CODE
 	for (unsigned i = 0; i < sizeof(speed_tbl) / sizeof(speed_tbl[0]); ++i)
 	{
 		if (value->di == speed_tbl[i])
@@ -215,6 +249,19 @@ static s32 console1_speed_verify(at_value_t *value)
 		}
 	}
 	return 1;
+#else
+	at_di_t speed_tbl_copy[sizeof(speed_tbl) / sizeof(speed_tbl)[0]];
+	const at_di_t *const speed_tbl_end = speed_tbl_copy + (sizeof(speed_tbl) / sizeof(speed_tbl)[0]);
+	memcpy(speed_tbl_copy, speed_tbl, sizeof(speed_tbl_copy));
+	for (const at_di_t *entry = speed_tbl_copy; entry != speed_tbl_end; ++entry)
+	{
+		if (value->di == *entry)
+		{
+			return 0;
+		}
+	}
+	return 1;
+#endif
 }
 
 /** console1_hwfc_verify

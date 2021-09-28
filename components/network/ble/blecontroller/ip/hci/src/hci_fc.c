@@ -82,3 +82,6 @@ uint16_t hci_fc_check_host_available_nb_acl_packets(void)
 	}
 	return 0
 }
+
+TODO uint8_t hci_fc_acl_en(bool flow_enable)
+TODO uint8_t hci_fc_acl_buf_size_set(uint16_t acl_pkt_len,uint16_t nb_acl_pkts)

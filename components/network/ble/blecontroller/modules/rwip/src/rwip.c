@@ -1,9 +1,6 @@
-/**
-* @file rwip.c
-* Source file for BL602
-*/
 #include "rwip.h"
 
+#include <stdbool.h>
 
 typedef struct {
     uint32_t time;
@@ -51,30 +48,26 @@ void rwip_wlcoex_set(bool state);
  */
 bool rwip_ext_wakeup_enable(void)
 {
-	ASSER_ERR(FALSE);
-	return false;
+	__builtin_trap();
 }
 
 /** rwip_sleep_lpcycles_2_us
  */
 uint32_t rwip_sleep_lpcycles_2_us(uint32_t lpcycles)
 {
-	ASSER_ERR(FALSE);
-	return 0xffffffff;
+	__builtin_trap();
 }
 
 /** rwip_us_2_lpcycles
  */
 uint32_t rwip_us_2_lpcycles(uint32_t us)
 {
-	ASSER_ERR(FALSE);
-	return 0xffffffff;
+	__builtin_trap();
 }
 
 /** rwip_wlcoex_set
  */
 void rwip_wlcoex_set(bool state)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }

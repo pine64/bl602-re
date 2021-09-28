@@ -1,9 +1,5 @@
-/**
-* @file rwip_config.h
-* Header file for BL602
-*/
-#ifndef __RWIP_CONFIG_H__
-#define __RWIP_CONFIG_H__
+#ifndef BLECONTROLLER_MODULES_RWIP_RWIP_CONFIG_H
+#define BLECONTROLLER_MODULES_RWIP_RWIP_CONFIG_H
 
 enum KE_EVENT_TYPE {
     KE_EVENT_ECC_MULTIPLICATION = 0,
@@ -65,4 +61,4 @@ enum rwip_incr_dft {
     RWIP_INCR_ADV_HDC_PRIO_DFT = 1,
 };
 
-#endif // __RWIP_CONFIG_H__
+#endif /* BLECONTROLLER_MODULES_RWIP_RWIP_CONFIG_H */

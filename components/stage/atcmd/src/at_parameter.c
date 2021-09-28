@@ -1,12 +1,9 @@
-/**
-* @file at_parameter.c
-* Source file for BL602
-*/
+#include <atcmd/at_command.h>
 #include <atcmd/at_macros.h>
 
 
-s32 at_get_value(char *strbuf, s32 pt, void *pvar, s32 vsize);
-s32 at_set_value(s32 pt, void *pvar, s32 vsize, at_value_t *value);
+AT_ERROR_CODE at_get_value(char *strbuf, AT_PARA_TYPE pt, void *pvar, s32 vsize);
+s32 at_set_value(AT_PARA_TYPE pt, void *pvar, s32 vsize, at_value_t *value);
 int at_atoi(char *str);
 static int hex_to_num(char ch);
 static u32 get_text_para(char **ppara, void *pvar, u32 opt);
@@ -90,7 +87,6 @@ s32 at_set_value(AT_PARA_TYPE pt, void *pvar, s32 vsize, at_value_t *value)
 	}
 	return 0;
 }
-}
 
 /** at_atoi
  */
@@ -103,8 +99,57 @@ int at_atoi(char *str)
  */
 AT_ERROR_CODE at_get_parameters(char **ppara, at_para_descriptor_t *list, s32 lsize, s32 *pcnt)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
+#if 0
+	int iVar1;
+	AT_ERROR_CODE AVar2;
+	uint uVar3;
+	uint uVar4;
+	int iVar5;
+	
+	if ((list == NULL) || (lsize == 0)) {
+		return at_get_newline(*ppara, 2);
+	}
+	iVar1 = 0;
+	for (s32 i = 0; i < lsize; ++i) {
+		if ((u8)list->pt > 5) {
+			return AEC_PARA_ERROR;
+		}
+		u32 opt = list->option;
+		void *pvar = list->pvar;
+		switch (list->pt)
+		{
+		case APT_TEXT:
+			uVar4 = get_text_para(ppara, pvar, opt);
+			break;
+		case APT_TDATA:
+			uVar4 = get_tdata_para(ppara, pvar, opt);
+			break;
+		case APT_HEX:
+			uVar4 = get_hex_para(ppara, pvar, opt);
+			break;
+		case APT_DI:
+			uVar4 = get_di_para(ppara, pvar, opt);
+			break;
+		case APT_HI:
+			uVar4 = get_hi_para(ppara, pvar, opt);
+			break;
+		case APT_IP:
+			uVar4 = get_ip_para(ppara, pvar, opt);
+			break;
+		}
+		TODO
+      uVar3 = uVar4 >> 1 & 1;
+      if (uVar3 == 0) {
+        iVar1 = iVar1 + 1;
+      }
+      if (((uVar4 & 1) != 0) || (list = list + 1, uVar3 != 0)) goto .L0;
+    }
+    uVar3 = 0;
+.L0:
+    *pcnt = iVar1;
+	return (AT_ERROR_CODE)(uVar3 << 2);
+#endif
 }
 
 /** at_get_newline
@@ -141,46 +186,40 @@ static int hex_to_num(char ch)
  */
 static u32 get_text_para(char **ppara, void *pvar, u32 opt)
 {
-	ASSER_ERR(FALSE);
-	return 0xffffffff;
+	__builtin_trap();
 }
 
 /** get_tdata_para
  */
 static u32 get_tdata_para(char **ppara, void *pvar, u32 opt)
 {
-	ASSER_ERR(FALSE);
-	return 0xffffffff;
+	__builtin_trap();
 }
 
 /** get_hex_para
  */
 static u32 get_hex_para(char **ppara, void *pvar, u32 opt)
 {
-	ASSER_ERR(FALSE);
-	return 0xffffffff;
+	__builtin_trap();
 }
 
 /** get_di_para
  */
 static u32 get_di_para(char **ppara, void *pvar, u32 opt)
 {
-	ASSER_ERR(FALSE);
-	return 0xffffffff;
+	__builtin_trap();
 }
 
 /** get_hi_para
  */
 static u32 get_hi_para(char **ppara, void *pvar, u32 opt)
 {
-	ASSER_ERR(FALSE);
-	return 0xffffffff;
+	__builtin_trap();
 }
 
 /** get_ip_para
  */
 static u32 get_ip_para(char **ppara, void *pvar, u32 opt)
 {
-	ASSER_ERR(FALSE);
-	return 0xffffffff;
+	__builtin_trap();
 }

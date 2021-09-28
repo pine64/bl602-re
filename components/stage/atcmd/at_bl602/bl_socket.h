@@ -5,6 +5,8 @@
 #ifndef __BL_SOCKET_H__
 #define __BL_SOCKET_H__
 
+#include <at_types.h>
+
 struct server_arg {
     s16 port; // +0
     s32 protocol; // +4

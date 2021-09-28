@@ -1,9 +1,7 @@
-/**
-* @file hci.h
-* Header file for BL602
-*/
-#ifndef __HCI_H__
-#define __HCI_H__
+#ifndef BLECONTROLLER_IP_HCI_HCI_H
+#define BLECONTROLLER_IP_HCI_HCI_H
+
+#include <stdint.h>
 
 enum HCI_MSG {
     HCI_MSG_ID_FIRST = 2048,
@@ -19,4 +17,10 @@ enum HCI_MSG {
     HCI_MSG_ID_LAST = 2058,
 };
 
-#endif // __HCI_H__
+void hci_init(void);
+void hci_reset(void);
+void hci_send_2_host(void *param);
+void hci_send_2_controller(void *param);
+uint8_t hci_evt_mask_set(const struct evt_mask *evt_msk, uint8_t page);
+
+#endif /* BLECONTROLLER_IP_HCI_HCI_H */

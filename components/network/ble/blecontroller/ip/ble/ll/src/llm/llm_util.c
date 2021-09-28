@@ -60,8 +60,7 @@ bool llm_util_bd_addr_in_wl(const struct bd_addr *bd_address, uint8_t bd_addr_ty
  */
 uint8_t llm_util_check_address_validity(struct bd_addr *bd_address, uint8_t addr_type)
 {
-	ASSER_ERR(FALSE);
-	return 0xff;
+	return co_bdaddr_compare(&co_null_bdaddr) == 0 ? 0 : 0x12;
 }
 
 /** llm_util_check_map_validity
@@ -116,8 +115,16 @@ void llm_util_get_supp_features(struct le_features *feats)
  */
 void llm_util_adv_data_update(void)
 {
-	ASSER_ERR(FALSE);
-	return;
+	if (*_llm_set_scan_rsp_data != 0) {
+		llm_set_adv_data(*_llm_set_scan_rsp_data + 0xc);
+		ble_ke_msg_free(*_llm_set_scan_rsp_data);
+		*_llm_set_scan_rsp_data = 0;
+	}
+	if (_llm_set_scan_rsp_data[1] != 0) {
+		llm_set_scan_rsp_data(_llm_set_scan_rsp_data[1] + 0xc);
+		ble_ke_msg_free(_llm_set_scan_rsp_data[1]);
+		_llm_set_scan_rsp_data[1] = 0;
+	}
 }
 
 /** llm_util_bl_check

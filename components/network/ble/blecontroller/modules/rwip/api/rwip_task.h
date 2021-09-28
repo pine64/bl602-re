@@ -1,9 +1,5 @@
-/**
-* @file rwip_task.h
-* Header file for BL602
-*/
-#ifndef __RWIP_TASK_H__
-#define __RWIP_TASK_H__
+#ifndef BLECONTROLLER_MODULES_RWIP_RWIP_TASK_H
+#define BLECONTROLLER_MODULES_RWIP_RWIP_TASK_H
 
 enum TASK_API_ID {
     TASK_ID_LLM = 0,
@@ -77,4 +73,4 @@ enum TASK_API_ID {
     TASK_ID_INVALID = 255,
 };
 
-#endif // __RWIP_TASK_H__
+#endif /* BLECONTROLLER_MODULES_RWIP_RWIP_TASK_H */

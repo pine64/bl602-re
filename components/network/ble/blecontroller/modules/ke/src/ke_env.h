@@ -1,9 +1,7 @@
-/**
-* @file ke_env.h
-* Header file for BL602
-*/
-#ifndef __KE_ENV_H__
-#define __KE_ENV_H__
+#ifndef BLECONTROLLER_MODULES_KE_KE_ENV_H
+#define BLECONTROLLER_MODULES_KE_KE_ENV_H
+
+#include <stdint.h>
 
 struct ble_ke_env_tag {
     struct co_list queue_sent; // +0
@@ -12,6 +10,7 @@ struct ble_ke_env_tag {
     struct mblock_free *heap[2]; // +24
     uint16_t heap_size[2]; // +32
 };
-struct ble_ke_env_tag ble_ke_env;
 
-#endif // __KE_ENV_H__
+extern struct ble_ke_env_tag ble_ke_env;
+
+#endif /* BLECONTROLLER_MODULES_KE_KE_ENV_H */

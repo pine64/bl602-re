@@ -1,8 +1,4 @@
-/**
-* @file at_command.c
-* Source file for BL602
-*/
-#include "at_command.h"
+#include <atcmd/at_command.h>
 
 
 at_callback_t at_callback;
@@ -22,52 +18,60 @@ static AT_ERROR_CODE setautoconnect_handler(at_para_t *at_para);
 static AT_ERROR_CODE set_ip_handler(at_para_t *at_para);
 
 
+AT_ERROR_CODE wifi_supports(at_para_t *at_para)
+{
+  AT_ERROR_CODE code = at_get_parameters(&at_para->ptr, NULL, 0, NULL);
+  if (code != AEC_OK)
+  {
+	code = AEC_PARA_ERROR;
+  }
+  return code;
+}
+
+AT_ERROR_CODE attention_handler(at_para_t *at_para)
+{
+  return at_get_parameters(&at_para->ptr, NULL, 0, NULL);
+}
 
 
 /** get_reconnect_enable_status
  */
 int get_reconnect_enable_status(void)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
 /** at_get_ssid_psk
  */
 AT_ERROR_CODE at_get_ssid_psk(char **ppara, char *ssid, char *pwd)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }
 
 /** join_ap_handler
  */
 static AT_ERROR_CODE join_ap_handler(at_para_t *at_para)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }
 
 /** disconnect_handler
  */
 static AT_ERROR_CODE disconnect_handler(at_para_t *at_para)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }
 
 /** setautoconnect_handler
  */
 static AT_ERROR_CODE setautoconnect_handler(at_para_t *at_para)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }
 
 /** set_ip_handler
  */
 static AT_ERROR_CODE set_ip_handler(at_para_t *at_para)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }

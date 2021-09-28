@@ -1,9 +1,10 @@
-/**
-* @file ke_timer.h
-* Header file for BL602
-*/
-#ifndef __KE_TIMER_H__
-#define __KE_TIMER_H__
+#ifndef BLECONTROLLER_MODULES_KE_TIMER_H
+#define BLECONTROLLER_MODULES_KE_TIMER_H
+
+#include <stdint.h>
+
+#include "ke_msg.h"
+#include "ke_task.h"
 
 struct ke_timer {
     struct ke_timer *next; // +0
@@ -12,4 +13,4 @@ struct ke_timer {
     uint32_t time; // +8
 };
 
-#endif // __KE_TIMER_H__
+#endif /* BLECONTROLLER_MODULES_KE_TIMER_H */

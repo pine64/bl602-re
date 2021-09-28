@@ -1,9 +1,7 @@
-/**
-* @file rwip.h
-* Header file for BL602
-*/
-#ifndef __RWIP_H__
-#define __RWIP_H__
+#ifndef BLECONTROLLER_MODULES_RWIP_RWIP_H
+#define BLECONTROLLER_MODULES_RWIP_RWIP_H
+
+#include <stdint.h>
 
 typedef struct {
     uint8_t msg_type; // +0
@@ -57,6 +55,11 @@ struct rwip_eif_api {
     void (*flow_on)(void); // +8
     bool (*flow_off)(void); // +12
 };
-struct rwip_rf_api rwip_rf;const struct rwip_prio rwip_priority[7];const uint8_t rwip_coex_cfg[5];
 
-#endif // __RWIP_H__
+extern struct rwip_rf_api rwip_rf;
+extern const struct rwip_prio rwip_priority[7];
+extern const uint8_t rwip_coex_cfg[5];
+
+void rwip_schedule(void);
+
+#endif /* BLECONTROLLER_MODULES_RWIP_RWIP_H */

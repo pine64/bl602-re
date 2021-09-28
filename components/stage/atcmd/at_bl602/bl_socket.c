@@ -4,6 +4,23 @@
 */
 #include "bl_socket.h"
 
+#include <FreeRTOS.h>
+#include <semphr.h>
+
+#include <at_command.h>
+
+#warning Add #include <lwip/err.h>
+typedef s8 err_t;
+typedef u16 u16_t;
+typedef struct {} ip_addr_t;
+
+#warning Add #include <fs/vfs_romfs.h>
+typedef struct {} romfs_filebuf_t;
+
+struct pbuf;
+struct udp_pcb;
+struct altcp_pcb;
+
 
 static struct server_arg g_server_arg;
 static server_ctrl_t g_server_ctrl;
@@ -47,142 +64,124 @@ AT_ERROR_CODE bl_cipsslcalpn(at_callback_para_t *para, at_callback_rsp_t *unused
  */
 AT_ERROR_CODE bl_cipstatus(at_callback_para_t *para, at_callback_rsp_t *rsp)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }
 
 /** bl_cipstart
  */
 AT_ERROR_CODE bl_cipstart(at_callback_para_t *para, at_callback_rsp_t *rsp)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }
 
 /** bl_cipsendbuf
  */
 AT_ERROR_CODE bl_cipsendbuf(at_callback_para_t *para, at_callback_rsp_t *rsp)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }
 
 /** bl_cipclose
  */
 AT_ERROR_CODE bl_cipclose(at_callback_para_t *para, at_callback_rsp_t *rsp)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }
 
 /** bl_tcpserver
  */
 AT_ERROR_CODE bl_tcpserver(at_callback_para_t *para, at_callback_rsp_t *rsp)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }
 
 /** bl_cipsend
  */
 AT_ERROR_CODE bl_cipsend(at_callback_para_t *para, at_callback_rsp_t *rsp)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }
 
 /** bl_cipsslcconf_path
  */
 AT_ERROR_CODE bl_cipsslcconf_path(at_callback_para_t *para, at_callback_rsp_t *unused)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }
 
 /** bl_cipsslcsni
  */
 AT_ERROR_CODE bl_cipsslcsni(at_callback_para_t *para, at_callback_rsp_t *rsp)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }
 
 /** bl_cipsslcalpn
  */
 AT_ERROR_CODE bl_cipsslcalpn(at_callback_para_t *para, at_callback_rsp_t *unused)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }
 
 /** tcp_receive_callback
  */
 static err_t tcp_receive_callback(void *arg, struct altcp_pcb *conn, struct pbuf *p, err_t err)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }
 
 /** tcp_sent_callback
  */
 static err_t tcp_sent_callback(void *arg, struct altcp_pcb *conn, u16_t len)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }
 
 /** tcp_err_callback
  */
 static void tcp_err_callback(void *arg, err_t err)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** tcp_connected_callback
  */
 static err_t tcp_connected_callback(void *arg, struct altcp_pcb *conn, err_t err)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }
 
 /** udp_receive_callback
  */
 static void udp_receive_callback(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** get_romfs_file_content
  */
 static int get_romfs_file_content(const char *path, romfs_filebuf_t *buf)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
 /** tcp_accept_callback
  */
 static err_t tcp_accept_callback(void *arg, struct altcp_pcb *new_conn, err_t err)
 {
-	ASSER_ERR(FALSE);
-	return AT_ERROR_UNIMP;
+	__builtin_trap();
 }
 
 /** tcp_send_data
  */
 static void tcp_send_data(void *arg)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** udp_send_data
  */
 static void udp_send_data(void *arg)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
