@@ -1,9 +1,10 @@
-/**
-* @file lld_evt.h
-* Header file for BL602
-*/
 #ifndef __LLD_EVT_H__
 #define __LLD_EVT_H__
+
+#include <stdbool.h>
+#include <stdint.h>
+
+#include <co_list.h>
 
 enum lld_evt_flag {
     LLD_EVT_FLAG_WAITING_ACK = 1,
@@ -68,6 +69,10 @@ struct lld_conn {
     uint8_t tx_prog_pkt_cnt; // +28
     bool wait_con_up_sync; // +29
 };
+union lld_evt_info {
+	struct lld_non_conn non_conn;
+	struct lld_conn conn;
+};
 struct lld_evt_tag {
     struct lld_evt_anchor anchor_point; // +0
     struct co_list tx_acl_rdy; // +8
@@ -85,10 +90,6 @@ struct lld_evt_tag {
     uint8_t default_prio; // +85
     uint8_t evt_flag; // +86
     bool delete_ongoing; // +87
-};
-union lld_evt_info {
-    struct lld_non_conn non_conn;
-    struct lld_conn conn;
 };
 struct lld_evt_update_tag {
     uint16_t win_offset; // +0

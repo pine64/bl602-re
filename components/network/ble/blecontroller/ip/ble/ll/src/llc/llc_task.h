@@ -1,9 +1,10 @@
-/**
-* @file llc_task.h
-* Header file for BL602
-*/
 #ifndef __LLC_TASK_H__
 #define __LLC_TASK_H__
+
+#include <stdint.h>
+
+#include <co_bt_defines.h>
+#include <co_llcp.h>
 
 enum llc_op_type {
     LLC_OP_LOC_PARAM_UPD = 0,
@@ -127,6 +128,7 @@ struct llc_con_upd_req_ind {
     uint16_t offset4; // +30
     uint16_t offset5; // +32
 };
-const struct ke_state_handler llc_default_handler;ke_state_t llc_state[2];
+extern const struct ke_state_handler llc_default_handler;
+extern ke_state_t llc_state[2];
 
 #endif // __LLC_TASK_H__

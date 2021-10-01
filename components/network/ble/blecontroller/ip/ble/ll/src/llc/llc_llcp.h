@@ -1,9 +1,9 @@
-/**
-* @file llc_llcp.h
-* Header file for BL602
-*/
 #ifndef __LLC_LLCP_H__
 #define __LLC_LLCP_H__
+
+#include <stdint.h>
+
+#include <co_list.h>
 
 struct llcp_pdu_tag {
     struct co_list_hdr hdr; // +0

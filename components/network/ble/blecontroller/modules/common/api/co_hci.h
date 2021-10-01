@@ -1,9 +1,9 @@
-/**
-* @file co_hci.h
-* Header file for BL602
-*/
 #ifndef __CO_HCI_H__
 #define __CO_HCI_H__
+
+#include <stdint.h>
+
+#include <co_bt_defines.h>
 
 enum hci_opcode {
     HCI_NO_OPERATION_CMD_OPCODE = 0,

@@ -1,9 +1,7 @@
-/**
-* @file lld_pdu.c
-* Source file for BL602
-*/
 #include "lld_pdu.h"
 
+#include <em/em_buf.h>
+#include <lld/lld_evt.h>
 
 enum lld_pdu_pack_status {
     LLC_PDU_PACK_OK = 0,
@@ -70,126 +68,110 @@ void lld_pdu_rx_handler(struct lld_evt_tag *evt, uint8_t nb_rx_desc);
  */
 bool lld_pdu_check(struct lld_evt_tag *evt)
 {
-	ASSER_ERR(FALSE);
-	return false;
+	__builtin_trap();
 }
 
 /** lld_pdu_tx_loop
  */
 void lld_pdu_tx_loop(struct lld_evt_tag *evt)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** lld_pdu_data_tx_push
  */
 void lld_pdu_data_tx_push(struct lld_evt_tag *evt, struct em_desc_node *txnode, bool can_be_freed, bool encrypted)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** lld_pdu_data_send
  */
 bool lld_pdu_data_send(void *param)
 {
-	ASSER_ERR(FALSE);
-	return false;
+	__builtin_trap();
 }
 
 /** lld_pdu_tx_push
  */
 void lld_pdu_tx_push(struct ea_elt_tag *elt, struct em_desc_node *txnode)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** lld_pdu_tx_prog
  */
 void lld_pdu_tx_prog(struct lld_evt_tag *evt)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** lld_pdu_tx_flush
  */
 void lld_pdu_tx_flush(struct lld_evt_tag *evt)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** lld_pdu_adv_pack
  */
 uint8_t lld_pdu_adv_pack(uint8_t code, uint8_t *buf, uint8_t *p_len)
 {
-	ASSER_ERR(FALSE);
-	return 0xff;
+	__builtin_trap();
 }
 
 /** lld_pdu_rx_handler
  */
 void lld_pdu_rx_handler(struct lld_evt_tag *evt, uint8_t nb_rx_desc)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** lld_pdu_cntl_aligned_unpk
  */
 static void lld_pdu_cntl_aligned_unpk(uint16_t pdu_ptr, uint8_t parlen, uint8_t *param)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** lld_pdu_llcp_con_param_req_unpk
  */
 static void lld_pdu_llcp_con_param_req_unpk(uint16_t pdu_ptr, uint8_t parlen, uint8_t *param)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** lld_pdu_llcp_con_param_rsp_unpk
  */
 static void lld_pdu_llcp_con_param_rsp_unpk(uint16_t pdu_ptr, uint8_t parlen, uint8_t *param)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** lld_pdu_llcp_length_req_unpk
  */
 static void lld_pdu_llcp_length_req_unpk(uint16_t pdu_ptr, uint8_t parlen, uint8_t *param)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** lld_pdu_llcp_length_rsp_unpk
  */
 static void lld_pdu_llcp_length_rsp_unpk(uint16_t pdu_ptr, uint8_t parlen, uint8_t *param)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** lld_pdu_pack
  */
 static uint8_t lld_pdu_pack(uint8_t *p_data, uint8_t *p_length, const char *format)
 {
-	ASSER_ERR(FALSE);
-	return 0xff;
+	__builtin_trap();
 }
 
 /** lld_pdu_tx_flush_list
  */
 static uint8_t lld_pdu_tx_flush_list(struct co_list *list)
 {
-	ASSER_ERR(FALSE);
-	return 0xff;
+	__builtin_trap();
 }

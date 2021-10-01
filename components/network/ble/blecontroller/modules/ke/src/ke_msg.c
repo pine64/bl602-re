@@ -1,16 +1,47 @@
 #include <ke_msg.h>
 
+#include <stdint.h>
+
+#include <arch/arch.h>
+#include <co_string.h>
+#include <ke_mem.h>
+
+#define NO_NEXT ((void *) 0xFFFFFFFF)
+
 /** _patch_ble_ke_msg_alloc
  */
 uint32_t _patch_ble_ke_msg_alloc(void *pRet, const ke_msg_id_t id, const ke_task_id_t dest_id, const ke_task_id_t src_id, const uint16_t param_len)
 {
-	__builtin_trap();
+	struct ke_msg *msg = ble_ke_malloc(sizeof(struct ke_msg) + param_len, 0);
+	msg->hdr.next = NO_NEXT;
+	msg->id = id;
+	msg->dest_id = dest_id;
+	msg->src_id = src_id;
+	msg->param_len = param_len;
+	*(void **) pRet = msg->param;
+	(*ble_memset_ptr)(msg->param, 0, param_len);
+	return 1;
 }
 
 /** *ble_ke_msg_alloc
  */
 void *ble_ke_msg_alloc(const ke_msg_id_t id, const ke_task_id_t dest_id, const ke_task_id_t src_id, const uint16_t param_len)
 {
+#if 0
+	void *res;
+	if ((*_rom_patch_hook)(&res, id, dest_id, src_id, param_len) != 0)
+	{
+		return res;
+	}
+	struct ke_msg *msg = ble_ke_malloc(sizeof(struct ke_msg) + param_len, 0);
+	msg->hdr.next = NO_NEXT;
+	msg->id = id;
+	msg->dest_id = dest_id;
+	msg->src_id = src_id;
+	msg->param_len = param_len;
+	(*ble_memset_ptr)(msg->param, 0, param_len);
+	return msg->param;
+#endif
 	__builtin_trap();
 }
 
@@ -102,5 +133,5 @@ ke_msg_id_t ble_ke_msg_src_id_get(const void *param_ptr)
  */
 bool ble_ke_msg_in_queue(const void *param_ptr)
 {
-	__builtin_trap();
+	return ((struct ke_msg *) param_ptr)[-1].hdr.next != NO_NEXT;
 }

@@ -1,6 +1,7 @@
 #ifndef BLECONTROLLER_MODULES_RWIP_RWIP_H
 #define BLECONTROLLER_MODULES_RWIP_RWIP_H
 
+#include <stdbool.h>
 #include <stdint.h>
 
 typedef struct {

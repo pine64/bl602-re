@@ -1,9 +1,14 @@
-/**
-* @file llm.h
-* Header file for BL602
-*/
 #ifndef __LLM_H__
 #define __LLM_H__
+
+#include <stdbool.h>
+#include <stdint.h>
+
+#include <co_bt_defines.h>
+#include <co_hci.h>
+#include <em/em_buf.h>
+#include <ke_msg.h>
+#include <llm/llm_task.h>
 
 enum llm_enh_priv {
     LLM_PRIV_RFU_MASK = 140,
@@ -141,6 +146,34 @@ struct llm_le_env_tag {
     uint8_t secret_key256[32]; // +179
     t_key_multi_type cur_ecc_multiplication; // +211
 };
-const struct supp_cmds llm_local_cmds;uint8_t llm_local_supp_feats[3];const struct le_features llm_local_le_feats;const struct le_states llm_local_le_states;const struct data_len_ext llm_local_data_len_values;struct llm_le_env_tag llm_le_env;
+extern const struct supp_cmds llm_local_cmds;uint8_t llm_local_supp_feats[3];
+extern const struct le_features llm_local_le_feats;
+extern const struct le_states llm_local_le_states;
+extern const struct data_len_ext llm_local_data_len_values;
+extern struct llm_le_env_tag llm_le_env;
+
+void llm_init(bool reset);
+void llm_ble_ready(void);
+void llm_con_req_ind(uint8_t rx_hdl, uint16_t status);
+void llm_le_adv_report_ind(uint8_t rx_hdl);
+void llm_con_req_tx_cfm(uint8_t rx_hdl);
+void llm_common_cmd_complete_send(uint16_t opcode, uint8_t status);
+void llm_common_cmd_status_send(uint16_t opcode, uint8_t status);
+uint8_t llm_test_mode_start_tx(const struct hci_le_tx_test_cmd *param);
+uint8_t llm_test_mode_start_rx(const struct hci_le_rx_test_cmd *param);
+uint8_t llm_set_adv_param(const struct hci_le_set_adv_param_cmd *param);
+uint8_t llm_set_adv_en(const struct hci_le_set_adv_en_cmd *param);
+uint8_t llm_set_adv_data(const struct hci_le_set_adv_data_cmd *param);
+uint8_t llm_set_scan_rsp_data(const struct hci_le_set_scan_rsp_data_cmd *param);
+uint8_t llm_set_scan_param(const struct hci_le_set_scan_param_cmd *param);
+uint8_t llm_set_scan_en(const struct hci_le_set_scan_en_cmd *param);
+void llm_wl_clr(void);
+void llm_wl_dev_add(struct bd_addr *bd_addr, uint8_t bd_addr_type);
+void llm_wl_dev_rem(struct bd_addr *bd_addr, uint8_t bd_addr_type);
+uint8_t llm_wl_dev_add_hdl(struct bd_addr *bd_addr, uint8_t bd_addr_type);
+uint8_t llm_wl_dev_rem_hdl(struct bd_addr *bd_addr, uint8_t bd_addr_type);
+uint8_t llm_create_con(const struct hci_le_create_con_cmd *param);
+void llm_encryption_done(void);
+void llm_encryption_start(const struct llm_enc_req *param);
 
 #endif // __LLM_H__

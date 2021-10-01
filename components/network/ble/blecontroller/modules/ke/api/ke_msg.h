@@ -16,7 +16,7 @@ struct ke_msg {
     ke_task_id_t dest_id; // +6
     ke_task_id_t src_id; // +8
     uint16_t param_len; // +10
-    uint32_t param[1]; // +12
+	uint32_t param[]; // +12
 };
 
 enum ke_msg_status_tag {

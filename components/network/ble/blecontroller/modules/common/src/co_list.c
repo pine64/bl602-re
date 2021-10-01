@@ -16,7 +16,8 @@ uint32_t _patch_ble_co_list_init(void *pRet, struct co_list *list)
  */
 void ble_co_list_init(struct co_list *list)
 {
-	if ((*_rom_patch_hook)(NULL, list, _rom_patch_hook) == 0) {
+	if ((*_rom_patch_hook)(NULL, list) == 0)
+	{
 		list->first = NULL;
 		list->last = NULL;
 	}
@@ -74,7 +75,7 @@ uint32_t _patch_ble_co_list_push_back(void *pRet, struct co_list *list, struct c
  */
 void ble_co_list_push_back(struct co_list *list, struct co_list_hdr *list_hdr)
 {
-	if ((*_rom_patch_hook)(NULL, list, list_hdr, _rom_patch_hook) == 0)
+	if ((*_rom_patch_hook)(NULL, list, list_hdr) == 0)
 	{
 		if (list->first == NULL)
 		{

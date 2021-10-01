@@ -131,10 +131,14 @@ LIBRARIES = [
             REPO_ROOT / 'components/bl602/freertos_riscv_ram/config/',
             REPO_ROOT / 'components/bl602/freertos_riscv_ram/portable/GCC/RISC-V/',
             REPO_ROOT / 'components/hal_drv/bl602_hal/',
+            REPO_ROOT / 'components/network/ble/blecontroller/ble_inc/',
+            REPO_ROOT / 'components/network/ble/blecontroller/ip/ble/ll/src/',
             REPO_ROOT / 'components/network/ble/blecontroller/ip/ea/api/',
             REPO_ROOT / 'components/network/ble/blecontroller/ip/hci/api/',
             REPO_ROOT / 'components/network/ble/blecontroller/modules/common/api/',
+            REPO_ROOT / 'components/network/ble/blecontroller/modules/ecc_p256/api/',
             REPO_ROOT / 'components/network/ble/blecontroller/modules/ke/api/',
+            REPO_ROOT / 'components/network/ble/blecontroller/modules/rf/api/',
             REPO_ROOT / 'components/network/ble/blecontroller/modules/rwip/api/',
             REPO_ROOT / 'components/network/ble/blecontroller/plf/refip/src/'
         ]

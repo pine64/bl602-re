@@ -1,8 +1,7 @@
-/**
-* @file lld_sleep.c
-* Source file for BL602
-*/
 #include "lld_sleep.h"
+
+#include <stdbool.h>
+#include <stdint.h>
 
 
 struct lld_sleep_env_tag {
@@ -22,24 +21,17 @@ struct lld_sleep_env_tag {
 
 static struct lld_sleep_env_tag lld_sleep_env;
 
-uint32_t lld_sleep_get_pds_reset(void);
-void lld_sleep_set_current_time(void);
-
-
-
 
 /** lld_sleep_get_pds_reset
  */
 uint32_t lld_sleep_get_pds_reset(void)
 {
-	ASSER_ERR(FALSE);
-	return 0xffffffff;
+	__builtin_trap();
 }
 
 /** lld_sleep_set_current_time
  */
 void lld_sleep_set_current_time(void)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }

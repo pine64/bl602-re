@@ -1,9 +1,9 @@
-/**
-* @file co_llcp.h
-* Header file for BL602
-*/
 #ifndef __CO_LLCP_H__
 #define __CO_LLCP_H__
+
+#include <stdint.h>
+
+#include <llm/llm.h>
 
 enum co_llcp_opcode {
     LLCP_CONNECTION_UPDATE_IND_OPCODE = 0,

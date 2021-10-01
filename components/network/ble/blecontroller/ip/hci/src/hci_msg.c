@@ -1,9 +1,4 @@
-/**
-* @file hci_msg.c
-* Source file for BL602
-*/
-#include "hci_msg.h"
-
+#include "hci_int.h"
 
 const struct hci_cmd_desc_tag hci_cmd_desc_tab_lk_ctrl[3];
 const struct hci_cmd_desc_tag hci_cmd_desc_tab_ctrl_bb[10];
@@ -30,54 +25,47 @@ const struct hci_evt_desc_tag *hci_look_for_le_evt_desc(uint8_t subcode);
  */
 const struct hci_cmd_desc_tag *hci_look_for_cmd_desc(uint16_t opcode)
 {
-	ASSER_ERR(FALSE);
-	returnNULL;
+	__builtin_trap();
 }
 
 /** *hci_look_for_evt_desc
  */
 const struct hci_evt_desc_tag *hci_look_for_evt_desc(uint8_t code)
 {
-	ASSER_ERR(FALSE);
-	returnNULL;
+	__builtin_trap();
 }
 
 /** *hci_look_for_le_evt_desc
  */
 const struct hci_evt_desc_tag *hci_look_for_le_evt_desc(uint8_t subcode)
 {
-	ASSER_ERR(FALSE);
-	returnNULL;
+	__builtin_trap();
 }
 
 /** hci_pack_bytes
  */
 static uint8_t hci_pack_bytes(uint8_t **pp_in, uint8_t **pp_out, uint8_t *p_in_end, uint8_t *p_out_end, uint8_t len)
 {
-	ASSER_ERR(FALSE);
-	return 0xff;
+	__builtin_trap();
 }
 
 /** hci_host_nb_cmp_pkts_cmd_pkupk
  */
 static uint8_t hci_host_nb_cmp_pkts_cmd_pkupk(uint8_t *out, uint8_t *in, uint16_t *out_len, uint16_t in_len)
 {
-	ASSER_ERR(FALSE);
-	return 0xff;
+	__builtin_trap();
 }
 
 /** hci_le_adv_report_evt_pkupk
  */
 static uint8_t hci_le_adv_report_evt_pkupk(uint8_t *out, uint8_t *in, uint16_t *out_len, uint16_t in_len)
 {
-	ASSER_ERR(FALSE);
-	return 0xff;
+	__builtin_trap();
 }
 
 /** hci_le_dir_adv_report_evt_pkupk
  */
 static uint8_t hci_le_dir_adv_report_evt_pkupk(uint8_t *out, uint8_t *in, uint16_t *out_len, uint16_t in_len)
 {
-	ASSER_ERR(FALSE);
-	return 0xff;
+	__builtin_trap();
 }

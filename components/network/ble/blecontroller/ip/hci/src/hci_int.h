@@ -1,9 +1,9 @@
-/**
-* @file hci_int.h
-* Header file for BL602
-*/
 #ifndef __HCI_INT_H__
 #define __HCI_INT_H__
+
+#include <stdint.h>
+
+#include <co_bt_defines.h>
 
 enum HCI_MSG_DEST_LL {
     MNG = 0,
@@ -54,6 +54,6 @@ struct hci_env_tag {
     struct evt_mask evt_msk; // +0
     struct evt_mask evt_msk_page_2; // +8
 };
-struct hci_env_tag hci_env;
+extern struct hci_env_tag hci_env;
 
 #endif // __HCI_INT_H__
