@@ -131,6 +131,7 @@ LIBRARIES = [
             REPO_ROOT / 'components/bl602/freertos_riscv_ram/config/',
             REPO_ROOT / 'components/bl602/freertos_riscv_ram/portable/GCC/RISC-V/',
             REPO_ROOT / 'components/hal_drv/bl602_hal/',
+            REPO_ROOT / 'components/network/ble/blecontroller/ip/ea/api/',
             REPO_ROOT / 'components/network/ble/blecontroller/ip/hci/api/',
             REPO_ROOT / 'components/network/ble/blecontroller/modules/common/api/',
             REPO_ROOT / 'components/network/ble/blecontroller/modules/ke/api/',
@@ -210,9 +211,8 @@ class Label:
 
 
 class Function:
-    def __init__(self, asm: str):
-        lines = asm.splitlines()
-        self.name = lines[0][:-1]
+    def __init__(self, lines: List[str]):
+        self.name = '_unknown'
         self.asm_lines: List[AsmLine] = []
         self.labels: List[Label] = []
         for line in lines[1:]:
@@ -225,12 +225,13 @@ class Function:
                     comment=match.group(5)))
             elif (match := RELOC_RE.match(line)) is not None and match.group(1) in ('HI20', 'LO12_I', 'CALL'):
                 self.asm_lines[-1].target = match.group(2)
-            elif (match := LABEL_RE.match(line)) is not None and \
-                    match.group(2) != self.name and \
-                    not match.group(2).startswith('.LV'):
-                self.labels.append(Label(
-                    offset=int(match.group(1), 16),
-                    name=match.group(2)))
+            elif (match := LABEL_RE.match(line)) is not None:
+                label_offset = int(match.group(1), 16)
+                label_name = match.group(2)
+                if label_name[0] != '.' and label_offset == 0:
+                    self.name = label_name
+                elif label_name[0] == '.' and not label_name.startswith('.LV'):
+                    self.labels.append(Label(offset=label_offset, name=label_name))
 
     @property
     def lines(self) -> Generator[Union[AsmLine, Label], None, None]:
@@ -268,17 +269,27 @@ def build_reobj(lib: Library, build_dir: Path, vendorobj_path: Path) -> Tuple[fl
     return end - start, result
 
 
+def is_funcion_section(name: str) -> bool:
+    return name.startswith('text.') or name.startswith('tcm_code')
+
+
 def diff_lib(lib: Library, build_dir: Path, vendorobj_path: Path) -> Tuple[str, float]:
     vendor_dump_result = objdump('-rd', vendorobj_path, capture_output=True)
     vendor_funcs: Dict[str, Function] = {}
-    for section_asm in vendor_dump_result.stdout.decode().split('Disassembly of section .text.')[1:]:
-        f = Function(section_asm)
+    for section_asm in vendor_dump_result.stdout.decode().split('Disassembly of section .')[1:]:
+        lines = section_asm.splitlines()
+        if not is_funcion_section(lines[0]):
+            continue
+        f = Function(lines)
         vendor_funcs[f.name] = f
 
     re_dump_result = objdump('-rd', build_dir / vendorobj_path.name, capture_output=True)
     re_funcs: Dict[str, Function] = {}
-    for section_asm in re_dump_result.stdout.decode().split('Disassembly of section .text.')[1:]:
-        f = Function(section_asm)
+    for section_asm in re_dump_result.stdout.decode().split('Disassembly of section .')[1:]:
+        lines = section_asm.splitlines()
+        if not is_funcion_section(lines[0]):
+            continue
+        f = Function(lines)
         re_funcs[f.name] = f
 
     html = ''
