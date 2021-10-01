@@ -273,7 +273,7 @@ def is_funcion_section(name: str) -> bool:
     return name.startswith('text.') or name.startswith('tcm_code')
 
 
-def diff_lib(lib: Library, build_dir: Path, vendorobj_path: Path) -> Tuple[str, float]:
+def diff_lib(lib: Library, build_dir: Path, vendorobj_path: Path) -> Tuple[str, float, bool]:
     vendor_dump_result = objdump('-rd', vendorobj_path, capture_output=True)
     vendor_funcs: Dict[str, Function] = {}
     for section_asm in vendor_dump_result.stdout.decode().split('Disassembly of section .')[1:]:
@@ -385,7 +385,7 @@ def diff_lib(lib: Library, build_dir: Path, vendorobj_path: Path) -> Tuple[str, 
         html += f'<details class="func {status}" id="func_{vendorobj_path.name}_{func_name}"><summary><div class="similarity">{similarity*100:.0f}%</div><h3>{func_name}</h3></summary>\n{content}</details>\n'
         similarities += (similarity,)
     # TODO: .rodata equivalence checking; .LANCHORx labels are a pain however
-    return html, (sum(similarities) / len(similarities)) if similarities else 1
+    return html, (sum(similarities) / len(similarities)) if similarities else 1, all(s == 1 for s in similarities)
 
 
 def main():
@@ -429,7 +429,7 @@ def main():
     .func.missing h3::before { background: rgb(128, 0, 0); }
     .func.different { background: rgba(255, 0, 0, 0.1); }
     .func.missing h3::before { background: rgb(255, 0, 0); }
-    .func.equivalent { background: rgba(0, 255, 0, 0.1); }
+    .func.equivalent, .obj.equivalent { background: rgba(0, 255, 0, 0.1); }
     .func.missing h3::before { background: rgb(255, 0, 0); }
     summary { cursor: pointer; }
     details[open] summary { margin-bottom: .3em; }
@@ -449,9 +449,9 @@ def main():
                 buildtime, result = build_reobj(lib, Path(tmpdir), vendorobj_path)
                 tag = f'<details id="obj_{vendorobj_path.name}" class="obj'
                 if result.returncode == 0:
-                    diff_html, similarity = diff_lib(lib, Path(tmpdir), vendorobj_path)
+                    diff_html, similarity, all_equivalent = diff_lib(lib, Path(tmpdir), vendorobj_path)
                     html.write(
-                        f'{tag}"><summary><div class="buildtime">{buildtime:.3f}s {similarity * 100:.0f}%</div><h2>{vendorobj_path.name}</h2></summary>{diff_html}\n')
+                        f'{tag}{" equivalent" if all_equivalent else ""}"><summary><div class="buildtime">{buildtime:.3f}s {similarity * 100:.0f}%</div><h2>{vendorobj_path.name}</h2></summary>{diff_html}\n')
                 else:
                     html.write(
                         f'{tag} failed"><summary><div class="buildtime">{buildtime:.3f}s</div><h2>{vendorobj_path.name} 🛑</h2></summary>\n')
