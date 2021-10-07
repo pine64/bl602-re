@@ -27,7 +27,7 @@ class Library:
         for source_dir in self.source_dirs:
             if (source_path := source_dir / f'{vendorobj_path.stem}.c').is_file():
                 break
-        if not source_path.is_file():
+        if not source_path or not source_path.is_file():
             raise FileNotFoundError(f"Source file {vendorobj_path.stem}.c for lib {self.name} not found")
         print(f"Building {self.name}/{source_path.name}")
         outobj_path = build_dir / vendorobj_path.name
@@ -45,6 +45,7 @@ class Library:
 
 
 BLE_ROOT = REPO_ROOT / 'components/network/ble/blecontroller'
+WIFI_ROOT = REPO_ROOT / 'components/bl602/bl602_wifi'
 LIBRARIES = [
     Library(
         'libatcmd',
@@ -102,6 +103,54 @@ LIBRARIES = [
             REPO_ROOT / 'components/network/ble/blecontroller/modules/rf/api/',
             REPO_ROOT / 'components/network/ble/blecontroller/modules/rwip/api/',
             REPO_ROOT / 'components/network/ble/blecontroller/plf/refip/src/'
+        ]
+    ),
+    Library(
+        'libbl602_wifi',
+        [
+            WIFI_ROOT / 'modules/dbg/src/',
+            WIFI_ROOT / 'modules/common/src/',
+            WIFI_ROOT / 'modules/ke/src/',
+            WIFI_ROOT / 'modules/mac/src/',
+            WIFI_ROOT / 'modules/supplicant/src/',
+            WIFI_ROOT / 'modules/supplicant/src/ap/',
+            WIFI_ROOT / 'modules/supplicant/src/sae/',
+            WIFI_ROOT / 'ip/cfg/',
+            WIFI_ROOT / 'ip/lmac/src/bl/',
+            WIFI_ROOT / 'ip/lmac/src/chan/',
+            WIFI_ROOT / 'ip/lmac/src/hal/',
+            WIFI_ROOT / 'ip/lmac/src/mm/',
+            WIFI_ROOT / 'ip/lmac/src/ps/',
+            WIFI_ROOT / 'ip/lmac/src/rx/',
+            WIFI_ROOT / 'ip/lmac/src/rx/rxl/',
+            WIFI_ROOT / 'ip/lmac/src/scan/',
+            WIFI_ROOT / 'ip/lmac/src/sta/',
+            WIFI_ROOT / 'ip/lmac/src/td/',
+            WIFI_ROOT / 'ip/lmac/src/tpc/',
+            WIFI_ROOT / 'ip/lmac/src/tx/txl/',
+            WIFI_ROOT / 'ip/lmac/src/vif/',
+            WIFI_ROOT / 'ip/umac/src/apm/',
+            WIFI_ROOT / 'ip/umac/src/bam/',
+            WIFI_ROOT / 'ip/umac/src/hostapd/',
+            WIFI_ROOT / 'ip/umac/src/me/',
+            WIFI_ROOT / 'ip/umac/src/mfp/',
+            WIFI_ROOT / 'ip/umac/src/rc/',
+            WIFI_ROOT / 'ip/umac/src/rxu/',
+            WIFI_ROOT / 'ip/umac/src/scanu/',
+            WIFI_ROOT / 'ip/umac/src/sm/',
+            WIFI_ROOT / 'ip/umac/src/txu/',
+            WIFI_ROOT / 'plf/refip/src/arch/rv32i/',
+            WIFI_ROOT / 'plf/refip/src/driver/intc/rv32i/',
+            WIFI_ROOT / 'plf/refip/src/driver/ipc/',
+            WIFI_ROOT / 'plf/refip/src/driver/phy/',
+            WIFI_ROOT / 'plf/refip/src/driver/phy/bl602_phy_rf/',
+            WIFI_ROOT / 'plf/refip/src/driver/phy/bl602_phy_rf/rf/Src/',
+            WIFI_ROOT / 'plf/refip/src/driver/phyif/',
+            WIFI_ROOT / 'plf/refip/src/driver/sysctrl/'
+        ],
+        REPO_ROOT / 'libbl602_wifi',
+        [
+
         ]
     )
 ]

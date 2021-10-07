@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 from argparse import ArgumentParser
-from fnmatch import fnmatch
+from collections import OrderedDict
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Optional, List, Dict, Tuple, Union
+from typing import Optional, List, Dict, Tuple, Union, OrderedDict as TOrderedDict, TypeVar
 
 from elftools.dwarf.die import DIE
 from elftools.elf.elffile import ELFFile
 
 from odiff.c import HeaderFile, CType, CStruct, CUnion, CEnum, CVariable, CFunction, CPointer, CArray, CConst, \
-    CVolatile, CFunctionPtr
+    CVolatile, CFunctionPtr, CVoid, CPrimitive, CEllipsis, CTypedef
 from odiff.html import HTML_HEADER, HTML_FOOTER, make_diff_table
 from odiff.lib import LIBRARIES
 from odiff.paths import VENDOR_PATH_PREFIX, REPO_ROOT
@@ -36,114 +36,122 @@ CFLAGS = [
 ]
 
 
-def die_at_type_to_ctype_or_func(die: DIE) -> Union[CType, CFunction]:
-    return die_to_ctype_or_func(die.cu.get_DIE_from_refaddr(die.attributes['DW_AT_type'].value)) \
-            if 'DW_AT_type' in die.attributes else 'void'
+def die_get_name(die: DIE) -> Optional[str]:
+    return die.attributes['DW_AT_name'].value.decode() if 'DW_AT_name' in die.attributes else None
 
 
-def die_to_ctype_or_func(die: DIE) -> Union[CType, CFunction]:
+def die_get_at_type(die: DIE) -> CType:
+    try:
+        return die_to_ctype(die.cu.get_DIE_from_refaddr(die.attributes['DW_AT_type'].value))
+    except KeyError:
+        return CVoid
+
+
+def die_to_funclike_args(die: DIE) -> Tuple[CType, List[Tuple[CType, Optional[str]]]]:
+    if die.tag not in ('DW_TAG_subroutine_type', 'DW_TAG_subprogram'):
+        raise ValueError(f"Wrong DIE tag {die.tag} for a function/funcptr")
+    return_type = die_get_at_type(die)
+    args: List[Tuple[CType, Optional[str]]] = []
+    for arg_die in die.iter_children():
+        arg_die: DIE
+        if arg_die.tag == 'DW_TAG_formal_parameter':
+            arg_name: Optional[str] = arg_die.attributes['DW_AT_name'].value.decode() \
+                if 'DW_AT_name' in die.attributes else None
+            args.append((
+                die_to_ctype(die.cu.get_DIE_from_refaddr(arg_die.attributes['DW_AT_type'].value)), arg_name))
+        elif arg_die.tag == 'DW_TAG_unspecified_parameters':
+            args.append((CEllipsis, None))
+        elif arg_die.tag in ('DW_TAG_variable', 'DW_TAG_inlined_subroutine', 'DW_TAG_lexical_block',
+                             'DW_TAG_subprogram', 'DW_TAG_label') \
+                or arg_die.tag.startswith('DW_TAG_GNU') or arg_die.tag.endswith('_type'):
+            pass  # Skip
+        else:
+            raise TypeError(f"What is a {arg_die.tag} function DIE child?")
+    return return_type, args
+
+
+def die_to_func(die: DIE) -> CFunction:
+    if die.tag != 'DW_TAG_subprogram':
+        raise ValueError(f"Wrong DIE tag {die.tag} for a function")
+    return_type, args = die_to_funclike_args(die)
+    return CFunction(die=die, name=die_get_name(die), return_type=return_type, args=args)
+
+
+CT = TypeVar('CT')
+
+
+def cache_ctype(ctype: CT) -> CT:
+    ctype.die.cu.ctype_cache[ctype.die.offset] = ctype
+    return ctype
+
+
+def die_to_ctype(die: DIE) -> CType:
+    if not hasattr(die.cu, 'ctype_cache'):
+        die.cu.ctype_cache = {}
+    try:
+        return die.cu.ctype_cache[die.offset]
+    except KeyError:
+        pass
+
     if die.tag == 'DW_TAG_pointer_type':
-        if 'DW_AT_type' not in die.attributes:
-            return CPointer('void')
-        pointed_type_die: DIE = die.cu.get_DIE_from_refaddr(die.attributes['DW_AT_type'].value)
-        if pointed_type_die.tag == 'DW_TAG_subroutine_type':
-            return die_to_ctype_or_func(pointed_type_die)
-        return CPointer(die_to_ctype_or_func(pointed_type_die))
+        of = die_get_at_type(die)
+        # DW_TAG_subroutine_type is already turned into a function pointer, so bypass the first level of indirection
+        if 'DW_AT_type' in die.attributes:
+            of_die: DIE = die.cu.get_DIE_from_refaddr(die.attributes['DW_AT_type'].value)
+            if of_die.tag == 'DW_TAG_subroutine_type':
+                return of
+        return cache_ctype(CPointer(die=die, of=of))
     elif die.tag == 'DW_TAG_array_type':
-        # TODO length (range is DIE child)
-        return CArray(die_at_type_to_ctype_or_func(die))
-    elif die.tag in ('DW_TAG_subroutine_type', 'DW_TAG_subprogram'):
-        return_type = die_at_type_to_ctype_or_func(die)
-        args: List[Tuple[CType, Optional[str]]] = []
-        for arg_die in die.iter_children():
-            arg_die: DIE
-            if arg_die.tag == 'DW_TAG_formal_parameter':
-                arg_name: Optional[str] = arg_die.attributes['DW_AT_name'].value.decode() \
-                    if 'DW_AT_name' in die.attributes else None
-                args.append((
-                    die_to_ctype(die.cu.get_DIE_from_refaddr(arg_die.attributes['DW_AT_type'].value)), arg_name))
-            elif arg_die.tag == 'DW_TAG_unspecified_parameters':
-                args.append(('...', None))
-            elif arg_die.tag in ('DW_TAG_variable', 'DW_TAG_inlined_subroutine', 'DW_TAG_lexical_block',
-                                 'DW_TAG_subprogram', 'DW_TAG_label') \
-                    or arg_die.tag.startswith('DW_TAG_GNU'):
-                pass  # Skip
-            else:
-                raise TypeError(f"What is a {arg_die.tag} function DIE child?")
-        if die.tag == 'DW_TAG_subroutine_type':
-            return CFunctionPtr(CFunction(return_type, args))
-        return CFunction(return_type, args)
+        array_length: Optional[int] = None
+        for child_die in die.iter_children():
+            if child_die.tag == 'DW_TAG_subrange_type' and 'DW_AT_upper_bound' in child_die.attributes:
+                array_length = child_die.attributes['DW_AT_upper_bound'].value + 1
+        return cache_ctype(CArray(die=die, of=die_get_at_type(die), length=array_length))
     elif die.tag == 'DW_TAG_structure_type':
-        # TODO named and anonymous
-        return CStruct()
+        members: TOrderedDict[str, CType] = OrderedDict()
+        struct = cache_ctype(CStruct(die=die, name=die_get_name(die), members=members))
+        for memb_die in die.iter_children():
+            if memb_die.tag == 'DW_TAG_member':
+                members[die_get_name(memb_die)] = die_get_at_type(memb_die)
+        return struct
     elif die.tag == 'DW_TAG_union_type':
-        # TODO named and anonymous
-        return CUnion()
+        members: TOrderedDict[str, CType] = OrderedDict()
+        union = cache_ctype(CUnion(die=die, name=die_get_name(die), members=members))
+        for memb_die in die.iter_children():
+            if memb_die.tag == 'DW_TAG_member':
+                members[die_get_name(memb_die)] = die_get_at_type(memb_die)
+        return union
     elif die.tag == 'DW_TAG_enumeration_type':
-        # TODO named and anonymous
-        return CEnum()
-    elif die.tag == 'DW_TAG_const_type':
-        return CConst(die_at_type_to_ctype_or_func(die))
-    elif die.tag == 'DW_TAG_volatile_type':
-        return CVolatile(die_at_type_to_ctype_or_func(die))
+        members: TOrderedDict[str, int] = OrderedDict()
+        enum = cache_ctype(CEnum(die=die, name=die_get_name(die), members=members))
+        for memb_die in die.iter_children():
+            if memb_die.tag == 'DW_TAG_enumerator':
+                members[die_get_name(memb_die)] = memb_die.attributes['DW_AT_const_value'].value
+        return enum
+    elif die.tag in ('DW_TAG_const_type', 'DW_TAG_volatile_type'):
+        of = die_get_at_type(die)
+        if isinstance(of, CArray):
+            return of  # A cv array is an array of cv, and its element types are already cv-qualified
+        if die.tag == 'DW_TAG_const_type':
+            return cache_ctype(CConst(die=die, of=of))
+        else:
+            return cache_ctype(CVolatile(die=die, of=of))
+    elif die.tag == 'DW_TAG_subroutine_type':
+        return_type, args = die_to_funclike_args(die)
+        return cache_ctype(CFunctionPtr(die=die, return_type=return_type, args=args))
     elif die.tag == 'DW_TAG_base_type':
-        return die.attributes['DW_AT_name'].value.decode()
+        return cache_ctype(CPrimitive(die=die, name=die.attributes['DW_AT_name'].value.decode()))
     elif die.tag == 'DW_TAG_typedef':
-        # TODO maybe resolve?
-        return die.attributes['DW_AT_name'].value.decode()
+        return cache_ctype(CTypedef(die=die, name=die.attributes['DW_AT_name'].value.decode(), of=die_get_at_type(die)))
     else:
         raise TypeError(f"What is a type {die.tag}?")
 
 
-def die_to_ctype(die: DIE) -> CType:
-    ctype = die_to_ctype_or_func(die)
-    if isinstance(ctype, CFunction):
-        raise TypeError("Functions themselves can't be types")
-    return ctype
-
-
-def process_struct(decl_file: HeaderFile, decl_line: int, die: DIE, name: str):
-    if name in decl_file.defs:
-        return
-    decl_file.defs[name] = die_to_ctype(die)
-    decl_file.def_lines[name] = decl_line
-
-
-def process_union(decl_file: HeaderFile, decl_line: int, die: DIE, name: str):
-    if name in decl_file.defs:
-        return
-    decl_file.defs[name] = die_to_ctype(die)
-    decl_file.def_lines[name] = decl_line
-
-
-def process_enum(decl_file: HeaderFile, decl_line: int, die: DIE, name: str):
-    if name in decl_file.defs:
-        return
-    decl_file.defs[name] = die_to_ctype(die)
-    decl_file.def_lines[name] = decl_line
-
-
-def process_type(decl_file: HeaderFile, decl_line: int, die: DIE, name: str):
-    if name in decl_file.defs:
-        return
-    decl_file.defs[name] = die_to_ctype(die)
-    decl_file.def_lines[name] = decl_line
-
-
-def process_func(decl_file: HeaderFile, decl_line: int, die: DIE, name: str):
-    if name in decl_file.defs:
-        return
-    decl_file.defs[name] = die_to_ctype_or_func(die)
-    decl_file.def_lines[name] = decl_line
-
-
-def process_var(decl_file: HeaderFile, decl_line: int, die: DIE, name: str):
-    if name in decl_file.defs:
-        return
-    type_die: DIE = die.cu.get_DIE_from_refaddr(die.attributes['DW_AT_type'].value)
-    var = CVariable(die_to_ctype(type_die))
-    decl_file.defs[name] = var
-    decl_file.def_lines[name] = decl_line
+def die_to_ctype_or_func(die: DIE) -> Union[CType, CFunction]:
+    if die.tag == 'DW_TAG_subprogram':
+        return_type, args = die_to_funclike_args(die)
+        return CFunction(die=die, name=die_get_name(die), return_type=return_type, args=args)
+    return die_to_ctype(die)
 
 
 def process_file(filename: Path, header_files: Dict[str, HeaderFile]):
@@ -173,41 +181,15 @@ def process_file(filename: Path, header_files: Dict[str, HeaderFile]):
                 continue
             decl_file = file_entries[die.attributes['DW_AT_decl_file'].value - 1]
             decl_line = die.attributes['DW_AT_decl_line'].value
-            name: Optional[str] = die.attributes['DW_AT_name'].value.decode() \
-                if 'DW_AT_name' in die.attributes else None
+            name: Optional[str] = die_get_name(die)
             if name is None:
-                continue  # Skip over anonymous structs/unions/enums as they are (almost) always typedef'd later
-            if die.tag == 'DW_TAG_typedef':
-                typedef_die: DIE = cu.get_DIE_from_refaddr(die.attributes['DW_AT_type'].value)
-                if typedef_die.tag == 'DW_TAG_structure_type':
-                    process_struct(decl_file, decl_line, typedef_die, name)
-                elif typedef_die.tag == 'DW_TAG_union_type':
-                    process_union(decl_file, decl_line, typedef_die, name)
-                elif typedef_die.tag == 'DW_TAG_enumeration_type':
-                    process_enum(decl_file, decl_line, typedef_die, name)
-                elif typedef_die.tag in ('DW_TAG_array_type', 'DW_TAG_pointer_type',
-                                         'DW_TAG_const_type', 'DW_TAG_subroutine_type'):
-                    process_type(decl_file, decl_line, typedef_die, name)
-                elif typedef_name := typedef_die.attributes.get('DW_AT_name', None):
-                    decl_file.defs[name] = typedef_name.value.decode()
-                    decl_file.def_lines[name] = decl_line
-                else:
-                    raise TypeError(f"What is a typedef {typedef_die}")
-            elif die.tag == 'DW_TAG_structure_type':
-                process_struct(decl_file, decl_line, die, name)
-            elif die.tag == 'DW_TAG_union_type':
-                process_union(decl_file, decl_line, die, name)
-            elif die.tag == 'DW_TAG_enumeration_type':
-                process_enum(decl_file, decl_line, die, name)
-            elif die.tag == 'DW_TAG_subprogram':
-                process_func(decl_file, decl_line, die, name)
-            elif die.tag == 'DW_TAG_variable':
-                process_var(decl_file, decl_line, die, name)
-            elif typedef_die.tag in ('DW_TAG_array_type', 'DW_TAG_pointer_type',
-                                     'DW_TAG_const_type', 'DW_TAG_subroutine_type'):
-                pass  # Ignore
+                continue
+            if die.tag == 'DW_TAG_variable':
+                entry = CVariable(die=die, type=die_get_at_type(die), name=name)
             else:
-                raise TypeError(f"What is a {die.tag}?")
+                entry = die_to_ctype_or_func(die)
+            decl_file.defs[name] = entry
+            decl_file.def_lines[name] = decl_line
 
 
 def main():
@@ -243,8 +225,9 @@ def main():
         html.write(f'<article class="hdr"><h1>{vhdr_name}</h1>')
         if rehdr is None:
             html.write('Not there!')
-            html.write(f'<pre><code>{vhdr}</code></pre>')
+            html.write(f'<pre><code>{vhdr.to_source()}</code></pre>')
         else:
+            html.write(f'<pre><code>{vhdr.to_source()}</code></pre>')
             original_a = [(vhdr.def_lines[k], k, v) for k, v in vhdr.sorted_defs]
             original_b = [(rehdr.def_lines[k], k, v) for k, v in rehdr.sorted_defs]
             content, similarity = make_diff_table(
