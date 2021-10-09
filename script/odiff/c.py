@@ -190,12 +190,14 @@ class CTypedef(CType, CNamed):
 
 
 class CFunction(CElement, CNamed):
-    def __init__(self, die: Optional[DIE], name: Optional, return_type: CType, args: List[Tuple[CType, Optional[str]]]):
+    def __init__(self, die: Optional[DIE], name: Optional, return_type: CType, args: List[Tuple[CType, Optional[str]]],
+                 static: bool = False):
         CElement.__init__(self, die)
         CNamed.__init__(self, name)
         self.name = name
         self.return_type = return_type
         self.args = args
+        self.static = static
 
     def format_args(self):
         if not self.args:
@@ -203,7 +205,10 @@ class CFunction(CElement, CNamed):
         return ', '.join(t.to_namedef(n) if n else str(t) for t, n in self.args)
 
     def __str__(self):
-        return self.return_type.to_namedef(f'{self.name}({self.format_args()})')
+        proto = self.return_type.to_namedef(f'{self.name}({self.format_args()})')
+        if self.static:
+            proto = 'static ' + proto
+        return proto
 
     def to_def(self, indent: int = 0) -> str:
         return str(self)

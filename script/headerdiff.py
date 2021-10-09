@@ -2,11 +2,13 @@
 from argparse import ArgumentParser
 from collections import OrderedDict
 from pathlib import Path
+from struct import Struct
 from tempfile import TemporaryDirectory
 from typing import Optional, List, Dict, Tuple, Union, OrderedDict as TOrderedDict, TypeVar
 
 from elftools.dwarf.die import DIE
 from elftools.elf.elffile import ELFFile
+from elftools.elf.sections import SymbolTableSection
 
 from odiff.c import HeaderFile, CType, CStruct, CUnion, CEnum, CVariable, CFunction, CPointer, CArray, CConst, \
     CVolatile, CFunctionPtr, CVoid, CPrimitive, CEllipsis, CTypedef
@@ -150,16 +152,40 @@ def die_to_ctype(die: DIE) -> CType:
         raise TypeError(f"What is a type {die.tag}?")
 
 
-def die_to_ctype_or_func(die: DIE) -> Union[CType, CFunction]:
+ELF_SYM_STRUCT = Struct('<I8xB')
+STB_LOCAL = 0
+STT_FUNC = 2
+
+
+def is_func_static(symtab: SymbolTableSection, name: str) -> bool:
+    if not hasattr(symtab, '_static_cache'):
+        static = {}
+        entsize = symtab['sh_entsize']
+        symtab.stream.seek(symtab['sh_offset'])
+        buf = symtab.stream.read(entsize * symtab.num_symbols())
+        for pos in range(0, len(buf), entsize):
+            st_name, st_info = ELF_SYM_STRUCT.unpack(buf[pos:pos + ELF_SYM_STRUCT.size])
+            if (st_info & 0xF) == STT_FUNC:
+                static[symtab.stringtable.get_string(st_name)] = (st_info >> 4) == STB_LOCAL
+        symtab._static_cache = static
+    # noinspection PyProtectedMember
+    return symtab._static_cache.get(name, False)
+
+
+def die_to_ctype_or_func(die: DIE, symtab: SymbolTableSection) -> Union[CType, CFunction]:
     if die.tag == 'DW_TAG_subprogram':
         return_type, args = die_to_funclike_args(die)
-        return CFunction(die=die, name=die_get_name(die), return_type=return_type, args=args)
+        func_name = die_get_name(die)
+        static = is_func_static(symtab, func_name)
+        return CFunction(die=die, name=func_name, return_type=return_type, args=args, static=static)
     return die_to_ctype(die)
 
 
 def process_file(filename: Path, header_files: Dict[str, HeaderFile]):
     with open(filename, 'rb') as f:
-        dwarf = ELFFile(f).get_dwarf_info()
+        elf = ELFFile(f)
+        symtab = elf.get_section_by_name('.symtab')
+        dwarf = elf.get_dwarf_info()
         try:
             cu = next(dwarf.iter_CUs())
         except StopIteration:
@@ -190,7 +216,7 @@ def process_file(filename: Path, header_files: Dict[str, HeaderFile]):
             if die.tag == 'DW_TAG_variable':
                 entry = CVariable(die=die, type=die_get_at_type(die), name=name)
             else:
-                entry = die_to_ctype_or_func(die)
+                entry = die_to_ctype_or_func(die, symtab)
             decl_file.defs[name] = entry
             decl_file.def_lines[name] = decl_line
 
