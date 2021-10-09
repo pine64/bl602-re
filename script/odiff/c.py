@@ -113,7 +113,11 @@ class CPointer(CType):
         return f"{self.of}*"
 
     def to_namedef(self, alias: str) -> str:
-        return f'{self} {alias}'
+        of = self.of
+        depth = 1
+        while isinstance(of, CPointer):
+            of, depth = of.of, depth + 1
+        return f'{of} {"*" * depth}{alias}'
 
 
 class CArray(CType):
