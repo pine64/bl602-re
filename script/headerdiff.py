@@ -247,7 +247,7 @@ def main():
                     continue
                 print(f"Collecting reverse-engineered {lib.name}/{vendorobj_path.name}")
                 process_file(reobj_path, re_header_files)
-    for vhdr_name, vhdr in vendor_header_files.items():
+    for vhdr_name, vhdr in sorted(vendor_header_files.items(), key=lambda x: x[0]):
         if not vhdr_name.startswith('components/'):
             continue
         rehdr = re_header_files.get(vhdr_name, None)
