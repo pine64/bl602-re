@@ -139,6 +139,8 @@ class CConst(CType):
         self.of = of
 
     def __str__(self):
+        if isinstance(self.of, (CPrimitive, CCompound, CTypedef)):
+            return f"const {self.of}"
         return f"{self.of} const"
 
     def to_namedef(self, alias: str) -> str:
@@ -151,6 +153,8 @@ class CVolatile(CType):
         self.of = of
 
     def __str__(self):
+        if isinstance(self.of, (CPrimitive, CCompound, CTypedef)):
+            return f"volatile {self.of}"
         return f"{self.of} volatile"
 
     def to_namedef(self, alias: str) -> str:
