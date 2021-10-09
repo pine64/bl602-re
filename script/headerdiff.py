@@ -157,7 +157,7 @@ STB_LOCAL = 0
 STT_FUNC = 2
 
 
-def is_func_static(symtab: SymbolTableSection, name: str) -> bool:
+def is_func_static(symtab: SymbolTableSection, name: str) -> Tuple[bool, bool]:
     if not hasattr(symtab, '_static_cache'):
         static = {}
         entsize = symtab['sh_entsize']
@@ -168,20 +168,62 @@ def is_func_static(symtab: SymbolTableSection, name: str) -> bool:
             if (st_info & 0xF) == STT_FUNC:
                 static[symtab.stringtable.get_string(st_name)] = (st_info >> 4) == STB_LOCAL
         symtab._static_cache = static
-    # noinspection PyProtectedMember
-    return symtab._static_cache.get(name, False)
+    try:
+        # noinspection PyProtectedMember
+        return True, symtab._static_cache[name]
+    except KeyError:
+        return False, False
 
 
-def die_to_ctype_or_func(die: DIE, symtab: SymbolTableSection) -> Union[CType, CFunction]:
-    if die.tag == 'DW_TAG_subprogram':
+class Context:
+    def __init__(self, name: str):
+        self.name = name
+        self.funcs: Dict[str, Tuple[CFunction, bool]] = {}
+
+    def func(self, func_name: str) -> Optional[CFunction]:
+        try:
+            return self.funcs[func_name][0]
+        except KeyError:
+            return None
+
+    def decl_func(self, func: CFunction):
+        self.funcs[func.name] = (func, False)
+
+    def def_func(self, funcdef: CFunction, inline: bool):
+        if funcdef.name not in self.funcs:
+            self.funcs[funcdef.name] = (funcdef, True)
+            return
+        f, defined = self.funcs[funcdef.name]
+        if defined:
+            if inline:
+                return
+            raise ValueError(f"ODR violation: function {funcdef.name} is defined twice in context {self.name}")
+        f.return_type = funcdef.return_type
+        f.args = funcdef.args
+
+
+def die_to_ctype_or_func(ctx: Context, die: DIE, symtab: SymbolTableSection) -> Union[CType, CFunction]:
+    if die.tag != 'DW_TAG_subprogram':
+        return die_to_ctype(die)
+    func_name = die_get_name(die)
+    in_obj, static = is_func_static(symtab, func_name)
+    if static:
         return_type, args = die_to_funclike_args(die)
-        func_name = die_get_name(die)
-        static = is_func_static(symtab, func_name)
-        return CFunction(die=die, name=func_name, return_type=return_type, args=args, static=static)
-    return die_to_ctype(die)
+        return CFunction(die=die, name=func_name, return_type=return_type, args=args, static=True)
+    if in_obj:
+        return_type, args = die_to_funclike_args(die)
+        cfunc = CFunction(die=die, name=func_name, return_type=return_type, args=args, static=False)
+        ctx.def_func(cfunc, 'DW_AT_inline' in die.attributes)
+        return cfunc
+    if (cfunc := ctx.func(func_name)) is not None:
+        return cfunc
+    return_type, args = die_to_funclike_args(die)
+    cfunc = CFunction(die=die, name=func_name, return_type=return_type, args=args, static=False)
+    ctx.decl_func(cfunc)
+    return cfunc
 
 
-def process_file(filename: Path, header_files: Dict[str, HeaderFile]):
+def process_file(filename: Path, header_files: Dict[str, HeaderFile], ctx: Context):
     with open(filename, 'rb') as f:
         elf = ELFFile(f)
         symtab = elf.get_section_by_name('.symtab')
@@ -216,7 +258,7 @@ def process_file(filename: Path, header_files: Dict[str, HeaderFile]):
             if die.tag == 'DW_TAG_variable':
                 entry = CVariable(die=die, type=die_get_at_type(die), name=name)
             else:
-                entry = die_to_ctype_or_func(die, symtab)
+                entry = die_to_ctype_or_func(ctx, die, symtab)
             decl_file.defs[name] = entry
             decl_file.def_lines[name] = decl_line
 
@@ -233,20 +275,22 @@ def main():
     patterns: List[str] = args.patterns
     vendor_header_files: Dict[str, HeaderFile] = {}
     for lib in LIBRARIES:
+        vendor_lib_ctx = Context('vendor_' + lib.name)
         for vendorobj_path in lib.get_vendorobj_paths(patterns):
             print(f"Collecting vendor {lib.name}/{vendorobj_path.name}")
-            process_file(vendorobj_path, vendor_header_files)
+            process_file(vendorobj_path, vendor_header_files, vendor_lib_ctx)
     # print("\n".join(f"=========== {k}\n{v}" for k, v in vendor_header_files.items()))
     re_header_files: Dict[str, HeaderFile] = {}
     with TemporaryDirectory(prefix='headerdiff') as tmpdir:
         for lib in LIBRARIES:
+            re_lib_ctx = Context('re_' + lib.name)
             for vendorobj_path in lib.get_vendorobj_paths(patterns):
                 _, result, reobj_path = lib.build_obj(Path(tmpdir), vendorobj_path, CFLAGS)
                 if result.returncode != 0:
                     print(f"{vendorobj_path.name} failed to build: {result.stderr.decode()}")
                     continue
                 print(f"Collecting reverse-engineered {lib.name}/{vendorobj_path.name}")
-                process_file(reobj_path, re_header_files)
+                process_file(reobj_path, re_header_files, re_lib_ctx)
     for vhdr_name, vhdr in sorted(vendor_header_files.items(), key=lambda x: x[0]):
         if not vhdr_name.startswith('components/'):
             continue
