@@ -109,10 +109,13 @@ def die_to_ctype(die: DIE) -> CType:
         return cache_ctype(CArray(die=die, of=die_get_at_type(die), length=array_length))
     elif die.tag == 'DW_TAG_structure_type':
         members: TOrderedDict[str, CType] = OrderedDict()
-        struct = cache_ctype(CStruct(die=die, name=die_get_name(die), members=members))
+        member_offsets: Dict[str, int] = {}
+        struct = cache_ctype(CStruct(die=die, name=die_get_name(die), members=members, member_offsets=member_offsets))
         for memb_die in die.iter_children():
             if memb_die.tag == 'DW_TAG_member':
-                members[die_get_name(memb_die)] = die_get_at_type(memb_die)
+                memb_name = die_get_name(memb_die)
+                members[memb_name] = die_get_at_type(memb_die)
+                member_offsets[memb_name] = memb_die.attributes['DW_AT_data_member_location'].value
         return struct
     elif die.tag == 'DW_TAG_union_type':
         members: TOrderedDict[str, CType] = OrderedDict()

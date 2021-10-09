@@ -14,7 +14,7 @@ class CNamed(ABC):
         self.name = name
 
     @abstractmethod
-    def to_def(self) -> str:
+    def to_def(self, indent: int = 0) -> str:
         ...
 
 
@@ -47,16 +47,22 @@ class CCompound(CType, CNamed, ABC):
 
 
 class CStruct(CCompound):
-    def __init__(self, die: Optional[DIE], name: Optional[str], members: OrderedDict[str, CType]):
+    def __init__(self, die: Optional[DIE], name: Optional[str], members: OrderedDict[str, CType],
+                 member_offsets: Dict[str, int]):
         super().__init__(die, name)
         self.members = members
+        self.member_offsets = member_offsets
 
     def __str__(self):
         return f"struct{f' {self.name}' if self.name else ''}"
 
-    def to_def(self) -> str:
-        m = '\n'.join(f'  {v.to_namedef(k)};' for k, v in self.members.items())
-        return f"{self} {{\n{m}\n}}"
+    def to_def(self, indent: int = 0) -> str:
+        m = '\n'.join(
+            f'  {"  " * indent}{v.to_def(indent + 1)} {k};'
+            if isinstance(v, CCompound) and not v.name
+            else f'  {"  " * indent}{v.to_namedef(k)}; // +{self.member_offsets[k]}'
+            for k, v in self.members.items())
+        return f"{self} {{\n{m}\n{'  ' * indent}}}"
 
     def to_namedef(self, alias: str) -> str:
         return f'{self} {alias}'
@@ -70,9 +76,13 @@ class CUnion(CCompound):
     def __str__(self):
         return f"union{f' {self.name}' if self.name else ''}"
 
-    def to_def(self) -> str:
-        m = '\n'.join(f'  {v.to_namedef(k)};' for k, v in self.members.items())
-        return f"{self} {{\n{m}\n}}"
+    def to_def(self, indent: int = 0) -> str:
+        m = '\n'.join(
+            f'  {"  " * indent}{v.to_def(indent + 1)} {k};'
+            if isinstance(v, CCompound) and not v.name
+            else f'  {"  " * indent}{v.to_namedef(k)};'
+            for k, v in self.members.items())
+        return f"{self} {{\n{m}\n{'  ' * indent}}}"
 
     def to_namedef(self, alias: str) -> str:
         return f'{self} {alias}'
@@ -86,9 +96,9 @@ class CEnum(CCompound):
     def __str__(self):
         return f"enum{f' {self.name}' if self.name else ''}"
 
-    def to_def(self) -> str:
-        m = ',\n'.join(f'  {k} = {v}' for k, v in self.members.items())
-        return f"{self} {{\n{m}\n}}"
+    def to_def(self, indent: int = 0) -> str:
+        m = ',\n'.join(f'  {"  " * indent}{k} = {v}' for k, v in self.members.items())
+        return f"{self} {{\n{m}\n{'  ' * indent}}}"
 
     def to_namedef(self, alias: str) -> str:
         return f'{self} {alias}'
@@ -170,7 +180,7 @@ class CTypedef(CType, CNamed):
     def __str__(self):
         return self.name
 
-    def to_def(self) -> str:
+    def to_def(self, indent: int = 0) -> str:
         if isinstance(self.of, CCompound):
             return f'typedef {self.of.to_def()} {self.name}'
         return f'typedef {self.of.to_namedef(self.name)}'
@@ -195,7 +205,7 @@ class CFunction(CElement, CNamed):
     def __str__(self):
         return self.return_type.to_namedef(f'{self.name}({self.format_args()})')
 
-    def to_def(self) -> str:
+    def to_def(self, indent: int = 0) -> str:
         return str(self)
 
     def to_namedef(self, alias: str) -> str:
@@ -211,7 +221,7 @@ class CVariable(CElement, CNamed):
     def __str__(self):
         return f"var {self.type}"
 
-    def to_def(self) -> str:
+    def to_def(self, indent: int = 0) -> str:
         return self.type.to_namedef(self.name)
 
     def to_namedef(self, alias: str) -> str:
@@ -234,6 +244,5 @@ class HeaderFile:
     def to_source(self) -> str:
         return "\n".join(
             f'/*{self.def_lines[k]:4d}*/ '
-            #f'{"" if isinstance(v, (CVariable, CFunction)) else "typedef "}'
             f'{v.to_def() if isinstance(v, CNamed) else v.to_namedef(k)};'
             for k, v in self.sorted_defs)
