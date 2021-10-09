@@ -145,7 +145,10 @@ def die_to_ctype(die: DIE) -> CType:
         return_type, args = die_to_funclike_args(die)
         return cache_ctype(CFunctionPtr(die=die, return_type=return_type, args=args))
     elif die.tag == 'DW_TAG_base_type':
-        return cache_ctype(CPrimitive(die=die, name=die.attributes['DW_AT_name'].value.decode()))
+        name = die.attributes['DW_AT_name'].value.decode()
+        if name == '_Bool':
+            name = 'bool'
+        return cache_ctype(CPrimitive(die=die, name=name))
     elif die.tag == 'DW_TAG_typedef':
         return cache_ctype(CTypedef(die=die, name=die.attributes['DW_AT_name'].value.decode(), of=die_get_at_type(die)))
     else:
