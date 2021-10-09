@@ -259,7 +259,8 @@ def process_file(filename: Path, header_files: Dict[str, HeaderFile], ctx: Conte
             if name is None:
                 continue
             if die.tag == 'DW_TAG_variable':
-                entry = CVariable(die=die, type=die_get_at_type(die), name=name)
+                entry = CVariable(
+                    die=die, type=die_get_at_type(die), name=name, extern='DW_AT_external' in die.attributes)
             else:
                 entry = die_to_ctype_or_func(ctx, die, symtab)
             decl_file.defs[name] = entry
