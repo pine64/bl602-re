@@ -1,95 +1,54 @@
-
-Status_e cm_AllocAPResources(cm_ConnectionInfo_t * connPtr);
-Status_e cm_AllocResources(cm_ConnectionInfo_t * connPtr);
-Status_e cm_DeAllocAPResources(cm_ConnectionInfo_t * connPtr);
-void cm_DeleteAPConnection(cm_ConnectionInfo_t * connPtr);
-void cm_DeleteConnection(cm_ConnectionInfo_t * connPtr);
-apSpecificData_t * cm_GetApData(cm_ConnectionInfo_t * connPtr);
-apInfo_t * cm_GetApInfo(cm_ConnectionInfo_t * connPtr);
-cm_ConnectionInfo_t * cm_InitConnection(UINT8 conType, UINT8 bssType, UINT8 bssNum, IEEEtypes_MacAddr_t * bssId, IEEEtypes_MacAddr_t * peerMacAddr, UINT8 channel, mdev_t * hostMdev);
-void cm_SetComData(cm_ConnectionInfo_t * connPtr, char * ssid);
-void cm_SetPeerAddr(cm_ConnectionInfo_t * connPtr, IEEEtypes_MacAddr_t * bssId, IEEEtypes_MacAddr_t * peerMacAddr);
-#if 0 //TODO EXISTS ALEADY
-/**
-* @file bl_connection_mgmt.c
-* Source file for BL602
-*/
-#include "bl_connection_mgmt.h"
+#include <w81connmgr.h>
+#include <wltypes.h>
 
 
-Status_e cm_AllocAPResources(cm_ConnectionInfo_t *connPtr);
-Status_e cm_AllocResources(cm_ConnectionInfo_t *connPtr);
-cm_ConnectionInfo_t *cm_InitConnection(UINT8 conType, UINT8 bssType, UINT8 bssNum, IEEEtypes_MacAddr_t *bssId, IEEEtypes_MacAddr_t *peerMacAddr, UINT8 channel, mdev_t *hostMdev);
-void cm_DeleteConnection(cm_ConnectionInfo_t *connPtr);
-apInfo_t *cm_GetApInfo(cm_ConnectionInfo_t *connPtr);
-apSpecificData_t *cm_GetApData(cm_ConnectionInfo_t *connPtr);
-void cm_SetPeerAddr(cm_ConnectionInfo_t *connPtr, IEEEtypes_MacAddr_t *bssId, IEEEtypes_MacAddr_t *peerMacAddr);
-void cm_SetComData(cm_ConnectionInfo_t *connPtr, char *ssid);
+Status_e cm_DeAllocAPResources(cm_ConnectionInfo_t *connPtr)
+{
+	__builtin_trap();
+}
 
+void cm_DeleteAPConnection(cm_ConnectionInfo_t *connPtr)
+{
+	__builtin_trap();
+}
 
-
-
-/** cm_AllocAPResources
- */
 Status_e cm_AllocAPResources(cm_ConnectionInfo_t *connPtr)
 {
-	ASSER_ERR(FALSE);
-	return FAIL;
+	__builtin_trap();
 }
 
-/** cm_AllocResources
- */
 Status_e cm_AllocResources(cm_ConnectionInfo_t *connPtr)
 {
-	ASSER_ERR(FALSE);
-	return FAIL;
+	__builtin_trap();
 }
 
-/** *cm_InitConnection
- */
 cm_ConnectionInfo_t *cm_InitConnection(UINT8 conType, UINT8 bssType, UINT8 bssNum, IEEEtypes_MacAddr_t *bssId, IEEEtypes_MacAddr_t *peerMacAddr, UINT8 channel, mdev_t *hostMdev)
 {
-	ASSER_ERR(FALSE);
-	returnNULL;
+	__builtin_trap();
 }
 
-/** cm_DeleteConnection
- */
 void cm_DeleteConnection(cm_ConnectionInfo_t *connPtr)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** *cm_GetApInfo
- */
 apInfo_t *cm_GetApInfo(cm_ConnectionInfo_t *connPtr)
 {
-	ASSER_ERR(FALSE);
-	returnNULL;
+	__builtin_trap();
 }
 
-/** *cm_GetApData
- */
 apSpecificData_t *cm_GetApData(cm_ConnectionInfo_t *connPtr)
 {
-	ASSER_ERR(FALSE);
-	returnNULL;
+	__builtin_trap();
 }
 
-/** cm_SetPeerAddr
- */
 void cm_SetPeerAddr(cm_ConnectionInfo_t *connPtr, IEEEtypes_MacAddr_t *bssId, IEEEtypes_MacAddr_t *peerMacAddr)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** cm_SetComData
- */
 void cm_SetComData(cm_ConnectionInfo_t *connPtr, char *ssid)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
-#endf 0 //TODO EXISTS ALEADY
+

@@ -31,7 +31,7 @@ if not gcc_found:
 def run(args: List[Any], check=True, capture_output=False) -> subprocess.CompletedProcess[bytes]:
     completed = subprocess.run(args, capture_output=capture_output, env=SUBPROCESS_ENV)
     if check and completed.returncode != 0:
-        raise ChildProcessError(f"{' '.join(str(x) for x in [GCC, *args])} returned {completed.returncode}")
+        raise ChildProcessError(f"{' '.join(str(x) for x in args)} returned {completed.returncode}")
     return completed
 
 

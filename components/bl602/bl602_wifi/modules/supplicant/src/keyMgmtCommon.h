@@ -1,15 +1,16 @@
-/**
-* @file keyMgmtCommon.h
-* Header file for BL602
-*/
 #ifndef __KEYMGMTCOMMON_H__
 #define __KEYMGMTCOMMON_H__
+
+#include <IEEE_types.h>
+#include <wltypes.h>
+
 
 typedef struct {
     UINT8 protocol_ver; // +0
     IEEEtypes_8021x_PacketType_e pckt_type; // +1
     UINT16 pckt_body_len; // +2
 } Hdr_8021x_t;
+
 typedef struct {
     UINT16 KeyMIC:1; // +0
     UINT16 Secure:1; // +0
@@ -23,6 +24,7 @@ typedef struct {
     UINT16 Install:1; // +0
     UINT16 KeyAck:1; // +0
 } key_info_t;
+
 typedef struct {
     UINT8 KeyID:2; // +0
     UINT8 Tx:1; // +0
@@ -30,6 +32,7 @@ typedef struct {
     UINT8 rsvd1; // +1
     UINT8 GTK[1]; // +2
 } GTK_KDE_t;
+
 typedef struct {
     UINT8 type; // +0
     UINT8 length; // +1
@@ -37,6 +40,7 @@ typedef struct {
     UINT8 dataType; // +5
     UINT8 data[1]; // +6
 } KDE_t;
+
 typedef struct {
     Hdr_8021x_t hdr_8021x; // +0
     UINT8 desc_type; // +4
@@ -51,6 +55,7 @@ typedef struct {
     UINT16 key_material_len; // +97
     UINT8 key_data[1]; // +99
 } EAPOL_KeyMsg_t;
+
 typedef struct {
     Hdr_8021x_t hdr_8021x; // +0
     IEEEtypes_8021x_CodeType_e code; // +4
@@ -58,6 +63,7 @@ typedef struct {
     UINT16 length; // +6
     UINT8 data[1]; // +8
 } EAP_PacketMsg_t;
+
 typedef struct {
     ether_hdr_t ethHdr; // +0
     EAPOL_KeyMsg_t keyMsg; // +14

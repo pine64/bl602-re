@@ -9,6 +9,7 @@ enum hostapd_state_tag {
     HOSTAPD_STATE_MAX = 1,
 };
 
+
 extern const struct ke_state_handler hostapd_default_handler;
 extern ke_state_t hostapd_u_state[1];
 

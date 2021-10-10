@@ -54,6 +54,7 @@ struct rc_sta_stats {
     uint16_t fixed_rate_cfg; // +198
 };
 
+
 uint16_t rc_get_max_amsdu_len(struct sta_info_tag *sta_entry);
 void rc_init(struct sta_info_tag *sta_entry);
 void rc_update_counters(uint8_t sta_idx, uint32_t attempts, uint32_t failures, bool tx_ampdu, bool retry_required);

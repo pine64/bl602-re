@@ -26,6 +26,7 @@ enum ke_msg_status_tag {
   KE_MSG_SAVED = 2
 };
 
+
 struct ke_msg *ke_param2msg(const void *param_ptr);
 void *ke_msg2param(const struct ke_msg *msg);
 void *ke_msg_alloc(const ke_msg_id_t id, const ke_task_id_t dest_id, const ke_task_id_t src_id, const uint16_t param_len);

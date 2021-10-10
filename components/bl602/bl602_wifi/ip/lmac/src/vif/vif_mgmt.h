@@ -86,8 +86,10 @@ struct vif_mgmt_env_tag {
     uint8_t low_bcn_int_idx; // +18
 };
 
+
 extern struct vif_mgmt_env_tag vif_mgmt_env;
 extern struct vif_info_tag vif_info_tab[2];
+
 
 int vif_mgmt_used_cnt(void);
 struct vif_info_tag *vif_mgmt_first_used(void);

@@ -31,8 +31,10 @@ typedef struct cm_ConnectionInfo {
     cipher_key_buf_t TxRxCipherKeyBuf; // +164
 } cm_ConnectionInfo_t;
 
+
 extern cm_ConnectionInfo_t sta_conn_info;
 extern cm_ConnectionInfo_t *uap_conn_info;
+
 
 cm_ConnectionInfo_t *cm_InitConnection(UINT8 conType, UINT8 bssType, UINT8 bssNum, IEEEtypes_MacAddr_t *bssId, IEEEtypes_MacAddr_t *peerMacAddr, UINT8 channel, mdev_t *hostMdev);
 void cm_DeleteConnection(cm_ConnectionInfo_t *connPtr);

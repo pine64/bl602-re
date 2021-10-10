@@ -1,160 +1,90 @@
-
-void apm_sta_add(void);
-Status_e GenerateApEapolMsg(cm_ConnectionInfo_t * connPtr, keyMgmtState_e msgState, BufferDesc_t * pBufDesc);
-Status_e GeneratePWKMsg1(cm_ConnectionInfo_t * connPtr, BufferDesc_t * pBufDesc);
-Status_e GeneratePWKMsg3(cm_ConnectionInfo_t * connPtr, BufferDesc_t * pBufDesc);
-void incrementReplayCounter(apKeyMgmtInfoSta_t * pKeyMgmtInfo);
-void InitGroupKey(cm_ConnectionInfo_t * connPtr);
-void InitStaKeyInfo(void * pConn, SecurityMode_t * secType, Cipher_t * pwCipher, UINT16 staRsnCap, UINT8 akmType);
-BOOLEAN IsAuthenticatorEnabled(cm_ConnectionInfo_t * connPtr);
-int isValidReplayCount(apKeyMgmtInfoSta_t * pKeyMgmtInfo, UINT8 * pRxReplayCount);
-void KeyMgmtInit(cm_ConnectionInfo_t * connPtr);
-BufferDesc_t * PrepDefaultEapolMsg(cm_ConnectionInfo_t * connPtr, EAPOL_KeyMsg_Tx_t * * pTxEapolPtr, BufferDesc_t * pBufDesc);
-Status_e ProcessKeyMgmtDataAp(BufferDesc_t * pBufDesc);
-Status_e ProcessPWKMsg2(BufferDesc_t * pBufDesc);
-Status_e ProcessPWKMsg4(BufferDesc_t * pBufDesc);
-void ReInitGTK(cm_ConnectionInfo_t * connPtr);
-void RemoveAPKeyInfo(void * pConn);
-BOOLEAN SendEAPOLMsgUsingBufDesc(cm_ConnectionInfo_t * connPtr, BufferDesc_t * pBufDesc);
-#if 0 //TODO EXISTS ALEADY
-/**
-* @file bl_ap_mgmt.c
-* Source file for BL602
-*/
-#include "bl_ap_mgmt.h"
+#include <keyMgmtApTypes.h>
+#include <keyMgmtCommon.h>
+#include <w81connmgr.h>
 
 
-void ReInitGTK(cm_ConnectionInfo_t *connPtr);
-void KeyMgmtInit(cm_ConnectionInfo_t *connPtr);
-BufferDesc_t *PrepDefaultEapolMsg(cm_ConnectionInfo_t *connPtr, EAPOL_KeyMsg_Tx_t **pTxEapolPtr, BufferDesc_t *pBufDesc);
-Status_e GeneratePWKMsg1(cm_ConnectionInfo_t *connPtr, BufferDesc_t *pBufDesc);
+void incrementReplayCounter(apKeyMgmtInfoSta_t *pKeyMgmtInfo)
+{
+	__builtin_trap();
+}
 
-uint8_t int_rsn_ie[26];
-uint8_t rsn_len;
+int isValidReplayCount(apKeyMgmtInfoSta_t *pKeyMgmtInfo, UINT8 *pRxReplayCount)
+{
+	__builtin_trap();
+}
 
-Status_e ProcessPWKMsg2(BufferDesc_t *pBufDesc);
-Status_e GeneratePWKMsg3(cm_ConnectionInfo_t *connPtr, BufferDesc_t *pBufDesc);
-Status_e ProcessPWKMsg4(BufferDesc_t *pBufDesc);
-BOOLEAN SendEAPOLMsgUsingBufDesc(cm_ConnectionInfo_t *connPtr, BufferDesc_t *pBufDesc);
-Status_e GenerateApEapolMsg(cm_ConnectionInfo_t *connPtr, keyMgmtState_e msgState, BufferDesc_t *pBufDesc);
-Status_e ProcessKeyMgmtDataAp(BufferDesc_t *pBufDesc);
-BOOLEAN IsAuthenticatorEnabled(cm_ConnectionInfo_t *connPtr);
-void InitStaKeyInfo(void *pConn, SecurityMode_t *secType, Cipher_t *pwCipher, UINT16 staRsnCap, UINT8 akmType);
-void RemoveAPKeyInfo(void *pConn);
-void InitGroupKey(cm_ConnectionInfo_t *connPtr);
-
-
-
-
-/** ReInitGTK
- */
 void ReInitGTK(cm_ConnectionInfo_t *connPtr)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** KeyMgmtInit
- */
 void KeyMgmtInit(cm_ConnectionInfo_t *connPtr)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** *PrepDefaultEapolMsg
- */
 BufferDesc_t *PrepDefaultEapolMsg(cm_ConnectionInfo_t *connPtr, EAPOL_KeyMsg_Tx_t **pTxEapolPtr, BufferDesc_t *pBufDesc)
 {
-	ASSER_ERR(FALSE);
-	returnNULL;
+	__builtin_trap();
 }
 
-/** GeneratePWKMsg1
- */
 Status_e GeneratePWKMsg1(cm_ConnectionInfo_t *connPtr, BufferDesc_t *pBufDesc)
 {
-	ASSER_ERR(FALSE);
-	return FAIL;
+	__builtin_trap();
 }
 
-/** ProcessPWKMsg2
- */
+
+extern uint8_t int_rsn_ie[26];
+extern uint8_t rsn_len;
+
 Status_e ProcessPWKMsg2(BufferDesc_t *pBufDesc)
 {
-	ASSER_ERR(FALSE);
-	return FAIL;
+	__builtin_trap();
 }
 
-/** GeneratePWKMsg3
- */
 Status_e GeneratePWKMsg3(cm_ConnectionInfo_t *connPtr, BufferDesc_t *pBufDesc)
 {
-	ASSER_ERR(FALSE);
-	return FAIL;
+	__builtin_trap();
 }
 
-/** ProcessPWKMsg4
- */
+void apm_sta_add(uint8_t sta_idx);
+
 Status_e ProcessPWKMsg4(BufferDesc_t *pBufDesc)
 {
-	ASSER_ERR(FALSE);
-	return FAIL;
+	__builtin_trap();
 }
 
-/** SendEAPOLMsgUsingBufDesc
- */
 BOOLEAN SendEAPOLMsgUsingBufDesc(cm_ConnectionInfo_t *connPtr, BufferDesc_t *pBufDesc)
 {
-	ASSER_ERR(FALSE);
-	return FALSE;
+	__builtin_trap();
 }
 
-/** GenerateApEapolMsg
- */
 Status_e GenerateApEapolMsg(cm_ConnectionInfo_t *connPtr, keyMgmtState_e msgState, BufferDesc_t *pBufDesc)
 {
-	ASSER_ERR(FALSE);
-	return FAIL;
+	__builtin_trap();
 }
 
-/** ProcessKeyMgmtDataAp
- */
 Status_e ProcessKeyMgmtDataAp(BufferDesc_t *pBufDesc)
 {
-	ASSER_ERR(FALSE);
-	return FAIL;
+	__builtin_trap();
 }
 
-/** IsAuthenticatorEnabled
- */
 BOOLEAN IsAuthenticatorEnabled(cm_ConnectionInfo_t *connPtr)
 {
-	ASSER_ERR(FALSE);
-	return FALSE;
+	__builtin_trap();
 }
 
-/** InitStaKeyInfo
- */
 void InitStaKeyInfo(void *pConn, SecurityMode_t *secType, Cipher_t *pwCipher, UINT16 staRsnCap, UINT8 akmType)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** RemoveAPKeyInfo
- */
 void RemoveAPKeyInfo(void *pConn)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** InitGroupKey
- */
 void InitGroupKey(cm_ConnectionInfo_t *connPtr)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
-#endf 0 //TODO EXISTS ALEADY

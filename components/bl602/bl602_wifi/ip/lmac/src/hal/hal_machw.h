@@ -12,7 +12,9 @@ uint32_t hal_machw_time(void);
 bool hal_machw_time_cmp(uint32_t time1, uint32_t time2);
 bool hal_machw_time_past(uint32_t time);
 
+
 extern const uint8_t rxv2macrate[];
+
 
 static uint32_t hal_machw_rx_duration(struct rx_hd *rhd, uint16_t len);
 void hal_machw_init(void);

@@ -1,25 +1,3 @@
-
-int anon_subr_int_notifier_block_ptr_int_void_ptr_for_cb(notifier_block * , int , void * );
-typedef struct notifier_block notifier_block, *notifier_block;
-
-int anon_subr_int_notifier_block_ptr_int_void_ptr_for_cb(notifier_block * , int , void * );
-struct notifier_block {
-    int (* cb)(struct notifier_block *, int, void *);
-    struct notifier_block * next;
-    int priority;
-};
-
-void notifier_chain_call(void);
-void notifier_chain_call_fromeCritical(void);
-void notifier_chain_regsiter(void);
-void notifier_chain_regsiter_fromCritical(void);
-void notifier_chain_unregsiter(void);
-void notifier_chain_unregsiter_fromCritical(void);
-#if 0 //TODO EXISTS ALEADY
-/**
-* @file notifier.h
-* Header file for BL602
-*/
 #ifndef __NOTIFIER_H__
 #define __NOTIFIER_H__
 
@@ -29,5 +7,12 @@ struct notifier_block {
     int priority; // +8
 };
 
+
+int notifier_chain_regsiter(struct notifier_block **list, struct notifier_block *n);
+int notifier_chain_regsiter_fromCritical(struct notifier_block **list, struct notifier_block *n);
+int notifier_chain_unregsiter(struct notifier_block **list, struct notifier_block *n);
+int notifier_chain_unregsiter_fromCritical(struct notifier_block **list, struct notifier_block *n);
+int notifier_chain_call(struct notifier_block **list, int event, void *env);
+int notifier_chain_call_fromeCritical(struct notifier_block **list, int event, void *env);
+
 #endif // __NOTIFIER_H__
-#endf 0 //TODO EXISTS ALEADY

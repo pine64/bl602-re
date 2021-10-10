@@ -1,48 +1,26 @@
-/**
-* @file bl_sta_mgmt_others.c
-* Source file for BL602
-*/
-#include "bl_sta_mgmt_others.h"
+#include <nohostSecurityParams.h>
+#include <wltypes.h>
 
 
-NoHostSecurityParams_t nohostParams;
-
-void set_psk(char *pSsid, UINT8 ssidLen, char *phrase);
-void set_pmk(char *pSsid, UINT8 ssidLen, char *pPMK);
-char *get_pmk(char *pSsid, UINT8 ssidLen);
-void remove_psk(char *pSsid, UINT8 ssidLen);
+extern NoHostSecurityParams_t nohostParams;
 
 
-
-
-/** set_psk
- */
 void set_psk(char *pSsid, UINT8 ssidLen, char *phrase)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** set_pmk
- */
 void set_pmk(char *pSsid, UINT8 ssidLen, char *pPMK)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** *get_pmk
- */
 char *get_pmk(char *pSsid, UINT8 ssidLen)
 {
-	ASSER_ERR(FALSE);
-	returnNULL;
+	__builtin_trap();
 }
 
-/** remove_psk
- */
 void remove_psk(char *pSsid, UINT8 ssidLen)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }

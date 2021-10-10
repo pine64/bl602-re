@@ -14,6 +14,7 @@ struct phy_cfg_tag {
   uint32_t parameters[16]; // +0
 };
 
+
 void phy_init(const struct phy_cfg_tag *config);
 void phy_get_version(uint32_t *version_1, uint32_t *version_2);
 void phy_set_channel(uint8_t band, uint8_t type, uint16_t prim20_freq, uint16_t center1_freq, uint16_t center2_freq, uint8_t index);

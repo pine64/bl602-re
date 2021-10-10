@@ -60,8 +60,10 @@ struct txdesc_host {
     uint32_t pad_buf[128]; // +304
 };
 
+
 extern struct txdesc *txdesc_array;
 extern const int nx_txdesc_cnt[5];
+
 
 bool is_int_frame(struct txdesc *txdesc);
 bool is_qos_data(struct txdesc *txdesc);

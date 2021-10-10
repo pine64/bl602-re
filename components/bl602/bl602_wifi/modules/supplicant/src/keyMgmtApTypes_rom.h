@@ -1,9 +1,9 @@
-/**
-* @file keyMgmtApTypes_rom.h
-* Header file for BL602
-*/
 #ifndef __KEYMGMTAPTYPES_ROM_H__
 #define __KEYMGMTAPTYPES_ROM_H__
+
+#include <keyMgmtStaTypes.h>
+#include <wltypes.h>
+
 
 typedef enum {
     HSK_NOT_STARTED = 0,
@@ -18,6 +18,7 @@ typedef enum {
     HSK_DUMMY_STATE = 9,
     HSK_END = 10,
 } keyMgmtState_e;
+
 typedef struct {
     UINT16 staRsnCap; // +0
     SecurityMode_t staSecType; // +2

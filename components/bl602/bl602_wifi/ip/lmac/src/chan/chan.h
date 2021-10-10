@@ -5,10 +5,11 @@
 
 #include <mm/mm_task.h>
 #include <mm/mm_timer.h>
-#include <vif/vif_mgmt.h>
 #include <co_list.h>
 #include <ke_task.h>
 
+
+struct vif_info_tag;
 
 enum chan_ctxt_status {
     CHAN_NOT_SCHEDULED = 0,
@@ -79,7 +80,9 @@ struct chan_env_tag {
     uint8_t pm; // +115
 };
 
+
 extern struct chan_env_tag chan_env;
+
 
 void chan_init(void);
 void chan_scan_req(uint8_t band, uint16_t freq, int8_t pwr, uint32_t duration_us, uint8_t vif_index);

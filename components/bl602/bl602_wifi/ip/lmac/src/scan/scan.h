@@ -5,9 +5,10 @@
 #include <stdint.h>
 
 #include <driver/dma/dma.h>
-#include <hal/hal_dma.h>
 #include <hal/hal_desc.h>
+#include <hal/hal_dma.h>
 #include <ke_msg.h>
+
 
 struct scan_chan_tag {
     uint16_t freq; // +0
@@ -32,8 +33,10 @@ struct scan_env_tag {
     bool abort; // +27
 };
 
+
 extern struct scan_env_tag scan_env;
 extern struct scan_probe_req_ie_tag scan_probe_req_ie;
+
 
 void scan_init(void);
 void scan_ie_download(const struct scan_start_req *param);

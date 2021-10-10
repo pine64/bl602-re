@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 
+#include <driver/dma/dma.h>
 #include <driver/phy/phy.h>
 
 
@@ -121,6 +122,7 @@ struct tx_hw_desc {
 struct tx_agg_desc {
     uint8_t reserved; // +0
 };
+
 
 extern struct dma_desc bcn_dwnld_desc;
 extern struct rx_dmadesc rx_dma_hdrdesc[];

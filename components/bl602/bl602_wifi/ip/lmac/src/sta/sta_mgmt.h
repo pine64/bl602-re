@@ -5,10 +5,11 @@
 #include <stdint.h>
 
 #include <mm/mm_task.h>
-#include <vif/vif_mgmt.h>
 #include <co_list.h>
 #include <mac.h>
 
+
+struct vif_info_tag;
 
 enum sta_mgmt_pol_upd {
     STA_MGMT_POL_UPD_RATE = 0,
@@ -100,8 +101,10 @@ struct sta_info_env_tag {
     struct co_list free_sta_list; // +0
 };
 
+
 extern struct sta_info_env_tag sta_info_env;
 extern struct sta_info_tag sta_info_tab[12];
+
 
 uint8_t sta_mgmt_get_port_state(uint8_t sta_idx);
 uint16_t sta_mgmt_get_port_ethertype(uint8_t sta_idx);
