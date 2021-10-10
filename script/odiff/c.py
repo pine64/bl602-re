@@ -20,7 +20,7 @@ class CNamed(ABC):
 
 class CType(CElement, ABC):
     @abstractmethod
-    def to_namedef(self, alias: str) -> str:
+    def to_namedef(self, name: str) -> str:
         ...
 
 
@@ -65,6 +65,8 @@ class CStruct(CCompound):
         return f"{self} {{\n{m}\n{'  ' * indent}}}"
 
     def to_namedef(self, alias: str) -> str:
+        if not self.name:
+            return f'{self.to_def()} {alias}'
         return f'{self} {alias}'
 
 
@@ -85,6 +87,8 @@ class CUnion(CCompound):
         return f"{self} {{\n{m}\n{'  ' * indent}}}"
 
     def to_namedef(self, alias: str) -> str:
+        if not self.name:
+            return f'{self.to_def()} {alias}'
         return f'{self} {alias}'
 
 
@@ -101,6 +105,8 @@ class CEnum(CCompound):
         return f"{self} {{\n{m}\n{'  ' * indent}}}"
 
     def to_namedef(self, alias: str) -> str:
+        if not self.name:
+            return f'{self.to_def()} {alias}'
         return f'{self} {alias}'
 
 
@@ -144,6 +150,8 @@ class CConst(CType):
         return f"{self.of} const"
 
     def to_namedef(self, alias: str) -> str:
+        if isinstance(self.of, (CPrimitive, CCompound, CTypedef)):
+            return f"const {self.of.to_namedef(alias)}"
         return f'{self} {alias}'
 
 
@@ -158,7 +166,9 @@ class CVolatile(CType):
         return f"{self.of} volatile"
 
     def to_namedef(self, alias: str) -> str:
-        return f'{self} {alias}'
+        if isinstance(self.of, (CPrimitive, CCompound, CTypedef)):
+            return f"volatile {self.of.to_namedef(alias)}"
+        return f"{self.of} volatile"
 
 
 class CFunctionPtr(CType):
@@ -189,8 +199,6 @@ class CTypedef(CType, CNamed):
         return self.name
 
     def to_def(self, indent: int = 0) -> str:
-        if isinstance(self.of, CCompound):
-            return f'typedef {self.of.to_def()} {self.name}'
         return f'typedef {self.of.to_namedef(self.name)}'
 
     def to_namedef(self, alias: str) -> str:
