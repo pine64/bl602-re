@@ -226,17 +226,18 @@ class CFunction(CElement, CNamed):
 
 
 class CVariable(CElement, CNamed):
-    def __init__(self, die: Optional[DIE], type: CType, name: str, extern: bool):
+    def __init__(self, die: Optional[DIE], type: CType, name: str, extern: bool, static: bool):
         CElement.__init__(self, die)
         CNamed.__init__(self, name)
         self.type = type
         self.extern = extern
+        self.static = static
 
     def __str__(self):
-        return f"var {'extern ' if self.extern else ''}{self.type}"
+        return f"var {'static ' if self.static else ''}{'extern ' if self.extern else ''}{self.type}"
 
     def to_def(self, indent: int = 0) -> str:
-        return f'extern {self.type.to_namedef(self.name)}' if self.extern else self.type.to_namedef(self.name)
+        return f'{"static " if self.static else ""}{"extern " if self.extern else ""}{self.type.to_namedef(self.name)}'
 
     def to_namedef(self, alias: str) -> str:
         raise NotImplementedError

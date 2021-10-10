@@ -6,7 +6,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import List, Dict, Tuple
 
-from odiff.asm import Function, AsmLine, Label
+from odiff.asm import Function, AsmLine
 from odiff.html import HTML_HEADER, HTML_FOOTER, make_diff_table
 from odiff.lib import Library, LIBRARIES
 from odiff.toolchain import objdump

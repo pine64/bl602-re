@@ -157,10 +157,11 @@ def die_to_ctype(die: DIE) -> CType:
 
 ELF_SYM_STRUCT = Struct('<I8xB')
 STB_LOCAL = 0
+STT_OBJECT = 1
 STT_FUNC = 2
 
 
-def is_func_static(symtab: SymbolTableSection, name: str) -> Tuple[bool, bool]:
+def is_static(symtab: SymbolTableSection, name: str) -> Tuple[bool, bool]:
     if not hasattr(symtab, '_static_cache'):
         static = {}
         entsize = symtab['sh_entsize']
@@ -168,7 +169,7 @@ def is_func_static(symtab: SymbolTableSection, name: str) -> Tuple[bool, bool]:
         buf = symtab.stream.read(entsize * symtab.num_symbols())
         for pos in range(0, len(buf), entsize):
             st_name, st_info = ELF_SYM_STRUCT.unpack(buf[pos:pos + ELF_SYM_STRUCT.size])
-            if (st_info & 0xF) == STT_FUNC:
+            if (st_info & 0xF) in (STT_FUNC, STT_OBJECT):
                 static[symtab.stringtable.get_string(st_name)] = (st_info >> 4) == STB_LOCAL
         symtab._static_cache = static
     try:
@@ -209,7 +210,7 @@ def die_to_ctype_or_func(ctx: Context, die: DIE, symtab: SymbolTableSection) -> 
     if die.tag != 'DW_TAG_subprogram':
         return die_to_ctype(die)
     func_name = die_get_name(die)
-    in_obj, static = is_func_static(symtab, func_name)
+    in_obj, static = is_static(symtab, func_name)
     if static:
         return_type, args = die_to_funclike_args(die)
         return CFunction(die=die, name=func_name, return_type=return_type, args=args, static=True)
@@ -256,12 +257,22 @@ def process_file(filename: Path, header_files: Dict[str, HeaderFile], ctx: Conte
             decl_file = file_entries[die.attributes['DW_AT_decl_file'].value - 1]
             decl_line = die.attributes['DW_AT_decl_line'].value
             name: Optional[str] = die_get_name(die)
-            if name is None:
-                continue
             if die.tag == 'DW_TAG_variable':
-                entry = CVariable(
-                    die=die, type=die_get_at_type(die), name=name, extern='DW_AT_external' in die.attributes)
+                if 'DW_AT_specification' in die.attributes:
+                    var_spec_die = cu.get_DIE_from_refaddr(die.attributes['DW_AT_specification'].value)
+                    name = die_get_name(var_spec_die)
+                    assert name is not None
+                    entry = CVariable(
+                        die=die, type=die_get_at_type(var_spec_die), name=name,
+                        extern='DW_AT_external' in die.attributes, static=False)
+                else:
+                    _, static = is_static(symtab, name)
+                    entry = CVariable(
+                        die=die, type=die_get_at_type(die), name=name,
+                        extern='DW_AT_external' in die.attributes, static=static)
             else:
+                if name is None:
+                    continue
                 entry = die_to_ctype_or_func(ctx, die, symtab)
             decl_file.defs[name] = entry
             decl_file.def_lines[name] = decl_line
