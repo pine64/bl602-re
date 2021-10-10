@@ -1,43 +1,31 @@
-
-typedef struct co_list co_list, *co_list;
-
-typedef struct co_list_hdr co_list_hdr, *co_list_hdr;
-
-struct co_list_hdr {
-    struct co_list_hdr * next;
-};
-
-struct co_list {
-    struct co_list_hdr * first;
-    struct co_list_hdr * last;
-};
-
-void co_list_cnt(void);
-void co_list_extract(void);
-void co_list_init(void);
-void co_list_insert(void);
-void co_list_insert_after(void);
-_Bool co_list_is_empty(co_list * list);
-co_list_hdr * co_list_next(co_list_hdr * list_hdr);
-co_list_hdr * co_list_pick(co_list * list);
-void co_list_pop_front(void);
-void co_list_push_back(void);
-void co_list_remove(void);
-#if 0 //TODO EXISTS ALEADY
-/**
-* @file co_list.h
-* Header file for BL602
-*/
 #ifndef __CO_LIST_H__
 #define __CO_LIST_H__
 
+#include <stdbool.h>
+#include <stdint.h>
+
 struct co_list_hdr {
-    struct co_list_hdr *next; // +0
-};
-struct co_list {
-    struct co_list_hdr *first; // +0
-    struct co_list_hdr *last; // +4
+	struct co_list_hdr *next;
 };
 
+struct co_list {
+	struct co_list_hdr *first;
+	struct co_list_hdr *last;
+};
+
+void co_list_init(struct co_list *list);
+void co_list_push_back(struct co_list *list, struct co_list_hdr *list_hdr);
+struct co_list_hdr *co_list_pop_front(struct co_list *list);
+void co_list_extract(struct co_list *list, struct co_list_hdr *list_hdr);
+void co_list_insert(const struct co_list *list, const struct co_list_hdr *element, bool (*cmp)(const struct co_list_hdr*, const struct co_list_hdr*));
+void co_list_insert_before(const struct co_list *list, const struct co_list_hdr *next_element, const struct co_list_hdr *element);
+void co_list_insert_after(const struct co_list *list, const struct co_list_hdr *prev_element, const struct co_list_hdr *element);
+void co_list_remove(struct co_list *list, struct co_list_hdr *prev_element, struct co_list_hdr *element);
+void co_list_concat(struct co_list *list1, struct co_list *list2);
+bool co_list_is_empty(const struct co_list *const list);
+bool co_list_find(struct co_list *list, struct co_list_hdr *list_hdr);
+uint32_t co_list_cnt(const struct co_list *const list);
+struct co_list_hdr* co_list_pick(struct co_list const* const list);
+struct co_list_hdr* co_list_next(struct co_list_hdr const* const list_hdr);
+
 #endif // __CO_LIST_H__
-#endf 0 //TODO EXISTS ALEADY

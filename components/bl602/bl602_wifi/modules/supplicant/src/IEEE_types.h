@@ -1,9 +1,8 @@
-/**
-* @file IEEE_types.h
-* Header file for BL602
-*/
 #ifndef __IEEE_TYPES_H__
 #define __IEEE_TYPES_H__
+
+#include <wltypes.h>
+
 
 typedef enum {
     IEEE_8021X_PACKET_TYPE_EAP_PACKET = 0,

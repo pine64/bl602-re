@@ -1,9 +1,10 @@
-/**
-* @file keyMgmtApTypes.h
-* Header file for BL602
-*/
 #ifndef __KEYMGMTAPTYPES_H__
 #define __KEYMGMTAPTYPES_H__
+
+#include <mm/mm_timer.h>
+#include <keyMgmtApTypes_rom.h>
+#include <wltypes.h>
+
 
 typedef struct {
     apKeyMgmtInfoStaRom_t rom; // +0

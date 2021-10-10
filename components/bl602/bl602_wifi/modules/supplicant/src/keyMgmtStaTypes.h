@@ -1,9 +1,8 @@
-/**
-* @file keyMgmtStaTypes.h
-* Header file for BL602
-*/
 #ifndef __KEYMGMTSTATYPES_H__
 #define __KEYMGMTSTATYPES_H__
+
+#include <wltypes.h>
+
 
 typedef struct {
     UINT8 wep40:1; // +0
@@ -12,6 +11,7 @@ typedef struct {
     UINT8 ccmp:1; // +0
     UINT8 rsvd:4; // +0
 } Cipher_t;
+
 typedef struct {
     UINT16 noRsn:1; // +0
     UINT16 wepStatic:1; // +0
@@ -24,6 +24,7 @@ typedef struct {
     UINT16 wpa3:1; // +0
     UINT16 rsvd:7; // +0
 } SecurityMode_t;
+
 typedef enum {
     AKM_NONE = 0,
     AKM_1X = 1,
@@ -38,11 +39,14 @@ typedef enum {
     AKM_RSN_MAX = 6,
     AKM_SUITE_MAX = 5,
 } AkmType_e;
+
 typedef AkmType_e AkmTypePacked_e;
+
 typedef struct {
     UINT8 akmOui[3]; // +0
     AkmTypePacked_e akmType; // +3
 } AkmSuite_t;
+
 typedef struct {
     SecurityMode_t wpaType; // +0
     Cipher_t mcstCipher; // +2

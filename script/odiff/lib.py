@@ -46,6 +46,16 @@ class Library:
 
 BLE_ROOT = REPO_ROOT / 'components/network/ble/blecontroller'
 WIFI_ROOT = REPO_ROOT / 'components/bl602/bl602_wifi'
+COMMON_INCLUDES = [
+    REPO_ROOT / 'components/bl602/bl602_std/bl602_std/Common/platform_print/',
+    REPO_ROOT / 'components/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/',
+    REPO_ROOT / 'components/bl602/bl602_std/bl602_std/RISCV/Core/Include/',
+    REPO_ROOT / 'components/bl602/bl602_std/bl602_std/RISCV/Device/Bouffalo/BL602/Startup/',
+    REPO_ROOT / 'components/bl602/bl602_std/bl602_std/StdDriver/Inc/',
+    REPO_ROOT / 'components/bl602/freertos_riscv_ram/config/',
+    REPO_ROOT / 'components/bl602/freertos_riscv_ram/portable/GCC/RISC-V/',
+    REPO_ROOT / 'components/hal_drv/bl602_hal/'
+]
 LIBRARIES = [
     Library(
         'libatcmd',
@@ -55,10 +65,9 @@ LIBRARIES = [
         ],
         REPO_ROOT / 'libatcmd',
         [
+            *COMMON_INCLUDES,
             REPO_ROOT / 'components/stage/atcmd/inc',
-            REPO_ROOT / 'components/stage/atcmd/inc/atcmd',
-            REPO_ROOT / 'components/bl602/freertos_riscv_ram/config/',
-            REPO_ROOT / 'components/bl602/freertos_riscv_ram/portable/GCC/RISC-V/'
+            REPO_ROOT / 'components/stage/atcmd/inc/atcmd'
         ]
     ),
     Library(
@@ -85,14 +94,7 @@ LIBRARIES = [
         ],
         REPO_ROOT / 'libblecontroller',
         [
-            REPO_ROOT / 'components/bl602/bl602_std/bl602_std/Common/platform_print/',
-            REPO_ROOT / 'components/bl602/bl602_std/bl602_std/Device/Bouffalo/BL602/Peripherals/',
-            REPO_ROOT / 'components/bl602/bl602_std/bl602_std/RISCV/Core/Include/',
-            REPO_ROOT / 'components/bl602/bl602_std/bl602_std/RISCV/Device/Bouffalo/BL602/Startup/',
-            REPO_ROOT / 'components/bl602/bl602_std/bl602_std/StdDriver/Inc/',
-            REPO_ROOT / 'components/bl602/freertos_riscv_ram/config/',
-            REPO_ROOT / 'components/bl602/freertos_riscv_ram/portable/GCC/RISC-V/',
-            REPO_ROOT / 'components/hal_drv/bl602_hal/',
+            *COMMON_INCLUDES,
             REPO_ROOT / 'components/network/ble/blecontroller/ble_inc/',
             REPO_ROOT / 'components/network/ble/blecontroller/ip/ble/ll/src/',
             REPO_ROOT / 'components/network/ble/blecontroller/ip/ea/api/',
@@ -150,7 +152,20 @@ LIBRARIES = [
         ],
         REPO_ROOT / 'libbl602_wifi',
         [
-
+            *COMMON_INCLUDES,
+            REPO_ROOT / 'components/bl602/bl602_wifi/include/',
+            REPO_ROOT / 'components/bl602/bl602_wifi/ip/',
+            REPO_ROOT / 'components/bl602/bl602_wifi/ip/lmac/src/',
+            REPO_ROOT / 'components/bl602/bl602_wifi/ip/umac/src/',
+            REPO_ROOT / 'components/bl602/bl602_wifi/modules/common/src/',
+            REPO_ROOT / 'components/bl602/bl602_wifi/modules/dbg/src/',
+            REPO_ROOT / 'components/bl602/bl602_wifi/modules/ke/src/',
+            REPO_ROOT / 'components/bl602/bl602_wifi/modules/mac/src/',
+            REPO_ROOT / 'components/bl602/bl602_wifi/modules/supplicant/src/',
+            REPO_ROOT / 'components/bl602/bl602_wifi/plf/refip/src/',
+            REPO_ROOT / 'components/bl602/bl602_wifi/plf/refip/src/driver/phy/bl602_phy_rf/rf/Inc/',
+            REPO_ROOT / 'components/utils/include/'
         ]
     )
 ]
+
