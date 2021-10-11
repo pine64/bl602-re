@@ -1,9 +1,10 @@
-/**
-* @file hci_tl.c
-* Source file for BL602
-*/
-#include "hci_tl.h"
+#include "hci_int.h"
 
+#include <stdbool.h>
+
+#include <em/em_buf.h>
+#include <co_list.h>
+#include <ke_msg.h>
 
 enum HCI_TX_STATE {
     HCI_STATE_TX_ONGOING = 0,
@@ -41,46 +42,40 @@ void hci_acl_tx_data_received(uint16_t hdl_flags, uint16_t datalen, uint8_t *pay
  */
 void hci_tl_send(struct ke_msg *msg)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** hci_tl_init
  */
 void hci_tl_init(bool reset)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** hci_cmd_get_max_param_size
  */
 uint8_t hci_cmd_get_max_param_size(uint16_t opcode)
 {
-	ASSER_ERR(FALSE);
-	return 0xff;
+	__builtin_trap();
 }
 
 /** hci_cmd_received
  */
 void hci_cmd_received(uint16_t opcode, uint8_t length, uint8_t *payload)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** *hci_acl_tx_data_alloc
  */
 uint8_t *hci_acl_tx_data_alloc(uint16_t hdl_flags, uint16_t len)
 {
-	ASSER_ERR(FALSE);
-	returnNULL;
+	__builtin_trap();
 }
 
 /** hci_acl_tx_data_received
  */
 void hci_acl_tx_data_received(uint16_t hdl_flags, uint16_t datalen, uint8_t *payload)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }

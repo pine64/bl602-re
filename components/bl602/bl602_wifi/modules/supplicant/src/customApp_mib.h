@@ -1,9 +1,10 @@
-/**
-* @file customApp_mib.h
-* Header file for BL602
-*/
 #ifndef __CUSTOMAPP_MIB_H__
 #define __CUSTOMAPP_MIB_H__
+
+#include <keyMgmtStaTypes.h>
+#include <IEEE_types.h>
+#include <wltypes.h>
+
 
 typedef struct {
     UINT8 RSNEnabled:1; // +0

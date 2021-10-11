@@ -1,9 +1,9 @@
-/**
-* @file lld_pdu.h
-* Header file for BL602
-*/
 #ifndef __LLD_PDU_H__
 #define __LLD_PDU_H__
+
+#include <stdint.h>
+
+#include <co_list.h>
 
 struct lld_pdu_data_tx_tag {
     struct co_list_hdr hdr; // +0

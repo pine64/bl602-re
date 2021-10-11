@@ -1,9 +1,13 @@
-/**
-* @file macMgmtMain.h
-* Header file for BL602
-*/
 #ifndef __MACMGMTMAIN_H__
 #define __MACMGMTMAIN_H__
+
+#include <mm/mm_timer.h>
+#include <keyMgmtApTypes.h>
+#include <keyMgmtStaTypes.h>
+#include <keyMgmtStaHostTypes_rom.h>
+#include <IEEE_types.h>
+#include <wltypes.h>
+
 
 typedef struct {
     IEEEtypes_SsId_t SsId; // +0
@@ -19,15 +23,19 @@ typedef struct {
     UINT8 MbssCurBcnIntCnt; // +49
     UINT16 Reserved; // +50
 } CommonMlmeData_t;
+
 struct _txQingInfo_t {
     IEEEtypes_PwrMgmtMode_e mode; // +0
 };
+
 typedef struct _txQingInfo_t txQingInfo_t;
+
 typedef struct {
     UINT16 keyExchange:1; // +0
     UINT16 authenticate:1; // +0
     UINT16 reserved:14; // +0
 } Operation_t;
+
 typedef struct {
     Cipher_t mcstCipher; // +0
     UINT8 mcstCipherCount; // +1
@@ -47,12 +55,14 @@ typedef struct {
     UINT32 PwsHskTimeOut; // +116
     UINT32 GrpHskTimeOut; // +120
 } apRsnConfig_t;
+
 typedef struct {
     UINT32 StaAgeOutTime; // +0
     UINT32 PsStaAgeOutTime; // +4
     apRsnConfig_t RsnConfig; // +8
     CommonMlmeData_t comData; // +132
 } BssConfig_t;
+
 typedef struct {
     BOOLEAN updatePassPhrase; // +0
     struct mm_timer_tag apMicTimer; // +4
@@ -61,10 +71,12 @@ typedef struct {
     UINT32 grpRekeyBcnCntConfigured; // +92
     UINT32 grpRekeyBcnCntRemaining; // +96
 } BssData_t;
+
 typedef struct {
     txQingInfo_t pwrSaveInfo; // +0
     apKeyMgmtInfoSta_t keyMgmtInfo; // +4
 } staData_t;
+
 typedef struct {
     BssConfig_t bssConfig; // +0
     BssData_t bssData; // +184

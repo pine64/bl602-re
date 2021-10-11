@@ -1,45 +1,36 @@
-
-txl_buffer_tag * txl_buffer_alloc(txdesc * txdesc, uint8_t access_category, uint8_t user_idx);
-void txl_buffer_transfer(txdesc * txdesc, txl_buffer_tag * buf, uint16_t head_len);
-void txl_buffer_update_thd(txdesc * txdesc);
-#if 0 //TODO EXISTS ALEADY
-/**
-* @file txl_buffer.c
-* Source file for BL602
-*/
 #include "txl_buffer.h"
 
 
 struct txl_buffer_env_tag txl_buffer_env;
 
-void txl_buffer_reset(void);
-struct txl_buffer_tag *txl_buffer_alloc(struct txdesc *txdesc, uint8_t access_category, uint8_t user_idx);
-void txl_buffer_update_thd(struct txdesc *txdesc);
 
+void txl_buffer_transfer(struct txdesc *txdesc, struct txl_buffer_tag *buf, uint16_t head_len)
+{
+	__builtin_trap();
+}
 
+void txl_buffer_reinit(void)
+{
+	__builtin_trap();
+}
 
+void txl_buffer_init(void)
+{
+	__builtin_trap();
+}
 
-/** txl_buffer_reset
- */
 void txl_buffer_reset(void)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** *txl_buffer_alloc
- */
 struct txl_buffer_tag *txl_buffer_alloc(struct txdesc *txdesc, uint8_t access_category, uint8_t user_idx)
 {
-	ASSER_ERR(FALSE);
-	returnNULL;
+	__builtin_trap();
 }
 
-/** txl_buffer_update_thd
- */
 void txl_buffer_update_thd(struct txdesc *txdesc)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
-#endf 0 //TODO EXISTS ALEADY
+

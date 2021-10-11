@@ -1,21 +1,10 @@
-/**
-* @file hal_mib.c
-* Source file for BL602
-*/
-#include "hal_mib.h"
+#include <hal/hal_machw_mib.h>
 
 
-volatile struct machw_mib_tag *machw_mib;
-
-void hal_mib_dump(void);
+extern volatile struct machw_mib_tag *machw_mib;
 
 
-
-
-/** hal_mib_dump
- */
 void hal_mib_dump(void)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }

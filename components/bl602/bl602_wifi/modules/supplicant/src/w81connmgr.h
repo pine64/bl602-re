@@ -1,9 +1,11 @@
-/**
-* @file w81connmgr.h
-* Header file for BL602
-*/
 #ifndef __W81CONNMGR_H__
 #define __W81CONNMGR_H__
+
+#include <bufferMgmtLib.h>
+#include <keyApiStaTypes.h>
+#include <macMgmtMain.h>
+#include <wltypes.h>
+
 
 typedef struct {
     apInfo_t *apInfo; // +0
@@ -11,7 +13,8 @@ typedef struct {
     ChanBandInfo_t chanBandInfo; // +8
     staData_t staData; // +12
 } apSpecificData_t;
-struct cm_ConnectionInfo {
+
+typedef struct cm_ConnectionInfo {
     UINT8 conType; // +0
     UINT8 staId; // +1
     UINT8 instNbr; // +2
@@ -26,8 +29,18 @@ struct cm_ConnectionInfo {
         apSpecificData_t apData;
     } specDat; // +76
     cipher_key_buf_t TxRxCipherKeyBuf; // +164
-};
-typedef struct cm_ConnectionInfo cm_ConnectionInfo_t;
-cm_ConnectionInfo_t sta_conn_info;cm_ConnectionInfo_t *uap_conn_info;
+} cm_ConnectionInfo_t;
+
+
+extern cm_ConnectionInfo_t sta_conn_info;
+extern cm_ConnectionInfo_t *uap_conn_info;
+
+
+cm_ConnectionInfo_t *cm_InitConnection(UINT8 conType, UINT8 bssType, UINT8 bssNum, IEEEtypes_MacAddr_t *bssId, IEEEtypes_MacAddr_t *peerMacAddr, UINT8 channel, mdev_t *hostMdev);
+void cm_DeleteConnection(cm_ConnectionInfo_t *connPtr);
+void cm_SetPeerAddr(cm_ConnectionInfo_t *connPtr, IEEEtypes_MacAddr_t *bssId, IEEEtypes_MacAddr_t *peerMacAddr);
+void cm_SetComData(cm_ConnectionInfo_t *connPtr, char *ssid);
+apInfo_t *cm_GetApInfo(cm_ConnectionInfo_t *connPtr);
+apSpecificData_t *cm_GetApData(cm_ConnectionInfo_t *connPtr);
 
 #endif // __W81CONNMGR_H__

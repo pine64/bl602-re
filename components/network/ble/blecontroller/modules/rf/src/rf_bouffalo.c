@@ -1,3 +1,5 @@
+#include <rf.h>
+
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -16,7 +18,6 @@ static int8_t rf_rssi_convert(uint8_t rssi_reg);
 static uint32_t rf_reg_rd(uint16_t addr);
 static void rf_reg_wr(uint16_t addr, uint32_t value);
 static void rf_sleep(void);
-void ble_rf_init(struct rwip_rf_api *api);
 
 
 

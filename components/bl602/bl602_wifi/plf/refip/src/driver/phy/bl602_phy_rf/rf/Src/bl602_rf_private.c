@@ -1,64 +1,4 @@
-void rf_pri_auto_gain(void);
-void rf_pri_chipv(uint8_t chipv);
-void rf_pri_config_bandwidth(uint32_t bw);
-void rf_pri_config_channel(uint32_t channel_index);
-void rf_pri_config_mode(uint32_t mode);
-void rf_pri_config_txgain(uint32_t gc_tbb_boost, uint32_t gc_tmx, uint32_t gc_tbb);
-void rf_pri_fcal(void);
-uint16_t rf_pri_fcal_meas(uint32_t cw);
-void rf_pri_fixed_val_regs(void);
-void rf_pri_full_cal(void);
-void rf_pri_get_notch_param(uint32_t chanfreq_MHz, uint8_t * ncf_on, int32_t * ncf_freq_Hz);
-uint32_t rf_pri_get_txgain_index(int32_t pwr, uint32_t mode);
-int32_t rf_pri_get_txgain_max(void);
-int32_t rf_pri_get_txgain_min(void);
-uint32_t rf_pri_get_vco_freq_cw(uint32_t chanfreq_MHz);
-uint32_t rf_pri_get_vco_idac_cw(uint32_t chanfreq_MHz);
-void rf_pri_init(uint8_t reset, uint8_t chipv);
-void rf_pri_init_fast(uint32_t flag);
-void rf_pri_lo_acal(void);
-void rf_pri_manu_pu(uint32_t mode);
-uint32_t rf_pri_pm_pwr(void);
-int32_t rf_pri_pm_pwr_avg(uint32_t iq, uint32_t acc_len);
-void rf_pri_query_txgain_table(uint32_t index, uint32_t * rfg_index, uint32_t * dg);
-void rf_pri_rccal(void);
-void rf_pri_rccal_config(uint32_t iq, uint32_t rbb_fc);
-uint32_t rf_pri_rccal_iq(uint32_t iq);
-void rf_pri_restore_cal_reg(void);
-void rf_pri_restore_state_for_cal(void);
-void rf_pri_roscal(void);
-void rf_pri_roscal_config(uint32_t iq, uint32_t rosdac);
-uint32_t rf_pri_roscal_iq(uint32_t iq, uint32_t length, uint32_t sram_start_addr);
-void rf_pri_save_state_for_cal(void);
-void rf_pri_set_gain_table_regs(void);
-void rf_pri_singen_amplitude(uint32_t gain_i, uint32_t gain_q);
-void rf_pri_singen_config(uint32_t fcw, uint32_t start_addr_q, uint32_t start_addr_i);
-void rf_pri_singen_pwrmx_dc(uint32_t amp, uint32_t num_data, int32_t adc_mean_max, int32_t adc_mean_min);
-void rf_pri_singen_start(void);
-void rf_pri_start_rxdfe(void);
-void rf_pri_start_txdfe(void);
-void rf_pri_stop_rxdfe(void);
-void rf_pri_stop_txdfe(void);
-void rf_pri_tx_gain_comp(int32_t Tsens);
-void rf_pri_txcal(void);
-void rf_pri_txcal_config(uint32_t param_ind, int32_t val);
-void rf_pri_txcal_config_hw(void);
-int32_t rf_pri_txcal_search_core(uint32_t param_ind, uint32_t center, uint32_t delta, uint32_t meas_freq);
-void rf_pri_update_dvga_os(int8_t dvga_os);
-void rf_pri_update_param(uint32_t chanfreq_MHz);
-void rf_pri_update_power_offset(int32_t * power_offset);
-void rf_pri_update_tx_power_offset(uint8_t channel, int8_t * power_offset);
-void rf_pri_update_txgain_tempos(int16_t tempos);
-void rf_pri_wait_ms(uint32_t ms);
-void rf_pri_wait_us(uint32_t us);
-void rf_pri_xtalfreq(uint32_t xtalfreq);
-void rfc_apply_tx_dvga(void);
-#if 0 //TODO EXISTS ALEADY
-/**
-* @file bl602_rf_private.c
-* Source file for BL602
-*/
-#include "bl602_rf_private.h"
+#include <bl602_rf_private.h>
 
 
 static uint32_t state_rf_fsm_ctrl_hw;
@@ -123,187 +63,278 @@ regs_to_opti *opti_regs;
 static uint16_t channel_cw_table[21];
 static uint16_t channel_cnt_opt_table[40];
 
-static void rf_pri_restore_state_for_cal(void);
-static void rf_pri_singen_start(void);
-static uint32_t rf_pri_pm_pwr(void);
-static void rf_pri_rccal_config(uint32_t iq, uint32_t rbb_fc);
-static void rf_pri_start_txdfe(void);
-static int32_t rf_pri_pm_pwr_avg(uint32_t iq, uint32_t acc_len);
-static void rf_pri_txcal_config(uint32_t param_ind, int32_t val);
-static int32_t rf_pri_txcal_search_core(uint32_t param_ind, uint32_t center, uint32_t delta, uint32_t meas_freq);
-static void rf_pri_txcal_config_hw(void);
-static uint32_t rf_pri_rccal_iq(uint32_t iq);
-static uint16_t rf_pri_fcal_meas(uint32_t cw);
-void rf_pri_config_bandwidth(uint32_t bw);
-void rf_pri_txcal(void);
-void rf_pri_roscal(void);
-void rf_pri_rccal(void);
-void rf_pri_lo_acal(void);
-void rf_pri_fcal(void);
-void rf_pri_full_cal(void);
-void rf_pri_restore_cal_reg(void);
-void rf_pri_update_power_offset(int32_t *power_offset);
-
-
-
-
-/** rf_pri_config_bandwidth
- */
-void rf_pri_config_bandwidth(uint32_t bw)
+void rf_pri_wait_us(uint32_t us)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** rf_pri_txcal
- */
-void rf_pri_txcal(void)
+void rf_pri_wait_ms(uint32_t ms)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** rf_pri_roscal
- */
-void rf_pri_roscal(void)
+static void rf_pri_set_gain_table_regs(void)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** rf_pri_rccal
- */
-void rf_pri_rccal(void)
+void rf_pri_fixed_val_regs(void)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** rf_pri_lo_acal
- */
-void rf_pri_lo_acal(void)
+void rf_pri_chipv(uint8_t chipv)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** rf_pri_fcal
- */
-void rf_pri_fcal(void)
+void rf_pri_update_tx_power_offset(uint8_t channel, int8_t *power_offset)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** rf_pri_full_cal
- */
-void rf_pri_full_cal(void)
+void rf_pri_init(uint8_t reset, uint8_t chipv)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** rf_pri_restore_cal_reg
- */
-void rf_pri_restore_cal_reg(void)
+void rf_pri_init_fast(uint32_t flag)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** rf_pri_update_power_offset
- */
-void rf_pri_update_power_offset(int32_t *power_offset)
+void rf_pri_get_notch_param(uint32_t chanfreq_MHz, uint8_t *ncf_on, int32_t *ncf_freq_Hz)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** rf_pri_restore_state_for_cal
- */
+void rf_pri_update_param(uint32_t chanfreq_MHz)
+{
+	__builtin_trap();
+}
+
+void rf_pri_xtalfreq(uint32_t xtalfreq)
+{
+	__builtin_trap();
+}
+
+uint32_t rf_pri_get_vco_freq_cw(uint32_t chanfreq_MHz)
+{
+	__builtin_trap();
+}
+
+uint32_t rf_pri_get_vco_idac_cw(uint32_t chanfreq_MHz)
+{
+	__builtin_trap();
+}
+
+void rf_pri_update_txgain_tempos(int16_t tempos)
+{
+	__builtin_trap();
+}
+
+int32_t rf_pri_get_txgain_max(void)
+{
+	__builtin_trap();
+}
+
+int32_t rf_pri_get_txgain_min(void)
+{
+	__builtin_trap();
+}
+
+uint32_t rf_pri_get_txgain_index(int32_t pwr, uint32_t mode)
+{
+	__builtin_trap();
+}
+
+void rf_pri_query_txgain_table(uint32_t index, uint32_t *rfg_index, uint32_t *dg)
+{
+	__builtin_trap();
+}
+
+void rf_pri_update_dvga_os(int8_t dvga_os)
+{
+	__builtin_trap();
+}
+
+void rfc_apply_tx_dvga(int8_t *dvga_qdb)
+{
+	__builtin_trap();
+}
+
+void rf_pri_tx_gain_comp(int32_t Tsens)
+{
+	__builtin_trap();
+}
+
+void rf_pri_config_channel(uint32_t channel_index)
+{
+	__builtin_trap();
+}
+
+static void rf_pri_manu_pu(uint32_t mode)
+{
+	__builtin_trap();
+}
+
+void rf_pri_config_mode(uint32_t mode)
+{
+	__builtin_trap();
+}
+
+void rf_pri_auto_gain(void)
+{
+	__builtin_trap();
+}
+
+static void rf_pri_save_state_for_cal(void)
+{
+	__builtin_trap();
+}
+
 static void rf_pri_restore_state_for_cal(void)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** rf_pri_singen_start
- */
+void rf_pri_singen_config(uint32_t fcw, uint32_t start_addr_i, uint32_t start_addr_q)
+{
+	__builtin_trap();
+}
+
 static void rf_pri_singen_start(void)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** rf_pri_pm_pwr
- */
+void rf_pri_singen_amplitude(uint32_t gain_i, uint32_t gain_q)
+{
+	__builtin_trap();
+}
+
 static uint32_t rf_pri_pm_pwr(void)
 {
-	ASSER_ERR(FALSE);
-	return 0xffffffff;
+	__builtin_trap();
 }
 
-/** rf_pri_rccal_config
- */
 static void rf_pri_rccal_config(uint32_t iq, uint32_t rbb_fc)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** rf_pri_start_txdfe
- */
+void rf_pri_roscal_config(uint32_t iq, uint32_t rosdac)
+{
+	__builtin_trap();
+}
+
+void rf_pri_config_txgain(uint32_t gc_tbb_boost, uint32_t gc_tmx, uint32_t gc_tbb)
+{
+	__builtin_trap();
+}
+
 static void rf_pri_start_txdfe(void)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** rf_pri_pm_pwr_avg
- */
+void rf_pri_stop_txdfe(void)
+{
+	__builtin_trap();
+}
+
+void rf_pri_start_rxdfe(void)
+{
+	__builtin_trap();
+}
+
+void rf_pri_stop_rxdfe(void)
+{
+	__builtin_trap();
+}
+
 static int32_t rf_pri_pm_pwr_avg(uint32_t iq, uint32_t acc_len)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
-/** rf_pri_txcal_config
- */
 static void rf_pri_txcal_config(uint32_t param_ind, int32_t val)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** rf_pri_txcal_search_core
- */
 static int32_t rf_pri_txcal_search_core(uint32_t param_ind, uint32_t center, uint32_t delta, uint32_t meas_freq)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
-/** rf_pri_txcal_config_hw
- */
 static void rf_pri_txcal_config_hw(void)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** rf_pri_rccal_iq
- */
+uint32_t rf_pri_roscal_iq(uint32_t iq, uint32_t sram_start_addr, uint32_t length)
+{
+	__builtin_trap();
+}
+
 static uint32_t rf_pri_rccal_iq(uint32_t iq)
 {
-	ASSER_ERR(FALSE);
-	return 0xffffffff;
+	__builtin_trap();
 }
 
-/** rf_pri_fcal_meas
- */
 static uint16_t rf_pri_fcal_meas(uint32_t cw)
 {
-	ASSER_ERR(FALSE);
-	return 0xffff;
+	__builtin_trap();
 }
-#endf 0 //TODO EXISTS ALEADY
+
+void rf_pri_singen_pwrmx_dc(uint32_t amp, uint32_t num_data, int32_t adc_mean_max, int32_t adc_mean_min)
+{
+	__builtin_trap();
+}
+
+void rf_pri_config_bandwidth(uint32_t bw)
+{
+	__builtin_trap();
+}
+
+void rf_pri_txcal(void)
+{
+	__builtin_trap();
+}
+
+void rf_pri_roscal(void)
+{
+	__builtin_trap();
+}
+
+void rf_pri_rccal(void)
+{
+	__builtin_trap();
+}
+
+void rf_pri_lo_acal(void)
+{
+	__builtin_trap();
+}
+
+void rf_pri_fcal(void)
+{
+	__builtin_trap();
+}
+
+void rf_pri_full_cal(void)
+{
+	__builtin_trap();
+}
+
+void rf_pri_restore_cal_reg(void)
+{
+	__builtin_trap();
+}
+
+void rf_pri_update_power_offset(int32_t *power_offset)
+{
+	__builtin_trap();
+}
+

@@ -1,50 +1,28 @@
-/**
-* @file rc4.c
-* Source file for BL602
-*/
-#include "rc4.h"
-
-
-struct rc4_key {
-    unsigned char state[256];
- // +0
-    unsigned char x;
- // +256
-    unsigned char y;
- // +257
-};
-
-typedef struct rc4_key rc4_key;
+typedef struct rc4_key {
+	unsigned char state[256];
+	unsigned char x;
+	unsigned char y;
+} rc4_key;
 
 static rc4_key rc4key;
 
-void prepare_key(unsigned char *key_data_ptr, int key_data_len, rc4_key *key);
-void rc4(unsigned char *buffer_ptr, int buffer_len, int skip, rc4_key *key);
-void RC4_Encrypt(unsigned char *Encr_Key, unsigned char *IV, unsigned short iv_length, unsigned char *Data, unsigned short data_length, unsigned short skipBytes);
 
-
-
-
-/** prepare_key
- */
 void prepare_key(unsigned char *key_data_ptr, int key_data_len, rc4_key *key)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** rc4
- */
 void rc4(unsigned char *buffer_ptr, int buffer_len, int skip, rc4_key *key)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
-/** RC4_Encrypt
- */
-void RC4_Encrypt(unsigned char *Encr_Key, unsigned char *IV, unsigned short iv_length, unsigned char *Data, unsigned short data_length, unsigned short skipBytes)
+void swap_byte(unsigned char *a, unsigned char *b)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
+}
+
+void RC4_Encrypt(unsigned char *Encr_Key, unsigned char *IV, short unsigned int iv_length, unsigned char *Data, short unsigned int data_length, short unsigned int skipBytes)
+{
+	__builtin_trap();
 }

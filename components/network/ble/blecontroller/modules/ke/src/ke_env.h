@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+#include <co_list.h>
+
 struct ble_ke_env_tag {
     struct co_list queue_sent; // +0
     struct co_list queue_saved; // +8

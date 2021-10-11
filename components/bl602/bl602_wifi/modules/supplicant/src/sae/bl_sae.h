@@ -1,9 +1,8 @@
-/**
-* @file bl_sae.h
-* Header file for BL602
-*/
 #ifndef __BL_SAE_H__
 #define __BL_SAE_H__
+
+#include <wltypes.h>
+
 
 struct sae_temporary_data {
     uint8 kck[32]; // +0
@@ -25,12 +24,14 @@ struct sae_temporary_data {
     struct wpabuf *anti_clogging_token; // +92
     char *pw_id; // +96
 };
+
 enum sae_state {
     SAE_NOTHING = 0,
     SAE_COMMITTED = 1,
     SAE_CONFIRMED = 2,
     SAE_ACCEPTED = 3,
 };
+
 struct sae_data {
     enum sae_state state; // +0
     uint16 send_confirm; // +2

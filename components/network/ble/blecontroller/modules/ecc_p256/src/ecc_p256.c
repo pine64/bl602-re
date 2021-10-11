@@ -1,11 +1,5 @@
-/**
-* @file ecc_p256.c
-* Source file for BL602
-*/
-#include "ecc_p256.h"
+#include <ecc_p256.h>
 
-
-typedef unsigned long long u64;
 typedef uint8_t u_int8;
 typedef uint32_t u_int32;
 
@@ -95,14 +89,7 @@ int notEqual256(const bigHex256 *bigHexA, const bigHex256 *bigHexB);
 void GF_Point_Jacobian_To_Affine256(ECC_Jacobian_Point256 *pJacPoint, bigHex256 *pX_co_ord_affine, bigHex256 *pY_co_ord_affine);
 void bigHexInversion256(bigHex256 *bigHexA, bigHex256 *pResult);
 static void ecc_multiplication_event_handler(void);
-void ecc_init(bool reset);
 bool ecc_is_valid_point(bigHex256 *X_coord, bigHex256 *Y_coord);
-uint8_t ecc_generate_key256(u_int8 key_type, const u_int8 *secret_key, const u_int8 *public_key_x, const u_int8 *public_key_y, ke_msg_id_t msg_id, ke_task_id_t task_id);
-void ecc_abort_key256_generation(ke_task_id_t task_id);
-void ecc_gen_new_public_key(u_int8 *secret_key, ke_msg_id_t msg_id, ke_task_id_t task_id);
-void ecc_gen_new_secret_key(uint8_t *secret_key256, bool forced);
-void ecc_get_debug_Keys(uint8_t *secret_key, uint8_t *pub_key_x, uint8_t *pub_key_y);
-
 
 
 
@@ -110,102 +97,89 @@ void ecc_get_debug_Keys(uint8_t *secret_key, uint8_t *pub_key_x, uint8_t *pub_ke
  */
 int notEqual256(const bigHex256 *bigHexA, const bigHex256 *bigHexB)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
 /** GF_Point_Jacobian_To_Affine256
  */
 void GF_Point_Jacobian_To_Affine256(ECC_Jacobian_Point256 *pJacPoint, bigHex256 *pX_co_ord_affine, bigHex256 *pY_co_ord_affine)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** bigHexInversion256
  */
 void bigHexInversion256(bigHex256 *bigHexA, bigHex256 *pResult)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** ecc_init
  */
 void ecc_init(bool reset)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** ecc_is_valid_point
  */
 bool ecc_is_valid_point(bigHex256 *X_coord, bigHex256 *Y_coord)
 {
-	ASSER_ERR(FALSE);
-	return false;
+	__builtin_trap();
 }
 
 /** ecc_generate_key256
  */
 uint8_t ecc_generate_key256(u_int8 key_type, const u_int8 *secret_key, const u_int8 *public_key_x, const u_int8 *public_key_y, ke_msg_id_t msg_id, ke_task_id_t task_id)
 {
-	ASSER_ERR(FALSE);
-	return 0xff;
+	__builtin_trap();
 }
 
 /** ecc_abort_key256_generation
  */
 void ecc_abort_key256_generation(ke_task_id_t task_id)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** ecc_gen_new_public_key
  */
 void ecc_gen_new_public_key(u_int8 *secret_key, ke_msg_id_t msg_id, ke_task_id_t task_id)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** ecc_gen_new_secret_key
  */
 void ecc_gen_new_secret_key(uint8_t *secret_key256, bool forced)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** ecc_get_debug_Keys
  */
 void ecc_get_debug_Keys(uint8_t *secret_key, uint8_t *pub_key_x, uint8_t *pub_key_y)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** Mont2GF
  */
 static void Mont2GF(uint8_t reg_idx)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** getFinalPoint
  */
 static void getFinalPoint(uint8_t reg_idx)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }
 
 /** ecc_multiplication_event_handler
  */
 static void ecc_multiplication_event_handler(void)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }

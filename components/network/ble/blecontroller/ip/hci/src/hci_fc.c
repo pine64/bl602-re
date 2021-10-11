@@ -1,10 +1,5 @@
-/**
-* @file hci_fc.c
-* Source file for BL602
-*/
-#include "hci_fc.h"
+#include <co_string.h>
 #include <ke_task.h>
-
 
 struct host_set_fc {
     bool acl_flow_cntl_en;
@@ -58,7 +53,7 @@ void hci_fc_acl_packet_sent(void)
  */
 void hci_fc_host_nb_acl_pkts_complete(uint16_t acl_pkt_nb)
 {
-	if (hci_fc_env.cntr.acl_pkt_sent >= acl_pkt_nb)
+	if (acl_pkt_nb < hci_fc_env.cntr.acl_pkt_sent)
 	{
 		hci_fc_env.cntr.acl_pkt_sent -= acl_pkt_nb;
 	}
@@ -80,8 +75,8 @@ uint16_t hci_fc_check_host_available_nb_acl_packets(void)
 	{
 		return hci_fc_env.host_set.acl_pkt_nb - hci_fc_env.cntr.acl_pkt_sent;
 	}
-	return 0
+	return 0;
 }
 
-TODO uint8_t hci_fc_acl_en(bool flow_enable)
-TODO uint8_t hci_fc_acl_buf_size_set(uint16_t acl_pkt_len,uint16_t nb_acl_pkts)
+//TODO uint8_t hci_fc_acl_en(bool flow_enable)
+//TODO uint8_t hci_fc_acl_buf_size_set(uint16_t acl_pkt_len,uint16_t nb_acl_pkts)

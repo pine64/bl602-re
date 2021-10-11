@@ -1,9 +1,10 @@
-/**
-* @file llm_task.h
-* Header file for BL602
-*/
 #ifndef __LLM_TASK_H__
 #define __LLM_TASK_H__
+
+#include <stdint.h>
+
+#include <ke_msg.h>
+#include <llc/llc.h>
 
 enum llm_state_id {
     LLM_ADV_STATE_MASK = 240,
@@ -43,6 +44,7 @@ struct llm_enc_ind {
     uint8_t status; // +0
     uint8_t encrypted_data[16]; // +1
 };
-const struct ke_state_handler llm_default_handler;ke_state_t llm_state[1];
+extern const struct ke_state_handler llm_default_handler;
+extern ke_state_t llm_state[1];
 
 #endif // __LLM_TASK_H__

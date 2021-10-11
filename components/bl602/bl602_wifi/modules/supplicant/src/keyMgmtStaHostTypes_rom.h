@@ -1,9 +1,8 @@
-/**
-* @file keyMgmtStaHostTypes_rom.h
-* Header file for BL602
-*/
 #ifndef __KEYMGMTSTAHOSTTYPES_ROM_H__
 #define __KEYMGMTSTAHOSTTYPES_ROM_H__
+
+#include <wltypes.h>
+
 
 typedef struct {
     UINT8 Key[16]; // +0

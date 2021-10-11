@@ -13,10 +13,7 @@ void em_buf_init(void)
  */
 void em_buf_rx_free(uint8_t hdl)
 {
-	*(ushort *)(&DAT_280083ce + hdl * 0xe) =
-		 (ushort)(((uint)*(ushort *)(&DAT_280083ce + CONCAT31(in_register_00002029,hdl) * 0xe) << 0x11
-				  ) >> 0x11);
-	return;
+	__builtin_trap();
 }
 
 /** *em_buf_rx_buff_addr_get

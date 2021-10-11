@@ -5,6 +5,10 @@
 #ifndef __EA_H__
 #define __EA_H__
 
+#include <stdint.h>
+
+#include <co_list.h>
+
 enum ea_error {
     EA_ERROR_OK = 0,
     EA_ERROR_REJECTED = 1,
@@ -70,5 +74,22 @@ struct ea_param_output {
     uint32_t duration; // +4
     uint16_t offset; // +8
 };
+
+void ea_elt_cancel(struct ea_elt_tag *new_elt);
+void ea_init(bool reset);
+struct ea_elt_tag *ea_elt_create(uint16_t size_of_env);
+uint8_t ea_elt_insert(struct ea_elt_tag *elt);
+uint8_t ea_elt_remove(struct ea_elt_tag *elt);
+struct ea_interval_tag *ea_interval_create(void);
+void ea_interval_insert(struct ea_interval_tag *interval_to_add);
+void ea_interval_remove(struct ea_interval_tag *interval_to_remove);
+void ea_interval_delete(struct ea_interval_tag *interval_to_remove);
+void ea_finetimer_isr(void);
+void ea_sw_isr(void);
+uint8_t ea_offset_req(struct ea_param_input *input_param, struct ea_param_output *output_param);
+uint32_t ea_time_get_halfslot_rounded(void);
+uint32_t ea_time_get_slot_rounded(void);
+uint32_t ea_timer_target_get(uint32_t current_time);
+void ea_interval_duration_req(struct ea_param_input *input_param, struct ea_param_output *output_param);
 
 #endif // __EA_H__

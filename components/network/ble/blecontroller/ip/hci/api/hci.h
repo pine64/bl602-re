@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+#include <co_bt_defines.h>
+
 enum HCI_MSG {
     HCI_MSG_ID_FIRST = 2048,
     HCI_CMD_CMP_EVENT = 2049,

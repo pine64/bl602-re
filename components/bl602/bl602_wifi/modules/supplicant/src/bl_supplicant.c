@@ -1,28 +1,12 @@
-/**
-* @file bl_supplicant.c
-* Source file for BL602
-*/
-#include "bl_supplicant.h"
+#include <wltypes.h>
 
 
-Status_e supplicantRestoreDefaults(void);
-void supplicantFuncInit(void);
-
-
-
-
-/** supplicantRestoreDefaults
- */
 Status_e supplicantRestoreDefaults(void)
 {
-	ASSER_ERR(FALSE);
-	return FAIL;
+	__builtin_trap();
 }
 
-/** supplicantFuncInit
- */
 void supplicantFuncInit(void)
 {
-	ASSER_ERR(FALSE);
-	return;
+	__builtin_trap();
 }

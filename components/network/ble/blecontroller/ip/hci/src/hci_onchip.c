@@ -1,9 +1,9 @@
-/**
-* @file hci_onchip.c
-* Source file for BL602
-*/
-#include "hci_onchip.h"
+#include <hci_onchip.h>
 
+#include <ke_msg.h>
+#include <ke_task.h>
+
+#include "hci_int.h"
 
 static bt_hci_recv_cb hci_rx_cb;
 static const struct ke_msg_handler hci_onchip_default_state[5];
@@ -22,30 +22,26 @@ uint8_t bt_onchiphci_hanlde_rx_acl(void *param, uint8_t *host_buf_data);
  */
 uint8_t bt_onchiphci_interface_init(bt_hci_recv_cb cb)
 {
-	ASSER_ERR(FALSE);
-	return 0xff;
+	__builtin_trap();
 }
 
 /** bt_onchiphci_send
  */
 int bt_onchiphci_send(uint8_t pkt_type, ke_task_id_t dest_id, hci_pkt_struct *pkt)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
 
 /** bt_onchiphci_hanlde_rx_acl
  */
 uint8_t bt_onchiphci_hanlde_rx_acl(void *param, uint8_t *host_buf_data)
 {
-	ASSER_ERR(FALSE);
-	return 0xff;
+	__builtin_trap();
 }
 
 /** bt_hcionchip_recv
  */
 static int bt_hcionchip_recv(const ke_msg_id_t msgid, const void *param, const ke_task_id_t dest_id, const ke_task_id_t src_id)
 {
-	ASSER_ERR(FALSE);
-	return -1;
+	__builtin_trap();
 }
