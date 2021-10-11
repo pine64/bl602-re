@@ -36,7 +36,7 @@ def is_funcion_section(name: str) -> bool:
     return name.startswith('text.') or name.startswith('tcm_code')
 
 
-def diff_lib(lib: Library, build_dir: Path, vendorobj_path: Path) -> Tuple[str, float, bool]:
+def diff_objects(vendorobj_path: Path, reobj_path: Path) -> Tuple[str, float, bool]:
     vendor_dump_result = objdump('-rd', vendorobj_path, capture_output=True)
     vendor_funcs: Dict[str, Function] = {}
     for section_asm in vendor_dump_result.stdout.decode().split('Disassembly of section .')[1:]:
@@ -46,7 +46,7 @@ def diff_lib(lib: Library, build_dir: Path, vendorobj_path: Path) -> Tuple[str, 
         f = Function(lines)
         vendor_funcs[f.name] = f
 
-    re_dump_result = objdump('-rd', build_dir / vendorobj_path.name, capture_output=True)
+    re_dump_result = objdump('-rd', reobj_path, capture_output=True)
     re_funcs: Dict[str, Function] = {}
     for section_asm in re_dump_result.stdout.decode().split('Disassembly of section .')[1:]:
         lines = section_asm.splitlines()
@@ -89,28 +89,54 @@ def diff_lib(lib: Library, build_dir: Path, vendorobj_path: Path) -> Tuple[str, 
 def main():
     parser = ArgumentParser(description="Generate HTML instruction-level diffs between functions in object files")
     parser.add_argument('-o', '--output', type=str, default='report.html', help="Output file name")
-    parser.add_argument(dest='patterns', type=str, nargs='*', help="Glob-like pattern(s) of files to build")
+    parser.add_argument(
+        '-d', '--diff-objects', dest='diff_objects', action='store_true',
+        help="Diff between 2 object directories instead of building sources and diffing them against vendor objects. "
+             "The first given directory acts as the reference directory.")
+    parser.add_argument(
+        dest='patterns_or_dirs', type=str, nargs='*',
+        help="Glob-like pattern(s) of files to build, or 2 directories to diff in object diffing mode")
     args = parser.parse_args()
     html = open(args.output, 'w')
     html.write(HTML_HEADER)
-    patterns: List[str] = args.patterns
-    with TemporaryDirectory(prefix='funcdiff') as tmpdir:
-        for lib in LIBRARIES:
-            html.write(f'<article class="lib"><h1>{lib.name}</h1>')
-            for vendorobj_path in lib.get_vendorobj_paths(patterns):
-                buildtime, result, _ = lib.build_obj(Path(tmpdir), vendorobj_path, CFLAGS)
-                tag = f'<details id="obj_{vendorobj_path.name}" class="obj'
-                if result.returncode == 0:
-                    diff_html, similarity, all_equivalent = diff_lib(lib, Path(tmpdir), vendorobj_path)
-                    html.write(
-                        f'{tag}{" equivalent" if all_equivalent else ""}"><summary><div class="buildtime">{buildtime:.3f}s {similarity * 100:.0f}%</div><h2>{vendorobj_path.name}</h2></summary>{diff_html}\n')
-                else:
-                    html.write(
-                        f'{tag} failed"><summary><div class="buildtime">{buildtime:.3f}s</div><h2>{vendorobj_path.name} 🛑</h2></summary>\n')
-                if len(result.stderr) > 0:
-                    html.write(f'<pre><code>{escape(result.stderr.decode())}</code></pre>')
-                html.write('</details>')
-            html.write('</article>')
+
+    if args.diff_objects:
+        if len(args.patterns_or_dirs) != 2:
+            raise ValueError("Exactly 2 directory paths must be passed in object diffing mode")
+        dir_a = Path(args.patterns_or_dirs[0])
+        if not dir_a.is_dir():
+            raise NotADirectoryError(f"{dir_a} is not a directory")
+        dir_b = Path(args.patterns_or_dirs[1])
+        if not dir_b.is_dir():
+            raise NotADirectoryError(f"{dir_b} is not a directory")
+        html.write('<article class="lib"><h1>Directory diff</h1>')
+        for a_obj_path in dir_a.glob('*.o'):
+            diff_html, similarity, all_equivalent = diff_objects(a_obj_path, dir_b / a_obj_path.name)
+            html.write(
+                f'<details id="obj_{a_obj_path.name}" class="obj{" equivalent" if all_equivalent else ""}"><summary><div class="buildtime">{similarity * 100:.0f}%</div><h2>{a_obj_path.name}</h2></summary>{diff_html}\n')
+            html.write('</details>')
+        html.write('</article>')
+    else:
+        patterns: List[str] = args.patterns_or_dirs
+        with TemporaryDirectory(prefix='funcdiff') as tmpdir:
+            tmpdir_path = Path(tmpdir)
+            for lib in LIBRARIES:
+                html.write(f'<article class="lib"><h1>{lib.name}</h1>')
+                for vendorobj_path in lib.get_vendorobj_paths(patterns):
+                    buildtime, result, _ = lib.build_obj(Path(tmpdir), vendorobj_path, CFLAGS)
+                    tag = f'<details id="obj_{vendorobj_path.name}" class="obj'
+                    if result.returncode == 0:
+                        diff_html, similarity, all_equivalent = diff_objects(
+                            vendorobj_path, tmpdir_path / vendorobj_path.name)
+                        html.write(
+                            f'{tag}{" equivalent" if all_equivalent else ""}"><summary><div class="buildtime">{buildtime:.3f}s {similarity * 100:.0f}%</div><h2>{vendorobj_path.name}</h2></summary>{diff_html}\n')
+                    else:
+                        html.write(
+                            f'{tag} failed"><summary><div class="buildtime">{buildtime:.3f}s</div><h2>{vendorobj_path.name} 🛑</h2></summary>\n')
+                    if len(result.stderr) > 0:
+                        html.write(f'<pre><code>{escape(result.stderr.decode())}</code></pre>')
+                    html.write('</details>')
+                html.write('</article>')
     html.write(HTML_FOOTER)
 
 
