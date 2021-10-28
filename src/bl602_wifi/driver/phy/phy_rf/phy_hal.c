@@ -1,4 +1,4 @@
-#include "phy_hal.h"
+#include <phy_rf/phy_hal.h>
 #include <soc/AON.h>
 
 static struct phy_hal_tag hal_env;

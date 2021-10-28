@@ -1,7 +1,7 @@
 #ifndef _BL602_RF_PRIVATE_H_
 #define _BL602_RF_PRIVATE_H_
 #include <stdint.h>
-
+#define RF_PRIVATE_PRESENT 1
 struct anon_struct1 {
     uint32_t index;
     int32_t dvga;
@@ -78,4 +78,79 @@ void rf_pri_update_power_offset(int32_t * power_offset);
 void rf_pri_update_tx_power_offset(uint8_t channel, int8_t * power_offset);
 void rf_pri_update_txgain_tempos(int16_t tempos);
 void rf_pri_xtalfreq(uint32_t xtalfreq);
+
+enum {
+    E_RF_XTAL_24M = 0,
+    E_RF_XTAL_26M = 1,
+    E_RF_XTAL_32M = 2,
+    E_RF_XTAL_38M4 = 3,
+    E_RF_XTAL_40M = 4,
+    E_RF_XTAL_52M = 5,
+};
+
+enum
+{
+    E_RF_CHANNEL_2404M = 0,
+    E_RF_CHANNEL_2408M,
+    E_RF_CHANNEL_2412M,
+    E_RF_CHANNEL_2416M,
+    E_RF_CHANNEL_2420M,
+    E_RF_CHANNEL_2424M,
+    E_RF_CHANNEL_2428M,
+    E_RF_CHANNEL_2432M,
+    E_RF_CHANNEL_2436M,
+    E_RF_CHANNEL_2440M,
+    E_RF_CHANNEL_2444M,
+    E_RF_CHANNEL_2448M,
+    E_RF_CHANNEL_2452M,
+    E_RF_CHANNEL_2456M,
+    E_RF_CHANNEL_2460M,
+    E_RF_CHANNEL_2464M,
+    E_RF_CHANNEL_2468M,
+    E_RF_CHANNEL_2472M,
+    E_RF_CHANNEL_2476M,
+    E_RF_CHANNEL_2480M,
+    E_RF_CHANNEL_2484M,
+    E_RF_CHANNEL_NUM
+};
+
+enum {
+    E_RF_BRANCH_I = 0,
+    E_RF_BRANCH_Q = 1,
+    E_RF_GAIN = 2,
+    E_RF_PHASE = 3
+};
+
+enum {
+    E_RF_MODE_11B = 0,
+    E_RF_MODE_11G = 1,
+    E_RF_MODE_11N = 2,
+};
+
+enum {
+    E_RF_GC_TBB_0DB = 0,
+    E_RF_GC_TBB_6DB = 1,
+    E_RF_GC_TBB_12DB = 2,
+    E_RF_GC_TBB_18DB = 3,
+    E_RF_GC_TBB_24DB = 4
+};
+
+enum {
+    E_RF_MODE_IDLE = 0,
+    E_RF_MODE_TX,
+    E_RF_MODE_RX,
+    E_RF_MODE_ROSCAL,
+    E_RF_MODE_RCCAL,
+    E_RF_MODE_TXCAL,
+    E_RF_MODE_LO_ACAL,
+    E_RF_MODE_LO_FCAL
+};
+
+enum {
+    E_RF_RXCAL_GAIN_CNT = 4,
+    E_RF_TXCAL_GAIN_CNT = 8,
+    E_RF_TXPWR_TBL_CNT = 16,
+};
+
+
 #endif

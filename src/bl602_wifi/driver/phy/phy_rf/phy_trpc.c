@@ -1,7 +1,7 @@
-#include "phy_trpc.h"
-#include "phy_bl602.h"
-#include "bl602_rf_private.h"
-#include "utils.h"
+#include <phy_rf/phy_trpc.h>
+#include <phy_rf/phy_bl602.h>
+#include <phy_rf/bl602_rf_private.h>
+#include <utils.h>
 
 static int8_t txpwr_vs_rate_table[3][8] = {
     {0x12, 0x12, 0x12, 0x12, 0x12, 0x12, 0x12, 0x12},

@@ -3,14 +3,17 @@
 #include <phy/agc.h>
 #include <phy/agcram.h>
 #include <phy/bz_phy.h>
+#include <phy/bz_phy_agc.h>
 
-#include "phy_bl602.h"
-#include "phy_trpc.h"
-#include "rfc_bl602.h"
-#include "phy_adapt.h"
-#include "phy_tcal.h"
-#include "rf.h"
-#include "assert.h"
+#include <phy_rf/phy_bl602.h>
+#include <phy_rf/phy_trpc.h>
+#include <phy_rf/rfc_bl602.h>
+#include <phy_rf/phy_adapt.h>
+#include <phy_rf/phy_tcal.h>
+#include <phy_rf/rf.h>
+#include <phy_rf/hal_desc.h>
+#include <assert.h>
+#include "macro.h"
 
 static int8_t rxgain_offset_vs_temperature; // :79:15
 static int8_t poweroffset[14]; // :80:15
@@ -37,11 +40,19 @@ void phy_get_channel(struct phy_channel_info *info, uint8_t index) {
 }
 
 uint8_t phy_get_mac_freq(void) {
-    return 0x28;
+    return PHY_BL602_MACCORE_FREQ_MHZ;
 }
 
 uint8_t phy_get_nss(void) {
     return (uint8_t)(( (int8_t)(MDM->version.nss  & 0xf) )- 1);
+}
+
+uint8_t phy_get_nsts(void) {
+    return (uint8_t)(( (int8_t)(MDM->version.nsts  & 0xf) )- 1);
+}
+
+uint8_t phy_get_ntx(){
+    return (uint8_t)(( (int8_t)(MDM->version.ntx  & 0xf) )- 1);
 }
 
 void phy_get_version(uint32_t *version_1,uint32_t *version_2) {
@@ -119,18 +130,21 @@ void agc_config(void) {
 }
 
 void bz_phy_reset(void) {
+    int tx_rampup_time_us = 8;
+    int tx_rampdn_time_us = 4; // 4
+    int tx_padzero_time_us = 0;
     BZ_PHY->r0x2808.bz_phy_tx_rampup_fm_on = 0x1;
-    BZ_PHY->r0x2808.bz_phy_tx_rampup_time_us = 0x8;
+    BZ_PHY->r0x2808.bz_phy_tx_rampup_time_us = tx_rampup_time_us;
     BZ_PHY->r0x280c.bz_phy_tx_rampdn_fm_on = 0x1;
-    BZ_PHY->r0x280c.bz_phy_tx_rampdn_time_us = 0x4;
-    BZ_PHY->r0x280c.bz_phy_tx_rampdn_pad0_time_us = 0x0;
+    BZ_PHY->r0x280c.bz_phy_tx_rampdn_time_us = tx_rampdn_time_us;
+    BZ_PHY->r0x280c.bz_phy_tx_rampdn_pad0_time_us = tx_padzero_time_us;
     BZ_PHY->r0x2854.bz_phy_rx_proc_time_mlsd_us = 0x20;
     BZ_PHY->r0x2854.bz_phy_rx_proc_time_direct_us = 0x1e;
     BZ_PHY->r0x2854.bz_phy_rx_proc_time_eq_us = 0xa;
     BZ_PHY->r0x2854.bz_phy_rx_proc_time_viterbi_us = 0x1e;
     BZ_PHY->r0x2810.bz_phy_rx_dfe_notch_en = 0x0;
     BZ_PHY->r0x2810.bz_phy_rx_dfe_toc_en = 0x1;
-    BZ_PHY->r0x2cac.bz_agc_rbb_ind_min = 0x4;
+    BZ_PHY_AGC->r0x2cac.bz_agc_rbb_ind_min = 0x4;
     return ;
 }
 
@@ -158,7 +172,7 @@ void phy_get_rf_gain_capab(int8_t *max,int8_t *min) {
 }
 
 void phy_get_rf_gain_idx(int8_t *power,uint8_t *idx) {
-    *idx = (uint8_t)rfc_get_power_level(2, (int)*power * 10);
+    *idx = (uint8_t)rfc_get_power_level(RFC_FORMATMOD_11N, (int)*power * 10);
 }
 
 void phy_get_rf_gain_idx_vs_mode(uint8_t mode,int8_t *power,uint8_t *idx) {
@@ -190,15 +204,22 @@ void phy_hw_set_channel(uint8_t band, uint16_t freq, uint16_t freq1, uint8_t cha
     MDM->rxchan.rxdsssen = 1;
     MDM->mdmconf = 0;
     mdm_reset();
-    MDM->txstartdelay = 0xb4;
-    MDM->txctrl1 = 0x1c13;
-    MDM->txctrl3 = 0x2d00438;
-    MDM->TBECTRL0.tbe_count_adjust_20 = 0;
-    MDM->DCESTIMCTRL.value = 0xf0f;
-    MDM->DCESTIMCTRL.WAITHTSTF = 7;
+
+    MDM->txstartdelay = 180;
+    MDM->txctrl1 = 0x1c13; // (txfeofdm80delay = 19, txfeofdm40delay = 28, txfeofdm20delay = 0, txfedsssdelay = 0)(txfeofdm80delay = 0x13, txfeofdm40delay = 0x1c, txfeofdm20delay = 0, txfedsssdelay = 0)
+    MDM->txctrl3 = 0x2d00438; // mdm_txctrl3_pack(txphyrdyhtdelay = 720, txphyrdynonhtdelay = 1080)
+
+    MDM->TBECTRL0.tbe_count_adjust_20 = 0; // TBE for 60MHz
+
+    MDM->DCESTIMCTRL.value = 0xf0f; // (starthtdc = 0, startdc = 0, delaysynctd20 = 0, delaysync = 0xf, waithtstf = 0xf)
+
+    MDM->DCESTIMCTRL.WAITHTSTF = 7; // For FPGA, divide value by 2 due to timing constraints
+
     MDM->r834.tddchtstfmargin = 0x6;
-    MDM->SMOOTHCTRL.value = 0x1880c06;
+    MDM->SMOOTHCTRL.value = 0x1880c06; // smooth enable/auto-selection
     MDM->tbectrl2 = 0x7f03;
+
+    // No ACI margin in BW=20MHz due to latency on HTSIG decoding
     AGC->riu_rwnxagcaci20marg0 = 0;
     AGC->riu_rwnxagcaci20marg1 = 0;
     AGC->riu_rwnxagcaci20marg2 = 0;
@@ -209,7 +230,7 @@ void phy_hw_set_channel(uint8_t band, uint16_t freq, uint16_t freq1, uint8_t cha
         AGC->riu_iqestiterclr = 1;
     }
 
-    rf_set_channel(chantype,freq1);
+    rf_set_channel(chantype, freq1);
 
     uint8_t channel = 0;
 
@@ -231,19 +252,54 @@ void phy_set_channel(uint8_t band,uint8_t type,uint16_t prim20_freq,uint16_t cen
 
 extern uint32_t agcmem[];
 
-void phy_init(phy_cfg_tag *config) {
-    MDM->mdmconf = 0;
+static void agc_download() {
+    AGC->RWNXAGCCNTL.agcfsmreset = 1;
+
+    MDM->r0x874.mdm_agcmemclkforce = 1;
+
+    for (int i = 0; i < PHY_BL602_AGC_MEM_SIZE / 4; i++)
+        AGCRAM->agcram[i] = agcmem[i];
+    
+    MDM->r0x874.mdm_agcmemclkforce = 0;
+    AGC->RWNXAGCCNTL.agcfsmreset = 0;
+    AGC->r0xc020.rc_paoff_delay = 0x14;
+}
+
+static void phy_hw_init(const struct phy_bl602_cfg_tag *cfg) {
+    MDM->mdmconf = BW_20MHZ;
     mdm_reset();
+
+    // realname = rxmode
     MDM->rxchan.value = 0x20d;
+    /*
+    PACK(MDM->rxchan, rxmode) {
+        rxmode.rxdsssen = 1; // MDM_RXDSSSEN_BIT
+        rxmode.pad0 = 0b11; // bit 2-3 MDM_RXMMEN_BIT  MDM_RXGFEN_BIT
+        rxmode.pad2 = 1; // bit 9 MDM_RXSTBCEN_BIT
+    }
+    */
     MDM->rxchan.rxnssmax = phy_get_nss();
-    MDM->rxchan.rxndpnstsmax = MDM->version.nsts;
+    MDM->rxchan.rxndpnstsmax = phy_get_nsts();
     MDM->rxchan.rxldpcen = MDM->version.ldpcdec;
     MDM->rxchan.rxvhten = phy_vht_supported();
     MDM->rxchan.rxmumimoen = MDM->version.mu_mimo_rx;
-    MDM->r3024.precomp = 0x2D;
+    MDM->r3024.precomp = 45;
+    
+    // Rx frame violation check
+    //   [31:15]: VHT
+    //   [14: 4]: HT
+    //   [ 3: 0]: NON-HT
     MDM->rxframeviolationmask = 0xffffffff;
 
     MDM->txchan.value = 0x20d;
+    /*
+    PACK(MDM->txchan, txmode) {
+        txmode.txdsssen = 1; // MDM_TXDSSSEN_BIT
+        txmode.pad1 = 0b11; // bit 2-3 MDM_TXMMEN_BIT     MDM_TXGFEN_BIT  
+        txmode.pad3 = 1; // bit 9 MDM_TXSTBCEN_BIT 
+    }
+    */
+
     MDM->txchan.txnssmax = phy_get_nss();
     MDM->txchan.ntxmax = phy_get_ntx();
     MDM->txchan.txcbwmax = MDM->version.chbw;
@@ -251,10 +307,16 @@ void phy_init(phy_cfg_tag *config) {
     MDM->txchan.vht = phy_vht_supported();
     MDM->txchan.txmumimoen = MDM->version.mu_mimo_tx;
     
+    // AGC reset mode
+    // Don't turn off RF if rxreq de-asserted for few cycles after a RXERR
     MDM->r834.rxtdctrl1 = 1;
+
+    // Enable automatic smoothing filter selection from SNR, then disable force
     MDM->SMOOTHCTRL.CFGSMOOTHFORCE = 0;
     MDM->SMOOTHSNRTHR.smoothsnrthrhigh = 0x1b;
     MDM->SMOOTHSNRTHR.smoothsnrthrmid = 0xf;
+
+    // limit NDBPSMAX to 1x1 80 MCS7 LGI(292.5Mb/s) / SGI (325.0Mb/s)
     MDM->rxctrl1 = 0x4920492;
     MDM->r0x874.rcclkforce = 1;
     
@@ -266,27 +328,33 @@ void phy_init(phy_cfg_tag *config) {
         AGC->r0xb110.riu_rxiqgaincompen = 0;
         AGC->riu_iqestiterclr = 0;
     }
+
+    // limit RIU to 1 or 2 antenna active depending on modem capabilities
     AGC->activeant = 1;
+
+    // limit AGC with a single antenna (path0)
     AGC->RWNXAGCCNTL.combpathsel = 1;
+
+    // CCA timeout
     AGC->RWNXAGCCCATIMEOUT = 4000000;
     AGC->irqmacccatimeouten.irqmacccatimeouten = 1;
-    agc_config();
-    AGC->RWNXAGCCNTL.agcfsmreset = 1;
-
-    MDM->r0x874.mdm_agcmemclkforce = 1;
-
-    for (int i = 0; i < 0x200; i++)
-        AGCRAM->agcram[i] = agcmem[i];
     
-    MDM->r0x874.mdm_agcmemclkforce = 0;
-    AGC->RWNXAGCCNTL.agcfsmreset = 0;
-    AGC->r0xc020.rc_paoff_delay = 0x14;
+    agc_config();
+
+    agc_download();
+}
+
+void phy_init(phy_cfg_tag *config) {
+    const struct phy_bl602_cfg_tag *cfg = (const struct phy_bl602_cfg_tag *)&config->parameters;
+    phy_hw_init(cfg);
+
     phy_env[0].cfg.reserved = (config->parameters)[0];
-    phy_env[0].chnl_center1_freq = 0xff;
-    phy_env[0].chnl_center2_freq = 0xff;
-    phy_env[0].chnl_prim20_freq = 0xff;
-    phy_env[0].band = 0x00;
+    phy_env[0].chnl_center1_freq = PHY_UNUSED;
+    phy_env[0].chnl_center2_freq = PHY_UNUSED;
+    phy_env[0].chnl_prim20_freq = PHY_UNUSED;
+    phy_env[0].band = PHY_BAND_2G4;
     phy_env[0].chnl_type = PHY_CHNL_BW_OTHER;
+
     trpc_init();
     pa_init();
     phy_tcal_reset();
@@ -294,9 +362,9 @@ void phy_init(phy_cfg_tag *config) {
 }
 
 uint8_t phy_vht_supported() {
-    if (MDM->version.vht) // TODO: verify this cond
+    if (MDM->version.vht)
         return 1;
-    return ((MDM->version.chbw) >> 1) & 1;
+    return MDM->version.chbw > PHY_CHNL_BW_40;
 }
 
 uint8_t phy_ldpc_rx_supported(void) {
@@ -322,7 +390,8 @@ uint8_t phy_mu_mimo_tx_supported(void) {
 void phy_rc_isr(void) {
     uint32_t val = AGC->rwnxmacintstatmasked.value;
     AGC->rwnxmacintack = val;
-    if (val & 0x100) {
+    if (val & 0x100) { 
+        // RIU_IRQMACCCATIMEOUTMASKED_BIT
         mdm_reset();
     }
 }

@@ -1,4 +1,4 @@
-#include "phy_helper.h"
+#include <phy_rf/phy_helper.h>
 #include <phy/mac_core.h>
 #include <phy/sysctrl.h>
 #include <soc/glb.h>

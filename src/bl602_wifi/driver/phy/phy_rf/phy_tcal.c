@@ -1,14 +1,14 @@
-#include "phy_tcal.h"
-#include "phy_hal.h"
-#include "phy_bl602.h"
-#include "phy_trpc.h"
-#include "bl602_rf_private.h"
-#include "utils.h"
+#include <phy_rf/phy_tcal.h>
+#include <phy_rf/phy_hal.h>
+#include <phy_rf/phy_bl602.h>
+#include <phy_rf/phy_trpc.h>
+#include <phy_rf/bl602_rf_private.h>
+#include <utils.h>
 
 static struct tcal_tag tcal_env; // :41:24
 
 void phy_tcal_reset(void) {
-    memset(&tcal_env,0,0x38);
+    memset(&tcal_env, 0, sizeof(tcal_env));
     tcal_env.prev_temperature = 0x19;
     tcal_env.last_action_temperature[0] = 0x19;
     tcal_env.last_action_temperature[1] = 0x19;

@@ -1,7 +1,7 @@
 #ifndef _PHY_ADAPT_H_
 #define _PHY_ADAPT_H_
 #include <stdint.h>
-#include "hal_desc.h"
+#include <phy_rf/hal_desc.h>
 
 typedef struct {
     int8_t rssi; // +0

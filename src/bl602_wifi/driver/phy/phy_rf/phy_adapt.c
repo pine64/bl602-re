@@ -1,7 +1,7 @@
-#include "phy_adapt.h"
-#include "utils.h"
-#include "phy_hal.h"
-#include "assert.h"
+#include <phy_rf/phy_adapt.h>
+#include <utils.h>
+#include <phy_rf/phy_hal.h>
+#include <assert.h>
 
 static pa_state_t pa_env[4]; // :136:19
 
@@ -117,7 +117,7 @@ void pa_init(void) {
 
 
 float calc_ppm_dsss(uint8_t rxv_freqoff) {
-    return ((double)rxv_freqoff) * 0.7;
+    return ((double)((int8_t)rxv_freqoff)) * 0.7;
 }
 
 float calc_ppm_ofdm(uint16_t rxv_freqoff) {

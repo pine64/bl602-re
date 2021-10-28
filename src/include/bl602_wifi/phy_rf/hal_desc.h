@@ -2,7 +2,18 @@
 #ifndef _HAL_DESC_H_
 #define _HAL_DESC_H_
 #include <stdint.h>
-#include "phy.h"
+#include <phy_rf/phy.h>
+
+/// 20 MHz bandwidth
+#define BW_20MHZ                  0
+/// 40 MHz bandwidth
+#define BW_40MHZ                  1
+/// 80 MHz bandwidth
+#define BW_80MHZ                  2
+/// 160 or 80+80 MHz bandwidth
+#define BW_160MHZ                 3
+
+
 struct tx_policy_tbl {
     uint32_t upatterntx; // +0
     uint32_t phycntrlinfo1; // +4
