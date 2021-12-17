@@ -5,6 +5,8 @@
 #include <co_hci.h>
 #include <ke_msg.h>
 #include <ke_task.h>
+#include <lld/lld_evt.h>
+#include <lld/lld_pdu.h>
 
 static int hci_le_con_update_cmd_handler(const ke_msg_id_t msgid, const struct hci_le_con_update_cmd *param, const ke_task_id_t dest_id, const ke_task_id_t src_id);
 static int hci_le_rd_chnl_map_cmd_handler(const ke_msg_id_t msgid, const struct hci_basic_conhdl_cmd *param, const ke_task_id_t dest_id, const ke_task_id_t src_id);
@@ -40,7 +42,25 @@ int llc_hci_command_handler(const ke_msg_id_t msgid, const void *param, const ke
  */
 int llc_hci_acl_data_tx_handler(const ke_msg_id_t msgid, const struct hci_acl_data_tx *param, const ke_task_id_t dest_id, const ke_task_id_t src_id)
 {
-	__builtin_trap();
+	ke_state_t state;
+	bool bVar1;
+
+	state = ble_ke_state_get(dest_id);
+	if (((state & 0xf) == 0xf) || (param->length == 0))
+	{
+		ble_co_list_push_back
+		(llc_common_nb_of_pkt_comp_evt_send,&em_buf_env + (param->buf->idx + 0x29) * 2);
+		llc_common_nb_of_pkt_comp_evt_send(param->conhdl,'\x01');
+	}
+	else
+	{
+		bVar1 = lld_pdu_data_send(param);
+		if (CONCAT31(extraout_var,bVar1) == 0) {
+			llc_common_nb_of_pkt_comp_evt_send(param->conhdl,'\x01');
+		}
+		lld_evt_schedule_next(*(undefined4 *)(*(int *)(&llc_env + (uint)param->conhdl * 4) + 0x10));
+	}
+	return 0;
 }
 
 /** hci_le_con_update_cmd_handler

@@ -2,6 +2,7 @@
 
 #include <ecc_p256.h>
 
+
 static int llm_enc_req_handler(const ke_msg_id_t msgid, const struct llm_enc_req *param, const ke_task_id_t dest_id, const ke_task_id_t src_id);
 static int llm_ecc_result_ind_handler(const ke_msg_id_t msgid, const struct ecc_result_ind *param, const ke_task_id_t dest_id, const ke_task_id_t src_id);
 static int lld_stop_ind_handler(const ke_msg_id_t msgid, const void *param, const ke_task_id_t dest_id, const ke_task_id_t src_id);

@@ -61,6 +61,7 @@ extern struct rwip_rf_api rwip_rf;
 extern const struct rwip_prio rwip_priority[7];
 extern const uint8_t rwip_coex_cfg[5];
 
+void rwip_init(uint32_t error);
 void rwip_schedule(void);
 
 #endif /* BLECONTROLLER_MODULES_RWIP_RWIP_H */

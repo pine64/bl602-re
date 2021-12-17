@@ -3,8 +3,9 @@
 
 #include <stdint.h>
 
+#include <co_bt_defines.h>
 #include <ke_msg.h>
-#include <llc/llc.h>
+#include <ke_task.h>
 
 enum llm_state_id {
     LLM_ADV_STATE_MASK = 240,

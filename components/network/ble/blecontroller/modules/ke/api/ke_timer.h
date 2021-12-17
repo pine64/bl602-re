@@ -13,4 +13,10 @@ struct ke_timer {
     uint32_t time; // +8
 };
 
+void ble_ke_timer_init(void);
+void ble_ke_timer_set(const ke_msg_id_t timer_id, const ke_task_id_t task_id, uint32_t delay);
+void ble_ke_timer_clear(const ke_msg_id_t timer_id, const ke_task_id_t task_id);
+bool ble_ke_timer_active(const ke_msg_id_t timer_id, const ke_task_id_t task_id);
+uint32_t ble_ke_timer_target_get(void);
+
 #endif /* BLECONTROLLER_MODULES_KE_TIMER_H */

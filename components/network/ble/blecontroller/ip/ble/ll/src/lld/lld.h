@@ -5,6 +5,7 @@
 #include <stdint.h>
 
 #include <llm/llm.h>
+#include <llc/llc_task.h>
 
 void lld_init(bool reset);
 void lld_core_reset(void);

@@ -5,6 +5,7 @@
 #include <stdint.h>
 
 #include <co_list.h>
+#include <llc/llc_task.h>
 
 enum lld_evt_flag {
     LLD_EVT_FLAG_WAITING_ACK = 1,
@@ -123,5 +124,25 @@ struct lld_evt_delete_tag {
     bool send_ind; // +9
 };
 struct lld_evt_env_tag lld_evt_env;
+
+uint8_t lld_evt_sca_get(void);
+uint32_t lld_evt_time_get(void);
+bool lld_evt_time_cmp(uint32_t time1, uint32_t time2);
+struct ea_elt_tag *lld_evt_scan_create(uint16_t handle, uint16_t latency);
+struct ea_elt_tag *lld_evt_adv_create(uint16_t handle, uint16_t mininterval, uint16_t maxinterval, bool restart_pol);
+struct ea_elt_tag *lld_evt_update_create(struct ea_elt_tag *elt_old, uint16_t ce_len, uint16_t mininterval, uint16_t maxinterval, uint16_t latency, uint8_t pref_period, struct lld_evt_update_tag *upd_par);
+struct ea_elt_tag *lld_evt_move_to_slave(struct llc_create_con_req_ind *con_par, struct llm_pdu_con_req_rx *con_req_pdu, struct ea_elt_tag *elt_adv, uint16_t conhdl);
+void lld_evt_slave_update(const struct llcp_con_upd_ind *param_pdu, struct ea_elt_tag *elt_old);
+struct ea_elt_tag *lld_evt_move_to_master(struct ea_elt_tag *elt_scan, uint16_t conhdl, const struct llc_create_con_req_ind *pdu_tx, uint8_t rx_hdl);
+void lld_evt_schedule_next(struct ea_elt_tag *elt);
+void lld_evt_init(bool reset);
+void lld_evt_init_evt(struct lld_evt_tag *evt);
+void lld_evt_elt_insert(struct ea_elt_tag *elt, bool inc_prio);
+bool lld_evt_elt_delete(struct ea_elt_tag *elt, bool flush_data, bool send_indication);
+void lld_evt_end_isr(bool apfm);
+void lld_evt_rx_isr(void);
+void lld_evt_afs_isr(uint8_t num);
+void lld_evt_timer_isr(void);
+void lld_evt_delete_elt_push(struct ea_elt_tag *elt, bool flush, bool send_indication);
 
 #endif // __LLD_EVT_H__

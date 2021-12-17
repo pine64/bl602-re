@@ -33,4 +33,9 @@ struct ke_task_desc {
     uint16_t idx_max; // +14
 };
 
+void ble_ke_task_init(void);
+uint8_t ble_ke_task_create(uint8_t task_type, const struct ke_task_desc *p_task_desc);
+ke_state_t ble_ke_state_get(const ke_task_id_t id);
+void ble_ke_state_set(const ke_task_id_t id, const ke_state_t state_id);
+
 #endif /* BLECONTROLLER_MODULES_KE_TASK_H */

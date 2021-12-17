@@ -1,6 +1,10 @@
 #include "lld_pdu.h"
 
+#include <co_list.h>
+#include <co_string.h>
 #include <em/em_buf.h>
+#include <ke_mem.h>
+#include <llc/llc.h>
 #include <lld/lld_evt.h>
 
 enum lld_pdu_pack_status {
@@ -89,7 +93,25 @@ void lld_pdu_data_tx_push(struct lld_evt_tag *evt, struct em_desc_node *txnode, 
  */
 bool lld_pdu_data_send(void *param)
 {
-	__builtin_trap();
+	const struct hci_acl_data_tx *frame = param;
+	uint32_t mstatus, dummy;
+	struct lld_pdu_data_tx_tag *pdu = ble_ke_malloc(sizeof(struct lld_pdu_data_tx_tag), 0);
+	if (pdu == NULL) {
+		return false;
+	}
+	struct ea_elt_tag *elt = llc_env[frame->conhdl]->elt;
+	// TODO: offset 0x30 is further than sizeof(ea_elt_tag), so it's another struct, but which one?
+	struct co_list *list = (struct co_list*) (((uint8_t*)elt) + 0x30);
+	pdu->buf = frame->buf;
+	pdu->conhdl = frame->conhdl;
+	pdu->length = frame->length;
+	pdu->pb_bc_flag = frame->pb_bc_flag;
+	pdu->idx = 0x1a;
+	__asm__ volatile("csrr %0, mstatus" : "=r" (mstatus));
+	__asm__ volatile("csrrci %0, mstatus, 8" : "=r" (dummy));
+	ble_co_list_push_back(list, &pdu->hdr);
+	__asm__ volatile("csrw mstatus, %0" :: "r" (mstatus));
+	return true;
 }
 
 /** lld_pdu_tx_push
@@ -152,7 +174,17 @@ static void lld_pdu_llcp_con_param_rsp_unpk(uint16_t pdu_ptr, uint8_t parlen, ui
  */
 static void lld_pdu_llcp_length_req_unpk(uint16_t pdu_ptr, uint8_t parlen, uint8_t *param)
 {
-	__builtin_trap();
+	const uint32_t base = 0x28008000;
+	struct llcp_length_req *req = (struct llcp_length_req*) param;
+	uint16_t value;
+	(*ble_memcpy_ptr)(&value, (void *)(pdu_ptr + base), sizeof(value));
+	req->max_rx_octets = value;
+	(*ble_memcpy_ptr)(&value, (void *)((pdu_ptr + 2U & 0xffff) + base), sizeof(value));
+	req->max_rx_time = value;
+	(*ble_memcpy_ptr)(&value, (void *)((pdu_ptr + 4U & 0xffff) + base), sizeof(value));
+	req->max_tx_octets = value;
+	(*ble_memcpy_ptr)(&value, (void *)((pdu_ptr + 6U & 0xffff) + base), sizeof(value));
+	req->max_tx_time = value;
 }
 
 /** lld_pdu_llcp_length_rsp_unpk
