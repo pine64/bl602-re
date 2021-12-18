@@ -9,7 +9,11 @@
 
 == Toolset
 
+* Our `funcdiff.py` and  `headerdiff.py` tools. See link:script/README.md[their documentation]
+
 * https://github.com/riscv/riscv-gnu-toolchain[RISC-V GNU Compiler Toolchain]
+
+* https://ghidra-sre.org/[Ghidra], an IDA-like RE suite courtesy of the NSA. Use https://github.com/ElementW/ghidra[this fork] if you want to load RISC-V binaries that have relocations (i.e. unlinked bins)
 
 * https://cutter.re/[Cutter], a graphical frontend for
   https://www.radare.org/r/[radare2]
@@ -19,6 +23,27 @@
 
 * Add your favorite disassembly tools here. If the tool is not free, mark it
   with (non-free).
+
+== Where to get started
+
+WiFi and BLE-related binaries available in the BL602 are included within this repo:
+
+* `blobs/` contains `.a` files of the libraries along with compiled examples of their use, as `.elf`.
+
+* `images/` has `.bin` files of factory PineCone firmware. See link:images/README.md[the README for the directory].
+
+* `libatcmd/`, `libbl602_wifi/` and `libblecontroller/` contain disassembled binaries of the libraries' object files, along with disassembly of their respective example app.
+
+Sources that are being reverse engineered are located in `components/`, and reconstructed headers are in `dwarf/` and `headers/`.
+Tooling is available in the `script/` directory.
+
+[IMPORTANT]
+.Using proprietary RivieraWaves code
+====
+This reverse-engineering project tries to stay clear of any possible copyright problems coming from RivieraWaves; i.e. the goal is https://en.wikipedia.org/wiki/Clean_room_design[clean-room RE].
+Whatever you do, do not insert proprietary `Copyright (C) RivieraWaves` code in the sources in `components/` if this code isn't available in the BL602 SDK!
+RivieraWaves code is known to be easily available on GitHub with simple searches, but avoid looking at it, unless you wish to forfeit your right to directly contribute code here.
+====
 
 == Resources
 
