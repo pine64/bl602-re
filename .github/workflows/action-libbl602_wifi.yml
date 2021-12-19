@@ -11,7 +11,7 @@ jobs:
         version: latest
         platform: x64
     - name: Build libbl602_wifi
-      run: mkdir build && cmake -DUSE_CLANG=ON .. && make -j
+      run: mkdir build && cd build && cmake -DUSE_CLANG=ON .. && make -j
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
       with:
