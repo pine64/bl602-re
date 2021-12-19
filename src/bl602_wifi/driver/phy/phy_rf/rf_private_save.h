@@ -1,0 +1,29 @@
+#ifdef RF_PRI_SAVE
+RF_PRI_SAVE(rf_fsm_ctrl_hw);
+RF_PRI_SAVE(rfctrl_hw_en);
+RF_PRI_SAVE(rfcal_ctrlen);
+RF_PRI_SAVE(pucr1);
+RF_PRI_SAVE(fbdv);
+RF_PRI_SAVE(sdm1);
+RF_PRI_SAVE(sdm2);
+RF_PRI_SAVE(rbb3);
+RF_PRI_SAVE(adda1);
+RF_PRI_SAVE(dfe_ctrl_0);
+RF_PRI_SAVE(dfe_ctrl_3);
+RF_PRI_SAVE(dfe_ctrl_6);
+RF_PRI_SAVE(dfe_ctrl_7);
+RF_PRI_SAVE(trx_gain1);
+RF_PRI_SAVE(singen_ctrl0);
+RF_PRI_SAVE(singen_ctrl2);
+RF_PRI_SAVE(singen_ctrl3);
+RF_PRI_SAVE(rf_sram_ctrl0);
+RF_PRI_SAVE(rf_sram_ctrl1);
+RF_PRI_SAVE(rf_sram_ctrl2);
+RF_PRI_SAVE(rf_resv_reg_1);
+RF_PRI_SAVE(pa1);
+RF_PRI_SAVE(ten_ac);
+RF_PRI_SAVE(rfif_dfe_ctrl0);
+RF_PRI_SAVE(tbb);
+RF_PRI_SAVE(vco2);
+#undef RF_PRI_SAVE
+#endif
