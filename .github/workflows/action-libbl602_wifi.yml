@@ -16,5 +16,5 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: libbl602_wifi
-        path: build/src/libbl602_wifi.a
+        path: src/libbl602_wifi.a
     
