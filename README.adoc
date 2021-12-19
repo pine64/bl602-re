@@ -45,6 +45,17 @@ Whatever you do, do not insert proprietary `Copyright (C) RivieraWaves` code in 
 RivieraWaves code is known to be easily available on GitHub with simple searches, but avoid looking at it, unless you wish to forfeit your right to directly contribute code here.
 ====
 
+== BL602 wifi
+I'm working on the reverse engineering of the bl602 wifi. 
+
+The source code is located in `src/` instead of `components/**`.
+
+Using `cmake` to build the wifi module and it will automatically add other components
+from the original `libbl602_wifi.a` and create a new one.
+
+This should generate a usable `libbl602_wifi.a` to link against other bl602 components.
+But, I'm still working on this and it hasn't been tested yet. 
+
 == Resources
 
 * https://github.com/pine64/bl602-docs[Pine64 SDK fork's documentation], if you figure something out that's documentation-worthy, please update that documentation.
