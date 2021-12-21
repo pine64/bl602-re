@@ -18,6 +18,8 @@
 static int8_t rxgain_offset_vs_temperature; // :79:15
 static int8_t poweroffset[14]; // :80:15
 
+struct phy_env_tag phy_env[1]; // :75:20
+
 void phy_config_rxgain(int offset) {
     if (rxgain_offset_vs_temperature != offset) {
         rxgain_offset_vs_temperature = (int8_t) offset;

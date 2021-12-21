@@ -31,7 +31,6 @@ struct phy_env_tag {
     uint8_t band;
     uint8_t chnl_type;
 }; // :54:8
-struct phy_env_tag phy_env[1]; // :75:20
 
 void phy_config_rxgain(int offset);
 uint8_t phy_get_mac_freq();
