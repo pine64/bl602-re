@@ -18,3 +18,7 @@ void rf_init(void) {
 void rf_lo_isr(void) {
     return ;
 }
+
+void rf_dump_status(void) {
+    return ;
+}
