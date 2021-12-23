@@ -24,5 +24,6 @@ extern struct hal_dma_env_tag hal_dma_env;
 
 void hal_dma_init(void);
 void hal_dma_push(struct hal_dma_desc_tag *desc, int type);
+void hal_dma_evt(int dma_queue);
 
 #endif // _HAL_DMA_H_
