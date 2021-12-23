@@ -8,7 +8,7 @@ typedef union {
 		uint32_t irq_unmask_clear[0x2]; // @ 0x18
 		uint32_t irq_polarity[0x2]; // @ 0x20
 		uint8_t pad0[0x18];
-		uint32_t irq_index[0x2]; // @ 0x40
+		uint32_t irq_index; // @ 0x40
 	};
 } intc_regs;
 #define INTC_BASE 0x44910000

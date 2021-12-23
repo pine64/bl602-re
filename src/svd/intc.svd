@@ -57,13 +57,9 @@
             <dimIndex>0-1</dimIndex>
         </register>
         <register>
-            <name>irq_index%s</name>
+            <name>irq_index</name>
             <description>irq_index.</description>
             <addressOffset>0x40</addressOffset>
-            <size>16</size>
-            <dim>2</dim>
-            <dimIncrement>4</dimIncrement>
-            <dimIndex>0-1</dimIndex>
         </register>
     </registers>
 </peripheral>
