@@ -43,5 +43,5 @@
 #define _APPLY_NEXT() APPLY_NEXT
 
 #define PACK(var, name) for (int tip = 1; tip;) for (__typeof__ (var) name = var; tip; tip = 0, var = name)
-
+#define STATIC_ASSERT(COND,MSG) typedef char static_assertion_##MSG[(COND)?1:-1]
 #endif
