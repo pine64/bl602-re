@@ -41,7 +41,7 @@ void txl_cntrl_flush_ac(uint8_t access_category, uint32_t status);
 void txl_cntrl_clear_bcn_ac(void);
 void txl_cntrl_clear_all_ac(void);
 void txl_cntrl_inc_pck_cnt(void);
-void txl_payload_handle(int access_category);
+void txl_payload_handle(void);
 void txl_transmit_trigger(void);
 
 #endif 
