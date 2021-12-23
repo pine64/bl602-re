@@ -6,6 +6,8 @@
 #include <lmac/tx/txl/txl_cntrl.h>
 #include <lmac/rx/rxl/rxl_cntrl.h>
 #include <hal/hal_machw.h>
+#include <phy/ipc.h>
+#include <modules/ke/ke_event.h>
 
 void intc_spurious(void) {
     ASSERT_ERR(0);
@@ -70,12 +72,12 @@ void mac_irq(void) {
     ipc_emb_notify();
 }
 
+void ipc_host_disable_irq_e2a(void) {
+    IPC->emb2app_unmask_clear = 0x7ff;
+}
+
 void bl_irq_handler(void) {
     ipc_host_disable_irq_e2a();
     ke_evt_set(0x40000000);
     ipc_emb_notify();
-}
-
-void ipc_host_disable_irq_e2a(void) {
-    IPC->emb2app_unmask_clear = 0x7ff;
 }
