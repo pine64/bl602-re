@@ -432,7 +432,26 @@ Reg("ptr_config", 0x44920004)
 peris['ipc'] = Peripheral(peripheral('ipc', 0x44800000, 0x1000))
 
 for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver/reg_ipc_app.h", pattern='brief'):
-    RegFromComment(offset + 0x44800000, code)
+    RegFromComment(offset + 0x44800000, code.lower())
+Reg('emb2app_line_sel_low', 0x44800000 + 0x14)
+for i in range(0,16):
+    FieldBit(f'emb2app{i}_sel', i*2, 2)
+Reg('emb2app_line_sel_high', 0x44800000 + 0x18)
+ipc_names = []
+def flipname(name):
+    name = name.replace('app', 'XXXXX')
+    name = name.replace('emb', 'YYYYY')
+    name = name.replace('XXXXX', 'emb')
+    name = name.replace('YYYYY', 'app')
+    return name
+for reg in peris['ipc'].regs:
+    if (len(reg.fields) == 1):
+        reg.fields = []
+    ipc_names.append((flipname(reg.name), reg.offset + 0x100, reg.fields))
+for name, offset, f in ipc_names:
+    Reg(name, offset + 0x44800000)
+    for i in f:
+        FieldBit(flipname(i.name), i.lsb, i.len)
 
 #open('../src/include/phy/ipc.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))

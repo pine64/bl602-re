@@ -12,88 +12,258 @@
     </addressBlock>
     <registers>
         <register>
-            <name>APP2EMB_TRIGGER</name>
-            <description>APP2EMB_TRIGGER.</description>
+            <name>app2emb_trigger</name>
+            <description>app2emb_trigger.</description>
             <addressOffset>0x0</addressOffset>
-            <fields>
-                <field>
-                    <name>APP2EMB_TRIGGER</name>
-                    <msb>31</msb>
-                    <lsb>0</lsb>
-                </field>
-            </fields>
         </register>
         <register>
-            <name>EMB2APP_RAWSTATUS</name>
-            <description>EMB2APP_RAWSTATUS.</description>
+            <name>emb2app_rawstatus</name>
+            <description>emb2app_rawstatus.</description>
             <addressOffset>0x4</addressOffset>
-            <fields>
-                <field>
-                    <name>EMB2APP_RAWSTATUS</name>
-                    <msb>31</msb>
-                    <lsb>0</lsb>
-                </field>
-            </fields>
         </register>
         <register>
-            <name>EMB2APP_ACK</name>
-            <description>EMB2APP_ACK.</description>
+            <name>emb2app_ack</name>
+            <description>emb2app_ack.</description>
             <addressOffset>0x8</addressOffset>
-            <fields>
-                <field>
-                    <name>EMB2APP_ACK</name>
-                    <msb>31</msb>
-                    <lsb>0</lsb>
-                </field>
-            </fields>
         </register>
         <register>
-            <name>EMB2APP_UNMASK_SET</name>
-            <description>EMB2APP_UNMASK_SET.</description>
+            <name>emb2app_unmask_set</name>
+            <description>emb2app_unmask_set.</description>
             <addressOffset>0xc</addressOffset>
-            <fields>
-                <field>
-                    <name>EMB2APP_UNMASK</name>
-                    <msb>31</msb>
-                    <lsb>0</lsb>
-                </field>
-            </fields>
         </register>
         <register>
-            <name>EMB2APP_UNMASK_CLEAR</name>
-            <description>EMB2APP_UNMASK_CLEAR.</description>
+            <name>emb2app_unmask_clear</name>
+            <description>emb2app_unmask_clear.</description>
             <addressOffset>0x10</addressOffset>
+        </register>
+        <register>
+            <name>emb2app_line_sel_low</name>
+            <description>emb2app_line_sel_low.</description>
+            <addressOffset>0x14</addressOffset>
             <fields>
                 <field>
-                    <name>EMB2APP_UNMASK</name>
+                    <name>emb2app15_sel</name>
                     <msb>31</msb>
+                    <lsb>30</lsb>
+                </field>
+                <field>
+                    <name>emb2app14_sel</name>
+                    <msb>29</msb>
+                    <lsb>28</lsb>
+                </field>
+                <field>
+                    <name>emb2app13_sel</name>
+                    <msb>27</msb>
+                    <lsb>26</lsb>
+                </field>
+                <field>
+                    <name>emb2app12_sel</name>
+                    <msb>25</msb>
+                    <lsb>24</lsb>
+                </field>
+                <field>
+                    <name>emb2app11_sel</name>
+                    <msb>23</msb>
+                    <lsb>22</lsb>
+                </field>
+                <field>
+                    <name>emb2app10_sel</name>
+                    <msb>21</msb>
+                    <lsb>20</lsb>
+                </field>
+                <field>
+                    <name>emb2app9_sel</name>
+                    <msb>19</msb>
+                    <lsb>18</lsb>
+                </field>
+                <field>
+                    <name>emb2app8_sel</name>
+                    <msb>17</msb>
+                    <lsb>16</lsb>
+                </field>
+                <field>
+                    <name>emb2app7_sel</name>
+                    <msb>15</msb>
+                    <lsb>14</lsb>
+                </field>
+                <field>
+                    <name>emb2app6_sel</name>
+                    <msb>13</msb>
+                    <lsb>12</lsb>
+                </field>
+                <field>
+                    <name>emb2app5_sel</name>
+                    <msb>11</msb>
+                    <lsb>10</lsb>
+                </field>
+                <field>
+                    <name>emb2app4_sel</name>
+                    <msb>9</msb>
+                    <lsb>8</lsb>
+                </field>
+                <field>
+                    <name>emb2app3_sel</name>
+                    <msb>7</msb>
+                    <lsb>6</lsb>
+                </field>
+                <field>
+                    <name>emb2app2_sel</name>
+                    <msb>5</msb>
+                    <lsb>4</lsb>
+                </field>
+                <field>
+                    <name>emb2app1_sel</name>
+                    <msb>3</msb>
+                    <lsb>2</lsb>
+                </field>
+                <field>
+                    <name>emb2app0_sel</name>
+                    <msb>1</msb>
                     <lsb>0</lsb>
                 </field>
             </fields>
         </register>
         <register>
-            <name>EMB2APP_STATUS</name>
-            <description>EMB2APP_STATUS.</description>
+            <name>emb2app_line_sel_high</name>
+            <description>emb2app_line_sel_high.</description>
+            <addressOffset>0x18</addressOffset>
+        </register>
+        <register>
+            <name>emb2app_status</name>
+            <description>emb2app_status.</description>
             <addressOffset>0x1c</addressOffset>
+        </register>
+        <register>
+            <name>app_signature</name>
+            <description>app_signature.</description>
+            <addressOffset>0x40</addressOffset>
+        </register>
+        <register>
+            <name>emb2app_trigger</name>
+            <description>emb2app_trigger.</description>
+            <addressOffset>0x100</addressOffset>
+        </register>
+        <register>
+            <name>app2emb_rawstatus</name>
+            <description>app2emb_rawstatus.</description>
+            <addressOffset>0x104</addressOffset>
+        </register>
+        <register>
+            <name>app2emb_ack</name>
+            <description>app2emb_ack.</description>
+            <addressOffset>0x108</addressOffset>
+        </register>
+        <register>
+            <name>app2emb_unmask_set</name>
+            <description>app2emb_unmask_set.</description>
+            <addressOffset>0x10c</addressOffset>
+        </register>
+        <register>
+            <name>app2emb_unmask_clear</name>
+            <description>app2emb_unmask_clear.</description>
+            <addressOffset>0x110</addressOffset>
+        </register>
+        <register>
+            <name>app2emb_line_sel_low</name>
+            <description>app2emb_line_sel_low.</description>
+            <addressOffset>0x114</addressOffset>
             <fields>
                 <field>
-                    <name>EMB2APP_STATUS</name>
+                    <name>app2emb15_sel</name>
                     <msb>31</msb>
+                    <lsb>30</lsb>
+                </field>
+                <field>
+                    <name>app2emb14_sel</name>
+                    <msb>29</msb>
+                    <lsb>28</lsb>
+                </field>
+                <field>
+                    <name>app2emb13_sel</name>
+                    <msb>27</msb>
+                    <lsb>26</lsb>
+                </field>
+                <field>
+                    <name>app2emb12_sel</name>
+                    <msb>25</msb>
+                    <lsb>24</lsb>
+                </field>
+                <field>
+                    <name>app2emb11_sel</name>
+                    <msb>23</msb>
+                    <lsb>22</lsb>
+                </field>
+                <field>
+                    <name>app2emb10_sel</name>
+                    <msb>21</msb>
+                    <lsb>20</lsb>
+                </field>
+                <field>
+                    <name>app2emb9_sel</name>
+                    <msb>19</msb>
+                    <lsb>18</lsb>
+                </field>
+                <field>
+                    <name>app2emb8_sel</name>
+                    <msb>17</msb>
+                    <lsb>16</lsb>
+                </field>
+                <field>
+                    <name>app2emb7_sel</name>
+                    <msb>15</msb>
+                    <lsb>14</lsb>
+                </field>
+                <field>
+                    <name>app2emb6_sel</name>
+                    <msb>13</msb>
+                    <lsb>12</lsb>
+                </field>
+                <field>
+                    <name>app2emb5_sel</name>
+                    <msb>11</msb>
+                    <lsb>10</lsb>
+                </field>
+                <field>
+                    <name>app2emb4_sel</name>
+                    <msb>9</msb>
+                    <lsb>8</lsb>
+                </field>
+                <field>
+                    <name>app2emb3_sel</name>
+                    <msb>7</msb>
+                    <lsb>6</lsb>
+                </field>
+                <field>
+                    <name>app2emb2_sel</name>
+                    <msb>5</msb>
+                    <lsb>4</lsb>
+                </field>
+                <field>
+                    <name>app2emb1_sel</name>
+                    <msb>3</msb>
+                    <lsb>2</lsb>
+                </field>
+                <field>
+                    <name>app2emb0_sel</name>
+                    <msb>1</msb>
                     <lsb>0</lsb>
                 </field>
             </fields>
         </register>
         <register>
-            <name>APP_SIGNATURE</name>
-            <description>APP_SIGNATURE.</description>
-            <addressOffset>0x40</addressOffset>
-            <fields>
-                <field>
-                    <name>APP_SIGNATURE</name>
-                    <msb>31</msb>
-                    <lsb>0</lsb>
-                </field>
-            </fields>
+            <name>app2emb_line_sel_high</name>
+            <description>app2emb_line_sel_high.</description>
+            <addressOffset>0x118</addressOffset>
+        </register>
+        <register>
+            <name>app2emb_status</name>
+            <description>app2emb_status.</description>
+            <addressOffset>0x11c</addressOffset>
+        </register>
+        <register>
+            <name>emb_signature</name>
+            <description>emb_signature.</description>
+            <addressOffset>0x140</addressOffset>
         </register>
     </registers>
 </peripheral>
