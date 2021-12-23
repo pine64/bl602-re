@@ -13,7 +13,7 @@
 #include <phy_rf/rf.h>
 #include <phy_rf/hal_desc.h>
 #include <assert.h>
-#include "macro.h"
+#include <macro.h>
 
 static int8_t rxgain_offset_vs_temperature; // :79:15
 static int8_t poweroffset[14]; // :80:15
