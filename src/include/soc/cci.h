@@ -47,4 +47,4 @@ typedef union {
 	};
 } cci_regs;
 #define CCI_BASE 0x40008000
-#define CCI ((cci_regs* volatile)(CCI_BASE))
+#define CCI ((volatile cci_regs*)(CCI_BASE))

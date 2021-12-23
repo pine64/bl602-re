@@ -965,4 +965,4 @@ typedef union {
 	};
 } glb_regs;
 #define GLB_BASE 0x40000000
-#define GLB ((glb_regs* volatile)(GLB_BASE))
+#define GLB ((volatile glb_regs*)(GLB_BASE))

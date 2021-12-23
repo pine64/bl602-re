@@ -883,4 +883,4 @@ typedef union {
 	};
 } bz_phy_regs;
 #define BZ_PHY_BASE 0x40002800
-#define BZ_PHY ((bz_phy_regs* volatile)(BZ_PHY_BASE))
+#define BZ_PHY ((volatile bz_phy_regs*)(BZ_PHY_BASE))

@@ -7,4 +7,4 @@ typedef union {
 	};
 } sysctrl92_regs;
 #define SYSCTRL92_BASE 0x44920000
-#define SYSCTRL92 ((sysctrl92_regs* volatile)(SYSCTRL92_BASE))
+#define SYSCTRL92 ((volatile sysctrl92_regs*)(SYSCTRL92_BASE))

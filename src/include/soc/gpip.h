@@ -79,4 +79,4 @@ typedef union {
 	};
 } gpip_regs;
 #define GPIP_BASE 0x40002000
-#define GPIP ((gpip_regs* volatile)(GPIP_BASE))
+#define GPIP ((volatile gpip_regs*)(GPIP_BASE))

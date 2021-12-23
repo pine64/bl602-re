@@ -281,4 +281,4 @@ typedef union {
 	};
 } timer_regs;
 #define TIMER_BASE 0x4000a500
-#define TIMER ((timer_regs* volatile)(TIMER_BASE))
+#define TIMER ((volatile timer_regs*)(TIMER_BASE))

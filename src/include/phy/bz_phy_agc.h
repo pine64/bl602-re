@@ -583,4 +583,4 @@ typedef union {
 	};
 } bz_phy_agc_regs;
 #define BZ_PHY_AGC_BASE 0x40002c00
-#define BZ_PHY_AGC ((bz_phy_agc_regs* volatile)(BZ_PHY_AGC_BASE))
+#define BZ_PHY_AGC ((volatile bz_phy_agc_regs*)(BZ_PHY_AGC_BASE))

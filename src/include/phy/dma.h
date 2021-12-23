@@ -88,4 +88,4 @@ typedef union {
 	};
 } dma_regs;
 #define DMA_BASE 0x44a00000
-#define DMA ((dma_regs* volatile)(DMA_BASE))
+#define DMA ((volatile dma_regs*)(DMA_BASE))

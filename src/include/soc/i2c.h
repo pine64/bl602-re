@@ -139,4 +139,4 @@ typedef union {
 	};
 } i2c_regs;
 #define I2C_BASE 0x4000a300
-#define I2C ((i2c_regs* volatile)(I2C_BASE))
+#define I2C ((volatile i2c_regs*)(I2C_BASE))

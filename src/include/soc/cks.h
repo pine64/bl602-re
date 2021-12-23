@@ -27,4 +27,4 @@ typedef union {
 	};
 } cks_regs;
 #define CKS_BASE 0x4000a000
-#define CKS ((cks_regs* volatile)(CKS_BASE))
+#define CKS ((volatile cks_regs*)(CKS_BASE))

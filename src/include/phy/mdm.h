@@ -162,4 +162,4 @@ typedef union {
 	};
 } mdm_regs;
 #define MDM_BASE 0x44c00000
-#define MDM ((mdm_regs* volatile)(MDM_BASE))
+#define MDM ((volatile mdm_regs*)(MDM_BASE))

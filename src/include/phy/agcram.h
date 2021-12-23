@@ -6,4 +6,4 @@ typedef union {
 	};
 } agcram_regs;
 #define AGCRAM_BASE 0x54c0a000
-#define AGCRAM ((agcram_regs* volatile)(AGCRAM_BASE))
+#define AGCRAM ((volatile agcram_regs*)(AGCRAM_BASE))

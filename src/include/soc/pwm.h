@@ -264,4 +264,4 @@ typedef union {
 	};
 } pwm_regs;
 #define PWM_BASE 0x4000a400
-#define PWM ((pwm_regs* volatile)(PWM_BASE))
+#define PWM ((volatile pwm_regs*)(PWM_BASE))

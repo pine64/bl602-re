@@ -825,4 +825,4 @@ typedef union {
 	};
 } mac_core_regs;
 #define MAC_CORE_BASE 0x44b00000
-#define MAC_CORE ((mac_core_regs* volatile)(MAC_CORE_BASE))
+#define MAC_CORE ((volatile mac_core_regs*)(MAC_CORE_BASE))

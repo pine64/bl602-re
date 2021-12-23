@@ -59,4 +59,4 @@ typedef union {
 	};
 } sec_dbg_regs;
 #define SEC_DBG_BASE 0x40003000
-#define SEC_DBG ((sec_dbg_regs* volatile)(SEC_DBG_BASE))
+#define SEC_DBG ((volatile sec_dbg_regs*)(SEC_DBG_BASE))

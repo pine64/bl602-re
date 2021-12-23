@@ -59,4 +59,4 @@ typedef union {
 	};
 } tzc_nsec_regs;
 #define TZC_NSEC_BASE 0x40006000
-#define TZC_NSEC ((tzc_nsec_regs* volatile)(TZC_NSEC_BASE))
+#define TZC_NSEC ((volatile tzc_nsec_regs*)(TZC_NSEC_BASE))

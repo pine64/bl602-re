@@ -394,4 +394,4 @@ typedef union {
 	};
 } AON_regs;
 #define AON_BASE 0x4000f000
-#define AON ((AON_regs* volatile)(AON_BASE))
+#define AON ((volatile AON_regs*)(AON_BASE))

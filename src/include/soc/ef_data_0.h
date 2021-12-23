@@ -235,4 +235,4 @@ typedef union {
 	};
 } ef_data_0_regs;
 #define EF_DATA_0_BASE 0x40007000
-#define EF_DATA_0 ((ef_data_0_regs* volatile)(EF_DATA_0_BASE))
+#define EF_DATA_0 ((volatile ef_data_0_regs*)(EF_DATA_0_BASE))

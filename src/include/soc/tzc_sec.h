@@ -59,4 +59,4 @@ typedef union {
 	};
 } tzc_sec_regs;
 #define TZC_SEC_BASE 0x40005000
-#define TZC_SEC ((tzc_sec_regs* volatile)(TZC_SEC_BASE))
+#define TZC_SEC ((volatile tzc_sec_regs*)(TZC_SEC_BASE))

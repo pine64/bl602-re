@@ -428,4 +428,4 @@ typedef union {
 	};
 } agc_regs;
 #define AGC_BASE 0x44c0b000
-#define AGC ((agc_regs* volatile)(AGC_BASE))
+#define AGC ((volatile agc_regs*)(AGC_BASE))

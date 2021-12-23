@@ -49,4 +49,4 @@ typedef union {
 	};
 } ipc_regs;
 #define IPC_BASE 0x44800000
-#define IPC ((ipc_regs* volatile)(IPC_BASE))
+#define IPC ((volatile ipc_regs*)(IPC_BASE))

@@ -206,4 +206,4 @@ typedef union {
 	};
 } HBN_regs;
 #define HBN_BASE 0x4000f000
-#define HBN ((HBN_regs* volatile)(HBN_BASE))
+#define HBN ((volatile HBN_regs*)(HBN_BASE))

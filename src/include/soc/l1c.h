@@ -81,4 +81,4 @@ typedef union {
 	};
 } l1c_regs;
 #define L1C_BASE 0x40009000
-#define L1C ((l1c_regs* volatile)(L1C_BASE))
+#define L1C ((volatile l1c_regs*)(L1C_BASE))

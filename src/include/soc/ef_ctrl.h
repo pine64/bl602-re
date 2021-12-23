@@ -187,4 +187,4 @@ typedef union {
 	};
 } ef_ctrl_regs;
 #define EF_CTRL_BASE 0x40007000
-#define EF_CTRL ((ef_ctrl_regs* volatile)(EF_CTRL_BASE))
+#define EF_CTRL ((volatile ef_ctrl_regs*)(EF_CTRL_BASE))

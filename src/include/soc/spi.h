@@ -136,4 +136,4 @@ typedef union {
 	};
 } spi_regs;
 #define SPI_BASE 0x4000a200
-#define SPI ((spi_regs* volatile)(SPI_BASE))
+#define SPI ((volatile spi_regs*)(SPI_BASE))

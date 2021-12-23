@@ -1931,4 +1931,4 @@ typedef union {
 	};
 } rf_regs;
 #define RF_BASE 0x40001000
-#define RF ((rf_regs* volatile)(RF_BASE))
+#define RF ((volatile rf_regs*)(RF_BASE))

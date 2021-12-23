@@ -281,4 +281,4 @@ typedef union {
 	};
 } pds_regs;
 #define PDS_BASE 0x4000e000
-#define PDS ((pds_regs* volatile)(PDS_BASE))
+#define PDS ((volatile pds_regs*)(PDS_BASE))

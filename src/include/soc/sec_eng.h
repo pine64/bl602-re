@@ -621,4 +621,4 @@ typedef union {
 	};
 } sec_eng_regs;
 #define SEC_ENG_BASE 0x40004000
-#define SEC_ENG ((sec_eng_regs* volatile)(SEC_ENG_BASE))
+#define SEC_ENG ((volatile sec_eng_regs*)(SEC_ENG_BASE))

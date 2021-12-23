@@ -189,4 +189,4 @@ typedef union {
 	};
 } uart_regs;
 #define UART_BASE 0x4000a000
-#define UART ((uart_regs* volatile)(UART_BASE))
+#define UART ((volatile uart_regs*)(UART_BASE))

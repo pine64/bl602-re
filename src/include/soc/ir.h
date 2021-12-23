@@ -192,4 +192,4 @@ typedef union {
 	};
 } ir_regs;
 #define IR_BASE 0x4000a600
-#define IR ((ir_regs* volatile)(IR_BASE))
+#define IR ((volatile ir_regs*)(IR_BASE))

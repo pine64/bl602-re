@@ -32,4 +32,4 @@ typedef union {
 	};
 } sysctrl_regs;
 #define SYSCTRL_BASE 0x44900000
-#define SYSCTRL ((sysctrl_regs* volatile)(SYSCTRL_BASE))
+#define SYSCTRL ((volatile sysctrl_regs*)(SYSCTRL_BASE))

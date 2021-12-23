@@ -664,4 +664,4 @@ typedef union {
 	};
 } sf_ctrl_regs;
 #define SF_CTRL_BASE 0x4000b000
-#define SF_CTRL ((sf_ctrl_regs* volatile)(SF_CTRL_BASE))
+#define SF_CTRL ((volatile sf_ctrl_regs*)(SF_CTRL_BASE))
