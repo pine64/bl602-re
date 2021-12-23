@@ -498,6 +498,10 @@ for reg_addr,field_name,mask in leak_scan.scan_leak_source(open('../blobs/reg/re
     f = Field(field_name, mask)
     pass
 
+intc_base = 0x44910000
+peris['intc'] = Peripheral(peripheral('intc', intc_base, 0x1000))
+for code, offset in getregs("../alios/reg_intc.h"):
+    RegFromComment(offset + intc_base - 0x10000, code.lower(), lambda name, addr: Buf(name, addr, addr + 4))
 
 if __name__ == '__main__':
     import sys

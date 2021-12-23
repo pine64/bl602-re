@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from typing import List, Union, Optional
+from typing import Callable, List, Union, Optional
 
 def ident(l, n=1, ch="    "):
     si = ch * n
@@ -63,6 +63,9 @@ class reg(gen):
                 return i
         return None
 
+    def size(self) -> int:
+        return 4
+
     def __gt__(self, reg2):
         return self.offset > reg2.offset
     def __str__(self):
@@ -122,6 +125,8 @@ class buf(gen):
         self.dim = dim
         self.nbytes = nbytes
         self.typename = TPNAME[nbytes]
+    def size(self) -> int:
+        return self.dim * self.nbytes
     def __gt__(self, reg2):
         return self.offset > reg2.offset
     def __str__(self):
@@ -221,7 +226,7 @@ class peripheral(gen):
                 s.append(f'\t\tuint8_t pad{padId}[{hex(distance)}];')
                 padId = padId + 1
             s.extend(ident(i.genHeader(), 2, '\t'))
-            currentOffset = i.offset + 4
+            currentOffset = i.offset + i.size()
         s.extend([
             '\t};',
             "}" + f' {self.name}_regs;',
@@ -322,7 +327,7 @@ def CAccess(peris, addr, mask):
                     return f"{p_name.upper()}->{r.name}"
             
 
-def RegFromComment(addr, comment:str):
+def RegFromComment(addr, comment:str, yd:Optional[Callable[[str, int], None]]=None):
     name = ""
     import re
     name_pattern = r'\* @(name|brief) ([^\s]+)'
@@ -334,17 +339,20 @@ def RegFromComment(addr, comment:str):
     else:
         print("Cannot find group.")
         return
-    r = Reg(name, addr)
-    field_matches = re.finditer(field_pattern, comment)
+    if yd:
+        yd(name, addr)
+    else:
+        r = Reg(name, addr)
+        field_matches = re.finditer(field_pattern, comment)
 
-    for g in field_matches:
-        msb = int(g.group(1))
-        lsb = g.group(3)
-        if not lsb:
-            lsb = msb
-        else:
-            lsb = int(lsb)
-        FieldBit(g.group(4), lsb, msb-lsb+1)
+        for g in field_matches:
+            msb = int(g.group(1))
+            lsb = g.group(3)
+            if not lsb:
+                lsb = msb
+            else:
+                lsb = int(lsb)
+            FieldBit(g.group(4), lsb, msb-lsb+1)
 
 
 if __name__ == '__main__':
