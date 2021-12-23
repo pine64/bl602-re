@@ -405,6 +405,7 @@ Reg('time', 0x44900084)
 FieldBit('time_greater_on_bit12', 0)
 Reg("diag_conf", 0x44900068) # set to 0x8000000c for init
 Field("diag_sel", 0xffff0000)
+Reg("diag_trigger", 0x44900070) # used in force_trigger
 
 Reg("misc_cntl", 0x449000e0) # or with 0x1ff00
 Field("set1", (~0x1ff00) & 0xffffffff)

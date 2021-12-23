@@ -10,7 +10,8 @@ typedef union {
 				uint32_t pad0 : 16;
 			};
 		} diag_conf; // @ 0x68
-		uint8_t pad1[0x8];
+		uint8_t pad1[0x4];
+		uint32_t diag_trigger; // @ 0x70
 		uint32_t r074; // @ 0x74
 		uint8_t pad2[0xc];
 		union {
