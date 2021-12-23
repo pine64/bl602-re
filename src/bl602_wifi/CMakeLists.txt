@@ -1,4 +1,6 @@
 init_bl602module("bl602_wifi")
 add_bl602module("driver/phy/phy_rf")
 add_bl602module("driver/phyif")
+add_bl602module("driver/sysctrl")
+add_bl602module("driver/ipc")
 end_bl602module()
