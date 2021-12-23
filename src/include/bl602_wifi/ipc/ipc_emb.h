@@ -29,5 +29,10 @@ void ipc_emb_txcfm_ind(uint32_t queue_bits);
 void ipc_emb_init(void);
 void ipc_emb_notify(void);
 void ipc_emb_wait(void);
+void ipc_emb_msg_dma_int_handler(void);
+void ipc_emb_dbg_dma_int_handler(void);
+void ipc_emb_msg_irq(void);
+void ipc_emb_cfmback_irq(void);
+void ipc_emb_tx_irq(void);
 
 #endif
