@@ -188,10 +188,11 @@ void rf_pri_fcal(void) {
     uint16_t cw = 0x80;
     while (1) {
         for (int j = 6; j >= 0; j--) {
-            if (rf_pri_fcal_meas(cw) < c0) {
+            int cnt = rf_pri_fcal_meas(cw);
+            if (cnt < c0) {
                 cw -= (1 << j);
             } else {
-                if (rf_pri_fcal_meas(cw) > c1) {
+                if (cnt > c1) {
                     cw += (1 << j);
                 } else break;
             }
@@ -201,7 +202,7 @@ void rf_pri_fcal(void) {
             break;
         
         printf("Unexpected cw %ld\r\n", cw);
-
+        cw = 0x80;
         /// reset
         RF->sdm1.lo_sdm_rstb = 0;
         RF->fbdv.lo_fbdv_rst = 1;
@@ -210,10 +211,8 @@ void rf_pri_fcal(void) {
         RF->fbdv.lo_fbdv_rst = 0;
         BL602_Delay_US(0x32);
     }
-
     cw++;
     channel_cnt_opt_table[0] = rf_pri_fcal_meas(cw);
-
     for (int i = 1; i < 40; i++) {
         uint16_t cnt = rf_pri_fcal_meas(cw-i);
         channel_cnt_opt_table[i] = cnt;
@@ -222,7 +221,7 @@ void rf_pri_fcal(void) {
 
     for (int i = 0, j = 0; i < 21; i++) {
         while (channel_cnt_opt_table[j] < channel_cnt_table[i]) j++;
-        channel_cw_table[i] = cw - (j - 1); /// hmmm what if j = 0?\
+        channel_cw_table[i] = cw - (j - 1); /// hmmm what if j = 0?
         /// or it can't because cw was + 1..
         if (j > 0) j--;
     }
@@ -268,6 +267,7 @@ void rf_pri_start_txdfe() {
 
 static void rf_pri_config_channel(uint32_t channel_index) {
     // sdm = sigma-delta modulator ?
+    printf("lo_vco_freq[%d] = %d, %d\n", channel_index, rf_calib_data->lo[channel_index].fcal, rf_calib_data->lo[channel_index].acal);
     PACK(RF->vco1, vco1) {
         vco1.lo_vco_freq_cw = rf_calib_data->lo[channel_index].fcal;
         vco1.lo_vco_idac_cw = rf_calib_data->lo[channel_index].acal;
