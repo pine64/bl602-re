@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include <phy_rf/hal_desc.h>
+#include <hal/hal_desc.h>
 #include <modules/common/co_list.h>
 #include <modules/mac/mac.h>
 

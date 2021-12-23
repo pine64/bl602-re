@@ -11,7 +11,7 @@
 #include <phy_rf/phy_adapt.h>
 #include <phy_rf/phy_tcal.h>
 #include <phy_rf/rf.h>
-#include <phy_rf/hal_desc.h>
+#include <hal/hal_desc.h>
 #include <assert.h>
 #include <macro.h>
 
