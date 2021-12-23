@@ -226,7 +226,7 @@ class peripheral(gen):
             '\t};',
             "}" + f' {self.name}_regs;',
             f'#define {self.name.upper()}_BASE {hex(self.base)}',
-            f'#define {self.name.upper()} (({self.name}_regs* volatile)({self.name.upper()}_BASE))'
+            f'#define {self.name.upper()} ((volatile {self.name}_regs*)({self.name.upper()}_BASE))'
         ])
         
         return s
