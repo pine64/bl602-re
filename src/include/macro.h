@@ -42,6 +42,13 @@
     IF(HAS_ARGS(__VA_ARGS__)) (EVAL(APPLY_NEXT(func, ##__VA_ARGS__)))
 #define _APPLY_NEXT() APPLY_NEXT
 
+#define APPLYarg_NEXT(func, arg, a, ...) \
+    func(arg, a) \
+    IF(HAS_ARGS(__VA_ARGS__)) (DEFER2(_APPLYarg_NEXT)()(func, arg, __VA_ARGS__))
+#define APPLYarg(func, arg, ...) \
+    IF(HAS_ARGS(__VA_ARGS__)) (EVAL(APPLYarg_NEXT(func, arg, ##__VA_ARGS__)))
+#define _APPLYarg_NEXT() APPLYarg_NEXT
+
 #define PACK(var, name) for (int tip = 1; tip;) for (__typeof__ (var) name = var; tip; tip = 0, var = name)
 #define STATIC_ASSERT(COND,MSG) typedef char static_assertion_##MSG[(COND)?1:-1]
 #endif
