@@ -10,5 +10,6 @@ typedef signed char int8_t;
 typedef short int16_t;
 typedef int int32_t;
 typedef long long int int64_t;
-typedef uint8_t bool;
+//typedef uint8_t bool;
+#include <stdbool.h> 
 #endif
