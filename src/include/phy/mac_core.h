@@ -720,11 +720,16 @@ typedef union {
 			uint32_t value;
 			struct {
 				uint32_t coexEnable : 1; // @ 0 -- 0 # 0xfffffffe
-				uint32_t pad0 : 11;
+				uint32_t pad0 : 3;
+				uint32_t coexForceEnable : 1; // @ 4 -- 4 # 0xffffffef
+				uint32_t pad1 : 7;
 				uint32_t coexWlanChanOffset : 1; // @ 12 -- 12 # 0xffffefff
-				uint32_t pad1 : 3;
+				uint32_t pad2 : 3;
 				uint32_t coexWlanChanFreq : 7; // @ 22 -- 16 # 0xff80ffff
-				uint32_t pad2 : 9;
+				uint32_t pad3 : 3;
+				uint32_t coexForceWlanChanBw : 1; // @ 26 -- 26 # 0xfbffffff
+				uint32_t coexForceWlanPtiToggle : 1; // @ 27 -- 27 # 0xf7ffffff
+				uint32_t coexForceWlanPti : 4; // @ 31 -- 28 # 0xfffffff
 			};
 		} COEX_CONTROL; // @ 0x400
 		union {
@@ -740,7 +745,8 @@ typedef union {
 				uint32_t coexPTIBcnData : 4; // @ 31 -- 28 # 0xfffffff
 			};
 		} COEX_PTI; // @ 0x404
-		uint8_t pad15[0xf8];
+		uint32_t coex_stat; // @ 0x408
+		uint8_t pad15[0xf4];
 		union {
 			uint32_t value;
 			struct {

@@ -1785,6 +1785,21 @@
             <addressOffset>0x400</addressOffset>
             <fields>
                 <field>
+                    <name>coexForceWlanPti</name>
+                    <msb>31</msb>
+                    <lsb>28</lsb>
+                </field>
+                <field>
+                    <name>coexForceWlanPtiToggle</name>
+                    <msb>27</msb>
+                    <lsb>27</lsb>
+                </field>
+                <field>
+                    <name>coexForceWlanChanBw</name>
+                    <msb>26</msb>
+                    <lsb>26</lsb>
+                </field>
+                <field>
                     <name>coexWlanChanFreq</name>
                     <msb>22</msb>
                     <lsb>16</lsb>
@@ -1793,6 +1808,11 @@
                     <name>coexWlanChanOffset</name>
                     <msb>12</msb>
                     <lsb>12</lsb>
+                </field>
+                <field>
+                    <name>coexForceEnable</name>
+                    <msb>4</msb>
+                    <lsb>4</lsb>
                 </field>
                 <field>
                     <name>coexEnable</name>
@@ -1847,6 +1867,11 @@
                     <lsb>0</lsb>
                 </field>
             </fields>
+        </register>
+        <register>
+            <name>coex_stat</name>
+            <description>coex_stat.</description>
+            <addressOffset>0x408</addressOffset>
         </register>
         <register>
             <name>DEBUG_HWSM_1</name>

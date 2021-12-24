@@ -334,7 +334,12 @@ peris['mac_core'] = Peripheral(peripheral('mac_core', 0x44b00000, 0x1000))
 
 for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver/reg_mac_core.h", pattern='brief'):
     RegFromComment(offset + 0x44b00000, code)
-
+Reg('coex_stat', 0x44b00408)
+Goto(0x44b00400)
+Field('coexForceEnable', 0xffffffef)
+Field('coexForceWlanPti', 0x0FFFFFFF)
+Field('coexForceWlanChanBw', 0xfbffffff)
+FieldBit('coexForceWlanPtiToggle', 31 - 4)
 #open('../src/include/phy/mac_core.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
 #print('\n'.join(GenSVD()))
