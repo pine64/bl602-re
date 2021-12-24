@@ -108,8 +108,8 @@ void ipc_emb_tx_irq(void) {
 }
 
 void ipc_emb_txdesc_copy(struct txdesc *dst_local, volatile struct txdesc_host *src_shared) {
-    for (int i = 0; i < sizeof(struct hostdesc); i++) {
-        *(uint32_t*)&dst_local->host = *(uint32_t*)&src_shared->host;
+    for (int i = 0; i < sizeof(struct hostdesc); i += 4) {
+        *(((uint32_t*)&dst_local->host) + i/4) = *(((uint32_t*)&src_shared->host) + i/4);
     }
 }
 
