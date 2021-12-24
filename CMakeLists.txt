@@ -16,6 +16,10 @@ if(USE_CLANG)
     set(CMAKE_CXX_COMPILER_TARGET "riscv32-unknown-elf")
     set(CMAKE_TOOLCHAIN_PREFIX llvm-)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fcommon ") # generate correct section for uninitialized data
+else()
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fstrict-volatile-bitfields") 
+    # this make GCC access pheripherals memory with respect to word align
+    # rather than byte align (e.g. sb/lb)
 endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -march=rv32imfc -mabi=ilp32f -DARCH_RISCV")
