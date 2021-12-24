@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.14.0)
 set(CMAKE_SYSTEM_NAME Generic)
+
+set(CMAKE_USER_MAKE_RULES_OVERRIDE cmake/c_extension.cmake)
+set(CMAKE_C_OUTPUT_EXTENSION_REPLACE 1) # This is critical to produce correct object files name for bl602 linker script
+
 set(CMAKE_SYSTEM_PROCESSOR riscv)
 SET(CMAKE_CROSSCOMPILING 1)
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
@@ -11,10 +15,12 @@ if(USE_CLANG)
     set(CMAKE_CXX_COMPILER clang++)
     set(CMAKE_CXX_COMPILER_TARGET "riscv32-unknown-elf")
     set(CMAKE_TOOLCHAIN_PREFIX llvm-)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fcommon ") # generate correct section for uninitialized data
 endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -march=rv32imfc -mabi=ilp32f -DARCH_RISCV")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11 -march=rv32imfc -mabi=ilp32f -DARCH_RISCV")
+
 project(bl602_re VERSION 0.1.0)
 
 include_directories(./src/include)
