@@ -1810,6 +1810,11 @@
                     <lsb>12</lsb>
                 </field>
                 <field>
+                    <name>coexAutoPTIAdjEnable</name>
+                    <msb>5</msb>
+                    <lsb>5</lsb>
+                </field>
+                <field>
                     <name>coexForceEnable</name>
                     <msb>4</msb>
                     <lsb>4</lsb>

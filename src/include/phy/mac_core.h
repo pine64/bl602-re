@@ -722,7 +722,8 @@ typedef union {
 				uint32_t coexEnable : 1; // @ 0 -- 0 # 0xfffffffe
 				uint32_t pad0 : 3;
 				uint32_t coexForceEnable : 1; // @ 4 -- 4 # 0xffffffef
-				uint32_t pad1 : 7;
+				uint32_t coexAutoPTIAdjEnable : 1; // @ 5 -- 5 # 0xffffffdf
+				uint32_t pad1 : 6;
 				uint32_t coexWlanChanOffset : 1; // @ 12 -- 12 # 0xffffefff
 				uint32_t pad2 : 3;
 				uint32_t coexWlanChanFreq : 7; // @ 22 -- 16 # 0xff80ffff
