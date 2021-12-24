@@ -72,9 +72,8 @@ void mac_irq(void) {
     ipc_emb_notify();
 }
 
-void ipc_host_disable_irq_e2a(void) {
-    IPC->emb2app_unmask_clear = 0x7ff;
-}
+// this is actually defined in bl60x_wifi_driver/ipc_host.c
+void ipc_host_disable_irq_e2a(void);
 
 void bl_irq_handler(void) {
     ipc_host_disable_irq_e2a();
