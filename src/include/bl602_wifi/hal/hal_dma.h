@@ -6,6 +6,14 @@
 #include <dma/dma.h>
 #include <modules/common/co_list.h>
 
+enum {
+    /// A general purpose DMA download
+    DMA_DL,
+    /// A general purpose DMA upload
+    DMA_UL,
+    /// Number of general purpose DMA directions
+    DMA_MAX
+};
 
 typedef void (*cb_dma_func_ptr)(void *, int);
 struct hal_dma_desc_tag {
