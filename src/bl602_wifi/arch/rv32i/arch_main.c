@@ -16,6 +16,9 @@
 #include <arch/rv32i/ll.h>
 #include <macro.h>
 #include <phy_rf/rfc_bl602.h>
+#include <phy_rf/phy_bl602.h>
+#include <intc/intc.h>
+#include <sysctrl/sysctrl.h>
 
 #include <lmac/bl/bl.h>
 #include <ipc/ipc_emb.h>
