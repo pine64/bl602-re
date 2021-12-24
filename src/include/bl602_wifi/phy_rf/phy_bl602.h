@@ -63,7 +63,6 @@ void phy_get_rf_gain_idx(int8_t *power,uint8_t *idx);
 void phy_get_rf_gain_capab(int8_t *max,int8_t *min);
 uint8_t phy_bfmer_supported(void);
 uint8_t phy_bfmee_supported();
-void mpif_clk_init(void);
 void bz_phy_reset(void);
 
 // not sure if there functions are belong to phy_bl602
