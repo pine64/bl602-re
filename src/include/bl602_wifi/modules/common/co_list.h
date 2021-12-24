@@ -1,5 +1,9 @@
 #ifndef _CO_LIST_H_
 #define _CO_LIST_H_
+
+#include <stdint.h>
+#include <stdbool.h>
+
 struct co_list_hdr {
     struct co_list_hdr *next; // +0
 }; // :47:8
