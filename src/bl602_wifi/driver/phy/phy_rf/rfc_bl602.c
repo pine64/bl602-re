@@ -619,6 +619,7 @@ _Bool rfc_config_power_ble(int32_t pwr_dbm) {
         RF->dfe_ctrl_18.tx_dvga_gain_qdb_ble_gc1 = u2 & 0x7f;
         RF->dfe_ctrl_18.tx_dvga_gain_qdb_ble_gc2 = u2 & 0x7f;
     }
+    return 0;
 }
 
 
