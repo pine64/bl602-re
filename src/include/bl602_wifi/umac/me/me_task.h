@@ -8,7 +8,18 @@
 #include <lmac/scan/scan.h>
 #include <modules/mac/mac.h>
 
+/// Task max index number.
+#define ME_IDX_MAX 1
 
+/// Possible states of the task.
+enum {
+    /// Idle State.
+    ME_IDLE,
+    /// Busy State.
+    ME_BUSY,
+    /// Max number of states
+    ME_STATE_MAX
+};
 
 struct me_config_req {
     struct mac_htcapability ht_cap; // +0
@@ -95,6 +106,6 @@ struct me_rc_set_rate_req {
 };
 
 extern const struct ke_state_handler me_default_handler;
-extern ke_state_t me_state[1];
+extern ke_state_t me_state[ME_IDX_MAX];
 
 #endif 
