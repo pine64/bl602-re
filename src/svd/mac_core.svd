@@ -1284,16 +1284,13 @@
             </fields>
         </register>
         <register>
-            <name>ABS_TIMER</name>
+            <name>ABS_TIMER%s</name>
             <description>ABS_TIMER.</description>
             <addressOffset>0x128</addressOffset>
-            <fields>
-                <field>
-                    <name>absTimerValue</name>
-                    <msb>31</msb>
-                    <lsb>0</lsb>
-                </field>
-            </fields>
+            <size>16</size>
+            <dim>10</dim>
+            <dimIncrement>4</dimIncrement>
+            <dimIndex>0-9</dimIndex>
         </register>
         <register>
             <name>MAX_RX_LENGTH</name>
