@@ -4,10 +4,65 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include <modules/common/co_math.h>
+
+enum {
+    AC_BK = 0,
+    AC_BE,
+    AC_VI,
+    AC_VO,
+    AC_MAX
+};
+
+enum {
+    TID_0,
+    TID_1,
+    TID_2,
+    TID_3,
+    TID_4,
+    TID_5,
+    TID_6,
+    TID_7,
+    TID_MGT,
+    TID_MAX
+};
+
+/// SCAN type
+enum {
+    SCAN_PASSIVE,
+    SCAN_ACTIVE
+};
+
+enum {
+    MAC_RATE_1MBPS = 2,
+    MAC_RATE_2MBPS = 4,
+    MAC_RATE_5_5MBPS = 11,
+    MAC_RATE_6MBPS = 12,
+    MAC_RATE_9MBPS = 18,
+    MAC_RATE_11MBPS = 22,
+    MAC_RATE_12MBPS = 24,
+    MAC_RATE_18MBPS = 36,
+    MAC_RATE_24MBPS = 48,
+    MAC_RATE_36MBPS = 72,
+    MAC_RATE_48MBPS = 96,
+    MAC_RATE_54MBPS = 108
+};
+
+#define MAC_QOS_INFO_STA_UAPSD_ENABLED_VO CO_BIT(0)
+#define MAC_QOS_INFO_STA_UAPSD_ENABLED_VI CO_BIT(1)
+#define MAC_QOS_INFO_STA_UAPSD_ENABLED_BK CO_BIT(2)
+#define MAC_QOS_INFO_STA_UAPSD_ENABLED_BE CO_BIT(3)
+#define MAC_QOS_INFO_STA_UAPSD_ENABLED_ALL 0x0F
+
+#define MAC_QOS_INFO_AP_UAPSD_ENABLED CO_BIT(7)
 
 struct mac_addr {
     uint16_t array[3]; // +0
 };
+
+typedef struct mac_addr_unpack {
+    uint8_t array[6]; // +0
+} mac_addr_unpack;
 
 struct mac_ssid {
     uint8_t length; // +0
