@@ -70,5 +70,6 @@ static bool ke_task_local(const ke_task_id_t id) {
 };
 ke_state_t ke_state_get(const ke_task_id_t id);
 void ke_state_set(const ke_task_id_t id, const ke_state_t state_id);
+void ke_task_schedule(int dummy);
 
 #endif // __KE_TASK_H__

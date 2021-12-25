@@ -27,5 +27,6 @@ void rxl_timeout_int_handler(void);
 void rxl_mpdu_free(struct rx_swdesc *swdesc);
 void rxl_mpdu_transfer(struct rx_swdesc *swdesc);
 void rxl_dma_int_handler(void);
+void rxl_dma_evt(int dummy);
 
 #endif // _RXL_CNTRL_H_

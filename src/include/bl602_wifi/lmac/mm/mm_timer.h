@@ -24,5 +24,6 @@ extern struct mm_timer_env_tag mm_timer_env;
 void mm_timer_init(void);
 void mm_timer_set(struct mm_timer_tag *timer, uint32_t value);
 void mm_timer_clear(struct mm_timer_tag *timer);
+void mm_timer_schedule(int dummy);
 
 #endif 

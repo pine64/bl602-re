@@ -35,4 +35,7 @@ void ipc_emb_msg_irq(void);
 void ipc_emb_cfmback_irq(void);
 void ipc_emb_tx_irq(void);
 
+void ipc_emb_tx_evt(int queue_idx);
+void ipc_emb_msg_evt(int dummy);
+
 #endif
