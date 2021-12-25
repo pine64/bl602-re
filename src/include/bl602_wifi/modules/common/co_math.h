@@ -15,9 +15,13 @@ uint16_t co_rand_hword(void);
 uint32_t co_rand_word(void);
 uint32_t co_min(uint32_t a, uint32_t b);
 uint32_t co_max(uint32_t a, uint32_t b);
-uint32_t co_crc32(uint32_t addr, uint32_t len, uint32_t crc);
 */
+uint32_t co_crc32(uint32_t addr, uint32_t len, uint32_t crc);
 
 #define CO_BIT(x) (1UL<<(x))
+#define CO_ALIGN4_HI(x) (((x) + 3ul) & ~3ul)
+#define CO_ALIGN4_LO(x) ((x) & ~3ul)
+#define CO_ALIGN2_HI(x) (((x) + 1ul) & ~ 1ul)
+#define CO_ALIGN2_LO(x) ((x) & ~1ul)
 
 #endif // _CO_MATH_H_
