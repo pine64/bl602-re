@@ -18,19 +18,19 @@ void *ke_msg_alloc(const ke_msg_id_t id, const ke_task_id_t dest_id, const ke_ta
 	msg->src_id = src_id;
 	msg->param_len = param_len;
 	msg->hdr.next = NULL;
-	memset((void*)&(msg->param), 0, param_len);
-	return (void*)&(msg->param);
+	memset(ke_msg2param(msg), 0, param_len);
+	return ke_msg2param(msg);
 }
 
 void ke_msg_send(const void *param_ptr) {
-	struct ke_msg* msg = ((struct ke_msg*)param_ptr) - 1;
+	struct ke_msg* msg = ke_param2msg(param_ptr);
 	ke_task_id_t id = KE_TYPE_GET(msg->dest_id);
 	if (ke_task_local(id)) {
     	co_list_push_back(&ke_env.queue_sent, &(msg->hdr));
 		ke_evt_set(KE_EVT_KE_MESSAGE_BIT);
 	} else {
 		void bl_rx_e2a_handler(void *arg); // this is wifidrv function
-		bl_rx_e2a_handler(msg->id);
+		bl_rx_e2a_handler(&(msg->id));
 		ke_free(msg);
 	}
 }
@@ -40,14 +40,14 @@ void ke_msg_send_basic(const ke_msg_id_t id, const ke_task_id_t dest_id, const k
 }
 
 void ke_msg_forward(const void *param_ptr, const ke_task_id_t dest_id, const ke_task_id_t src_id) {
-	struct ke_msg* msg = ((struct ke_msg*)param_ptr) - 1;
+	struct ke_msg* msg = ke_param2msg(param_ptr);
 	msg->dest_id = dest_id;
 	msg->src_id = src_id;
 	ke_msg_send(param_ptr);
 }
 
 void ke_msg_forward_and_change_id(const void *param_ptr, const ke_msg_id_t msg_id, const ke_task_id_t dest_id, const ke_task_id_t src_id) {
-	struct ke_msg* msg = ((struct ke_msg*)param_ptr) - 1;
+	struct ke_msg* msg = ke_param2msg(param_ptr);
 	msg->id = msg_id;
 	msg->dest_id = dest_id;
 	msg->src_id = src_id;

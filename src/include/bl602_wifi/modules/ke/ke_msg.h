@@ -34,9 +34,19 @@ enum ke_msg_status_tag {
 
 /// Retrieves task index number from task id.
 #define KE_IDX_GET(ke_task_id) (((ke_task_id) >> 8) & 0xff)
+static inline struct ke_msg *ke_param2msg(const void *param_ptr) {
+    if (!param_ptr)
+        return 0;
+    
+    return ((struct ke_msg*) param_ptr) - 1;
+}
 
-struct ke_msg *ke_param2msg(const void *param_ptr);
-void *ke_msg2param(const struct ke_msg *msg);
+static inline void *ke_msg2param(const struct ke_msg *msg) {
+    if (!msg)
+        return 0;
+    return (void *)&(msg->param);
+}
+
 void *ke_msg_alloc(const ke_msg_id_t id, const ke_task_id_t dest_id, const ke_task_id_t src_id, const uint16_t param_len);
 void ke_msg_send(const void *param_ptr);
 void ke_msg_send_basic(const ke_msg_id_t id, const ke_task_id_t dest_id, const ke_task_id_t src_id);
