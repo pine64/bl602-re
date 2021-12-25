@@ -18,7 +18,14 @@
 int internel_cal_size_tx_desc; // :59:5
 static TaskHandle_t xTaskToNotify; // :91:21
 uint32_t ipc_emb_counter; // :92:10
-const uint32_t ipc_emb_evt_bit[5] = {0x80, 0x100, 0x200, 0x400, 0x800};
+const uint32_t ipc_emb_evt_bit[5] = {
+    KE_EVT_IPC_EMB_TXDESC_AC0_BIT, 
+    KE_EVT_IPC_EMB_TXDESC_AC1_BIT,
+    KE_EVT_IPC_EMB_TXDESC_AC2_BIT,
+    KE_EVT_IPC_EMB_TXDESC_AC3_BIT,
+    KE_EVT_IPC_EMB_TXDESC_BCN_BIT
+};
+
 struct ipc_emb_env_tag ipc_emb_env; // :110:24
 const int nx_txdesc_cnt_msk[1] = {3}; // :113:11
 
@@ -91,7 +98,8 @@ void ipc_emb_wait(void) {
 
 void ipc_emb_tx_flow_off(void) {
 	IPC->app2emb_unmask_clear = 0x1f00;
-    ke_evt_clear(0xf80);
+    ke_evt_clear(KE_EVT_IPC_EMB_TXDESC_MASK);
+    STATIC_ASSERT(KE_EVT_IPC_EMB_TXDESC_MASK == 0xf80, ipc_mask);
 }
 
 void ipc_emb_tx_flow_on(void) {
@@ -100,7 +108,9 @@ void ipc_emb_tx_flow_on(void) {
 
 void ipc_emb_tx_irq(void) {
     uint32_t status = IPC->app2emb_status;
-	if (status & 0x1f00) {
+    status &= 0x1f00;
+	if (status) {
+        // 21-25: IPC_EMB_TXDESC_XXX
         ke_evt_set(status >> 1);
         IPC->app2emb_unmask_clear = status;
         IPC->app2emb_ack = status;
@@ -122,7 +132,9 @@ void ipc_emb_tx_evt(int queue_idx) {
             IPC->app2emb_unmask_set = 0x100;
             return ;
         }
-        if (((event & 0x800) == 0) && ((ke_env.evt_field & 0x440800) != 0)) break;
+        // delay event for some reason?
+        #define PRIORITY_EVENT (KE_EVT_PRIMARY_TBTT_BIT | KE_EVT_RXLREADY_BIT | KE_EVT_IPC_EMB_TXDESC_BCN_BIT)
+        if (((event & KE_EVT_IPC_EMB_TXDESC_BCN_BIT) == 0) && ((ke_evt_get() & PRIORITY_EVENT) != 0)) break;
         IPC->app2emb_ack = 0x100;
         struct txdesc* txdesc = (struct txdesc*)txdesc_hx->pad_txdesc;
         memset(txdesc, 0, sizeof(struct txdesc));
@@ -146,12 +158,12 @@ void ipc_emb_cfmback_irq(void) {
 	if (IPC->app2emb_status & 0x20) {
         IPC->app2emb_unmask_clear = 0x20;
         IPC->app2emb_ack = 0x20;
-        ke_evt_set(0x40000);
+        ke_evt_set(KE_EVT_RXLREADY_BIT);
     }
 	if (IPC->app2emb_status & 0x10) {
         IPC->app2emb_unmask_clear = 0x10;
         IPC->app2emb_ack = 0x10;
-        ke_evt_set(0x80000);
+        ke_evt_set(KE_EVT_RXUREADY_BIT);
     }
 }
 
@@ -189,7 +201,7 @@ void ipc_emb_kmsg_hdlr(struct ke_msg *kmsg_ipc) {
 
 void ipc_emb_msg_irq(void) {
 	if (IPC->app2emb_status & 2) {
-        ke_evt_set(0x2000000);
+        ke_evt_set(KE_EVT_IPC_EMB_MSG_BIT);
         IPC->app2emb_unmask_clear = 2;
     }
 }
@@ -199,6 +211,6 @@ void ipc_emb_msg_evt(int dummy) {
         IPC->app2emb_ack = 2;
         ipc_emb_kmsg_hdlr((struct ke_msg *)&ipc_shared_env.msg_a2e_buf);
     }
-    ke_evt_clear(0x2000000);
+    ke_evt_clear(KE_EVT_IPC_EMB_MSG_BIT);
     IPC->app2emb_unmask_set = 2;
 }

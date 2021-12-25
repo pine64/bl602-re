@@ -21,11 +21,11 @@ enum {
                             | KE_EVT_TXCFM_AC3_BIT  \
                             | KE_EVT_TXCFM_BCN_BIT)
 
-#define KE_EVT_IPC_EMB_TXDESC_MASK   ( KE_EVT_IPC_EMB_TXDESC_AC0_BIT  \
-                            | KE_EVT_IPC_EMB_TXDESC_AC1_BIT  \
-                            | KE_EVT_IPC_EMB_TXDESC_AC2_BIT  \
-                            | KE_EVT_IPC_EMB_TXDESC_AC3_BIT  \
-                            | KE_EVT_IPC_EMB_TXDESC_BCN_BIT)
+#define KE_EVT_IPC_EMB_TXDESC_MASK  ( KE_EVT_IPC_EMB_TXDESC_AC0_BIT  \
+                                    | KE_EVT_IPC_EMB_TXDESC_AC1_BIT  \
+                                    | KE_EVT_IPC_EMB_TXDESC_AC2_BIT  \
+                                    | KE_EVT_IPC_EMB_TXDESC_AC3_BIT  \
+                                    | KE_EVT_IPC_EMB_TXDESC_BCN_BIT)
 
 
 static inline evt_field_t ke_evt_get(void) {

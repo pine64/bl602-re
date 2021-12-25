@@ -30,26 +30,26 @@ void hal_dma_push(struct hal_dma_desc_tag *desc, int type) {
     }
     memcpy((void *)dma_desc->dest, (void *)dma_desc->src, (uint32_t)dma_desc->length);
     evt_field_t event;
-    if (type == 0) {
-        event = 0x40;
+    if (type == DMA_DL) {
+        event = KE_EVT_DMA_DL_BIT;
     } else {
-        if (type != 1) {
+        if (type != DMA_UL) {
             do {
                 vTaskDelay(1000);
                 puts("[FW] Dead loop when using dma push\r\n");
             } while (true);
         }
-        event = 0x10000000;
+        event = KE_EVT_DMA_UL_BIT;
     }
     ke_evt_set(event);
 }
 
 void hal_dma_evt(int dma_queue) {
     evt_field_t event;
-    if (dma_queue == 0) {
-        event = 0x40;
+    if (dma_queue == DMA_DL) {
+        event = KE_EVT_DMA_DL_BIT;
     } else {
-        event = 0x10000000;
+        event = KE_EVT_DMA_UL_BIT;
     }
     ke_evt_clear(event);
     struct hal_dma_desc_tag *l;

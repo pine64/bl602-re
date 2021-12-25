@@ -77,6 +77,6 @@ void ipc_host_disable_irq_e2a(void);
 
 void bl_irq_handler(void) {
     ipc_host_disable_irq_e2a();
-    ke_evt_set(0x40000000);
+    ke_evt_set(KE_EVT_MAIN_BIT);
     ipc_emb_notify();
 }

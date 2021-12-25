@@ -38,7 +38,7 @@ void assert_rec(const char *condition, const char *file, int line) {
     if (((int)ke_env.evt_field) < 0)
         return ;
     hal_machw_disable_int();
-    ke_evt_set(0x80000000);
+    ke_evt_set(KE_EVT_RESET_BIT);
     return ;
 }
 
