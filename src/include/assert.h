@@ -1,6 +1,9 @@
 #ifndef _ASSERT_H_
 #define _ASSERT_H_
-void assert_err(char * condition, char * file, int line);
+
+#include <arch/arch.h>
 
 #define ASSERT_ERR(cond) if (!(cond)) assert_err(#cond, __FILE__, __LINE__);
+
+#define ASSERT_REC_VAL(cond, ret) if (!(cond)) { assert_rec(#cond, __FILE__, __LINE__); return (ret); }
 #endif
