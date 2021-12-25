@@ -1,3 +1,4 @@
+#ifndef UART_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -190,3 +191,4 @@ typedef union {
 } uart_regs;
 #define UART_BASE 0x4000a000
 #define UART ((volatile uart_regs*)(UART_BASE))
+#endif

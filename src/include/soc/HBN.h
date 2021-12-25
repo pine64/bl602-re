@@ -1,3 +1,4 @@
+#ifndef HBN_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -207,3 +208,4 @@ typedef union {
 } HBN_regs;
 #define HBN_BASE 0x4000f000
 #define HBN ((volatile HBN_regs*)(HBN_BASE))
+#endif

@@ -1,3 +1,4 @@
+#ifndef PDS_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -282,3 +283,4 @@ typedef union {
 } pds_regs;
 #define PDS_BASE 0x4000e000
 #define PDS ((volatile pds_regs*)(PDS_BASE))
+#endif

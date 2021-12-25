@@ -1,3 +1,4 @@
+#ifndef SEC_ENG_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -622,3 +623,4 @@ typedef union {
 } sec_eng_regs;
 #define SEC_ENG_BASE 0x40004000
 #define SEC_ENG ((volatile sec_eng_regs*)(SEC_ENG_BASE))
+#endif

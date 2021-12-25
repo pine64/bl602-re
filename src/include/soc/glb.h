@@ -1,3 +1,4 @@
+#ifndef GLB_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -966,3 +967,4 @@ typedef union {
 } glb_regs;
 #define GLB_BASE 0x40000000
 #define GLB ((volatile glb_regs*)(GLB_BASE))
+#endif

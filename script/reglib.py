@@ -213,6 +213,7 @@ class peripheral(gen):
     def genHeader(self):
         self.regs.sort()
         s = [
+            f'#ifndef {self.name.upper()}_BASE',
             f'typedef union ' + "{",
             f'\tuint32_t regs[{hex(self.size//4)}];',
             f'\tuint8_t pad[{hex(self.size)}];',
@@ -231,7 +232,8 @@ class peripheral(gen):
             '\t};',
             "}" + f' {self.name}_regs;',
             f'#define {self.name.upper()}_BASE {hex(self.base)}',
-            f'#define {self.name.upper()} ((volatile {self.name}_regs*)({self.name.upper()}_BASE))'
+            f'#define {self.name.upper()} ((volatile {self.name}_regs*)({self.name.upper()}_BASE))',
+            "#endif"
         ])
         
         return s
@@ -343,16 +345,17 @@ def RegFromComment(addr, comment:str, yd:Optional[Callable[[str, int], None]]=No
         yd(name, addr)
     else:
         r = Reg(name, addr)
-        field_matches = re.finditer(field_pattern, comment)
+        if isinstance(r, reg):
+            field_matches = re.finditer(field_pattern, comment)
 
-        for g in field_matches:
-            msb = int(g.group(1))
-            lsb = g.group(3)
-            if not lsb:
-                lsb = msb
-            else:
-                lsb = int(lsb)
-            FieldBit(g.group(4), lsb, msb-lsb+1)
+            for g in field_matches:
+                msb = int(g.group(1))
+                lsb = g.group(3)
+                if not lsb:
+                    lsb = msb
+                else:
+                    lsb = int(lsb)
+                FieldBit(g.group(4), lsb, msb-lsb+1)
 
 
 if __name__ == '__main__':

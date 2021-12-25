@@ -1,3 +1,4 @@
+#ifndef MAC_CORE_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -509,13 +510,7 @@ typedef union {
 				uint32_t pad0 : 16;
 			};
 		} MONOTONIC_COUNTER_2_HI; // @ 0x124
-		union {
-			uint32_t value;
-			struct {
-				uint32_t absTimerValue : 32; // @ 31 -- 0 # 0x0
-			};
-		} ABS_TIMER; // @ 0x128
-		uint8_t pad8[0x24];
+		uint32_t ABS_TIMER[0xa]; // @ 0x128
 		union {
 			uint32_t value;
 			struct {
@@ -523,7 +518,7 @@ typedef union {
 				uint32_t pad0 : 12;
 			};
 		} MAX_RX_LENGTH; // @ 0x150
-		uint8_t pad9[0xac];
+		uint8_t pad8[0xac];
 		union {
 			uint32_t value;
 			struct {
@@ -564,7 +559,7 @@ typedef union {
 				uint32_t pad0 : 4;
 			};
 		} EDCA_AC_3; // @ 0x20c
-		uint8_t pad10[0x10];
+		uint8_t pad9[0x10];
 		union {
 			uint32_t value;
 			struct {
@@ -582,7 +577,7 @@ typedef union {
 				uint32_t pad1 : 26;
 			};
 		} EDCA_CNTRL; // @ 0x224
-		uint8_t pad11[0x58];
+		uint8_t pad10[0x58];
 		union {
 			uint32_t value;
 			struct {
@@ -631,7 +626,7 @@ typedef union {
 				uint32_t ccaBusyDurSec80 : 32; // @ 31 -- 0 # 0x0
 			};
 		} ADD_CCA_BUSY_SEC_80; // @ 0x298
-		uint8_t pad12[0x64];
+		uint8_t pad11[0x64];
 		union {
 			uint32_t value;
 			struct {
@@ -700,7 +695,7 @@ typedef union {
 				uint32_t pad0 : 10;
 			};
 		} HTMCS; // @ 0x314
-		uint8_t pad13[0x4];
+		uint8_t pad12[0x4];
 		union {
 			uint32_t value;
 			struct {
@@ -715,7 +710,7 @@ typedef union {
 				uint32_t pad0 : 31;
 			};
 		} LSTP; // @ 0x320
-		uint8_t pad14[0xdc];
+		uint8_t pad13[0xdc];
 		union {
 			uint32_t value;
 			struct {
@@ -747,7 +742,7 @@ typedef union {
 			};
 		} COEX_PTI; // @ 0x404
 		uint32_t coex_stat; // @ 0x408
-		uint8_t pad15[0xf4];
+		uint8_t pad14[0xf4];
 		union {
 			uint32_t value;
 			struct {
@@ -768,7 +763,7 @@ typedef union {
 				uint32_t macControlCs : 8; // @ 31 -- 24 # 0xffffff
 			};
 		} DEBUG_HWSM_2; // @ 0x504
-		uint8_t pad16[0x4];
+		uint8_t pad15[0x4];
 		union {
 			uint32_t value;
 			struct {
@@ -821,7 +816,7 @@ typedef union {
 				uint32_t ac3QLRC : 8; // @ 31 -- 24 # 0xffffff
 			};
 		} DEBUG_QLRC; // @ 0x520
-		uint8_t pad17[0x38];
+		uint8_t pad16[0x38];
 		union {
 			uint32_t value;
 			struct {
@@ -833,3 +828,4 @@ typedef union {
 } mac_core_regs;
 #define MAC_CORE_BASE 0x44b00000
 #define MAC_CORE ((volatile mac_core_regs*)(MAC_CORE_BASE))
+#endif

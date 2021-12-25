@@ -1,3 +1,4 @@
+#ifndef RF_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -1932,3 +1933,4 @@ typedef union {
 } rf_regs;
 #define RF_BASE 0x40001000
 #define RF ((volatile rf_regs*)(RF_BASE))
+#endif

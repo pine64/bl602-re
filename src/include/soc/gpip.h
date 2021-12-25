@@ -1,3 +1,4 @@
+#ifndef GPIP_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -80,3 +81,4 @@ typedef union {
 } gpip_regs;
 #define GPIP_BASE 0x40002000
 #define GPIP ((volatile gpip_regs*)(GPIP_BASE))
+#endif

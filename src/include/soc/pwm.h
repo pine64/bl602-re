@@ -1,3 +1,4 @@
+#ifndef PWM_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -265,3 +266,4 @@ typedef union {
 } pwm_regs;
 #define PWM_BASE 0x4000a400
 #define PWM ((volatile pwm_regs*)(PWM_BASE))
+#endif

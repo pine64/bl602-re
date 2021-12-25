@@ -1,3 +1,4 @@
+#ifndef AON_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -395,3 +396,4 @@ typedef union {
 } AON_regs;
 #define AON_BASE 0x4000f000
 #define AON ((volatile AON_regs*)(AON_BASE))
+#endif

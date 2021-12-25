@@ -1,3 +1,4 @@
+#ifndef EF_CTRL_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -188,3 +189,4 @@ typedef union {
 } ef_ctrl_regs;
 #define EF_CTRL_BASE 0x40007000
 #define EF_CTRL ((volatile ef_ctrl_regs*)(EF_CTRL_BASE))
+#endif

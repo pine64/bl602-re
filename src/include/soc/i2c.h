@@ -1,3 +1,4 @@
+#ifndef I2C_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -140,3 +141,4 @@ typedef union {
 } i2c_regs;
 #define I2C_BASE 0x4000a300
 #define I2C ((volatile i2c_regs*)(I2C_BASE))
+#endif

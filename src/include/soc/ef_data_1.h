@@ -1,3 +1,4 @@
+#ifndef EF_DATA_1_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -128,3 +129,4 @@ typedef union {
 } ef_data_1_regs;
 #define EF_DATA_1_BASE 0x40007000
 #define EF_DATA_1 ((volatile ef_data_1_regs*)(EF_DATA_1_BASE))
+#endif

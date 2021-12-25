@@ -1,3 +1,4 @@
+#ifndef SF_CTRL_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -665,3 +666,4 @@ typedef union {
 } sf_ctrl_regs;
 #define SF_CTRL_BASE 0x4000b000
 #define SF_CTRL ((volatile sf_ctrl_regs*)(SF_CTRL_BASE))
+#endif

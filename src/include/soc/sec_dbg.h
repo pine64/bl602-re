@@ -1,3 +1,4 @@
+#ifndef SEC_DBG_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -60,3 +61,4 @@ typedef union {
 } sec_dbg_regs;
 #define SEC_DBG_BASE 0x40003000
 #define SEC_DBG ((volatile sec_dbg_regs*)(SEC_DBG_BASE))
+#endif

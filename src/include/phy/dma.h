@@ -1,3 +1,4 @@
+#ifndef DMA_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -89,3 +90,4 @@ typedef union {
 } dma_regs;
 #define DMA_BASE 0x44a00000
 #define DMA ((volatile dma_regs*)(DMA_BASE))
+#endif

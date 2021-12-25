@@ -1,3 +1,4 @@
+#ifndef TIMER_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -282,3 +283,4 @@ typedef union {
 } timer_regs;
 #define TIMER_BASE 0x4000a500
 #define TIMER ((volatile timer_regs*)(TIMER_BASE))
+#endif

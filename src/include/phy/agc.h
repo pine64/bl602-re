@@ -1,3 +1,4 @@
+#ifndef AGC_BASE
 typedef union {
 	uint32_t regs[0x800];
 	uint8_t pad[0x2000];
@@ -429,3 +430,4 @@ typedef union {
 } agc_regs;
 #define AGC_BASE 0x44c0b000
 #define AGC ((volatile agc_regs*)(AGC_BASE))
+#endif

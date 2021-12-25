@@ -1,3 +1,4 @@
+#ifndef TZC_SEC_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -60,3 +61,4 @@ typedef union {
 } tzc_sec_regs;
 #define TZC_SEC_BASE 0x40005000
 #define TZC_SEC ((volatile tzc_sec_regs*)(TZC_SEC_BASE))
+#endif

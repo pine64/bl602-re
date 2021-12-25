@@ -1,3 +1,4 @@
+#ifndef IPC_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -67,3 +68,4 @@ typedef union {
 } ipc_regs;
 #define IPC_BASE 0x44800000
 #define IPC ((volatile ipc_regs*)(IPC_BASE))
+#endif

@@ -1,3 +1,4 @@
+#ifndef IR_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -193,3 +194,4 @@ typedef union {
 } ir_regs;
 #define IR_BASE 0x4000a600
 #define IR ((volatile ir_regs*)(IR_BASE))
+#endif

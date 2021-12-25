@@ -1,3 +1,4 @@
+#ifndef L1C_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -82,3 +83,4 @@ typedef union {
 } l1c_regs;
 #define L1C_BASE 0x40009000
 #define L1C ((volatile l1c_regs*)(L1C_BASE))
+#endif

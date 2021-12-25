@@ -1,3 +1,4 @@
+#ifndef TZC_NSEC_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -60,3 +61,4 @@ typedef union {
 } tzc_nsec_regs;
 #define TZC_NSEC_BASE 0x40006000
 #define TZC_NSEC ((volatile tzc_nsec_regs*)(TZC_NSEC_BASE))
+#endif

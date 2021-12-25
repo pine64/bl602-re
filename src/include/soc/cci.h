@@ -1,3 +1,4 @@
+#ifndef CCI_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -48,3 +49,4 @@ typedef union {
 } cci_regs;
 #define CCI_BASE 0x40008000
 #define CCI ((volatile cci_regs*)(CCI_BASE))
+#endif

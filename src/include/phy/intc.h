@@ -1,3 +1,4 @@
+#ifndef INTC_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -13,3 +14,4 @@ typedef union {
 } intc_regs;
 #define INTC_BASE 0x44910000
 #define INTC ((volatile intc_regs*)(INTC_BASE))
+#endif

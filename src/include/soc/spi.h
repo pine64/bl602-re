@@ -1,3 +1,4 @@
+#ifndef SPI_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -137,3 +138,4 @@ typedef union {
 } spi_regs;
 #define SPI_BASE 0x4000a200
 #define SPI ((volatile spi_regs*)(SPI_BASE))
+#endif

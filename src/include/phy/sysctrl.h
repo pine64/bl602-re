@@ -1,3 +1,4 @@
+#ifndef SYSCTRL_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -34,3 +35,4 @@ typedef union {
 } sysctrl_regs;
 #define SYSCTRL_BASE 0x44900000
 #define SYSCTRL ((volatile sysctrl_regs*)(SYSCTRL_BASE))
+#endif
