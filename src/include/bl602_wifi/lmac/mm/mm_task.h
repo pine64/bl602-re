@@ -9,7 +9,7 @@
 #include <modules/ke/ke_task.h>
 #include <modules/mac/mac.h>
 
-
+#define MM_IDX_MAX 1
 
 enum mm_state_tag {
     MM_IDLE = 0,
@@ -422,8 +422,8 @@ struct mm_force_idle_req {
     cb_idle_func_ptr cb; // +0
 };
 
-extern const struct ke_state_handler mm_state_handler[4];
+extern const struct ke_state_handler mm_state_handler[MM_STATE_MAX];
 extern const struct ke_state_handler mm_default_handler;
-extern ke_state_t mm_state[1];
+extern ke_state_t mm_state[MM_IDX_MAX];
 
 #endif 

@@ -29,6 +29,11 @@ enum ke_msg_status_tag {
     KE_MSG_SAVED = 2
 };
 
+/// Retrieves task type from task id.
+#define KE_TYPE_GET(ke_task_id) ((ke_task_id) & 0xff)
+
+/// Retrieves task index number from task id.
+#define KE_IDX_GET(ke_task_id) (((ke_task_id) >> 8) & 0xff)
 
 struct ke_msg *ke_param2msg(const void *param_ptr);
 void *ke_msg2param(const struct ke_msg *msg);

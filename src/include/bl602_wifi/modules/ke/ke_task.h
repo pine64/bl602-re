@@ -36,13 +36,13 @@ enum
     TASK_RXU = 11, // maybe, not used anyway 
     /// CFG task
     TASK_CFG = 12,
+    TASK_LAST_EMB = TASK_CFG, // Last task
     // nX API task
     TASK_API = 13, // maybe, not used anyway
     TASK_MAX, // max == 14
 };
 
 #define DRV_TASK_ID                     100
-
 
 typedef int (*ke_msg_func_t)(const ke_msg_id_t, const void *, const ke_task_id_t, const ke_task_id_t);
 
@@ -64,9 +64,9 @@ struct ke_task_desc {
     uint16_t idx_max; // +14
 };
 
-static bool ke_task_local(const ke_task_id_t id) {
+static inline bool ke_task_local(const ke_task_id_t id) {
     ASSERT_ERR(id <= TASK_MAX);
-    return id < TASK_API;
+    return id <= TASK_LAST_EMB;
 };
 ke_state_t ke_state_get(const ke_task_id_t id);
 void ke_state_set(const ke_task_id_t id, const ke_state_t state_id);
