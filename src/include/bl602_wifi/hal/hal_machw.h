@@ -15,6 +15,18 @@
 #include <assert.h>
 #include <macro.h>
 
+/// For MAC HW States.
+enum {
+    /// MAC HW IDLE State.
+    HW_IDLE = 0,
+    /// MAC HW RESERVED State.
+    HW_RESERVED,
+    /// MAC HW DOZE State.
+    HW_DOZE,
+    /// MAC HW ACTIVE State.
+    HW_ACTIVE
+};
+
 static inline uint32_t hal_machw_time(void) {
     return MAC_CORE->MONOTONIC_COUNTER_2_LO.value;
 }

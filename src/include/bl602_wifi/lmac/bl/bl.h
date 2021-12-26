@@ -16,4 +16,6 @@ uint32_t bl_nap_calculate(void);
 int bl_sleep(void);
 void bl_reset_evt(int dummy);
 
+extern struct notifier_block fw_nap_chain;
+
 #endif // _BL_H_
