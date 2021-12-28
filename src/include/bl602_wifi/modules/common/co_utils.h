@@ -70,4 +70,14 @@ static inline void co_copy8p(uint32_t dst, uint32_t src, uint32_t len) {
     }
 }
 
+/**
+ ****************************************************************************************
+ * @brief Get the index of an element in an array.
+ * @param[in] __element_ptr Pointer to the element
+ * @param[in] __array_ptr Pointer to the array
+ * @return The index of the element
+ ****************************************************************************************
+ */
+#define CO_GET_INDEX(__element_ptr, __array_ptr) ((__element_ptr) - (__array_ptr))
+
 #endif // _CO_UTILS_H_

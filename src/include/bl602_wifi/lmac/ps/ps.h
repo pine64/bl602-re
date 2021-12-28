@@ -9,6 +9,8 @@
 #include <lmac/vif/vif_mgmt.h>
 #include <lmac/chan/chan.h>
 
+#include <modules/common/co_math.h>
+
 enum ps_dpsm_state_bit_pos {
     PS_DPSM_STATE_ON = 0,
     PS_DPSM_STATE_PAUSING = 1,
@@ -58,5 +60,38 @@ void ps_check_frame(uint8_t *frame, uint32_t statinfo, struct vif_info_tag *vif_
 void ps_uapsd_set(struct vif_info_tag *vif_entry, uint8_t hw_queue, bool uapsd);
 void ps_check_tx_frame(uint8_t staid, uint8_t tid);
 void ps_traffic_status_update(uint8_t vif_index, uint8_t new_status);
+
+
+// Definition of bits preventing from going to sleep (per VIF)
+/// Station is waiting for beacon reception
+#define PS_VIF_WAITING_BCN         CO_BIT(0)
+/// Station is waiting for broadcast/multicast traffic from AP
+#define PS_VIF_WAITING_BCMC        CO_BIT(1)
+/// Station is waiting for unicast traffic from AP
+#define PS_VIF_WAITING_UC          CO_BIT(2)
+/// Station is waiting for WMM-PS end of service period
+#define PS_VIF_WAITING_EOSP        CO_BIT(3)
+/// Station is waiting for the end of the association procedure
+#define PS_VIF_ASSOCIATING         CO_BIT(4)
+/// P2P GO is supposed to be present
+#define PS_VIF_P2P_GO_PRESENT      CO_BIT(5)
+
+// Definition of bits preventing from going to sleep (global)
+/// Upload of TX confirmations is ongoing
+#define PS_TX_CFM_UPLOADING        CO_BIT(0)
+/// A scanning process is ongoing
+#define PS_SCAN_ONGOING            CO_BIT(1)
+/// A request for going to IDLE is pending
+#define PS_IDLE_REQ_PENDING        CO_BIT(2)
+/// PSM is paused in order to allow data traffic
+#define PS_PSM_PAUSED              CO_BIT(3)
+/// A CAC period is active
+#define PS_CAC_STARTED             CO_BIT(4)
+
+//  Station is waiting for data
+#define PS_WAITING_ADD_KEY        CO_BIT(6)
+
+/// Mask showing that all ACs UAPSD enabled
+#define PS_ALL_UAPSD_ACS           0x0F
 
 #endif // _PS_H_

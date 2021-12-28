@@ -2,6 +2,7 @@
 #define _CHAN_H_
 
 #include <stdint.h>
+#include <blconfig.h>
 
 #include <lmac/mm/mm_task.h>
 #include <lmac/mm/mm_timer.h>
@@ -99,4 +100,31 @@ bool chan_is_on_operational_channel(struct vif_info_tag *p_vif_entry);
 bool chan_is_tx_allowed(struct vif_info_tag *p_vif_entry);
 void chan_update_tx_power(struct chan_ctxt_tag *p_chan_entry);
 
+/// Number of channel contexts for traffic
+#define CHAN_TRAF_CTXT_CNT     (NX_CHAN_CTXT_CNT)
+/// Number of channel context (+1 for the Scan Channel Context and +1 for the Remain on Channel Context)
+#define CHAN_CHAN_CTXT_CNT     (CHAN_TRAF_CTXT_CNT + 1 + 1)
+/// Index of the Scan Channel Context
+#define CHAN_SCAN_CTXT_IDX     (CHAN_TRAF_CTXT_CNT)
+/// Index of the Remain on Channel Context
+#define CHAN_ROC_CTXT_IDX      (CHAN_SCAN_CTXT_IDX + 1)
+/// Index of a Channel Context that is not linked with a VIF
+#define CHAN_CTXT_UNUSED       (0xFF)
+
+/// Duration of a slot (in TUs)
+#define CHAN_SLOT_DURATION_TU  (1)
+/// Duration of a slot (in us)
+#define CHAN_SLOT_DURATION_US  (CHAN_SLOT_DURATION_TU * 1024)
+/// Number of slots initially allocated for a VIF
+#define CHAN_VIF_NB_SLOTS      (50)
+
+/// Maximal TBTT presence duration (in slots)
+#define CHAN_MAX_TBTT_PRES_DUR (10)
+/// Minimal presence duration on a channel (in slots)
+#define CHAN_MIN_PRES_DUR      (5)
+
+#define CHAN_CONN_LESS_DELAY   (30000)
+#define CHAN_SWITCH_DELAY      (2500)
+#define CHAN_MIN_TIMER_VALUE   (2000)
+#define CHAN_TBTT_PRIORITY_MAX (5)
 #endif
