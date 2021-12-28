@@ -127,4 +127,5 @@ void chan_update_tx_power(struct chan_ctxt_tag *p_chan_entry);
 #define CHAN_SWITCH_DELAY      (2500)
 #define CHAN_MIN_TIMER_VALUE   (2000)
 #define CHAN_TBTT_PRIORITY_MAX (5)
+#define CHAN_SWITCH_TO_DUR     (4000)
 #endif

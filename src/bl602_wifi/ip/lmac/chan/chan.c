@@ -96,7 +96,7 @@ static void chan_upd_ctxt_status(struct chan_ctxt_tag *p_chan_entry, uint8_t nex
 	uint32_t tmr_exp_time = 0;
 	if (next_status == CHAN_GOTO_IDLE) {
 		if (p_chan_entry->idx < CHAN_TRAF_CTXT_CNT)
-			tmr_exp_time = now + 4000;
+			tmr_exp_time = now + CHAN_SWITCH_TO_DUR;
 	} else {
 		if (next_status == CHAN_WAITING_END) {
 			if (p_chan_entry->idx < CHAN_TRAF_CTXT_CNT) {
