@@ -11,7 +11,7 @@
 #include <modules/common/co_list.h>
 #include <modules/mac/mac.h>
 
-
+#include <blconfig.h>
 
 enum VIF_AP_BCMC_STATUS {
     VIF_AP_BCMC_BUFFERED = 1,
@@ -28,6 +28,7 @@ struct vif_info_tag {
     struct chan_ctxt_tag *chan_ctxt; // +64
     struct chan_tbtt_tag tbtt_switch; // +68
     struct mac_addr mac_addr; // +80
+    /// Type of the interface (@ref VIF_STA, @ref VIF_IBSS, @ref VIF_MESH_POINT or @ref VIF_AP)
     uint8_t type; // +86
     uint8_t index; // +87
     bool active; // +88
@@ -89,25 +90,60 @@ struct vif_mgmt_env_tag {
 
 
 extern struct vif_mgmt_env_tag vif_mgmt_env;
-extern struct vif_info_tag vif_info_tab[2];
+extern struct vif_info_tag vif_info_tab[NX_VIRT_DEV_MAX];
 
 
-int vif_mgmt_used_cnt(void);
-struct vif_info_tag *vif_mgmt_first_used(void);
-struct vif_info_tag *vif_mgmt_next(struct vif_info_tag *vif_entry);
 void vif_mgmt_init(void);
 void vif_mgmt_reset(void);
 uint8_t vif_mgmt_register(const struct mac_addr *mac_addr, uint8_t vif_type, bool p2p, uint8_t *vif_idx);
 void vif_mgmt_unregister(uint8_t vif_idx);
 void vif_mgmt_add_key(const struct mm_key_add_req *param, uint8_t hw_key_idx);
 void vif_mgmt_del_key(struct vif_info_tag *vif, uint8_t keyid);
-uint8_t vif_mgmt_get_type(uint8_t vif_idx);
-struct mac_addr *vif_mgmt_get_addr(uint8_t vif_idx);
 void vif_mgmt_send_postponed_frame(struct vif_info_tag *p_vif_entry);
 void vif_mgmt_bcn_to_prog(struct vif_info_tag *p_vif_entry);
 void vif_mgmt_bcn_recv(struct vif_info_tag *p_vif_entry);
 void vif_mgmt_set_ap_bcn_int(struct vif_info_tag *p_vif_entry, uint16_t bcn_int);
 void vif_mgmt_switch_channel(struct vif_info_tag *p_vif_entry);
 struct vif_info_tag *vif_mgmt_get_first_ap_inf(void);
+
+static inline int vif_mgmt_used_cnt(void) {
+    return vif_mgmt_env.vif_ap_cnt + vif_mgmt_env.vif_sta_cnt;
+}
+
+static inline struct vif_info_tag *vif_mgmt_first_used(void) {
+    return (struct vif_info_tag *) co_list_pick(&vif_mgmt_env.used_list);
+}
+
+static inline struct vif_info_tag *vif_mgmt_next(struct vif_info_tag *vif_entry) {
+    return (struct vif_info_tag *) co_list_next(&vif_entry->list_hdr);
+}
+
+static inline uint8_t vif_mgmt_get_type(uint8_t vif_idx) {
+    return vif_info_tab[vif_idx].type;
+}
+
+static inline struct mac_addr *vif_mgmt_get_addr(uint8_t vif_idx) {
+    return &vif_info_tab[vif_idx].mac_addr;
+}
+
+enum {
+    /// ESS STA interface
+    VIF_STA,
+    /// IBSS STA interface
+    VIF_IBSS,
+    /// AP interface
+    VIF_AP,
+    /// Mesh Point interface
+    VIF_MESH_POINT,
+    /// Unknown type
+    VIF_UNKNOWN
+};
+
+/// Macro defining an invalid VIF index
+#define INVALID_VIF_IDX 0xFF
+
+/// Macro defining an unknown tx power
+#define VIF_UNDEF_POWER 0x7F
+
 
 #endif // __VIF_MGMT_H__
