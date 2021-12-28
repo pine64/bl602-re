@@ -23,13 +23,13 @@ static int dbg_mem_write_req_handler(const ke_msg_id_t msgid, const struct dbg_m
 }
 
 static int dbg_set_mod_filter_req_handler(const ke_msg_id_t msgid, const struct dbg_set_mod_filter_req *param, const ke_task_id_t dest_id, const ke_task_id_t src_id) {
-	dbg_env.filter_module = param->mod_filter;
+    dbg_env.filter_module = param->mod_filter;
     ke_msg_send_basic(DBG_SET_MOD_FILTER_CFM, src_id, dest_id);
     return KE_MSG_CONSUMED;
 }
 
 static int dbg_set_sev_filter_req_handler(const ke_msg_id_t msgid, const struct dbg_set_sev_filter_req *param, const ke_task_id_t dest_id, const ke_task_id_t src_id) {
-	dbg_env.filter_severity = param->sev_filter;
+    dbg_env.filter_severity = param->sev_filter;
     ke_msg_send_basic(DBG_SET_SEV_FILTER_CFM, src_id, dest_id);
     return KE_MSG_CONSUMED;
 }

@@ -62,7 +62,7 @@ void ke_free(void *mem_ptr) {
     struct mblock_free *node = ke_env.mblock_first;
     struct mblock_used *mblock = ((struct mblock_used *)mem_ptr) - 1;
     struct mblock_free *free = (struct mblock_free *)mblock;
-	ASSERT_ERR((uint32_t)mem_ptr > (uint32_t)node);
+    ASSERT_ERR((uint32_t)mem_ptr > (uint32_t)node);
     __disable_irq();
     // find node X that free should be inserted after X.
     for (; node->next; node = node->next) {

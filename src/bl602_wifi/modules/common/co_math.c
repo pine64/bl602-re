@@ -69,8 +69,8 @@ static const uint32_t crc_tab[256] = {
 };
 
 uint32_t co_crc32(uint32_t addr, uint32_t len, uint32_t crc) {
-	for (uint32_t i = 0; i != len; i = i + 1) {
-		crc = (crc << 8) ^ crc_tab[(crc >> 24) ^ co_read8p(addr + i)];
-	}
-	return crc;
+    for (uint32_t i = 0; i != len; i = i + 1) {
+        crc = (crc << 8) ^ crc_tab[(crc >> 24) ^ co_read8p(addr + i)];
+    }
+    return crc;
 }

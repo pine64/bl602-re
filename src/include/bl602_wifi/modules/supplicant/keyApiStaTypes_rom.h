@@ -15,7 +15,7 @@ union ckd {
 };
 
 struct cipher_key_t {
-	union ckd ckd; // +0
+    union ckd ckd; // +0
 };
 
 typedef struct cipher_key_t cipher_key_t;
