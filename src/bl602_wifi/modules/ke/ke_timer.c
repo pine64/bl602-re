@@ -31,7 +31,7 @@ static void ke_timer_hw_set(struct ke_timer *timer) {
 }
 
 static bool cmp_abs_time(const struct co_list_hdr *timerA, const struct co_list_hdr *timerB) {
-       uint32_t timeA = ((const struct ke_timer *)timerA)->time;
+    uint32_t timeA = ((const struct ke_timer *)timerA)->time;
     uint32_t timeB = ((const struct ke_timer *)timerB)->time;
     return (((uint32_t)(timeA - timeB)) > KE_TIMER_DELAY_MAX);
 }
@@ -39,7 +39,7 @@ static bool cmp_abs_time(const struct co_list_hdr *timerA, const struct co_list_
 static bool cmp_timer_id(const struct co_list_hdr *timer, uint32_t timer_task) {
     if (((const struct ke_timer*)timer)->id == timer_task >> 0x10) {
         return (((const struct ke_timer*)timer)->task == (timer_task & 0xffff));
-      }
+    }
     return false;
 }
 

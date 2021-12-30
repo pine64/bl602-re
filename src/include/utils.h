@@ -9,4 +9,5 @@ void* memcpy(void*, const void*, unsigned int);
 int memcmp(const void *, const void *, unsigned int);
 void BL602_Delay_US(uint32_t cnt);
 void BL602_Delay_MS(uint32_t cnt);
+unsigned int strlen(const char *__s);
 #endif

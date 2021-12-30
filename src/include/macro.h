@@ -50,5 +50,7 @@
 #define _APPLYarg_NEXT() APPLYarg_NEXT
 
 #define PACK(var, name) for (int tip = 1; tip;) for (__typeof__ (var) name = var; tip; tip = 0, var = name)
+#define PACK0(var, name) for (int tip = 1; tip;) for (__typeof__ (var) name = {0}; tip; tip = 0, var = name)
+#define EXTRACT(var, name) for (int tip = 1; tip;) for (__typeof__ (var) name = var; tip; tip = 0, )
 #define STATIC_ASSERT(COND,MSG) typedef char static_assertion_##MSG[(COND)?1:-1]
 #endif

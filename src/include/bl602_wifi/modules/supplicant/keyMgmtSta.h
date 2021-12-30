@@ -31,6 +31,7 @@ void UpdateEAPOLWcbLenAndTransmit(BufferDesc_t *pBufDesc, UINT16 frameLen);
 BufferDesc_t *GetTxEAPOLBuffer(cm_ConnectionInfo_t *connPtr, EAPOL_KeyMsg_Tx_t **ppTxEapol, BufferDesc_t *pBufDesc);
 void allocSupplicantData(void *connectionPtr);
 void supplicantEnable(void *connectionPtr, int security_mode, void *mcstCipher, void *ucstCipher, bool is_pmf_required);
+void supplicantDisable(cm_ConnectionInfo_t *connPtr);
 uint8_t add_key_to_mac(cm_ConnectionInfo_t *connPtr, UINT8 pairwise);
 
 #endif // _KEYMGMTSTA_H_

@@ -130,4 +130,43 @@ struct tx_agg_desc {
     uint8_t reserved; // +0
 }; // :979:8
 
+
+//----------------------------------------------------------------------------------------
+//THD STATINFO fields
+//----------------------------------------------------------------------------------------
+/// Number of RTS frame retries offset
+#define NUM_RTS_RETRIES_OFT                0
+/// Number of RTS frame retries mask
+#define NUM_RTS_RETRIES_MSK               (0xFF << NUM_RTS_RETRIES_OFT)
+/// Number of MPDU frame retries offset
+#define NUM_MPDU_RETRIES_OFT               8
+/// Number of MPDU frame retries mask
+#define NUM_MPDU_RETRIES_MSK              (0xFF << NUM_MPDU_RETRIES_OFT)
+/// Retry limit reached: frame unsuccessful
+#define RETRY_LIMIT_REACHED_BIT            CO_BIT(16)
+/// Frame lifetime expired: frame unsuccessful
+#define LIFETIME_EXPIRED_BIT               CO_BIT(17)
+/// BA frame not received - valid only for MPDUs part of AMPDU
+#define BA_FRAME_RECEIVED_BIT              CO_BIT(18)
+/// Frame successful by TX DMA: Ack received successfully
+#define FRAME_SUCCESSFUL_TX_BIT            CO_BIT(23)
+/// Last MPDU of an A-MPDU
+#define A_MPDU_LAST                        (0x0F << 26)
+/// Transmission bandwidth offset
+#define BW_TX_OFT                          24
+/// Transmission bandwidth mask
+#define BW_TX_MSK                          (0x3 << BW_TX_OFT)
+/// Transmission bandwidth - 20MHz
+#define BW_20MHZ_TX                        (0x0 << BW_TX_OFT)
+/// Transmission bandwidth - 40MHz
+#define BW_40MHZ_TX                        (0x1 << BW_TX_OFT)
+/// Transmission bandwidth - 80MHz
+#define BW_80MHZ_TX                        (0x2 << BW_TX_OFT)
+/// Transmission bandwidth - 160MHz
+#define BW_160MHZ_TX                       (0x3 << BW_TX_OFT)
+/// Descriptor done bit: Set by HW for TX DMA
+#define DESC_DONE_TX_BIT                   CO_BIT(31)
+/// Descriptor done bit: Set by SW for TX DMA
+#define DESC_DONE_SW_TX_BIT                CO_BIT(30)
+
 #endif

@@ -56,6 +56,9 @@ enum {
 
 #define MAC_QOS_INFO_AP_UAPSD_ENABLED CO_BIT(7)
 
+#define MAC_DEFAULT_KEY_COUNT 4
+#define MAC_DEFAULT_MFP_KEY_COUNT 6
+
 struct mac_addr {
     uint16_t array[3]; // +0
 };
@@ -151,4 +154,5 @@ extern const uint8_t mac_ac2uapsd[4];
 extern const uint8_t mac_id2rate[];
 extern const struct mac_addr mac_addr_bcst;
 
+void bl60x_current_time_us(long long *time_now);
 #endif

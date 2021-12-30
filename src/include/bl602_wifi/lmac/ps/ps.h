@@ -19,6 +19,17 @@ enum ps_dpsm_state_bit_pos {
     PS_DPSM_STATE_SET_MODE_REQ = 4,
 };
 
+/// Power Save mode setting
+enum
+{
+    /// Power-save off
+    PS_MODE_OFF,
+    /// Power-save on - Normal mode
+    PS_MODE_ON,
+    /// Power-save on - Dynamic mode
+    PS_MODE_ON_DYN,
+};
+
 struct ps_env_tag {
     bool ps_on; // +0
     ke_task_id_t taskid; // +2

@@ -4,6 +4,9 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#ifndef CHAR_BIT
+#define CHAR_BIT                     8
+#endif
 
 static inline uint16_t co_read16(const void *ptr16) {
     return *((uint16_t*)ptr16);
@@ -80,4 +83,28 @@ static inline void co_copy8p(uint32_t dst, uint32_t src, uint32_t len) {
  */
 #define CO_GET_INDEX(__element_ptr, __array_ptr) ((__element_ptr) - (__array_ptr))
 
+/// Length of a char in bytes
+#define CHAR_LEN    (CHAR_BIT/8)
+
+/**
+ ****************************************************************************************
+ * @brief Converts a CPU pointer into a HW address
+ * This macro is used to convert a SW pointer into the corresponding HW address. With CPUs
+ * having native byte support, the value returned will be the same as the pointer passed.
+ * With TL4, the value returned is the pointer multiplied by 2.
+ * @param[in] ptr Pointer to be converted
+ * @return The corresponding HW address
+ ****************************************************************************************
+ */
+#define CPU2HW(ptr) (((uint32_t)(ptr)) * CHAR_LEN)
+
+/**
+ ****************************************************************************************
+ * @brief Converts a HW address into a CPU pointer
+ * This macro is doing the reverse operation as @ref CPU2HW.
+ * @param[in] ptr Address to be converted
+ * @return The corresponding CPU pointer
+ ****************************************************************************************
+ */
+#define HW2CPU(ptr) ((void *)(((uint32_t)(ptr)) / CHAR_LEN))
 #endif // _CO_UTILS_H_

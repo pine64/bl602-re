@@ -8,6 +8,7 @@
 #include <lmac/vif/vif_mgmt.h>
 #include <modules/common/co_list.h>
 
+#include <modules/mac/mac.h>
 
 struct txl_list {
     struct tx_hd *last_frame_exch; // +0
@@ -44,4 +45,6 @@ void txl_cntrl_inc_pck_cnt(void);
 void txl_payload_handle(void);
 void txl_transmit_trigger(void);
 
+/// Index of the beacon queue
+#define AC_BCN                        AC_MAX
 #endif 
