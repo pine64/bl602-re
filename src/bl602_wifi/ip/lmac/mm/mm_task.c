@@ -623,7 +623,88 @@ static int mm_tim_update_req_handler(const ke_msg_id_t msgid, const struct mm_ti
 }
 
 static int mm_hw_config_handler(const ke_msg_id_t msgid, const void *param, const ke_task_id_t dest_id, const ke_task_id_t src_id) {
-    __builtin_trap();
+    int status = KE_MSG_SAVED;
+
+    switch (ke_state_get(dest_id)) {
+        case MM_IDLE:
+            ASSERT_ERR(MAC_CORE->STATE_CNTRL.currentState == HW_IDLE);
+            switch (msgid) {
+                case MM_SET_CHANNEL_REQ: //
+                    status = mm_set_channel_req_handler(msgid, param, dest_id, src_id);
+                    break;
+                case MM_SET_FILTER_REQ: //
+                    status = mm_set_filter_req_handler(msgid, param, dest_id, src_id);
+                    break;
+                case MM_ADD_IF_REQ: //
+                    status = mm_add_if_req_handler(msgid, param, dest_id, src_id);
+                    break;
+                case MM_REMOVE_IF_REQ: //
+                    status = mm_remove_if_req_handler(msgid, param, dest_id, src_id);
+                    break;
+                case MM_SET_BASIC_RATES_REQ: // 
+                    status = mm_set_basic_rates_req_handler(msgid, param, dest_id, src_id);
+                    break;
+                case MM_SET_BEACON_INT_REQ: //
+                    status = mm_set_beacon_int_req_handler(msgid, param, dest_id, src_id);
+                    break;
+                case MM_SET_DTIM_REQ: //
+                    status = mm_set_dtim_req_handler(msgid, param, dest_id, src_id);
+                    break;
+                case MM_SET_BSSID_REQ: //
+                    status = mm_set_bssid_req_handler(msgid, param, dest_id, src_id);
+                    break;
+                case MM_SET_EDCA_REQ: //
+                    status = mm_set_edca_req_handler(msgid, param, dest_id, src_id);
+                    break;
+                case MM_SET_SLOTTIME_REQ: //
+                    status = mm_set_slottime_req_handler(msgid, param, dest_id, src_id);
+                    break;
+                case MM_SET_MODE_REQ: //
+                    status = mm_set_mode_req_handler(msgid, param, dest_id, src_id);
+                    break;
+                case MM_SET_VIF_STATE_REQ: //
+                    status = mm_set_vif_state_req_handler(msgid, param, dest_id, src_id);
+                    break;
+                case MM_BA_ADD_REQ: //
+                    status = mm_ba_add_req_handler(msgid, param, dest_id, src_id);
+                    break;
+                #if (NX_CHNL_CTXT)
+                case MM_CHAN_CTXT_UPDATE_REQ: //
+                    status = mm_chan_ctxt_update_req_handler(msgid, param, dest_id, src_id);
+                    break;
+                #endif //(NX_CHNL_CTXT)
+                default:
+                    ASSERT_ERR(0);
+                    break;
+            }
+
+            PACK0(MAC_CORE->STATE_CNTRL, state) {
+                state.nextState = mm_env.prev_hw_state;
+            }
+
+            ke_state_set(dest_id, mm_env.prev_mm_state);
+            break;
+
+        case MM_GOING_TO_IDLE:
+        case MM_HOST_BYPASSED:
+            // MAC is currently going to IDLE, so simply save the message. It will be
+            // rescheduled once the MAC has switched to IDLE.
+            break;
+
+        default:
+            // Store the current HW and MM states for later restoring
+            mm_env.prev_hw_state = MAC_CORE->STATE_CNTRL.currentState;
+            mm_env.prev_mm_state = ke_state_get(dest_id);
+
+            // Request to MAC HW to switch to IDLE state
+            hal_machw_idle_req();
+
+            // Adjust the MM state accordingly
+            ke_state_set(dest_id, MM_GOING_TO_IDLE);
+            break;
+    }
+
+    return (status);
 }
 
 #if NX_POWERSAVE
