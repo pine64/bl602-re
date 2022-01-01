@@ -334,6 +334,13 @@ peris['mac_core'] = Peripheral(peripheral('mac_core', 0x44b00000, 0x1000))
 
 Buf('ABS_TIMER', 0x44b00128, 0x44b00128 + 4 * 9)
 
+Reg('encr_ram_config', 0x44b000d8)
+Field('start', 0xffffff00)
+Field('end', 0xffff00ff)
+Field('nVAP', 0xff00ffff)
+Field('max', 0x00ffffff)
+
+
 for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver/reg_mac_core.h", pattern='brief'):
     RegFromComment(offset + 0x44b00000, code)
 Reg('coex_stat', 0x44b00408)
