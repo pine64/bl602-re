@@ -1,6 +1,9 @@
 #ifndef _BLCONFIG_H_
 #define _BLCONFIG_H_
 
+// from hal_machw_init nxmac_max_rx_length_set(0x1000)
+#define CFG_AMSDU_4K 
+
 #ifndef  CFG_TXDESC
 #define CFG_TXDESC          4
 #endif
@@ -42,6 +45,54 @@
 #define RW_WAPI_EN 0
 #define NX_VHT 0
 
+/// == 13 not 17, because of the loop in rxl_hwdesc_init
+/// Number of RX descriptors (SW and Header descriptors)
+#define NX_RXDESC_CNT        13
+
+/// Maximum size of A-MSDU supported in reception
+#if defined CFG_AMSDU_4K
+#define RWNX_MAX_AMSDU_RX    4096
+#elif defined CFG_AMSDU_8K
+#define RWNX_MAX_AMSDU_RX    8192
+#elif defined CFG_AMSDU_12K
+#define RWNX_MAX_AMSDU_RX    12288
+#endif
+
+/// Beamformer support
+#if defined CFG_BFMER
+    #define RW_BFMER_EN                 1
+    #define RW_BFR_TXFRAME_CNT          CFG_MU_CNT
+#else //defined CFG_BFMER
+    #define RW_BFMER_EN                 0
+    #define RW_BFR_TXFRAME_CNT          0
+    // Disable MU-MIMO TX if Beamformer is not supported
+    #undef CFG_MU_CNT
+    #define CFG_MU_CNT                  1
+#endif //defined CFG_BFMER
+
+/// Number of users supported
+#define RW_USER_MAX                 CFG_MU_CNT
+
+#if (NX_BEACONING)
+/// Number of TX descriptors available in the system (BCN)
+#define CFG_TXDESC4       4
+#define NX_TXDESC_CNT4       CFG_TXDESC4
+#if (NX_TXDESC_CNT4 & (NX_TXDESC_CNT4 - 1))
+#error "Not a power of 2"
+#endif
+#endif
+
+#define NX_BCNFRAME_LEN 512
+
+// == 4 for some reason?
+#define NX_TXFRAME_CNT NX_VIRT_DEV_MAX + RW_BFR_TXFRAME_CNT + 2
+
+#if (NX_P2P)
+    #define NX_TXFRAME_LEN       384
+#else
+    #define NX_TXFRAME_LEN       256
+#endif //(NX_P2P)
+
 /// Wireless Mesh Networking support
 #if defined CFG_MESH
     #define RW_MESH_EN                  (1)
@@ -62,6 +113,17 @@
     #define RW_MESH_PATH_NB             (0)
     #define RW_MESH_PROXY_NB            (0)
 #endif //defined CFG_MESH
+
+/// RX Payload buffer size
+#define NX_RX_PAYLOAD_LEN 848
+
+/// Number of RX payload descriptors - defined to be twice the maximum A-MSDU size
+/// plus one extra one used for HW flow control
+// NX_RX_PAYLOAD_DESC_CNT == 13 based on sizeof rx_payload_desc 
+// RWNX_MAX_AMSDU_RX / NX_RX_PAYLOAD_LEN == 6
+// * 2 only gets 9, I guess it's *3
+#define NX_RX_PAYLOAD_DESC_CNT ((RWNX_MAX_AMSDU_RX / NX_RX_PAYLOAD_LEN) * 3 + 1)
+
 #define CFG_MODE_SWITCH 0
 #undef CONFIG_AOS_MESH
 

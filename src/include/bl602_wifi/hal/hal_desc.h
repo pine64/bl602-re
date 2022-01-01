@@ -1,6 +1,8 @@
 
 #ifndef _HAL_DESC_H_
 #define _HAL_DESC_H_
+#include <blconfig.h>
+
 #include <stdint.h>
 #include <phy_rf/phy.h>
 
@@ -168,5 +170,21 @@ struct tx_agg_desc {
 #define DESC_DONE_TX_BIT                   CO_BIT(31)
 /// Descriptor done bit: Set by SW for TX DMA
 #define DESC_DONE_SW_TX_BIT                CO_BIT(30)
+
+// TODO: check why tx_hw_descX are not existing in binary
+// It seems that the entire tx_swdesc is not exists in bl602
+extern struct dma_desc bcn_dwnld_desc;
+extern struct rx_dmadesc rx_dma_hdrdesc[]; // NX_RXDESC_CNT
+extern struct rx_payloaddesc rx_payload_desc[]; // NX_RX_PAYLOAD_DESC_CNT
+extern uint32_t rx_payload_desc_buffer[NX_RX_PAYLOAD_DESC_CNT][212];
+extern struct tx_hw_desc tx_hw_desc0[RW_USER_MAX * NX_TXDESC_CNT0];
+extern struct tx_hw_desc tx_hw_desc1[RW_USER_MAX * NX_TXDESC_CNT0];
+extern struct tx_hw_desc tx_hw_desc2[RW_USER_MAX * NX_TXDESC_CNT0];
+extern struct tx_hw_desc tx_hw_desc3[RW_USER_MAX * NX_TXDESC_CNT0];
+#if (NX_BEACONING)
+/// Array of HW descriptors for BCN queue
+extern struct tx_hw_desc       tx_hw_desc4[NX_TXDESC_CNT4];
+#endif
+extern struct tx_cfm_tag tx_hw_cfms[RW_USER_MAX * NX_TXDESC_CNT0];
 
 #endif
