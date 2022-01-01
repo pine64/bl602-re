@@ -59,6 +59,11 @@ enum {
 #define MAC_DEFAULT_KEY_COUNT 4
 #define MAC_DEFAULT_MFP_KEY_COUNT 6
 
+#define MAC_SEC_KEY_LEN         32  // TKIP keys 256 bits (max length) with MIC keys
+
+/// duration of a Time Unit in microseconds
+#define TU_DURATION                     1024
+
 struct mac_addr {
     uint16_t array[3]; // +0
 };

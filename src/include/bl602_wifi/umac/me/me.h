@@ -6,6 +6,7 @@
 
 #include <umac/me/me_task.h>
 #include <modules/ke/ke_task.h>
+#include <modules/ke/ke_msg.h>
 #include <modules/supplicant/keyMgmtStatTypes.h>
 #include <modules/mac/mac.h>
 

@@ -48,6 +48,7 @@ static inline void *ke_msg2param(const struct ke_msg *msg) {
 }
 
 void *ke_msg_alloc(const ke_msg_id_t id, const ke_task_id_t dest_id, const ke_task_id_t src_id, const uint16_t param_len);
+#define KE_MSG_ALLOC(id, dest_id, src_id, type) ((struct type*) ke_msg_alloc(id, dest_id, src_id, sizeof(struct type)))
 void ke_msg_send(const void *param_ptr);
 void ke_msg_send_basic(const ke_msg_id_t id, const ke_task_id_t dest_id, const ke_task_id_t src_id);
 void ke_msg_forward_and_change_id(const void *param_ptr, const ke_msg_id_t msg_id, const ke_task_id_t dest_id, const ke_task_id_t src_id);

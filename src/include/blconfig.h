@@ -27,6 +27,20 @@
 #define NX_BCN_AUTONOMOUS_TX 1
 #define NX_MFP 0
 #define NX_KEY_RAM_CONFIG 1
+#define NX_UAPSD 1
+#define NX_DPSM 1
+#define NX_AMPDU_TX 0
+#define NX_AMSDU_TX 0
+#define NX_P2P 0
+#define NX_P2P_GO 0
+#define NX_REORD 0
+#define TDLS_ENABLE 0
+#define RW_BFMEE_EN 0
+#define RW_BFMER_EN 0
+#define RW_MUMIMO_RX_EN 0
+#define RW_MUMIMO_TX_EN 0
+#define RW_WAPI_EN 0
+#define NX_VHT 0
 
 /// Wireless Mesh Networking support
 #if defined CFG_MESH
@@ -50,4 +64,17 @@
 #endif //defined CFG_MESH
 #define CFG_MODE_SWITCH 0
 #undef CONFIG_AOS_MESH
+
+#define NX_VERSION_MAJ      5
+/// Minor version number
+#define NX_VERSION_MIN      0
+/// Release number
+#define NX_VERSION_REL      4
+/// Patch number
+#define NX_VERSION_PAT      0
+
+/// Version word
+#define NX_VERSION ((NX_VERSION_MAJ << 24) | (NX_VERSION_MIN << 16) | \
+                           (NX_VERSION_REL << 8) | NX_VERSION_PAT)
+
 #endif

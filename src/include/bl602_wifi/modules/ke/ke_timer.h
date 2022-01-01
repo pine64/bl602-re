@@ -23,6 +23,8 @@ void ke_timer_clear(const ke_msg_id_t timer_id, const ke_task_id_t task_id);
 void ke_timer_schedule(int dummy);
 
 #define KE_TIMER_DELAY_MAX 300000000
+/// Standard Multiplier
+#define MILLI2MICRO             1000
 
 static inline bool ke_time_abs_cmp(uint32_t time1, uint32_t time2) {
     uint32_t diff = time1 - time2;

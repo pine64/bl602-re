@@ -39,6 +39,31 @@ enum mm_features {
     MM_FEAT_TDLS_BIT = 24,
 };
 
+///BA agreement related status
+enum {
+    /// Correct BA agreement establishment
+    BA_AGMT_ESTABLISHED,
+    /// BA agreement already exists for STA+TID requested, cannot override it (should have been deleted first)
+    BA_AGMT_ALREADY_EXISTS,
+    /// Correct BA agreement deletion
+    BA_AGMT_DELETED,
+    /// BA agreement for the (STA, TID) doesn't exist so nothing to delete
+    BA_AGMT_DOESNT_EXIST,
+    /// No more BA agreement can be added for the specified type
+    BA_AGMT_NO_MORE_BA_AGMT,
+    /// BA agreement type not supported
+    BA_AGMT_NOT_SUPPORTED
+};
+
+///BA agreement types
+enum
+{
+    ///BlockAck agreement for TX
+    BA_AGMT_TX,
+    ///BlockAck agreement for RX
+    BA_AGMT_RX,
+};
+
 struct mm_env_tag {
     uint32_t rx_filter_umac; // +0
     uint32_t rx_filter_lmac_enable; // +4
@@ -90,6 +115,8 @@ void mm_hw_idle_evt(int dummy);
 #define MM_BEACON_LOSS_THD          (100)  // not 30
 /// Periodicity of keep-alive NULL frame transmission
 #define MM_KEEP_ALIVE_PERIOD (30 * 1000000)   ///< 30s
+/// Default peer device accuracy (in ppm)
+#define MM_AP_CLK_ACCURACY            20
 
 #define NXMAC_EN_DUPLICATE_DETECTION_BIT         ((uint32_t)0x80000000)
 #define NXMAC_EN_DUPLICATE_DETECTION_POS         31
@@ -213,6 +240,13 @@ void mm_hw_idle_evt(int dummy);
                              NXMAC_ACCEPT_DATA_BIT | NXMAC_ACCEPT_Q_DATA_BIT |           \
                              NXMAC_ACCEPT_QO_S_NULL_BIT | NXMAC_ACCEPT_OTHER_DATA_FRAMES_BIT)   
 // bl602 has one moer NXMAC_ACCEPT_PROBE_REQ_BIT                          
+#endif
+
+/// Number of supported Default+Pairwise keys
+#if NX_KEY_RAM_CONFIG
+#define MM_SEC_MAX_KEY_NBR      ((MAC_CORE->encr_ram_config.max) + 1)
+#else
+#define MM_SEC_MAX_KEY_NBR      64
 #endif
 
 static inline void mm_ps_change_ind(uint8_t sta_idx, uint8_t ps_state) {

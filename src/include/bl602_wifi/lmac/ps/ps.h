@@ -28,6 +28,7 @@ enum
     PS_MODE_ON,
     /// Power-save on - Dynamic mode
     PS_MODE_ON_DYN,
+    PS_DENOISE,
 };
 
 struct ps_env_tag {
