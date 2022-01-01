@@ -51,7 +51,7 @@ uint8_t phy_mu_mimo_rx_supported(void);
 void phy_mdm_isr(void);
 uint8_t phy_ldpc_tx_supported(void);
 uint8_t phy_ldpc_rx_supported(void);
-void phy_init(phy_cfg_tag *config);
+void phy_init(const phy_cfg_tag *config);
 void phy_set_channel(uint8_t band,uint8_t type,uint16_t prim20_freq,uint16_t center1_freq,
                     uint16_t center2_freq,uint8_t index);
 void phy_hw_set_channel(uint8_t band, uint16_t freq, uint16_t freq1, uint8_t chantype);

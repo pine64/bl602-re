@@ -346,7 +346,7 @@ static void phy_hw_init(const struct phy_bl602_cfg_tag *cfg) {
     agc_download();
 }
 
-void phy_init(phy_cfg_tag *config) {
+void phy_init(const phy_cfg_tag *config) {
     const struct phy_bl602_cfg_tag *cfg = (const struct phy_bl602_cfg_tag *)&config->parameters;
     phy_hw_init(cfg);
 
