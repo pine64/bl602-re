@@ -9,6 +9,7 @@
 #include <modules/common/co_list.h>
 
 #include <modules/mac/mac.h>
+#include <modules/mac/mac_frame.h>
 
 struct txl_list {
     struct tx_hd *last_frame_exch; // +0
@@ -30,7 +31,6 @@ extern struct txl_cntrl_env_tag txl_cntrl_env;
 
 
 bool txl_sleep_check(void);
-uint16_t txl_get_seq_ctrl(void);
 void txl_cntrl_init(void);
 void txl_reset(void);
 bool txl_cntrl_tx_check(struct vif_info_tag *p_vif_entry);
@@ -47,4 +47,12 @@ void txl_transmit_trigger(void);
 
 /// Index of the beacon queue
 #define AC_BCN                        AC_MAX
+
+
+static inline uint16_t txl_get_seq_ctrl(void) {
+    txl_cntrl_env.seqnbr++;
+
+    return (txl_cntrl_env.seqnbr << MAC_SEQCTRL_NUM_OFT);
+}
+
 #endif 

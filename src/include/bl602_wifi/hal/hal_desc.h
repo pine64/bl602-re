@@ -171,6 +171,25 @@ struct tx_agg_desc {
 /// Descriptor done bit: Set by SW for TX DMA
 #define DESC_DONE_SW_TX_BIT                CO_BIT(30)
 
+/// uPattern for TX header descriptor.
+#define TX_HEADER_DESC_PATTERN 0xCAFEBABE
+/// uPattern for TX buffer descriptor
+#define TX_PAYLOAD_DESC_PATTERN 0xCAFEFADE
+/// uPattern for RX header descriptor.
+#define RX_HEADER_DESC_PATTERN 0xBAADF00D
+/// uPattern for RX payload descriptor.
+#define RX_PAYLOAD_DESC_PATTERN 0xC0DEDBAD
+
+// Policy Table: Power Control Information field
+/// Transmit Power Level for RCX offset
+#define TX_PWR_LEVEL_PT_RCX_OFT         0
+/// Transmit Power Level for RCX mask
+#define TX_PWR_LEVEL_PT_RCX_MASK        (0xff << TX_PWR_LEVEL_PT_RCX_OFT)
+/// Transmit Power Level of Protection for RCX offset
+#define TX_PWR_LEVEL_PROT_PT_RCX_OFT    8
+/// Transmit Power Level of Protection for RCX mask
+#define TX_PWR_LEVEL_PROT_PT_RCX_MASK   (0xff << TX_PWR_LEVEL_PROT_PT_RCX_OFT)
+
 // TODO: check why tx_hw_descX are not existing in binary
 // It seems that the entire tx_swdesc is not exists in bl602
 extern struct dma_desc bcn_dwnld_desc;

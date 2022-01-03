@@ -210,5 +210,28 @@ struct preq_frame {
  #define MAC_RSNIE_CIPHER_WPI_SMS4 0x04
  #define MAC_RSNIE_CIPHER_AES_CMAC 0x05
 
+/*
+ * MAC HEADER definitions and OFFSETS
+ ****************************************************************************************
+ */
+#define MAC_HEAD_FCTRL_OFT              0
+#define MAC_HEAD_DURATION_OFT           2
+#define MAC_HEAD_DURATION_CFP      0x8000
+#define MAC_HEAD_ADDR1_OFT              4
+#define MAC_HEAD_ADDR2_OFT             10
+#define MAC_HEAD_ADDR3_OFT             16
+#define MAC_HEAD_CTRL_OFT              22
+#define MAC_HEAD_ADDR4_OFT             24
+#define MAC_HEAD_SHORT_QOS_OFT         24
+#define MAC_HEAD_LONG_QOS_OFT          30
+#define MAC_ORIGINAL_ETHTYPE_OFT       36
+
+/// SEQUENCE CONTROL FIELD
+#define MAC_SEQCTRL_LEN                 2
+#define MAC_SEQCTRL_NUM_OFT             4
+#define MAC_SEQCTRL_NUM_MSK             0xFFF0
+#define MAC_SEQCTRL_NUM_MAX             (MAC_SEQCTRL_NUM_MSK >> MAC_SEQCTRL_NUM_OFT)
+#define MAC_SEQCTRL_FRAG_OFT            0
+#define MAC_SEQCTRL_FRAG_MSK            0x000F
 
 #endif // _MAC_FRAME_H_

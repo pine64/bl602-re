@@ -89,11 +89,11 @@ struct sta_info_tag {
     uint16_t ctrl_port_ethertype; // +56
     struct sta_mgmt_sec_info sta_sec_info; // +64
     struct mac_sta_info info; // +176
-    uint16_t seq_nbr[9]; // +248
+    uint16_t seq_nbr[TID_MAX]; // +248
     struct sta_pol_tbl_cntl pol_tbl; // +268
-    struct sta_mgmt_ba_info ba_info[9]; // +284
+    struct sta_mgmt_ba_info ba_info[TID_MAX]; // +284
     uint16_t rx_nqos_last_seqcntl; // +392
-    uint16_t rx_qos_last_seqcntl[9]; // +394
+    uint16_t rx_qos_last_seqcntl[TID_MAX]; // +394
     struct co_list tx_desc_post; // +412
     void *suppData; // +420
     uint32_t time_last_seen; // +424
