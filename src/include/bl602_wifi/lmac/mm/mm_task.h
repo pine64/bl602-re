@@ -128,6 +128,8 @@ enum mm_msg_tag {
     MM_MAX = 99,
 };
 
+#define BCN_MAX_CSA_CPT 2
+
 struct mm_monitor_cfm {
     uint32_t status; // +0
     uint32_t enable; // +4
