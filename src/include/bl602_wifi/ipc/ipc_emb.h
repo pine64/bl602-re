@@ -23,7 +23,12 @@ extern struct ipc_emb_env_tag ipc_emb_env;
 extern const int nx_txdesc_cnt_msk[];
 
 
-bool ipc_emb_tx_q_has_data(int queue_idx);
+static inline bool ipc_emb_tx_q_has_data(int queue_idx) {
+    // guessed, not sure if it's !=0 or == 0
+    // rationally, it should be != 0
+    return (ipc_emb_env.txdesc + (ipc_emb_env.txdesc_idx & 3))->ready != 0;
+}
+
 uint32_t ipc_emb_tx_evt_field(uint32_t stat);
 void ipc_emb_txcfm_ind(uint32_t queue_bits);
 void ipc_emb_init(void);

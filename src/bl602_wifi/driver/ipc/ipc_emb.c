@@ -44,12 +44,6 @@ void ipc_emb_dump(void) {
     return ;
 }
 
-bool ipc_emb_tx_q_has_data(int queue_idx) {
-    // guessed, not sure if it's !=0 or == 0
-    // rationally, it should be != 0
-    return (ipc_emb_env.txdesc + (ipc_emb_env.txdesc_idx & 3))->ready != 0;
-}
-
 uint32_t ipc_emb_tx_evt_field(uint32_t stat) {
     // can't find impl
     return 0;
