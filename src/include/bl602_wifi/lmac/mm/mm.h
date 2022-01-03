@@ -86,7 +86,7 @@ void mm_rx_filter_umac_set(uint32_t filter);
 void mm_rx_filter_lmac_enable_set(uint32_t filter);
 void mm_rx_filter_lmac_enable_clear(uint32_t filter);
 static void mm_ps_change_ind(uint8_t sta_idx, uint8_t ps_state);
-void mm_traffic_req_ind(uint8_t sta_idx, uint8_t pkt_cnt, bool uapsd);
+
 void mm_init(void);
 void mm_reset(void);
 void mm_active(void);

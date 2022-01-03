@@ -5,6 +5,8 @@
 #include <stdbool.h>
 #include <modules/common/co_list.h>
 
+#include <lmac/tx/tx_swdesc.h>
+
 struct ipc_emb_env_tag {
     struct co_list rx_queue; // +0
     struct co_list cfm_queue; // +8

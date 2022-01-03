@@ -234,4 +234,8 @@ struct preq_frame {
 #define MAC_SEQCTRL_FRAG_OFT            0
 #define MAC_SEQCTRL_FRAG_MSK            0x000F
 
+// MIC and FCS lengths
+#define MAC_FCS_LEN     4
+#define MAC_MIC_LEN     8
+
 #endif // _MAC_FRAME_H_
