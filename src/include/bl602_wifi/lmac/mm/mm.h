@@ -261,6 +261,17 @@ static inline void mm_ps_change_ind(uint8_t sta_idx, uint8_t ps_state) {
     ke_msg_send(ind);
 }
 
+static inline void mm_traffic_req_ind(uint8_t sta_idx, uint8_t pkt_cnt, bool uapsd) {
+    struct mm_traffic_req_ind *ind = KE_MSG_ALLOC(MM_TRAFFIC_REQ_IND, TASK_API, TASK_MM, mm_traffic_req_ind);
+
+    ind->sta_idx = sta_idx;
+    ind->pkt_cnt = pkt_cnt;
+    ind->uapsd = uapsd;
+
+    ke_msg_send(ind);
+}
+
+
 #define TASK_IND TASK_SM
 
 #endif // _MM_H_
