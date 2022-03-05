@@ -2,10 +2,15 @@
 
 == Notes
 
-* The blobs were compiled using
-  `riscv32-unknown-elf-gcc_8.3.0 -march=rv32imfc -mabi=ilp32f -gdwarf -Os -std=gnu99 -ffunction-sections -fdata-sections -fstrict-volatile-bitfields -fshort-enums -ffreestanding -fno-strict-aliasing`
+* The blobs were compiled using `riscv32-unknown-elf-gcc-8.3.0 -march=rv32imfc
+  -mabi=ilp32f -gdwarf -Os -std=gnu99 -ffunction-sections -fdata-sections
+  -fstrict-volatile-bitfields -fshort-enums -ffreestanding
+  -fno-strict-aliasing` which implies integers, longs, and pointers are all
+  32-bits; and single-precision floats are supported by the hardware.
 
-* The target likely supports atomics. If so we may use `-march=rv32imafc`.
+* Unless disabled entirely; the SiFive E24 only partially supports atomics.
+  Load-reserved and store-conditionals are not implemented and will generate an
+  illegal instruction exception if used.
 
 == Toolset
 
@@ -70,7 +75,7 @@ RivieraWaves code is known to be easily available on GitHub with simple searches
 * Split objects out of archives `ar x libx.a`.
 
 * Disassembled objects to their assembly
-  `git/github/pine64/bl_iot_sdk/toolchain/riscv/Linux/bin/riscv64-unknown-elf-objdump -d -r xx.o"`
+  `pine64/bl_iot_sdk/toolchain/riscv/Linux/bin/riscv64-unknown-elf-objdump -d -r xx.o`
   
 === Yangff (30 Oct 2020)
   * Added three statically linked elf built from bl_iot_sdk to provide clear symbols for reverse engineering
@@ -78,3 +83,10 @@ RivieraWaves code is known to be easily available on GitHub with simple searches
   * The three examples are from commit 9a10205e96a6b10e22069c87625550cad666b1b4, bl602_demo_at, bl602_demo_wifi and sdk_app_ble_sync.
   
   * They are compiled with the riscv toolchain shipped with the sdk and using `make -j` directly in the folders with `CONFIG_CHIP_NAME=BL602` and `CONFIG_LINK_ROM=1`. The disassembly is generated with `riscv64-unknown-elf-objdump -d ./x.elf > ./x.S`
+
+=== WildCryptoFox (3 Nov 2020)
+
+* Added reko decompilation outputs for Yangff's 3 binaries above. Decompiled by
+  Reko's developer @uxmal in
+  https://github.com/uxmal/reko/issues/958[uxmal/reko#958], after patching
+  32-bit RISC-V ELF handling and improving RISC-V decompilation output.

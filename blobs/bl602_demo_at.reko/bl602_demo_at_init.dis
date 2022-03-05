@@ -1,0 +1,64 @@
+void bl602_start(word32 s0, word32 s2, word32 s3, word32 fcsr, word32 mstatus, word32 misa, word32 mie, word32 mtvec)
+// stackDelta: 0; fpuStackDelta: 0; fpuMaxParam: -1
+
+// MayUse:  fcsr:[0..31] mie:[0..31] misa:[0..31] mstatus:[0..31] mtvec:[0..31] s0:[0..31] s2:[0..31] s3:[0..31]
+// LiveOut:
+// Trashed:
+// Preserved: sp
+// Terminates process
+bl602_start_exit:
+bl602_start_entry:
+l23000000:
+	__csrrc(mstatus, 0<32>)
+	word32 a0_10 = 0x42049C00<p32>
+	word32 a1_12 = 0x4200EFA8<p32>
+	branch 0x4200EFA8<p32> >=u 0x4200F200<p32> l23000042
+l23000032:
+	Mem19[a1_12:word32] = Mem16[a0_10:int32]
+	a0_10 = a0_10 + 4<32>
+	a1_12 = a1_12 + 4<32>
+	branch a1_12 <u 0x4200F200<p32> l23000032
+l23000042:
+	word32 a5_24
+	word32 a0_23 = hal_boot2_get_flash_addr(out a5_24)
+	word32 a1_26 = 0x4200F200<p32>
+	branch 0x4200F200<p32> >=u 0x4200F258<p32> l2300006A
+l2300005A:
+	Mem33[a1_26:word32] = Mem30[a0_23:int32]
+	a0_23 = a0_23 + 4<32>
+	a1_26 = a1_26 + 4<32>
+	branch a1_26 <u 0x4200F258<p32> l2300005A
+l2300006A:
+	word32 a0_38 = 0x230CC2DC<p32>
+	word32 a1_40 = 0x4200C498<p32>
+	branch 0x4200C498<p32> >=u 0x4200EFA8<p32> l23000096
+l23000086:
+	Mem47[a1_40:word32] = Mem44[a0_38:int32]
+	a0_38 = a0_38 + 4<32>
+	a1_40 = a1_40 + 4<32>
+	branch a1_40 <u 0x4200EFA8<p32> l23000086
+l23000096:
+	word32 a0_52 = 0x4200F258<p32>
+	branch 0x4200F258<p32> >=u 0x420280F3<p32> l230000D2
+l230000AA:
+	Mem56[a0_52:word32] = 0<32>
+	a0_52 = a0_52 + 4<32>
+	branch a0_52 <u 0x420280F3<p32> l230000AA
+l230000B4:
+	word32 a0_60 = 0x42040000<p32>
+	branch 0x42040000<p32> >=u 0x420497A0<p32> l230000D2
+l230000C8:
+	Mem64[a0_60:word32] = 0<32>
+	a0_60 = a0_60 + 4<32>
+	branch a0_60 <u 0x420497A0<p32> l230000C8
+l230000D2:
+	__csrrs(mstatus, 0<32>)
+	branch (__csrrs(mstatus, 0<32>) & 0x6000000<32>) == 0<32> l230000E8
+l230000E4:
+	__csrrw(fcsr, 0x4200C7F0<p32>)
+l230000E8:
+	Mem110[0x4203FFF4<p32>:word32] = 0x230000E8<p32>
+	bfl_main(0x6000000<32>, s0, a5_24, s2, s3, fcsr, mstatus, misa, mie, mtvec, Mem110[0x4203FFF0<p32>:word32], Mem110[0x4203FFF4<p32>:word32], Mem110[0x4203FFF8<p32>:word32], Mem110[0x42040000<p32>:word32], Mem110[0x42040004<p32>:word32], Mem110[0x42040008<p32>:word32], Mem110[0x42040010<p32>:word32], Mem110[0x42040014<p32>:word32], Mem110[0x42040018<p32>:word32], Mem110[0x4204001C<p32>:word32], Mem110[0x42040024<p32>:word32], Mem110[0x42040028<p32>:word32], Mem110[0x4204002C<p32>:word32], Mem110[0x42040034<p32>:word32], Mem110[0x42040038<p32>:word32], Mem110[0x42040048<p32>:word32], Mem110[0x4204004C<p32>:word32], Mem110[0x4204005C<p32>:word32], Mem110[0x42040068<p32>:word32], Mem110[0x42040074<p32>:word32], Mem110[0x42040078<p32>:word32], Mem110[0x42040088<p32>:word32], Mem110[0x42040094<p32>:word32], Mem110[0x42040098<p32>:word32], Mem110[0x420400A8<p32>:word32], Mem110[0x420400B8<p32>:word32], Mem110[0x420400C8<p32>:word32], Mem110[0x420400D8<p32>:word32], Mem110[0x420400E8<p32>:word32], Mem110[0x420400F8<p32>:word32], Mem110[0x42040114<p32>:word32], Mem110[0x42040118<p32>:word32], Mem110[0x42040134<p32>:word32], Mem110[0x42040154<p32>:word32])
+l230000F8:
+
+
