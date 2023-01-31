@@ -62,8 +62,8 @@ struct txl_buffer_tag {
 };
 
 extern struct txl_buffer_env_tag txl_buffer_env;
-extern struct txl_buffer_control txl_buffer_control_desc[10];
-extern struct txl_buffer_control txl_buffer_control_desc_bcmc[2];
+extern struct txl_buffer_control txl_buffer_control_desc[NX_REMOTE_STA_MAX]; // this should be 3... instead of 10
+extern struct txl_buffer_control txl_buffer_control_desc_bcmc[NX_VIRT_DEV_MAX];
 
 void txl_buffer_push(uint8_t access_category, struct txl_buffer_tag *buf);
 struct txl_buffer_tag *txl_buffer_pop(uint8_t access_category);

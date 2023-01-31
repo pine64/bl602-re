@@ -82,10 +82,23 @@ struct mm_env_tag {
 extern struct mm_env_tag mm_env;
 
 void mm_rx_filter_set(void);
-void mm_rx_filter_umac_set(uint32_t filter);
-void mm_rx_filter_lmac_enable_set(uint32_t filter);
-void mm_rx_filter_lmac_enable_clear(uint32_t filter);
-static void mm_ps_change_ind(uint8_t sta_idx, uint8_t ps_state);
+
+inline static void mm_rx_filter_umac_set(uint32_t filter) {
+    mm_env.rx_filter_umac = filter;
+    mm_rx_filter_set();
+}
+
+inline static void mm_rx_filter_lmac_enable_set(uint32_t filter) {
+    mm_env.rx_filter_lmac_enable |= filter;
+    mm_rx_filter_set();
+}
+
+inline static void mm_rx_filter_lmac_enable_clear(uint32_t filter) {
+    mm_env.rx_filter_lmac_enable &= ~filter;
+    mm_rx_filter_set();
+}
+
+void mm_ps_change_ind(uint8_t sta_idx, uint8_t ps_state);
 
 void mm_init(void);
 void mm_reset(void);

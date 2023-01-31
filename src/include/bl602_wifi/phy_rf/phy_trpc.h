@@ -25,4 +25,7 @@ void trpc_update_power_11g(int8_t * power_rate_table);
 void trpc_update_power_11n(int8_t * power_rate_table);
 void trpc_update_vs_channel(int8_t channel_MHz);
 void trpc_update_vs_temperature(int8_t temperature);
+
+extern int8_t txpwr_vs_rate_table[3][8];
+
 #endif

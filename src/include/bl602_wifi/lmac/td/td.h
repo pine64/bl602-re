@@ -26,7 +26,7 @@ struct td_env_tag {
     bool has_active_chan; // +35
 };
 
-extern struct td_env_tag td_env[NX_REMOTE_STA_MAX];
+extern struct td_env_tag td_env[NX_VIRT_DEV_MAX];
 
 void td_init(void);
 void td_reset(uint8_t vif_index);
@@ -41,5 +41,7 @@ static inline uint8_t td_get_status(uint8_t vif_index) {
 static inline uint8_t td_get_ps_status(uint8_t vif_index) {
     return (td_env[vif_index].status & (CO_BIT(TD_STATUS_TX_PS) | CO_BIT(TD_STATUS_RX_PS)));
 }
+
+#define TD_DEFAULT_INTV_US 1000000
 
 #endif // _TD_H_

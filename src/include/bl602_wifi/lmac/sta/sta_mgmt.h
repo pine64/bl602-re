@@ -8,7 +8,7 @@
 #include <modules/common/co_list.h>
 
 #include <modules/mac/mac.h>
-
+#include <modules/mac/mac_common.h>
 
 
 struct vif_info_tag;
@@ -39,6 +39,17 @@ enum sta_ps_sp {
     UAPSD_SERVICE_PERIOD = 6,
     ANY_SERVICE_PERIOD_INT = 3,
     BCN_SERVICE_PERIOD = 8,
+};
+
+enum {
+    /// no data traffic could be exchanged with this station
+    PORT_CLOSED = 0,
+    /// encryption key is not yet available, only EAP frames could be sent
+    PORT_CONTROLED,
+    /// closing status for key is deleted but station is still active
+    PORT_CLOSING,
+    /// any data types could be sent
+    PORT_OPEN
 };
 
 typedef int sta_ps_sp_t;
@@ -105,7 +116,8 @@ struct sta_info_env_tag {
 
 
 extern struct sta_info_env_tag sta_info_env;
-extern struct sta_info_tag sta_info_tab[12];
+// this is 5, not 12.. IDK why it's 12 in header..
+extern struct sta_info_tag sta_info_tab[STA_MAX];
 
 
 uint8_t sta_mgmt_get_port_state(uint8_t sta_idx);
@@ -116,9 +128,16 @@ void sta_mgmt_unregister(uint8_t sta_idx);
 void sta_mgmt_add_key(const struct mm_key_add_req *param, uint8_t hw_key_idx);
 void sta_mgmt_del_key(struct sta_info_tag *sta);
 uint16_t sta_mgmt_get_tx_ssn_and_inc(uint8_t sta_idx, uint8_t tid);
-bool sta_mgmt_is_valid(uint8_t sta_idx);
 struct mac_addr *sta_mgmt_get_peer_addr(uint8_t sta_idx);
 uint8_t sta_mgmt_get_vif_idx(uint8_t sta_idx);
 int sta_mgmt_send_postponed_frame(struct vif_info_tag *p_vif_entry, struct sta_info_tag *p_sta_entry, int limit);
+
+
+static inline bool sta_mgmt_is_valid(uint8_t sta_idx) {
+	if (sta_idx >= STA_MAX)
+		return false;
+	
+	return (sta_info_tab[sta_idx].valid);
+}
 
 #endif 

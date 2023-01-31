@@ -19,10 +19,10 @@ struct txl_frame_cfm_tag {
 
 struct txl_frame_desc_tag {
     struct txdesc txdesc; // +0
-    struct txl_frame_cfm_tag cfm; // +716
-    uint8_t type; // +724
-    bool postponed; // +725
-    bool keep_desc; // +726
+    struct txl_frame_cfm_tag cfm; // +204 +716
+    uint8_t type; // +212
+    bool postponed; // +213
+    bool keep_desc; // +214
 };
 
 struct txl_frame_env_tag {

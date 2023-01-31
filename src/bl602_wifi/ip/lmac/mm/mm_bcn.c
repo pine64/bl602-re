@@ -350,7 +350,7 @@ static void mm_bcn_init_tim(struct vif_info_tag *vif_entry) {
 }
 
 void mm_bcn_init(void) {
-  memset(&mm_bcn_env, 0, sizeof(mm_bcn_env));
+  memset(&mm_bcn_env, 0, sizeof(struct mm_bcn_env_tag));
   mm_bcn_env.dma.dma_desc = &bcn_dwnld_desc;
   mm_bcn_env.dma.cb = mm_bcn_updated;
   co_list_init(&mm_bcn_env.tim_list);
@@ -424,7 +424,7 @@ void mm_bcn_transmit(void) {
                     #endif //(NX_CHNL_CTXT || NX_P2P_GO)
                     struct sta_info_tag* p_sta_info = sta_info_tab + VIF_TO_BCMC_IDX(vif->index);
                     if ((p_sta_info->traffic_avail & PS_TRAFFIC_INT) != 0) {
-                        p_sta_info->ps_service_period = 9;
+                        p_sta_info->ps_service_period = PS_SERVICE_PERIOD | BCN_SERVICE_PERIOD;
                         sta_mgmt_send_postponed_frame(vif, p_sta_info, 0);
                         p_sta_info->ps_service_period = NO_SERVICE_PERIOD;
                     }

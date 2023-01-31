@@ -33,6 +33,8 @@ enum
 
 /// Macro giving the BCMC station index for the VIF index passed as parameter
 #define VIF_TO_BCMC_IDX(idx)    (BROADCAST_STA_IDX_MIN + (idx))
+// for some reason here the value is 3
+//#define VIF_TO_BCMC_IDX(idx)    (3 + (idx))
 
 /// Maximum size of the frame body for frames that are internally carried.
 #define MAC_FRAME_LEN 512

@@ -79,6 +79,7 @@ struct rxu_cntrl_env_tag {
 
 
 extern struct rxu_cntrl_env_tag rxu_cntrl_env;
+extern uint32_t mac_payload_offset;
 
 
 bool rxu_cntrl_frame_handle(struct rx_swdesc *swdesc);

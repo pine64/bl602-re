@@ -238,4 +238,110 @@ struct preq_frame {
 #define MAC_FCS_LEN     4
 #define MAC_MIC_LEN     8
 
+#define MAC_FCTRL_PROTOCOLVERSION_MASK  0x0003
+#define MAC_FCTRL_TYPE_MASK             0x000C
+#define MAC_FCTRL_MGT_T                 0x0000
+#define MAC_FCTRL_CTRL_T                0x0004
+#define MAC_FCTRL_DATA_T                0x0008
+#define MAC_FCTRL_RSV_T                 0x000c
+
+#define MAC_FCTRL_SUBT_MASK             0x00F0
+/// Management SubType
+#define MAC_FCTRL_ASSOCREQ_ST           0x0000
+#define MAC_FCTRL_ASSOCRSP_ST           0x0010
+#define MAC_FCTRL_REASSOCREQ_ST         0x0020
+#define MAC_FCTRL_REASSOCRSP_ST         0x0030
+#define MAC_FCTRL_PROBEREQ_ST           0x0040
+#define MAC_FCTRL_PROBERSP_ST           0x0050
+#define MAC_FCTRL_BEACON_ST             0x0080
+#define MAC_FCTRL_ATIM_ST               0x0090
+#define MAC_FCTRL_DISASSOC_ST           0x00A0
+#define MAC_FCTRL_AUTHENT_ST            0x00B0
+#define MAC_FCTRL_DEAUTHENT_ST          0x00C0
+#define MAC_FCTRL_ACTION_ST             0x00D0
+#define MAC_FCTRL_ACTION_NO_ACK_ST      0x00E0
+/// Control SubTypes
+#define MAC_FCTRL_BFM_REPORT_POLL_ST    0x0040
+#define MAC_FCTRL_VHT_NDPA_ST           0x0050
+#define MAC_FCTRL_CTRL_WRAPPER_ST       0x0070
+#define MAC_FCTRL_BAR_ST                0x0080
+#define MAC_FCTRL_BA_ST                 0x0090
+#define MAC_FCTRL_PSPOLL_ST             0x00A0
+#define MAC_FCTRL_RTS_ST                0x00B0
+#define MAC_FCTRL_CTS_ST                0x00C0
+#define MAC_FCTRL_ACK_ST                0x00D0
+#define MAC_FCTRL_CFEND_ST              0x00E0
+#define MAC_FCTRL_CFEND_CFACK_ST        0x00F0
+
+/// Data SubTypes
+/* Decoding the subtypes of data type frames can take advantage of the fact that
+ * each subtype field bit position is used to indicate a specific modification of
+ * the basic data frame (subtype 0). Frame control bit 4 is set to 1 in data
+ * subtypes which include +CF-Ack, bit 5 is set to 1 in data subtypes which include
+ * +CF-Poll, bit 6 is set to 1 in data subtypes that contain no Frame Body,
+ * and bit 7 is set to 1 in the QoS data subtypes, which have QoS Control fields in
+ * their MAC headers.
+ *
+ * Usage: check FrameT and FrameSubT individually. If the FrameT is MAC_FCTRL_DATA_T,
+ * check the following bits of the FrameSubT
+ */
+#define MAC_CFACK_ST_BIT                CO_BIT(4)
+#define MAC_CFPOLL_ST_BIT               CO_BIT(5)
+#define MAC_NODATA_ST_BIT               CO_BIT(6)
+#define MAC_QOS_ST_BIT                  CO_BIT(7)
+
+#define MAC_FCTRL_DATACFACKPOLL_ST      (MAC_CFACK_ST_BIT | MAC_CFPOLL_ST_BIT)
+#define MAC_FCTRL_TODS                  0x0100
+#define MAC_FCTRL_FROMDS                0x0200
+#define MAC_FCTRL_MOREFRAG              0x0400
+#define MAC_FCTRL_RETRY                 0x0800
+#define MAC_FCTRL_PWRMGT                0x1000
+#define MAC_FCTRL_MOREDATA              0x2000
+#define MAC_FCTRL_PROTECTEDFRAME        0x4000
+#define MAC_FCTRL_ORDER                 0x8000
+
+#define MAC_FCTRL_TODS_FROMDS          (MAC_FCTRL_TODS | MAC_FCTRL_FROMDS)
+
+/// FRAME CONTROL : Type information including Type and SubType
+#define MAC_FCTRL_TYPESUBTYPE_MASK      (MAC_FCTRL_TYPE_MASK | MAC_FCTRL_SUBT_MASK)
+#define MAC_FCTRL_ASSOCREQ              (MAC_FCTRL_MGT_T     | MAC_FCTRL_ASSOCREQ_ST)
+#define MAC_FCTRL_ASSOCRSP              (MAC_FCTRL_MGT_T     | MAC_FCTRL_ASSOCRSP_ST)
+#define MAC_FCTRL_REASSOCREQ            (MAC_FCTRL_MGT_T     | MAC_FCTRL_REASSOCREQ_ST)
+#define MAC_FCTRL_REASSOCRSP            (MAC_FCTRL_MGT_T     | MAC_FCTRL_REASSOCRSP_ST)
+#define MAC_FCTRL_PROBEREQ              (MAC_FCTRL_MGT_T     | MAC_FCTRL_PROBEREQ_ST)
+#define MAC_FCTRL_PROBERSP              (MAC_FCTRL_MGT_T     | MAC_FCTRL_PROBERSP_ST)
+#define MAC_FCTRL_BEACON                (MAC_FCTRL_MGT_T     | MAC_FCTRL_BEACON_ST)
+#define MAC_FCTRL_ATIM                  (MAC_FCTRL_MGT_T     | MAC_FCTRL_ATIM_ST)
+#define MAC_FCTRL_DISASSOC              (MAC_FCTRL_MGT_T     | MAC_FCTRL_DISASSOC_ST)
+#define MAC_FCTRL_AUTHENT               (MAC_FCTRL_MGT_T     | MAC_FCTRL_AUTHENT_ST)
+#define MAC_FCTRL_DEAUTHENT             (MAC_FCTRL_MGT_T     | MAC_FCTRL_DEAUTHENT_ST)
+#define MAC_FCTRL_ACTION                (MAC_FCTRL_MGT_T     | MAC_FCTRL_ACTION_ST)
+#define MAC_FCTRL_ACTION_NO_ACK         (MAC_FCTRL_MGT_T     | MAC_FCTRL_ACTION_NO_ACK_ST)
+#define MAC_FCTRL_BFM_REPORT_POLL       (MAC_FCTRL_CTRL_T    | MAC_FCTRL_BFM_REPORT_POLL_ST)
+#define MAC_FCTRL_VHT_NDPA              (MAC_FCTRL_CTRL_T    | MAC_FCTRL_VHT_NDPA_ST)
+#define MAC_FCTRL_BA                    (MAC_FCTRL_CTRL_T    | MAC_FCTRL_BA_ST)
+#define MAC_FCTRL_BAR                   (MAC_FCTRL_CTRL_T    | MAC_FCTRL_BAR_ST)
+#define MAC_FCTRL_PSPOLL                (MAC_FCTRL_CTRL_T    | MAC_FCTRL_PSPOLL_ST)
+#define MAC_FCTRL_RTS                   (MAC_FCTRL_CTRL_T    | MAC_FCTRL_RTS_ST)
+#define MAC_FCTRL_CTS                   (MAC_FCTRL_CTRL_T    | MAC_FCTRL_CTS_ST)
+#define MAC_FCTRL_ACK                   (MAC_FCTRL_CTRL_T    | MAC_FCTRL_ACK_ST)
+#define MAC_FCTRL_CFEND                 (MAC_FCTRL_CTRL_T    | MAC_FCTRL_CFEND_ST)
+#define MAC_FCTRL_CFEND_CFACK           (MAC_FCTRL_CFEND     | MAC_CFACK_ST_BIT)
+#define MAC_FCTRL_DATA_CFACK            (MAC_FCTRL_DATA_T    | MAC_CFACK_ST_BIT)
+#define MAC_FCTRL_DATA_CFPOLL           (MAC_FCTRL_DATA_T    | MAC_CFPOLL_ST_BIT)
+#define MAC_FCTRL_DATA_CFACKPOLL        (MAC_FCTRL_DATA_T    | MAC_FCTRL_DATACFACKPOLL_ST)
+#define MAC_FCTRL_NULL_FUNCTION         (MAC_FCTRL_DATA_T    | MAC_NODATA_ST_BIT)
+#define MAC_FCTRL_NULL_CFACK            (MAC_FCTRL_NULL_FUNCTION  | MAC_CFACK_ST_BIT)
+#define MAC_FCTRL_NULL_CFPOLL           (MAC_FCTRL_NULL_FUNCTION  | MAC_CFPOLL_ST_BIT)
+#define MAC_FCTRL_NULL_CFACKPOLL        (MAC_FCTRL_NULL_FUNCTION  | MAC_FCTRL_DATACFACKPOLL_ST)
+#define MAC_FCTRL_QOS_DATA              (MAC_FCTRL_DATA_T    | MAC_QOS_ST_BIT)
+#define MAC_FCTRL_QOS_DATA_CFACK        (MAC_FCTRL_QOS_DATA  | MAC_CFACK_ST_BIT)
+#define MAC_FCTRL_QOS_DATA_CFPOLL       (MAC_FCTRL_QOS_DATA  | MAC_CFPOLL_ST_BIT)
+#define MAC_FCTRL_QOS_DATA_CFACKPOLL    (MAC_FCTRL_QOS_DATA  | MAC_FCTRL_DATACFACKPOLL_ST)
+#define MAC_FCTRL_QOS_NULL              (MAC_FCTRL_QOS_DATA  | MAC_NODATA_ST_BIT)
+#define MAC_FCTRL_QOS_NULL_CFACK        (MAC_FCTRL_QOS_DATA  | MAC_FCTRL_NULL_CFACK)
+#define MAC_FCTRL_QOS_NULL_CFPOLL       (MAC_FCTRL_QOS_DATA  | MAC_FCTRL_NULL_CFPOLL)
+#define MAC_FCTRL_QOS_NULL_CFACKPOLL    (MAC_FCTRL_QOS_DATA  | MAC_FCTRL_NULL_CFACKPOLL)
+
+#define MAC_FCTRL_IS(fc, type) (((fc) & MAC_FCTRL_TYPESUBTYPE_MASK) == MAC_FCTRL_##type)
 #endif // _MAC_FRAME_H_

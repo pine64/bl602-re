@@ -907,6 +907,18 @@ static int element_notify_keepalive_received(struct cfg_element_entry *entry, vo
     return 0;
 }
 
+void mm_rx_filter_set(void) {
+    MAC_CORE->RX_CNTRL.value = mm_env.rx_filter_lmac_enable | mm_env.rx_filter_umac;
+}
+
+void mm_ps_change_ind(uint8_t sta_idx, uint8_t ps_state) {
+    struct mm_ps_change_ind *ind = KE_MSG_ALLOC(MM_PS_CHANGE_IND, TASK_API, TASK_MM, mm_ps_change_ind);
+    sta_info_tab[sta_idx].ps_state = ps_state;
+    ind->sta_idx = sta_idx;
+    ind->ps_state = ps_state;
+    ke_msg_send(ind);
+}
+
 __attribute__((section(".wifi.cfg.entry"))) const struct cfg_element_entry cfg_entrys_mm[3] = {
     {
         .task = 0,

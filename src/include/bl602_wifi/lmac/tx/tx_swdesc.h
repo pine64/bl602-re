@@ -50,7 +50,7 @@ struct txdesc {
     struct lmacdesc lmac; // +100
     struct tx_hw_desc hw_desc; // +112
     struct tx_cfm_tag hw_cfm; // +184
-    uint32_t buf[128]; // +204
+    uint32_t buf[0]; // +204
 };
 
 struct txdesc_host {

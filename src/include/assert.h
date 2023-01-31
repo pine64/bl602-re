@@ -7,4 +7,5 @@
 #define ASSERT_WARN(cond) if (!(cond)) assert_warn(#cond, __FILE__, __LINE__);
 
 #define ASSERT_REC_VAL(cond, ret) if (!(cond)) { assert_rec(#cond, __FILE__, __LINE__); return (ret); }
+#define ASSERT_REC(cond) if (!(cond)) { assert_rec(#cond, __FILE__, __LINE__); }
 #endif

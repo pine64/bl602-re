@@ -11,8 +11,10 @@
 #define NX_CHAN_CTXT_CNT        3
 
 #define CFG_STA_MAX 10
-#define NX_REMOTE_STA_MAX CFG_STA_MAX
+// #define NX_REMOTE_STA_MAX CFG_STA_MAX
 // this is 10 given by the sizeof txl_buffer_control_desc
+// no I think the value should be 3..
+#define NX_REMOTE_STA_MAX 3
 
 // == txl_buffer_control_desc_bcmc
 #define NX_VIRT_DEV_MAX 2
@@ -44,6 +46,7 @@
 #define RW_MUMIMO_TX_EN 0
 #define RW_WAPI_EN 0
 #define NX_VHT 0
+#define NX_RX_FRAME_HANDLING 1
 
 /// == 13 not 17, because of the loop in rxl_hwdesc_init
 /// Number of RX descriptors (SW and Header descriptors)

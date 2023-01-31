@@ -68,6 +68,9 @@ struct mac_addr {
     uint16_t array[3]; // +0
 };
 
+/// Check if MAC address is a group address: test the multicast bit.
+#define MAC_ADDR_GROUP(mac_addr_ptr) ((*((uint8_t *)(mac_addr_ptr))) & 1)
+
 typedef struct mac_addr_unpack {
     uint8_t array[6]; // +0
 } mac_addr_unpack;

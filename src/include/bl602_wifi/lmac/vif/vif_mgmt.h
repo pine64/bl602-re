@@ -55,29 +55,29 @@ struct vif_info_tag {
         struct {
             uint32_t dummy; // +0
             struct txl_frame_desc_tag bcn_desc; // +4
-            uint16_t bcn_len; // +732
-            uint16_t tim_len; // +734
-            uint16_t tim_bitmap_set; // +736
-            uint16_t bcn_int; // +738
-            uint8_t bcn_tbtt_ratio; // +740
-            uint8_t bcn_tbtt_cnt; // +741
-            bool bcn_configured; // +742
-            uint8_t dtim_count; // +743
-            uint8_t tim_n1; // +744
-            uint8_t tim_n2; // +745
-            uint8_t bc_mc_status; // +746
-            uint8_t csa_count; // +747
-            uint8_t csa_oft[2]; // +748
-            uint8_t ps_sta_cnt; // +750
-            uint16_t ctrl_port_ethertype; // +752
+            uint16_t bcn_len; // +220
+            uint16_t tim_len; // +222
+            uint16_t tim_bitmap_set; // +224
+            uint16_t bcn_int; // +226
+            uint8_t bcn_tbtt_ratio; // +228
+            uint8_t bcn_tbtt_cnt; // +229
+            bool bcn_configured; // +230
+            uint8_t dtim_count; // +231
+            uint8_t tim_n1; // +232
+            uint8_t tim_n2; // +233
+            uint8_t bc_mc_status; // +234
+            uint8_t csa_count; // +235
+            uint8_t csa_oft[2]; // +236
+            uint8_t ps_sta_cnt; // +238
+            uint16_t ctrl_port_ethertype; // +240
         } ap;
     } u; // +92
-    struct co_list sta_list; // +848
-    struct mac_bss_info bss_info; // +856
-    struct key_info_tag key_info[4]; // +1056
-    struct key_info_tag *default_key; // +1472
-    uint32_t flags; // +1476
-    struct mm_chan_ctxt_add_req csa_channel; // +1480
+    struct co_list sta_list; // +336
+    struct mac_bss_info bss_info; // +344
+    struct key_info_tag key_info[4]; // +544
+    struct key_info_tag *default_key; // +960
+    uint32_t flags; // +964
+    struct mm_chan_ctxt_add_req csa_channel; // +968
 };
 
 struct vif_mgmt_env_tag {
@@ -145,5 +145,6 @@ enum {
 /// Macro defining an unknown tx power
 #define VIF_UNDEF_POWER 0x7F
 
+#define VIF_MGMT_BCN_TO_DUR     (10000)
 
 #endif // __VIF_MGMT_H__

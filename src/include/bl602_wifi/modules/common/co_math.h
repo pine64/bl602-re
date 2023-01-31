@@ -6,15 +6,24 @@
 
 static inline uint32_t co_clz(uint32_t val) { return __builtin_clz(val); };
 
-/*
-static long unsigned int next;
+extern long unsigned int next;
 
+static inline int mini_rand(void) {
+    next = next * 0x41c64e6d + 0x3039;
+    return next >> 0x10;
+}
 
-int mini_rand(void);
-uint16_t co_rand_hword(void);
-uint32_t co_rand_word(void);
-*/
+static inline uint16_t co_rand_hword(void) {
+    return mini_rand() & 0xffff;
+}
 
+static inline uint32_t co_rand_word(void) {
+    /// TODO: this is not a good random number generator
+    /// as it only generate 16 bits of randomness
+    /// and very insecure..
+    /// but we will see..
+    return mini_rand();
+}
 
 static inline uint32_t co_min(uint32_t a, uint32_t b) {
     return (a<b)?a:b;

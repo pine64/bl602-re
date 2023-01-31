@@ -44,4 +44,12 @@ void scan_set_channel_request(void);
 void scan_probe_req_tx(void);
 void scan_send_cancel_cfm(uint8_t status, ke_task_id_t dest_id);
 
+#define SCAN_MAX_IE_LEN 200
+
+#define SCAN_PASSIVE_BIT CO_BIT(0)
+#define SCAN_DISABLED_BIT CO_BIT(31)
+
+#define SCAN_ACTIVE_DURATION 90000
+#define SCAN_PASSIVE_DURATION 220000
+
 #endif // _SCAN_H_

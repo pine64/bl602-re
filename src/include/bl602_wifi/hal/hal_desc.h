@@ -190,6 +190,85 @@ struct tx_agg_desc {
 /// Transmit Power Level of Protection for RCX mask
 #define TX_PWR_LEVEL_PROT_PT_RCX_MASK   (0xff << TX_PWR_LEVEL_PROT_PT_RCX_OFT)
 
+
+/// @name RHD STATINFO
+/// @{
+
+/// Key index offset
+#define KEY_IDX_OFT                       15
+/// Key index mask
+#define KEY_IDX_MSK                       (0x3FF << KEY_IDX_OFT)
+/// Key index valid bit
+#define KEY_IDX_VALID_BIT                 CO_BIT(25)
+/// Immediate response access category offset
+#define IMM_RSP_AC_OFT                    11
+/// Immediate response access category mask
+#define IMM_RSP_AC_MSK                    (0x03 << IMM_RSP_AC_OFT)
+
+/// Last buffer of the MPDU
+#define RX_PD_LASTBUF                     0x0001
+/// Descriptor Done in HW
+#define RX_PD_DONE                        0x0002
+
+/// Storage RAM key index valid bit.
+#define RX_HD_KEYIDV                      0x02000000
+/// Storage RAM key index.
+#define RX_HD_KEYID                       0x01FF8000
+/// Lowest significant bit of the storage RAM key index.
+#define RX_HD_KEYID_LSB                   15
+/// Done bit.
+#define RX_HD_DONE                        0x00004000
+/// Frame successfully received bit.
+#define RX_HD_SUCCESS                     0x00002000
+/// Group Addressed frame bit.
+#define RX_HD_GA_FRAME                    0x00000400
+/// Address mismatch bit.
+#define RX_HD_ADDRMIS                     0x00000200
+/// FCS error bit.
+#define RX_HD_FCSERR                      0x0100
+/// PHY error bit.
+#define RX_HD_PHYERR                      0x00000080
+/// Undefined error bit.
+#define RX_HD_UNDEFERR                    0x00000040
+/// Decryption status mask.
+#define RX_HD_DECRSTATUS                  0x0000001C
+/// Is response frame bit.
+#define RX_HD_RSP_FRM                     0x00000002
+/// Vector 2 valid bit.
+#define RX_HD_RXVEC2V                     0x00000001
+/// Frame unencrypted.
+#define RX_HD_DECR_UNENC                  0x0000
+/// WEP/TKIP ICV failure.
+#define RX_HD_DECR_ICVFAIL                0x0004
+/// MAC CCMP failure.
+#define RX_HD_DECR_CCMPFAIL               0x0008
+/// MAC A-MSDU discarded at HW.
+#define RX_HD_DECR_AMSDUDISCARD           0x000C
+/// NULL key found.
+#define RX_HD_DECR_NULLKEY                0x0010
+/// MAC security type WEP.
+#define RX_HD_DECR_WEPSUCCESS             0x0014
+/// MAC security type TKIP.
+#define RX_HD_DECR_TKIPSUCCESS            0x0018
+/// MAC security type CCMP.
+#define RX_HD_DECR_CCMPSUCCESS            0x001C
+/// Macro to retrieve the storage RAM key index for the received frame.
+/// @param[in] __s MPDU status information from the RX header descriptor.
+#define RX_HD_KEYID_GET(__s) (((__s) & RX_HD_KEYID) >> RX_HD_KEYID_LSB)
+/// Macro to retrieve the done bit of the received frame.
+/// @param[in] __s MPDU status information from the RX header descriptor.
+#define RX_HD_DONE_GET(__s) ((__s) & RX_HD_DONE)
+/// Macro to retrieve the success bit of the received frame.
+/// @param[in] __s MPDU status information from the RX header descriptor.
+#define RX_HD_SUCCESS_GET(__s) ((__s) & (RX_HD_SUCCESS | RX_HD_FCSERR))
+
+/// @}
+
+/// Length of the receive vectors
+#define RXL_HWDESC_RXV_LEN    40
+
+
+
 // TODO: check why tx_hw_descX are not existing in binary
 // It seems that the entire tx_swdesc is not exists in bl602
 extern struct dma_desc bcn_dwnld_desc;
