@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.14.0)
 set(CMAKE_SYSTEM_NAME Generic)
 
 set(CMAKE_USER_MAKE_RULES_OVERRIDE cmake/c_extension.cmake)
-set(CMAKE_C_OUTPUT_EXTENSION_REPLACE 1) # This is critical to produce correct object files name for bl602 linker script
+set(CMAKE_C_OUTPUT_EXTENSION_REPLACE 1) # This is critical to producing the correct object files name for bl602 linker script
 
 set(CMAKE_SYSTEM_PROCESSOR riscv)
 SET(CMAKE_CROSSCOMPILING 1)
@@ -18,7 +18,7 @@ if(USE_CLANG)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fcommon ") # generate correct section for uninitialized data
 else()
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fstrict-volatile-bitfields") 
-    # this make GCC access pheripherals memory with respect to word align
+    # this makes GCC access peripherals memory with respect to word align
     # rather than byte align (e.g. sb/lb)
 endif()
 
