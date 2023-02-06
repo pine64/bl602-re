@@ -7,8 +7,9 @@ typedef unsigned int uint32_t;
 typedef unsigned long long int uint64_t;
 
 typedef signed char int8_t;
-typedef short intint16_t;
+typedef short int16_t;
 typedef int int32_t;
 typedef long long int int64_t;
-
+//typedef uint8_t bool;
+#include <stdbool.h> 
 #endif

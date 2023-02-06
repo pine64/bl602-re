@@ -104,7 +104,6 @@ Field('mdm_agcmemclkforce', 0xdfffffff)
 ############# AGC
 
 peris['agc'] = Peripheral(peripheral('agc', 0x44c0b000, 0x2000))
-
 Reg('r000', 0x44c0b000)
 FieldBit('iqcomp', 31-10)
 
@@ -183,7 +182,7 @@ def scan_write(code, dat="dat"):
         name_r = f'r{hex(addr&0xffff)}'
         gid = gid + 1
         r = Reg(name_r, addr)
-        yield r, Field(name_f, mask)
+        yield r, Field(name_f, mask), value
 
 
 agc_attr = [
@@ -252,12 +251,13 @@ agc_attr = [
 ]
 
 i = 0
-for r, f in scan_write(open('../blobs/agc_config.c').readlines()):
+for r, f, val in scan_write(open('../blobs/agc_config.c').readlines()):
     if r.offset == agc_attr[i][0] - 0x44c0b000:
         f.name = agc_attr[i][1]
     else:
         print(f"mismatched {i} {agc_attr[i][1]} {hex(r.offset + 0x44c0b000)} {hex(agc_attr[i][0])}")
     i = i + 1
+    #print(f"AGC->{r.name}.{f.name} = {hex(val)};")
 
 extra_regs = [
     "rc_paoff_delay",
@@ -270,7 +270,7 @@ extra_regs = [
 ]
 
 i = 0
-for _, f in scan_write([
+for _, f, _ in scan_write([
     "write_volatile_4(DAT_44c0c020,uVar4 & 0xfc00ffff | 0x140000);",
     "write_volatile_4(DAT_44c0b390,uVar1 & 0xfffffeff);",
     "write_volatile_4(DAT_44c0b500,uVar4 & 0xffffcfff | 0x2000);",
@@ -332,8 +332,25 @@ def getregs(fname, pattern='name'):
 
 peris['mac_core'] = Peripheral(peripheral('mac_core', 0x44b00000, 0x1000))
 
+Buf('ABS_TIMER', 0x44b00128, 0x44b00128 + 4 * 9)
+
+Reg('encr_ram_config', 0x44b000d8)
+Field('start', 0xffffff00)
+Field('end', 0xffff00ff)
+Field('nVAP', 0xff00ffff)
+Field('max', 0x00ffffff)
+
+
 for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver/reg_mac_core.h", pattern='brief'):
     RegFromComment(offset + 0x44b00000, code)
+Reg('coex_stat', 0x44b00408)
+Goto(0x44b00400)
+Field('coexForceEnable', 0xffffffef)
+Field('coexForceWlanPti', 0x0FFFFFFF)
+Field('coexForceWlanChanBw', 0xfbffffff)
+Field('coexAutoPTIAdjEnable', 0xffffffdf)
+FieldBit('coexForceWlanPtiToggle', 31 - 4)
+
 
 #open('../src/include/phy/mac_core.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
@@ -405,6 +422,7 @@ Reg('time', 0x44900084)
 FieldBit('time_greater_on_bit12', 0)
 Reg("diag_conf", 0x44900068) # set to 0x8000000c for init
 Field("diag_sel", 0xffff0000)
+Reg("diag_trigger", 0x44900070) # used in force_trigger
 
 Reg("misc_cntl", 0x449000e0) # or with 0x1ff00
 Field("set1", (~0x1ff00) & 0xffffffff)
@@ -432,7 +450,26 @@ Reg("ptr_config", 0x44920004)
 peris['ipc'] = Peripheral(peripheral('ipc', 0x44800000, 0x1000))
 
 for code, offset in getregs("../components/bl602/bl602_wifidrv/bl60x_wifi_driver/reg_ipc_app.h", pattern='brief'):
-    RegFromComment(offset + 0x44800000, code)
+    RegFromComment(offset + 0x44800000, code.lower())
+Reg('emb2app_line_sel_low', 0x44800000 + 0x14)
+for i in range(0,16):
+    FieldBit(f'emb2app{i}_sel', i*2, 2)
+Reg('emb2app_line_sel_high', 0x44800000 + 0x18)
+ipc_names = []
+def flipname(name):
+    name = name.replace('app', 'XXXXX')
+    name = name.replace('emb', 'YYYYY')
+    name = name.replace('XXXXX', 'emb')
+    name = name.replace('YYYYY', 'app')
+    return name
+for reg in peris['ipc'].regs:
+    if (len(reg.fields) == 1):
+        reg.fields = []
+    ipc_names.append((flipname(reg.name), reg.offset + 0x100, reg.fields))
+for name, offset, f in ipc_names:
+    Reg(name, offset + 0x44800000)
+    for i in f:
+        FieldBit(flipname(i.name), i.lsb, i.len)
 
 #open('../src/include/phy/ipc.h', 'w').write('\n'.join(GenHeader()))
 #print('\n'.join(GenHeader()))
@@ -458,7 +495,7 @@ extra_bz_phy = [
 ]
 
 i = 0
-for r, f in scan_write(open('../blobs/bz_phy.c').readlines(), '0x'):
+for r, f, _ in scan_write(open('../blobs/bz_phy.c').readlines(), '0x'):
     if r.offset == extra_bz_phy[i][0] - bz_phy_base:
         f.name = extra_bz_phy[i][1]
     else:
@@ -479,6 +516,15 @@ for reg_addr,field_name,mask in leak_scan.scan_leak_source(open('../blobs/reg/re
     f = Field(field_name, mask)
     pass
 
+intc_base = 0x44910000
+peris['intc'] = Peripheral(peripheral('intc', intc_base, 0x1000))
+def intc_handle(name, addr):
+    if name != 'irq_index':
+        Buf(name, addr, addr + 4)
+    else:
+        Reg(name, addr)
+for code, offset in getregs("../alios/reg_intc.h"):
+    RegFromComment(offset + intc_base - 0x10000, code.lower(), intc_handle)
 
 if __name__ == '__main__':
     import sys

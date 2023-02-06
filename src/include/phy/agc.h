@@ -1,3 +1,4 @@
+#ifndef AGC_BASE
 typedef union {
 	uint32_t regs[0x800];
 	uint8_t pad[0x2000];
@@ -239,7 +240,7 @@ typedef union {
 		} r0xc044; // @ 0x1044
 		uint8_t pad12[0x38];
 		uint8_t rxgain_offset_vs_temperature[0x9]; // @ 0x1080
-		uint8_t pad13[0xfc];
+		uint8_t pad13[0xf7];
 		union {
 			uint32_t value;
 			struct {
@@ -428,4 +429,5 @@ typedef union {
 	};
 } agc_regs;
 #define AGC_BASE 0x44c0b000
-#define AGC ((agc_regs* volatile)(AGC_BASE))
+#define AGC ((volatile agc_regs*)(AGC_BASE))
+#endif

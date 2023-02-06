@@ -57,8 +57,8 @@ if __name__ == '__main__':
         root = CU.get_top_DIE()
         is_ble = 'components/network/ble/blecontroller' in root.get_full_path()
         is_wifi = 'bl602/bl602_wifi/' in root.get_full_path()
-        if ('ble' in path and not is_ble) or ('wifi' in path and not is_wifi):
-            continue
+        #if ('ble' in path and not is_ble) or ('wifi' in path and not is_wifi):
+        #    continue
         proprietary.append(root)
     
     subroutines = []

@@ -1,3 +1,4 @@
+#ifndef MAC_PL_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -867,4 +868,5 @@ typedef union {
 	};
 } mac_pl_regs;
 #define MAC_PL_BASE 0x44b08000
-#define MAC_PL ((mac_pl_regs* volatile)(MAC_PL_BASE))
+#define MAC_PL ((volatile mac_pl_regs*)(MAC_PL_BASE))
+#endif

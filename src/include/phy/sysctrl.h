@@ -1,3 +1,4 @@
+#ifndef SYSCTRL_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -10,7 +11,8 @@ typedef union {
 				uint32_t pad0 : 16;
 			};
 		} diag_conf; // @ 0x68
-		uint8_t pad1[0x8];
+		uint8_t pad1[0x4];
+		uint32_t diag_trigger; // @ 0x70
 		uint32_t r074; // @ 0x74
 		uint8_t pad2[0xc];
 		union {
@@ -32,4 +34,5 @@ typedef union {
 	};
 } sysctrl_regs;
 #define SYSCTRL_BASE 0x44900000
-#define SYSCTRL ((sysctrl_regs* volatile)(SYSCTRL_BASE))
+#define SYSCTRL ((volatile sysctrl_regs*)(SYSCTRL_BASE))
+#endif

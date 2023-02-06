@@ -305,3 +305,6 @@ tags
 [._]*.un~
 
 # End of https://www.toptal.com/developers/gitignore/api/emacs,vim,pycharm+all,python
+/build*
+.vscode/
+*.cache

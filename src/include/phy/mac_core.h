@@ -1,3 +1,4 @@
+#ifndef MAC_CORE_BASE
 typedef union {
 	uint32_t regs[0x400];
 	uint8_t pad[0x1000];
@@ -362,7 +363,15 @@ typedef union {
 				uint32_t encrIntKeyRAMWord3 : 32; // @ 31 -- 0 # 0x0
 			};
 		} ENCR_WPI_INT_KEY_3; // @ 0xd4
-		uint8_t pad6[0x4];
+		union {
+			uint32_t value;
+			struct {
+				uint32_t start : 8; // @ 7 -- 0 # 0xffffff00
+				uint32_t end : 8; // @ 15 -- 8 # 0xffff00ff
+				uint32_t nVAP : 8; // @ 23 -- 16 # 0xff00ffff
+				uint32_t max : 8; // @ 31 -- 24 # 0xffffff
+			};
+		} encr_ram_config; // @ 0xd8
 		union {
 			uint32_t value;
 			struct {
@@ -454,7 +463,7 @@ typedef union {
 				uint32_t pad0 : 2;
 			};
 		} TIMINGS_9; // @ 0x104
-		uint8_t pad7[0x4];
+		uint8_t pad6[0x4];
 		union {
 			uint32_t value;
 			struct {
@@ -509,13 +518,7 @@ typedef union {
 				uint32_t pad0 : 16;
 			};
 		} MONOTONIC_COUNTER_2_HI; // @ 0x124
-		union {
-			uint32_t value;
-			struct {
-				uint32_t absTimerValue : 32; // @ 31 -- 0 # 0x0
-			};
-		} ABS_TIMER; // @ 0x128
-		uint8_t pad8[0x24];
+		uint32_t ABS_TIMER[0xa]; // @ 0x128
 		union {
 			uint32_t value;
 			struct {
@@ -523,7 +526,7 @@ typedef union {
 				uint32_t pad0 : 12;
 			};
 		} MAX_RX_LENGTH; // @ 0x150
-		uint8_t pad9[0xac];
+		uint8_t pad7[0xac];
 		union {
 			uint32_t value;
 			struct {
@@ -564,7 +567,7 @@ typedef union {
 				uint32_t pad0 : 4;
 			};
 		} EDCA_AC_3; // @ 0x20c
-		uint8_t pad10[0x10];
+		uint8_t pad8[0x10];
 		union {
 			uint32_t value;
 			struct {
@@ -582,7 +585,7 @@ typedef union {
 				uint32_t pad1 : 26;
 			};
 		} EDCA_CNTRL; // @ 0x224
-		uint8_t pad11[0x58];
+		uint8_t pad9[0x58];
 		union {
 			uint32_t value;
 			struct {
@@ -631,7 +634,7 @@ typedef union {
 				uint32_t ccaBusyDurSec80 : 32; // @ 31 -- 0 # 0x0
 			};
 		} ADD_CCA_BUSY_SEC_80; // @ 0x298
-		uint8_t pad12[0x64];
+		uint8_t pad10[0x64];
 		union {
 			uint32_t value;
 			struct {
@@ -700,7 +703,7 @@ typedef union {
 				uint32_t pad0 : 10;
 			};
 		} HTMCS; // @ 0x314
-		uint8_t pad13[0x4];
+		uint8_t pad11[0x4];
 		union {
 			uint32_t value;
 			struct {
@@ -715,16 +718,22 @@ typedef union {
 				uint32_t pad0 : 31;
 			};
 		} LSTP; // @ 0x320
-		uint8_t pad14[0xdc];
+		uint8_t pad12[0xdc];
 		union {
 			uint32_t value;
 			struct {
 				uint32_t coexEnable : 1; // @ 0 -- 0 # 0xfffffffe
-				uint32_t pad0 : 11;
+				uint32_t pad0 : 3;
+				uint32_t coexForceEnable : 1; // @ 4 -- 4 # 0xffffffef
+				uint32_t coexAutoPTIAdjEnable : 1; // @ 5 -- 5 # 0xffffffdf
+				uint32_t pad1 : 6;
 				uint32_t coexWlanChanOffset : 1; // @ 12 -- 12 # 0xffffefff
-				uint32_t pad1 : 3;
+				uint32_t pad2 : 3;
 				uint32_t coexWlanChanFreq : 7; // @ 22 -- 16 # 0xff80ffff
-				uint32_t pad2 : 9;
+				uint32_t pad3 : 3;
+				uint32_t coexForceWlanChanBw : 1; // @ 26 -- 26 # 0xfbffffff
+				uint32_t coexForceWlanPtiToggle : 1; // @ 27 -- 27 # 0xf7ffffff
+				uint32_t coexForceWlanPti : 4; // @ 31 -- 28 # 0xfffffff
 			};
 		} COEX_CONTROL; // @ 0x400
 		union {
@@ -740,7 +749,8 @@ typedef union {
 				uint32_t coexPTIBcnData : 4; // @ 31 -- 28 # 0xfffffff
 			};
 		} COEX_PTI; // @ 0x404
-		uint8_t pad15[0xf8];
+		uint32_t coex_stat; // @ 0x408
+		uint8_t pad13[0xf4];
 		union {
 			uint32_t value;
 			struct {
@@ -761,7 +771,7 @@ typedef union {
 				uint32_t macControlCs : 8; // @ 31 -- 24 # 0xffffff
 			};
 		} DEBUG_HWSM_2; // @ 0x504
-		uint8_t pad16[0x4];
+		uint8_t pad14[0x4];
 		union {
 			uint32_t value;
 			struct {
@@ -814,7 +824,7 @@ typedef union {
 				uint32_t ac3QLRC : 8; // @ 31 -- 24 # 0xffffff
 			};
 		} DEBUG_QLRC; // @ 0x520
-		uint8_t pad17[0x38];
+		uint8_t pad15[0x38];
 		union {
 			uint32_t value;
 			struct {
@@ -825,4 +835,5 @@ typedef union {
 	};
 } mac_core_regs;
 #define MAC_CORE_BASE 0x44b00000
-#define MAC_CORE ((mac_core_regs* volatile)(MAC_CORE_BASE))
+#define MAC_CORE ((volatile mac_core_regs*)(MAC_CORE_BASE))
+#endif

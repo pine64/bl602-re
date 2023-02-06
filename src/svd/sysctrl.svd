@@ -24,6 +24,11 @@
             </fields>
         </register>
         <register>
+            <name>diag_trigger</name>
+            <description>diag_trigger.</description>
+            <addressOffset>0x70</addressOffset>
+        </register>
+        <register>
             <name>r074</name>
             <description>r074.</description>
             <addressOffset>0x74</addressOffset>

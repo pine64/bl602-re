@@ -953,6 +953,33 @@
             </fields>
         </register>
         <register>
+            <name>encr_ram_config</name>
+            <description>encr_ram_config.</description>
+            <addressOffset>0xd8</addressOffset>
+            <fields>
+                <field>
+                    <name>max</name>
+                    <msb>31</msb>
+                    <lsb>24</lsb>
+                </field>
+                <field>
+                    <name>nVAP</name>
+                    <msb>23</msb>
+                    <lsb>16</lsb>
+                </field>
+                <field>
+                    <name>end</name>
+                    <msb>15</msb>
+                    <lsb>8</lsb>
+                </field>
+                <field>
+                    <name>start</name>
+                    <msb>7</msb>
+                    <lsb>0</lsb>
+                </field>
+            </fields>
+        </register>
+        <register>
             <name>RATES</name>
             <description>RATES.</description>
             <addressOffset>0xdc</addressOffset>
@@ -1284,16 +1311,13 @@
             </fields>
         </register>
         <register>
-            <name>ABS_TIMER</name>
+            <name>ABS_TIMER%s</name>
             <description>ABS_TIMER.</description>
             <addressOffset>0x128</addressOffset>
-            <fields>
-                <field>
-                    <name>absTimerValue</name>
-                    <msb>31</msb>
-                    <lsb>0</lsb>
-                </field>
-            </fields>
+            <size>16</size>
+            <dim>10</dim>
+            <dimIncrement>4</dimIncrement>
+            <dimIndex>0-9</dimIndex>
         </register>
         <register>
             <name>MAX_RX_LENGTH</name>
@@ -1785,6 +1809,21 @@
             <addressOffset>0x400</addressOffset>
             <fields>
                 <field>
+                    <name>coexForceWlanPti</name>
+                    <msb>31</msb>
+                    <lsb>28</lsb>
+                </field>
+                <field>
+                    <name>coexForceWlanPtiToggle</name>
+                    <msb>27</msb>
+                    <lsb>27</lsb>
+                </field>
+                <field>
+                    <name>coexForceWlanChanBw</name>
+                    <msb>26</msb>
+                    <lsb>26</lsb>
+                </field>
+                <field>
                     <name>coexWlanChanFreq</name>
                     <msb>22</msb>
                     <lsb>16</lsb>
@@ -1793,6 +1832,16 @@
                     <name>coexWlanChanOffset</name>
                     <msb>12</msb>
                     <lsb>12</lsb>
+                </field>
+                <field>
+                    <name>coexAutoPTIAdjEnable</name>
+                    <msb>5</msb>
+                    <lsb>5</lsb>
+                </field>
+                <field>
+                    <name>coexForceEnable</name>
+                    <msb>4</msb>
+                    <lsb>4</lsb>
                 </field>
                 <field>
                     <name>coexEnable</name>
@@ -1847,6 +1896,11 @@
                     <lsb>0</lsb>
                 </field>
             </fields>
+        </register>
+        <register>
+            <name>coex_stat</name>
+            <description>coex_stat.</description>
+            <addressOffset>0x408</addressOffset>
         </register>
         <register>
             <name>DEBUG_HWSM_1</name>
