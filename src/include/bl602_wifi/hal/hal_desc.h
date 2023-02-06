@@ -133,6 +133,49 @@ struct tx_agg_desc {
 }; // :979:8
 
 
+/// Bit indicating if an interrupt has to be set or not once packet is transmitted
+#define INTERRUPT_EN_TX                   CO_BIT(8)
+
+/// Offset of Number of Blank delimiters
+#define NB_BLANK_DELIM_OFT                9
+/// Mask of Number of Blank delimiters
+#define NB_BLANK_DELIM_MSK                (0x3FF << NB_BLANK_DELIM_OFT)
+
+/// WhichDescriptor definition - contains aMPDU bit and position value
+/// Offset of WhichDescriptor field in the MAC CONTROL INFO 2 word
+#define WHICHDESC_OFT                     19
+/// Mask of the WhichDescriptor field
+#define WHICHDESC_MSK                     (0x07 << WHICHDESC_OFT)
+/// Only 1 THD possible, describing an unfragmented MSDU
+#define WHICHDESC_UNFRAGMENTED_MSDU       (0x00 << WHICHDESC_OFT)
+/// THD describing the first MPDU of a fragmented MSDU
+#define WHICHDESC_FRAGMENTED_MSDU_FIRST   (0x01 << WHICHDESC_OFT)
+/// THD describing intermediate MPDUs of a fragmented MSDU
+#define WHICHDESC_FRAGMENTED_MSDU_INT     (0x02 << WHICHDESC_OFT)
+/// THD describing the last MPDU of a fragmented MSDU
+#define WHICHDESC_FRAGMENTED_MSDU_LAST    (0x03 << WHICHDESC_OFT)
+/// THD for extra descriptor starting an AMPDU
+#define WHICHDESC_AMPDU_EXTRA             (0x04 << WHICHDESC_OFT)
+/// THD describing the first MPDU of an A-MPDU
+#define WHICHDESC_AMPDU_FIRST             (0x05 << WHICHDESC_OFT)
+/// THD describing intermediate MPDUs of an A-MPDU
+#define WHICHDESC_AMPDU_INT               (0x06 << WHICHDESC_OFT)
+/// THD describing the last MPDU of an A-MPDU
+#define WHICHDESC_AMPDU_LAST              (0x07 << WHICHDESC_OFT)
+
+/// aMPDU bit offset
+#define AMPDU_OFT                         21
+/// aMPDU bit
+#define AMPDU_BIT                         CO_BIT(AMPDU_OFT)
+
+/// Under BA setup bit
+#define UNDER_BA_SETUP_BIT                CO_BIT(22)
+
+/// Don't touch duration bit
+#define DONT_TOUCH_DUR                    CO_BIT(28)
+
+
+
 //----------------------------------------------------------------------------------------
 //THD STATINFO fields
 //----------------------------------------------------------------------------------------
@@ -267,6 +310,155 @@ struct tx_agg_desc {
 /// Length of the receive vectors
 #define RXL_HWDESC_RXV_LEN    40
 
+#define RATE_CONTROL_STEPS 4
+#define POLICY_TABLE_PATTERN 0xBADCAB1E
+
+#define STBC_PT_MASK (0x3 << STBC_PT_OFT)
+/// Number of Transmit Chains for PPDU offset
+#define NX_TX_PT_OFT 14
+
+#define ANTENNA_SET_PT_OFT 0
+
+#define MCS_INDEX_TX_RCX_OFT 0
+
+//----------------------------------------------------------------------------------------
+// THD: PHY CONTROL INFO definitions
+//----------------------------------------------------------------------------------------
+/// Sounding of PPDU Frame Transmission (Bit 0)
+#define SOUNDING_TX_BIT         CO_BIT(0)
+/// Smoothing for PPDU frames (Bit 1)
+#define SMTHN_TX_BIT            CO_BIT(1)
+/// Smoothing for Control frames (Bit 2)
+#define SMTHN_PROT_BIT          CO_BIT(2)
+/// Use BW signaling bit
+#define USE_BW_SIG_TX_BIT       CO_BIT(3)
+/// Dynamic BW
+#define DYN_BW_TX_BIT           CO_BIT(4)
+/// Doze allowed by AP during TXOP
+#define DOZE_ALLOWED_TX_BIT     CO_BIT(5)
+/// Continuous transmit
+#define CONT_TX_BIT             CO_BIT(6)
+/// User Position field offset
+#define USER_POS_OFT            12
+/// User Position field mask
+#define USER_POS_MASK           (0x3 << USER_POS_OFT)
+/// Use RIFS for Transmission (Bit 14)
+#define USE_RIFS_TX_BIT         CO_BIT(14)
+/// Use MU-MIMO for Transmission (Bit 15)
+#define USE_MUMIMO_TX_BIT       CO_BIT(15)
+/// GroupId field offset
+#define GID_TX_OFT              16
+/// GroupId field mask
+#define GID_TX_MASK             (0x3F << GID_TX_OFT)
+/// Partial AID field offset
+#define PAID_TX_OFT             22
+/// Partial AID field mask
+#define PAID_TX_MASK            (0x1FF << PAID_TX_OFT)
+
+//----------------------------------------------------------------------------------------
+// TBD: BUF CONTROL INFO definitions
+//----------------------------------------------------------------------------------------
+/// Flag indicating if HW handled the buffer
+#define TBD_DONE_HW             CO_BIT(31)
+/// Bit allowing to request HW to generate an interrupt upon a payload buffer transmission
+#define TBD_INTERRUPT_EN        CO_BIT(0)
+
+//----------------------------------------------------------------------------------------
+// THD: MAC CONTROL INFO 1 definitions
+//----------------------------------------------------------------------------------------
+/// Protection Frame Duration offset
+#define PROT_FRM_DURATION_OFT             16
+/// Protection Frame Duration mask
+#define PROT_FRM_DURATION_MSK             (0xFFFF << PROT_FRM_DURATION_OFT)
+
+/// Set if ACK has to be passed to SW
+#define WRITE_ACK                         CO_BIT(14)
+/// Set if lower rates have to be used for retries
+#define LOW_RATE_RETRY                    CO_BIT(13)
+/// L-SIG TXOP Protection for protection frame
+#define LSTP_PROT                         CO_BIT(12)
+/// L-SIG TXOP Protection
+#define LSTP                              CO_BIT(11)
+
+// Expected Acknowledgment
+/// Expected Acknowledgment offset
+#define EXPECTED_ACK_OFT                  9
+/// Expected Acknowledgment mask
+#define EXPECTED_ACK_MSK                  (0x3 << EXPECTED_ACK_OFT)
+/// No acknowledgment
+#define EXPECTED_ACK_NO_ACK               (0x0 << EXPECTED_ACK_OFT)
+/// Normal acknowledgment
+#define EXPECTED_ACK_NORMAL_ACK           (0x1 << EXPECTED_ACK_OFT)
+/// Uncompressed block acknowledgment
+#define EXPECTED_ACK_BLOCK_ACK            (0x2 << EXPECTED_ACK_OFT)
+/// Compressed block acknowledgment
+#define EXPECTED_ACK_COMPRESSED_BLOCK_ACK (0x3 << EXPECTED_ACK_OFT)
+
+/// legacy RATE definitions
+typedef enum
+{
+    /// 1Mbps
+    HW_RATE_1MBPS = 0,
+    /// 2Mbps
+    HW_RATE_2MBPS,
+    /// 5.5Mbps
+    HW_RATE_5_5MBPS,
+    /// 11Mbps
+    HW_RATE_11MBPS,
+    /// 6Mbps
+    HW_RATE_6MBPS,
+    /// 9Mbps
+    HW_RATE_9MBPS,
+    /// 12Mbps
+    HW_RATE_12MBPS,
+    /// 18Mbps
+    HW_RATE_18MBPS,
+    /// 24Mbps
+    HW_RATE_24MBPS,
+    /// 36Mbps
+    HW_RATE_36MBPS,
+    /// 48Mbps
+    HW_RATE_48MBPS,
+    /// 54Mbps
+    HW_RATE_54MBPS
+} HW_RATE_E;
+
+
+// Policy Table: Rate Control Information field
+/// MCS Index offset
+#define MCS_INDEX_TX_RCX_OFT    0
+/// MCS Index mask
+#define MCS_INDEX_TX_RCX_MASK   (0X7FU << MCS_INDEX_TX_RCX_OFT)
+/// Bandwidth for transmission offset
+#define BW_TX_RCX_OFT           7
+/// Bandwidth for transmission mask
+#define BW_TX_RCX_MASK          (0X3U << BW_TX_RCX_OFT)
+/// Short Guard Interval for Transmission offset
+#define SHORT_GI_TX_RCX_OFT     9
+/// Short Guard Interval for Transmission mask
+#define SHORT_GI_TX_RCX_MASK    (0x1U << SHORT_GI_TX_RCX_OFT)
+/// Preamble type for 11b Transmission offset
+#define PRE_TYPE_TX_RCX_OFT     10
+/// Preamble type for 11b Transmission mask
+#define PRE_TYPE_TX_RCX_MASK    (0x1U << PRE_TYPE_TX_RCX_OFT)
+/// Format of the modulation offset
+#define FORMAT_MOD_TX_RCX_OFT   11
+/// Format of the modulation mask
+#define FORMAT_MOD_TX_RCX_MASK  (0X7U << FORMAT_MOD_TX_RCX_OFT)
+/// Type of NAV protection frame exchange offset
+#define PROT_FRM_EX_RCX_OFT     14
+/// Type of NAV protection frame exchange mask
+#define PROT_FRM_EX_RCX_MASK    (0X7 << PROT_FRM_EX_RCX_OFT)
+/// No protection
+#define PROT_NO_PROT            (0x0 << PROT_FRM_EX_RCX_OFT)
+/// Self-CTS
+#define PROT_SELF_CTS           (0x1 << PROT_FRM_EX_RCX_OFT)
+/// RTS-CTS with intended receiver
+#define PROT_RTS_CTS            (0x2 << PROT_FRM_EX_RCX_OFT)
+/// RTS-CTS with QAP
+#define PROT_RTS_CTS_WITH_QAP   (0x3 << PROT_FRM_EX_RCX_OFT)
+/// STBC protection
+#define PROT_STBC               (0x4 << PROT_FRM_EX_RCX_OFT)
 
 
 // TODO: check why tx_hw_descX are not existing in binary

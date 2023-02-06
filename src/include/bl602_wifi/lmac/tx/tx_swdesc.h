@@ -65,7 +65,11 @@ extern struct txdesc *txdesc_array;
 extern const int nx_txdesc_cnt[5];
 
 
-bool is_int_frame(struct txdesc *txdesc);
-bool is_qos_data(struct txdesc *txdesc);
+static inline bool is_int_frame(struct txdesc *txdesc) {
+    return txdesc->host.packet_addr == 0;
+}
+static inline bool is_qos_data(struct txdesc *txdesc) {
+    return txdesc->host.tid != 0xFF;
+}
 
 #endif 

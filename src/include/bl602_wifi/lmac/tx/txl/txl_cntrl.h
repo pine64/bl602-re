@@ -11,6 +11,17 @@
 #include <modules/mac/mac.h>
 #include <modules/mac/mac_frame.h>
 
+
+/// Tx trigger descriptor status check states
+enum
+{
+    /// State for checking MPDU THD done status
+    THD_CHK_STATE,
+    /// State for checking BAR THD done status
+    ATHD_CHK_STATE,
+};
+
+
 struct txl_list {
     struct tx_hd *last_frame_exch; // +0
     struct co_list transmitting; // +4
@@ -45,9 +56,28 @@ void txl_cntrl_inc_pck_cnt(void);
 void txl_payload_handle(void);
 void txl_transmit_trigger(void);
 
+/*
+ * DEFINES
+ ****************************************************************************************
+ */
+/// AC0 queue timeout
+#define TX_AC0_TIMEOUT      200000
+/// AC1 queue timeout
+#define TX_AC1_TIMEOUT      2000000
+/// AC2 queue timeout
+#define TX_AC2_TIMEOUT      400000
+/// AC3 queue timeout
+#define TX_AC3_TIMEOUT      200000
+/// BCN queue timeout
+#define TX_BCN_TIMEOUT      50000
+
+/// Conversion from Access Category to corresponding TX timer
+#define TX_AC2TIMER(ac)             ((ac) + HAL_AC0_TIMER)
+
 /// Index of the beacon queue
 #define AC_BCN                        AC_MAX
 
+#define TX_NTX_2_ANTENNA_SET(ntx)   ((CO_BIT((ntx) + 1) - 1) << ANTENNA_SET_PT_OFT)
 
 static inline uint16_t txl_get_seq_ctrl(void) {
     txl_cntrl_env.seqnbr++;

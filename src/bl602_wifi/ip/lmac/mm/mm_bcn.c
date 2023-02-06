@@ -28,6 +28,7 @@
 struct mm_bcn_env_tag mm_bcn_env;
 
 static void mm_tim_update_proceed(const struct mm_tim_update_req *param) {
+    /// TODO: verify this function..
     struct vif_info_tag *vif_entry = vif_info_tab + param->inst_nbr;
 
     // No beacon transmission ongoing, proceed immediately to the update
@@ -37,10 +38,10 @@ static void mm_tim_update_proceed(const struct mm_tim_update_req *param) {
         else
             vif_entry->u.ap.bc_mc_status = 1;
     } else {
-        struct tx_pbd *pbd_tim = &txl_tim_desc[param->inst_nbr][0];
-        uint32_t tim_ie = CPU2HW(&txl_tim_ie_pool[param->inst_nbr][0]);
-        struct tx_pbd *pbd_bmp = &txl_tim_desc[param->inst_nbr][1];
-        uint32_t tim_bmp = CPU2HW(&txl_tim_bitmap_pool[param->inst_nbr][0]);
+        struct tx_pbd *pbd_tim = &txl_tim_desc[0]; //&txl_tim_desc[param->inst_nbr][0];
+        uint32_t tim_ie = CPU2HW(txl_tim_ie_pool + 0); // CPU2HW(&txl_tim_ie_pool[param->inst_nbr][0]);
+        struct tx_pbd *pbd_bmp = &txl_tim_desc[1]; // &txl_tim_desc[param->inst_nbr][1];
+        uint32_t tim_bmp = CPU2HW(txl_tim_bitmap_pool + 0); // CPU2HW(&txl_tim_bitmap_pool[param->inst_nbr][0]);
 
         // Compute the byte and bit numbers for this AID
         uint8_t n = param->aid / 8;
@@ -129,7 +130,7 @@ static void mm_tim_update_proceed(const struct mm_tim_update_req *param) {
                 co_write8p(tim_ie + MAC_TIM_BMPC_OFT, 0);
                 // Update the TIM PBD
                 pbd_tim->dataendptr = tim_ie + MAC_TIM_BMP_OFT;
-                pbd_tim->next = CPU2HW(&txl_bcn_end_desc[param->inst_nbr]);
+                pbd_tim->next = CPU2HW(&txl_bcn_end_desc);//[param->inst_nbr]);
                 // Update the end pointer in the TBD
                 pbd_bmp->dataendptr = tim_bmp + vif_entry->u.ap.tim_n2;
             }
@@ -144,9 +145,9 @@ static void mm_bcn_desc_prep(struct vif_info_tag *vif_entry, const struct mm_bcn
     struct txl_frame_desc_tag *frame = &vif_entry->u.ap.bcn_desc;
     uint32_t vif_index = vif_entry->index;
     struct tx_hd *thd = &frame->txdesc.lmac.hw_desc->thd;
-    struct tx_pbd *pbd_bcn = txl_bcn_end_desc + vif_index;
+    struct tx_pbd *pbd_bcn = &txl_bcn_end_desc; //+ vif_index;
     uint32_t tim_bcn = thd->datastartptr + param->tim_oft;
-    uint32_t tim_ie = CPU2HW(&txl_tim_ie_pool[vif_index][0]);
+    uint32_t tim_ie = CPU2HW(&txl_tim_ie_pool[0]); // CPU2HW(&txl_tim_ie_pool[vif_index][0]);
     struct tx_policy_tbl *pol;
     uint8_t band;
     uint32_t bcn_len = param->bcn_len - param->tim_len;
@@ -179,7 +180,7 @@ static void mm_bcn_desc_prep(struct vif_info_tag *vif_entry, const struct mm_bcn
     thd->policyentryaddr = CPU2HW(pol);
     thd->phyctrlinfo = 0;
     thd->macctrlinfo2 = 0;
-    thd->first_pbd_ptr = CPU2HW(&txl_tim_desc[vif_index][0]);
+    thd->first_pbd_ptr = CPU2HW(&txl_tim_desc[0]); // CPU2HW(&txl_tim_desc[vif_index][0]);
 
     // The beacon is now configured for this VIF
     vif_entry->u.ap.bcn_configured = true;
@@ -210,7 +211,7 @@ static void mm_bcn_send_csa_counter_ind(uint8_t vif_index, uint8_t csa_count) {
 static uint8_t mm_bcn_build(struct vif_info_tag *vif_entry) {
     struct txl_frame_desc_tag *frame = &vif_entry->u.ap.bcn_desc;
     struct tx_hd *thd = &frame->txdesc.lmac.hw_desc->thd;
-    uint32_t tim_ie = CPU2HW(&txl_tim_ie_pool[vif_entry->index][0]);
+    uint32_t tim_ie = CPU2HW(&txl_tim_ie_pool[0]); // CPU2HW(&txl_tim_ie_pool[vif_entry->index][0]);
     uint8_t bmpc = co_read8p(tim_ie + MAC_TIM_BMPC_OFT);
 
     thd->frmlen = vif_entry->u.ap.bcn_len + vif_entry->u.ap.tim_len + MAC_FCS_LEN;
@@ -280,7 +281,8 @@ static void mm_bcn_updated(void *env, int dma_queue) {
 
 static void mm_bcn_update(const struct mm_bcn_change_req *param) {
     // param->inst_nbr <= 2?
-    struct txl_buffer_tag *buffer = (struct txl_buffer_tag *)&txl_bcn_pool[param->inst_nbr];
+    //struct txl_buffer_tag *buffer = (struct txl_buffer_tag *)&txl_bcn_pool[param->inst_nbr];
+    struct txl_buffer_tag *buffer = (struct txl_buffer_tag *)&txl_bcn_pool;
     memcpy(buffer->payload, param->bcn_buf, param->bcn_len);
     mm_bcn_env.update_pending = false;
     mm_bcn_env.update_ongoing = true;
@@ -310,9 +312,9 @@ static void mm_bcn_transmitted(void *env, uint32_t status) {
 
 static void mm_bcn_init_tim(struct vif_info_tag *vif_entry) {
     uint8_t inst_nbr = vif_entry->index;
-    struct tx_pbd *pbd = &txl_tim_desc[inst_nbr][0];
-    uint32_t tim_ie = CPU2HW(&txl_tim_ie_pool[inst_nbr][0]);
-    uint32_t tim_bmp = CPU2HW(&txl_tim_bitmap_pool[inst_nbr][0]);
+    struct tx_pbd *pbd = &txl_tim_desc[0]; // &txl_tim_desc[inst_nbr][0];
+    uint32_t tim_ie = CPU2HW(&txl_tim_ie_pool[0]); // CPU2HW(&txl_tim_ie_pool[inst_nbr][0]);
+    uint32_t tim_bmp = CPU2HW(&txl_tim_bitmap_pool[0]); // CPU2HW(&txl_tim_bitmap_pool[inst_nbr][0]);
 
     // Initialize the DTIM count
     vif_entry->u.ap.dtim_count = 0;
@@ -326,7 +328,7 @@ static void mm_bcn_init_tim(struct vif_info_tag *vif_entry) {
     pbd->upatterntx = TX_PAYLOAD_DESC_PATTERN;
     pbd->datastartptr = tim_ie + MAC_TIM_ID_OFT;
     pbd->dataendptr = tim_ie + MAC_TIM_BMP_OFT;
-    pbd->next = CPU2HW(&txl_bcn_end_desc[inst_nbr]);
+    pbd->next = CPU2HW(&txl_bcn_end_desc);///[inst_nbr]);
     pbd->bufctrlinfo = 0;
     co_write8p(tim_ie + MAC_TIM_ID_OFT, MAC_ELTID_TIM);
     co_write8p(tim_ie + MAC_TIM_LEN_OFT, 4);
@@ -336,14 +338,15 @@ static void mm_bcn_init_tim(struct vif_info_tag *vif_entry) {
     co_write8p(tim_ie + MAC_TIM_BMP_OFT, 0xff); // 0xff instead of 0
 
     // Reset the TIM virtual bitmap
-    pbd = &txl_tim_desc[inst_nbr][1];
+    pbd = &txl_tim_desc[1]; // &txl_tim_desc[inst_nbr][1];
     pbd->upatterntx = TX_PAYLOAD_DESC_PATTERN;
     pbd->dataendptr = tim_bmp + vif_entry->u.ap.tim_n2;
-    pbd->next = CPU2HW(&txl_bcn_end_desc[inst_nbr]);
-    memset(txl_tim_bitmap_pool[inst_nbr], 0, sizeof(txl_tim_bitmap_pool[inst_nbr]));
+    pbd->next = CPU2HW(&txl_bcn_end_desc);//[inst_nbr]);
+    //memset(txl_tim_bitmap_pool[inst_nbr], 0, sizeof(txl_tim_bitmap_pool[inst_nbr]));
+    memset(txl_tim_bitmap_pool, 0, sizeof(txl_tim_bitmap_pool));
 
     // Initialize post-TIM TX PBD
-    pbd = &txl_bcn_end_desc[inst_nbr];
+    pbd = &txl_bcn_end_desc;//[inst_nbr];
     pbd->upatterntx = TX_PAYLOAD_DESC_PATTERN;
     pbd->next = 0;
     pbd->bufctrlinfo = 0;
@@ -358,9 +361,9 @@ void mm_bcn_init(void) {
 
 void mm_bcn_init_vif(struct vif_info_tag *vif_entry) {
     struct txl_frame_desc_tag *frame = &vif_entry->u.ap.bcn_desc;
-    struct txl_buffer_tag *buffer = (struct txl_buffer_tag *)&txl_bcn_pool[vif_entry->index][0];
-    struct tx_hw_desc *hwdesc = &txl_bcn_hwdesc_pool[vif_entry->index];
-    struct txl_buffer_control *bufctrl = &txl_bcn_buf_ctrl[vif_entry->index];
+    struct txl_buffer_tag *buffer = (struct txl_buffer_tag *)&txl_bcn_pool; //(struct txl_buffer_tag *)&txl_bcn_pool[vif_entry->index][0];
+    struct tx_hw_desc *hwdesc = &txl_bcn_hwdesc_pool //&txl_bcn_hwdesc_pool[vif_entry->index];
+    struct txl_buffer_control *bufctrl = &txl_bcn_buf_ctrl;//[vif_entry->index];
     struct tx_hd *thd;
 
     // Initialize the frame descriptor

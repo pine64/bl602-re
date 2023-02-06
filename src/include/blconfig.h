@@ -48,6 +48,8 @@
 #define NX_VHT 0
 #define NX_RX_FRAME_HANDLING 1
 
+#define NX_TXQ_CNT          (AC_MAX + NX_BEACONING)
+
 /// == 13 not 17, because of the loop in rxl_hwdesc_init
 /// Number of RX descriptors (SW and Header descriptors)
 #define NX_RXDESC_CNT        13
@@ -141,5 +143,11 @@
 /// Version word
 #define NX_VERSION ((NX_VERSION_MAJ << 24) | (NX_VERSION_MIN << 16) | \
                            (NX_VERSION_REL << 8) | NX_VERSION_PAT)
+
+
+
+
+#define PACKED __attribute__((packed, aligned(1)))
+
 
 #endif

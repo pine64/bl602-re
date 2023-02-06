@@ -6,6 +6,8 @@
 #include <dma/dma.h>
 #include <hal/hal_desc.h>
 
+#include <lmac/tx/tx_swdesc.h>
+
 
 struct txl_buffer_hw_desc_tag {
     struct dma_desc dma_desc; // +0
@@ -65,13 +67,25 @@ extern struct txl_buffer_env_tag txl_buffer_env;
 extern struct txl_buffer_control txl_buffer_control_desc[NX_REMOTE_STA_MAX]; // this should be 3... instead of 10
 extern struct txl_buffer_control txl_buffer_control_desc_bcmc[NX_VIRT_DEV_MAX];
 
-void txl_buffer_push(uint8_t access_category, struct txl_buffer_tag *buf);
-struct txl_buffer_tag *txl_buffer_pop(uint8_t access_category);
-struct txl_buffer_tag *txl_buffer_get(struct txdesc *txdesc);
-struct txl_buffer_control *txl_buffer_control_get(struct txdesc *txdesc);
-void *txl_buffer_payload_get(struct txdesc *txdesc);
-void txl_buffer_control_copy(struct txdesc *txdesc, struct txl_buffer_tag *buf);
-void txl_buffer_mic_compute(struct txdesc *txdesc, uint32_t *mic_key, uint32_t start, uint32_t len, uint8_t access_category);
+static inline void txl_buffer_push(uint8_t access_category, struct txl_buffer_tag *buf) {
+    struct txl_buffer_list_tag *list = &txl_buffer_env.list[access_category];
+    if (!list->first) {
+        list->first = buf;
+    } else {
+        list->last->next = buf;
+    }
+    list->last = buf;
+    buf->next = NULL;
+}
+//struct txl_buffer_tag *txl_buffer_pop(uint8_t access_category);
+static inline struct txl_buffer_tag *txl_buffer_get(struct txdesc *txdesc) {
+    return txdesc->lmac.buffer;
+}
+
+//struct txl_buffer_control *txl_buffer_control_get(struct txdesc *txdesc);
+// void *txl_buffer_payload_get(struct txdesc *txdesc);
+//void txl_buffer_control_copy(struct txdesc *txdesc, struct txl_buffer_tag *buf);
+//void txl_buffer_mic_compute(struct txdesc *txdesc, uint32_t *mic_key, uint32_t start, uint32_t len, uint8_t access_category);
 void txl_buffer_init(void);
 void txl_buffer_reinit(void);
 void txl_buffer_reset(void);

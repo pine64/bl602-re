@@ -5,15 +5,14 @@
 
 #include <modules/mac/mac.h>
 
-
-struct mac_hdr_ctrl {
+struct PACKED mac_hdr_ctrl {
     uint16_t fctl; // +0
     uint16_t durid; // +2
     struct mac_addr addr1; // +4
     struct mac_addr addr2; // +10
 };
 
-struct mac_hdr {
+struct PACKED mac_hdr {
     uint16_t fctl; // +0
     uint16_t durid; // +2
     struct mac_addr addr1; // +4
@@ -22,7 +21,7 @@ struct mac_hdr {
     uint16_t seq; // +22
 };
 
-struct mac_hdr_qos {
+struct PACKED mac_hdr_qos {
     uint16_t fctl; // +0
     uint16_t durid; // +2
     struct mac_addr addr1; // +4
@@ -32,7 +31,7 @@ struct mac_hdr_qos {
     uint16_t qos; // +24
 };
 
-struct mac_hdr_long {
+struct PACKED mac_hdr_long {
     uint16_t fctl; // +0
     uint16_t durid; // +2
     struct mac_addr addr1; // +4
@@ -42,7 +41,7 @@ struct mac_hdr_long {
     struct mac_addr addr4; // +24
 };
 
-struct mac_hdr_long_qos {
+struct PACKED mac_hdr_long_qos {
     uint16_t fctl; // +0
     uint16_t durid; // +2
     struct mac_addr addr1; // +4
@@ -53,13 +52,13 @@ struct mac_hdr_long_qos {
     uint16_t qos; // +30
 };
 
-struct eth_hdr {
+struct PACKED eth_hdr {
     struct mac_addr da; // +0
     struct mac_addr sa; // +6
     uint16_t len; // +12
 };
 
-struct bcn_frame {
+struct PACKED bcn_frame {
     struct mac_hdr h; // +0
     uint64_t tsf; // +24
     uint16_t bcnint; // +32
@@ -67,10 +66,48 @@ struct bcn_frame {
     uint8_t variable[0]; // +36
 };
 
-struct preq_frame {
+struct PACKED preq_frame {
     struct mac_hdr h; // +0
     uint8_t payload[0]; // +24
 };
+
+/*
+struct PACKED aux_sec_hdr {
+    uint8_t security_control;  // +0
+    union {
+        uint8_t framecounters[4];
+        uint32_t framecounter32;
+        uint32_t framecounter16[2];
+    }; // + 1
+    uint8_t key_idx[0]; // + 5
+};*/
+
+struct PACKED eapol_payload {
+    union {
+        struct PACKED {
+            union {
+                struct PACKED {
+                    uint8_t snap_dsap; // +0
+                    uint8_t snap_ssap; // +1
+                };
+                uint16_t snap; // + 0
+            };
+            union {
+                struct PACKED {
+                    uint8_t control; // +2
+                    uint8_t rfc1042[3]; // +3
+                };
+                uint32_t ctrl_rfc; // +2
+            };
+        }; // =6
+        struct PACKED {
+            uint32_t llc; // +0
+            uint16_t zero; // +4
+        }; // =6
+    }; // =6
+    uint16_t eth_type; // +6
+    uint8_t payload[0];
+}; // =8
 
 
 /*
@@ -344,4 +381,34 @@ struct preq_frame {
 #define MAC_FCTRL_QOS_NULL_CFACKPOLL    (MAC_FCTRL_QOS_DATA  | MAC_FCTRL_NULL_CFACKPOLL)
 
 #define MAC_FCTRL_IS(fc, type) (((fc) & MAC_FCTRL_TYPESUBTYPE_MASK) == MAC_FCTRL_##type)
+
+/// Long control frame header length
+#define MAC_LONG_CTRLFRAME_LEN         16
+/// Short control frame header length (ACK/CTS)
+#define MAC_SHORT_CTRLFRAME_LEN        10
+
+/// Maximum size of a beacon frame (default IE + TIM + remaining IE space)
+#define MAC_BEACON_SIZE             (102 + MAC_TIM_SIZE + 128)
+/// Maximum size of a probe request frame
+#define MAC_PROBEREQ_SIZE           100
+/// Maximum size of a probe response frame (default IE + remaining IE space)
+#define MAC_PROBERSP_SIZE               (102 + 128)
+/// Size of a NULL frame
+#define MAC_NULL_FRAME_SIZE         MAC_SHORT_MAC_HDR_LEN
+/// Size of a QoS-NULL frame
+#define MAC_QOS_NULL_FRAME_SIZE     MAC_SHORT_QOS_MAC_HDR_LEN
+/// Size of a PS poll
+#define MAC_PSPOLL_FRAME_SIZE       MAC_LONG_CTRLFRAME_LEN
+
+/* See IEEE 802.1H for LLC/SNAP encapsulation/decapsulation */
+/* Ethernet-II snap header (RFC1042 for most EtherTypes) */
+#define FRAME_BODY_LLC_H 0x0003AAAA
+#define FRAME_BODY_LLC_L 0x0D890000
+#define PAYLOAD_TYPE_TDLS 0x02
+
+#define MAC_ENCAPSULATED_LLC_H_OFT  0
+#define MAC_ENCAPSULATED_LLC_L_OFT  4
+#define MAC_ENCAPSULATED_PAYLOAD_TYPE_OFT  8
+#define MAC_ENCAPSULATED_PAYLOAD_OFT  9
+
 #endif // _MAC_FRAME_H_

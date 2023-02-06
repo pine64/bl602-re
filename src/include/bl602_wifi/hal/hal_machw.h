@@ -27,6 +27,60 @@ enum {
     HW_ACTIVE
 };
 
+
+/// Mapping of HW timers
+enum
+{
+    /// AC0 TX timeout
+    HAL_AC0_TIMER = 0,
+    /// AC1 TX timeout
+    HAL_AC1_TIMER,
+    /// AC2 TX timeout
+    HAL_AC2_TIMER,
+    /// AC3 TX timeout
+    HAL_AC3_TIMER,
+    /// BCN TX timeout
+    HAL_BCN_TIMER,
+    /// Go to IDLE timeout
+    HAL_IDLE_TIMER,
+    /// RX interrupt mitigation timeout
+    HAL_RX_TIMER,
+    #if NX_MM_TIMER
+    /// MM timeout
+    HAL_MM_TIMER,
+    #endif
+    /// Kernel timer
+    HAL_KE_TIMER,
+
+    /// Number of HW timers used
+    HAL_TIMER_MAX,
+};
+
+/// Bits associated to HW timers
+enum
+{
+    /// AC0 TX timeout bit
+    HAL_AC0_TIMER_BIT = CO_BIT(HAL_AC0_TIMER),
+    /// AC1 TX timeout bit
+    HAL_AC1_TIMER_BIT = CO_BIT(HAL_AC1_TIMER),
+    /// AC2 TX timeout bit
+    HAL_AC2_TIMER_BIT = CO_BIT(HAL_AC2_TIMER),
+    /// AC3 TX timeout bit
+    HAL_AC3_TIMER_BIT = CO_BIT(HAL_AC3_TIMER),
+    /// BCN TX timeout bit
+    HAL_BCN_TIMER_BIT = CO_BIT(HAL_BCN_TIMER),
+    /// Go to IDLE timeout bit
+    HAL_IDLE_TIMER_BIT = CO_BIT(HAL_IDLE_TIMER),
+    /// RX interrupt mitigation timeout bit
+    HAL_RX_TIMER_BIT = CO_BIT(HAL_RX_TIMER),
+    #if NX_MM_TIMER
+    /// MM timeout bit
+    HAL_MM_TIMER_BIT = CO_BIT(HAL_MM_TIMER),
+    #endif
+    /// Kernel timer bit
+    HAL_KE_TIMER_BIT = CO_BIT(HAL_KE_TIMER),
+};
+
 static inline uint32_t hal_machw_time(void) {
     return MAC_CORE->MONOTONIC_COUNTER_2_LO.value;
 }
