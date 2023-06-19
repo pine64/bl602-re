@@ -16,7 +16,7 @@
 * https://ghidra-sre.org/[Ghidra], an IDA-like RE suite courtesy of the NSA. Use https://github.com/ElementW/ghidra[this fork] if you want to load RISC-V binaries that have relocations (i.e. unlinked bins)
 
 * https://cutter.re/[Cutter], a graphical frontend for
-  https://www.radare.org/r/[radare2]
+  https://rizin.re/[Rizin]
 
 * https://github.com/sevaa/dwex[DWARF Explorer], an explorer for DWARF debugging data
  ** The proprietary libraries still contain DWARF data, but tool support for showing it varies greatly. This will show you the raw DWARF information (e.g. structures, function local variables, inlined function information).
